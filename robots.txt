@@ -1,0 +1,9 @@
+# hexo robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://www.ieclipse.cn/sitemap.xml
+Sitemap: https://www.ieclipse.cn/category-sitemap.xml
+Sitemap: https://www.ieclipse.cn/tag-sitemap.xml
+Sitemap: https://www.ieclipse.cn/page-sitemap.xml
+Sitemap: https://www.ieclipse.cn/post-sitemap.xml

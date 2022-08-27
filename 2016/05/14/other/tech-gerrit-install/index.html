@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Gerrit安装与配置</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="其它,git,Gerrit安装与配置">
+  <meta name="description" content="简介Gerrit是一套代码审核服务本人尝试了两套linux系统，其中ubuntu系统为虚拟机环境，centos系统为正式环境。两套linux环境均为64位操作系统。
+
+ubuntu 14.10 amd-64 server版
+CentOS Linux release 7.1.1503 (Core)
+">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="静勤居">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="Gerrit安装与配置">
+  <meta name="og:url" content="https://www.ieclipse.cn/2016/05/14/other/tech-gerrit-install/">
+  <meta name="og:description" content="简介Gerrit是一套代码审核服务本人尝试了两套linux系统，其中ubuntu系统为虚拟机环境，centos系统为正式环境。两套linux环境均为64位操作系统。
+
+ubuntu 14.10 amd-64 server版
+CentOS Linux release 7.1.1503 (Core)
+">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="静勤居">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="Gerrit安装与配置">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="简介Gerrit是一套代码审核服务本人尝试了两套linux系统，其中ubuntu系统为虚拟机环境，centos系统为正式环境。两套linux环境均为64位操作系统。
+
+ubuntu 14.10 amd-64 server版
+CentOS Linux release 7.1.1503 (Core)
+">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/2016/05/14/other/tech-gerrit-install/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/about/" class="main-nav">关于</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2016/05/14/other/tech-gerrit-install/">简体中文</a></li>
+              
+              <li><a href="/en/2016/05/14/other/tech-gerrit-install/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>当前路径：<a class="category-item" href="/">文章</a><a class="category-item" href="/categories/other/">其它</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline"></h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">发表于</span>
+      <time datetime="2016-05-14T05:46:46.000Z" itemprop="datePublished"><time datetime="2016-05-14T05:46:46.000Z">2016-05-14</time></time>
+      </span>
+      
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">分享</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" id="changyan_count_unit" data-thread-key="8df66b310dd5e55634b4f406459bd1dc"></span><span class="hidden-xs">评论</span></a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">喜欢</span></a>-->
+        <a href="#" class="icon nova-eye leancloud_visitors" id="8df66b310dd5e55634b4f406459bd1dc" data-flag-title="“Gerrit安装与配置”"><span class="count lc-count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2016-05-14T05:46:46.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Gerrit是一套代码审核服务<br>本人尝试了两套linux系统，其中ubuntu系统为虚拟机环境，centos系统为正式环境。<br>两套linux环境均为64位操作系统。</p>
+<ol>
+<li>ubuntu 14.10 amd-64 server版</li>
+<li>CentOS Linux release 7.1.1503 (Core)</li>
+</ol>
+<a id="more"></a>
+
+<h2 id="软件环境"><a href="#软件环境" class="headerlink" title="软件环境"></a>软件环境</h2><p>安装gerrit所需的相关软件包</p>
+<h3 id="jdk-jre"><a href="#jdk-jre" class="headerlink" title="jdk/jre"></a>jdk/jre</h3><ul>
+<li><p>ubuntu 安装Java（jre） </p>
+<img src="/2016/05/14/other/tech-gerrit-install/image001.png"></li>
+<li><p>centos<br><code># yum -y list java*</code><br>列出可安装的软件包<br><code># yum -y install java-1.7.0-openjdk.x86_64</code><br>安装jdk 7</p>
+<h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3></li>
+<li><p>ubuntu<br><code>$ sudo apt-get install git git-core git-doc</code></p>
+
+
+<img src="/2016/05/14/other/tech-gerrit-install/image011.png">
+
+</li>
+</ul>
+<h3 id="apache2"><a href="#apache2" class="headerlink" title="apache2"></a>apache2</h3><h4 id="ubuntu"><a href="#ubuntu" class="headerlink" title="ubuntu"></a>ubuntu</h4><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="bash">$ sudo apt-get install apache2 apache2.2-common apache2-utils</code></pre>
+<p>其中，使用htpasswd指令需要安装apache2-utils包</p>
+{% asset_img image003.png %}
+
+{% asset_img image005.png %}
+
+<p>安装成功后，在/etc/apache2/sites-enable/目录下，新建<kbd>gerrit.conf</kbd>用于配置gerrit服务<br>ubuntu下，需要手动添加LoadModule proxy_http_module<br>添加后 <kbd>/etc/apache2/mods-enabled/proxy.load</kbd>内容如下：</p>
+{% asset_img image007.png %}
+
+<h4 id="centos"><a href="#centos" class="headerlink" title="centos"></a>centos</h4><p><code># yum install httpd</code><br>安装成功后，在<strong>/etc/httpd/conf.d/</strong>目录下，新建gerrit.conf用于配置gerrit服务</p>
+<h4 id="apache配置"><a href="#apache配置" class="headerlink" title="apache配置"></a>apache配置</h4><p><kbd>gerrit.conf</kbd>内容如下：</p>
+<p class="code-caption" data-lang="apache" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="apache"># NameVirtualHost 已不推荐使用，在ubuntu下，必须存在，centos可以注释掉
+NameVirtualHost *:80
+&lt;VirtualHost *:80&gt;
+        # 服务器的ip地址
+        ServerName 192.168.133.102
+        ProxyRequests Off
+        ProxyVia Off
+        ProxyPreserveHost On
+        &lt;Proxy *&gt;
+                Order deny,allow
+                Allow from all
+        &lt;/Proxy&gt;
+        &lt;Location &quot;/gerrit/login/&quot;&gt;
+                AuthType Basic
+                AuthName &quot;Gerrit Code Review&quot;
+                AuthBasicProvider file
+                AuthUserFile /home/gerrit/htpasswd.conf
+        &lt;/Location&gt;
+        AllowEncodedSlashes On
+        RedirectMatch ^gerrit$ /gerrit/
+        ProxyPass /gerrit/ http://127.0.0.1:8081/gerrit/
+        ProxyPassReverse /gerrit/ http://127.0.0.1:8081/gerrit/
+&lt;/VirtualHost&gt;</code></pre>
+<p>注意</p>
+<ul>
+<li>AllowEncodedSlashes On设置将无法在gerrit上创建parent/child.git结构的project。</li>
+<li>在centos上出现过AuthUserFile无法读取的问题。新建gerrit专有账户后，无此问题。</li>
+<li>gerrit.conf的内容与gerrit/etc/gerrit.config有关联。gerrit的配置请见后文</li>
+</ul>
+<h2 id="Gerrit安装"><a href="#Gerrit安装" class="headerlink" title="Gerrit安装"></a>Gerrit安装</h2><h3 id="下载gerrit"><a href="#下载gerrit" class="headerlink" title="下载gerrit"></a>下载gerrit</h3><p>因为国内code.google比较难访问，建议先在windows上先下载gerrit安装包然后上传到服务器</p>
+<p>gerrit release包列表：<a href="http://gerrit-releases.storage.googleapis.com/index.html" target="_blank" rel="noopener">http://gerrit-releases.storage.googleapis.com/index.html</a></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ol>
+<li>创建专有账号（可选）<br>在centos上，创建了专有账号gerrit及gerrit组，并且禁止gerrit账户登录系统。<p class="code-caption" data-lang="shell" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+</li>
+</ol>
+<pre><code class="shell">[root@Centos ~]# adduser gerrit
+[root@Centos ~]# passwd --delete gerrit
+[root@Centos ~]# sudo su - gerrit
+[gerrit@Centos ~]$ ls</code></pre>
+<p> 第2行清除用户的密码</p>
+<ol start="2">
+<li>安装 </li>
+</ol>
+<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="bash">[root@Centos ~]# java -jar gerrit-2.8.6.1.war init -d gerrit</code></pre>
+<p> 进入gerrit安装交互过程</p>
+<p class="code-caption" data-lang="apache" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="apache">*** Gerrit Code Review 2.8.6.1
+***
+Create &#39;/root/gerrit&#39;          [Y/n]? y
+*** Git Repositories
+***
+Location of Git repositories   [git]: ~/git/
+*** SQL Database
+***
+Database server type           [h2]:
+*** User Authentication
+***
+Authentication method          [OPENID/?]: HTTP
+Get username from custom HTTP header [y/N]? n
+SSO logout URL                 :
+*** Email Delivery
+***
+// Email 
+*** Container Process
+***
+Run as                         [root]:
+Java runtime                   [/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.85-2.6.1.2.el7_1.x86_64/jre]:
+Copy gerrit-2.8.6.1.war to /root/gerrit/bin/gerrit.war [Y/n]? y
+Copying gerrit-2.8.6.1.war to /root/gerrit/bin/gerrit.war
+*** SSH Daemon
+***
+Listen on address              [*]:
+Listen on port                 [29418]:
+Gerrit Code Review is not shipped with Bouncy Castle Crypto SSL v149
+  If available, Gerrit can take advantage of features
+  in the library, but will also function without it.
+Download and install it now [Y/n]? y
+Downloading http://www.bouncycastle.org/download/bcpkix-jdk15on-149.jar ... OK
+Checksum bcpkix-jdk15on-149.jar OK
+Gerrit Code Review is not shipped with Bouncy Castle Crypto Provider v149
+** This library is required by Bouncy Castle Crypto SSL v149. **
+Download and install it now [Y/n]? y
+Downloading http://www.bouncycastle.org/download/bcprov-jdk15on-149.jar ... OK
+Checksum bcprov-jdk15on-149.jar OK
+Generating SSH host key ... rsa... dsa... done
+*** HTTP Daemon
+***
+Behind reverse proxy           [y/N]? y
+Proxy uses SSL (https://)      [y/N]? n
+Subdirectory on proxy server   [/]: gerrit
+Listen on address              [*]:
+Listen on port                 [8081]:
+Canonical URL                  [http://null]: http://localhost:8081/gerrit/
+*** Plugins
+***
+Install plugin download-commands version v2.8.6.1 [y/N]? y
+Install plugin reviewnotes version v2.8.6.1 [y/N]? y
+Install plugin replication version v2.8.6.1 [y/N]? y
+Install plugin commit-message-length-validator version v2.8.6.1 [y/N]? y</code></pre>
+<p> 建议在第二步 Git Repositories选择独立于gerrit安装目录的一个空目录，不然默认使用gerrit/git/作为git仓库目录。<br> 然后其它的步骤基本只需默认即可</p>
+<p> 不同版本的gerrit，使用的ssh key加密库是不一样的，以下是2.8使用的加密库<br> <a href="http://www.bouncycastle.org/download/bcprov-jdk16-144.jar" target="_blank" rel="noopener">http://www.bouncycastle.org/download/bcprov-jdk16-144.jar</a><br> <img src="/2016/05/14/other/tech-gerrit-install/image013.png"><br> 安装完成：<br> <img src="/2016/05/14/other/tech-gerrit-install/image015.png"></p>
+<ol start="3">
+<li>配置<br><kbd>gerrit/etc/gerrit.config</kbd> 配置如下：<img src="/2016/05/14/other/tech-gerrit-install/image017.jpg">
+
+</li>
+</ol>
+<h3 id="添加gitweb支持"><a href="#添加gitweb支持" class="headerlink" title="添加gitweb支持"></a>添加gitweb支持</h3><p class="code-caption" data-lang="apache" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="apache">[gitweb]
+        cgi = /var/www/git/gitweb.cgi
+        url = http://192.168.133.102/git/</code></pre>
+<p>然后修改<kbd>/etc/gitweb.conf</kbd></p>
+<p>设定<code>$projectroot = /home/gerrit/gitprojects</code> 指向git仓库路径</p>
+<p>重启服务后生效。</p>
+<ul>
+<li>注1：个人觉得gitweb.url可以设定路径/var/www/git/也是可行的，但未作尝试。</li>
+<li>注2：有人说gitweb cgi的owner必须和 $projectroot的ownwer一致。好像不一致也是可以的，因为我没有去更改gitprojects的所有者信息</li>
+</ul>
+<h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2><ul>
+<li><p>centos 上访问gerrit出现http 503<br>输入以下指令，第一个不行，试第二个</p>
+<pre><code class="bash"># /usr/sbin/setsebool httpd_can_network_connect 1
+# /usr/sbin/setsebool -P httpd_can_network_connect 1</code></pre>
+<p>参考：<a href="http://sysadminsjourney.com/content/2010/02/01/apache-modproxy-error-13permission-denied-error-rhel/" target="_blank" rel="noopener">http://sysadminsjourney.com/content/2010/02/01/apache-modproxy-error-13permission-denied-error-rhel/</a></p>
+</li>
+<li><p>centos 上访问gerrit出现http 500<br>关闭防火墙即可</p>
+<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+</li>
+</ul>
+<pre><code class="bash"># systemctl stop firewalld.service</code></pre>
+<p> 因apache和gerrit的配置问题导致gerrit不能正常访问，建议多多查看apache和gerrit的log。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>Gerrit2安装配置<br><a href="http://openwares.net/linux/gerrit2_setup.html" target="_blank" rel="noopener">http://openwares.net/linux/gerrit2_setup.html</a></li>
+<li>Gerrit Code Review for Git<br><a href="https://gerrit-documentation.storage.googleapis.com/Documentation/2.8.1/index.html" target="_blank" rel="noopener">https://gerrit-documentation.storage.googleapis.com/Documentation/2.8.1/index.html</a></li>
+</ul>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/05/14/other/tech-gerrit-install/](https://www.ieclipse.cn/2016/05/14/other/tech-gerrit-install/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.971Z" itemprop="dateModified">
+    最后更新：2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="静勤居" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/2016/05/14/other/tech-gerrit-guide/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">上一页</span></a></li><li class="next"><a href="/2016/05/13/other/tech-vba-guide/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">下一页</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    打赏
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>各位看官，鄙人借网络这块宝地在此献丑，望有钱的捧个钱场（打赏任意金额），没钱的捧个人场（分享）</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">打赏</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="8df66b310dd5e55634b4f406459bd1dc"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: '8df66b310dd5e55634b4f406459bd1dc',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          目录
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#简介">简介</a></li><li><a href="#软件环境">软件环境</a><ul class="nav toc-ul"><li><a href="#jdk-jre">jdk/jre</a></li><li><a href="#git">git</a></li><li><a href="#apache2">apache2</a><ul class="nav toc-ul"><li><a href="#ubuntu">ubuntu</a></li><li><a href="#centos">centos</a></li><li><a href="#apache配置">apache配置</a></li></ul></li></ul></li><li><a href="#Gerrit安装">Gerrit安装</a><ul class="nav toc-ul"><li><a href="#下载gerrit">下载gerrit</a></li><li><a href="#安装">安装</a></li><li><a href="#添加gitweb支持">添加gitweb支持</a></li></ul></li><li><a href="#FAQ">FAQ</a></li><li><a href="#参考">参考</a></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "代码",
+        right: "如下：",
+        copy: "复制"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

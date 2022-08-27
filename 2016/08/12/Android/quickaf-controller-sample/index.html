@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>QuickAF解析REST API综合示例</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Android,QuickAF,QuickAF解析REST API综合示例">
+  <meta name="description" content="
+
+在QuickAF中使用基于Volley的网络数据连接框架。能够方便地执行REST API网络请求，并与界面进行交互。在本文中通过一个天气查询的综合示例来讲解QuickAF中如何进行网络请求。">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="静勤居">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="QuickAF解析REST API综合示例">
+  <meta name="og:url" content="https://www.ieclipse.cn/2016/08/12/Android/quickaf-controller-sample/">
+  <meta name="og:description" content="
+
+在QuickAF中使用基于Volley的网络数据连接框架。能够方便地执行REST API网络请求，并与界面进行交互。在本文中通过一个天气查询的综合示例来讲解QuickAF中如何进行网络请求。">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="静勤居">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="QuickAF解析REST API综合示例">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="
+
+在QuickAF中使用基于Volley的网络数据连接框架。能够方便地执行REST API网络请求，并与界面进行交互。在本文中通过一个天气查询的综合示例来讲解QuickAF中如何进行网络请求。">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/2016/08/12/Android/quickaf-controller-sample/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/about/" class="main-nav">关于</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2016/08/12/Android/quickaf-controller-sample/">简体中文</a></li>
+              
+              <li><a href="/en/2016/08/12/Android/quickaf-controller-sample/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>当前路径：<a class="category-item" href="/">文章</a><a class="category-item" href="/categories/Android/">Android</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline"></h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">发表于</span>
+      <time datetime="2016-08-12T02:16:41.000Z" itemprop="datePublished"><time datetime="2016-08-12T02:16:41.000Z">2016-08-12</time></time>
+      </span>
+      
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">分享</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" id="changyan_count_unit" data-thread-key="9e5152924aeb954ecc6b17e176c75234"></span><span class="hidden-xs">评论</span></a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">喜欢</span></a>-->
+        <a href="#" class="icon nova-eye leancloud_visitors" id="9e5152924aeb954ecc6b17e176c75234" data-flag-title="“QuickAF解析REST" api综合示例”><span class="count lc-count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2016-08-12T02:16:41.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <img src="/2016/08/12/Android/quickaf-controller-sample/weather.png">
+
+<p>在<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中使用基于Volley的网络数据连接框架。能够方便地执行REST API网络请求，并与界面进行交互。在本文中通过一个天气查询的综合示例来讲解<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中如何进行网络请求。</p>
+<a id="more"></a>
+
+<h2 id="框架设置"><a href="#框架设置" class="headerlink" title="框架设置"></a>框架设置</h2><p>在使用网络数据框架之前，须先配置，一般在Application.onCreate()中配置，当然，也可以使用前配置，比如Activity.onCreate()</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">// typically, you just config volley in Application.onCreate
+VolleyConfig config = new VolleyConfig.Builder()
+    .setBaseResponseClass(WeatherBaseResponse.class)
+    .build();
+VolleyManager.init(getApplicationContext(), config);</code></pre>
+<p>如果有喜欢使用OkHttp的同学，还可配置网络连接使用OkHttp。</p>
+<h3 id="接口响应对象"><a href="#接口响应对象" class="headerlink" title="接口响应对象"></a>接口响应对象</h3><p><code>WeatherBaseResponse.class</code>为接口返回对象class，一般一套接口标准中只有唯一的一个。接口返回的对象一般包含状态码(status)，提示信息(message)及业务对象（data）。对于业务模块，只需要关心业务对象(data)即可，框架中还可以定义拦截器，如果接口请求成功，业务操作不成功，则不会进入业务逻辑层。</p>
+<h2 id="接口API"><a href="#接口API" class="headerlink" title="接口API"></a>接口API</h2><p>在这里，使用的是<a href="http://apistore.baidu.com/apiworks/servicedetail/112.html" target="_blank" rel="noopener">百度api store中的天气api</a>，其中了其中的两个API</p>
+<ol>
+<li>查询城市可用列表，通过输入的城市名称，查询该城市下的城市（或区）列表。</li>
+<li>查询指定城市（或区）的天气详情</li>
+</ol>
+<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p>根据接口API，先把模型定义出来</p>
+<ul>
+<li>查询城市列表请求模型<code>BaseRequest</code><br>非常简单，只有一个cityname的请求参数<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+</li>
+</ul>
+<pre><code class="java">public class BaseRequest implements Serializable {
+    public String cityname;
+}</code></pre>
+<ul>
+<li>查询城市列表响应 <code>List&lt;CityInfo&gt;</code><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+</li>
+</ul>
+<pre><code class="java">public class CityInfo implements Serializable {
+    public String province_cn;
+    public String district_cn;
+    public String name_cn;
+    public String name_en;
+    public String area_id;
+}</code></pre>
+<ul>
+<li>查询城市天气详情请求 <code>CityInfo</code>，与查询城市列表响应返回的列表项一样</li>
+<li>查询城市天气详情响应 <code>WeatherInfo</code><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+</li>
+</ul>
+<pre><code class="java">public class WeatherInfo implements Serializable {
+    public String city;
+    public String pinyin;
+    public String citycode;
+    public String date;
+    public String time;
+    public String postCode;
+    public double longitude;
+    public double latitude;
+    public String altitude;
+    public String weather;
+    public String temp;
+    public String l_tmp;
+    public String h_tmp;
+    public String WD;
+    public String WS;
+    public String sunrise;
+    public String sunset;
+}</code></pre>
+<h2 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h2><p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中通过Controller来执行API请求，一般来说，一个界面对应一个Controller，在Controller中提供了页面操作需要调用的接口API。在Controller内部，每个网络请求都是一个Task。所有的Controller须继承自<code>cn.ieclipse.af.volley.Controller</code>。通常，一个App只有一套接口API，所以，可以定义一个<code>AppController</code>继承自<code>cn.ieclipse.af.volley.Controller</code>。然后各业务模块的Controller继承<code>AppController</code>并向外提供一个回调Listener。</p>
+<h3 id="Task"><a href="#Task" class="headerlink" title="Task"></a>Task</h3><p>Task是Controller中的内部类，用于执行网络请求。可以<code>AppController</code>中定义一个<code>AppTask</code>并继承自父Controller中的<code>RequestObjectTask</code>，来执行一些常用的操作，比如API调用错误处理，给接口API统一添加appKey等http头等。这样子各个业务模块只需专注模块业务即可。<br>Task的调用有两种方式</p>
+<ul>
+<li><code>load(Input input, Class&lt;Output&gt; clazz, boolean needCache)</code>，接口返回为对象，如果模型不匹配，编译时将会报错。</li>
+<li><code>load2List(Input input, Class&lt;?&gt; itemClass, boolean needCache)</code>，接口返回为数组，此种方式，需要指定List集合中的模型Class，如果错了，将导致json无法解析为正确的模型，在运行时会报错</li>
+</ul>
+<h3 id="Listener"><a href="#Listener" class="headerlink" title="Listener"></a>Listener</h3><p>回调Listener必须在Controller中定义，通常回调Listener需提供两个抽象方法</p>
+<ul>
+<li>onXXXSuccess(response model)<br>当接口API调用成功时的回调，接口API的响应在参数中</li>
+<li>onXXXFailure(error object)<br>当接口API调用失败时的回调，参数为错误对象，比如网络错误等。</li>
+</ul>
+<p><strong><em>注：回调接口中的方法可以在UI线程中调用</em></strong></p>
+<h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><p>在Task中可以设置是否允许缓存，相应地，在接口回调中，会标识此次接口调用是来自于缓存还是实时的接口响应。在<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中，有自己的API缓存，与Volley不太一样，主要是在国内我们的大后端，一般不会在HTTP中控制缓存（反正我工作快10年了，没有见过一个后端这么做）。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>下面来看看<code>WeatherController</code>。</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">public class WeatherController extends AppController&lt;WeatherController.WeatherListener&gt; {
+
+    public WeatherController(WeatherListener l) {
+        super(l);
+    }
+
+    public void loadCityList(BaseRequest req, boolean needCache) {
+        CityListTask task = new CityListTask();
+        task.load2List(req, CityInfo.class, needCache);
+    }
+
+    public void loadWeather(BaseRequest req) {
+        CityWeatherTask task = new CityWeatherTask();
+        task.load(req, WeatherInfo.class, false);
+    }
+
+    private class CityListTask extends AppBaseTask&lt;BaseRequest, List&lt;CityInfo&gt;&gt; {
+
+        @Override
+        public IUrl getUrl() {
+            return new URLConst.AbsoluteUrl(&quot;http://apis.baidu.com/apistore/weatherservice/citylist&quot;).get();
+        }
+
+        @Override
+        public void onSuccess(List&lt;CityInfo&gt; out, boolean fromCache) {
+            mListener.onLoadCityListSuccess(out, fromCache);
+        }
+
+        @Override
+        public void onError(RestError error) {
+            mListener.onLoadCityListFailure(error);
+        }
+
+        @Override
+        public boolean onInterceptor(IBaseResponse response) throws Exception {
+            if (response instanceof WeatherBaseResponse) {
+                WeatherBaseResponse resp = (WeatherBaseResponse) response;
+                if (resp.errNum != 0) {
+                    throw new LogicError(null, String.valueOf(resp.errNum), resp.errMsg);
+                }
+            }
+            return false;
+        }
+
+        @Override
+        protected GsonRequest buildRequest(IUrl url, String body) {
+            GsonRequest request = super.buildRequest(url, body);
+            request.addHeader(&quot;apikey&quot;, &quot;e8c043231152d9cbcf30a648382ca4c5&quot;);
+            return  request;
+        }
+    }
+
+    private class CityWeatherTask extends AppBaseTask&lt;BaseRequest, WeatherInfo&gt; {
+
+        @Override
+        public IUrl getUrl() {
+            return new URLConst.AbsoluteUrl(&quot;http://apis.baidu.com/apistore/weatherservice/cityname&quot;).get();
+        }
+
+        @Override
+        public void onSuccess(WeatherInfo out, boolean fromCache) {
+            mListener.onLoadWeatherSuccess(out, fromCache);
+        }
+
+        @Override
+        public void onError(RestError error) {
+            mListener.onLoadWeatherError(error);
+        }
+
+        @Override
+        public boolean onInterceptor(IBaseResponse response) throws Exception {
+            if (response instanceof WeatherBaseResponse) {
+                WeatherBaseResponse resp = (WeatherBaseResponse) response;
+                if (resp.errNum != 0) {
+                    throw new LogicError(null, String.valueOf(resp.errNum), resp.errMsg);
+                }
+            }
+            return false;
+        }
+
+        @Override
+        protected GsonRequest buildRequest(IUrl url, String body) {
+            GsonRequest request = super.buildRequest(url, body);
+            request.addHeader(&quot;apikey&quot;, &quot;e8c043231152d9cbcf30a648382ca4c5&quot;);
+            return  request;
+        }
+    }
+
+    public interface WeatherListener {
+        void onLoadCityListSuccess(List&lt;CityInfo&gt; out, boolean fromCache);
+
+        void onLoadCityListFailure(RestError error);
+
+        void onLoadWeatherSuccess(WeatherInfo out, boolean fromCache);
+
+        void onLoadWeatherError(RestError error);
+    }</code></pre>
+<h2 id="界面"><a href="#界面" class="headerlink" title="界面"></a>界面</h2><p>终于到界面了，先看看<code>WeatherActivity</code>的代码</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">public class WeatherActivity extends BaseActivity implements WeatherController.WeatherListener {
+
+    TextView tv;
+    EditText et;
+    Spinner spn;
+    CityAdapter adapter;
+    WeatherController controller;
+
+    @Override
+    protected int getContentLayout() {
+        return R.layout.sample_activity_volley_weather;
+    }
+
+    @Override
+    protected void initHeaderView() {
+        super.initHeaderView();
+        setTitle(&quot;Weather Sample&quot;);
+    }
+
+    @Override
+    protected void initContentView(View view) {
+        super.initContentView(view);
+        // typically, you just config volley in Application.onCreate
+        VolleyConfig config = new VolleyConfig.Builder().setBaseResponseClass(WeatherBaseResponse.class).build();
+        VolleyManager.init(getApplicationContext(), config);
+        spn = (Spinner) findViewById(R.id.spn1);
+        adapter = new CityAdapter();
+        spn.setAdapter(adapter);
+        et = (EditText) findViewById(R.id.et_text);
+        tv = (TextView) findViewById(R.id.tv);
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
+        controller = new WeatherController(this);
+        String name = et.getText().toString();
+        if (TextUtils.isEmpty(name)) {
+            name = et.getHint().toString();
+        }
+        loadCityList(name, true);
+    }</code></pre>
+<p><code>WeatherActivity</code>实现了<code>WeatherController.WeatherListener</code>回调接口，在初始化时，调用了<code>loadCityList</code>来获取城市列表。</p>
+<p>下面再看4个跟接口API相关的方法。</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">/**
+ * 获取城市列表
+ * @param name
+ * @param needCache
+ */
+public void loadCityList(String name, boolean needCache) {
+    BaseRequest req = new BaseRequest();
+    req.cityname = name;
+    controller.loadCityList(req, needCache);
+}
+
+/**
+ * 获取城市天气详情
+ */
+public void loadWeather() {
+    BaseRequest req = new BaseRequest();
+    CityInfo city = (CityInfo)spn.getSelectedItem();
+    if (city != null) {
+        req.cityname = city.name_cn;
+        controller.loadWeather(req);
+    }
+}
+
+@Override
+public void onLoadCityListSuccess(List&lt;CityInfo&gt; out, boolean fromCache) {
+    adapter.setDataList(out);
+    adapter.notifyDataSetChanged();
+}
+
+@Override
+public void onLoadCityListFailure(RestError error) {
+    VolleyUtils.showError(tv, error);
+}
+
+@Override
+public void onLoadWeatherSuccess(WeatherInfo out, boolean fromCache) {
+    String msg = String.format(&quot;city:%s\ntemp:%sC (%s - %s)\nwind:%s(%s)&quot;, out.city, out.temp, out.l_tmp, out.h_tmp,
+        out.WD, out.WS);
+    tv.setText(msg);
+}
+
+@Override
+public void onLoadWeatherError(RestError error) {
+    VolleyUtils.showError(tv, error);
+}</code></pre>
+<p>在回调onXXXSuccess方法中，将模型设置到界面控件中以显示在UI中。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>使用<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>请求REST API非常的方便，开发相当快，重点步骤如下</p>
+<ol>
+<li>设置，设置好接口返回大对象IBaseResponse, AppController，这个一般在工程初始化中做。</li>
+<li>根据接口API生成模型，可以通过GsonFormat之类的工具来生成</li>
+<li>编写Controller，根据模块业务编写对应的Controller，一个API对应一个Task。</li>
+<li>界面中实现Controller，在适当的地方比如点击按钮调用Controller中的方法，在回调方法中处理业务逻辑。</li>
+</ol>
+<p>本示例中的所有代码，可以访问：<a href="https://github.com/Jamling/QuickAF/tree/master/sample/src/main/java/cn/ieclipse/af/demo/sample/volley/weather" target="_blank" rel="noopener">https://github.com/Jamling/QuickAF/tree/master/sample/src/main/java/cn/ieclipse/af/demo/sample/volley/weather</a> 查看。</p>
+<h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">https://github.com/Jamling/QuickAF</a></p>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/08/12/Android/quickaf-controller-sample/](https://www.ieclipse.cn/2016/08/12/Android/quickaf-controller-sample/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.896Z" itemprop="dateModified">
+    最后更新：2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="静勤居" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/2016/08/18/other/scratch-compile/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">上一页</span></a></li><li class="next"><a href="/2016/08/12/Android/quickaf-preference/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">下一页</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    打赏
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>各位看官，鄙人借网络这块宝地在此献丑，望有钱的捧个钱场（打赏任意金额），没钱的捧个人场（分享）</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">打赏</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="9e5152924aeb954ecc6b17e176c75234"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: '9e5152924aeb954ecc6b17e176c75234',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          目录
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#框架设置">框架设置</a><ul class="nav toc-ul"><li><a href="#接口响应对象">接口响应对象</a></li></ul></li><li><a href="#接口API">接口API</a><ul class="nav toc-ul"><li><a href="#模型">模型</a></li></ul></li><li><a href="#Controller">Controller</a><ul class="nav toc-ul"><li><a href="#Task">Task</a></li><li><a href="#Listener">Listener</a></li><li><a href="#缓存">缓存</a></li><li><a href="#实例">实例</a></li></ul></li><li><a href="#界面">界面</a></li><li><a href="#总结">总结</a></li><li><a href="#关于">关于</a></li><li><a href="#参考">参考</a></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "代码",
+        right: "如下：",
+        copy: "复制"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>清除与初始化</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Java,清除与初始化">
+  <meta name="description" content="构造函数构建函数(Constructor)属于一种较特殊的方法类型,因为它没有返回值.这与void返回值存在着明显的区别。对于void返回值，尽管方法本身不会自动返回什么，但仍然可以让它返回另一些东西。构建器则不同，它不仅什么也不会自动返回，而且根本不能有任何选择.若创建一个没有构件器的类,则编译器会自动创建一个默认构件器.">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="静勤居">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="清除与初始化">
+  <meta name="og:url" content="https://www.ieclipse.cn/2007/10/23/Java/Java-清除与初始化/">
+  <meta name="og:description" content="构造函数构建函数(Constructor)属于一种较特殊的方法类型,因为它没有返回值.这与void返回值存在着明显的区别。对于void返回值，尽管方法本身不会自动返回什么，但仍然可以让它返回另一些东西。构建器则不同，它不仅什么也不会自动返回，而且根本不能有任何选择.若创建一个没有构件器的类,则编译器会自动创建一个默认构件器.">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="静勤居">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="清除与初始化">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="构造函数构建函数(Constructor)属于一种较特殊的方法类型,因为它没有返回值.这与void返回值存在着明显的区别。对于void返回值，尽管方法本身不会自动返回什么，但仍然可以让它返回另一些东西。构建器则不同，它不仅什么也不会自动返回，而且根本不能有任何选择.若创建一个没有构件器的类,则编译器会自动创建一个默认构件器.">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/2007/10/23/Java/Java-清除与初始化/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/about/" class="main-nav">关于</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2007/10/23/Java/Java-清除与初始化/">简体中文</a></li>
+              
+              <li><a href="/en/2007/10/23/Java/Java-清除与初始化/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>当前路径：<a class="category-item" href="/">文章</a><a class="category-item" href="/categories/Java/">Java</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline"></h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">发表于</span>
+      <time datetime="2007-10-23T12:13:00.000Z" itemprop="datePublished"><time datetime="2007-10-23T12:13:00.000Z">2007-10-23</time></time>
+      </span>
+      
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">分享</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" id="changyan_count_unit" data-thread-key="ab68a9fae4f58abfc920d7eeca68bae4"></span><span class="hidden-xs">评论</span></a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">喜欢</span></a>-->
+        <a href="#" class="icon nova-eye leancloud_visitors" id="ab68a9fae4f58abfc920d7eeca68bae4" data-flag-title="“清除与初始化”"><span class="count lc-count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2007-10-23T12:13:00.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <p>构造函数构建函数(Constructor)属于一种较特殊的方法类型,因为它没有返回值.这与void返回值存在着明显的区别。对于void返回值，尽管方法本身不会自动返回什么，但仍然可以让它返回另一些东西。构建器则不同，它不仅什么也不会自动返回，而且根本不能有任何选择.若创建一个没有构件器的类,则编译器会自动创建一个默认构件器.</p>
+<a id="more"></a>
+<p>gc()与finalize()gc只能清除在堆上分配的内存(纯java语言的所有对象都在堆上使用new分配内存),而不能清除栈上分配的内存（当使用JNI技术时,可能会在栈上分配内存,例如java调用c程序，而该c程序使用malloc分配内存时）.因此,如果某些对象被分配了栈上的内存区域,那gc就管不着了,对这样的对象进行内存回收就要靠finalize().</p>
+<p>举个例子来说,当java 调用非java方法时（这种方法可能是c或是c++的）,在非java代码内部也许调用了c的malloc()函数来分配内存，而且除非调用那个了free() 否则不会释放内存(因为free()是c的函数),这个时候要进行释放内存的工作,gc是不起作用的,因而需要在finalize()内部的一个固有方法调用它(free()).</p>
+<p>finalize的工作原理应该是这样的：一旦垃圾收集器准备好释放对象占用的存储空间，它首先调用finalize()，而且只有在下一次垃圾收集过程中，才会真正回收对象的内存.所以如果使用finalize()，就可以在垃圾收集期间进行一些重要的清除或清扫工作.</p>
+<p>finalize()在什么时候被调用?</p>
+<ol>
+<li>所有对象被Garbage Collection时自动调用,比如运行System.gc()的时候.</li>
+<li>程序退出时为每个对象调用一次finalize方法。</li>
+<li>显式的调用finalize方法</li>
+</ol>
+<p>除此以外,正常情况下,当某个对象被系统收集为无用信息的时候,finalize()将被自动调用,但是jvm不保证finalize()一定被调用,也就是说,finalize()的调用是不确定的,这也就是为什么sun不提倡使用finalize()的原因.成员初始化对于类成员，你可以不初始化就直接使用它，JVM会自动对类成员进行初始化，比如，int类型初始化为0，char类型初始化为’’；在书者，作者指的就是类成员的初始化。那么成员函数的成员初始化呢？这就需要自己手动进行了，如果没有初始化而直接使用的话，编译器会给出一个错误：当前变量可能还没有初始化。<br>如下所示：</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">int i;
+String s;
+System.out.println(this.i);//can not be i:The local variable i may not have been initialized</code></pre>
+<p>这使我想到了C/C++，在C/C++中是这样介绍的，如果局部变量没有初始化的话，那么编译器将自动赋给它一个随机值。所以在C/C++中，如果没有给局部变量赋初值（初始化）的话，将是一件“危险”的事，而Java则聪明了许多，没有初始化的局部变量，如果直接使用的话，编译不让你通过，以减少程序出现BUG的机率。</p>
+<p>构造函数的初始化没看懂，比仙剑的迷宫还难走。搞了半天，没搞懂，惭愧！以下是原文。</p>
+<p>static 初始化只有在必要的时候才会进行，…它们才会得到初始化在这以后，static 对象都不会重新初始化。初始化顺序首先是 static（如果它们尚未由前一次对象创建过程初始化）接着是非 static对象。大家可从输出结果中找到相应的证据。<br>原来是没有看完，根据以上原则，其它一些原则请参考原文。原文中的原例做一下面的分析。</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">package ch2;
+public class Test {
+    int i;
+    public void menberInit() {
+       int i;
+       String s;
+       System.out.println(this.i);// can not be i:The local variable i may not
+       // have been initialized
+    }
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+       // Test t = new Test();
+       // t.menberInit();
+       /*static init
+       System.out.println(&quot;Creating new Cupboard() in main&quot;);
+       new Cupboard();// 13
+       System.out.println(&quot;Creating new Cupboard() in main&quot;);
+       new Cupboard();// 14
+       t2.f2(1);
+       t3.f3(1);
+       */
+       Mugs x = new Mugs();
+    }
+    //static Table t2 = new Table();// 1,初始化静态成员t2.
+    //static Cupboard t3 = new Cupboard();// 8
+}
+class Bowl {
+    Bowl(int marker) {// 3,没有静态成员/方法,执行构造函数//5
+       System.out.println(&quot;Bowl(&quot; + marker + &quot;)&quot;);
+    }
+    void f(int marker) {
+       System.out.println(&quot;f(&quot; + marker + &quot;)&quot;);
+    }
+}
+class Table {
+    static Bowl b1 = new Bowl(1);// 2,初始化静态成员b1
+    Table() {// 6
+       System.out.println(&quot;Table()&quot;);
+       b2.f(1);// 7
+    }
+    void f2(int marker) {
+       System.out.println(&quot;f2(&quot; + marker + &quot;)&quot;);
+    }
+    static Bowl b2 = new Bowl(2);// 4,初始化静态成员b2
+}
+class Cupboard {
+    Bowl b3 = new Bowl(3);// 11最后才是非静态
+    static Bowl b4 = new Bowl(4);// 9,先静态
+    Cupboard() {// 12
+       System.out.println(&quot;Cupboard()&quot;);
+       b4.f(2);
+    }
+    void f3(int marker) {
+       System.out.println(&quot;f3(&quot; + marker + &quot;)&quot;);
+    }
+    static Bowl b5 = new Bowl(5);// 10,第二个静态
+}
+/**
+* non-static init
+*/
+class Mug {
+    Mug(int marker) {
+       System.out.println(&quot;Mug(&quot; + marker + &quot;)&quot;);
+    }
+    void f(int marker) {
+       System.out.println(&quot;f(&quot; + marker + &quot;)&quot;);
+    }
+}
+class Mugs {
+    Mug c1;
+    Mug c2;
+    {
+       c1 = new Mug(1);
+       c2 = new Mug(2);
+       System.out.println(&quot;c1 &amp; c2 initialized&quot;);
+    }
+    Mugs() {
+       System.out.println(&quot;Mugs()&quot;);
+    }
+}</code></pre>
+<p>请注意程序中注释中的序号，我喜欢用机器的方式思考方式来解这种题。</p>
+<ol>
+<li>发现静态成员t1，它新建一个Table对象。<br>在Table对象中，发现静态变量b1，新建一个Bowl对象，初始化Bowl，执行构造<br>在Table对象中，发现静态变量b2，新建一个Bowl对象，初始化Bowl，执行构造<br>Table.class没有成员/静态方法了，进行构造方法。</li>
+<li>发现静态成员t2，它新建一个Cupbord对象。<br>在Cupboard.class，先初始化静态成员b4,b5,然后才是非静态成员b3,最后执行其构造。</li>
+<li>程序继续往下执行，new Cupbord(), new Cupbord()，注意到这两次初始化，对已经初始化的静态b4,b5是不会进行第二次初始化的，而b3则每new 一次，则初始化一次。</li>
+<li>继续执行。<br>非静态实例的初始化很容易理解。<br>下面是例子运行的结果：<blockquote>
+</blockquote>
+Mug(1)<br>Mug(2)<br>c1 &amp; c2 initialized<br>Mugs()<blockquote>
+</blockquote>
+注：如果没有把两条static 实例注释掉的话，将有助于理解上面的静态实例初始化。</li>
+</ol>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2007/10/23/Java/Java-清除与初始化/](https://www.ieclipse.cn/2007/10/23/Java/Java-清除与初始化/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.909Z" itemprop="dateModified">
+    最后更新：2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="静勤居" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/2008/08/16/Java/jdom解析xml/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">上一页</span></a></li><li class="next"><a href="/2007/08/31/Java/J2EE真不是个东西四之Servlet篇/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">下一页</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    打赏
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>各位看官，鄙人借网络这块宝地在此献丑，望有钱的捧个钱场（打赏任意金额），没钱的捧个人场（分享）</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">打赏</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="ab68a9fae4f58abfc920d7eeca68bae4"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: 'ab68a9fae4f58abfc920d7eeca68bae4',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "代码",
+        right: "如下：",
+        copy: "复制"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Hexo高级教程之插件开发</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Web,Hexo,Node.js,Hexo高级教程之插件开发">
+  <meta name="description" content="引言Hexo 有强大的插件系统，使您能轻松扩展功能而不用修改核心模块的源码。在 Hexo 中有两种形式的插件：
+脚本（Scripts）如果您的代码很简单，建议您编写脚本，您只需要把 JavaScript 文件放到 scripts 文件夹，在启动时就会自动载入。
+插件（Packages）如果您的代码较复杂，或是您想要发布到 NPM 上，建议您编写插件。首先，在 node_modules 文件夹中建立文件夹，文件夹名称开头必须为 hexo-，如此一来 Hexo 才会在启动时载入否则 Hexo 将会忽略它。
+hexo.io插件">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="Jamling's Blog and Project Site">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="Hexo高级教程之插件开发">
+  <meta name="og:url" content="https://www.ieclipse.cn/2016/07/18/Web/Hexo-dev-plugin/">
+  <meta name="og:description" content="引言Hexo 有强大的插件系统，使您能轻松扩展功能而不用修改核心模块的源码。在 Hexo 中有两种形式的插件：
+脚本（Scripts）如果您的代码很简单，建议您编写脚本，您只需要把 JavaScript 文件放到 scripts 文件夹，在启动时就会自动载入。
+插件（Packages）如果您的代码较复杂，或是您想要发布到 NPM 上，建议您编写插件。首先，在 node_modules 文件夹中建立文件夹，文件夹名称开头必须为 hexo-，如此一来 Hexo 才会在启动时载入否则 Hexo 将会忽略它。
+hexo.io插件">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="Jamling's Blog and Project Site">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="Hexo高级教程之插件开发">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="引言Hexo 有强大的插件系统，使您能轻松扩展功能而不用修改核心模块的源码。在 Hexo 中有两种形式的插件：
+脚本（Scripts）如果您的代码很简单，建议您编写脚本，您只需要把 JavaScript 文件放到 scripts 文件夹，在启动时就会自动载入。
+插件（Packages）如果您的代码较复杂，或是您想要发布到 NPM 上，建议您编写插件。首先，在 node_modules 文件夹中建立文件夹，文件夹名称开头必须为 hexo-，如此一来 Hexo 才会在启动时载入否则 Hexo 将会忽略它。
+hexo.io插件">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/en/2016/07/18/Web/Hexo-dev-plugin/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/en/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/en/" class="main-nav">Home</a></li><li><a href="/en/p/" class="main-nav">Projects</a></li><li><a href="/en/categories/" class="main-nav">Category</a></li><li><a href="/en/archives/" class="main-nav">Archive</a></li><li><a href="/en/donate/" class="main-nav">Donate</a></li><li><a href="/en/about/" class="main-nav">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2016/07/18/Web/Hexo-dev-plugin/">简体中文</a></li>
+              
+              <li><a href="/en/2016/07/18/Web/Hexo-dev-plugin/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>Path: <a class="category-item" href="/en/">Blog</a><a class="category-item" href="/en/categories/Web/">Web</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline"></h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">Post at: </span>
+      <time datetime="2016-07-18T12:30:30.000Z" itemprop="datePublished"><time datetime="2016-07-18T12:30:30.000Z">2016-07-18</time></time>
+      </span>
+      
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">Share</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" id="changyan_count_unit" data-thread-key="d682017ad70fd0bea74e9e97cd8733ee"></span><span class="hidden-xs">Comment</span></a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">Like</span></a>-->
+        <a href="#" class="icon nova-eye leancloud_visitors" id="d682017ad70fd0bea74e9e97cd8733ee" data-flag-title="“Hexo高级教程之插件开发”"><span class="count lc-count leancloud-visitors-count"></span><span class="hidden-xs">Views</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2016-07-18T12:30:30.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote><p>Hexo 有强大的插件系统，使您能轻松扩展功能而不用修改核心模块的源码。在 Hexo 中有两种形式的插件：</p>
+<p>脚本（Scripts）<br>如果您的代码很简单，建议您编写脚本，您只需要把 JavaScript 文件放到 scripts 文件夹，在启动时就会自动载入。</p>
+<p>插件（Packages）<br>如果您的代码较复杂，或是您想要发布到 NPM 上，建议您编写插件。首先，在 node_modules 文件夹中建立文件夹，文件夹名称开头必须为 hexo-，如此一来 Hexo 才会在启动时载入否则 Hexo 将会忽略它。</p>
+<footer><strong>hexo.io</strong><cite><a href="https://hexo.io/zh-cn/docs/plugins.html" target="_blank" rel="noopener">插件</a></cite></footer></blockquote>
+
+<a id="more"></a>
+
+<p>以上引用来自hexo官方文档。所以，辅助函数也是hexo插件中的一种。除了辅助函数，还有以下类型的插件：</p>
+<ul>
+<li>控制台 (Console)</li>
+<li>部署器 (Deployer)</li>
+<li>过滤器 (Filter)</li>
+<li>生成器 (Generator)</li>
+<li>迁移器 (Migrator)</li>
+<li>处理器 (Processor)</li>
+<li>渲染引擎 (Renderer)</li>
+<li>标签 (Tag)</li>
+</ul>
+<h2 id="Hexo插件加载流程"><a href="#Hexo插件加载流程" class="headerlink" title="Hexo插件加载流程"></a>Hexo插件加载流程</h2><p>首先上代码（hexo/lib/index.js）：</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">Hexo.prototype.init = function() {
+  var self = this;
+
+  this.log.debug(&#39;Hexo version: %s&#39;, chalk.magenta(this.version));
+  this.log.debug(&#39;Working directory: %s&#39;, chalk.magenta(tildify(this.base_dir)));
+
+  // Load internal plugins
+  require(&#39;../plugins/console&#39;)(this);
+  require(&#39;../plugins/filter&#39;)(this);
+  require(&#39;../plugins/generator&#39;)(this);
+  require(&#39;../plugins/helper&#39;)(this);
+  require(&#39;../plugins/processor&#39;)(this);
+  require(&#39;../plugins/renderer&#39;)(this);
+  require(&#39;../plugins/tag&#39;)(this);
+
+  // Load config
+  return Promise.each([
+    &#39;update_package&#39;, // Update package.json
+    &#39;load_config&#39;, // Load config
+    &#39;load_plugins&#39; // Load external plugins &amp; scripts
+  ], function(name) {
+    return require(&#39;./&#39; + name)(self);
+  }).then(function() {
+    return self.execFilter(&#39;after_init&#39;, null, {context: self});
+  }).then(function() {
+    // Ready to go!
+    self.emit(&#39;ready&#39;);
+  });
+};</code></pre>
+<p>从上面的代码可知，在hexo初始化时会加载插件，加载插件写在<code>load_plugins.js</code>中。它有两个主要函数</p>
+<ul>
+<li>loadModules，会去加载第三方的插件，包括hexo自带的插件</li>
+<li>loadScripts，会去加载脚本类的插件，包括主题<code>scripts</code>下的脚本</li>
+</ul>
+<p>无论加载哪种插件，最后都是通过<code>index.js</code>中的<code>loadPlugin</code>函数来加载。</p>
+<p>有些插件（生成器，处理器，过滤器，渲染引擎）如果存在编译错误，会导致hexo无法启动并且输出错误日志。插件加载完成之后，则根据插件类型，分别放到对应的store中（可以视为数组）。</p>
+<h2 id="插件类型选择"><a href="#插件类型选择" class="headerlink" title="插件类型选择"></a>插件类型选择</h2><p>根据功能，选择合适的插件类型，比如<a href="http://github.com/Jamling/hexo-generator-github" target="_blank" rel="noopener">hexo-generator-github</a>插件，主要是生成一些与github相关的页面，比如README.md。笔者曾经不懂hexo插件开发，尝试过使用前端js，tag插件，helper插件等实现方式。但均不理想，存在各方面的问题。后来静下心里，耐心学习hexo源码之后，选择了做为generator插件，在hexo生成时，将github api缓存起来。然后再渲染。</p>
+<p>不同的类型的插件，在使用上是不一样的。如辅助函数插件，可以在主题模板中使用；标签插件，则是在源文件中使用，在渲染时，再实时转化为html输出。</p>
+<h2 id="最简单的插件"><a href="#最简单的插件" class="headerlink" title="最简单的插件"></a>最简单的插件</h2><p>下面，我们通过实例来写一个最简单的Hello Plugin插件。在<code>scripts</code>目录下新建一个hello.js文件，然后键入以下内容：</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">hexo.extend.helper.register(&#39;hello_plugin&#39;, function(page){
+    this.log(&quot;Hello Plugin&quot;);
+    return &quot;hello plugin&quot;;
+});</code></pre>
+<p>重启后，调用此辅助函数，则会在命令窗口显示Hello Plugin，并且在前台界面上显示hello plugin。</p>
+<p>如果插件功能较为简单，则不妨将其写为script插件。一个文件，可以写多个不同类型的插件。<a href="http://github.com/Jamling/hexo-generator-i18n" target="_blank" rel="noopener">hexo-generator-i18n</a>国际化插件早期也是写在script中的，后来为了更多的人能够使用，将其发布到NPM，才写为了package插件。</p>
+<h2 id="Package插件"><a href="#Package插件" class="headerlink" title="Package插件"></a>Package插件</h2><h3 id="npm-init"><a href="#npm-init" class="headerlink" title="npm init"></a>npm init</h3><p>使用<code>npm init</code>来新建本地包。然后根据提示，依次输入name, version, description等信息，新建完成后会生成一个<code>package.json</code>文件。</p>
+<p class="code-caption" data-lang="yaml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="yaml">{
+  &quot;name&quot;: &quot;test-plugin&quot;,
+  &quot;version&quot;: &quot;0.0.1&quot;,
+  &quot;description&quot;: &quot;test&quot;,
+  &quot;main&quot;: &quot;index.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
+  },
+  &quot;author&quot;: &quot;&quot;,
+  &quot;license&quot;: &quot;ISC&quot;,
+  &quot;keywords&quot;: []
+}</code></pre>
+<p>当然也可以手动新建<code>package.json</code>文件，并编辑，其中name和version字段是必须的。详细请参考npm文档<a href="https://docs.npmjs.com/getting-started/using-a-package.json。" target="_blank" rel="noopener">https://docs.npmjs.com/getting-started/using-a-package.json。</a></p>
+<h3 id="编写插件逻辑"><a href="#编写插件逻辑" class="headerlink" title="编写插件逻辑"></a>编写插件逻辑</h3><p>确定好插件要实现的功能，再根据<a href="https://hexo.io/zh-cn/api/" target="_blank" rel="noopener">hexo api</a>编写相应的逻辑代码。下面以<a href="http://github.com/Jamling/hexo-generator-index2" target="_blank" rel="noopener">hexo-generator-index2</a>为例。</p>
+<p>之前，有人在群里问，如何在hexo博客首页，显示指定分类下文章。要实现这个功能，可以修改官方的hexo-generator-index插件。</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">module.exports = function(locals) {
+  var config = this.config;
+  var posts = locals.posts.sort(config.index_generator.order_by);
+  var paginationDir = config.pagination_dir || &#39;page&#39;;
+
+  return pagination(&#39;&#39;, posts, {
+    perPage: config.index_generator.per_page,
+    layout: [&#39;index&#39;, &#39;archive&#39;],
+    format: paginationDir + &#39;/%d/&#39;,
+    data: {
+      __index: true
+    }
+  });
+};</code></pre>
+<p>在对posts分页之前，将指定分类之外的文章过滤掉即可。如下所示：</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">posts = posts.filter(function(post){
+  var ret = false;
+  post.categories.forEach(function(item, i){
+    if (item.name == &#39;软件技术&#39;){
+      ret = true;
+    }
+  });
+  return ret;
+});</code></pre>
+<p>但这种修改，只在当前的机器上有效。在此基础上，对此插件稍做修改，指定的分类，可以通过配置来指定。</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">var funcs = [];
+funcs[&#39;category&#39;] = function(post, value){
+    var ret = false;
+    post.categories.forEach(function(item, i){
+      if (item.name == value){
+        ret = true;return;
+      }
+    });
+    return ret;
+};</code></pre>
+<p>除了category过滤，<a href="http://github.com/Jamling/hexo-generator-index2" target="_blank" rel="noopener">hexo-generator-index2</a>还有tag和path过滤。</p>
+<p>注：hexo启动时，会调用所有的generaotr插件。</p>
+<h3 id="插件发布"><a href="#插件发布" class="headerlink" title="插件发布"></a>插件发布</h3><p>在发布到npm之前，先去npmjs.com注册账号并激活，然后在本地<code>$ npm login</code>登录。登录成功之后，就可以发布到npm了。</p>
+<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="bash">$ npm publish</code></pre>
+<p>发布成功之后，就可以将插件提交到hexo plugins列表了。</p>
+<p>如果对插件进行了修改，刚可以通过<code>npm version</code>来更新版本（注如使用了git做scm，那么，它会自动生成一个新tag并提交）。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>hexo api: <a href="https://hexo.io/zh-cn/api/" target="_blank" rel="noopener">https://hexo.io/zh-cn/api/</a><br>hexo docs: <a href="https://hexo.io/zh-cn/docs/plugins.html" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/plugins.html</a></p>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/07/18/Web/Hexo-dev-plugin/](https://www.ieclipse.cn/2016/07/18/Web/Hexo-dev-plugin/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.925Z" itemprop="dateModified">
+    Last updated: 2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="Jamling's Blog and Project Site" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/en/2016/07/18/Web/Hexo-dev-highlight/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">Prev</span></a></li><li class="next"><a href="/en/2016/07/14/Web/Hexo-dev-theme/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">Next</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    Donate
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>Dear reader, if you feel this good, could you rewark me a `bread` as awark? Thank you very much~</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">Donate</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="d682017ad70fd0bea74e9e97cd8733ee"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: 'd682017ad70fd0bea74e9e97cd8733ee',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          Table Of Contents
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#引言">引言</a></li><li><a href="#Hexo插件加载流程">Hexo插件加载流程</a></li><li><a href="#插件类型选择">插件类型选择</a></li><li><a href="#最简单的插件">最简单的插件</a></li><li><a href="#Package插件">Package插件</a><ul class="nav toc-ul"><li><a href="#npm-init">npm init</a></li><li><a href="#编写插件逻辑">编写插件逻辑</a></li><li><a href="#插件发布">插件发布</a></li></ul></li><li><a href="#参考">参考</a></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "Code",
+        right: ":",
+        copy: "Copy to clipboard"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Developer|eclipse-explorer</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Developer">
+  <meta name="description" content="简介Eclipse Explorer 4.x is a millstone version. It de-couples the resources and the development language plugin under Eclipse platform. And it’s possible to integrated the Eclipse Explorer to your RCP products or other Eclipse IDE for xxx developer. (such as Eclipse for Java IDE).">
+  
+
+  <meta name="og:type" content="website">
+  <meta name="og:site_name" content="Jamling's Blog and Project Site">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="Developer">
+  <meta name="og:url" content="https://www.ieclipse.cn/en/p/eclipse-explorer/develop.html">
+  <meta name="og:description" content="简介Eclipse Explorer 4.x is a millstone version. It de-couples the resources and the development language plugin under Eclipse platform. And it’s possible to integrated the Eclipse Explorer to your RCP products or other Eclipse IDE for xxx developer. (such as Eclipse for Java IDE).">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="Jamling's Blog and Project Site">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="Developer">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="简介Eclipse Explorer 4.x is a millstone version. It de-couples the resources and the development language plugin under Eclipse platform. And it’s possible to integrated the Eclipse Explorer to your RCP products or other Eclipse IDE for xxx developer. (such as Eclipse for Java IDE).">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/en/p/eclipse-explorer/develop.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/en/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/en/" class="main-nav">Home</a></li><li><a href="/en/p/" class="main-nav">Projects</a></li><li><a href="/en/categories/" class="main-nav">Category</a></li><li><a href="/en/archives/" class="main-nav">Archive</a></li><li><a href="/en/donate/" class="main-nav">Donate</a></li><li><a href="/en/about/" class="main-nav">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/p/eclipse-explorer/develop.html">简体中文</a></li>
+              
+              <li><a href="/en/p/eclipse-explorer/develop.html">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+  <div class="container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-12 col-md-2 col-lg-2" role="navigation">
+        <aside>
+      <div id="project_tree"></div>
+      <style>
+      .treeview li{
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+      }
+      </style>
+      
+      <script src="//cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+      <script>
+      $('#project_tree').treeview({
+        enableLinks: true,
+        color: '#428bca',
+        expandIcon: 'icon nova-arrow-right2',
+        collapseIcon: 'icon nova-arrow-down2',
+        //levels: 3,
+        //node-icon: '',
+        //selectedColor: '#ff0000',
+        onNodeSelected: function(event, data) {
+          if (data.state.selected){
+            return;
+          }
+        },
+        data: [{"text":"Overview","color":null,"href":"index.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}},{"text":"Downloads","color":null,"href":"download.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}},{"text":"Change logs","color":null,"href":"change.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}},{"text":"<b>Developer</b>","color":"#337ab7","href":"#","selectable":false,"state":{"disabled":false,"expanded":true,"selected":false},"nodes":[{"text":"Developer","color":null,"href":"develop.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":true}},{"text":"APIs","color":null,"href":"http://dl.ieclipse.cn/api/explorer/index.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}}]}]
+      });
+      function pnav(liobj){
+        var as = $(liobj).find('a');
+        if (as && as.length > 0){
+          var href = as.attr("href");
+          if(href == '#'){
+            // as.trigger('click');
+          } else if (href) {
+            location.href = href;
+          }
+        }
+      }
+      
+      $('.node-project_tree').each(function(i){
+        //$(this).attr('onclick', 'pnav(this)');
+	    });
+      
+      $(document).ready(function(e){
+        $(document).on("click",'.node-project_tree',function(e){pnav(this);  });
+      });
+      </script>
+    </aside>
+  </div>
+  <div class="col-sx-12 col-sm-8 col-md-8 col-lg-8 project">
+    <a id="project" href></a>
+    
+<article class="article " itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <h1 class="article-title" itemprop="name headline">
+      Developer
+    </h1>
+    <meta content="2016-01-30T09:43:26.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a> 4.x is a millstone version. It de-couples the resources and the development language plugin under Eclipse platform. And it’s possible to integrated the <a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a> to your RCP products or other Eclipse IDE for xxx developer. (such as Eclipse for Java IDE).</p>
+<p>Our aim is making the most powerful explorer plugin of Eclipse, if you are insterting, invite you to join us sincerely.</p>
+<h2 id="Suggestions"><a href="#Suggestions" class="headerlink" title="Suggestions"></a>Suggestions</h2><ul>
+<li>Fork <a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a></li>
+<li>Submit fragment project to <a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a></li>
+<li>Bundle-Name suggested to explorer4xxx, xxx is the dev lang, e.g. explorer4java</li>
+<li>Feature Name suggested to name as Eclipse explorer for xxx, e.g. Eclipse explorer for CDT</li>
+</ul>
+<h2 id="Fragment-list"><a href="#Fragment-list" class="headerlink" title="Fragment list"></a>Fragment list</h2><ul>
+<li>Eclipse explorer for Java, for Eclipse standard or other Java versions</li>
+<li>Eclipse explorer for CDT, for Eclipse IDE for C/C++ Developers</li>
+</ul>
+<h2 id="Dev-guide"><a href="#Dev-guide" class="headerlink" title="Dev guide"></a>Dev guide</h2><ul>
+<li>New fragment project<br>Eclipse-&gt;New-&gt;Others-&gt;Plugin Development-&gt;Fragment Project</li>
+</ul>
+<p><img src="/p/eclipse-explorer/develop/new_fragment_project1.png" alt="image"></p>
+<ul>
+<li>Set host plugin<br>Set <a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a> as host plugin</li>
+</ul>
+<p><img src="/p/eclipse-explorer/develop/new_fragment_project3.png" alt="image"></p>
+<ul>
+<li><p>Set fragment dependencies<br>Add the fragment dependencies, e.g. add org.eclipse.jdt.core for explorer4java fragment.</p>
+</li>
+<li><p>Extension AdapterFactory<br>New class such as JavaAdapterFactory.java and extend cn.ieclipse.pde.explorer.AdapterFactory. Rewrite getExplorable() abstract method and return the IExplorable object.</p>
+</li>
+</ul>
+<p>Sample:</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">@Override
+public IExplorable getExplorable(Object obj) {
+    String path = null;
+    if (obj instanceof IJavaElement) {
+        // java project.
+        if (obj instanceof IJavaProject) {
+            path = ((IJavaProject) obj).getProject().getLocation()
+                    .toOSString();
+            return new Explorer(path, null);
+        }
+        // jar resource is null
+        else if (obj instanceof JarPackageFragmentRoot) {
+            String file = ((IPackageFragmentRoot) obj).getPath()
+                    .toOSString();
+            // get folder
+            return new Explorer(null, file);
+        }
+        else if (obj instanceof IPackageFragmentRoot) {
+            // src folder
+            IPackageFragmentRoot src = ((IPackageFragmentRoot) obj);
+            IProject p = src.getJavaProject().getProject();
+            String prjPath = p.getLocation().toOSString();
+            path = new File(prjPath, src.getElementName())
+                    .getAbsolutePath();
+            return new Explorer(path, null);
+            // System.out.println(path);
+        }
+        else if (obj instanceof IPackageFragment) {// other : package
+            IResource resource = ((IPackageFragment) obj).getResource();
+            path = resource.getLocation().toOSString();
+            return new Explorer(path, null);
+        }
+        else {// member:filed:
+            IResource resource = ((IJavaElement) obj).getResource();
+            String file = resource.getLocation().toOSString();
+            // get folder
+            return new Explorer(null, file);
+        }
+    }
+    return null;
+}</code></pre>
+<ul>
+<li>Configure extensions<br>In fragment.xml Editor-&gt;Extensions Tab, add org.eclipse.core.runtime.adapters extension.<p> ![image](/p/eclipse-explorer/develop/new_extension.png) ![image](/p/eclipse-explorer/develop/add_adapter_factory_extension.png)</p>
+Sample:
+
+</li>
+</ul>
+<p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="xml">&lt;extension
+      point=&quot;org.eclipse.core.runtime.adapters&quot;&gt;
+   &lt;factory
+         adaptableType=&quot;org.eclipse.jdt.core.IJavaElement&quot;
+         class=&quot;cn.ieclipse.pde.explorer.java.JavaAdapterFactory&quot;&gt;
+      &lt;adapter
+            type=&quot;cn.ieclipse.pde.explorer.IExplorable&quot;&gt;
+      &lt;/adapter&gt;
+   &lt;/factory&gt;
+&lt;/extension&gt;</code></pre>
+<ul>
+<li><p>Debug<br>Debug fragment project as Eclipse Application. “Error log” is suggested to show.</p>
+</li>
+<li><p>Create feature<br>After debuging and testing, New-&gt;Project-&gt;Plugin Development-&gt;Feature Project to create feature.<br>Add the created feature to cn.ieclipse.pde.explorer.feature project Included Features tab. Finally rebuild the cn.ieclipse.pde.explorer.site project then test the feature installation.</p>
+</li>
+</ul>
+<h2 id="Publish"><a href="#Publish" class="headerlink" title="Publish"></a>Publish</h2><p>Make sure the fragment/feature/update site passing the test, then publish fragment to Eclipse marketplace or published as <a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a> fragment. Finally, fork <a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a> and edit the  README.md to insert the fragment and author info and pull a  request.</p>
+<p>Published as <a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a> fragment is recommended, please <a href="mailto:li.jaming@gmail.com" target="_blank" rel="noopener">mail</a> to update the information on Eclipse Marketplace.</p>
+
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.987Z" itemprop="dateModified">
+    Last updated: 2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="Jamling's Blog and Project Site" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/en/p/eclipse-explorer/change.html"><span aria-hidden="true">&larr;</span><span class="hidden-xs">Prev</span></a></li><li class="next"><a href="/en/p/eclipse-explorer/http:/dl.ieclipse.cn/api/explorer/index.html"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">Next</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    Donate
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>Dear reader, if you feel this good, could you rewark me a `bread` as awark? Thank you very much~</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">Donate</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="7e91d98668f70e33c632b01a61f2df0e"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: '7e91d98668f70e33c632b01a61f2df0e',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+  </div>
+  <!-- aside -->
+  <div class="col-sx-2 col-sm-2 col-md-2 col-lg-2 hidden-xs">
+  <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          Table Of Contents
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#简介">简介</a></li><li><a href="#Suggestions">Suggestions</a></li><li><a href="#Fragment-list">Fragment list</a></li><li><a href="#Dev-guide">Dev guide</a></li><li><a href="#Publish">Publish</a></li></ul>
+        </div>
+      </nav>
+</div>
+
+  </div>
+</div>
+<script>
+  {
+    var base = $('a#project').attr('href');
+    // Article
+    $('.article').each(function (i) {
+      // image
+      $(this).find('img').each(function () {
+        var src = $(this).attr('src');
+        if (src && !(src.indexOf('http://') == 0 || src.indexOf('https://') == 0 || src.indexOf('//') == 0)) {
+          console.log(src, 'need to prepend base url');
+          $(this).attr('src', base + src);
+          var p = $(this).parent();
+          if ($(p).is('a')) {
+            $(p).attr('href', base + src);
+          }
+        }
+      });
+    });
+  }
+</script>
+</div>
+
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "Code",
+        right: ":",
+        copy: "Copy to clipboard"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

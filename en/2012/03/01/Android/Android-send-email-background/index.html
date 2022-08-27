@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Android平台邮件自动发送功能实现</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Android,Android平台邮件自动发送功能实现">
+  <meta name="description" content="简介本文简述的是在Android平台如何自动发送邮件（没有邮件编写界面），主要应用场景为忘记密码等安全等级较高的操作，比如我忘记密码了，点击“发送密码到我的邮箱”系统会将密码发送到注册时的电子邮件地址。">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="Jamling's Blog and Project Site">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="Android平台邮件自动发送功能实现">
+  <meta name="og:url" content="https://www.ieclipse.cn/2012/03/01/Android/Android-send-email-background/">
+  <meta name="og:description" content="简介本文简述的是在Android平台如何自动发送邮件（没有邮件编写界面），主要应用场景为忘记密码等安全等级较高的操作，比如我忘记密码了，点击“发送密码到我的邮箱”系统会将密码发送到注册时的电子邮件地址。">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="Jamling's Blog and Project Site">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="Android平台邮件自动发送功能实现">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="简介本文简述的是在Android平台如何自动发送邮件（没有邮件编写界面），主要应用场景为忘记密码等安全等级较高的操作，比如我忘记密码了，点击“发送密码到我的邮箱”系统会将密码发送到注册时的电子邮件地址。">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/en/2012/03/01/Android/Android-send-email-background/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/en/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/en/" class="main-nav">Home</a></li><li><a href="/en/p/" class="main-nav">Projects</a></li><li><a href="/en/categories/" class="main-nav">Category</a></li><li><a href="/en/archives/" class="main-nav">Archive</a></li><li><a href="/en/donate/" class="main-nav">Donate</a></li><li><a href="/en/about/" class="main-nav">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2012/03/01/Android/Android-send-email-background/">简体中文</a></li>
+              
+              <li><a href="/en/2012/03/01/Android/Android-send-email-background/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>Path: <a class="category-item" href="/en/">Blog</a><a class="category-item" href="/en/categories/Android/">Android</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline"></h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">Post at: </span>
+      <time datetime="2012-03-01T13:00:00.000Z" itemprop="datePublished"><time datetime="2012-03-01T13:00:00.000Z">2012-03-01</time></time>
+      </span>
+      
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">Share</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" id="changyan_count_unit" data-thread-key="a0b0683ce115e7d67c825f7b9f255e4b"></span><span class="hidden-xs">Comment</span></a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">Like</span></a>-->
+        <a href="#" class="icon nova-eye leancloud_visitors" id="a0b0683ce115e7d67c825f7b9f255e4b" data-flag-title="“Android平台邮件自动发送功能实现”"><span class="count lc-count leancloud-visitors-count"></span><span class="hidden-xs">Views</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2012-03-01T13:00:00.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文简述的是在Android平台如何自动发送邮件（没有邮件编写界面），主要应用场景为忘记密码等安全等级较高的操作，比如我忘记密码了，点击“发送密码到我的邮箱”系统会将密码发送到注册时的电子邮件地址。</p>
+<a id="more"></a>
+<h2 id="Android平台邮件客户端"><a href="#Android平台邮件客户端" class="headerlink" title="Android平台邮件客户端"></a>Android平台邮件客户端</h2><ul>
+<li>Gmail: Gmai电子邮件客户端</li>
+<li>Email: 通用的电子邮件客户端</li>
+</ul>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="Gmail"><a href="#Gmail" class="headerlink" title="Gmail"></a>Gmail</h3><p>Gmail已经支持自动发送了，所以非常简单。在使用时，需要添加<br><code>&lt;uses-permission android:name=&quot;com.google.android.gm.permission.AUTO_SEND&quot; /&gt;</code><br>到AndroidManifest.xml</p>
+<p>示例代码如下：</p>
+<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code>Intent intent = new Intent(&quot;com.google.android.gm.action.AUTO_SEND&quot;);  
+intent.setType(&quot;plain/text&quot;);  
+String[] reciver = new String[] { &quot;xxxx@xxx.com&quot; };  
+String subject = &quot;email title&quot;;  
+String body = &quot;email body&quot;;  
+intent.putExtra(android.content.Intent.EXTRA_EMAIL, reciver);  
+intent.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);  
+intent.putExtra(android.content.Intent.EXTRA_TEXT, body);</code></pre><h3 id="Email"><a href="#Email" class="headerlink" title="Email"></a>Email</h3><p>Email不支持自动发送，但又是默认邮件客户端，所以需要添加自动发送功能。主要实现步骤为：</p>
+<h4 id="编写一个自动发送邮件类"><a href="#编写一个自动发送邮件类" class="headerlink" title="编写一个自动发送邮件类"></a>编写一个自动发送邮件类</h4><p>主要功能为：接收用户输入，组装message对象，获取Sender实例，将message发送出去，最后删除message对象（这样已发送的邮件内容不会出现在client中，提高发安全性）</p>
+<p>Java代码</p>
+<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code>package com.android.email.activity;  
+
+import android.app.Activity;  
+import android.app.ProgressDialog;  
+import android.content.ContentUris;  
+import android.content.Context;  
+import android.content.Intent;  
+import android.os.AsyncTask;  
+import android.os.Bundle;  
+import android.text.TextUtils;  
+import android.util.Log;  
+import android.view.View;  
+import android.view.Window;  
+import android.net.Uri;  
+import android.widget.Toast;  
+
+import com.android.emailcommon.provider.EmailContent;  
+import com.android.emailcommon.provider.EmailContent.Account;  
+import com.android.emailcommon.provider.EmailContent.Message;  
+import com.android.emailcommon.mail.MessagingException;  
+import com.android.emailcommon.mail.Address;  
+import com.android.emailcommon.utility.Utility;  
+import com.android.emailcommon.mail.AuthenticationFailedException;  
+import com.android.email.EmailAddressValidator;  
+import com.android.email.mail.Sender;  
+
+/** 
+ * Send email in background with account configured in Email application. 
+ * Sending message will not saved as draft or in out-going box. Usage: 
+ *  
+ * &lt;pre&gt; 
+ * Intent intent = new Intent(&amp;quot;com.android.email.intent.action.sendInBack&amp;quot;); 
+ * String[] reciver = new String[] { &amp;quot;your_name@corp.com&amp;quot; }; 
+ * String subject = &amp;quot;email title&amp;quot;; 
+ * String body = &amp;quot;email body &amp;quot;; 
+ * intent.putExtra(android.content.Intent.EXTRA_EMAIL, reciver[0]); 
+ * intent.putExtra(android.content.Intent.EXTRA_SUBJECT, subject); 
+ * intent.putExtra(android.content.Intent.EXTRA_TEXT, body); 
+ * startActivityForResult(Intent.createChooser(intent, &amp;quot;send&amp;quot;), 0x02); 
+ * &lt;/pre&gt; 
+ *  
+ * Now, attachment and multi-receiver function is unsupported. 
+ *  
+ * @author melord 
+ *  
+ */  
+public class EmailSendAutoActivity extends Activity implements SendListener {  
+
+    private static String tag = &quot;EmailSendAutoAcitivity&quot;;  
+    private Context mContext;  
+
+    private String mTo;  
+    private String mCc;  
+    private String mBcc;  
+    private String mSubject;  
+    private String mBody;  
+
+    private EmailAddressValidator mValidator = new EmailAddressValidator();  
+    private SendListener mListener;  
+    private Toast mWaiting;  
+    private boolean enableLog = true;  
+
+    /** 
+     * Sending account email address. 
+     */  
+    private String mSendEmail;  
+    /** 
+     * Sending account id 
+     */  
+    private long mAccountId = -1;  
+
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        this.mContext = this;  
+        requestWindowFeature(Window.FEATURE_NO_TITLE);  
+
+        mListener = this;  
+        Intent intent = getIntent();  
+        initMessageFromIntent(intent);  
+        initAccountFromIntent(intent);  
+
+        new SendTask().execute();  
+        String msg = intent.getStringExtra(&quot;sendMsg&quot;);  
+        if (msg == null) {  
+            msg = &quot;Sending message...&quot;;  
+        }  
+        // mWaiting = ProgressDialog.show(this, &quot;&quot;, &quot;sending...&quot;, true, true,  
+        // null);  
+        mWaiting = Toast.makeText(this, msg, Toast.LENGTH_LONG);  
+        mWaiting.show();  
+    }  
+
+    @Override  
+    public void onBackPressed() {  
+        if (mWaiting != null) {  
+            mWaiting.cancel();  
+        }  
+        super.onBackPressed();  
+    }  
+
+    @Override  
+    public void finish() {  
+        if (mWaiting != null) {  
+            mWaiting.cancel();  
+        }  
+        super.finish();  
+    }  
+
+    /** 
+     * Initialize sending account from intent. 
+     *  
+     * @param intent 
+     *            imcoming intent 
+     */  
+    private void initAccountFromIntent(Intent intent) {  
+        String email = intent.getStringExtra(&quot;sendAccount&quot;);  
+        if (email != null) {  
+            log(String.format(&quot;send email use account (%s) &quot;, email));  
+            mSendEmail = email;  
+            Long[] ids = EmailContent.Account.getAllAccountIds(this);  
+            if (ids != null &amp;&amp; ids.length &gt; 0) {  
+                for (int i = 0; i &lt; ids.length; i++) {  
+                    EmailContent.Account temp = EmailContent.Account  
+                            .restoreAccountWithId(this, ids[i]);  
+                    if (temp != null &amp;&amp; email.equals(temp.getEmailAddress())) {  
+                        log(&quot;valid account&quot;);  
+                        mAccountId = ids[i];  
+                        break;  
+                    }  
+                }  
+            }  
+        }  
+    }  
+
+    /** 
+     * Initialize message from intent. 
+     *  
+     * @param intent 
+     *            intent 
+     */  
+    private void initMessageFromIntent(Intent intent) {  
+        String to = intent.getStringExtra(Intent.EXTRA_EMAIL);  
+        mTo = composeAddress(to);  
+
+        String cc = intent.getStringExtra(Intent.EXTRA_CC);  
+        mCc = composeAddress(cc);  
+
+        String bcc = intent.getStringExtra(Intent.EXTRA_BCC);  
+        mBcc = composeAddress(bcc);  
+
+        mSubject = intent.getStringExtra(Intent.EXTRA_SUBJECT);  
+
+        mBody = intent.getStringExtra(Intent.EXTRA_TEXT);  
+
+        log(&quot;to:&quot; + mTo);  
+        log(&quot;cc:&quot; + mCc);  
+        log(&quot;bcc:&quot; + mBcc);  
+
+    }  
+
+    /** 
+     * change to stand email address reference to Rfc822 
+     *  
+     * @param address 
+     *            email address 
+     * @return RFC822 format email address 
+     */  
+    private String composeAddress(String address) {  
+        String addr = null;  
+        if (!TextUtils.isEmpty(address)) {  
+            Address[] addresses = Address.parse(address.trim());  
+            addr = Address.pack(addresses);  
+        }  
+        return addr;  
+    }  
+
+    /** 
+     * Update message. fill fields. 
+     *  
+     * @param message 
+     *            email message 
+     * @param account 
+     *            sending account 
+     */  
+    private void updateMessage(Message message, Account account) {  
+        if (message.mMessageId == null || message.mMessageId.length() == 0) {  
+            message.mMessageId = Utility.generateMessageId();  
+        }  
+        message.mTimeStamp = System.currentTimeMillis();  
+        // it will : Name&lt;Address&gt;  
+        message.mFrom = new Address(account.getEmailAddress(), account  
+                .getSenderName()).pack();  
+        message.mTo = mTo;  
+        message.mCc = mCc;  
+        message.mBcc = mBcc;  
+        message.mSubject = mSubject;  
+        message.mText = mBody;  
+        message.mAccountKey = account.mId;  
+        // here just used account setting simply  
+        message.mDisplayName = account.getSenderName();  
+        message.mFlagRead = true;  
+        message.mFlagLoaded = Message.FLAG_LOADED_COMPLETE;  
+
+    }  
+
+    private void log(String msg) {  
+        if (enableLog) {  
+            Log.i(tag, msg);  
+        }  
+    }  
+
+    /** 
+     * Really send message. 
+     *  
+     * @param account 
+     *            sending account 
+     * @param messageId 
+     *            message id 
+     */  
+    public void sendMessage(Account account, long messageId) {  
+        // message uri  
+        Uri uri = ContentUris.withAppendedId(EmailContent.Message.CONTENT_URI,  
+                messageId);  
+        try {  
+            // get a sender, ex. smtp sender.  
+            Sender sender = Sender.getInstance(mContext, account  
+                    .getSenderUri(mContext));  
+            // sending started  
+            mListener.onStarted(account.mId, messageId);  
+            // sending  
+            sender.sendMessage(messageId);  
+            // send completed  
+            mListener.onCompleted(account.mId);  
+
+        } catch (MessagingException me) {  
+            // report error  
+            mListener.onFailed(account.mId, messageId, me);  
+        } finally {  
+            try {  
+                // delete this message whenever send successfully or not  
+                mContext.getContentResolver().delete(uri, null, null);  
+            } catch (Exception ex) {  
+                Log.w(tag, &quot;delete message occur exception message uri:&quot; + uri);  
+            }  
+        }  
+    }  
+
+    public void onCompleted(long accountId) {  
+        log(&quot;send mail ok&quot;);  
+        // return Activity.RESULT_OK when send successfully  
+        setResult(RESULT_OK);  
+        finish();  
+    }  
+
+    public void onFailed(long accountId, long messageId, Exception ex) {  
+        log(&quot;send mail failed : &quot; + ex.toString());  
+        finish();  
+    }  
+
+    public void onStarted(long messageId, long accountId) {  
+        log(&quot;send mail started&quot;);  
+    }  
+
+    /** 
+     * Send message task, it is an async task 
+     *  
+     * @author melord_li 
+     *  
+     */  
+    private class SendTask extends AsyncTask&lt;Void, Void, Void&gt; {  
+        @Override  
+        protected Void doInBackground(Void... params) {  
+            // get default account, if not set, first record is treated as  
+            // default.  
+            // long id = Account.getDefaultAccountId(mContext);  
+            long id = mAccountId;  
+            if (id &lt; 0) {  
+                id = Account.getDefaultAccountId(mContext);  
+            }  
+            if (id &lt; 0) {  
+                Log.w(tag, &quot;no account exists&quot;);  
+                finish();  
+                return null;  
+            }  
+            // get full account message  
+            Account account = Account.restoreAccountWithId(mContext, id);  
+
+            // A empty message  
+            Message message = new Message();  
+            // fill message field  
+            updateMessage(message, account);  
+
+            // Save this message. Because send API will read message in message  
+            // db.  
+            Uri uri = message.save(mContext);  
+            if (uri == null) {  
+                Log.e(tag, &quot;save message occured an error&quot;);  
+                finish();  
+                return null;  
+            }  
+
+            // send  
+            sendMessage(account, message.mId);  
+            return null;  
+        }  
+    }  
+}  
+
+/** 
+ * Sending monitor 
+ *  
+ * @author melord 
+ *  
+ */  
+interface SendListener {  
+
+    /** 
+     * Send failed. 
+     *  
+     * @param accountId 
+     *            account id 
+     * @param messageId 
+     *            message id 
+     * @param ex 
+     *            exception 
+     */  
+    void onFailed(long accountId, long messageId, Exception ex);  
+
+    /** 
+     * Send begin. 
+     *  
+     * @param accountId 
+     *            account id 
+     * @param messageId 
+     *            message id 
+     */  
+    void onStarted(long messageId, long accountId);  
+
+    /** 
+     * Send completed. 
+     *  
+     * @param accountId 
+     *            account id 
+     */  
+    void onCompleted(long accountId);  
+}</code></pre><h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>Xml代码</p>
+<p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="xml">&lt;activity android:name=&quot;.activity.EmailSendAutoActivity&quot; android:theme=&quot;@android:style/Theme.Translucent&quot;&gt;  
+    &lt;intent-filter&gt;  
+        &lt;action android:name=&quot;com.android.email.intent.action.sendInBack&quot;/&gt;  
+        &lt;data android:mimeType=&quot;*/*&quot; /&gt;  
+        &lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;  
+    &lt;/intent-filter&gt;  
+&lt;/activity&gt;</code></pre>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>Java代码</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">Intent intent = new Intent(&quot;com.android.email.intent.action.sendInBack&quot;);  
+String[] reciver = new String[] { &quot;yourname@corp.com&quot; };  
+String subject = &quot;email title&quot;;  
+String body = &quot;email body&quot;;  
+intent.putExtra(android.content.Intent.EXTRA_EMAIL, reciver[0]);  
+intent.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);  
+intent.putExtra(android.content.Intent.EXTRA_TEXT, body);  
+
+startActivityForResult(Intent.createChooser(intent, &quot;send&quot;), 0x02);</code></pre>
+<h4 id="处理回调"><a href="#处理回调" class="headerlink" title="处理回调"></a>处理回调</h4><p>如果发送成功，会返回Activity.RESULT_OK。</p>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2012/03/01/Android/Android-send-email-background/](https://www.ieclipse.cn/2012/03/01/Android/Android-send-email-background/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.895Z" itemprop="dateModified">
+    Last updated: 2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="Jamling's Blog and Project Site" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/en/2012/06/08/Android/Android-Thread-join-in-AsyncTask/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">Prev</span></a></li><li class="next"><a href="/en/2011/08/01/Android/Android-Complie-OpenCV/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">Next</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    Donate
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>Dear reader, if you feel this good, could you rewark me a `bread` as awark? Thank you very much~</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">Donate</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="a0b0683ce115e7d67c825f7b9f255e4b"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: 'a0b0683ce115e7d67c825f7b9f255e4b',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          Table Of Contents
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#简介">简介</a></li><li><a href="#Android平台邮件客户端">Android平台邮件客户端</a></li><li><a href="#解决方案">解决方案</a><ul class="nav toc-ul"><li><a href="#Gmail">Gmail</a></li><li><a href="#Email">Email</a><ul class="nav toc-ul"><li><a href="#编写一个自动发送邮件类">编写一个自动发送邮件类</a></li><li><a href="#配置">配置</a></li><li><a href="#使用">使用</a></li><li><a href="#处理回调">处理回调</a></li></ul></li></ul></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "Code",
+        right: ":",
+        copy: "Copy to clipboard"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

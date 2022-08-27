@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>布局|hexo-theme-nova</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="布局">
+  <meta name="description" content="The theme provided three layouts to demonstrate the page.">
+  
+
+  <meta name="og:type" content="website">
+  <meta name="og:site_name" content="静勤居">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="布局">
+  <meta name="og:url" content="https://www.ieclipse.cn/p/hexo-theme-nova/layouts.html">
+  <meta name="og:description" content="The theme provided three layouts to demonstrate the page.">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="静勤居">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="布局">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="The theme provided three layouts to demonstrate the page.">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/p/hexo-theme-nova/layouts.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/about/" class="main-nav">关于</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/p/hexo-theme-nova/layouts.html">简体中文</a></li>
+              
+              <li><a href="/en/p/hexo-theme-nova/layouts.html">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+  <div class="container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-12 col-md-2 col-lg-2" role="navigation">
+        <aside>
+      <div id="project_tree"></div>
+      <style>
+      .treeview li{
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+      }
+      </style>
+      
+      <script src="//cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+      <script>
+      $('#project_tree').treeview({
+        enableLinks: true,
+        color: '#428bca',
+        expandIcon: 'icon nova-arrow-right2',
+        collapseIcon: 'icon nova-arrow-down2',
+        //levels: 3,
+        //node-icon: '',
+        //selectedColor: '#ff0000',
+        onNodeSelected: function(event, data) {
+          if (data.state.selected){
+            return;
+          }
+        },
+        data: [{"text":"概览","color":null,"href":"index.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}},{"text":"下载","color":null,"href":"download.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}},{"text":"<b>用户指南</b>","color":"#337ab7","href":"#","selectable":false,"state":{"disabled":false,"expanded":true,"selected":false},"nodes":[{"text":"布局","color":null,"href":"layouts.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":true}},{"text":"Front-matter","color":null,"href":"front-matter.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}},{"text":"辅助函数","color":null,"href":"helpers.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}},{"text":"插件","color":null,"href":"plugins.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}}]}]
+      });
+      function pnav(liobj){
+        var as = $(liobj).find('a');
+        if (as && as.length > 0){
+          var href = as.attr("href");
+          if(href == '#'){
+            // as.trigger('click');
+          } else if (href) {
+            location.href = href;
+          }
+        }
+      }
+      
+      $('.node-project_tree').each(function(i){
+        //$(this).attr('onclick', 'pnav(this)');
+	    });
+      
+      $(document).ready(function(e){
+        $(document).on("click",'.node-project_tree',function(e){pnav(this);  });
+      });
+      </script>
+    </aside>
+  </div>
+  <div class="col-sx-12 col-sm-8 col-md-8 col-lg-8 project">
+    <a id="project" href></a>
+    
+<article class="article " itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <h1 class="article-title" itemprop="name headline">
+      布局
+    </h1>
+    <meta content="2019-11-08T07:18:23.266Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <p>The theme provided three layouts to demonstrate the page.</p>
+<ol>
+<li><code>post</code> for blog</li>
+<li><code>project</code> for github project</li>
+<li><code>page</code> for other pages</li>
+</ol>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><h3 id="post"><a href="#post" class="headerlink" title="post"></a>post</h3><p>Similar to most hexo theme, nova has index, archive, widgets layout. The difference is nova rewrite archive list helpers and provided two paginator helpers.</p>
+<h3 id="project"><a href="#project" class="headerlink" title="project"></a>project</h3><p>Project layout is aimed to demonstrate the github projects info. For project layout, a <code>gh</code> front-matter is nessary in your page.</p>
+<p>The projects sidebar is configurated in <var>_data</var>/<var>projects.yml</var></p>
+<h3 id="page"><a href="#page" class="headerlink" title="page"></a>page</h3><p>The default layout of other pages.</p>
+<p>A <code>type</code> front-matter is used to mark special pages.</p>
+<ul>
+<li>categories: Categories page</li>
+<li>donates: Donate list page.</li>
+</ul>
+<h3 id="other"><a href="#other" class="headerlink" title="other"></a>other</h3><ul>
+<li>comment: Page comment, default is uyan comment</li>
+<li>share: Jiathis share component</li>
+<li>analytics: Baidu analytics component</li>
+<li>donate: page donate component</li>
+</ul>
+<h2 id="Layout-tree"><a href="#Layout-tree" class="headerlink" title="Layout tree"></a>Layout tree</h2><pre>
+layout
+    post
+        index.swig // home
+        article.swig // post article detail
+        archive.swig // archive/tag/category 
+        widget_xxx.swig // search, tags, categories, recently... widget_xxx.swig // search, tags, categories, recently...widget_xxx.swig // search, tags, categories, recently...
+    project
+        projects.swig // project home, list repos on github
+        releases.swig // list repo releases on github
+        contents.swig // display repo contents on github
+        sidebar.swig // project navigator side bar
+    portail
+        header.swig // html head, header
+        footer.swig // html footer
+        comment.swig // page comment
+        toc.swig    // toc suffix
+    page
+        categories.swig // all categories
+        donates.swig // donate records and rank
+        article.swig // the article 
+    index.swig // index layout dispatcher, link to post/index.
+    post.swig // post layout dispatcher.
+    page.swig // page layout dispatcher.
+    project.swig // project layout dispatcher.
+</pre>
+
+<h3 id="post-1"><a href="#post-1" class="headerlink" title="post"></a>post</h3><p>The index page is a special article list page, listing all post with excerpt in main container.</p>
+<p>The archive, category, tag page regards as archive list page, listing article archive list in main container.</p>
+<p>The article page display the post detail content in main container</p>
+<p>The <code>layout/post.swig</code> dispatche layout to <code>layout/post/xxx.swig</code> :</p>
+<p class="code-caption" data-lang="htmlbars" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="htmlbars">&lt;div class=&quot;container container-fluid&quot;&gt;
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;{{theme.layout.index.main}}&quot;&gt;
+    {% if is_home() %}
+    {{ partial('post/index') }}
+    {% elseif is_archive() || is_category() || is_tag() %}
+    {{ partial('post/archive') }}
+    {% elseif is_post() %}
+    {% set show_toc = theme.toc.post && page.toc %}
+    {{ partial('post/article', {post: page}) }}
+    {% endif %}
+  &lt;/div&gt;
+  &lt;!-- aside --&gt;
+  &lt;div class=&quot;{{theme.layout.index.widgets}}&quot;&gt;
+    &lt;aside&gt;
+      {%- if page_toc() %}
+      {{ partial('./partial/toc', {style: theme.layout.index.widgets}) }}
+      {%- endif %}
+    &lt;/aside&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<p>The <code>layout/index.swig</code> is a special layout for home page.</p>
+<h3 id="page-1"><a href="#page-1" class="headerlink" title="page"></a>page</h3><p>For common page, display content in main container, and TOC in right aside.</p>
+<p>For special page, dispatcher to special layout.</p>
+<p><code>layout/page.swig</code> dispatcher:</p>
+<p class="code-caption" data-lang="htmlbars" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="htmlbars">{%- if page.type === 'categories' %}
+{{ partial('page/categories', {}) }}
+{%- elseif page.type === 'donates' %}
+{{ partial('page/donates', {}) }}
+{%- else %}
+&lt;div class=&quot;container container-fluid&quot;&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;{{theme.layout.page.main}}&quot;&gt;
+      {{ partial('./page/article') }}
+    &lt;/div&gt;
+    &lt;div class=&quot;{{theme.layout.page.toc}}&quot;&gt;
+      {{ partial('./partial/toc') }}
+    &lt;/div&gt;
+  &lt;/div&gt;&lt;!--  end row --&gt;
+&lt;/div&gt;
+{%- endif %}</code></pre>
+<h3 id="project-1"><a href="#project-1" class="headerlink" title="project"></a>project</h3><p>Projects page, listing repos on github</p>
+<p>Other page, display content in main container, TOC in right aside and nagivation bar in left aside.</p>
+<p><code>layout/project.swig</code> dispatcher:</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">{% if page.gh %}
+  {% set gh = gh_opts() %}
+  {% if gh.type === 'get_contents' %} 
+    {% set page.content = gh_contents() %}
+    {{ partial('project/contents', {} )}}
+  {% elseif gh.type === 'get_repos' %}
+    {{ partial('project/projects', {} )}}
+  {% elseif gh.type === 'get_releases' %}
+    {{ partial('project/releases', {} )}}
+  {% endif %}
+{% else %}
+  {{ partial('project/contents', {} )}}
+{% endif %}</code></pre>
+<h1 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a>Plugin</h1><p>There are many <a href="https://hexo.io/plugins" target="_blank" rel="noopener">plugins</a> of [hexo], it’s easy to write a plugin under [hexo].<br>Just write a <var>.js</var> under <var>script</var> in your theme.</p>
+<p>here is a sample (<var>script</var>/<var>helpers.js</var>) to write a helper plugin to return page title.</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">// return page title.
+hexo.extend.helper.register(&#39;page_title&#39;, function(){
+  var p = this.page;
+  var ret = &#39;&#39;;
+  if (p.title2) { // if has a title2 in front-matter, i18n title2 value as title
+    ret = this.i18n(p.title2);
+  }
+  else if (p.title){ // use title value as title 
+    ret = p.title;
+  }
+  return ret;
+});</code></pre>
+<p>And another sample of display categories in post:</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">// insert category of post
+hexo.extend.helper.register(&#39;post_cates&#39;, function(post){
+  var cats = post.categories;
+  var _self = this;
+  var ret = &#39;&#39;;
+  if (cats == null || cats.length == 0) {
+      return ret;
+  }
+  ret += &#39;&lt;span class=&quot;glyphicon glyphicon-folder-close&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&amp;nbsp;&#39; + _self.__(&#39;category.label&#39;) + &#39;&#39;;
+  ret += &#39;&lt;ol class=&quot;breadcrumb category&quot;&gt;&#39;;
+  cats.forEach(function(item){
+    ret += &#39;&lt;li&gt;&lt;a class=&quot;&quot; href=&quot;&#39; + _self.url_for_lang(item.path) + &#39;&quot;&gt;&#39; + item.name + &#39;&lt;/a&gt;&lt;/li&gt;&#39;;
+  });
+  ret += &#39;&lt;/ol&gt;&#39;;
+  return ret;
+});</code></pre>
+<p>Use in layout/post.swig</p>
+<p class="code-caption" data-lang="htmlbars" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="htmlbars">&lt;footer class=&quot;post-item-footer&quot;&gt;
+  {{ post_cates(post) }} 
+  {{ post_tags(post) }}
+&lt;/footer&gt;</code></pre>
+<p>Will output:</p>
+<pre>
+    <footer class="post-item-footer">
+            <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>&nbsp;分类<ol class="breadcrumb category"><li><a class href="/categories/软件技术/">软件技术</a></li><li><a class href="/categories/软件技术/Web/">Web</a></li></ol> 
+            <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>&nbsp;标签<ol class="breadcrumb tag"><li><a class href="/tags/Hexo/">Hexo</a></li><li><a class href="/tags/Node-js/">Node.js</a></li></ol>
+    </footer>
+</pre>
+
+<p>The [Nova] rewrite lost of helper of [hexo] to simplify the style. Please visit <a href="http://ieclipse.cn/p/hexo-theme-nova/helpers.html" target="_blank" rel="noopener">Helpers</a> for more informations.</p>
+
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-11-08T07:18:23.266Z" itemprop="dateModified">
+    最后更新：2019-11-08
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="静勤居" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/p/hexo-theme-nova/download.html"><span aria-hidden="true">&larr;</span><span class="hidden-xs">上一页</span></a></li><li class="next"><a href="/p/hexo-theme-nova/front-matter.html"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">下一页</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    打赏
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>各位看官，鄙人借网络这块宝地在此献丑，望有钱的捧个钱场（打赏任意金额），没钱的捧个人场（分享）</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">打赏</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="78c9c6bd992c4882832077e718849bcd"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: '78c9c6bd992c4882832077e718849bcd',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+  </div>
+  <!-- aside -->
+  <div class="col-sx-2 col-sm-2 col-md-2 col-lg-2 hidden-xs">
+  <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          目录
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#Summary">Summary</a><ul class="nav toc-ul"><li><a href="#post">post</a></li><li><a href="#project">project</a></li><li><a href="#page">page</a></li><li><a href="#other">other</a></li></ul></li><li><a href="#Layout-tree">Layout tree</a><ul class="nav toc-ul"><li><a href="#post-1">post</a></li><li><a href="#page-1">page</a></li><li><a href="#project-1">project</a></li></ul></li><li><a href="#Plugin">Plugin</a></li></ul>
+        </div>
+      </nav>
+</div>
+
+  </div>
+</div>
+<script>
+  {
+    var base = $('a#project').attr('href');
+    // Article
+    $('.article').each(function (i) {
+      // image
+      $(this).find('img').each(function () {
+        var src = $(this).attr('src');
+        if (src && !(src.indexOf('http://') == 0 || src.indexOf('https://') == 0 || src.indexOf('//') == 0)) {
+          console.log(src, 'need to prepend base url');
+          $(this).attr('src', base + src);
+          var p = $(this).parent();
+          if ($(p).is('a')) {
+            $(p).attr('href', base + src);
+          }
+        }
+      });
+    });
+  }
+</script>
+</div>
+
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "代码",
+        right: "如下：",
+        copy: "复制"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

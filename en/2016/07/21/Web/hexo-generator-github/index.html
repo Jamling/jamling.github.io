@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Hexo github页面生成插件</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Web,Hexo,Node.js,Hexo github页面生成插件">
+  <meta name="description" content="痛点从2013年开始，本人开始活跃于github，以前托管于sourceforge、svn spot和oschina的开源项目，陆续迁移到了github。此前，我一直使用的是wiki系统来维护相关开源项目的文档及下载等。那时，Markdown还没有现在这么流行，在sourceforge等网站，我几乎不放文档。但迁移到github后，将之前的wiki页面渐渐转成了Markdown页面。在迁移到github之后，我比较重视文档，源代码的修改，有可能需要更新文档。此前wiki网站因为访问太慢，空间也不是特别稳定，在今年终于决定放弃维护，转而使用github pages功能来托管这些项目文档。
+github pages是一个静态空间，不支持php等动态语言。虽然如此，不过也有逼格高的玩法。当初曾想过使用jekyll来建站，不过因为工作太忙，没有时间学习。后来无意之中接触了hexo，hexo可以完全兼容github markdown，觉得hexo更适合我一些。于是试用了若干plugin和theme，对其blog功能还是非常满意，但是如果要展现项目文档，还是显得捉襟见肘。我不可能每次更新github后，都手动复制一份相关的文档再更新到博客站点。如何自动抓取github相关的页面等内容成了一个非常大的痛点。">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="Jamling's Blog and Project Site">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="Hexo github页面生成插件">
+  <meta name="og:url" content="https://www.ieclipse.cn/2016/07/21/Web/hexo-generator-github/">
+  <meta name="og:description" content="痛点从2013年开始，本人开始活跃于github，以前托管于sourceforge、svn spot和oschina的开源项目，陆续迁移到了github。此前，我一直使用的是wiki系统来维护相关开源项目的文档及下载等。那时，Markdown还没有现在这么流行，在sourceforge等网站，我几乎不放文档。但迁移到github后，将之前的wiki页面渐渐转成了Markdown页面。在迁移到github之后，我比较重视文档，源代码的修改，有可能需要更新文档。此前wiki网站因为访问太慢，空间也不是特别稳定，在今年终于决定放弃维护，转而使用github pages功能来托管这些项目文档。
+github pages是一个静态空间，不支持php等动态语言。虽然如此，不过也有逼格高的玩法。当初曾想过使用jekyll来建站，不过因为工作太忙，没有时间学习。后来无意之中接触了hexo，hexo可以完全兼容github markdown，觉得hexo更适合我一些。于是试用了若干plugin和theme，对其blog功能还是非常满意，但是如果要展现项目文档，还是显得捉襟见肘。我不可能每次更新github后，都手动复制一份相关的文档再更新到博客站点。如何自动抓取github相关的页面等内容成了一个非常大的痛点。">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="Jamling's Blog and Project Site">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="Hexo github页面生成插件">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="痛点从2013年开始，本人开始活跃于github，以前托管于sourceforge、svn spot和oschina的开源项目，陆续迁移到了github。此前，我一直使用的是wiki系统来维护相关开源项目的文档及下载等。那时，Markdown还没有现在这么流行，在sourceforge等网站，我几乎不放文档。但迁移到github后，将之前的wiki页面渐渐转成了Markdown页面。在迁移到github之后，我比较重视文档，源代码的修改，有可能需要更新文档。此前wiki网站因为访问太慢，空间也不是特别稳定，在今年终于决定放弃维护，转而使用github pages功能来托管这些项目文档。
+github pages是一个静态空间，不支持php等动态语言。虽然如此，不过也有逼格高的玩法。当初曾想过使用jekyll来建站，不过因为工作太忙，没有时间学习。后来无意之中接触了hexo，hexo可以完全兼容github markdown，觉得hexo更适合我一些。于是试用了若干plugin和theme，对其blog功能还是非常满意，但是如果要展现项目文档，还是显得捉襟见肘。我不可能每次更新github后，都手动复制一份相关的文档再更新到博客站点。如何自动抓取github相关的页面等内容成了一个非常大的痛点。">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/en/2016/07/21/Web/hexo-generator-github/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/en/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/en/" class="main-nav">Home</a></li><li><a href="/en/p/" class="main-nav">Projects</a></li><li><a href="/en/categories/" class="main-nav">Category</a></li><li><a href="/en/archives/" class="main-nav">Archive</a></li><li><a href="/en/donate/" class="main-nav">Donate</a></li><li><a href="/en/about/" class="main-nav">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2016/07/21/Web/hexo-generator-github/">简体中文</a></li>
+              
+              <li><a href="/en/2016/07/21/Web/hexo-generator-github/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>Path: <a class="category-item" href="/en/">Blog</a><a class="category-item" href="/en/categories/Web/">Web</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline"></h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">Post at: </span>
+      <time datetime="2016-07-21T12:30:30.000Z" itemprop="datePublished"><time datetime="2016-07-21T12:30:30.000Z">2016-07-21</time></time>
+      </span>
+      
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">Share</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" id="changyan_count_unit" data-thread-key="72bb16652f92a93e1ea15cedd7b6c6eb"></span><span class="hidden-xs">Comment</span></a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">Like</span></a>-->
+        <a href="#" class="icon nova-eye leancloud_visitors" id="72bb16652f92a93e1ea15cedd7b6c6eb" data-flag-title="“Hexo" github页面生成插件”><span class="count lc-count leancloud-visitors-count"></span><span class="hidden-xs">Views</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2016-07-21T12:30:30.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <h2 id="痛点"><a href="#痛点" class="headerlink" title="痛点"></a>痛点</h2><p>从2013年开始，本人开始活跃于github，以前托管于sourceforge、svn spot和oschina的开源项目，陆续迁移到了github。此前，我一直使用的是wiki系统来维护相关开源项目的文档及下载等。那时，Markdown还没有现在这么流行，在sourceforge等网站，我几乎不放文档。但迁移到github后，将之前的wiki页面渐渐转成了Markdown页面。在迁移到github之后，我比较重视文档，源代码的修改，有可能需要更新文档。此前wiki网站因为访问太慢，空间也不是特别稳定，在今年终于决定放弃维护，转而使用github pages功能来托管这些项目文档。</p>
+<p>github pages是一个静态空间，不支持php等动态语言。虽然如此，不过也有逼格高的玩法。当初曾想过使用jekyll来建站，不过因为工作太忙，没有时间学习。后来无意之中接触了hexo，hexo可以完全兼容github markdown，觉得hexo更适合我一些。于是试用了若干plugin和theme，对其blog功能还是非常满意，但是如果要展现项目文档，还是显得捉襟见肘。我不可能每次更新github后，都手动复制一份相关的文档再更新到博客站点。如何自动抓取github相关的页面等内容成了一个非常大的痛点。</p>
+<a id="more"></a>
+
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>这其实是一个hexo页面与github页面同步的问题。我期望的是，在github项目变更之后，比如README变更了，releases添加了，那么对应的hexo页面可以自动更新，而无需人工同步。</p>
+<h2 id="尝试"><a href="#尝试" class="headerlink" title="尝试"></a>尝试</h2><p>在尝试若干主题+插件都无法满足我的需求之后，我决定自己开发一个符合我需求的主题。主题的开发还是蛮曲折的，对于项目页这块，我尝试了不少的方案</p>
+<ul>
+<li><p>前端JS实现，在html页面使用ajax请求github api，然后填充内容。本来github访问就慢，多个ajax请求就更慢了，而且github还有limit访问限制，未加token的访问，一天也就60次。访问60次之后，就无法再访问了。这肯定不行。</p>
+</li>
+<li><p>同步实现，在生成或访问时，使用同步请求将github内容同步输出为html，node.js是异步的，所以特地找了几个同步网络请求请求库，比如ajax同步请求，urllib-sync等。最后，使用urllib-sync终于实现了同步请求，但是它仍然有缺点，一是生成时，仍然会消耗github api limit，二是生成速度太慢，三是不稳定，经常timeout。四是如果生成过程中，有一次同步请求失败，必须重新全部生成。后面我添加了项目页面越来越多，根本就用不下去了。</p>
+</li>
+</ul>
+<h2 id="终级方案"><a href="#终级方案" class="headerlink" title="终级方案"></a>终级方案</h2><p>在尝试过多个方案并失败之后，终于痛定思痛，还是要写一个插件，然后仔细研究了hexo源码，发现生成器插件比较适合。它在<code>hexo server</code>和<code>hexo generate</code>时，生成器都会被调用，那么我只需写一个生成器，用于抓取github api，然后缓存起来，渲染时，直接从缓存中取github response渲染。</p>
+<p>说干就干，在生成器中首先对站点的所有文章查找其是否带<code>gh</code> front-matter，如果存在，则属于项目页，判断缓存是否存在，存在则跳过生成</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">pages.forEach(function(item) {
+  if (item.gh) {
+    var path = pathFn.join(cacheDir, item.path);
+    if (!replace &amp;&amp; fs.existsSync(path)) {
+      if (github.debug) _self.log.debug(path + &quot; exists skip generate&quot;);
+      return;
+    }
+    _self.log.info(&quot;generating github &quot; + path);
+    var dir = pathFn.dirname(path);
+    mkdirsSync(dir);</code></pre>
+<p>生成具体规则如下：</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">var gh = gh_opt.call(_self, item);
+if (gh.type === &#39;get_contents&#39;) {
+  github.repos.getContent({
+    user : gh.user,
+    repo : gh.repo,
+    ref : gh.ref ? gh.ref : &#39;master&#39;,
+    path : gh.path ? gh.path : &#39;README.md&#39;
+  }, function(err, res) {
+    // var url = util.format(&#39;repos/%s/%s/contents/%s&#39;, user, name, path);
+    if (res &amp;&amp; res.content) {
+      var md = new Buffer(res.content, res.encoding).toString();
+      // var md_func = hs[&#39;markdown&#39;]; // Why generator can&#39;t call helper
+      // function?
+      fs.writeFileSync(path, md);
+    }
+    else {
+      _self.log.w(&quot;generate github &quot; + path + &quot; failed&quot;);
+    }
+  });
+}
+else if (gh.type === &#39;get_releases&#39;) {
+...
+}
+...</code></pre>
+<p>根据不同的<code>gh.type</code>来调用不同的github api，在这里，使用了node.js github第三方库来简化github操作。比如获取内容，将github上的markdown文件的内容写入到缓存中。所以此种方式，只要缓存存在，则不用重复请求github，不必担心github api limit限制，而且缓存是github原始数据，怎么展示，完全取决于主题。不像某些插件，生成的结果包含html，不好修改。</p>
+<p>在主题模板中，使用辅助函数来操作github。比如下面的<code>gh_contents</code>，将缓存中的markdown内容转化为html。</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">function gh_contents(options) {
+  var o = options || {}
+  var user = o.hasOwnProperty(&#39;user&#39;) ? o.user : this.config.github.user;
+  var name = o.hasOwnProperty(&#39;repo&#39;) ? o.repo : null;
+  var path = o.hasOwnProperty(&#39;path&#39;) ? o.path : &#39;README.md&#39;;
+  var ref = o.hasOwnProperty(&#39;ref&#39;) ? o.ref : &#39;master&#39;;
+
+  if (name === undefined) {
+    return &#39;&#39;;
+  }
+
+  var cache = (this.gh_read_cache(this.page));
+  if (cache) {
+    return this.markdown(cache.toString());
+  }</code></pre>
+<p>转化后的html可以做为page.content，直接显示。</p>
+<p class="code-caption" data-lang="htmlbars" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="htmlbars">{%- if gh.type === 'get_contents' %} 
+  {% set page.content = gh_contents(gh) %}
+  {{ partial('project/contents', {} )}}</code></pre>
+<pre><code class="htmlbars">&lt;div class=&quot;container-fluid&quot;&gt;
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;{{theme.layout.p.sidebar}}&quot; role=&quot;navigation&quot;&gt;
+    {{ partial('sidebar', {}) }}
+  &lt;/div&gt;
+  &lt;div class=&quot;{{theme.layout.p.main}}&quot;&gt;
+    {{ partial('../page/article') }}
+  &lt;/div&gt;
+  &lt;!-- aside --&gt;
+  &lt;div class=&quot;{{theme.layout.p.toc}}&quot;&gt;
+  {%- if page_toc() %}
+  {{ partial('../partial/toc', {style: 'col m4 l3'}) }}
+  {%- endif %}
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p class=&quot;code-caption&quot; data-lang=&quot;&quot; data-line_number=&quot;frontend&quot; data-trim_indent=&quot;backend&quot; data-label_position=&quot;outer&quot; data-labels_left=&quot;Code&quot; data-labels_right=&quot;:&quot; data-labels_copy=&quot;Copy Code&quot;&gt;&lt;span class=&quot;code-caption-label&quot;&gt;&lt;/span&gt;&lt;a class=&quot;code-caption-copy&quot;&gt;Copy Code&lt;/a&gt;&lt;/p&gt;
+</code></pre>
+<p>如上所示，将github上的文件内容直接输出到hexo页面。</p>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>为保证新建一个github相关的页面而不用重新启动hexo server，仍然需要保留github同步请求，当缓存不存在时，则执行同步请求api，并且将结果保存到缓存中。</p>
+<pre><code class="js">  var url = util.format(&#39;repos/%s/%s/contents/%s&#39;, user, name, path);
+  console.log(&quot;no cache, and try load from : &quot; + url);
+  var repo = gh.reqSync(url, {
+    data : {
+      &#39;ref&#39; : ref
+    }
+  });
+  if (repo &amp;&amp; repo.content) {
+    var md = new Buffer(repo.content, repo.encoding).toString();
+    var content = this.markdown(md);
+    this.gh_write_cache(this.gh_cache_dir(this.page, md));
+    return content;
+  }</code></pre>
+<p>为加快生成速度，本插件还提供了控制台命令方式来生成。</p>
+<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="bash">$ hexo github [-r --replace]</code></pre>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>使用<a href="http://github.com/Jamling/hexo-generator-github" target="_blank" rel="noopener">hexo-generator-github</a>可以将github的内容抓取到本地，配合主题来渲染输出。这样就不必手动修改hexo的页面了。比较方便。但是也有不足的地方，比如，为保证github上的markdown在hexo站点正常显示，要求markdown中的链接和图片等外部资源需要使用绝对路径。另外，如果要更新hexo页面，需要将github缓存删除或者通过控制台命令<code>$ hexo github -r</code>，这样才会重新生成hexo页面。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>hexo api: <a href="https://hexo.io/zh-cn/api/" target="_blank" rel="noopener">https://hexo.io/zh-cn/api/</a><br>hexo-generator-github: <a href="http://github.com/Jamling/hexo-generator-github" target="_blank" rel="noopener">http://github.com/Jamling/hexo-generator-github</a></p>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/07/21/Web/hexo-generator-github/](https://www.ieclipse.cn/2016/07/21/Web/hexo-generator-github/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.941Z" itemprop="dateModified">
+    Last updated: 2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="Jamling's Blog and Project Site" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/en/2016/07/21/Web/hexo-generator-index2/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">Prev</span></a></li><li class="next"><a href="/en/2016/07/18/Web/Hexo-dev-highlight/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">Next</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    Donate
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>Dear reader, if you feel this good, could you rewark me a `bread` as awark? Thank you very much~</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">Donate</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="72bb16652f92a93e1ea15cedd7b6c6eb"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: '72bb16652f92a93e1ea15cedd7b6c6eb',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          Table Of Contents
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#痛点">痛点</a></li><li><a href="#需求">需求</a></li><li><a href="#尝试">尝试</a></li><li><a href="#终级方案">终级方案</a></li><li><a href="#优化">优化</a></li><li><a href="#总结">总结</a></li><li><a href="#参考">参考</a></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "Code",
+        right: ":",
+        copy: "Copy to clipboard"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

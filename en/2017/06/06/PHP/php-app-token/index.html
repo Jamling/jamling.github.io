@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>我是怎么做App token认证的</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Web,PHP,我是怎么做App token认证的">
+  <meta name="description" content="使用Token来做身份认证在目前的移动客户端上非常流行，Token这个概念来源于OAuth认证，主要是在服务端实现。关于相关的原理，同学们自行百度。在这里，我简单介绍一下我是怎么具体实现的，重点描述token生成、token识别及token缓存。">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="Jamling's Blog and Project Site">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="我是怎么做App token认证的">
+  <meta name="og:url" content="https://www.ieclipse.cn/2017/06/06/PHP/php-app-token/">
+  <meta name="og:description" content="使用Token来做身份认证在目前的移动客户端上非常流行，Token这个概念来源于OAuth认证，主要是在服务端实现。关于相关的原理，同学们自行百度。在这里，我简单介绍一下我是怎么具体实现的，重点描述token生成、token识别及token缓存。">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="Jamling's Blog and Project Site">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="我是怎么做App token认证的">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="使用Token来做身份认证在目前的移动客户端上非常流行，Token这个概念来源于OAuth认证，主要是在服务端实现。关于相关的原理，同学们自行百度。在这里，我简单介绍一下我是怎么具体实现的，重点描述token生成、token识别及token缓存。">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/en/2017/06/06/PHP/php-app-token/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/en/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/en/" class="main-nav">Home</a></li><li><a href="/en/p/" class="main-nav">Projects</a></li><li><a href="/en/categories/" class="main-nav">Category</a></li><li><a href="/en/archives/" class="main-nav">Archive</a></li><li><a href="/en/donate/" class="main-nav">Donate</a></li><li><a href="/en/about/" class="main-nav">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2017/06/06/PHP/php-app-token/">简体中文</a></li>
+              
+              <li><a href="/en/2017/06/06/PHP/php-app-token/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>Path: <a class="category-item" href="/en/">Blog</a><a class="category-item" href="/en/categories/Web/">Web</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline"></h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">Post at: </span>
+      <time datetime="2017-06-06T10:30:00.000Z" itemprop="datePublished"><time datetime="2017-06-06T10:30:00.000Z">2017-06-06</time></time>
+      </span>
+      
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">Share</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" id="changyan_count_unit" data-thread-key="87a523d001614d0d9c52b4a7ea21d575"></span><span class="hidden-xs">Comment</span></a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">Like</span></a>-->
+        <a href="#" class="icon nova-eye leancloud_visitors" id="87a523d001614d0d9c52b4a7ea21d575" data-flag-title="“我是怎么做App" token认证的”><span class="count lc-count leancloud-visitors-count"></span><span class="hidden-xs">Views</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2017-06-06T10:30:00.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <p>使用Token来做身份认证在目前的移动客户端上非常流行，Token这个概念来源于OAuth认证，主要是在服务端实现。关于相关的原理，同学们自行百度。在这里，我简单介绍一下我是怎么具体实现的，重点描述token生成、token识别及token缓存。</p>
+<h2 id="生成Token"><a href="#生成Token" class="headerlink" title="生成Token"></a>生成Token</h2><p>服务端接收客户端传递的username和password等请求，在数据库中检查，如果用户名密码匹配的话，表示登录成功，服务端生成并返回一个token访问令牌。</p>
+<p class="code-caption" data-lang="php" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="php">public function login()
+{
+    $data = array_merge($this-&gt;request-&gt;post(), []);
+
+    // login with password
+    $user = Db::name($this-&gt;table)-&gt;field($this-&gt;field_except, true)-&gt;where(&#39;name&#39;, $data[&#39;name&#39;])-&gt;find();
+    if ($user) {
+        if ($user[&#39;pwd&#39;] === EncryptService::password($data[&#39;pwd&#39;])) {
+            $this-&gt;onLoginSuccess($user);
+        } else {
+            parent::logic_failure(&#39;密码不正确&#39;, &#39;user_wrong_pwd&#39;);
+        }
+    } else {
+        parent::logic_failure(&#39;用户不存在&#39;, &#39;user_not_exists&#39;);
+    }
+}
+
+private function onLoginSuccess($user)
+{
+    unset($user[&#39;pwd&#39;]);
+    $token = Token::generateToken($this-&gt;request, $user);
+    $ret = [
+        &#39;token&#39; =&gt; $token[&#39;token&#39;],
+        &#39;user&#39; =&gt; $user
+    ];
+    $this-&gt;logic_success(null, $ret);
+}</code></pre>
+<p>在上面的代码中，登录成功，服务端向客户端返回token和user信息。token是通过Token类的静态方法<code>generateToken</code>来生成的。</p>
+<p class="code-caption" data-lang="php" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="php">public static function generateToken($request, $user)
+{
+    // 1，生成包含用户及设备信息的新token
+    $data = [
+        &#39;uuid&#39; =&gt; $request-&gt;param(&#39;uuid&#39;, &#39;&#39;),
+        &#39;uid&#39; =&gt; $user[&#39;id&#39;],
+        &#39;ip&#39; =&gt; $request-&gt;ip(),
+        &#39;client&#39; =&gt; $request-&gt;param(&#39;client&#39;, &#39;&#39;),
+        &#39;update_time&#39; =&gt; ApiBase::_timestamp(),
+    ];
+    // json序列化
+    $json = json_encode($data);
+    // 加密token信息
+    $key = md5(EncryptService::encrypt($json));
+    $data[&#39;token&#39;] = $key;
+    // 2，从数据库查询用户的token，决定是update还是insert
+    $token = Token::get($user[&#39;id&#39;]);
+    // 如果数据库中已存在token，更新
+    if ($token) {
+        // 删除旧的缓存
+        cache($token[&#39;token&#39;], null);
+        // 执行更新
+        $token-&gt;isUpdate(true)-&gt;save($data);
+    }
+    // 不存在，插入
+    else {
+        $token = new Token();
+        $data[&#39;create_time&#39;] = ApiBase::_timestamp();
+        $token-&gt;data($data)-&gt;save();
+    }
+    // 3，将token写入缓存
+    Token::cacheToken($token-&gt;getData());
+    return $token-&gt;getData();
+}</code></pre>
+<p>这里主要有3个步骤</p>
+<ol>
+<li>根据用户及设备等信息生成一个唯一的token，uid用于识别用户，uuid用于识别设备，time用于保证唯一。将这些信息序列化后加密并生成md5</li>
+<li>根据用户id查询用户登录表，不管用户原来是否已经存在token，新的token将替换旧的token</li>
+<li>将token写入缓存，因为token是每个请求都会解析，如果不使用缓存的话，会导致数据库访问瓶颈。</li>
+</ol>
+<p>客户端应该保存token，然后在访问一些需要身份认证的API，比如修改昵称，就需要带上这个token了，而不需要显示带上用户信息，比如user_id。</p>
+<h2 id="解析token"><a href="#解析token" class="headerlink" title="解析token"></a>解析token</h2><p>服务端接收客户端传递的token，需要从中解析出相关的用户及设备信息。</p>
+<p class="code-caption" data-lang="php" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="php">public static function getToken($key)
+{
+    if (!isset($key)) {
+        return null;
+    }
+    $token = cache($key);
+    if ($token) {
+        return $token;
+    }
+    else {
+        return Token::findByToken($key);
+    }
+}</code></pre>
+<p>过程很简单，先从缓存中取，如果不存在再从数据库中查询。所有的请求，服务端都会执行解析token。</p>
+<h2 id="验证token"><a href="#验证token" class="headerlink" title="验证token"></a>验证token</h2><p>服务端简单地把API分为三类</p>
+<ol>
+<li>公共API，客户端可以任意访问，不需要验证身份，此类API多以GET请求为多。比如查询产品列表</li>
+<li>受保护的API，也即需要强制认证的API，这类API需要验证客户端身份才能访问，比如修改头像，客户端未传token或token无效，服务端返回一个错误码。</li>
+<li>可选认证的API，介于1和2之间，不要求强制验证客户端身份，比如分享奖励，如果客户端传递了token并认证通过了，则给相应的奖励，否则不做任何的奖励。</li>
+</ol>
+<p>基于上面的分析，验证token附带一个是否强制验证的参数，用于中断。验证的规则也相对简单，只要用户请求的设备ID与token中的设备ID相同就算验证通过了。</p>
+<p class="code-caption" data-lang="php" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="php">public function checkToken($exit = true)
+{
+    if ($this-&gt;token) {
+        if ($this-&gt;token[&#39;uuid&#39;] === $this-&gt;request-&gt;param(&#39;uuid&#39;, &#39;&#39;)) {
+            return true;
+        } else {
+            if ($exit) {
+                $this-&gt;logic_failure(null, &#39;user_offline&#39;);
+            } else {
+                $this-&gt;token = null;
+            }
+            return false;
+        }
+    } else {
+        if ($exit) {
+            $this-&gt;logic_failure(null, &#39;token_invalid&#39;);
+        }
+        return false;
+    }
+}</code></pre>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>缓存相对简单，缓存的key为加密token之后的md5值，也即登录成功后，服务端向客户端发送的token值。缓存未设置有效期，默认永不过期。</p>
+<p class="code-caption" data-lang="php" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="php">public static function cacheToken($token)
+{
+    if ($token) {
+        if (is_object($token)) {
+            $token = $token-&gt;getData();
+        }
+        cache($token[&#39;token&#39;], ($token));
+    }
+}
+?&gt;</code></pre>
+<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><p>为了让您的应该更加安全，还可以在以下方面强化</p>
+<ol>
+<li>token有效期</li>
+<li>token缓存加密</li>
+<li>token高级校验</li>
+</ol>
+<p>不过，我这里已经对token做了对称加密，相信他人伪造token的可能性也不大。</p>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/06/06/PHP/php-app-token/](https://www.ieclipse.cn/2017/06/06/PHP/php-app-token/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-10-18T14:20:08.385Z" itemprop="dateModified">
+    Last updated: 2019-10-18
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="Jamling's Blog and Project Site" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/en/2017/06/14/Android/Android-bitmap-config/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">Prev</span></a></li><li class="next"><a href="/en/2017/05/24/Android/quickaf-wechat-pay/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">Next</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    Donate
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>Dear reader, if you feel this good, could you rewark me a `bread` as awark? Thank you very much~</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">Donate</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="87a523d001614d0d9c52b4a7ea21d575"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: '87a523d001614d0d9c52b4a7ea21d575',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          Table Of Contents
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#生成Token">生成Token</a></li><li><a href="#解析token">解析token</a></li><li><a href="#验证token">验证token</a></li><li><a href="#缓存">缓存</a></li><li><a href="#进阶">进阶</a></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "Code",
+        right: ":",
+        copy: "Copy to clipboard"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

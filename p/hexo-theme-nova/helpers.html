@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>辅助函数|hexo-theme-nova</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="辅助函数">
+  <meta name="description" content="Helpers are used in templates to help you insert snippets quickly.  Helpers cannot be used in source files.
+hexo.ioHelpers
+
+Helpers of nova are located under theme scripts folder
+helpers.jshead_titleReturns page title. title2 assigned in front-marker the title will be i18n output
+head_keywordReturn keyword meta
+head_descriptionReturn description meta
+header_menu@param className class of menu item, param may changed in featureReturn menu navigation
+page_title@param page if undefined means current page.Return the page title, usually place to &lt;head&gt;&lt;title&gt;
+page_path@param post  the post@param options the optionsReturn post path navination
+
+
+
+Option
+Description
+Default
+
+
+
+class
+The path item class
+category-item
+
+
+icon
+The path preffix icon class
+glyphicon glyphicon-folder-close
+
+
+page_excerpt@param post the post, if undefined means current pageReturn page excerpt, if">
+  
+
+  <meta name="og:type" content="website">
+  <meta name="og:site_name" content="静勤居">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="辅助函数">
+  <meta name="og:url" content="https://www.ieclipse.cn/p/hexo-theme-nova/helpers.html">
+  <meta name="og:description" content="Helpers are used in templates to help you insert snippets quickly.  Helpers cannot be used in source files.
+hexo.ioHelpers
+
+Helpers of nova are located under theme scripts folder
+helpers.jshead_titleReturns page title. title2 assigned in front-marker the title will be i18n output
+head_keywordReturn keyword meta
+head_descriptionReturn description meta
+header_menu@param className class of menu item, param may changed in featureReturn menu navigation
+page_title@param page if undefined means current page.Return the page title, usually place to &lt;head&gt;&lt;title&gt;
+page_path@param post  the post@param options the optionsReturn post path navination
+
+
+
+Option
+Description
+Default
+
+
+
+class
+The path item class
+category-item
+
+
+icon
+The path preffix icon class
+glyphicon glyphicon-folder-close
+
+
+page_excerpt@param post the post, if undefined means current pageReturn page excerpt, if">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="静勤居">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="辅助函数">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="Helpers are used in templates to help you insert snippets quickly.  Helpers cannot be used in source files.
+hexo.ioHelpers
+
+Helpers of nova are located under theme scripts folder
+helpers.jshead_titleReturns page title. title2 assigned in front-marker the title will be i18n output
+head_keywordReturn keyword meta
+head_descriptionReturn description meta
+header_menu@param className class of menu item, param may changed in featureReturn menu navigation
+page_title@param page if undefined means current page.Return the page title, usually place to &lt;head&gt;&lt;title&gt;
+page_path@param post  the post@param options the optionsReturn post path navination
+
+
+
+Option
+Description
+Default
+
+
+
+class
+The path item class
+category-item
+
+
+icon
+The path preffix icon class
+glyphicon glyphicon-folder-close
+
+
+page_excerpt@param post the post, if undefined means current pageReturn page excerpt, if">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/p/hexo-theme-nova/helpers.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/about/" class="main-nav">关于</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/p/hexo-theme-nova/helpers.html">简体中文</a></li>
+              
+              <li><a href="/en/p/hexo-theme-nova/helpers.html">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+  <div class="container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-12 col-md-2 col-lg-2" role="navigation">
+        <aside>
+      <div id="project_tree"></div>
+      <style>
+      .treeview li{
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+      }
+      </style>
+      
+      <script src="//cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+      <script>
+      $('#project_tree').treeview({
+        enableLinks: true,
+        color: '#428bca',
+        expandIcon: 'icon nova-arrow-right2',
+        collapseIcon: 'icon nova-arrow-down2',
+        //levels: 3,
+        //node-icon: '',
+        //selectedColor: '#ff0000',
+        onNodeSelected: function(event, data) {
+          if (data.state.selected){
+            return;
+          }
+        },
+        data: [{"text":"概览","color":null,"href":"index.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}},{"text":"下载","color":null,"href":"download.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}},{"text":"<b>用户指南</b>","color":"#337ab7","href":"#","selectable":false,"state":{"disabled":false,"expanded":true,"selected":false},"nodes":[{"text":"布局","color":null,"href":"layouts.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}},{"text":"Front-matter","color":null,"href":"front-matter.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}},{"text":"辅助函数","color":null,"href":"helpers.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":true}},{"text":"插件","color":null,"href":"plugins.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}}]}]
+      });
+      function pnav(liobj){
+        var as = $(liobj).find('a');
+        if (as && as.length > 0){
+          var href = as.attr("href");
+          if(href == '#'){
+            // as.trigger('click');
+          } else if (href) {
+            location.href = href;
+          }
+        }
+      }
+      
+      $('.node-project_tree').each(function(i){
+        //$(this).attr('onclick', 'pnav(this)');
+	    });
+      
+      $(document).ready(function(e){
+        $(document).on("click",'.node-project_tree',function(e){pnav(this);  });
+      });
+      </script>
+    </aside>
+  </div>
+  <div class="col-sx-12 col-sm-8 col-md-8 col-lg-8 project">
+    <a id="project" href></a>
+    
+<article class="article " itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <h1 class="article-title" itemprop="name headline">
+      辅助函数
+    </h1>
+    <meta content="2019-11-08T03:05:07.673Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <blockquote><p>Helpers are used in templates to help you insert snippets quickly.  Helpers cannot be used in source files.</p>
+<footer><strong>hexo.io</strong><cite><a href="https://hexo.io/docs/helpers.html" target="_blank" rel="noopener">Helpers</a></cite></footer></blockquote>
+
+<p>Helpers of nova are located under theme <code>scripts</code> folder</p>
+<h2 id="helpers-js"><a href="#helpers-js" class="headerlink" title="helpers.js"></a>helpers.js</h2><h3 id="head-title"><a href="#head-title" class="headerlink" title="head_title"></a>head_title</h3><p>Returns page title. <code>title2</code> assigned in front-marker the title will be i18n output</p>
+<h3 id="head-keyword"><a href="#head-keyword" class="headerlink" title="head_keyword"></a>head_keyword</h3><p>Return keyword meta</p>
+<h3 id="head-description"><a href="#head-description" class="headerlink" title="head_description"></a>head_description</h3><p>Return description meta</p>
+<h3 id="header-menu"><a href="#header-menu" class="headerlink" title="header_menu"></a>header_menu</h3><p>@param <code>className</code> class of menu item, param may changed in feature<br>Return menu navigation</p>
+<h3 id="page-title"><a href="#page-title" class="headerlink" title="page_title"></a>page_title</h3><p>@param <code>page</code> if undefined means current page.<br>Return the page title, usually place to <code>&lt;head&gt;&lt;title&gt;</code></p>
+<h3 id="page-path"><a href="#page-path" class="headerlink" title="page_path"></a>page_path</h3><p>@param <code>post</code>  the post<br>@param <code>options</code> the options<br>Return post path navination</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>class</code></td>
+<td>The path item class</td>
+<td>category-item</td>
+</tr>
+<tr>
+<td><code>icon</code></td>
+<td>The path preffix icon class</td>
+<td>glyphicon glyphicon-folder-close</td>
+</tr>
+</tbody></table>
+<h3 id="page-excerpt"><a href="#page-excerpt" class="headerlink" title="page_excerpt"></a>page_excerpt</h3><p>@param <code>post</code> the post, if undefined means current page<br>Return page excerpt, if <a id="more"></a> not avaliable in .md, return the first paragraph as excerpt.</p>
+<h3 id="post-cates"><a href="#post-cates" class="headerlink" title="post_cates"></a>post_cates</h3><p>@param <code>post</code>  the post<br>@param <code>options</code> the options<br>Retrun categories in post</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>class</code></td>
+<td>The path item class</td>
+<td>category-item</td>
+</tr>
+<tr>
+<td><code>icon</code></td>
+<td>The path preffix icon class</td>
+<td>glyphicon glyphicon-folder-close</td>
+</tr>
+</tbody></table>
+<h3 id="post-tags"><a href="#post-tags" class="headerlink" title="post_tags"></a>post_tags</h3><p>@param <code>post</code>  the post<br>@param <code>options</code> the options<br>Return post tags in post</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>class</code></td>
+<td>The path item class</td>
+<td>tag-item</td>
+</tr>
+<tr>
+<td><code>icon</code></td>
+<td>The path preffix icon class</td>
+<td>glyphicon glyphicon-tags</td>
+</tr>
+</tbody></table>
+<h3 id="page-share-jiathis"><a href="#page-share-jiathis" class="headerlink" title="page_share_jiathis"></a><del>page_share_jiathis</del></h3><p>@param <code>post</code> the post, if undefined means current page<br>@param <code>webid</code> <a href="http://www.jiathis.com/help/html/support-media-website" target="_blank" rel="noopener">the webib of jiathis share</a>, if empty will redirect to share target page of jiathis.<br>Return share link of post</p>
+<h3 id="page-uid"><a href="#page-uid" class="headerlink" title="page_uid"></a>page_uid</h3><p>@param <code>page</code> page or this.page if undefined.<br>Return the unique id of page</p>
+<h3 id="widget-cates"><a href="#widget-cates" class="headerlink" title="widget_cates"></a>widget_cates</h3><p>List categories in post widget.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>show_count</code></td>
+<td>Show post count under category</td>
+<td>true</td>
+</tr>
+</tbody></table>
+<h3 id="widget-tags"><a href="#widget-tags" class="headerlink" title="widget_tags"></a>widget_tags</h3><p>List tags in post widget.</p>
+<h2 id="list-categories-js"><a href="#list-categories-js" class="headerlink" title="list_categories.js"></a>list_categories.js</h2><h3 id="nova-list-categories"><a href="#nova-list-categories" class="headerlink" title="nova_list_categories"></a>nova_list_categories</h3><p>Inserts a list of all categories.<br>Similar to list_categories, used in <var>post/widget_categories.swig</var><br>Only changed the ul, li, style.</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">&lt;%- nova_list_categories([options]) %&gt;</code></pre>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>orderby</code></td>
+<td>Order of categories</td>
+<td>name</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>Sort of order. <code>1</code>, <code>asc</code> for ascending; <code>-1</code>, <code>desc</code> for descending</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>show_count</code></td>
+<td>Display the number of posts for each category</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>style</code></td>
+<td>Style to display the category list. <code>list</code> displays categories in an unordered list.</td>
+<td>list</td>
+</tr>
+<tr>
+<td><code>separator</code></td>
+<td>Separator between categories. (Only works if <code>style</code> is not <code>list</code>)</td>
+<td>,</td>
+</tr>
+<tr>
+<td><code>depth</code></td>
+<td>Levels of categories to be displayed. <code>0</code> displays all categories and child categories; <code>-1</code> is similar to <code>0</code> but displayed in flat; <code>1</code> displays only top level categories.</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>class</code></td>
+<td>Class name of category list.</td>
+<td>category</td>
+</tr>
+<tr>
+<td><code>transform</code></td>
+<td>The function that changes the display of category name.</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="list-archives-js"><a href="#list-archives-js" class="headerlink" title="list_archives.js"></a>list_archives.js</h2><h3 id="nova-list-archives"><a href="#nova-list-archives" class="headerlink" title="nova_list_archives"></a>nova_list_archives</h3><p>Inserts a list of archives.<br>Similar to list_archives, used in post/widget_archives.swig<br>The helper adds archive.posts and changes class style.</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">&lt;%- nova_list_archives([options]) %&gt;</code></pre>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>type</code></td>
+<td>Type. This value can be <code>yearly</code> or <code>monthly</code>.</td>
+<td>monthly</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>Sort of order. <code>1</code>, <code>asc</code> for ascending; <code>-1</code>, <code>desc</code> for descending</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>show_count</code></td>
+<td>Display the number of posts for each archive</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>format</code></td>
+<td>Date format</td>
+<td>MMMM YYYY</td>
+</tr>
+<tr>
+<td><code>style</code></td>
+<td>Style to display the archive list. <code>list</code> displays archives in an unordered list. <strong><code>group</code> displays archives in a panel</strong></td>
+<td>list. <strong><code>page</code></strong> displays archives in archives page.</td>
+</tr>
+<tr>
+<td><code>separator</code></td>
+<td>Separator between archives. (Only works if <code>style</code> is not <code>list</code>)</td>
+<td>,</td>
+</tr>
+<tr>
+<td><code>class</code></td>
+<td>Class name of archive list.</td>
+<td>archive</td>
+</tr>
+<tr>
+<td><code>transform</code></td>
+<td>The function that changes the display of archive name.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>post_limit</code></td>
+<td>The posts display limitation. (add in nova)</td>
+<td>10</td>
+</tr>
+</tbody></table>
+<h3 id="nova-archives"><a href="#nova-archives" class="headerlink" title="nova_archives"></a><del>nova_archives</del></h3><p>Deprecated from 0.2.0, see <code>nova_list_archives</code> helpers and set <code>page</code> style options</p>
+<p>Inserts a list of archives.<br>Similar to list_archives, used in post/archives.swig</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">&lt;%- nova_archives([options]) %&gt;</code></pre>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>type</code></td>
+<td>Type. This value can be <code>yearly</code> or <code>monthly</code>.</td>
+<td>monthly</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>Sort of order. <code>1</code>, <code>asc</code> for ascending; <code>-1</code>, <code>desc</code> for descending</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>show_count</code></td>
+<td>Display the number of posts for each archive</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>format</code></td>
+<td>Date format</td>
+<td>MMMM YYYY</td>
+</tr>
+<tr>
+<td><code>style</code></td>
+<td>Style to display the archive list. <code>list</code> displays archives in an unordered list. <strong><code>group</code> displays archives in a panel</strong></td>
+<td>list</td>
+</tr>
+<tr>
+<td><code>separator</code></td>
+<td>Separator between archives. (Only works if <code>style</code> is not <code>list</code>)</td>
+<td>,</td>
+</tr>
+<tr>
+<td><code>class</code></td>
+<td>Class name of archive list.</td>
+<td>archive</td>
+</tr>
+<tr>
+<td><code>transform</code></td>
+<td>The function that changes the display of archive name.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>post_limit</code></td>
+<td>The posts display limitation. (add in nova)</td>
+<td>10</td>
+</tr>
+</tbody></table>
+<h2 id="list-posts-js"><a href="#list-posts-js" class="headerlink" title="list_posts.js"></a>list_posts.js</h2><h3 id="nova-list-posts"><a href="#nova-list-posts" class="headerlink" title="nova_list_posts"></a>nova_list_posts</h3><p>Inserts a list of posts. Only changs the class style.</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">&lt;%- nova_list_posts([options]) %&gt;</code></pre>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>orderby</code></td>
+<td>Order of posts</td>
+<td>date</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>Sort of order. <code>1</code>, <code>asc</code> for ascending; <code>-1</code>, <code>desc</code> for descending</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>style</code></td>
+<td>Style to display the post list. <code>list</code> displays posts in an unordered list.</td>
+<td>list</td>
+</tr>
+<tr>
+<td><code>separator</code></td>
+<td>Separator between posts. (Only works if <code>style</code> is not <code>list</code>)</td>
+<td>,</td>
+</tr>
+<tr>
+<td><code>class</code></td>
+<td>Class name of post list.</td>
+<td>post</td>
+</tr>
+<tr>
+<td><code>amount</code></td>
+<td>The number of posts to display (0 = unlimited)</td>
+<td>6</td>
+</tr>
+<tr>
+<td><code>transform</code></td>
+<td>The function that changes the display of post name.</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="paginator-js"><a href="#paginator-js" class="headerlink" title="paginator.js"></a>paginator.js</h2><h3 id="nova-paginator"><a href="#nova-paginator" class="headerlink" title="nova_paginator"></a>nova_paginator</h3><p>Inserts a paginator. Similar to paginator, adds class option for paginator bar.</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">&lt;%- paginator(options) %&gt;</code></pre>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>base</code></td>
+<td>Base URL</td>
+<td>/</td>
+</tr>
+<tr>
+<td><code>format</code></td>
+<td>URL format</td>
+<td>page/%d/</td>
+</tr>
+<tr>
+<td><code>total</code></td>
+<td>The number of pages</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>current</code></td>
+<td>Current page number</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>prev_text</code></td>
+<td>The link text of previous page. Works only if <code>prev_next</code> is set to true.</td>
+<td>Prev</td>
+</tr>
+<tr>
+<td><code>next_text</code></td>
+<td>The link text of next page. Works only if <code>prev_next</code> is set to true.</td>
+<td>Next</td>
+</tr>
+<tr>
+<td><code>space</code></td>
+<td>The space text</td>
+<td>&hellp;</td>
+</tr>
+<tr>
+<td><code>prev_next</code></td>
+<td>Display previous and next links</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>end_size</code></td>
+<td>The number of pages displayed on the start and the end side</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>mid_size</code></td>
+<td>The number of pages displayed between current page, but not including current page</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>show_all</code></td>
+<td>Display all pages. If this is set true, <code>end_size</code> and <code>mid_size</code> will not works.</td>
+<td>false</td>
+</tr>
+<tr>
+<td><code>class</code></td>
+<td>paginator ui class (add in nova).</td>
+<td>‘pagination’</td>
+</tr>
+</tbody></table>
+<h3 id="nova-paginator2"><a href="#nova-paginator2" class="headerlink" title="nova_paginator2"></a>nova_paginator2</h3><p>Display a paginator bar only with previous and next, used in single page.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>show_name</code></td>
+<td>Show page title</td>
+<td>false</td>
+</tr>
+</tbody></table>
+<h2 id="toc-js"><a href="#toc-js" class="headerlink" title="toc.js"></a>toc.js</h2><h3 id="nova-toc"><a href="#nova-toc" class="headerlink" title="nova_toc"></a>nova_toc</h3><p>Parses all heading tags (h1~h6) in the content and inserts a table of contents.<br>Delete list_number option, add expand and deep option.</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">&lt;%- nova_toc(str, [options]) %&gt;</code></pre>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>class</code></td>
+<td>Class name</td>
+<td><del>toc</del> -&gt; nav</td>
+</tr>
+<tr>
+<td><del><code>list_number</code></del></td>
+<td>Displays list number</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>deep</code></td>
+<td>The toc deepth</td>
+<td>3</td>
+</tr>
+<tr>
+<td><code>expand</code></td>
+<td>The toc max expand level</td>
+<td>6</td>
+</tr>
+</tbody></table>
+<p><strong>Examples:</strong></p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">{{ nova_toc(page.content, {class:'nav toc-ul', deep: 6, expand:6}) }}</code></pre>
+
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-11-08T03:05:07.673Z" itemprop="dateModified">
+    最后更新：2019-11-08
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="静勤居" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/p/hexo-theme-nova/front-matter.html"><span aria-hidden="true">&larr;</span><span class="hidden-xs">上一页</span></a></li><li class="next"><a href="/p/hexo-theme-nova/plugins.html"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">下一页</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    打赏
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>各位看官，鄙人借网络这块宝地在此献丑，望有钱的捧个钱场（打赏任意金额），没钱的捧个人场（分享）</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">打赏</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="263e2425492a1234c0348b3581ddf9b3"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: '263e2425492a1234c0348b3581ddf9b3',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+  </div>
+  <!-- aside -->
+  <div class="col-sx-2 col-sm-2 col-md-2 col-lg-2 hidden-xs">
+  <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          目录
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#helpers-js">helpers.js</a><ul class="nav toc-ul"><li><a href="#head-title">head_title</a></li><li><a href="#head-keyword">head_keyword</a></li><li><a href="#head-description">head_description</a></li><li><a href="#header-menu">header_menu</a></li><li><a href="#page-title">page_title</a></li><li><a href="#page-path">page_path</a></li><li><a href="#page-excerpt">page_excerpt</a></li><li><a href="#post-cates">post_cates</a></li><li><a href="#post-tags">post_tags</a></li><li><a href="#page-share-jiathis">page_share_jiathis</a></li><li><a href="#page-uid">page_uid</a></li><li><a href="#widget-cates">widget_cates</a></li><li><a href="#widget-tags">widget_tags</a></li></ul></li><li><a href="#list-categories-js">list_categories.js</a><ul class="nav toc-ul"><li><a href="#nova-list-categories">nova_list_categories</a></li></ul></li><li><a href="#list-archives-js">list_archives.js</a><ul class="nav toc-ul"><li><a href="#nova-list-archives">nova_list_archives</a></li><li><a href="#nova-archives">nova_archives</a></li></ul></li><li><a href="#list-posts-js">list_posts.js</a><ul class="nav toc-ul"><li><a href="#nova-list-posts">nova_list_posts</a></li></ul></li><li><a href="#paginator-js">paginator.js</a><ul class="nav toc-ul"><li><a href="#nova-paginator">nova_paginator</a></li><li><a href="#nova-paginator2">nova_paginator2</a></li></ul></li><li><a href="#toc-js">toc.js</a><ul class="nav toc-ul"><li><a href="#nova-toc">nova_toc</a></li></ul></li></ul>
+        </div>
+      </nav>
+</div>
+
+  </div>
+</div>
+<script>
+  {
+    var base = $('a#project').attr('href');
+    // Article
+    $('.article').each(function (i) {
+      // image
+      $(this).find('img').each(function () {
+        var src = $(this).attr('src');
+        if (src && !(src.indexOf('http://') == 0 || src.indexOf('https://') == 0 || src.indexOf('//') == 0)) {
+          console.log(src, 'need to prepend base url');
+          $(this).attr('src', base + src);
+          var p = $(this).parent();
+          if ($(p).is('a')) {
+            $(p).attr('href', base + src);
+          }
+        }
+      });
+    });
+  }
+</script>
+</div>
+
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "代码",
+        right: "如下：",
+        copy: "复制"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

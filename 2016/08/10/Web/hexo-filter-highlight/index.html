@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Hexo静态代码高亮插件</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Web,Hexo,Node.js,Hexo静态代码高亮插件">
+  <meta name="description" content="之前本站介绍了《Highlight.js 添加代码行号》和《Hexo高级教程之代码高亮》算是对Hexo的代码高亮有比较深的了解了。所以萌生出了写一个Hexo的静态代码高亮插件的想法。在原来代码高亮的基础上，允许添加代码提示及相关元数据，比如代码链接，代码标题。">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="静勤居">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="Hexo静态代码高亮插件">
+  <meta name="og:url" content="https://www.ieclipse.cn/2016/08/10/Web/hexo-filter-highlight/">
+  <meta name="og:description" content="之前本站介绍了《Highlight.js 添加代码行号》和《Hexo高级教程之代码高亮》算是对Hexo的代码高亮有比较深的了解了。所以萌生出了写一个Hexo的静态代码高亮插件的想法。在原来代码高亮的基础上，允许添加代码提示及相关元数据，比如代码链接，代码标题。">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="静勤居">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="Hexo静态代码高亮插件">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="之前本站介绍了《Highlight.js 添加代码行号》和《Hexo高级教程之代码高亮》算是对Hexo的代码高亮有比较深的了解了。所以萌生出了写一个Hexo的静态代码高亮插件的想法。在原来代码高亮的基础上，允许添加代码提示及相关元数据，比如代码链接，代码标题。">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/2016/08/10/Web/hexo-filter-highlight/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/about/" class="main-nav">关于</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2016/08/10/Web/hexo-filter-highlight/">简体中文</a></li>
+              
+              <li><a href="/en/2016/08/10/Web/hexo-filter-highlight/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>当前路径：<a class="category-item" href="/">文章</a><a class="category-item" href="/categories/Web/">Web</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline"></h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">发表于</span>
+      <time datetime="2016-08-10T14:30:30.000Z" itemprop="datePublished"><time datetime="2016-08-10T14:30:30.000Z">2016-08-10</time></time>
+      </span>
+      
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">分享</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" id="changyan_count_unit" data-thread-key="85dac0edf411cdaa5bb5c4f89551c06a"></span><span class="hidden-xs">评论</span></a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">喜欢</span></a>-->
+        <a href="#" class="icon nova-eye leancloud_visitors" id="85dac0edf411cdaa5bb5c4f89551c06a" data-flag-title="“Hexo静态代码高亮插件”"><span class="count lc-count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2016-08-10T14:30:30.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <p>之前本站介绍了《<a href="/2016/08/10/Web/highlight-js-numbering/">Highlight.js 添加代码行号</a>》和《<a href="/2016/07/18/Web/Hexo-dev-highlight/">Hexo高级教程之代码高亮</a>》算是对Hexo的代码高亮有比较深的了解了。所以萌生出了写一个<br>Hexo的静态代码高亮插件的想法。在原来代码高亮的基础上，允许添加代码提示及相关元数据，比如代码链接，代码标题。</p>
+<p>注：阅读本文需要一定的前端基础知识。</p>
+<h2 id="Hexo自带高亮"><a href="#Hexo自带高亮" class="headerlink" title="Hexo自带高亮"></a>Hexo自带高亮</h2><p>Hexo中插入代码有两种写法。一种叫<a href="https://hexo.io/docs/tag-plugins.html#Code-Block" target="_blank" rel="noopener">Code Block</a></p>
+<p class="code-caption" data-lang="plain" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="plain">{% codeblock [title] [lang:language] [url] [link text] %}
+code snippet
+{% endcodeblock %}</code></pre>
+<p>还有一种是<a href="https://hexo.io/docs/tag-plugins.html#Backtick-Code-Block" target="_blank" rel="noopener">Backtick Code Block</a></p>
+``` [language] [title] [url] [link text] code snippet ```
+
+<h2 id="Markdown代码高亮"><a href="#Markdown代码高亮" class="headerlink" title="Markdown代码高亮"></a>Markdown代码高亮</h2><p>Markdown中插入代码，是通过添加三个反引号（`）或三个波浪号（~）来实现的。如下示例</p>
+``` [language] code here <br>```
+
+<p>像大多数的markdown如github的markdown都是这种写法。这种写法在<code>[language]</code>后面不能加其它参数，否则会输出不正常。</p>
+<h2 id="对比分析"><a href="#对比分析" class="headerlink" title="对比分析"></a>对比分析</h2><p>如果使用静态的代码高亮，则必须关闭hexo自带高亮，关闭之后，如果以前的.md源文件使用的是hexo第二种插入代码的方式，则会导致hexo-renderer-marked渲染异常。而且我觉得hexo的第二种插入代码也挺不错的，尤其是链接参数。可以方便地链接到源代码。所以，针对现状，我写了hexo-filter-highlight插件，将代码块的一些元数据与代码内容分开。元数据主要由前端js来控制。而代码内容则由highlight.js来进行高亮，用于替代hexo自带高亮关闭后的代码高亮。</p>
+<h2 id="插件配置"><a href="#插件配置" class="headerlink" title="插件配置"></a>插件配置</h2><p class="code-caption" data-lang="yaml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code" data-hide="false" data-title="_config.yml"><span class="code-caption-label">(`_config.yml`)</span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="yaml">hljs:
+  enable: true #true to enable the plugin
+  line_number: frontend # add line_number in frontend or backend
+  trim_indent: backend # trim the indent of code block to prettify output. backend or front-end (recommend)
+  copy_code: true # show copy code in caption.
+  label:
+    left: Code
+    right: &#39;:&#39;
+    copy: Copy Code</code></pre>
+<p><code>enable</code>：用于打开或关闭本插件功能。<br><code>line_number</code>：设定是由前端还是后端（本插件）添加行号（暂时只时在前端添加）<br><code>trim_indent</code>：是否删除列前面的缩进空白，前端与后端均可。推荐在后端<br><code>label</code>：用于初始化代码块标题（caption）显示文本。</p>
+<p>注：本插件开启后，会在3个反引号前面添加一个<code>&lt;div class=&quot;code-caption&quot;&gt;</code>的div用于显示代码块caption。相应的设置均以<code>data-</code>添加在div的data域中。</p>
+<p>一开始本插件设定了两种caption的插入位置</p>
+<p> － <code>outer</code>方式，在三个反引号前插入，此种方式代码块的解析完全交由markdown，能很好控制caption的显示。比如复制代码右浮动。但是此种方式，代码行<code>ul</code>无法在<code>&lt;pre&gt;</code>内插入。<br>  － <code>inner</code>方式，由插件解析三个反引号内的内容为<code>&lt;pre&gt;&lt;code&gt;</code>，并且在<code>&lt;code&gt;</code>标签前面插入caption，后面插入行号<code>ul</code>，但是此种方式，caption内的元素无法浮动。所以目前只支持<code>outer</code>方式，如果有人能够完美解决上面的问题。请在github上提交pull-request。</p>
+<p>除了hexo配置，还需在主题在前端脚本上加入代码高亮脚本，如此，才会对代码块高亮。</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code" data-hide="false" data-href="https://github.com/Jamling/hexo-theme-nova/blob/master/source/js/hljs.js"><span class="code-caption-label">([hljs.js](https://github.com/Jamling/hexo-theme-nova/blob/master/source/js/hljs.js))</span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">$(&#39;.article pre code&#39;).each(function(i, block) {
+  var ds = $(this).parent().prev(code_caption_selector).data();
+  var texts = $(this).text().split(&#39;\n&#39;);
+  if (ds.trim_indent === &#39;frontend&#39;) {
+    console.log(&quot;trim indent in front-end&quot;);
+    var tab = texts[0].match(/^\s{0,}/);
+    if (tab) {
+      var arr = [];
+      texts.forEach(function(temp) {
+        arr.push(temp.replace(tab, &#39;&#39;));
+      });
+      $(this).text(arr.join(&#39;\n&#39;));
+    }
+  }
+
+  if (ds.line_number === &#39;frontend&#39;) {
+    console.log(&quot;show line number in front-end&quot;);
+    var lines = texts.length - 1;
+    var $numbering = $(&#39;&lt;ul/&gt;&#39;).addClass(&#39;pre-numbering&#39;);
+    $(this).addClass(&#39;has-numbering&#39;).parent().append($numbering);
+    for (i = 1; i &lt;= lines; i++) {
+      $numbering.append($(&#39;&lt;li/&gt;&#39;).text(i));
+    }
+  }
+
+  hljs.highlightBlock(block);
+});</code></pre>
+<p>设置前端显示样式</p>
+<p class="code-caption" data-lang="css" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="css">.code-caption {
+  clear: both;
+  position: relative;
+  top: 0; /*empty p height*/
+}
+
+.code-caption .code-caption-label {
+  font-style: italic;
+  font-weight: bold;
+ }
+
+.code-caption .code-caption-copy {
+  float: right;
+  @include user-select-none();
+}</code></pre>
+<p><strong><em>注：其它样式请参考[Highlight.js 添加代码行号]</em></strong></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>语法规则如下：</p>
+``` [language] [title] [link] show:off|false <br>code here <br>```
+
+<p>参数选项如下：</p>
+<ul>
+<li><code>language</code> 代码语言，如html, java, js</li>
+<li><code>title</code> 代码标题，一般使用文件名，如hljs.js</li>
+<li><code>link</code> 代码链接，一般链接到一个文件</li>
+<li><code>show</code> 可以设置off或false来隐藏caption的显示</li>
+</ul>
+<h2 id="国际化"><a href="#国际化" class="headerlink" title="国际化"></a>国际化</h2><p>本插件支持国际化，只不过需要在前端来完成。在加载<code>hljs.js</code>之前的位置在主题模板中插入以下脚本</p>
+<p class="code-caption" data-lang="html" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="html">&lt;script type=&quot;text/javascript&quot;&gt;
+var hljs_labels = {
+    left: &quot;{{__('hljs.left')}}&quot;,
+    right: &quot;{{__('hljs.right')}}&quot;,
+    copy: &quot;{{__('hljs.copy')}}&quot;
+}
+&lt;/script&gt;</code></pre>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>syntax-highlighting-with-highlightjs: <a href="http://idodev.co.uk/2013/03/syntax-highlighting-with-highlightjs/" target="_blank" rel="noopener">http://idodev.co.uk/2013/03/syntax-highlighting-with-highlightjs/</a><br>jquery.zeroclipboard: <a href="https://github.com/zeroclipboard/jquery.zeroclipboard" target="_blank" rel="noopener">https://github.com/zeroclipboard/jquery.zeroclipboard</a><br>Hexo高级教程之代码高亮: <a href="http://www.ieclipse.cn/2016/07/18/Web/Hexo-dev-highlight/">http://www.ieclipse.cn/2016/07/18/Web/Hexo-dev-highlight/</a><br>hexo-filter-highlight: <a href="https://github.com/Jamling/hexo-filter-highlight/" target="_blank" rel="noopener">https://github.com/Jamling/hexo-filter-highlight/</a></p>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/08/10/Web/hexo-filter-highlight/](https://www.ieclipse.cn/2016/08/10/Web/hexo-filter-highlight/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.941Z" itemprop="dateModified">
+    最后更新：2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="静勤居" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/2016/08/12/Android/Android-Push-Restart/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">上一页</span></a></li><li class="next"><a href="/2016/08/10/Web/highlight-js-numbering/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">下一页</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    打赏
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>各位看官，鄙人借网络这块宝地在此献丑，望有钱的捧个钱场（打赏任意金额），没钱的捧个人场（分享）</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">打赏</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="85dac0edf411cdaa5bb5c4f89551c06a"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: '85dac0edf411cdaa5bb5c4f89551c06a',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          目录
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#Hexo自带高亮">Hexo自带高亮</a></li><li><a href="#Markdown代码高亮">Markdown代码高亮</a></li><li><a href="#对比分析">对比分析</a></li><li><a href="#插件配置">插件配置</a></li><li><a href="#使用">使用</a></li><li><a href="#国际化">国际化</a></li><li><a href="#参考">参考</a></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "代码",
+        right: "如下：",
+        copy: "复制"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

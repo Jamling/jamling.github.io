@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>用户指南|Android-ORM</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="用户指南">
+  <meta name="description" content="引入
+Android studio在项目build.gradle中添加以下依赖Copy Code">
+  
+
+  <meta name="og:type" content="website">
+  <meta name="og:site_name" content="静勤居">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="用户指南">
+  <meta name="og:url" content="https://www.ieclipse.cn/p/Android-ORM/userguide.html">
+  <meta name="og:description" content="引入
+Android studio在项目build.gradle中添加以下依赖Copy Code">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="静勤居">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="用户指南">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="引入
+Android studio在项目build.gradle中添加以下依赖Copy Code">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/p/Android-ORM/userguide.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/about/" class="main-nav">关于</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/p/Android-ORM/userguide.html">简体中文</a></li>
+              
+              <li><a href="/en/p/Android-ORM/userguide.html">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+  <div class="container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-12 col-md-2 col-lg-2" role="navigation">
+        <aside>
+      <div id="project_tree"></div>
+      <style>
+      .treeview li{
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+      }
+      </style>
+      
+      <script src="//cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+      <script>
+      $('#project_tree').treeview({
+        enableLinks: true,
+        color: '#428bca',
+        expandIcon: 'icon nova-arrow-right2',
+        collapseIcon: 'icon nova-arrow-down2',
+        //levels: 3,
+        //node-icon: '',
+        //selectedColor: '#ff0000',
+        onNodeSelected: function(event, data) {
+          if (data.state.selected){
+            return;
+          }
+        },
+        data: [{"text":"概览","color":null,"href":"index.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}},{"text":"下载","color":null,"href":"download.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}},{"text":"用户指南","color":null,"href":"userguide.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":true}},{"text":"更新日志","color":null,"href":"change.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}}]
+      });
+      function pnav(liobj){
+        var as = $(liobj).find('a');
+        if (as && as.length > 0){
+          var href = as.attr("href");
+          if(href == '#'){
+            // as.trigger('click');
+          } else if (href) {
+            location.href = href;
+          }
+        }
+      }
+      
+      $('.node-project_tree').each(function(i){
+        //$(this).attr('onclick', 'pnav(this)');
+	    });
+      
+      $(document).ready(function(e){
+        $(document).on("click",'.node-project_tree',function(e){pnav(this);  });
+      });
+      </script>
+    </aside>
+  </div>
+  <div class="col-sx-12 col-sm-8 col-md-8 col-lg-8 project">
+    <a id="project" href></a>
+    
+<article class="article " itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <h1 class="article-title" itemprop="name headline">
+      用户指南
+    </h1>
+    <meta content="2016-01-30T09:43:26.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><ul>
+<li>Android studio<br>在项目build.gradle中添加以下依赖<p class="code-caption" data-lang="gradle" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+</li>
+</ul>
+<pre><code class="gradle">dependencies {
+    compile &#39;cn.ieclipse.aorm:aorm-core:1.1.2&#39;
+}</code></pre>
+<ul>
+<li>Eclipse<br>安装 <a href="https://marketplace.eclipse.org/content/android-adt-extensions" target="_blank" rel="noopener">Android ADT-extension</a> 插件，然后Add ORM capapility</li>
+</ul>
+<h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><p>设置Aorm的一些全局设置</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">Aorm.enableDebug(true);// 启用/禁用debug，在debug模式下会打印SQL等日志
+Aorm.allowExtend(false);// 允许/禁止模型继承，如果开启继承，ROM映射模型将会从父类中查找映射字段
+Aorm.setExactInsertOrUpdate(true);//设置是否精确的插入或更新操作。如果设置为true, 在执行写操作之前先查询数据库，如果查询出来的对象不存在，则插入新数据；如果存在，则更新数据库。如果设置为false，那么则根据主键是否为0来决定插入或更新操作（如果主键大于0，则执行更新操作，有可能会导致更新失败）。</code></pre>
+<h2 id="创建映射模型"><a href="#创建映射模型" class="headerlink" title="创建映射模型"></a>创建映射模型</h2><h3 id="设置映射表"><a href="#设置映射表" class="headerlink" title="设置映射表"></a>设置映射表</h3><p>只需简单地对class添加@Table注解，即可设置对数据库表的映射</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">@Table(name = &quot;student&quot;)
+public class Student implements java.ioSerializable{
+    //...
+}</code></pre>
+<h3 id="设置映射字段"><a href="#设置映射字段" class="headerlink" title="设置映射字段"></a>设置映射字段</h3><p>对Java bean的属性添加@Column注解</p>
+<ul>
+<li>pk (标识为主键)<br>id is true<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+</li>
+</ul>
+<pre><code class="java">@Column(name = &quot;_id&quot;, id = true)
+private long id;</code></pre>
+<ul>
+<li>普通字段<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+</li>
+</ul>
+<pre><code class="java">@Column(name = &quot;_name&quot;)
+private String name;
+@Column(name = &quot;_age&quot;)
+private int age;</code></pre>
+<ul>
+<li>非映射字段<br>如果不想映射数据库字段，则无需设置@Column注解<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+</li>
+</ul>
+<pre><code>private String address;</code></pre><p>映射的属性必须设置标准的Getter/Setter属性。</p>
+<h2 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h2><p>如果使用的是Eclipse已经安装了Android ADT-extensions插件，则可以使用此插件来生成数据库：右键选择Aorm模型（可以多选）-&gt;右键菜单-&gt;ADT extensions-&gt;New ORM Provider打开组件生成向导来自动生成。</p>
+<p>当然，您也可以手动创建，如下代码所示：</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">mOpenHelper = new SQLiteOpenHelper(this.getContext(), &quot;example.db&quot;,
+        null, 1) {
+    public void onCreate(SQLiteDatabase db) {
+        // method 3: use AORM to create table
+        Aorm.createTable(db, Grade.class);
+        Aorm.createTable(db, Student.class);
+        Aorm.createTable(db, Course.class);
+    }
+};</code></pre>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><h4 id="简单查询"><a href="#简单查询" class="headerlink" title="简单查询"></a>简单查询</h4><p>查询所有的学生记录。</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">Session session = ExampleContentProvider.getSession();
+// 最简单的查询，查询所有的记录
+Criteria criteria = Criteria.create(Student.class);
+List&lt;Student&gt; list = session.list(Student.class);</code></pre>
+<p>查询为cursor对象，cursor可以直接在CursorAdapter中使用</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">Cursor c = session.query(criteria);</code></pre>
+<p>查询单个学生信息</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">// 查询主键为4的学生
+s = session.get(Student.class, 4);</code></pre>
+<h4 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h4><p>Equals查询</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">// 添加id equals条件
+criteria.add(Restrictions.eq(&quot;id&quot;, 1));</code></pre>
+<p>Like查询</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">// 添加姓名中包含Jamling的学生
+criteria.add(Restrictions.like(&quot;name&quot;, &quot;Jaming&quot;));</code></pre>
+<p>比较查询</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">// 添加年龄大于30岁条件
+criteria.add(Restrictions.gt(&quot;age&quot;, 30));</code></pre>
+<p>排序</p>
+<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code>// 按年龄升序排序
+criteria.addOrder(Order.asc(&quot;age&quot;));</code></pre><p>Distinct</p>
+<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code>// set district
+criteria.setDistinct(true);</code></pre><p>Limit</p>
+<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code>// 限定查询第10到20条记录
+criteria.setLimit(10, 10);</code></pre><h4 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h4><p>Criteria支持以下四种连接</p>
+<ol>
+<li>左连接</li>
+<li>左外连接</li>
+<li>内连接</li>
+<li>交叉连接（笛卡尔积）</li>
+</ol>
+<p>通过Criteria.create方法来创建连接。如下示例代码。</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">Criteria criteria = Criteria.create(Student.class, &quot;s&quot;)
+                .addChild(Grade.class, &quot;g&quot;)
+                .add(Restrictions.eqProperty(&quot;s.id&quot;, &quot;g.sid&quot;));
+// query to list.
+List&lt;Object[]&gt; ret = session.listAll(criteria);
+Object[] item = ret.get(0);
+Student s = (Student) item[0];
+Grade g = (Grade) item[1];</code></pre>
+<h3 id="插入记录"><a href="#插入记录" class="headerlink" title="插入记录"></a>插入记录</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">Session session = ExampleContentProvider.getSession();
+// insert
+Student s = new Student();
+s.setName(&quot;Jamling&quot;);
+long rowId = session.insert(s, null);</code></pre>
+<h3 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a>更新记录</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">// update student&#39;s name to Jame whose id is 1
+s.setId(1);
+s.setName(&quot;Jame&quot;);
+int rows = session.update(s);</code></pre>
+<h3 id="删除记录"><a href="#删除记录" class="headerlink" title="删除记录"></a>删除记录</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">// delete student whose id is 2
+session.deleteById(Student.class, 2);</code></pre>
+
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.993Z" itemprop="dateModified">
+    最后更新：2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="静勤居" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/p/Android-ORM/download.html"><span aria-hidden="true">&larr;</span><span class="hidden-xs">上一页</span></a></li><li class="next"><a href="/p/Android-ORM/change.html"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">下一页</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    打赏
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>各位看官，鄙人借网络这块宝地在此献丑，望有钱的捧个钱场（打赏任意金额），没钱的捧个人场（分享）</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">打赏</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="da69a5f28a246e954add65b1ca017477"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: 'da69a5f28a246e954add65b1ca017477',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+  </div>
+  <!-- aside -->
+  <div class="col-sx-2 col-sm-2 col-md-2 col-lg-2 hidden-xs">
+  <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          目录
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#引入">引入</a></li><li><a href="#设置">设置</a></li><li><a href="#创建映射模型">创建映射模型</a><ul class="nav toc-ul"><li><a href="#设置映射表">设置映射表</a></li><li><a href="#设置映射字段">设置映射字段</a></li></ul></li><li><a href="#创建表">创建表</a></li><li><a href="#示例">示例</a><ul class="nav toc-ul"><li><a href="#查询">查询</a><ul class="nav toc-ul"><li><a href="#简单查询">简单查询</a></li><li><a href="#条件查询">条件查询</a></li><li><a href="#连接查询">连接查询</a></li></ul></li><li><a href="#插入记录">插入记录</a></li><li><a href="#更新记录">更新记录</a></li><li><a href="#删除记录">删除记录</a></li></ul></li></ul>
+        </div>
+      </nav>
+</div>
+
+  </div>
+</div>
+<script>
+  {
+    var base = $('a#project').attr('href');
+    // Article
+    $('.article').each(function (i) {
+      // image
+      $(this).find('img').each(function () {
+        var src = $(this).attr('src');
+        if (src && !(src.indexOf('http://') == 0 || src.indexOf('https://') == 0 || src.indexOf('//') == 0)) {
+          console.log(src, 'need to prepend base url');
+          $(this).attr('src', base + src);
+          var p = $(this).parent();
+          if ($(p).is('a')) {
+            $(p).attr('href', base + src);
+          }
+        }
+      });
+    });
+  }
+</script>
+</div>
+
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "代码",
+        right: "如下：",
+        copy: "复制"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

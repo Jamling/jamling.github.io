@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Front-matter|hexo-theme-nova</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Front-matter">
+  <meta name="description" content="Front-matter is a block of YAML or JSON at the beginning of the file that is used to configure settings for your writings. Front-matter is terminated by three dashes when written in YAML or three semicolons when written in JSON.">
+  
+
+  <meta name="og:type" content="website">
+  <meta name="og:site_name" content="静勤居">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="Front-matter">
+  <meta name="og:url" content="https://www.ieclipse.cn/p/hexo-theme-nova/front-matter.html">
+  <meta name="og:description" content="Front-matter is a block of YAML or JSON at the beginning of the file that is used to configure settings for your writings. Front-matter is terminated by three dashes when written in YAML or three semicolons when written in JSON.">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="静勤居">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="Front-matter">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="Front-matter is a block of YAML or JSON at the beginning of the file that is used to configure settings for your writings. Front-matter is terminated by three dashes when written in YAML or three semicolons when written in JSON.">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/p/hexo-theme-nova/front-matter.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/about/" class="main-nav">关于</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/p/hexo-theme-nova/front-matter.html">简体中文</a></li>
+              
+              <li><a href="/en/p/hexo-theme-nova/front-matter.html">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+  <div class="container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-12 col-md-2 col-lg-2" role="navigation">
+        <aside>
+      <div id="project_tree"></div>
+      <style>
+      .treeview li{
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+      }
+      </style>
+      
+      <script src="//cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+      <script>
+      $('#project_tree').treeview({
+        enableLinks: true,
+        color: '#428bca',
+        expandIcon: 'icon nova-arrow-right2',
+        collapseIcon: 'icon nova-arrow-down2',
+        //levels: 3,
+        //node-icon: '',
+        //selectedColor: '#ff0000',
+        onNodeSelected: function(event, data) {
+          if (data.state.selected){
+            return;
+          }
+        },
+        data: [{"text":"概览","color":null,"href":"index.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}},{"text":"下载","color":null,"href":"download.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}},{"text":"<b>用户指南</b>","color":"#337ab7","href":"#","selectable":false,"state":{"disabled":false,"expanded":true,"selected":false},"nodes":[{"text":"布局","color":null,"href":"layouts.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}},{"text":"Front-matter","color":null,"href":"front-matter.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":true}},{"text":"辅助函数","color":null,"href":"helpers.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}},{"text":"插件","color":null,"href":"plugins.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}}]}]
+      });
+      function pnav(liobj){
+        var as = $(liobj).find('a');
+        if (as && as.length > 0){
+          var href = as.attr("href");
+          if(href == '#'){
+            // as.trigger('click');
+          } else if (href) {
+            location.href = href;
+          }
+        }
+      }
+      
+      $('.node-project_tree').each(function(i){
+        //$(this).attr('onclick', 'pnav(this)');
+	    });
+      
+      $(document).ready(function(e){
+        $(document).on("click",'.node-project_tree',function(e){pnav(this);  });
+      });
+      </script>
+    </aside>
+  </div>
+  <div class="col-sx-12 col-sm-8 col-md-8 col-lg-8 project">
+    <a id="project" href></a>
+    
+<article class="article " itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <h1 class="article-title" itemprop="name headline">
+      Front-matter
+    </h1>
+    <meta content="2019-07-22T11:25:02.001Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <blockquote><p>Front-matter is a block of YAML or JSON at the beginning of the file that is used to configure settings for your writings. Front-matter is terminated by three dashes when written in YAML or three semicolons when written in JSON.</p>
+<footer><strong>hexo.io</strong><cite><a href="https://hexo.io/docs/front-matter.html" target="_blank" rel="noopener">Front-matter</a></cite></footer></blockquote>
+
+<p>The nova theme defined following front-matter beyond the official’s</p>
+<ul>
+<li>toc</li>
+<li>title2</li>
+<li>description</li>
+<li>type</li>
+<li>gh </li>
+</ul>
+<h3 id="toc"><a href="#toc" class="headerlink" title="toc"></a>toc</h3><p>Show table of contents or not, if not set, the default value is:</p>
+<ul>
+<li>post layout: false</li>
+<li>project layout: true</li>
+<li>page layout: true</li>
+</ul>
+<p>Sample (source of current page): </p>
+<p class="code-caption" data-lang="yaml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="yaml">---
+title: Hexo your blog
+date: 2016-03-04 12:48:31
+category: [软件技术, Web]
+tags: [Hexo, Node.js]
+toc: true
+---
+
+# Overview
+
+This article...</code></pre>
+<h3 id="title2"><a href="#title2" class="headerlink" title="title2"></a>title2</h3><p>The internationalization title key, will be translated with <code>__(title2)</code></p>
+<p>Example<br><code>download.md</code> content:</p>
+<p class="code-caption" data-lang="yaml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="yaml">---
+title: Downloads
+title2: project.download
+---</code></pre>
+<p><code>languages/en.yml</code> content:</p>
+<p class="code-caption" data-lang="yaml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="yaml">project:
+    download: Downloads</code></pre>
+<p>The page title will be the output of <code>__(&#39;project.download&#39;)</code>, the result is: <var>Downloads</var></p>
+<h3 id="description"><a href="#description" class="headerlink" title="description"></a>description</h3><p>The extra description of html page, will append to the content of <code>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;description&quot;...</code></p>
+<h3 id="type"><a href="#type" class="headerlink" title="type"></a>type</h3><p><code>type</code> front-matter only used in page layout.</p>
+<p>Sample (Source of <code>source/categories/index.md</code>):</p>
+<p class="code-caption" data-lang="yaml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="yaml">---
+title: categories
+date: 2016-03-30 16:14:59
+type: categories
+title2: menu.category
+---</code></pre>
+<h3 id="gh"><a href="#gh" class="headerlink" title="gh"></a>gh</h3><p>Nova project page are generated by <a href="https://github.com/Jamling/hexo-generator-github" target="_blank" rel="noopener">hexo-generator-github</a> partially, a <code>gh</code> front-matter is used for <a href="./layouts.html#project">project layout</a>.</p>
+<ul>
+<li>gh.user: the github user, default is the user in theme <var>_config.yml</var></li>
+<li>gh.repo: the github repo, default is fetched from url</li>
+<li>gh.type <ul>
+<li>get_repos: The <code>gh_repos()</code> helper will invoked to get repositories from github. </li>
+<li>get_contents: The <code>gh_repo_contents()</code> helper will be invoked to get markdown file under repository.<br><var>gh.path</var> to indicate the concrete file on github, default is <strong>README.md</strong><br><var>gh.ref</var> to indicate the branch on github, default is <strong>master</strong></li>
+<li>get_releases: The <code>gh_repo_releases()</code> helper will be invoked to get releases under repository.</li>
+</ul>
+</li>
+</ul>
+<p>Sample (Source of <code>p/Android-ORM/index.md</code>):</p>
+<p class="code-caption" data-lang="yaml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="yaml">---
+title: Android-ORM
+date: 2016-01-30 17:43:26
+layout: project
+title2: project.overview
+gh:
+  type: get_contents
+  path: README_zh.md
+  user: Jamling
+  repo: Android-ORM
+---</code></pre>
+<p>What’s the page output? see the snippets of helpers.js in <a href="https://github.com/Jamling/hexo-generator-github" target="_blank" rel="noopener">hexo-generator-github</a> plugin.</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">function gh_contents(options){
+  var o = options || {}
+  var user = o.hasOwnProperty(&#39;user&#39;) ? o.user : this.config.github.user;
+  var name = o.hasOwnProperty(&#39;repo&#39;) ? o.repo : null;
+  var path = o.hasOwnProperty(&#39;path&#39;) ? o.path : &#39;README.md&#39;;
+  var ref = o.hasOwnProperty(&#39;ref&#39;) ? o.ref : &#39;master&#39;;
+
+  if (name === undefined) {
+    return &#39;&#39;;
+  }
+
+  var cache = (this.gh_read_cache(this.page));
+  if (cache){
+      return this.markdown(cache.toString());
+  }
+
+  gh.setToken(this.config.github.token);
+  var url = util.format(&#39;repos/%s/%s/contents/%s&#39;, user, name, path);
+  console.log(&quot;no cache, and try load from : &quot; + url);
+  var repo = gh.reqSync(url, {data:{&#39;ref&#39;: ref}});
+  if (repo &amp;&amp; repo.content){
+    var md = new Buffer(repo.content, repo.encoding).toString();
+    var content = this.markdown(md);
+    this.gh_write_cache(this.gh_cache_dir(this.page, md));
+    return content;
+  }
+  return &#39;&#39;;
+}</code></pre>
+
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:02.001Z" itemprop="dateModified">
+    最后更新：2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="静勤居" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/p/hexo-theme-nova/layouts.html"><span aria-hidden="true">&larr;</span><span class="hidden-xs">上一页</span></a></li><li class="next"><a href="/p/hexo-theme-nova/helpers.html"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">下一页</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    打赏
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>各位看官，鄙人借网络这块宝地在此献丑，望有钱的捧个钱场（打赏任意金额），没钱的捧个人场（分享）</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">打赏</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="f4a9c6062468c1078b5383bdd9735b98"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: 'f4a9c6062468c1078b5383bdd9735b98',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+  </div>
+  <!-- aside -->
+  <div class="col-sx-2 col-sm-2 col-md-2 col-lg-2 hidden-xs">
+  <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          目录
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#toc">toc</a></li><li><a href="#title2">title2</a></li><li><a href="#description">description</a></li><li><a href="#type">type</a></li><li><a href="#gh">gh</a></li></ul>
+        </div>
+      </nav>
+</div>
+
+  </div>
+</div>
+<script>
+  {
+    var base = $('a#project').attr('href');
+    // Article
+    $('.article').each(function (i) {
+      // image
+      $(this).find('img').each(function () {
+        var src = $(this).attr('src');
+        if (src && !(src.indexOf('http://') == 0 || src.indexOf('https://') == 0 || src.indexOf('//') == 0)) {
+          console.log(src, 'need to prepend base url');
+          $(this).attr('src', base + src);
+          var p = $(this).parent();
+          if ($(p).is('a')) {
+            $(p).attr('href', base + src);
+          }
+        }
+      });
+    });
+  }
+</script>
+</div>
+
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "代码",
+        right: "如下：",
+        copy: "复制"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

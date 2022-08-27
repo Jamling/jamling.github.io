@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Android使用代码来实现StateListDrawable</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Android,QuickAF,Android使用代码来实现StateListDrawable">
+  <meta name="description" content="相信大家在做Android开发的时候，一定遇到以下问题：
+
+界面A上有一个按钮B1，点击时，需要变换背景颜色
+界面B的按钮B2与界面A的按钮B1外观一样，只是颜色不同
+
+通常我们的解决办法是向UI要按钮的背景图，不同的状态是一张图片。以上为例，我们需要向美工索取4张图片。按钮B1（常态与点击态），按钮B2（常态与点击态），然后再定义selector drawable xml，如果美工给的不是9.png，我们还要使用nine-patch工具将其转为9.png图片。大家可以想象一下，如果状态更多，而页面上的按钮又各不相同的话，天啊！那该有多少图片，多少个selector啊，得花多少时间啊！有没有快捷的解决办法呢？答案当然是有！">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="Jamling's Blog and Project Site">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="Android使用代码来实现StateListDrawable">
+  <meta name="og:url" content="https://www.ieclipse.cn/2016/08/02/Android/Android-code-states/">
+  <meta name="og:description" content="相信大家在做Android开发的时候，一定遇到以下问题：
+
+界面A上有一个按钮B1，点击时，需要变换背景颜色
+界面B的按钮B2与界面A的按钮B1外观一样，只是颜色不同
+
+通常我们的解决办法是向UI要按钮的背景图，不同的状态是一张图片。以上为例，我们需要向美工索取4张图片。按钮B1（常态与点击态），按钮B2（常态与点击态），然后再定义selector drawable xml，如果美工给的不是9.png，我们还要使用nine-patch工具将其转为9.png图片。大家可以想象一下，如果状态更多，而页面上的按钮又各不相同的话，天啊！那该有多少图片，多少个selector啊，得花多少时间啊！有没有快捷的解决办法呢？答案当然是有！">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="Jamling's Blog and Project Site">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="Android使用代码来实现StateListDrawable">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="相信大家在做Android开发的时候，一定遇到以下问题：
+
+界面A上有一个按钮B1，点击时，需要变换背景颜色
+界面B的按钮B2与界面A的按钮B1外观一样，只是颜色不同
+
+通常我们的解决办法是向UI要按钮的背景图，不同的状态是一张图片。以上为例，我们需要向美工索取4张图片。按钮B1（常态与点击态），按钮B2（常态与点击态），然后再定义selector drawable xml，如果美工给的不是9.png，我们还要使用nine-patch工具将其转为9.png图片。大家可以想象一下，如果状态更多，而页面上的按钮又各不相同的话，天啊！那该有多少图片，多少个selector啊，得花多少时间啊！有没有快捷的解决办法呢？答案当然是有！">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/en/2016/08/02/Android/Android-code-states/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/en/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/en/" class="main-nav">Home</a></li><li><a href="/en/p/" class="main-nav">Projects</a></li><li><a href="/en/categories/" class="main-nav">Category</a></li><li><a href="/en/archives/" class="main-nav">Archive</a></li><li><a href="/en/donate/" class="main-nav">Donate</a></li><li><a href="/en/about/" class="main-nav">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2016/08/02/Android/Android-code-states/">简体中文</a></li>
+              
+              <li><a href="/en/2016/08/02/Android/Android-code-states/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>Path: <a class="category-item" href="/en/">Blog</a><a class="category-item" href="/en/categories/Android/">Android</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline"></h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">Post at: </span>
+      <time datetime="2016-08-02T13:01:00.000Z" itemprop="datePublished"><time datetime="2016-08-02T13:01:00.000Z">2016-08-02</time></time>
+      </span>
+      
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">Share</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" id="changyan_count_unit" data-thread-key="ff586cee7d56aae4354eb829010c3a38"></span><span class="hidden-xs">Comment</span></a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">Like</span></a>-->
+        <a href="#" class="icon nova-eye leancloud_visitors" id="ff586cee7d56aae4354eb829010c3a38" data-flag-title="“Android使用代码来实现StateListDrawable”"><span class="count lc-count leancloud-visitors-count"></span><span class="hidden-xs">Views</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2016-08-02T13:01:00.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <p>相信大家在做Android开发的时候，一定遇到以下问题：</p>
+<ul>
+<li>界面A上有一个按钮B1，点击时，需要变换背景颜色</li>
+<li>界面B的按钮B2与界面A的按钮B1外观一样，只是颜色不同</li>
+</ul>
+<p>通常我们的解决办法是向UI要按钮的背景图，不同的状态是一张图片。以上为例，我们需要向美工索取4张图片。<br>按钮B1（常态与点击态），按钮B2（常态与点击态），然后再定义selector drawable xml，如果美工给的不是9.png，我们还要使用nine-patch工具将其转为9.png图片。<br>大家可以想象一下，如果状态更多，而页面上的按钮又各不相同的话，天啊！那该有多少图片，多少个selector啊，得花多少时间啊！有没有快捷的解决办法呢？答案当然是有！</p>
+<a id="more"></a>
+
+<ul>
+<li>在Android的5.0之后，Android提供了一个Tint着色功能，允许你修改背景图片的颜色来达到复用功能。不过只能在Android5.0以上的系统中使用。</li>
+<li>使用<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>的RoundedColorDrawable和RoundButton来实现</li>
+</ul>
+<h2 id="RoundedColorDrawable"><a href="#RoundedColorDrawable" class="headerlink" title="RoundedColorDrawable"></a>RoundedColorDrawable</h2><p>RoundedColorDrawable继承自Drawable，不仅可以设置Drawable的背景和圆角，还可以设置边框。</p>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>常用的构造函数如下：</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">/**
+ * Creates a new instance of RoundedColorDrawable.
+ *
+ * @param radius
+ *            of the corners in pixels
+ * @param color
+ *            of the drawable
+ */
+public RoundedColorDrawable(float radius, int color) {
+    this(color);
+    setRadius(radius);
+}</code></pre>
+<p>构造时传入圆角半径和默认的背景颜色。</p>
+<h3 id="设置边框"><a href="#设置边框" class="headerlink" title="设置边框"></a>设置边框</h3><p>如果需要设置边框，需要单独调用setBorder来实现。</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">/**
+ * Sets the border
+ * 
+ * @param color
+ *            of the border
+ * @param width
+ *            of the border
+ */
+public void setBorder(int color, float width) {
+    if (mBorderColor != color) {
+        mBorderColor = color;
+        invalidateSelf();
+    }
+
+    if (mBorderWidth != width) {
+        mBorderWidth = width;
+        updatePath();
+        invalidateSelf();
+    }
+}</code></pre>
+<p><code>setBorder()</code>方法可以对RoundedColorDrawable设置框架厚度和颜色。</p>
+<h3 id="设置状态"><a href="#设置状态" class="headerlink" title="设置状态"></a>设置状态</h3><p>核心的设置状态及其对应的颜色代码如下：</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">private StateListDrawable sld;
+public RoundedColorDrawable setStateColor(int[][] stateSets, int[] colors){
+    if (stateSets != null &amp;&amp; colors != null) {
+        int len = Math.min(stateSets.length, colors.length);
+        for (int i = 0; i &lt; len; i++) {
+            RoundedColorDrawable self = new RoundedColorDrawable(mRadii, colors[i]);
+            self.setBorder(mBorderColor, mBorderWidth);
+            sld.addState(stateSets[i], self);
+        }
+    }
+    return this;
+}
+
+public RoundedColorDrawable addStateColor(int[] stateSet, int color, int borderColor){
+    if (sld == null) {
+        sld = new StateListDrawable();
+    }
+    RoundedColorDrawable self = new RoundedColorDrawable(mRadii, color);
+    self.setBorder(borderColor &gt; 0 ? borderColor : mBorderColor, mBorderWidth);
+    sld.addState(stateSet, self);
+    return this;
+}
+
+public RoundedColorDrawable addStateColor(int[] stateSet, int color){
+    return addStateColor(stateSet, color, 0);
+}
+
+public RoundedColorDrawable addStateColor(int state, int color){
+    return addStateColor(new int[]{state}, color);
+}</code></pre>
+<p>通过上面的代码可以知道，给RoundedColorDrawable添加状态集对应的drawable，其实都是调用StateListDrawable的addState()方法。而我们定义的selector drawable xml，其实也是生成一个StateListDrawable。RoundedColorDrawable不过是提供类似的方法罢了。</p>
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><p>回到本文开篇的例子，按钮B1定义如下：</p>
+<p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+    &lt;item android:drawable=&quot;@drawable/b1_pressed&quot; android:state_selected=&quot;true&quot;/&gt;
+    &lt;item android:drawable=&quot;@drawable/b1_pressed&quot; android:state_pressed=&quot;true&quot;/&gt;
+    &lt;item android:drawable=&quot;@drawable/b1_normal&quot;/&gt;
+&lt;/selector&gt;</code></pre>
+<p><code>b1_pressed.9.png</code>为点击时或选中时的背景，颜色假设为<code>#ffff0000</code>(红色)，<code>b1_nromal.9.png</code>为默认的背景，颜色假设为<code>#ff00ff00</code>(绿色)。如果使用RoundedColorDrawable，那么代码如下：</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">Button btn2 = (RoundButton)view.findViewById(R.id.btn2);
+// btn2 bg
+intr = AppUtils.dp2px(this, 4); // 圆角半径
+RoundedColorDrawablenormal = new RoundedColorDrawable(r, 0xffff0000); // 默认背景
+normal.addStateColor(newint[]{ android.R.attr.state_pressed}, 0xff00ff00); // pressed时的背景
+normal.addStateColor(newint[]{ android.R.attr.state_selected}, 0xff00ff00); // selected时的背景
+
+normal.applyTo(btn2);// 将背景应用到btn2上</code></pre>
+<p>注意顺序，如果Android判断当前的状态符合，则不会继续向下查找状态。在selector xml中，顺序要按状态的范围从小到大写。而java代码中则相反，顺序按状态的范围从大到小add。</p>
+<h2 id="RoundButton"><a href="#RoundButton" class="headerlink" title="RoundButton"></a>RoundButton</h2><p>RoundButton是Button+RoundedColorDrawable的综合体，它的内部有一个类型为RoundedColorDrawable的mRoundBg对象作为背景。像半径和圆角可以在xml中配置，如下：</p>
+<p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="xml">&lt;cn.ieclipse.af.view.RoundButton
+    android:id=&quot;@+id/btn3&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_gravity=&quot;center&quot;
+    android:background=&quot;@color/colorPrimary&quot;
+    android:text=&quot;Normal button&quot;
+    android:padding=&quot;8dp&quot;
+    android:radius=&quot;8dp&quot;
+    android:textColor=&quot;@color/white&quot;
+    android:textSize=&quot;14sp&quot;
+    app:borderColor=&quot;@color/black_alpha_60&quot;
+    app:borderWidth=&quot;1dp&quot;
+    android:layout_marginTop=&quot;20dp&quot; /&gt;</code></pre>
+<p>其中<code>android:radius</code>、<code>app:borderColor</code>和<code>app:borderWidth</code>分别指定的Button的圆角半径，边框颜色和边框厚度。</p>
+<p>RoundButton对于状态的操作更为简单。如下：</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">RoundButton btn3 = (RoundButton)view.findViewById(R.id.btn3);
+btn3.setPressedBgColor(0xff3F51B5);
+btn3.setSelectedBgColor(0xff333333);
+btn3.apply();</code></pre>
+<h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a> 是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">https://github.com/Jamling/QuickAF</a></p>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/08/02/Android/Android-code-states/](https://www.ieclipse.cn/2016/08/02/Android/Android-code-states/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.894Z" itemprop="dateModified">
+    Last updated: 2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="Jamling's Blog and Project Site" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/en/2016/08/02/Android/Android-coutdown-button/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">Prev</span></a></li><li class="next"><a href="/en/2016/08/02/Android/Android-radio-badge/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">Next</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    Donate
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>Dear reader, if you feel this good, could you rewark me a `bread` as awark? Thank you very much~</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">Donate</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="ff586cee7d56aae4354eb829010c3a38"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: 'ff586cee7d56aae4354eb829010c3a38',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          Table Of Contents
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#RoundedColorDrawable">RoundedColorDrawable</a><ul class="nav toc-ul"><li><a href="#构造函数">构造函数</a></li><li><a href="#设置边框">设置边框</a></li><li><a href="#设置状态">设置状态</a></li><li><a href="#示例代码">示例代码</a></li></ul></li><li><a href="#RoundButton">RoundButton</a></li><li><a href="#关于">关于</a></li><li><a href="#参考">参考</a></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "Code",
+        right: ":",
+        copy: "Copy to clipboard"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

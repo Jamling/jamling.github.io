@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Scratch源代码编译小记</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="其它,Gradle,Scratch源代码编译小记">
+  <meta name="description" content="这几天搞Scratch源代码的编译，遇到不少坑，特此记录一下。">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="静勤居">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="Scratch源代码编译小记">
+  <meta name="og:url" content="https://www.ieclipse.cn/2016/08/18/other/scratch-compile/">
+  <meta name="og:description" content="这几天搞Scratch源代码的编译，遇到不少坑，特此记录一下。">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="静勤居">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="Scratch源代码编译小记">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="这几天搞Scratch源代码的编译，遇到不少坑，特此记录一下。">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/2016/08/18/other/scratch-compile/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/about/" class="main-nav">关于</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2016/08/18/other/scratch-compile/">简体中文</a></li>
+              
+              <li><a href="/en/2016/08/18/other/scratch-compile/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>当前路径：<a class="category-item" href="/">文章</a><a class="category-item" href="/categories/other/">其它</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline"></h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">发表于</span>
+      <time datetime="2016-08-18T07:34:08.000Z" itemprop="datePublished"><time datetime="2016-08-18T07:34:08.000Z">2016-08-18</time></time>
+      </span>
+      
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">分享</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" id="changyan_count_unit" data-thread-key="23c496c3553b390c254acf97b749f00c"></span><span class="hidden-xs">评论</span></a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">喜欢</span></a>-->
+        <a href="#" class="icon nova-eye leancloud_visitors" id="23c496c3553b390c254acf97b749f00c" data-flag-title="“Scratch源代码编译小记”"><span class="count lc-count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2016-08-18T07:34:08.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <p>这几天搞Scratch源代码的编译，遇到不少坑，特此记录一下。</p>
+<a id="more"></a>
+
+<h2 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h2><p>官方提供了两种编译方式：Ant和Gradle，我是使用Gradle编译的，需要准备的工具如下：</p>
+<ul>
+<li>Java JDK，用于执行gradle</li>
+<li>Gradle，用于编译</li>
+<li>Git，用于下载源代码，同时gradle脚本中也会用到git命令（可注释掉不用）</li>
+</ul>
+<h2 id="下载源代码"><a href="#下载源代码" class="headerlink" title="下载源代码"></a>下载源代码</h2><p>请访问<a href="https://github.com/LLK/scratch-flash" target="_blank" rel="noopener">https://github.com/LLK/scratch-flash</a> 下载Scratch源代码，下载到本地后之后，在我大天朝，先不要急着编译，首先得修改一下编译脚本，不然编译时有些依赖包无法下载。</p>
+<ul>
+<li>下载apache-flex-sdk<br>参考<code>scratch.gradle</code>中ivy仓库配置<p class="code-caption" data-lang="gradle" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+</li>
+</ul>
+<pre><code class="gradle">repositories {
+    ivy {
+        name &#39;Apache Flex&#39;
+        // artifactPattern &#39;http://archive.apache.org/dist/flex/[revision]/binaries/[module]-[revision]-bin.[ext]&#39;
+    artifactPattern &#39;http://127.0.0.1/flex/[module]-[revision]-bin.[ext]&#39;
+    }
+    ivy {
+        name &#39;Player Globals&#39;
+        artifactPattern &#39;http://fpdownload.macromedia.com/get/flashplayer/installers/archive/[module]/[module][revision].[ext]&#39;
+    }
+}</code></pre>
+<p>先下载apache-flex-sdk，版本必须高于4.10.0，这个sdk比较大，有70多M，建议使用其它工具下载好，放到本地。我下载的是4.15.0，具体的下载路径地址为：<a href="http://archive.apache.org/dist/flex/4.15.0/binaries/apache-flex-sdk-4.15.0-bin.zip" target="_blank" rel="noopener">http://archive.apache.org/dist/flex/4.15.0/binaries/apache-flex-sdk-4.15.0-bin.zip</a></p>
+<ul>
+<li><p>下载swfobject<br>下载好swfobject_2_2.zip。同样放入本地服务器上</p>
+</li>
+<li><p>下载OSMF<br>下载好OSMF_1.0.zip，同样放入本地服务器上</p>
+</li>
+</ul>
+<p>修改apache-flex-sdk中的<code>frameworks/downloads.xml</code>内容，将swfobject和osmf的下载地址改为本地地址。</p>
+<p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="xml">&lt;target name=&quot;download-osmf-zip&quot; unless=&quot;osmf.zip.exists&quot;&gt;
+    &lt;mkdir dir=&quot;${download.dir}&quot;/&gt;
+    &lt;get src=&quot;http://127.0.0.1/flex/OSMF_1.0.zip&quot; 
+        dest=&quot;${download.dir}/OSMF_1.0.zip&quot; 
+        verbose=&quot;false&quot;/&gt;
+&lt;/target&gt;
+
+&lt;!-- swfobject.js (Version 2.2) --&gt;
+&lt;!-- Because this requires a network connection it downloads SWFObject only if it doesn&#39;t already exist. --&gt;
+&lt;target name=&quot;swfobject-check&quot; description=&quot;Checks if SWFObject has been downloaded.&quot;&gt;
+    &lt;available file=&quot;${basedir}/../templates/swfobject/swfobject.js&quot; property=&quot;swfobject.js.present&quot;/&gt;
+&lt;/target&gt;
+
+&lt;target name=&quot;swfobject-download&quot; depends=&quot;swfobject-check&quot; unless=&quot;swfobject.js.present&quot; 
+    description=&quot;Copies SWFObject from code.google.com&quot;&gt;
+
+    &lt;mkdir dir=&quot;${download.dir}&quot;/&gt;
+    &lt;get src=&quot;http://127.0.0.1/flex/swfobject_2_2.zip&quot; 
+        dest=&quot;${download.dir}/swfobject_2_2.zip&quot; 
+        verbose=&quot;false&quot;/&gt;
+    ...
+&lt;/target&gt;</code></pre>
+<p>如此这般，编译时，依赖包应该能够全部下载好，如果有不能下载的依赖包，可以查看gradle日志输出，参考上面的方法修改gradle编译脚本或apache-flex-sdk的依赖脚本以保证依赖包能够正确下载。</p>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>参考官方文档，打开git终端，键入编译命令</p>
+<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="bash">$ ./gradlew build -Ptarget=11.6
+Defining custom &#39;build&#39; task when using the standard Gradle lifecycle plugins has been deprecated and is scheduled to be removed in Gradle 3.0
+Target is: 11.6
+Commit ID for scratch-flash is: latest
+:copyresources
+:compileFlex
+WARNING: The -library-path option is being used internally by GradleFx. Alternative: specify the library as a &#39;merged&#39; Gradle dependendency
+:copytestresources
+:test
+Skipping tests since no tests exist
+:build
+
+BUILD SUCCESSFUL
+
+Total time: 15.691 secs</code></pre>
+<p>以上是我最终编译通过的输出。编译后输出的Scratch2.swf在<code>build/11.6/</code>目录下。</p>
+<h2 id="源代码修改"><a href="#源代码修改" class="headerlink" title="源代码修改"></a>源代码修改</h2><p>具体的源代码修改，请参考我github上fork的scratch-flash项目。地址为<a href="https://github.com/ieclipsecn/scratch-flash/" target="_blank" rel="noopener">https://github.com/ieclipsecn/scratch-flash/</a><br>代码提交在jamling分支下。大致讲下修改的地方</p>
+<ul>
+<li>ifOffline 设置为true，默认是false，然后编译的swf不能好好工作。用离线即可。</li>
+<li>默认语言为zh_CN，但是不起作用，猜测应该要写zh-cn值。</li>
+<li>跨域crossdomain.xml路径修改为<a href="http://cdn.assets.scratch.mit.edu" target="_blank" rel="noopener">http://cdn.assets.scratch.mit.edu</a> ，这个地址允许所有的域访问</li>
+<li>加载媒体库和缩略图片库地址，都改为本地地址，且为相对路径。不然会出现跨域问题，导致编译之后的swf无法加载背景库或角色库。</li>
+</ul>
+<p>修改完毕之后，重新编译，如果有错误，根据日志提示，修正错误后再次编译就好了。编译成功之后，会输出Scratch.swf。我修改的代码，输出为Scratch2.swf。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>可以直接从官网将官网的网页另存为-&gt;保存全部，得到一个基本的html再编辑修改。修改好了。再通过本地服务器测试。此时，你会发现还有许多问题。主要是一大堆的404。可以自行写个爬虫脚本，将官网的一些资源抓到本地。其它的问题，自己再根据具体的错误修复即可。</p>
+<p>最后放上最终的演示地址：<a href="http://ot.ieclipse.cn/flex/Scratch.html" target="_blank" rel="noopener">http://ot.ieclipse.cn/flex/Scratch.html</a></p>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/08/18/other/scratch-compile/](https://www.ieclipse.cn/2016/08/18/other/scratch-compile/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.950Z" itemprop="dateModified">
+    最后更新：2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="静勤居" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/2016/08/25/PHP/php-mysql-mb-insert/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">上一页</span></a></li><li class="next"><a href="/2016/08/12/Android/quickaf-controller-sample/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">下一页</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    打赏
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>各位看官，鄙人借网络这块宝地在此献丑，望有钱的捧个钱场（打赏任意金额），没钱的捧个人场（分享）</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">打赏</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="23c496c3553b390c254acf97b749f00c"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: '23c496c3553b390c254acf97b749f00c',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          目录
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#准备工具">准备工具</a></li><li><a href="#下载源代码">下载源代码</a></li><li><a href="#编译">编译</a></li><li><a href="#源代码修改">源代码修改</a></li><li><a href="#测试">测试</a></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "代码",
+        right: "如下：",
+        copy: "复制"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

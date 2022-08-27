@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>RFC1939_POP3协议</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="其它,RFC1939_POP3协议">
+  <meta name="description" content="1.简介　　对于在网络上的比较小的结点，支持消息传输系统（MTS）是不实际的。例如，一台工作站可能不具有充足的资源允许SMTP服务器和相当的本地邮件传送系统保持序驻留，并持续运行。同样的，将一台个人计算机长时间连接在IP类型网络上的费用也是可观的（结点缺少的资源被称为”联络性”）。
+　　虽然如此，在这样的小结点上允许管理邮件是十分有用的，并且这些结点经常支持一个用户代理来管理邮件。为解决这一问题，能够支持MTS的结点就为这些不能支持的结点提供了邮件存储功能。邮局协议-版本3就是使这样的工作站可以用一种比较实用的方法来访问存储于服务器上的储存邮件。通常，这意味着工作站可以从服务器上取得邮件，而服务器为它暂时保存邮件。">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="Jamling's Blog and Project Site">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="RFC1939_POP3协议">
+  <meta name="og:url" content="https://www.ieclipse.cn/2015/01/01/other/RFC1939_POP3_protocal_zh/">
+  <meta name="og:description" content="1.简介　　对于在网络上的比较小的结点，支持消息传输系统（MTS）是不实际的。例如，一台工作站可能不具有充足的资源允许SMTP服务器和相当的本地邮件传送系统保持序驻留，并持续运行。同样的，将一台个人计算机长时间连接在IP类型网络上的费用也是可观的（结点缺少的资源被称为”联络性”）。
+　　虽然如此，在这样的小结点上允许管理邮件是十分有用的，并且这些结点经常支持一个用户代理来管理邮件。为解决这一问题，能够支持MTS的结点就为这些不能支持的结点提供了邮件存储功能。邮局协议-版本3就是使这样的工作站可以用一种比较实用的方法来访问存储于服务器上的储存邮件。通常，这意味着工作站可以从服务器上取得邮件，而服务器为它暂时保存邮件。">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="Jamling's Blog and Project Site">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="RFC1939_POP3协议">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="1.简介　　对于在网络上的比较小的结点，支持消息传输系统（MTS）是不实际的。例如，一台工作站可能不具有充足的资源允许SMTP服务器和相当的本地邮件传送系统保持序驻留，并持续运行。同样的，将一台个人计算机长时间连接在IP类型网络上的费用也是可观的（结点缺少的资源被称为”联络性”）。
+　　虽然如此，在这样的小结点上允许管理邮件是十分有用的，并且这些结点经常支持一个用户代理来管理邮件。为解决这一问题，能够支持MTS的结点就为这些不能支持的结点提供了邮件存储功能。邮局协议-版本3就是使这样的工作站可以用一种比较实用的方法来访问存储于服务器上的储存邮件。通常，这意味着工作站可以从服务器上取得邮件，而服务器为它暂时保存邮件。">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/en/2015/01/01/other/RFC1939_POP3_protocal_zh/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/en/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/en/" class="main-nav">Home</a></li><li><a href="/en/p/" class="main-nav">Projects</a></li><li><a href="/en/categories/" class="main-nav">Category</a></li><li><a href="/en/archives/" class="main-nav">Archive</a></li><li><a href="/en/donate/" class="main-nav">Donate</a></li><li><a href="/en/about/" class="main-nav">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2015/01/01/other/RFC1939_POP3_protocal_zh/">简体中文</a></li>
+              
+              <li><a href="/en/2015/01/01/other/RFC1939_POP3_protocal_zh/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>Path: <a class="category-item" href="/en/">Blog</a><a class="category-item" href="/en/categories/other/">其它</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline"></h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">Post at: </span>
+      <time datetime="2015-01-01T04:48:31.000Z" itemprop="datePublished"><time datetime="2015-01-01T04:48:31.000Z">2015-01-01</time></time>
+      </span>
+      
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">Share</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" id="changyan_count_unit" data-thread-key="775d60c2ef01007d2a62ddf4eee2aa7b"></span><span class="hidden-xs">Comment</span></a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">Like</span></a>-->
+        <a href="#" class="icon nova-eye leancloud_visitors" id="775d60c2ef01007d2a62ddf4eee2aa7b" data-flag-title="“RFC1939_POP3协议”"><span class="count lc-count leancloud-visitors-count"></span><span class="hidden-xs">Views</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2015-01-01T04:48:31.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h2><p>　　对于在网络上的比较小的结点，支持消息传输系统（MTS）是不实际的。例如，一台<br>工作站可能不具有充足的资源允许SMTP服务器和相当的本地邮件传送系统保持序驻留，<br>并持续运行。同样的，将一台个人计算机长时间连接在IP类型网络上的费用也是可观的<br>（结点缺少的资源被称为”联络性”）。</p>
+<p>　　虽然如此，在这样的小结点上允许管理邮件是十分有用的，并且这些结点经常支持一<br>个用户代理来管理邮件。为解决这一问题，能够支持MTS的结点就为这些不能支持的结点提<br>供了邮件存储功能。邮局协议-版本3就是使这样的工作站可以用一种比较实用的方法来访问<br>存储于服务器上的储存邮件。通常，这意味着工作站可以从服务器上取得邮件，而服务器为<br>它暂时保存邮件。</p>
+<a id="more"></a>
+
+<p>　　在下文中，客户主机指的是利用POP3服务的主机，而服务器主机指的是提供POP3服务的<br>主机。</p>
+<h2 id="2-简单说明"><a href="#2-简单说明" class="headerlink" title="2.简单说明"></a>2.简单说明</h2><p>　　在此文档中不指明客户主机如何将邮件送入到传送系统中去。但这里有一个说明：当用<br>户代理需要将信息送到传送系统时，它在接力主机上建立SMTP连接（这些接力主机可以是<br>POP3主机，也可以不是）。
+　</p>
+<h2 id="3-基本操作"><a href="#3-基本操作" class="headerlink" title="3.基本操作"></a>3.基本操作</h2><p>　　初始时，服务器通过侦听TCP端口110开始POP3服务。当客户主机需要使用服务时，它将<br>与服务器主机建立TCP连接。当连接建立后，POP3发送确认消息。客户和POP3服务器相互（分<br>别）交换命令和响应，这一过程一直要持续到连接终止。</p>
+<p>　　POP3命令由一个命令和一些参数组成。所有命令以一个CRLF对结束。命令和参数由可打<br>印的ASCII字符组成，它们之间由空格间隔。命令一般是三到四个字母，每个参数却可达40个<br>字符长。</p>
+<p>　　POP3响应由一个状态码和一个可能跟有附加信息的命令组成。所有响应也是由CRLF对结<br>束。现在有两种状态码，”确定”(“+OK”)和”失败”(“-ERR”)。</p>
+<p>　　对于特定命令的响应是由许多字符组成的。在这些情况中，下面一一表述：在发送第一<br>行响应和一个CRLF之后，任何的附加信息行发送，他们也由CRLF对结束。当所有信息发送结束<br>时，发送最后一行，包括一个结束字符（十进制码46，也就是”.”）和一个CRLF对。如果信息<br>中的任何一行以结束字符开始，此行就是通过在那一行预先装入结束而进行字符填充的。因此，<br>多行响应由五个CRLF.CRLF结束。当检测多行响应时，客户检测以确认此行是否以结束字符开<br>始。如果是的，而且其后的字符不是CRLF，此行的第一个字符（结束字符）将被抛弃；如果其<br>后紧跟CRLF，从POP服务器来的响应终止，包括.CRLF的行也不被认为是多行响应的一部分了。</p>
+<p>　　在生命周期中，POP3会话有几个不同的状态。一旦TCP连接被打开，而且POP3服务器发送了<br>确认信息，此过程就进入了”确认”状态。在此状态中，客户必须向POP3服务器确认自己是其的<br>客户。一旦确认成功，服务器就获取与客户邮件相关的资源，此时这一过程进入了”操作”状态。<br>在此状态中，客户提出服务，当客户发出QUIT命令时，此过程进入了”更新”状态。在此状态中，<br>POP3服务器释放在”操作”状态中取得的资源，并发送消息，终止连接。</p>
+<p>　　POP3服务器可以拥有一个自动退出登录的记时器。此记时器必须至少可以记录10分钟。这样<br>从客户发送的消息才可能刷新此记时器。当记时器失效时，POP3会话并不进入”更新”状态，而是<br>关闭TCP连接，而且不删除任何消息，不向客户发送任何响应。
+　</p>
+<h2 id="4-”确认”状态"><a href="#4-”确认”状态" class="headerlink" title="4.”确认”状态"></a>4.”确认”状态</h2><p>　　一时TCP连接由POP3客户打开，POP3服务器发送一个单行的确认。这个消息可以是由CRLF结<br>束的任何字符。例如，它可以是：<br>　　S:+OKPOP3serverready</p>
+<p>　　注意：这个消息是一个POP3应答。POP3服务器应该给出一个”确定”响应作为确认。</p>
+<p>　　此时POP3会话就进入了”确认”状态。此时，客户必须向服务器证明它的身份。在文档中介绍<br>两种可能的处理机制，一种是USER和PASS命令，另一种是在后面要介绍的APOP命令。</p>
+<p>　　用USER和PASS命令进行确认过程，客户必须首先发送USER命令，如果POP3服务器以”确认”状<br>态码响应，客户就可以发送PASS命令以完成确认，或者发送QUIT命令终止POP3会话。如果POP3服<br>务器返回”失败”状态码，客户可以再发送确认命令，或者发送QUIT命令。</p>
+<p>　　当客户发送了PASS命令后，服务器根据USER和PASS命令的附加信息决定是否允许访问相应的<br>存储邮件。</p>
+<p>　　一旦服务器通过这些数据决定允许客户访问储存邮件，服务器会在邮件上加上排它锁，以防<br>止在进入”更新”状态前对邮件的改变。如果成功获得了排它锁，服务器返回一个”确认”状态码。<br>会话进入”操作状态”，同时没有任何邮件被标记为删除。如果邮件因为某种原因不能打开（例如，<br>排它锁不能获得，客户不能访问相应的邮件或者邮件不能进行语法分析），服务器将返回”失败”<br>状态码。在返回”失败”状态码后，服务器会关闭连接。如果服务器没有关闭连接，客户可以重新<br>发送确认命令，重新开始，或者发送QUIT命令。</p>
+<p>　　在服务器打开邮件后，它为每个消息指定一个消息号，并以八进制表示每个消息的长度。第<br>一个消息被指定为1，第二个消息被指定为2，以此类推，第N个消息被指定为N。在POP3命令和响应<br>中，所以的消息号和长度以十进制表示。</p>
+<p>　　下面是对上述三条命令的总结：
+　
+　
+　</p>
+<h2 id="5-”操作”状态"><a href="#5-”操作”状态" class="headerlink" title="5.”操作”状态"></a>5.”操作”状态</h2><p>　<br>　　一旦客户向服务器成功地确认了自己的身份，服务器将锁住并打开相应的邮件，这时POP3会<br>话进入”操作”状态。现在客户可以重复下面的POP3命令，对于每个命令服务器都会返回应答。最<br>后，客户发送QUIT命令，会话进入”更新”状态。</p>
+<p>　　下面是在”操作”状态中可用的命令：
+　
+　
+　
+　
+　
+　　　</p>
+<h2 id="6-”更新”状态"><a href="#6-”更新”状态" class="headerlink" title="6.”更新”状态"></a>6.”更新”状态</h2><p>　　当客户在”操作”状态下发送QUIT命令后，会话进入”更新”状态。（注意：如果客户在”确认”状<br>态下发送QUIT后，会话并不进入”更新”状态。）<br>　　如果会话因为QUIT命令以外的原因中断，会话并不进入”更新”状态，也不从服务器中删除任何<br>信件。
+　
+　</p>
+<h2 id="7-可选的POP3命令"><a href="#7-可选的POP3命令" class="headerlink" title="7.可选的POP3命令"></a>7.可选的POP3命令</h2><p>　　以上讨论的命令是对POP3服务的最小实现。以下说明的可选命令允许客户更方便地处理信件，<br>这是一个比较一般的POP3服务实现。</p>
+<p>　　·TOPmsgn<br>　　【参数】一个是未被标记为删除的信件数，另一个是非负数（必须提供）<br>　　【限制】仅在”操作”状态下使用。<br>　　【说明】<br>　　如果服务器返回”确认”，响应是多行的。在初始的+OK后，服务器发送信件头，一个空行将信<br>件头和信件体分开，对于多行响应要注意字节填充终止符。  </p>
+<p>　　注意：如果客户要求的行数比信件体中的行数大，服务器会发送整个信件。</p>
+<p>　　【响应】+OK：其后有信件头；<br>　　-ERR：其后无类似消息。<br>　　【例子】</p>
+<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code>C:TOP110
+S:+OK
+S:&lt;服务器发送消息头，一个空行和信件的头10行&gt;
+S:.
+...
+C:TOP1003
+S:-ERRnosuchmessage</code></pre><p>　　·UIDL[msg]<br>　　【参数】信件数（可选）。如果给出信件数，不包括被标记为删除的信件。<br>　　【限制】仅在”操作”状态下使用。<br>　　【说明】<br>　　如果给出了参数，且POP3服务器返回包括上述信息的”确认”，此行称为信息的”独立-ID表”。<br>　　<br>　　如果没有参数，服务器返回”确认”响应，此响应便以多行给出。在初的+OK后，对于每个信件，<br>服务器均给出相应的响应。此行叫做信件的”独立-ID表”。  </p>
+<p>　　为简化语法分析，所有服务器要求使用独立-ID表的特定格式。它包括空格和信件的独立-ID。<br>　　<br>　　信件的独立-ID由0x21到0x7E字符组成，这个符号在给定的存储邮件中不会重复。<br>　　<br>　　注意：信件不包括被标记为删除的信件。<br>　　<br>　　【响应】+OK：其后是独立-ID表；<br>　　-ERR：其后无类似信件。<br>　　【例子】  </p>
+<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code>C:UIDL
+S:+OK
+S:1whqtswO00WBw418f9t5JxYwZ
+S:2QhdPYR:00WBw1Ph7x7
+S:.
+...
+C:UIDL2
+S:+OK2QhdPYR:00WBw1Ph7x7
+...
+C:UIDL3
+S:-ERRnosuchmessage,only2messagesinmaildrop</code></pre><p>　　·APOPnamedigest<br>　　【参数】指定邮箱的字串和MD5摘要串。<br>　　【限制】仅在POP3确认后的”确认”状态中使用。<br>　　【说明】通常，每个POP3会话均以USER/PASS互换开始。这导致了用户名和口令在网络上的显式<br>传送，这不会造成什么危险。但是，许多客户经常连接到服务检查信件。通常间隔时间比较短，这就<br>加大了泄密的可能性。<br>另一种提供”确认”过程的方法是使用APOP命令。</p>
+<p>　　实现APOP命令的服务器包括一个标记确认的时间戳。例如：在UNIX上使用APOP命令的语法为：<br>process-ID.clock@hostname，其中进程-ID是进程的十进制的数，时钟是系统时钟的十进制表示，主<br>机名与POP3服务器名一致。</p>
+<p>　　客户记录下此时间戳，然后以送APOP命令。name语法和USER命令一致。Digest是采用MD5算法产<br>生的包括时间戳和共享密钥的字串。此密钥是客户和服务器共知的，应该注意保护此密钥，如果泄密，<br>任何人都能够以用户身份进入服务器。</p>
+<p>　　如果服务器接到APOP命令，它验证digest，如果正确，服务器返回”确认”，进入”操作”状态；否<br>则，给出”失败”并停留在”确认”状态。</p>
+<p>　　注意：共享密钥的长度增加，解读它的难度也相应增加，这个密钥应该是长字符串。<br>　　<br>　　【响应】+OK：邮件锁住并准备好；<br>　　-ERR：拒绝请求。<br>　　【例子】  </p>
+<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code>S:+OKPOP3serverready&lt;1896.697170952@dbc.mtview.ca.us&gt;
+C:APOPmrosec4c9334bac560ecc979e58001b3e22fb
+S:+OKmaildrophas1message(369octets)</code></pre><p>　　在此例子中，共享密钥<a href="mailto:&#x31;&#56;&#x39;&#x36;&#46;&#54;&#x39;&#x37;&#x31;&#55;&#48;&#57;&#x35;&#50;&#64;&#100;&#98;&#x63;&#x2e;&#x6d;&#116;&#118;&#105;&#101;&#x77;&#x2e;&#99;&#97;&#46;&#117;&#115;" target="_blank" rel="noopener">&#x31;&#56;&#x39;&#x36;&#46;&#54;&#x39;&#x37;&#x31;&#55;&#48;&#57;&#x35;&#50;&#64;&#100;&#98;&#x63;&#x2e;&#x6d;&#116;&#118;&#105;&#101;&#x77;&#x2e;&#99;&#97;&#46;&#117;&#115;</a>tanstaaf由MD5算法生成，它产生了<br>digest值，c4c9334bac560ecc979e58001b3e22fb</p>
+<h2 id="8-POP3命令总结"><a href="#8-POP3命令总结" class="headerlink" title="8.POP3命令总结"></a>8.POP3命令总结</h2><p>基础的POP3命令：<br>USERname在”确认”状态有效<br>PASSstring<br>QUIT  </p>
+<p>STAT在”操作”状态有效<br>LIST[msg]<br>RETRmsg<br>DELEmsg<br>NOOP<br>RSET  </p>
+<p>QUIT在”更新”状态有效<br>　<br>可选的POP3命令：<br>APOPnamedigest在”确认”状态有效<br>TOPmsgn在”操作”状态有效<br>UIDL[msg]  </p>
+<p>POP3响应：<br>+OK<br>-ERR  </p>
+<p>注意：除了STAT，LIST和UIDL的响应外，其它命令的响应均为”+OK”和”-ERR”。响应后的所有文<br>本将被客户略去。</p>
+<h2 id="9-POP3会话实例"><a href="#9-POP3会话实例" class="headerlink" title="9.POP3会话实例"></a>9.POP3会话实例</h2><p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code>S:&lt;等待连接到TCP端口110&gt;
+C:&lt;打开连接&gt;
+S:+OKPOP3serverready&lt;1896.697170952@dbc.mtview.ca.us&gt;
+C:APOPmrosec4c9334bac560ecc979e58001b3e22fb
+S:+OKmrose smaildrophas2messages(320octets)
+C:STAT
+S:+OK2320
+C:LIST
+S:+OK2messages(320octets)
+S:1120
+S:2200
+S:.
+C:RETR1
+S:+OK120octets
+S:&lt;服务器发送信件1&gt;
+S:.
+C:DELE1
+S:+OKmessage1deleted
+C:RETR2
+S:+OK200octets
+S:&lt;服务器发送信件2&gt;
+S:.
+C:DELE2
+S:+OKmessage2deleted
+C:QUIT
+S:+OKdeweyPOP3serversigningoff(maildropempty)
+C:&lt;关闭连接&gt;
+S:&lt;等待下一次连接&gt;</code></pre><h2 id="10-消息格式"><a href="#10-消息格式" class="headerlink" title="10.消息格式"></a>10.消息格式</h2><p>　　在会话过程中的消息格式都假定与Internet文本消息格式标准一致。应该注意的是，由于各<br>个服务器对于换行符的处理不同，因此计数不一定相同。通常，在”确认”状态中，服务器能够以<br>八进制计算信件的大小。例如，如果在打开储存邮件时服务器内部认定换行符代表一个字符，一<br>般服务器在计算它时作为两个字符计。注意，以终止符开始的消息行不被计数两次，因为客户将<br>在接收到多行响应后删除所有字节填充。</p>
+<h2 id="11-安全性考虑"><a href="#11-安全性考虑" class="headerlink" title="11.安全性考虑"></a>11.安全性考虑</h2><p>　　可以推测，使用APOP命令可以提供会话期间的保护。相应的，同时实现PASS和APOP命令的服务<br>器只允许用户以一种方式访问；也就是说要么使用USER/PASS组合，要么使用APOP命令，不能同时<br>使用两个。</p>
+<p>　　而且，注意随着共享密钥长度的增加，解读的难度也就上升了。服务器要提供用户名时不给出<br>任何响应，不给出任何暗示此用户名是否正确。而口令却在网络上显式传送；使用RETR和TOP命令<br>在网络上显式传送信件</p>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2015/01/01/other/RFC1939_POP3_protocal_zh/](https://www.ieclipse.cn/2015/01/01/other/RFC1939_POP3_protocal_zh/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.947Z" itemprop="dateModified">
+    Last updated: 2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="Jamling's Blog and Project Site" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/en/2015/01/03/Eclipse/Eclipse-mpc-content/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">Prev</span></a></li><li class="next"><a href="/en/2015/01/01/Android/Android-Compile-Source/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">Next</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    Donate
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>Dear reader, if you feel this good, could you rewark me a `bread` as awark? Thank you very much~</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">Donate</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="775d60c2ef01007d2a62ddf4eee2aa7b"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: '775d60c2ef01007d2a62ddf4eee2aa7b',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          Table Of Contents
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#1-简介">1.简介</a></li><li><a href="#2-简单说明">2.简单说明</a></li><li><a href="#3-基本操作">3.基本操作</a></li><li><a href="#4-”确认”状态">4.”确认”状态</a></li><li><a href="#5-”操作”状态">5.”操作”状态</a></li><li><a href="#6-”更新”状态">6.”更新”状态</a></li><li><a href="#7-可选的POP3命令">7.可选的POP3命令</a></li><li><a href="#8-POP3命令总结">8.POP3命令总结</a></li><li><a href="#9-POP3会话实例">9.POP3会话实例</a></li><li><a href="#10-消息格式">10.消息格式</a></li><li><a href="#11-安全性考虑">11.安全性考虑</a></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "Code",
+        right: ":",
+        copy: "Copy to clipboard"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

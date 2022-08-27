@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Gerrit&Git使用指南</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="其它,git,Gerrit&Git使用指南">
+  <meta name="description" content="上篇介绍了Gerrit的安装与配置，本篇介绍的是Gerrit的使用">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="Jamling's Blog and Project Site">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="Gerrit&Git使用指南">
+  <meta name="og:url" content="https://www.ieclipse.cn/2016/05/14/other/tech-gerrit-guide/">
+  <meta name="og:description" content="上篇介绍了Gerrit的安装与配置，本篇介绍的是Gerrit的使用">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="Jamling's Blog and Project Site">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="Gerrit&Git使用指南">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="上篇介绍了Gerrit的安装与配置，本篇介绍的是Gerrit的使用">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/en/2016/05/14/other/tech-gerrit-guide/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/en/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/en/" class="main-nav">Home</a></li><li><a href="/en/p/" class="main-nav">Projects</a></li><li><a href="/en/categories/" class="main-nav">Category</a></li><li><a href="/en/archives/" class="main-nav">Archive</a></li><li><a href="/en/donate/" class="main-nav">Donate</a></li><li><a href="/en/about/" class="main-nav">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2016/05/14/other/tech-gerrit-guide/">简体中文</a></li>
+              
+              <li><a href="/en/2016/05/14/other/tech-gerrit-guide/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>Path: <a class="category-item" href="/en/">Blog</a><a class="category-item" href="/en/categories/other/">其它</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline"></h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">Post at: </span>
+      <time datetime="2016-05-14T06:46:29.000Z" itemprop="datePublished"><time datetime="2016-05-14T06:46:29.000Z">2016-05-14</time></time>
+      </span>
+      
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">Share</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" id="changyan_count_unit" data-thread-key="17e8f62ad95a2638bc26512e97ec0c33"></span><span class="hidden-xs">Comment</span></a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">Like</span></a>-->
+        <a href="#" class="icon nova-eye leancloud_visitors" id="17e8f62ad95a2638bc26512e97ec0c33" data-flag-title="“Gerrit&Git使用指南”"><span class="count lc-count leancloud-visitors-count"></span><span class="hidden-xs">Views</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2016-05-14T06:46:29.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <p>上篇介绍了Gerrit的安装与配置，本篇介绍的是Gerrit的使用</p>
+<a id="more"></a>
+
+<h2 id="生成ssh-key"><a href="#生成ssh-key" class="headerlink" title="生成ssh key"></a>生成ssh key</h2><p>Windows下，打开gitbash等终端工具输入ssh-keygen生成公钥和私钥<br>Linux下直接在终端命令中输入ssh-keygen</p>
+<p class="code-caption" data-lang="shell" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="shell">$ssh-keygen</code></pre>
+{% asset_img image001.png %}
+
+<h2 id="登录gerrit"><a href="#登录gerrit" class="headerlink" title="登录gerrit"></a>登录gerrit</h2><p>在浏览器中输入gerrit地址：<a href="http://192.168.135.48/gerrit/" target="_blank" rel="noopener">http://192.168.135.48/gerrit/</a><br>然后在弹出的身份验证对话框中输入账号及密码<br><strong>注：注意用户名大小写</strong></p>
+<p>首次登录成功后，进入注册页面，如下所示：</p>
+{% asset_img image003.png %}
+
+<p>此界面可以添加ssh（亦可后续添加）</p>
+<p>输入Full Name，并点击Register New Email注册邮件地址。Gerrit会向输入的邮箱地址发送一封注册确认邮件。然后登录自己的邮箱，查收文件，点击验证链接，完成验证。验证通过后，将成功注册用户，就可以Review Code / Upload Code啦。</p>
+{% asset_img image005.png %}
+
+<h3 id="设置full-name和email"><a href="#设置full-name和email" class="headerlink" title="设置full-name和email"></a>设置full-name和email</h3><p>点击Settings -&gt; Contact Information更新姓名及邮箱地址。</p>
+{% asset_img image007.png %}
+
+<p>当email 不为空时，才算是正式的注册用户。才具备git 操作权限。</p>
+<p>这里的username和preferred email必须和git config配置的完全一致，才能upload代码到gerrit</p>
+<h3 id="设置ssh-public-key"><a href="#设置ssh-public-key" class="headerlink" title="设置ssh public key"></a>设置ssh public key</h3><p>点击settings -&gt; SSH Public Keys链接，将生成的ssh 公钥添加到gerrit</p>
+{% asset_img image009.png %}
+
+<h3 id="测试ssh连接"><a href="#测试ssh连接" class="headerlink" title="测试ssh连接"></a>测试ssh连接</h3><p>命令格式：<code>ssh –p port your_user_name@gerrit_host</code></p>
+<p class="code-caption" data-lang="shell" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="shell">$ ssh –p 29418 lijiaming@192.168.135.48</code></pre>
+<img src="/2016/05/14/other/tech-gerrit-guide/image011.png">
+
+<p>连接成功之后，就可以从gerrit上检出代码了</p>
+<h2 id="从gerrit检出代码"><a href="#从gerrit检出代码" class="headerlink" title="从gerrit检出代码"></a>从gerrit检出代码</h2><p>登录gerrit，点击Projects选项卡，在project list中点击要检出的工程<br>进入工程详情界面</p>
+<img src="/2016/05/14/other/tech-gerrit-guide/image013.png">
+
+<p>点击ssh选项卡，复制代码检出命令<br>回到git bash终端，粘贴或手动输入git clone命令</p>
+<img src="/2016/05/14/other/tech-gerrit-guide/image015.png">
+
+<p><strong>注：这里使用的是ssh协议哦</strong></p>
+<h2 id="git本地设置"><a href="#git本地设置" class="headerlink" title="git本地设置"></a>git本地设置</h2><h3 id="设置用户"><a href="#设置用户" class="headerlink" title="设置用户"></a>设置用户</h3><p>用户名登录gerrit的用户名<br>email地址为gerrit上注册的邮箱地址<br>必须完全与gerrit上配置的一致，否则将不能push代码</p>
+<img src="/2016/05/14/other/tech-gerrit-guide/image017.png">
+
+<h3 id="下载commit模板"><a href="#下载commit模板" class="headerlink" title="下载commit模板"></a>下载commit模板</h3><p>先cd到仓库目录，然后再下载commit-msg</p>
+<p class="code-caption" data-lang="shell" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="shell">$ scp -p -P 29418 yourname@review.example.com:bin/gerrit-cherry-pick ~/bin/
+
+$ scp -p -P 29418 yourname@host:hooks/commit-msg .git/hooks/
+
+$ scp -p -P 29418 lijiaming@192.168.135.48:hooks/commit-msg .git/hooks/</code></pre>
+<img src="/2016/05/14/other/tech-gerrit-guide/image019.png">
+
+<h3 id="设置默认push"><a href="#设置默认push" class="headerlink" title="设置默认push"></a>设置默认push</h3><p>编辑./git/config文件，在[remote “origin”]下添加<br><code>push = +refs/heads/*:refs/for/*</code><br>也可以通过<code>git config origin.remote.push= xxx</code>来设置哦</p>
+<p>这样，push代码时，可以直接使用git push origin branch名称将代码提交到gerrit</p>
+<p>如果不设置，需要使用git push origin HEAD:refs/for/master来提交到远程master分支</p>
+<h3 id="邮件提醒"><a href="#邮件提醒" class="headerlink" title="邮件提醒"></a>邮件提醒</h3><p>当gerrit上有事件发生时，会向相关的用户发送邮件，建议使用邮件客户端打开提醒功能，并设置过滤器，如来自<a href="mailto:gerrit@your_company.com" target="_blank" rel="noopener">gerrit@your_company.com</a>的邮件都存放在特定的文件夹下</p>
+<h3 id="提交代码"><a href="#提交代码" class="headerlink" title="提交代码"></a>提交代码</h3><h4 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h4><p class="code-caption" data-lang="shell" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="shell">$ git status</code></pre>
+<p>查看状态比如，已经加入git管控的文件（绿色），修改的文件（红色），冲突的文件（both modified 红色），新添加的文件（红色）</p>
+<h4 id="添加文件"><a href="#添加文件" class="headerlink" title="添加文件"></a>添加文件</h4><p class="code-caption" data-lang="shell" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="shell">$ git status add</code></pre>
+<p>添加文件，可以添加目录，文件，也可以使用git add .添加所有文件<br>建议在git add 之前先git status一下</p>
+<h4 id="提交代码-1"><a href="#提交代码-1" class="headerlink" title="提交代码"></a>提交代码</h4><p class="code-caption" data-lang="shell" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="shell">$ git commit –m “[add|mod|del|…]</code></pre>
+<p>提交日志内容，尽量精准描述本次提交</p>
+<p>如果忘了带-m参数，可以进入vim/vi界面，按i进入编辑界面，然后输入commit信息，再按esc退出编辑，输入:wq（vim指令， vi指令自行百度）保存并退出</p>
+<h4 id="推送代码"><a href="#推送代码" class="headerlink" title="推送代码"></a>推送代码</h4><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="bash">$ git push origin master</code></pre>
+<p>将当前代码push到远程master分支<br>如果没有设置默认push，则需使用完整命令</p>
+<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="bash">$ git push origin HEAD:refs/for/master</code></pre>
+<h4 id="拉取代码"><a href="#拉取代码" class="headerlink" title="拉取代码"></a>拉取代码</h4><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="bash">$ git pull --rebase origin master</code></pre>
+<p>从远程分支master上拉取代码，如果本地有修改，会导致拉取失败，需要先暂存本地修改的代码</p>
+<p>此命令相当于svn的svn update</p>
+<p>–rebase的作用是精简commit信息，减少不必要的merge</p>
+<h4 id="暂存代码"><a href="#暂存代码" class="headerlink" title="暂存代码"></a>暂存代码</h4><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="bash">$ git stash</code></pre>
+<p>将本地修改的代码暂存起来<br>可以添加-u参数，将添加的文件一并加入暂存区</p>
+<h4 id="从暂存区恢复"><a href="#从暂存区恢复" class="headerlink" title="从暂存区恢复"></a>从暂存区恢复</h4><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="bash">$ git stash apply</code></pre>
+<p>将暂时区的代码恢复到当前分支，后面可以跟stash{position}，将第position次的暂存恢复。</p>
+<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code>$ git stash pop</code></pre><p>同git stash apply，并且从stash中删除</p>
+<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code>$ git stash list</code></pre><p>列出暂时区列表</p>
+<h2 id="Gerrit工作流"><a href="#Gerrit工作流" class="headerlink" title="Gerrit工作流"></a>Gerrit工作流</h2><h3 id="Upload代码"><a href="#Upload代码" class="headerlink" title="Upload代码"></a>Upload代码</h3><p>请见上一节提交代码</p>
+<h3 id="Review代码"><a href="#Review代码" class="headerlink" title="Review代码"></a>Review代码</h3><p>当upload成功之后，就可以在gerrit上看到提交了</p>
+<img src="/2016/05/14/other/tech-gerrit-guide/image021.png">
+
+<h3 id="添加Reviewer"><a href="#添加Reviewer" class="headerlink" title="添加Reviewer"></a>添加Reviewer</h3><p>点击提交日志进去，添加reviewer</p>
+<img src="/2016/05/14/other/tech-gerrit-guide/image023.png">
+
+<p>注：输入reviewer的邮箱地址会自动联想，点击点击Add Reviewer确认添加</p>
+<h3 id="评审代码"><a href="#评审代码" class="headerlink" title="评审代码"></a>评审代码</h3><p>点击文件查看修改</p>
+<img src="/2016/05/14/other/tech-gerrit-guide/image025.png"> 
+
+<p>可以双击修改后的代码位置写入评审信息</p>
+<p>提交或评审</p>
+<img src="/2016/05/14/other/tech-gerrit-guide/image027.png">
+
+<p>点击Review，选择Review结果</p>
+<img src="/2016/05/14/other/tech-gerrit-guide/image029.png">
+
+<p>如果评审没有问题，则选择+2或+1，如果代码不正确或存在问题，则选择-1或-2。</p>
+<p>最后选择评审动作，是否提交到git</p>
+<p>注1：提交到git的前提条件是：review的分数总和必须大于或等于2，并且单次review分数没有-2</p>
+<p>注2：如果代码不存在冲突，本次提交则会顺利地merge到git仓库</p>
+<h3 id="废弃提交"><a href="#废弃提交" class="headerlink" title="废弃提交"></a>废弃提交</h3><p>如果代码评审不通过，也可以点击Abandon Change，直接废弃掉本次提交</p>
+<p>如果submit存在冲突，也可以先废弃掉提交，让代码提交者解决冲突后，再次提交。</p>
+<h2 id="git-进阶操作"><a href="#git-进阶操作" class="headerlink" title="git 进阶操作"></a>git 进阶操作</h2><h3 id="切换协议"><a href="#切换协议" class="headerlink" title="切换协议"></a>切换协议</h3><p>如果clone时，使用的是https，则每次提交都需要输入用户名与密码，推荐使用ssh协议，可以使用以下命令将https转为ssh协议</p>
+<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="bash">git remote set-url origin git@github.com:someaccount/someproject.git</code></pre>
+<h3 id="导入仓库"><a href="#导入仓库" class="headerlink" title="导入仓库"></a>导入仓库</h3><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="bash">git init
+git remote add origin git@github.com:Jamling/test.git
+git push -u origin master</code></pre>
+<h3 id="提交代码到多个分支"><a href="#提交代码到多个分支" class="headerlink" title="提交代码到多个分支"></a>提交代码到多个分支</h3><p>如果代码需要提交到多个分支，需要使用git cherry-pick功能。以下是一个示例</p>
+<p>PS：master为主干分支，dev为开发版本分支。<br>假设，我们当前在主干分支master，则：<br>1，master分支上git add , git commit，并且记录下commit id<br>2，git pull –rebase origin master // 确保master分支是最新状态<br>3，git push origin master<br>4，git checkout dev切换到dev分支<br>5，git cherry-pick 后面加上master分支下的刚刚提交的commit id<br>6，git pull –rebase origin dev // 确保dev分支是最新的<br>7，git push origin dev</p>
+<h3 id="追加修改"><a href="#追加修改" class="headerlink" title="追加修改"></a>追加修改</h3><p>当push代码之后，review不通过或者想继续修改，可以继续编辑源代码，然后再通过git commit –amend来追加修改</p>
+<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="bash">$ git add test.txt
+$ git commit –m “add test”
+$ git push origin master
+$ git add test2.txt
+$ git commit --amend
+$ git push origin master</code></pre>
+<h3 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h3><p>git reset可以实现版本回退</p>
+<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="bash">git reset --soft HEAD~</code></pre>
+<p>添加–soft选项，则本地修改仍然存在，commit信息将回退<br>HEAD<del>：表示将HEAD版本向前退一个版本</del>表示两个版本，亦可以用HEAD~2表示</p>
+<h3 id="提交tag"><a href="#提交tag" class="headerlink" title="提交tag"></a>提交tag</h3><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="bash">git tag -am “commit message” tagname
+git push origin tagname:refs/heads/tagname
+git push --tags</code></pre>
+<h2 id="Gerrit-常见问题"><a href="#Gerrit-常见问题" class="headerlink" title="Gerrit 常见问题"></a>Gerrit 常见问题</h2><h3 id="本地仓库与远程仓库不一致"><a href="#本地仓库与远程仓库不一致" class="headerlink" title="本地仓库与远程仓库不一致"></a>本地仓库与远程仓库不一致</h3><p> <code>Your branch is ahead of &#39;origin/master&#39; by 1 commits.</code></p>
+<p> 使用git status后，提示Your branch is ahead/behind of ‘origin/master’ by x commits. 表示本地仓库与远程仓库不同步，本地仓库比远程仓库提交x次提交。<br> 出现的原因是有以下两种：</p>
+<ol>
+<li><p>本地提交push到gerrit，但是gerrit没有merge到远程仓库。</p>
+</li>
+<li><p>gerrit上已经merge过了，但是本地没有拉取最新的远程仓库。</p>
+<p>解决办法：</p>
+<p>先查看gerrit merge状态。然后再通过拉取代码获取最新的分支代码。如果提交的commit是你自己的，可以简单使用git pull，如果不是，强烈推荐<code>git pull --rebase origin master</code>来拉取分支。</p>
+</li>
+</ol>
+<h3 id="Push代码被拒绝"><a href="#Push代码被拒绝" class="headerlink" title="Push代码被拒绝"></a>Push代码被拒绝</h3><ul>
+<li><p><code>[remote rejected] HEAD -&gt; refs/for/master (missing Change-Id in commit messag</code><br>push代码时，出现以下错误：</p>
+<img src="/2016/05/14/other/tech-gerrit-guide/image033.png">
+
+<p>解决办法</p>
+<ol>
+<li>先确认是否有从远程下载commit-msg模板，如果没有，参考下载commit模板一节，下载commit-msg模板</li>
+<li>使用git status查看状态，发现ahead of ‘origin/master’的数目不对。则使用git log查看提交记录，发现提交记录中有Merge branch ‘master’ of ssh://…，则可以确定是因为pull代码时，出现了分支冲突，git自动合并并提交合并commit。具体的解决办法之一：<br>a)    git reset –soft HEAD<del>将自动merge后的commit全部重置，并且保存到暂存区<br>b)    git reset –hard HEAD</del>将自动merge的commit还原，再pull –rebase拉取最新的分支代码。并解决冲突。<br>c)    从暂存区恢复代码，并且重新提交即可</li>
+</ol>
+</li>
+<li><p><code>warning: push.default is unset</code><br>是由版本兼容性导致的，低版本的git push如果不指定分支名，就会全部推送，而新版只会推送当前分支。<br>解决的办法也很简单，我们只需要明确指定应该推送方式即可</p>
+<ol>
+<li><p>全部推送<br>git config –global push.default matching</p>
+</li>
+<li><p>部分推送<br>git config –global push.default simple</p>
+</li>
+</ol>
+</li>
+</ul>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/05/14/other/tech-gerrit-guide/](https://www.ieclipse.cn/2016/05/14/other/tech-gerrit-guide/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.966Z" itemprop="dateModified">
+    Last updated: 2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="Jamling's Blog and Project Site" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/en/2016/05/14/other/tech-adb-mobile/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">Prev</span></a></li><li class="next"><a href="/en/2016/05/14/other/tech-gerrit-install/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">Next</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    Donate
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>Dear reader, if you feel this good, could you rewark me a `bread` as awark? Thank you very much~</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">Donate</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="17e8f62ad95a2638bc26512e97ec0c33"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: '17e8f62ad95a2638bc26512e97ec0c33',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          Table Of Contents
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#生成ssh-key">生成ssh key</a></li><li><a href="#登录gerrit">登录gerrit</a><ul class="nav toc-ul"><li><a href="#设置full-name和email">设置full-name和email</a></li><li><a href="#设置ssh-public-key">设置ssh public key</a></li><li><a href="#测试ssh连接">测试ssh连接</a></li></ul></li><li><a href="#从gerrit检出代码">从gerrit检出代码</a></li><li><a href="#git本地设置">git本地设置</a><ul class="nav toc-ul"><li><a href="#设置用户">设置用户</a></li><li><a href="#下载commit模板">下载commit模板</a></li><li><a href="#设置默认push">设置默认push</a></li><li><a href="#邮件提醒">邮件提醒</a></li><li><a href="#提交代码">提交代码</a><ul class="nav toc-ul"><li><a href="#查看状态">查看状态</a></li><li><a href="#添加文件">添加文件</a></li><li><a href="#提交代码-1">提交代码</a></li><li><a href="#推送代码">推送代码</a></li><li><a href="#拉取代码">拉取代码</a></li><li><a href="#暂存代码">暂存代码</a></li><li><a href="#从暂存区恢复">从暂存区恢复</a></li></ul></li></ul></li><li><a href="#Gerrit工作流">Gerrit工作流</a><ul class="nav toc-ul"><li><a href="#Upload代码">Upload代码</a></li><li><a href="#Review代码">Review代码</a></li><li><a href="#添加Reviewer">添加Reviewer</a></li><li><a href="#评审代码">评审代码</a></li><li><a href="#废弃提交">废弃提交</a></li></ul></li><li><a href="#git-进阶操作">git 进阶操作</a><ul class="nav toc-ul"><li><a href="#切换协议">切换协议</a></li><li><a href="#导入仓库">导入仓库</a></li><li><a href="#提交代码到多个分支">提交代码到多个分支</a></li><li><a href="#追加修改">追加修改</a></li><li><a href="#版本回退">版本回退</a></li><li><a href="#提交tag">提交tag</a></li></ul></li><li><a href="#Gerrit-常见问题">Gerrit 常见问题</a><ul class="nav toc-ul"><li><a href="#本地仓库与远程仓库不一致">本地仓库与远程仓库不一致</a></li><li><a href="#Push代码被拒绝">Push代码被拒绝</a></li></ul></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "Code",
+        right: ":",
+        copy: "Copy to clipboard"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

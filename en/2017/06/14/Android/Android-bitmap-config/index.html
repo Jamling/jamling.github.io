@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Android bitmap config你理解对了吗？</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Android,Android bitmap config你理解对了吗？">
+  <meta name="description" content="Bitmap config ALPHA_8/ARGB_4444/ARGB_8888/RGB_565理解">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="Jamling's Blog and Project Site">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="Android bitmap config你理解对了吗？">
+  <meta name="og:url" content="https://www.ieclipse.cn/2017/06/14/Android/Android-bitmap-config/">
+  <meta name="og:description" content="Bitmap config ALPHA_8/ARGB_4444/ARGB_8888/RGB_565理解">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="Jamling's Blog and Project Site">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="Android bitmap config你理解对了吗？">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="Bitmap config ALPHA_8/ARGB_4444/ARGB_8888/RGB_565理解">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/en/2017/06/14/Android/Android-bitmap-config/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/en/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/en/" class="main-nav">Home</a></li><li><a href="/en/p/" class="main-nav">Projects</a></li><li><a href="/en/categories/" class="main-nav">Category</a></li><li><a href="/en/archives/" class="main-nav">Archive</a></li><li><a href="/en/donate/" class="main-nav">Donate</a></li><li><a href="/en/about/" class="main-nav">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2017/06/14/Android/Android-bitmap-config/">简体中文</a></li>
+              
+              <li><a href="/en/2017/06/14/Android/Android-bitmap-config/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>Path: <a class="category-item" href="/en/">Blog</a><a class="category-item" href="/en/categories/Android/">Android</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline"></h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">Post at: </span>
+      <time datetime="2017-06-14T09:50:00.000Z" itemprop="datePublished"><time datetime="2017-06-14T09:50:00.000Z">2017-06-14</time></time>
+      </span>
+      
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">Share</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" id="changyan_count_unit" data-thread-key="a52938c1be8b6b60ec58aacdae4dc50c"></span><span class="hidden-xs">Comment</span></a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">Like</span></a>-->
+        <a href="#" class="icon nova-eye leancloud_visitors" id="a52938c1be8b6b60ec58aacdae4dc50c" data-flag-title="“Android" bitmap config你理解对了吗？”><span class="count lc-count leancloud-visitors-count"></span><span class="hidden-xs">Views</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2017-06-14T09:50:00.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <p>在写本文之前，我还以为自己对android的bitmap很熟悉，直到自己亲手写代码实践，才发现自己错了很多年。真是汗颜啊！</p>
+<a id="more"></a>
+
+<h2 id="Bitmap-Config"><a href="#Bitmap-Config" class="headerlink" title="Bitmap Config"></a>Bitmap Config</h2><p>首先，根据Android API 25的文档简要说明一下Android的Bitmap.Config以下4个选项</p>
+<ul>
+<li>ALPHA_8: 每个像素占用1字节（8位），存储的是透明度信息。</li>
+<li>ARGB_4444: 每个像素占用2字节（4+4+4+4＝16位），ARGB分别占用4位，支持alpha通道。<br><strong>注：从API 13开始不推荐使用，在android 4.4上面，设置的ARGB_4444会被系统使用ARGB_8888替换</strong></li>
+<li>ARGB_8888: 默认的选项，每像素占用4字节，ARGB分别占8位，支持1600万种颜色，质量最高，当然内存占用也高。</li>
+<li>RGB_565: 每像素占用2字节，RGB分别占5，6，5位。支持65535种颜色，不支持alpha。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>bitmap.config</th>
+<th align="center">ALPHA_8</th>
+<th align="right">ARGB_4444</th>
+<th align="right">ARGB_8888</th>
+<th align="right">RGB_565</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bytes/pixel</td>
+<td align="center">1 byte</td>
+<td align="right">2 byte</td>
+<td align="right">4 byte</td>
+<td align="right">2 byte</td>
+</tr>
+<tr>
+<td>alpha channel</td>
+<td align="center">8 bit</td>
+<td align="right">4 bit</td>
+<td align="right">8 bit</td>
+<td align="right">not support</td>
+</tr>
+</tbody></table>
+<h2 id="PNG-格式"><a href="#PNG-格式" class="headerlink" title="PNG 格式"></a>PNG 格式</h2><p>其次，简要说一下png格式</p>
+<ul>
+<li>png 8: 支持不透明，索引色透明，alpha透明，最大支持256种颜色</li>
+<li>png 24: 不支持透明，支持1600万种颜色</li>
+<li>png 32: 支持透明，其它同png 24，支持1600万种颜色</li>
+</ul>
+<h2 id="bitmap内存占用计算"><a href="#bitmap内存占用计算" class="headerlink" title="bitmap内存占用计算"></a>bitmap内存占用计算</h2><p>第三，简要说一下bitmap占用的内存</p>
+<p>Android中bitmap的内存占用是跟图片的尺寸（高和宽）相关。一张图片的内存占用大致的计算公式如下：</p>
+<p><strong>占用内存 = 图像像素总和（width x height）再 x 每像素(bitmap config)占用的字节数</strong></p>
+<p><em>以下是通过代码准确计算</em></p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">public static int getSizeInBytes(@Nullable Bitmap bitmap) {
+    if (bitmap == null) {
+        return 0;
+    }
+
+    // There&#39;s a known issue in KitKat where getAllocationByteCount() can throw an NPE. This was
+    // apparently fixed in MR1: http://bit.ly/1IvdRpd. So we do a version check here, and
+    // catch any potential NPEs just to be safe.
+    if (Build.VERSION.SDK_INT &gt; Build.VERSION_CODES.KITKAT) {
+        try {
+            return bitmap.getAllocationByteCount();
+        } catch (NullPointerException npe) {
+            // Swallow exception and try fallbacks.
+        }
+    }
+
+    if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.HONEYCOMB_MR1) {
+        return bitmap.getByteCount();
+    }
+
+    // Estimate for earlier platforms.
+    return bitmap.getWidth() * bitmap.getRowBytes();
+}</code></pre>
+<p>以一张1024<em>1024的图片为例，使用ARGB_8888，占用的内存为1024</em>1024*4=4M。像现在的手机摄像头动不动就是上千万像素，拍出来的照片如果按默认的ARGB_8888 config加载，则至少是几十M的内存占用。</p>
+<p>Android的图片资源主要分两部分：</p>
+<ol>
+<li>一种是apk中自带的，多为png格式，由系统加载，支持缩放，代码中通过R.xxx引用，decode时使用的是默认的ARGB_8888选项，图像质量高；</li>
+<li>另一种是网络图片或本地图片，多为jpg格式，加载时一般使用第三方的图片加载库，为节省内存decode时多为RGB_565选项。</li>
+</ol>
+<p>平时都是这么用，也没发现问题，优化内存占用时，一般也是从图片的尺寸方面入手。不过最近优化一个跟图片相关的功能，在图片尺寸无法缩放的条件下，只能通过更改bitmap config来降低内存的占用。然后意外的发现，导致颠覆了我的三观。为此我特地写了一个测试sample，代码详见<a href="https://github.com/Jamling/BitmapConfig" target="_blank" rel="noopener">github</a>，特地创建了一张背景色透明，图片内容为A（黑色50%透明度）R（红色）G（绿色）B（蓝色）图片，然后分别导出为：png8（alpha透明）、png24（不透明）、png32和jpeg（不透明）格式的图，分别使用ALPHA_8, ARGB_4444, ARGB_8888, RGB_565四种config加载图片，得到的实际结果如下（假设图像总像素为X）。</p>
+<h2 id="实践结果"><a href="#实践结果" class="headerlink" title="实践结果"></a>实践结果</h2><h3 id="运行截图"><a href="#运行截图" class="headerlink" title="运行截图"></a>运行截图</h3><p><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/screenshot.jpg" alt="screenshot"></p>
+<h3 id="结果统计"><a href="#结果统计" class="headerlink" title="结果统计"></a>结果统计</h3><table>
+<thead>
+<tr>
+<th align="center">bitmap.config</th>
+<th align="center">ALPHA_8</th>
+<th align="center">ARGB_4444</th>
+<th align="center">ARGB_8888</th>
+<th align="center">RGB_565</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/png8.png" alt>png8</td>
+<td align="center"><strong>4</strong><del><code>1</code></del> X</td>
+<td align="center">2 X</td>
+<td align="center">4 X</td>
+<td align="center"><strong>4</strong><del><code>2</code></del> X A <del><code>不</code></del> 透明</td>
+</tr>
+<tr>
+<td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/png24.png" alt>png24</td>
+<td align="center"><strong>4</strong><del><code>1</code></del> X</td>
+<td align="center">2 X</td>
+<td align="center">4 X</td>
+<td align="center"><strong>2</strong> X</td>
+</tr>
+<tr>
+<td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/png32.png" alt>png32</td>
+<td align="center"><strong>4</strong><del><code>1</code></del> X</td>
+<td align="center">2 X</td>
+<td align="center">4 X</td>
+<td align="center"><strong>4</strong><del><code>2</code></del> X A <del><code>不</code></del> 透明</td>
+</tr>
+<tr>
+<td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/jpeg_80.jpg" alt>jpeg</td>
+<td align="center"><strong>4</strong><del><code>1</code></del> X</td>
+<td align="center">2 X</td>
+<td align="center">4 X</td>
+<td align="center"><strong>2</strong> X</td>
+</tr>
+</tbody></table>
+<p><strong>请注意表格中带删除线的部分</strong></p>
+<ol>
+<li>ALPHA_8：config占用的内存竟然和ARGB_8888一样，不是说每个像素占用1字节的么？</li>
+<li>RGB_565：在png8和png32中，图片中的A都保持了50%的透明度，而且占用的内存也和ARGB_8888一样，不是说RGB_565不包含alpha么？不是说占用的内存是ARGB_8888的一半么？</li>
+<li>ARGB_4444：在android 6.0上面，png8和png32看不见（全透明），png24和jpeg显示为一块黑色区域，在android 4.2上则显示正常。</li>
+</ol>
+<p>带着上面的疑问，在网上进行了相关的搜索，也没有找到答案。好吧，我是懵了，不知道各位看客如何？附上github上的示例工程：<a href="https://github.com/Jamling/BitmapConfig" target="_blank" rel="noopener">https://github.com/Jamling/BitmapConfig</a></p>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/06/14/Android/Android-bitmap-config/](https://www.ieclipse.cn/2017/06/14/Android/Android-bitmap-config/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.894Z" itemprop="dateModified">
+    Last updated: 2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="Jamling's Blog and Project Site" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/en/2017/06/28/Eclipse/Eclipse-smartqq/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">Prev</span></a></li><li class="next"><a href="/en/2017/06/06/PHP/php-app-token/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">Next</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    Donate
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>Dear reader, if you feel this good, could you rewark me a `bread` as awark? Thank you very much~</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">Donate</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="a52938c1be8b6b60ec58aacdae4dc50c"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: 'a52938c1be8b6b60ec58aacdae4dc50c',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          Table Of Contents
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#Bitmap-Config">Bitmap Config</a></li><li><a href="#PNG-格式">PNG 格式</a></li><li><a href="#bitmap内存占用计算">bitmap内存占用计算</a></li><li><a href="#实践结果">实践结果</a><ul class="nav toc-ul"><li><a href="#运行截图">运行截图</a></li><li><a href="#结果统计">结果统计</a></li></ul></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "Code",
+        right: ":",
+        copy: "Copy to clipboard"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

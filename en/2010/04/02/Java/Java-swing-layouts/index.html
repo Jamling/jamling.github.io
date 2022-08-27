@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Swing 布局管理器</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Java,Swing,Swing 布局管理器">
+  <meta name="description" content="Null LayoutNull layout也称绝对布局管理器，如果一个容器使用绝对布局的话，那么其中的组件要调用setBounds()方法以确定在哪个位置显示组件，否则组件将不显示。 如果不用WindowsBuilder之类的界面开发插件，使用绝对定位将是一件痛苦的事。 在界面较复杂的情况下，一般不会使用绝对布局">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="Jamling's Blog and Project Site">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="Swing 布局管理器">
+  <meta name="og:url" content="https://www.ieclipse.cn/2010/04/02/Java/Java-swing-layouts/">
+  <meta name="og:description" content="Null LayoutNull layout也称绝对布局管理器，如果一个容器使用绝对布局的话，那么其中的组件要调用setBounds()方法以确定在哪个位置显示组件，否则组件将不显示。 如果不用WindowsBuilder之类的界面开发插件，使用绝对定位将是一件痛苦的事。 在界面较复杂的情况下，一般不会使用绝对布局">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="Jamling's Blog and Project Site">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="Swing 布局管理器">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="Null LayoutNull layout也称绝对布局管理器，如果一个容器使用绝对布局的话，那么其中的组件要调用setBounds()方法以确定在哪个位置显示组件，否则组件将不显示。 如果不用WindowsBuilder之类的界面开发插件，使用绝对定位将是一件痛苦的事。 在界面较复杂的情况下，一般不会使用绝对布局">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/en/2010/04/02/Java/Java-swing-layouts/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/en/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/en/" class="main-nav">Home</a></li><li><a href="/en/p/" class="main-nav">Projects</a></li><li><a href="/en/categories/" class="main-nav">Category</a></li><li><a href="/en/archives/" class="main-nav">Archive</a></li><li><a href="/en/donate/" class="main-nav">Donate</a></li><li><a href="/en/about/" class="main-nav">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2010/04/02/Java/Java-swing-layouts/">简体中文</a></li>
+              
+              <li><a href="/en/2010/04/02/Java/Java-swing-layouts/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>Path: <a class="category-item" href="/en/">Blog</a><a class="category-item" href="/en/categories/Java/">Java</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline"></h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">Post at: </span>
+      <time datetime="2010-04-02T13:00:00.000Z" itemprop="datePublished"><time datetime="2010-04-02T13:00:00.000Z">2010-04-02</time></time>
+      </span>
+      
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">Share</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" id="changyan_count_unit" data-thread-key="ab863890575f8edcb81fc0e8a10fda90"></span><span class="hidden-xs">Comment</span></a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">Like</span></a>-->
+        <a href="#" class="icon nova-eye leancloud_visitors" id="ab863890575f8edcb81fc0e8a10fda90" data-flag-title="“Swing" 布局管理器”><span class="count lc-count leancloud-visitors-count"></span><span class="hidden-xs">Views</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2010-04-02T13:00:00.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <h2 id="Null-Layout"><a href="#Null-Layout" class="headerlink" title="Null Layout"></a>Null Layout</h2><p>Null layout也称绝对布局管理器，如果一个容器使用绝对布局的话，那么其中的组件要调用setBounds()方法以确定在哪个位置显示组件，否则组件将不显示。 如果不用WindowsBuilder之类的界面开发插件，使用绝对定位将是一件痛苦的事。 在界面较复杂的情况下，一般不会使用绝对布局</p>
+<a id="more"></a>
+
+<h2 id="FlowLayout"><a href="#FlowLayout" class="headerlink" title="FlowLayout"></a>FlowLayout</h2><p>使用此布局管理器将容器内的组件按从左到右或从右到左排列，如果剩余空间小于组件，那么组件将在新行显示。</p>
+<h2 id="BorderLayout"><a href="#BorderLayout" class="headerlink" title="BorderLayout"></a>BorderLayout</h2><p>是某些容器组件的默认布局管理器，它将容器分为NORTH, SOUTH,CENTER，WEST，EAST五个区域，每个区域最多只能有一个组件，所以它也只适用于容器内组件较少（不大于5个）的布局管理。 使用方式：<br>Container.add（component, BorderLayout. SOUTH）;<br>如果第二个参数未指定，那么默认在BorderLayout. CENTER区域显示。<br>如果对同一个区域添加了多个组件，那么只显示最后添加的组件。</p>
+<h2 id="GridLayout"><a href="#GridLayout" class="headerlink" title="GridLayout"></a>GridLayout</h2><p>网格布局管理器，它将容器划分为指定行*列个单元格，按组件add的顺序，依次将组件放入单元格中，可以像表格一样指定其单元格之间的水平与垂直间距，但是，它不可以跨行与跨列。 所以此布局管理器只适用于容器内组件排列呈类表格方式的容器布局。</p>
+<h2 id="GridBagLayout"><a href="#GridBagLayout" class="headerlink" title="GridBagLayout"></a>GridBagLayout</h2><p>GridLayout不可以跨行与跨列，但GridBagLayout可以，个人认为GridBagLayout是基于GridLayout的，因为它的原理也是将容器区域分为若干个单元格的。</p>
+<p>不过功能远比GridLayout强大，不仅可以跨行与跨列，还可以指定在容器大小变更时，组件是否向x轴与y轴方向延伸，以及延伸率。</p>
+<p>每个由 GridBagLayout 管理的组件都与 GridBagConstraints 的实例相关联<br>Constraints 对象指定组件的显示区域在网格中的具体放置位置，以及组件在其显示区域中的放置方式。 除了 Constraints 对象之外，GridBagLayout 还考虑每个组件的最小大小和首选大小，以确定组件的大小。</p>
+<p>下面对GridBagConstraints的几个属性做一个简要说明，如要了解属性的原生说明请参考sun官方资料</p>
+<ul>
+<li><p>gridx, gridy  ：指定组件在容器单元格内的行索引与列索引，如最左上的那个单元格式，其gridx为0，gridy为0。</p>
+</li>
+<li><p>gridwidth, gridheight ：指定单元格的跨行与跨列数</p>
+</li>
+<li><p>fill：指定填充方向，可以向水平，垂直或水平+垂直方向充满整个容器。</p>
+</li>
+<li><p>ipadx, ipady：指定组件的内部填充，相当于单元格边距，即给组件的最小宽度或高度添加多大的空间。 此属性在我实践中未能参透其中工作方式（有时填充，有时不填充）</p>
+</li>
+<li><p>insets：指定组件的外部填充，相当于单元格间距。</p>
+</li>
+<li><p>Anchor：当组件的大小小于可用显示区域时使用，指定组件在显示区域中的位置。 请见下图： </p>
+</li>
+</ul>
+<pre>
+
+   -------------------------------------------------
+   |FIRST_LINE_START   PAGE_START     FIRST_LINE_END|
+   |                                                |
+   |                                                |
+   |LINE_START           CENTER             LINE_END|
+   |                                                |
+   |                                                |
+   |LAST_LINE_START     PAGE_END       LAST_LINE_END|
+   -------------------------------------------------
+
+</pre>
+
+<ul>
+<li>weightx, weighty ：指定容器大小变动时，向x或y方向的伸缩率。</li>
+</ul>
+<p>关于更多GridBagLayout的信息请参考JDK API或相关资料。</p>
+<h2 id="BoxLayout"><a href="#BoxLayout" class="headerlink" title="BoxLayout"></a>BoxLayout</h2><p>允许垂直或水平布置多个组件的布局管理器。<br>它与Box联合工作，Box是一个使用了BoxLayout的轻量级组件。 Box的思想是将容器内的组件当做一个Box（盒子），在Box与Box之间可以创建一些不可见的区域，分为：</p>
+<ul>
+<li>Glue: 相当于胶水，粘住了两个box，它会自动沿垂直或水平方向填充两个box之间的不可见区域</li>
+<li>Strut: 指定高度（宽度）的垂直（水平）间距的Glue<br>RigidArea: 同时指定高度与宽度的Strut<br>下面请看一个示例，实现的效果与GridBagLayout中示例的效果一样</li>
+</ul>
+<h2 id="SpringLayout"><a href="#SpringLayout" class="headerlink" title="SpringLayout"></a>SpringLayout</h2><p>SpringLayout是一种较特殊的布局管理器，它通过定义容器及容器内组件的约束来实现布局。 它与Spring, SpringLayout. Constraints联合使用。 </p>
+<p>在此之前先说一下Spring<br>Spring好似一个弹簧，它可以伸长到maximum，也可以收缩到minimun，在正常情况下它的长度是prefferenceSize，在容器大小变动时，它根据前面的三个值根据一系列规则计算出具体的value。<br>Spring是一个抽象类，它提供max,sum静态函数</p>
+<p>SpringLayout.Constraints，将管理组件大小和位置更改方式的约束存储在 SpringLayout 控制的容器中，它有x、y、width 和 height 属性，因而它类似于一个 Rectangle。 但是，在 Constraints 对象中，这些属性具有的是 Spring 值，而不是整数。 此外，可以使用 constraint 属性按四个边（东、南、西、北）操作一个 Constraints 对象。<br>组件与组件的约束是通过边来定义的，如一个textfield的左边距label的右边多少距离。 下面给出边的计算公式：<br>WEST = x<br>NORTH = y<br>EAST = x + width<br>SOUTH = y + height<br>下面给出一个官方的示例：<br>容器容器pane使用Spring布局管理器，pane下有一个label及一个textfield。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Swing的布局管理器感觉没有SWT好使，在现实的界面开发中，需要根据实际情况灵活使用多种布局管理器，不像SWT使用一个GridLayout差不多就可以了。 鉴于个人理解的还不够深刻，更多的资料需要去看sun官网布局管理器的说明：</p>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2010/04/02/Java/Java-swing-layouts/](https://www.ieclipse.cn/2010/04/02/Java/Java-swing-layouts/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.909Z" itemprop="dateModified">
+    Last updated: 2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="Jamling's Blog and Project Site" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/en/2011/04/14/Java/Java-swt-run/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">Prev</span></a></li><li class="next"><a href="/en/2010/03/31/Eclipse/Eclipse-rcp-i18n/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">Next</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    Donate
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>Dear reader, if you feel this good, could you rewark me a `bread` as awark? Thank you very much~</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">Donate</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="ab863890575f8edcb81fc0e8a10fda90"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: 'ab863890575f8edcb81fc0e8a10fda90',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          Table Of Contents
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#Null-Layout">Null Layout</a></li><li><a href="#FlowLayout">FlowLayout</a></li><li><a href="#BorderLayout">BorderLayout</a></li><li><a href="#GridLayout">GridLayout</a></li><li><a href="#GridBagLayout">GridBagLayout</a></li><li><a href="#BoxLayout">BoxLayout</a></li><li><a href="#SpringLayout">SpringLayout</a></li><li><a href="#总结">总结</a></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "Code",
+        right: ":",
+        copy: "Copy to clipboard"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Hexo your blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Web,Hexo,Node.js,Hexo your blog">
+  <meta name="description" content="OverviewThis article in an advanced guide to hexo your blog, you need to prepare the following knowledges:
+
+Front-end: You must has certain knowledge of Web tech such as javascript, css, html and node.js template.
+Layout: The hexo layout is the view of site, it’s usually using a template to render.
+Variables: The hexo variables, such as site.posts, config, page.
+Helpers: The hexo helpers are used in templates to help you insert snippets quickly.
+">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="静勤居">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="Hexo your blog">
+  <meta name="og:url" content="https://www.ieclipse.cn/2016/03/04/Web/Hexo-your-blog/">
+  <meta name="og:description" content="OverviewThis article in an advanced guide to hexo your blog, you need to prepare the following knowledges:
+
+Front-end: You must has certain knowledge of Web tech such as javascript, css, html and node.js template.
+Layout: The hexo layout is the view of site, it’s usually using a template to render.
+Variables: The hexo variables, such as site.posts, config, page.
+Helpers: The hexo helpers are used in templates to help you insert snippets quickly.
+">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="静勤居">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="Hexo your blog">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="OverviewThis article in an advanced guide to hexo your blog, you need to prepare the following knowledges:
+
+Front-end: You must has certain knowledge of Web tech such as javascript, css, html and node.js template.
+Layout: The hexo layout is the view of site, it’s usually using a template to render.
+Variables: The hexo variables, such as site.posts, config, page.
+Helpers: The hexo helpers are used in templates to help you insert snippets quickly.
+">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/2016/03/04/Web/Hexo-your-blog/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/about/" class="main-nav">关于</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2016/03/04/Web/Hexo-your-blog/">简体中文</a></li>
+              
+              <li><a href="/en/2016/03/04/Web/Hexo-your-blog/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>当前路径：<a class="category-item" href="/">文章</a><a class="category-item" href="/categories/Web/">Web</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline"></h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">发表于</span>
+      <time datetime="2016-03-04T04:48:31.000Z" itemprop="datePublished"><time datetime="2016-03-04T04:48:31.000Z">2016-03-04</time></time>
+      </span>
+      
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">分享</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" id="changyan_count_unit" data-thread-key="11b811dcac0a0b15ede93ffcdbf4d58c"></span><span class="hidden-xs">评论</span></a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">喜欢</span></a>-->
+        <a href="#" class="icon nova-eye leancloud_visitors" id="11b811dcac0a0b15ede93ffcdbf4d58c" data-flag-title="“Hexo" your blog”><span class="count lc-count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2016-03-04T04:48:31.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>This article in an advanced guide to <a href="https://hexo.io" target="_blank" rel="noopener">hexo</a> your blog, you need to prepare the following knowledges:</p>
+<ul>
+<li>Front-end: You must has certain knowledge of Web tech such as javascript, css, html and node.js template.</li>
+<li>Layout: The <a href="https://hexo.io" target="_blank" rel="noopener">hexo</a> layout is the <code>view</code> of site, it’s usually using a template to render.</li>
+<li>Variables: The <a href="https://hexo.io" target="_blank" rel="noopener">hexo</a> variables, such as <var>site.posts, <var>config</var>, <var>page</var>.</var></li>
+<li>Helpers: The <a href="https://hexo.io" target="_blank" rel="noopener">hexo</a> helpers are used in templates to help you insert snippets quickly.</li>
+</ul>
+<a id="more"></a>
+
+<img src="/2016/03/04/Web/Hexo-your-blog/Hexo.png">
+
+<p>If you has been prepared, I think it’s no difficulty for you to make your blog a little change to others.</p>
+<p>Index snippets:</p>
+<p class="code-caption" data-lang="htmlbars" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="htmlbars">&lt;div class=&quot;article-list&quot;&gt;
+  {%- for post in page.posts %}
+  &lt;!-- output blog to html article tag --&gt;
+  &lt;article class=&quot;article post&quot; itemscope itemtype=&quot;http://schema.org/Article&quot;&gt;
+    &lt;!-- article header: output title and date --&gt;
+    &lt;header class=&quot;article-header&quot;&gt;
+      &lt;h1&gt;
+        &lt;a href=&quot;{{ url_for_lang(post.path) }}&quot; class=&quot;article-title&quot; itemprop=&quot;name&quot;&gt;{{ post.title }}&lt;/a&gt;
+      &lt;/h1&gt;
+      &lt;a href=&quot;{{ url_for_lang(post.path) }}&quot; class=&quot;article-date&quot;&gt;{{ time_tag(post.date) }}&lt;/a&gt;
+    &lt;/header&gt;
+    &lt;!-- output body: blog excerpt content --&gt;
+    &lt;section class=&quot;article-content&quot; itemprop=&quot;articleBody&quot;&gt;
+      {% if post.excerpt %}
+      {{ post.excerpt }}
+      {% endif %}
+    &lt;/section&gt;
+    &lt;footer class=&quot;post-item-footer&quot;&gt;
+      &lt;!-- output blog categories and tags --&gt;
+      {{ post_cates(post) }} 
+      {{ post_tags(post) }}
+    &lt;/footer&gt;
+  &lt;/article&gt;
+  &lt;hr&gt;
+  {% endfor %}
+&lt;/div&gt;</code></pre>
+<p>Index output</p>
+<div style="display:none;">
+<p class="code-caption" data-lang="htmlbars" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="htmlbars">&lt;article class=&quot;article post&quot; itemscope itemtype=&quot;http://schema.org/Article&quot;&gt;
+  &lt;header class=&quot;article-header&quot;&gt;
+      &lt;h1&gt;
+        &lt;a href=&quot;/2016/05/14/tech-adb-mobile/&quot; class=&quot;article-title&quot; itemprop=&quot;name&quot;&gt;使用ADB连接手机&lt;/a&gt;
+      &lt;/h1&gt;
+    &lt;a href=&quot;/2016/05/14/tech-adb-mobile/&quot; class=&quot;article-date&quot;&gt;&lt;time datetime=&quot;2016-05-14T07:34:08.000Z&quot;&gt;2016-05-14&lt;/time&gt;&lt;/a&gt;
+  &lt;/header&gt;
+  &lt;section class=&quot;article-content&quot; itemprop=&quot;articleBody&quot;&gt;
+    &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;使用ADB连接手机进行调试，开发、文件传输&lt;/p&gt;
+&lt;p&gt;使用adb文件传输优点：无需卸载或挂载SD卡&lt;/p&gt;
+  &lt;/section&gt;
+  &lt;footer class=&quot;post-item-footer&quot;&gt;
+    &lt;span class=&quot;glyphicon glyphicon-folder-close&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&amp;nbsp;分类&lt;ol class=&quot;breadcrumb category&quot;&gt;&lt;li&gt;&lt;a class=&quot;&quot; href=&quot;/categories/软件技术/&quot;&gt;软件技术&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a class=&quot;&quot; href=&quot;/categories/软件技术/奇淫巧技/&quot;&gt;奇淫巧技&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt; 
+
+  &lt;/footer&gt;
+&lt;/article&gt;
+        &lt;hr&gt;
+
+&lt;article class=&quot;article post&quot; itemscope itemtype=&quot;http://schema.org/Article&quot;&gt;
+...
+&lt;/article&gt;</code></pre>
+</div>
+
+<img src="/2016/03/04/Web/Hexo-your-blog/index_post.png">
+
+<h1 id="Theme"><a href="#Theme" class="headerlink" title="Theme"></a>Theme</h1><p>If you used theme published on <a href="https://hexo.io" target="_blank" rel="noopener">https://hexo.io</a>, please see the doc/guide of the theme.</p>
+<p>But, sometimes, you want to make some change. You may edit the theme and make a little change. I think it’s no difficulty for you.</p>
+<p>However, the theme may not meet you. I had want to find one theme to set up the site for my github project once, unfortunately, I found none that help me to build site quickly. So, I decided to create my own theme. And the guide based on <a href="/en/p/hexo-theme-nova">Nova</a>.</p>
+<p>The first thing is to design.</p>
+<h2 id="Design"><a href="#Design" class="headerlink" title="Design"></a>Design</h2><p>The content is divided to three modules</p>
+<ol>
+<li><p>Blog article<br>It’s a little different from other theme, include index, tags, categories, pagination basic function.</p>
+<p>It’s two-columns layout, the main container is the post list or post detail, the aside container is widgets or toc.</p>
+</li>
+<li><p>Project page<br>It’s a sub layout of page, include project docs nagivator sidebar, project list, toc.</p>
+<p>It’s three-columns layout, the main container is page content, and the left aside is project nagivator and the right aside is toc suffix</p>
+</li>
+<li><p>Other page<br>Other fragment page, such as “About me”.</p>
+<p>It’s two-columns layout like blog article.</p>
+</li>
+</ol>
+<h2 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h2><p>The layout tree</p>
+<img src="/2016/03/04/Web/Hexo-your-blog/layout.png">
+
+<p>Please see <a href="/en/p/hexo-theme-nova/layouts.html">nova layout</a> for more information.</p>
+<h1 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a>Plugin</h1><p>There are many <a href="https://hexo.io/plugins" target="_blank" rel="noopener">plugins</a> of <a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>, it’s easy to write a plugin under <a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>.<br>Just write a <var>.js</var> under <var>scripts</var> in your theme.</p>
+<p>here is a sample (<var>scripts</var>/<var>helpers.js</var>) to write a helper plugin to return page title.</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">// return page title.
+hexo.extend.helper.register(&#39;page_title&#39;, function(page){
+  var p = page ? page : this.page;
+  var ret = &#39;&#39;;
+  if (p.title2) {
+    ret = this.i18n(p.title2);
+  }
+  else if (p.title){
+    ret = p.title;
+  }
+  return ret;
+});</code></pre>
+<p>And another sample of display categories in post:</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">// insert category of post
+hexo.extend.helper.register(&#39;post_cates&#39;, function(post, options){
+  var o = options || {};
+  var _class = o.hasOwnProperty(&#39;class&#39;) ? o.class : &#39;category-item&#39;;
+  var icon = o.hasOwnProperty(&#39;icon&#39;) ? o.icon : &#39;glyphicon glyphicon-folder-close&#39;;
+  var cats = post.categories;
+  var _self = this;
+  var ret = &#39;&#39;;
+  if (cats == null || cats.length == 0) {
+      return ret;
+  }
+  ret += &#39;&lt;span class=&quot;post-category&quot;&gt;&#39;;
+  ret += &#39;&lt;i class=&quot;&#39; + icon + &#39;&quot;&gt;&lt;/i&gt;&lt;span class=&quot;hidden-xs&quot;&gt;&#39; + _self.__(&#39;category.label&#39;) + &#39;&lt;/span&gt;&#39;;
+  cats.forEach(function(item, i){
+    ret += &#39;&lt;a class=&quot;&#39; + _class + &#39;&quot; href=&quot;&#39; + _self.url_for_lang(item.path) + &#39;&quot;&gt;&#39; + item.name + &#39;&lt;/a&gt;&#39;;
+  });
+  ret += &#39;&lt;/span&gt;&#39;;
+  return ret;
+});</code></pre>
+<p>Use in layout/post/index.swig</p>
+<p class="code-caption" data-lang="htmlbars" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="htmlbars">{{ post_cates(post) }}</code></pre>
+<p>Will output:</p>
+<pre>
+    <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/tech/">软件技术</a><a class="category-item" href="/categories/tech/Web/">Web</a></span>
+</pre>
+
+<p>The <a href="/en/p/hexo-theme-nova">Nova</a> rewrite lost of helpers of <a href="https://hexo.io" target="_blank" rel="noopener">hexo</a> to simplify the style. Please visit <a href="/en/p/hexo-theme-nova/helpers.html">Helpers</a> for more informations.</p>
+<h1 id="Front-matter"><a href="#Front-matter" class="headerlink" title="Front-matter"></a>Front-matter</h1>{% blockquote Docs--- https://hexo.io/docs/front-matter.html %}
+Front-matter is a block of YAML or JSON at the beginning of the file that is used to configure settings for your writings. Front-matter is terminated by three dashes when written in YAML or three semicolons when written in JSON.
+{% endblockquote %}
+
+<p>So you can use it to do lots of things.</p>
+<p>See <a href="/en/p/hexo-theme-nova/front-matter.html">Nova Front-matter</a> for more information.</p>
+<h1 id="Optimize"><a href="#Optimize" class="headerlink" title="Optimize"></a>Optimize</h1><h2 id="I18n"><a href="#I18n" class="headerlink" title="I18n"></a>I18n</h2><p><a href="/en/p/hexo-theme-nova">Nova</a> use <a href="http://github.com/Jamling/hexo-generator-i18n" target="_blank" rel="noopener">hexo-generator-i18n</a> to generate multi-languages site. The default languages is Chinese and <var>root</var>/<var>en</var> is Englisth site.</p>
+<h2 id="Highlight"><a href="#Highlight" class="headerlink" title="Highlight"></a>Highlight</h2><p>It’s a little of failure, code highlight style not work well in <a href="/en/p/hexo-theme-nova">Nova</a>.</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">// highlight
+hljs.initHighlightingOnLoad();
+//hljs.configure
+
+$(&#39;pre code&#39;).each(function(i, block) {
+  hljs.highlightBlock(block);
+});</code></pre>
+<h2 id="Image"><a href="#Image" class="headerlink" title="Image"></a>Image</h2><p>Find all images in article and add fancybox style.</p>
+<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="js">$(&#39;.article&#39;).each(function(i){
+  $(this).find(&#39;img&#39;).each(function(){
+    /*if (!$(this).hasClass(&#39;img-responsive&#39;)) {
+    $(this).addClass(&#39;img-responsive&#39;)
+    }*/
+    if ($(this).parent().hasClass(&#39;fancybox&#39;)) return;
+
+    var alt = this.alt;
+
+    if (alt) $(this).after(&#39;&lt;span class=&quot;funcybox-caption&quot;&gt;&#39; + alt + &#39;&lt;/span&gt;&#39;);
+
+    $(this).wrap(&#39;&lt;a href=&quot;&#39; + this.src + &#39;&quot; title=&quot;&#39; + alt + &#39;&quot; class=&quot;fancybox&quot;&gt;&lt;/a&gt;&#39;);
+  });
+
+  $(this).find(&#39;.fancybox&#39;).each(function(){
+    $(this).attr(&#39;rel&#39;, &#39;article&#39; + i);
+  });
+
+  $(this).find(&#39;table&#39;).each(function(){
+    if (!$(this).hasClass(&#39;table-bordered&#39;)) {
+      $(this).addClass(&#39;table&#39;);
+      $(this).addClass(&#39;table-bordered&#39;);
+    }
+  });
+});
+
+if ($.fancybox){
+  $(&#39;.fancybox&#39;).fancybox();
+}</code></pre>
+<h2 id="SEO"><a href="#SEO" class="headerlink" title="SEO"></a>SEO</h2><p><a href="/en/p/hexo-theme-nova">Nova</a> has three helper to enhance the SEO.</p>
+<ul>
+<li>head_title: Generate optimized title string in &lt;title&gt;</li>
+<li>head_keywords: Add tags/categores of post into keywords</li>
+<li>head_description: <strong>TODO, plan to add description in Front-matter and add post excerpt to description</strong></li>
+</ul>
+<h2 id="Donate"><a href="#Donate" class="headerlink" title="Donate"></a>Donate</h2><p>partial/donate.swig support donate in article, the 2d-code images is under image folder.</p>
+<ul>
+<li>donate_alipay.png: Donate via Alipay</li>
+<li>donate_wechat.png: Donate via Wechat</li>
+</ul>
+<h2 id="Baidu-site-tools"><a href="#Baidu-site-tools" class="headerlink" title="Baidu site tools"></a>Baidu site tools</h2><p>For China.<br>login <a href="http://zhanzhang.baidu.com/" target="_blank" rel="noopener">百度站长平台</a>, and add your site then to verify.</p>
+<p>Verification</p>
+<ul>
+<li>File verification<br>  download baidu_xxxx_verify.html and upload to your site root dir to verify.</li>
+<li>HTML tag verification<br>  add <code>&lt;meta name=&quot;baidu-site-verification&quot; content=&quot;xxx&quot; /&gt;</code><br>to your home .html</li>
+<li>CNAME verification<br>  add a cname dns parser to zz.baidu.com</li>
+</ul>
+<h3 id="tools"><a href="#tools" class="headerlink" title="tools"></a>tools</h3><p>After site added, you can do </p>
+<ol>
+<li>Post links<br> I choose post my links automatically using following script<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+</li>
+</ol>
+<pre><code class="js">&lt;script&gt;
+(function(){
+    var bp = document.createElement(&#39;script&#39;);
+    bp.src = &#39;//push.zhanzhang.baidu.com/push.js&#39;;
+    var s = document.getElementsByTagName(&quot;script&quot;)[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+&lt;/script&gt;</code></pre>
+<ol start="2">
+<li>Update robots<br> Update your robots.txt under your site root dir</li>
+<li>Search in sites<br> Enable and add your script</li>
+<li>Social Share<br> Custom your share style and add script</li>
+<li>Analytics<br> Enable baidu analytics<br>6, Feedback<br> Enable feedback<br>7, Back to top<br> Useful function in mobile</li>
+</ol>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/03/04/Web/Hexo-your-blog/](https://www.ieclipse.cn/2016/03/04/Web/Hexo-your-blog/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.929Z" itemprop="dateModified">
+    最后更新：2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="静勤居" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/2016/05/13/other/tech-vba-guide/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">上一页</span></a></li><li class="next"><a href="/2016/01/03/Eclipse/Eclipse-explorer4/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">下一页</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    打赏
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>各位看官，鄙人借网络这块宝地在此献丑，望有钱的捧个钱场（打赏任意金额），没钱的捧个人场（分享）</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">打赏</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="11b811dcac0a0b15ede93ffcdbf4d58c"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: '11b811dcac0a0b15ede93ffcdbf4d58c',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          目录
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#Overview">Overview</a></li><li><a href="#Theme">Theme</a><ul class="nav toc-ul"><li><a href="#Design">Design</a></li><li><a href="#Layout">Layout</a></li></ul></li><li><a href="#Plugin">Plugin</a></li><li><a href="#Front-matter">Front-matter</a></li><li><a href="#Optimize">Optimize</a><ul class="nav toc-ul"><li><a href="#I18n">I18n</a></li><li><a href="#Highlight">Highlight</a></li><li><a href="#Image">Image</a></li><li><a href="#SEO">SEO</a></li><li><a href="#Donate">Donate</a></li><li><a href="#Baidu-site-tools">Baidu site tools</a><ul class="nav toc-ul"><li><a href="#tools">tools</a></li></ul></li></ul></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "代码",
+        right: "如下：",
+        copy: "复制"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

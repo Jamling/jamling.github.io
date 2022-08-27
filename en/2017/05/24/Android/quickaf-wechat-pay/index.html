@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>谈谈那些年微信支付踩过的坑</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Android,QuickAF,谈谈那些年微信支付踩过的坑">
+  <meta name="description" content="Android微信支付大全,微信支付踩的坑,微信支付常见问题">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="Jamling's Blog and Project Site">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="谈谈那些年微信支付踩过的坑">
+  <meta name="og:url" content="https://www.ieclipse.cn/2017/05/24/Android/quickaf-wechat-pay/">
+  <meta name="og:description" content="Android微信支付大全,微信支付踩的坑,微信支付常见问题">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="Jamling's Blog and Project Site">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="谈谈那些年微信支付踩过的坑">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="Android微信支付大全,微信支付踩的坑,微信支付常见问题">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/en/2017/05/24/Android/quickaf-wechat-pay/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/en/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/en/" class="main-nav">Home</a></li><li><a href="/en/p/" class="main-nav">Projects</a></li><li><a href="/en/categories/" class="main-nav">Category</a></li><li><a href="/en/archives/" class="main-nav">Archive</a></li><li><a href="/en/donate/" class="main-nav">Donate</a></li><li><a href="/en/about/" class="main-nav">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2017/05/24/Android/quickaf-wechat-pay/">简体中文</a></li>
+              
+              <li><a href="/en/2017/05/24/Android/quickaf-wechat-pay/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>Path: <a class="category-item" href="/en/">Blog</a><a class="category-item" href="/en/categories/Android/">Android</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline"></h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">Post at: </span>
+      <time datetime="2017-05-24T02:00:00.000Z" itemprop="datePublished"><time datetime="2017-05-24T02:00:00.000Z">2017-05-24</time></time>
+      </span>
+      
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">Share</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" id="changyan_count_unit" data-thread-key="b0f5a0ab8064e195c97cdbfad4ce6e36"></span><span class="hidden-xs">Comment</span></a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">Like</span></a>-->
+        <a href="#" class="icon nova-eye leancloud_visitors" id="b0f5a0ab8064e195c97cdbfad4ce6e36" data-flag-title="“谈谈那些年微信支付踩过的坑”"><span class="count lc-count leancloud-visitors-count"></span><span class="hidden-xs">Views</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2017-05-24T02:00:00.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <p>很早的时候就想写这篇文章了，作为BAT中的一员，还真不想吐槽它，免得被人身攻击。有人说，微信支付很简单嘛，官网有例子，网上也有现成的例子，不过谁用谁知道，本人也是在深入了解之后，真心觉得微信支付里的坑太多，BAT的开发们太敷衍了事，结果给不少的其他开发者带来诸多麻烦。我在这里做个稍全一点的介绍，尽量减少其他同学们掉坑里的概率。</p>
+<a id="more"></a>
+
+<h2 id="在微信上创建你的应用"><a href="#在微信上创建你的应用" class="headerlink" title="在微信上创建你的应用"></a>在微信上创建你的应用</h2><p>这里特别强调一下，这一步很重要，不然微信支付集成调试会出现莫名的错误。</p>
+<p>1，在注册之前对于Android客户端，需要提供app应用的包名和应用签名（md5值），这两个东西问开发或产品同学要。尽量在注册前提供。另外还需准备一个28x28和108x108的logo图片，问设计或产品同学要。<br>2，在<a href="https://open.weixin.qq.com" target="_blank" rel="noopener">微信开放平台</a>上注册，注意了，是微信开放平台，不是公众号平台，公众号平台账号不能在开放平台登录。如果已经注册过，请直接登录，登录成功后，点击创建移动应用，创建Android应用时，<code>应用包名</code>和<code>应用签名</code>，尽量一次性填对了。应用创建成功后，将得到<code>appid</code>(以wx开头的一串数字)。然后再去申请微信支付（需做开发者认证并缴费）<br>3，在[微信支付商户平台]注册或登录，申请app支付，申请通过后，将得到商户id<code>mch_id</code>(一串10位数字)，然后在<em>账户设置–&gt;API安全–&gt;密钥设置</em>中设置API密钥<code>key</code>(32位的字串)</p>
+<p>更多的申请帮助，请参考：<a href="https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;t=resource/res_list&amp;verify=1&amp;id=open1419317780&amp;token=6c7b59a75b08969c15fa41141ee8d88c236f01ab&amp;lang=zh_CN" target="_blank" rel="noopener">https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;t=resource/res_list&amp;verify=1&amp;id=open1419317780&amp;token=6c7b59a75b08969c15fa41141ee8d88c236f01ab&amp;lang=zh_CN</a></p>
+<p>注：关于微信支付申请，请在开放平台申请（同公众号支付申请流程，公众号支付不在本文讨论范围之内）微信的工作人员审核通过后，会发审核通过的邮件。里面包含<em>微信支付商户号</em><code>mch_id</code>(一串10位数字)和APPID等信息。然后根据邮件提示或者直接在<em>微信商户平台中–&gt;账户设置–&gt;API安全–&gt;密钥设置</em>中下载api证书并设置API密钥<code>key</code>(32位的字串)</p>
+<p>在微信开放平台创建应用成功后，APP支付也申请通过了。请提供给开发同学以下东西：</p>
+<ul>
+<li>APPID <code>appid</code>(以wx开头的一串数字)</li>
+<li>商户id <code>mch_id</code>(一串10位数字)</li>
+<li>API密钥 <code>key</code> (32位的字串)<br>对于Android应用，还需要保证<strong>应用包名</strong>与<strong>应用签名</strong>正确</li>
+</ul>
+<p>只要上面的信息正确无误，下面就交给开发同学了。如果是直接使用微信支付sdk的同学，请准备好踩坑吧。</p>
+<h2 id="支付SDK和demo"><a href="#支付SDK和demo" class="headerlink" title="支付SDK和demo"></a>支付SDK和demo</h2><h3 id="微信支付SDK"><a href="#微信支付SDK" class="headerlink" title="微信支付SDK"></a>微信支付SDK</h3><p>SDK从4.0.2开始，已改为使用gradle方式。</p>
+<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code>dependencies {
+   compile &#39;com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+&#39;
+}</code></pre><p>以前是直接使用libammsdk.jar，相比起来，算是进步了。</p>
+<h3 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h3><p>我建议直接忽略官方的demo，不信我的可以直接去<a href="https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419319167&token=&lang=zh_CN" target="_blank" rel="noopener">Android资源下载</a>下载相关demo</p>
+<p>以下是我踩过的坑：</p>
+<ul>
+<li>支付Demo在另外一个单独的project中，尽管sdk demo与pay demo非常类似，搞不懂为啥不合为一个demo project。我昨天在微信网站下载的支付demo，今天在微信网站上就找不着了。昨天下载的支付demo，看版本是v3(sdk demo已经是5.0.2了)，还是eclipse工程，不过导入到eclipse之后，编译不通过。sdk中原来的com.tencent.mm.sdk包换成了com.tencent.mm.opensdk，demo，导致src代码一片红。</li>
+<li>支付Demo中的服务端下单接口地址(<a href="http://wxpay.weixin.qq.com/pub_v2/app/app_pay.php?plat=android" target="_blank" rel="noopener">http://wxpay.weixin.qq.com/pub_v2/app/app_pay.php?plat=android</a>) 不能访问，就算修复了编译错误，结果仍然运行不了。<br>然后我看了下其它的文档，sdk换了，但是相关的文档并没有更新，尤其是混淆配置，直接影响到联调，这也是一个隐藏的坑。</li>
+</ul>
+<h2 id="统一下单"><a href="#统一下单" class="headerlink" title="统一下单"></a>统一下单</h2><p><a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_1" target="_blank" rel="noopener">统一下单</a>是商户系统（客户端或服务端）向微信支付后台发送请求，以拿到预支付交易会话标识(<code>prepayid</code>)等信息。关于接口的请求与响应信息，请参考<a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_1" target="_blank" rel="noopener">统一下单</a>接口描述。文档写得还是蛮全的，不过，实际上如何，我就只能呵呵了。请看下面</p>
+<ul>
+<li>接口的请求与响应都是xml格式，xml的解析不太方便，微信仅支持这个格式。算是小坑。</li>
+<li>接口文档中定义了一个<code>NOT_UTF8</code>的错误码，似乎微信要求的请求编码为utf-8，不过使用官方demo的Util.httpPost时，如果参数中有中文，还需将请求的xml转为ISO-8859-1编码的字符串才行。不然，微信直接返回给你一个空字符串，保证让你找不着北。</li>
+<li>接口文档中定义了一个<code>LACK_PARAMS</code>的错误码，指的是如果必填的参数为空，会返回此错误码，可事实上呢，有一次我把total_fee参数搞混了，写成了支付宝的参数名，结果接口返回一个空串，结果让我一顿好找。</li>
+<li>Android从6.0开始，删除了apache的http组件，于是乎我把Util中的apache http组件换成了HttpUrlConnection，关于请求头，解析都和原来保持一致，结果返回个签名错误。要不是我换http组件之前可以成功下单，我几乎就信了它，真的去查签名了(事实上根本不是签名错误好吧)。后来我修改http的请求头，尝试各种请求方式与编码，结果还是返回签名错误，这让我很是折腾，一度曾想改回apache的http client。最后，我把请求的xml转为utf-8编码，然后HttpUrlConnection全都默认设置，这才下单成功。（PS，这里顺带讲一个HttpUrlConnection的坑，设置请求方法为post，可是debug中看到的HttpUrlConnection对象，请求方法仍为get，当初还以为是这个导致的，后来才知道HttpUrlConnection真正的实现是在delegate中）</li>
+</ul>
+<p>总结一下，<a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_1" target="_blank" rel="noopener">统一下单</a>的响应、错误码和错误描述比较混乱，成功响应还好，一旦出现问题，准让你摸不清东南西北。</p>
+<p>签名这块，请参考<a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=4_3" target="_blank" rel="noopener">签名算法</a>，注意按字母升序组织请求参数。我用的是有序的TreeMap保存参数并做签名。没掉坑里。这里附上<a href="https://pay.weixin.qq.com/wiki/tools/signverify/" target="_blank" rel="noopener">微信提供的签名检验工具</a></p>
+<h2 id="调用支付接口"><a href="#调用支付接口" class="headerlink" title="调用支付接口"></a>调用支付接口</h2><p>这一步是客户端拿到<code>prepayid</code>之后，向微信发送PayReq。请求参数有7个(详细参考微信sdk中的PayReq类，其中<code>partnerId</code>填商户ID<code>mch_id</code>；<code>packageValue</code>固定填<code>Sign=WXPay</code>；<code>timestamp</code>为北京时间戳，单位为秒。其它的顾名思义，对号入座即可)，缺一不可。这里呢，也有坑</p>
+<ul>
+<li>PayResp（响应）定义了errCode和errStr，只要支付失败，errCode都为-1，errStr永远为null，所以，具体的错误原因：签名错误、未注册APPID、项目设置APPID不正确、注册的APPID与设置的不匹配、其他异常等，一个一个查吧。</li>
+<li><a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_1" target="_blank" rel="noopener">统一下单</a>接口不返回timestamp，如果是我们自己设置一个，那么需要对请求重新签名，<a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_1" target="_blank" rel="noopener">统一下单</a>返回的sign就不能用了。不然调用支付接口肯定返回-1。</li>
+<li>如果接口调用失败，返回-1，是应用签名（apk的签名）不正确（比如debug和release版本使用的不同签名）导致的，那么需要清空微信缓存，才能支付成功。不过，我可不敢随便清微信缓存，我建议可以将手机重启，如果仍然不行，再清微信的缓存。</li>
+</ul>
+<h2 id="libammsdk-jar冲突"><a href="#libammsdk-jar冲突" class="headerlink" title="libammsdk.jar冲突"></a>libammsdk.jar冲突</h2><p>因微信支付和分享是在同一个jar中，所以如果使用了第三方的分享sdk，极有可能会出现jar冲突。即使是相同模块中的jar完全一致也不行。解决的办法是只保留一个模块中的libammsdk.jar然后clen build。</p>
+<h2 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h2><ul>
+<li>apk的包名，签名在工程初始化的时候就确定好，debug和release使用同一个签名。</li>
+<li>微信开放平台在创建应用前，确认好apk包名和签名。</li>
+<li>如果是服务端下单，确保sign值是对的（需要再次签名的再签一次）。客户端拿到七个参数后，可以直接支付。</li>
+<li>建议在服务端下单，这样更安全。</li>
+<li>使用第三方的支付sdk，避免入坑。</li>
+</ul>
+<h2 id="af-pay"><a href="#af-pay" class="headerlink" title="af-pay"></a>af-pay</h2><p>最后推荐一个Android上的支付sdk：<a href="https://github.com/Jamling/af-pay" target="_blank" rel="noopener">af-pay</a>，github地址为：<a href="https://github.com/Jamling/af-pay" target="_blank" rel="noopener">https://github.com/Jamling/af-pay</a><br><a href="https://github.com/Jamling/af-pay" target="_blank" rel="noopener">af-pay</a>是一个Android平台上支付库，支持支付宝和微信，使用<a href="https://github.com/Jamling/af-pay" target="_blank" rel="noopener">af-pay</a>可以让支付变得更简单，并且支持服务端与服务单下单。示例代码如下：</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">private void doWxpay(String orderInfo) {
+    final Activity activity = this;
+    // 获取支付类
+    Wxpay wxpay = Wxpay.getInstance(activity);
+    // 设置支付回调监听
+    wxpay.setPayListener(new Wxpay.PayListener() {
+        @Override
+        public void onPaySuccess(BaseResp resp) {
+            showToast(activity, &quot;支付成功&quot;);
+        }
+
+        @Override
+        public void onPayCanceled(BaseResp resp) {
+            showToast(activity, &quot;支付取消&quot;);
+        }
+
+        @Override
+        public void onPayFailure(BaseResp resp) {
+            showToast(activity, &quot;支付失败&quot;);
+        }
+    });
+    // 这里是服务端下单，内容是统一下单返回的xml
+    if (!TextUtils.isEmpty(orderInfo)) {
+        PayReq req = OrderInfoUtil.getPayReq(orderInfo);
+        wxpay.pay(req);
+    }
+    else { // 客户端下单
+        Wxpay.DEBUG = true; // 开启日志
+        // API密钥，在微信商户平台设置
+        Wxpay.Config.api_key = &quot;32位的字串&quot;;
+        // APPID，在微信开放平台创建应用后生成
+        Wxpay.Config.app_id = &quot;wx...&quot;;
+        // 商户ID，注册商户平台后生成
+        Wxpay.Config.mch_id = &quot;14...&quot;;
+        // 支付结果异步通知接口，由后台开发提供
+        Wxpay.Config.notify_url = &quot;http://www.ieclipse.cn/app/pay/wxpay_notify.do&quot;;
+        // 创建统一下单异步任务
+        Wxpay.DefaultOrderTask task = new Wxpay.DefaultOrderTask(wxpay);
+        // 这个商户订单号，由后台返回，在这里随便生成一个
+        String outTradeNo = OrderInfoUtil2_0.genOutTradeNo();
+        // 设置统一下单的请求参数
+        task.setParams(OrderInfoUtil.buildOrderParamMap(outTradeNo, &quot;测试支付&quot;, &quot;&quot;, &quot;1&quot;, null, null, null));
+        task.execute();
+    }
+}</code></pre>
+<p>附上完整的支付过程中的日志<br><img src="http://dl.ieclipse.cn/screenshots/af-pay-wechat.png" alt="完整日志"></p>
+<p>如果是服务端下单，客户端只需生成PayReq对象，然后调用<code>wxpay.pay(PayReq)</code>即可。<a href="https://github.com/Jamling/af-pay" target="_blank" rel="noopener">af-pay</a>已经配置好回调的WXPayActivity和Receiver。详细信息请访问Github。</p>
+<h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">https://github.com/Jamling/QuickAF</a><br>微信支付开发文档：<a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_1" target="_blank" rel="noopener">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_1</a></p>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/05/24/Android/quickaf-wechat-pay/](https://www.ieclipse.cn/2017/05/24/Android/quickaf-wechat-pay/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.902Z" itemprop="dateModified">
+    Last updated: 2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="Jamling's Blog and Project Site" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/en/2017/06/06/PHP/php-app-token/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">Prev</span></a></li><li class="next"><a href="/en/2017/05/18/Android/quickaf-round/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">Next</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    Donate
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>Dear reader, if you feel this good, could you rewark me a `bread` as awark? Thank you very much~</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">Donate</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="b0f5a0ab8064e195c97cdbfad4ce6e36"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: 'b0f5a0ab8064e195c97cdbfad4ce6e36',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          Table Of Contents
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#在微信上创建你的应用">在微信上创建你的应用</a></li><li><a href="#支付SDK和demo">支付SDK和demo</a><ul class="nav toc-ul"><li><a href="#微信支付SDK">微信支付SDK</a></li><li><a href="#demo">demo</a></li></ul></li><li><a href="#统一下单">统一下单</a></li><li><a href="#调用支付接口">调用支付接口</a></li><li><a href="#libammsdk-jar冲突">libammsdk.jar冲突</a></li><li><a href="#建议">建议</a></li><li><a href="#af-pay">af-pay</a></li><li><a href="#关于">关于</a></li><li><a href="#参考">参考</a></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "Code",
+        right: ":",
+        copy: "Copy to clipboard"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

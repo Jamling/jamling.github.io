@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Jamling&#39;s Blog and Project Site</title>
+  
+  <subtitle>Jamling&#39;s Blog &amp; Open Project</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://www.ieclipse.cn/"/>
+  <updated>2019-10-17T03:13:35.719Z</updated>
+  <id>https://www.ieclipse.cn/</id>
+  
+  <author>
+    <name>Jamling</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>万年历接口</title>
+    <link href="https://www.ieclipse.cn/2018/01/29/PHP/php-wnl/"/>
+    <id>https://www.ieclipse.cn/2018/01/29/PHP/php-wnl/</id>
+    <published>2018-01-29T10:30:30.000Z</published>
+    <updated>2019-10-17T03:13:35.719Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用PHP写的一个万年历接口</p><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>支持的年份为1900-2100（农历），支持公历和公历互转。接口基地址：<a href="http://api.ieclipse.cn/wnl/" target="_blank" rel="noopener">http://api.ieclipse.cn/wnl/</a> 主要功能列表</p><ul><li>公历转农历</li><li>农历转公历</li><li>支持公历和农历节日</li><li>支持干支纪年、纪月、纪日、纪时</li><li>支持农历闰月</li></ul><h2 id="示例json"><a href="#示例json" class="headerlink" title="示例json"></a>示例json</h2><p class="code-caption" data-lang="json" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="json">{    &quot;code&quot;:0, //响应码，为0时表示接口正常响应    &quot;msg&quot;:&quot;ok&quot;,    &quot;time&quot;:1517217808,    &quot;data&quot;:{        &quot;isToday&quot;:false,        &quot;sYear&quot;:&quot;2018&quot;, //公历年        &quot;sMonth&quot;:&quot;03&quot;, //公历月        &quot;sDay&quot;:16, //公历日        &quot;sWeek&quot;:5, //公历周几， 0－6，0表示周日        &quot;sHour&quot;:17, //公历小时        &quot;sFestival&quot;:&quot;&quot;, //公历节日，如元旦        &quot;lYear&quot;:2018, //农历年        &quot;lMonth&quot;:1, //农历月        &quot;lDay&quot;:29, //农历日        &quot;lFestival&quot;:&quot;&quot;,//农历节日，如春节        &quot;isLeap&quot;:false, //农历闰月        &quot;hzYear&quot;:&quot;二〇一八&quot;, //农历年大写        &quot;hzMonth&quot;:&quot;正&quot;, //农历月汉字,如果为闰月，前面有一个闰字        &quot;hzDay&quot;:&quot;廿九&quot;,//农历日        &quot;cWeek&quot;:&quot;五&quot;,//汉字星期几        &quot;cYear&quot;:&quot;戊戌&quot;, //汉字干支年        &quot;cMonth&quot;:&quot;乙卯&quot;,//汉字干支月        &quot;cDay&quot;:&quot;丁未&quot;,//汉字干支日        &quot;cAnimal&quot;:&quot;狗&quot;,//生肖年        &quot;cTerms&quot;:&quot;&quot;,//农历节气，如立春        &quot;cMnumber&quot;:1431,        &quot;cDnumber&quot;:43183,        &quot;cHour&quot;:&quot;己酉&quot; //汉字干支时    } }</code></pre><h2 id="接口说明"><a href="#接口说明" class="headerlink" title="接口说明"></a>接口说明</h2><h3 id="请求参数"><a href="#请求参数" class="headerlink" title="请求参数"></a>请求参数</h3><ul><li>date: 日期和时间，以<code>-</code>分隔，如2018-01-29-18，2019-01-29</li><li>l: 是否农历闰月，当date为农历时有效，如<code>l=true</code></li></ul><h3 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h3><ul><li>cHour: 当参数包含小时时，有此字段</li><li>cAnimal: 农历日期对应的生肖，遇到农历立春时，生肖会变化。</li><li>isLeap: 是否农历闰月</li></ul><h2 id="公历转农历"><a href="#公历转农历" class="headerlink" title="公历转农历"></a>公历转农历</h2><p><a href="http://api.ieclipse.cn/wnl/lunar" target="_blank" rel="noopener">http://api.ieclipse.cn/wnl/lunar</a></p><h2 id="农历转公历"><a href="#农历转公历" class="headerlink" title="农历转公历"></a>农历转公历</h2><p><a href="http://api.ieclipse.cn/wnl/solar" target="_blank" rel="noopener">http://api.ieclipse.cn/wnl/solar</a></p><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ul><li><a href="http://www.ieclipse.cn/birthday-tool">生辰助手</a></li></ul><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2018/01/29/PHP/php-wnl/](https://www.ieclipse.cn/2018/01/29/PHP/php-wnl/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;使用PHP写的一个万年历接口&lt;/p&gt;
+&lt;h2 id=&quot;说明&quot;&gt;&lt;a href=&quot;#说明&quot; class=&quot;headerlink&quot; title=&quot;说明&quot;&gt;&lt;/a&gt;说明&lt;/h2&gt;&lt;p&gt;支持的年份为1900-2100（农历），支持公历和公历互转。接口基地址：&lt;a href=&quot;htt
+      
+    
+    </summary>
+    
+    
+      <category term="Web" scheme="https://www.ieclipse.cn/categories/Web/"/>
+    
+    
+      <category term="PHP" scheme="https://www.ieclipse.cn/tags/PHP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>防Boss利器SmartIM4Intellij</title>
+    <link href="https://www.ieclipse.cn/2017/07/14/Eclipse/idea-smartqq/"/>
+    <id>https://www.ieclipse.cn/2017/07/14/Eclipse/idea-smartqq/</id>
+    <published>2017-07-14T04:48:31.000Z</published>
+    <updated>2019-11-08T10:17:28.674Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><img src="https://raw.githubusercontent.com/Jamling/SmartIM4IntelliJ/master/screenshot.png" alt="screenshot"></p><p>IntelliJ Idea上的SmartIM插件，适用于大多数的Intellij IDE，</p><p>Eclipse的插件请访问 <a href="https://github.com/Jamling/SmartIM4Eclipse/" target="_blank" rel="noopener">https://github.com/Jamling/SmartIM4Eclipse/</a></p><h2 id="更新日志"><a href="#更新日志" class="headerlink" title="更新日志"></a>更新日志</h2><ul><li>v1.0.3/2017/07/14，美化了UI，添加了异常通知。</li></ul><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul><li>File-&gt;Settings-&gt;Plugins打开插件设置界面</li><li>点击Browser repositories…并输入SmartIM执行搜索</li><li>点击SmartIM进行安装并重启</li></ul><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ul><li>安装成功后，会在底部栏出现一个Smart的tab（如果没有底部栏，则在菜单View中把ToolButtons勾选上）</li><li>点击Smart中的二维码使用手机QQ扫码登录</li></ul><p>最后附上github地址: <a href="https://github.com/Jamling/SmartIM4IntelliJ/" target="_blank" rel="noopener">https://github.com/Jamling/SmartIM4IntelliJ/</a></p><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/07/14/Eclipse/idea-smartqq/](https://www.ieclipse.cn/2017/07/14/Eclipse/idea-smartqq/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/Jamling/SmartIM4IntelliJ/m
+      
+    
+    </summary>
+    
+    
+      <category term="Eclipse 插件" scheme="https://www.ieclipse.cn/categories/pde/"/>
+    
+    
+      <category term="Eclipse" scheme="https://www.ieclipse.cn/tags/Eclipse/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>防Boss利器SmartIM4Eclipse</title>
+    <link href="https://www.ieclipse.cn/2017/06/28/Eclipse/Eclipse-smartqq/"/>
+    <id>https://www.ieclipse.cn/2017/06/28/Eclipse/Eclipse-smartqq/</id>
+    <published>2017-06-28T04:48:31.000Z</published>
+    <updated>2019-11-08T10:17:03.843Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>开发这个插件的目的是因为最近Boss一再强调纪律，不允许使用QQ，不过作为十几年Q龄的老用户，早已经习惯了QQ，虽然可以使用手机QQ，不过手机打字太慢，考虑到防Boss，还是开发了一个eclipse的插件，效率与隐私两不误。</p><p><img src="https://raw.githubusercontent.com/Jamling/SmartIM4Eclipse/master/main.png" alt="screenshot"><br><img src="https://raw.githubusercontent.com/Jamling/SmartIM4Eclipse/master/chat.png" alt="screenshot"></p><p>Intellij IDEA上的插件请移步这里: <a href="https://github.com/Jamling/SmartIM4IntelliJ" target="_blank" rel="noopener">https://github.com/Jamling/SmartIM4IntelliJ</a>, 支持所有的Intellij IDE哦，包含Android Studio, WebStrom等</p><h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><ul><li>收发文本消息</li><li>热键设定</li><li>一键关闭</li><li>支持图灵机器人接入</li></ul><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="Eclipse-Marketplace"><a href="#Eclipse-Marketplace" class="headerlink" title="Eclipse Marketplace"></a>Eclipse Marketplace</h3><ol><li>点击Eclipse-&gt;Help-&gt;Eclipse Marketplace…打开eclipse插件市场</li><li>输入SmartIM搜索</li><li>点击Install安装</li></ol><p><strong>推荐使用Eclipse Martplace安装</strong></p><h3 id="Install-New-Software"><a href="#Install-New-Software" class="headerlink" title="Install New Software"></a>Install New Software</h3><ol><li>点击Eclipse-&gt;Help-&gt;Install New Software…搜索插件</li><li>在Work with后面的输入框中输入<a href="http://dl.ieclipse.cn/updates/" target="_blank" rel="noopener">http://dl.ieclipse.cn/updates/</a> 并回车</li><li>选中SmartIM，并取消勾选”Contact all update site during install to find required software”</li><li>点击底部Next按钮继续安装</li></ol><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ol><li>点击Windows-&gt;Show view，找到SmartIM下的Smart双击打开Smart视图</li><li>点击视图工具栏或菜单栏中的同步图标进行登录</li><li>使用手机QQ扫描二维码</li><li>验证成功后，等待拉取最近消息，好友及群组列表</li><li>双击Smart视图中的好友或群，打开聊天窗口（聊天窗口为Console）</li><li>使用快捷键或点击I图标，激活输入窗口（不建议直接在console中输入，会导致同步时间）</li><li>输入聊天内容，并按快捷键（默认为Enter）发送聊天信息</li></ol><h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><p>注：在eclipse中，CR表示Enter键</p><ul><li>激活输入，默认CR，在console下面打开一个小窗口进行输入</li><li>发送，默认CR (Enter键)，发送消息</li><li>上/下一个聊天, 默认左/右箭头，也可以在console工具栏使用鼠标切换</li><li>隐藏聊天，默认Alt + M，隐藏Contact视图，清空当前聊天内容</li><li>关闭聊天，默认Alt + C，关闭Contact视图和所有的聊天窗口</li><li>退出输入，默认ESC</li></ul><p>注：快捷键有可能与eclipse中的热键冲突，请点击？打开首选项重新设置</p><h2 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h2><p>SmartIM Java API: <a href="https://github.com/ScienJus/smartqq" target="_blank" rel="noopener">https://github.com/ScienJus/smartqq</a></p><h2 id="问题提交"><a href="#问题提交" class="headerlink" title="问题提交"></a>问题提交</h2><p>任何问题包括建议均可以在<a href="https://github.com/Jamling/SmartIM4Eclipse/issues" target="_blank" rel="noopener">Issue</a>中提交</p><p>如果为Issue，建议带上eclipse版本及本插件版本信息（可以在Preference-&gt;SmartIM中查看并复制版本信息）</p><p>最后附上github地址: <a href="https://github.com/Jamling/SmartIM4Eclipse/" target="_blank" rel="noopener">https://github.com/Jamling/SmartIM4Eclipse/</a></p><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/06/28/Eclipse/Eclipse-smartqq/](https://www.ieclipse.cn/2017/06/28/Eclipse/Eclipse-smartqq/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h2&gt;&lt;p&gt;开发这个插件的目的是因为最近Boss一再强调纪律，不允许使用QQ，不过作为十几年Q龄的老用户，早已经习惯了QQ，虽然可以使用手机QQ，不过手
+      
+    
+    </summary>
+    
+    
+      <category term="Eclipse 插件" scheme="https://www.ieclipse.cn/categories/pde/"/>
+    
+    
+      <category term="Eclipse" scheme="https://www.ieclipse.cn/tags/Eclipse/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android bitmap config你理解对了吗？</title>
+    <link href="https://www.ieclipse.cn/2017/06/14/Android/Android-bitmap-config/"/>
+    <id>https://www.ieclipse.cn/2017/06/14/Android/Android-bitmap-config/</id>
+    <published>2017-06-14T09:50:00.000Z</published>
+    <updated>2019-07-22T11:25:01.894Z</updated>
+    
+    <content type="html"><![CDATA[<p>在写本文之前，我还以为自己对android的bitmap很熟悉，直到自己亲手写代码实践，才发现自己错了很多年。真是汗颜啊！</p><a id="more"></a><h2 id="Bitmap-Config"><a href="#Bitmap-Config" class="headerlink" title="Bitmap Config"></a>Bitmap Config</h2><p>首先，根据Android API 25的文档简要说明一下Android的Bitmap.Config以下4个选项</p><ul><li>ALPHA_8: 每个像素占用1字节（8位），存储的是透明度信息。</li><li>ARGB_4444: 每个像素占用2字节（4+4+4+4＝16位），ARGB分别占用4位，支持alpha通道。<br><strong>注：从API 13开始不推荐使用，在android 4.4上面，设置的ARGB_4444会被系统使用ARGB_8888替换</strong></li><li>ARGB_8888: 默认的选项，每像素占用4字节，ARGB分别占8位，支持1600万种颜色，质量最高，当然内存占用也高。</li><li>RGB_565: 每像素占用2字节，RGB分别占5，6，5位。支持65535种颜色，不支持alpha。</li></ul><table><thead><tr><th>bitmap.config</th><th align="center">ALPHA_8</th><th align="right">ARGB_4444</th><th align="right">ARGB_8888</th><th align="right">RGB_565</th></tr></thead><tbody><tr><td>bytes/pixel</td><td align="center">1 byte</td><td align="right">2 byte</td><td align="right">4 byte</td><td align="right">2 byte</td></tr><tr><td>alpha channel</td><td align="center">8 bit</td><td align="right">4 bit</td><td align="right">8 bit</td><td align="right">not support</td></tr></tbody></table><h2 id="PNG-格式"><a href="#PNG-格式" class="headerlink" title="PNG 格式"></a>PNG 格式</h2><p>其次，简要说一下png格式</p><ul><li>png 8: 支持不透明，索引色透明，alpha透明，最大支持256种颜色</li><li>png 24: 不支持透明，支持1600万种颜色</li><li>png 32: 支持透明，其它同png 24，支持1600万种颜色</li></ul><h2 id="bitmap内存占用计算"><a href="#bitmap内存占用计算" class="headerlink" title="bitmap内存占用计算"></a>bitmap内存占用计算</h2><p>第三，简要说一下bitmap占用的内存</p><p>Android中bitmap的内存占用是跟图片的尺寸（高和宽）相关。一张图片的内存占用大致的计算公式如下：</p><p><strong>占用内存 = 图像像素总和（width x height）再 x 每像素(bitmap config)占用的字节数</strong></p><p><em>以下是通过代码准确计算</em></p><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="java">public static int getSizeInBytes(@Nullable Bitmap bitmap) {    if (bitmap == null) {        return 0;    }    // There&#39;s a known issue in KitKat where getAllocationByteCount() can throw an NPE. This was    // apparently fixed in MR1: http://bit.ly/1IvdRpd. So we do a version check here, and    // catch any potential NPEs just to be safe.    if (Build.VERSION.SDK_INT &gt; Build.VERSION_CODES.KITKAT) {        try {            return bitmap.getAllocationByteCount();        } catch (NullPointerException npe) {            // Swallow exception and try fallbacks.        }    }    if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.HONEYCOMB_MR1) {        return bitmap.getByteCount();    }    // Estimate for earlier platforms.    return bitmap.getWidth() * bitmap.getRowBytes();}</code></pre><p>以一张1024<em>1024的图片为例，使用ARGB_8888，占用的内存为1024</em>1024*4=4M。像现在的手机摄像头动不动就是上千万像素，拍出来的照片如果按默认的ARGB_8888 config加载，则至少是几十M的内存占用。</p><p>Android的图片资源主要分两部分：</p><ol><li>一种是apk中自带的，多为png格式，由系统加载，支持缩放，代码中通过R.xxx引用，decode时使用的是默认的ARGB_8888选项，图像质量高；</li><li>另一种是网络图片或本地图片，多为jpg格式，加载时一般使用第三方的图片加载库，为节省内存decode时多为RGB_565选项。</li></ol><p>平时都是这么用，也没发现问题，优化内存占用时，一般也是从图片的尺寸方面入手。不过最近优化一个跟图片相关的功能，在图片尺寸无法缩放的条件下，只能通过更改bitmap config来降低内存的占用。然后意外的发现，导致颠覆了我的三观。为此我特地写了一个测试sample，代码详见<a href="https://github.com/Jamling/BitmapConfig" target="_blank" rel="noopener">github</a>，特地创建了一张背景色透明，图片内容为A（黑色50%透明度）R（红色）G（绿色）B（蓝色）图片，然后分别导出为：png8（alpha透明）、png24（不透明）、png32和jpeg（不透明）格式的图，分别使用ALPHA_8, ARGB_4444, ARGB_8888, RGB_565四种config加载图片，得到的实际结果如下（假设图像总像素为X）。</p><h2 id="实践结果"><a href="#实践结果" class="headerlink" title="实践结果"></a>实践结果</h2><h3 id="运行截图"><a href="#运行截图" class="headerlink" title="运行截图"></a>运行截图</h3><p><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/screenshot.jpg" alt="screenshot"></p><h3 id="结果统计"><a href="#结果统计" class="headerlink" title="结果统计"></a>结果统计</h3><table><thead><tr><th align="center">bitmap.config</th><th align="center">ALPHA_8</th><th align="center">ARGB_4444</th><th align="center">ARGB_8888</th><th align="center">RGB_565</th></tr></thead><tbody><tr><td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/png8.png" alt>png8</td><td align="center"><strong>4</strong><del><code>1</code></del> X</td><td align="center">2 X</td><td align="center">4 X</td><td align="center"><strong>4</strong><del><code>2</code></del> X A <del><code>不</code></del> 透明</td></tr><tr><td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/png24.png" alt>png24</td><td align="center"><strong>4</strong><del><code>1</code></del> X</td><td align="center">2 X</td><td align="center">4 X</td><td align="center"><strong>2</strong> X</td></tr><tr><td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/png32.png" alt>png32</td><td align="center"><strong>4</strong><del><code>1</code></del> X</td><td align="center">2 X</td><td align="center">4 X</td><td align="center"><strong>4</strong><del><code>2</code></del> X A <del><code>不</code></del> 透明</td></tr><tr><td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/jpeg_80.jpg" alt>jpeg</td><td align="center"><strong>4</strong><del><code>1</code></del> X</td><td align="center">2 X</td><td align="center">4 X</td><td align="center"><strong>2</strong> X</td></tr></tbody></table><p><strong>请注意表格中带删除线的部分</strong></p><ol><li>ALPHA_8：config占用的内存竟然和ARGB_8888一样，不是说每个像素占用1字节的么？</li><li>RGB_565：在png8和png32中，图片中的A都保持了50%的透明度，而且占用的内存也和ARGB_8888一样，不是说RGB_565不包含alpha么？不是说占用的内存是ARGB_8888的一半么？</li><li>ARGB_4444：在android 6.0上面，png8和png32看不见（全透明），png24和jpeg显示为一块黑色区域，在android 4.2上则显示正常。</li></ol><p>带着上面的疑问，在网上进行了相关的搜索，也没有找到答案。好吧，我是懵了，不知道各位看客如何？附上github上的示例工程：<a href="https://github.com/Jamling/BitmapConfig" target="_blank" rel="noopener">https://github.com/Jamling/BitmapConfig</a></p><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/06/14/Android/Android-bitmap-config/](https://www.ieclipse.cn/2017/06/14/Android/Android-bitmap-config/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      Bitmap config ALPHA_8/ARGB_4444/ARGB_8888/RGB_565理解
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="https://www.ieclipse.cn/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="https://www.ieclipse.cn/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我是怎么做App token认证的</title>
+    <link href="https://www.ieclipse.cn/2017/06/06/PHP/php-app-token/"/>
+    <id>https://www.ieclipse.cn/2017/06/06/PHP/php-app-token/</id>
+    <published>2017-06-06T10:30:00.000Z</published>
+    <updated>2019-10-18T14:20:08.385Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用Token来做身份认证在目前的移动客户端上非常流行，Token这个概念来源于OAuth认证，主要是在服务端实现。关于相关的原理，同学们自行百度。在这里，我简单介绍一下我是怎么具体实现的，重点描述token生成、token识别及token缓存。</p><h2 id="生成Token"><a href="#生成Token" class="headerlink" title="生成Token"></a>生成Token</h2><p>服务端接收客户端传递的username和password等请求，在数据库中检查，如果用户名密码匹配的话，表示登录成功，服务端生成并返回一个token访问令牌。</p><p class="code-caption" data-lang="php" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="php">public function login(){    $data = array_merge($this-&gt;request-&gt;post(), []);    // login with password    $user = Db::name($this-&gt;table)-&gt;field($this-&gt;field_except, true)-&gt;where(&#39;name&#39;, $data[&#39;name&#39;])-&gt;find();    if ($user) {        if ($user[&#39;pwd&#39;] === EncryptService::password($data[&#39;pwd&#39;])) {            $this-&gt;onLoginSuccess($user);        } else {            parent::logic_failure(&#39;密码不正确&#39;, &#39;user_wrong_pwd&#39;);        }    } else {        parent::logic_failure(&#39;用户不存在&#39;, &#39;user_not_exists&#39;);    }}private function onLoginSuccess($user){    unset($user[&#39;pwd&#39;]);    $token = Token::generateToken($this-&gt;request, $user);    $ret = [        &#39;token&#39; =&gt; $token[&#39;token&#39;],        &#39;user&#39; =&gt; $user    ];    $this-&gt;logic_success(null, $ret);}</code></pre><p>在上面的代码中，登录成功，服务端向客户端返回token和user信息。token是通过Token类的静态方法<code>generateToken</code>来生成的。</p><p class="code-caption" data-lang="php" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="php">public static function generateToken($request, $user){    // 1，生成包含用户及设备信息的新token    $data = [        &#39;uuid&#39; =&gt; $request-&gt;param(&#39;uuid&#39;, &#39;&#39;),        &#39;uid&#39; =&gt; $user[&#39;id&#39;],        &#39;ip&#39; =&gt; $request-&gt;ip(),        &#39;client&#39; =&gt; $request-&gt;param(&#39;client&#39;, &#39;&#39;),        &#39;update_time&#39; =&gt; ApiBase::_timestamp(),    ];    // json序列化    $json = json_encode($data);    // 加密token信息    $key = md5(EncryptService::encrypt($json));    $data[&#39;token&#39;] = $key;    // 2，从数据库查询用户的token，决定是update还是insert    $token = Token::get($user[&#39;id&#39;]);    // 如果数据库中已存在token，更新    if ($token) {        // 删除旧的缓存        cache($token[&#39;token&#39;], null);        // 执行更新        $token-&gt;isUpdate(true)-&gt;save($data);    }    // 不存在，插入    else {        $token = new Token();        $data[&#39;create_time&#39;] = ApiBase::_timestamp();        $token-&gt;data($data)-&gt;save();    }    // 3，将token写入缓存    Token::cacheToken($token-&gt;getData());    return $token-&gt;getData();}</code></pre><p>这里主要有3个步骤</p><ol><li>根据用户及设备等信息生成一个唯一的token，uid用于识别用户，uuid用于识别设备，time用于保证唯一。将这些信息序列化后加密并生成md5</li><li>根据用户id查询用户登录表，不管用户原来是否已经存在token，新的token将替换旧的token</li><li>将token写入缓存，因为token是每个请求都会解析，如果不使用缓存的话，会导致数据库访问瓶颈。</li></ol><p>客户端应该保存token，然后在访问一些需要身份认证的API，比如修改昵称，就需要带上这个token了，而不需要显示带上用户信息，比如user_id。</p><h2 id="解析token"><a href="#解析token" class="headerlink" title="解析token"></a>解析token</h2><p>服务端接收客户端传递的token，需要从中解析出相关的用户及设备信息。</p><p class="code-caption" data-lang="php" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="php">public static function getToken($key){    if (!isset($key)) {        return null;    }    $token = cache($key);    if ($token) {        return $token;    }    else {        return Token::findByToken($key);    }}</code></pre><p>过程很简单，先从缓存中取，如果不存在再从数据库中查询。所有的请求，服务端都会执行解析token。</p><h2 id="验证token"><a href="#验证token" class="headerlink" title="验证token"></a>验证token</h2><p>服务端简单地把API分为三类</p><ol><li>公共API，客户端可以任意访问，不需要验证身份，此类API多以GET请求为多。比如查询产品列表</li><li>受保护的API，也即需要强制认证的API，这类API需要验证客户端身份才能访问，比如修改头像，客户端未传token或token无效，服务端返回一个错误码。</li><li>可选认证的API，介于1和2之间，不要求强制验证客户端身份，比如分享奖励，如果客户端传递了token并认证通过了，则给相应的奖励，否则不做任何的奖励。</li></ol><p>基于上面的分析，验证token附带一个是否强制验证的参数，用于中断。验证的规则也相对简单，只要用户请求的设备ID与token中的设备ID相同就算验证通过了。</p><p class="code-caption" data-lang="php" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="php">public function checkToken($exit = true){    if ($this-&gt;token) {        if ($this-&gt;token[&#39;uuid&#39;] === $this-&gt;request-&gt;param(&#39;uuid&#39;, &#39;&#39;)) {            return true;        } else {            if ($exit) {                $this-&gt;logic_failure(null, &#39;user_offline&#39;);            } else {                $this-&gt;token = null;            }            return false;        }    } else {        if ($exit) {            $this-&gt;logic_failure(null, &#39;token_invalid&#39;);        }        return false;    }}</code></pre><h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>缓存相对简单，缓存的key为加密token之后的md5值，也即登录成功后，服务端向客户端发送的token值。缓存未设置有效期，默认永不过期。</p><p class="code-caption" data-lang="php" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="php">public static function cacheToken($token){    if ($token) {        if (is_object($token)) {            $token = $token-&gt;getData();        }        cache($token[&#39;token&#39;], ($token));    }}?&gt;</code></pre><h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><p>为了让您的应该更加安全，还可以在以下方面强化</p><ol><li>token有效期</li><li>token缓存加密</li><li>token高级校验</li></ol><p>不过，我这里已经对token做了对称加密，相信他人伪造token的可能性也不大。</p><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/06/06/PHP/php-app-token/](https://www.ieclipse.cn/2017/06/06/PHP/php-app-token/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;使用Token来做身份认证在目前的移动客户端上非常流行，Token这个概念来源于OAuth认证，主要是在服务端实现。关于相关的原理，同学们自行百度。在这里，我简单介绍一下我是怎么具体实现的，重点描述token生成、token识别及token缓存。&lt;/p&gt;
+&lt;h2 id=&quot;生
+      
+    
+    </summary>
+    
+    
+      <category term="Web" scheme="https://www.ieclipse.cn/categories/Web/"/>
+    
+    
+      <category term="PHP" scheme="https://www.ieclipse.cn/tags/PHP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>谈谈那些年微信支付踩过的坑</title>
+    <link href="https://www.ieclipse.cn/2017/05/24/Android/quickaf-wechat-pay/"/>
+    <id>https://www.ieclipse.cn/2017/05/24/Android/quickaf-wechat-pay/</id>
+    <published>2017-05-24T02:00:00.000Z</published>
+    <updated>2019-07-22T11:25:01.902Z</updated>
+    
+    <content type="html"><![CDATA[<p>很早的时候就想写这篇文章了，作为BAT中的一员，还真不想吐槽它，免得被人身攻击。有人说，微信支付很简单嘛，官网有例子，网上也有现成的例子，不过谁用谁知道，本人也是在深入了解之后，真心觉得微信支付里的坑太多，BAT的开发们太敷衍了事，结果给不少的其他开发者带来诸多麻烦。我在这里做个稍全一点的介绍，尽量减少其他同学们掉坑里的概率。</p><a id="more"></a><h2 id="在微信上创建你的应用"><a href="#在微信上创建你的应用" class="headerlink" title="在微信上创建你的应用"></a>在微信上创建你的应用</h2><p>这里特别强调一下，这一步很重要，不然微信支付集成调试会出现莫名的错误。</p><p>1，在注册之前对于Android客户端，需要提供app应用的包名和应用签名（md5值），这两个东西问开发或产品同学要。尽量在注册前提供。另外还需准备一个28x28和108x108的logo图片，问设计或产品同学要。<br>2，在<a href="https://open.weixin.qq.com" target="_blank" rel="noopener">微信开放平台</a>上注册，注意了，是微信开放平台，不是公众号平台，公众号平台账号不能在开放平台登录。如果已经注册过，请直接登录，登录成功后，点击创建移动应用，创建Android应用时，<code>应用包名</code>和<code>应用签名</code>，尽量一次性填对了。应用创建成功后，将得到<code>appid</code>(以wx开头的一串数字)。然后再去申请微信支付（需做开发者认证并缴费）<br>3，在[微信支付商户平台]注册或登录，申请app支付，申请通过后，将得到商户id<code>mch_id</code>(一串10位数字)，然后在<em>账户设置–&gt;API安全–&gt;密钥设置</em>中设置API密钥<code>key</code>(32位的字串)</p><p>更多的申请帮助，请参考：<a href="https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;t=resource/res_list&amp;verify=1&amp;id=open1419317780&amp;token=6c7b59a75b08969c15fa41141ee8d88c236f01ab&amp;lang=zh_CN" target="_blank" rel="noopener">https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;t=resource/res_list&amp;verify=1&amp;id=open1419317780&amp;token=6c7b59a75b08969c15fa41141ee8d88c236f01ab&amp;lang=zh_CN</a></p><p>注：关于微信支付申请，请在开放平台申请（同公众号支付申请流程，公众号支付不在本文讨论范围之内）微信的工作人员审核通过后，会发审核通过的邮件。里面包含<em>微信支付商户号</em><code>mch_id</code>(一串10位数字)和APPID等信息。然后根据邮件提示或者直接在<em>微信商户平台中–&gt;账户设置–&gt;API安全–&gt;密钥设置</em>中下载api证书并设置API密钥<code>key</code>(32位的字串)</p><p>在微信开放平台创建应用成功后，APP支付也申请通过了。请提供给开发同学以下东西：</p><ul><li>APPID <code>appid</code>(以wx开头的一串数字)</li><li>商户id <code>mch_id</code>(一串10位数字)</li><li>API密钥 <code>key</code> (32位的字串)<br>对于Android应用，还需要保证<strong>应用包名</strong>与<strong>应用签名</strong>正确</li></ul><p>只要上面的信息正确无误，下面就交给开发同学了。如果是直接使用微信支付sdk的同学，请准备好踩坑吧。</p><h2 id="支付SDK和demo"><a href="#支付SDK和demo" class="headerlink" title="支付SDK和demo"></a>支付SDK和demo</h2><h3 id="微信支付SDK"><a href="#微信支付SDK" class="headerlink" title="微信支付SDK"></a>微信支付SDK</h3><p>SDK从4.0.2开始，已改为使用gradle方式。</p><p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code>dependencies {   compile &#39;com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+&#39;}</code></pre><p>以前是直接使用libammsdk.jar，相比起来，算是进步了。</p><h3 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h3><p>我建议直接忽略官方的demo，不信我的可以直接去<a href="https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419319167&token=&lang=zh_CN" target="_blank" rel="noopener">Android资源下载</a>下载相关demo</p><p>以下是我踩过的坑：</p><ul><li>支付Demo在另外一个单独的project中，尽管sdk demo与pay demo非常类似，搞不懂为啥不合为一个demo project。我昨天在微信网站下载的支付demo，今天在微信网站上就找不着了。昨天下载的支付demo，看版本是v3(sdk demo已经是5.0.2了)，还是eclipse工程，不过导入到eclipse之后，编译不通过。sdk中原来的com.tencent.mm.sdk包换成了com.tencent.mm.opensdk，demo，导致src代码一片红。</li><li>支付Demo中的服务端下单接口地址(<a href="http://wxpay.weixin.qq.com/pub_v2/app/app_pay.php?plat=android" target="_blank" rel="noopener">http://wxpay.weixin.qq.com/pub_v2/app/app_pay.php?plat=android</a>) 不能访问，就算修复了编译错误，结果仍然运行不了。<br>然后我看了下其它的文档，sdk换了，但是相关的文档并没有更新，尤其是混淆配置，直接影响到联调，这也是一个隐藏的坑。</li></ul><h2 id="统一下单"><a href="#统一下单" class="headerlink" title="统一下单"></a>统一下单</h2><p><a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_1" target="_blank" rel="noopener">统一下单</a>是商户系统（客户端或服务端）向微信支付后台发送请求，以拿到预支付交易会话标识(<code>prepayid</code>)等信息。关于接口的请求与响应信息，请参考<a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_1" target="_blank" rel="noopener">统一下单</a>接口描述。文档写得还是蛮全的，不过，实际上如何，我就只能呵呵了。请看下面</p><ul><li>接口的请求与响应都是xml格式，xml的解析不太方便，微信仅支持这个格式。算是小坑。</li><li>接口文档中定义了一个<code>NOT_UTF8</code>的错误码，似乎微信要求的请求编码为utf-8，不过使用官方demo的Util.httpPost时，如果参数中有中文，还需将请求的xml转为ISO-8859-1编码的字符串才行。不然，微信直接返回给你一个空字符串，保证让你找不着北。</li><li>接口文档中定义了一个<code>LACK_PARAMS</code>的错误码，指的是如果必填的参数为空，会返回此错误码，可事实上呢，有一次我把total_fee参数搞混了，写成了支付宝的参数名，结果接口返回一个空串，结果让我一顿好找。</li><li>Android从6.0开始，删除了apache的http组件，于是乎我把Util中的apache http组件换成了HttpUrlConnection，关于请求头，解析都和原来保持一致，结果返回个签名错误。要不是我换http组件之前可以成功下单，我几乎就信了它，真的去查签名了(事实上根本不是签名错误好吧)。后来我修改http的请求头，尝试各种请求方式与编码，结果还是返回签名错误，这让我很是折腾，一度曾想改回apache的http client。最后，我把请求的xml转为utf-8编码，然后HttpUrlConnection全都默认设置，这才下单成功。（PS，这里顺带讲一个HttpUrlConnection的坑，设置请求方法为post，可是debug中看到的HttpUrlConnection对象，请求方法仍为get，当初还以为是这个导致的，后来才知道HttpUrlConnection真正的实现是在delegate中）</li></ul><p>总结一下，<a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_1" target="_blank" rel="noopener">统一下单</a>的响应、错误码和错误描述比较混乱，成功响应还好，一旦出现问题，准让你摸不清东南西北。</p><p>签名这块，请参考<a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=4_3" target="_blank" rel="noopener">签名算法</a>，注意按字母升序组织请求参数。我用的是有序的TreeMap保存参数并做签名。没掉坑里。这里附上<a href="https://pay.weixin.qq.com/wiki/tools/signverify/" target="_blank" rel="noopener">微信提供的签名检验工具</a></p><h2 id="调用支付接口"><a href="#调用支付接口" class="headerlink" title="调用支付接口"></a>调用支付接口</h2><p>这一步是客户端拿到<code>prepayid</code>之后，向微信发送PayReq。请求参数有7个(详细参考微信sdk中的PayReq类，其中<code>partnerId</code>填商户ID<code>mch_id</code>；<code>packageValue</code>固定填<code>Sign=WXPay</code>；<code>timestamp</code>为北京时间戳，单位为秒。其它的顾名思义，对号入座即可)，缺一不可。这里呢，也有坑</p><ul><li>PayResp（响应）定义了errCode和errStr，只要支付失败，errCode都为-1，errStr永远为null，所以，具体的错误原因：签名错误、未注册APPID、项目设置APPID不正确、注册的APPID与设置的不匹配、其他异常等，一个一个查吧。</li><li><a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_1" target="_blank" rel="noopener">统一下单</a>接口不返回timestamp，如果是我们自己设置一个，那么需要对请求重新签名，<a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_1" target="_blank" rel="noopener">统一下单</a>返回的sign就不能用了。不然调用支付接口肯定返回-1。</li><li>如果接口调用失败，返回-1，是应用签名（apk的签名）不正确（比如debug和release版本使用的不同签名）导致的，那么需要清空微信缓存，才能支付成功。不过，我可不敢随便清微信缓存，我建议可以将手机重启，如果仍然不行，再清微信的缓存。</li></ul><h2 id="libammsdk-jar冲突"><a href="#libammsdk-jar冲突" class="headerlink" title="libammsdk.jar冲突"></a>libammsdk.jar冲突</h2><p>因微信支付和分享是在同一个jar中，所以如果使用了第三方的分享sdk，极有可能会出现jar冲突。即使是相同模块中的jar完全一致也不行。解决的办法是只保留一个模块中的libammsdk.jar然后clen build。</p><h2 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h2><ul><li>apk的包名，签名在工程初始化的时候就确定好，debug和release使用同一个签名。</li><li>微信开放平台在创建应用前，确认好apk包名和签名。</li><li>如果是服务端下单，确保sign值是对的（需要再次签名的再签一次）。客户端拿到七个参数后，可以直接支付。</li><li>建议在服务端下单，这样更安全。</li><li>使用第三方的支付sdk，避免入坑。</li></ul><h2 id="af-pay"><a href="#af-pay" class="headerlink" title="af-pay"></a>af-pay</h2><p>最后推荐一个Android上的支付sdk：<a href="https://github.com/Jamling/af-pay" target="_blank" rel="noopener">af-pay</a>，github地址为：<a href="https://github.com/Jamling/af-pay" target="_blank" rel="noopener">https://github.com/Jamling/af-pay</a><br><a href="https://github.com/Jamling/af-pay" target="_blank" rel="noopener">af-pay</a>是一个Android平台上支付库，支持支付宝和微信，使用<a href="https://github.com/Jamling/af-pay" target="_blank" rel="noopener">af-pay</a>可以让支付变得更简单，并且支持服务端与服务单下单。示例代码如下：</p><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="java">private void doWxpay(String orderInfo) {    final Activity activity = this;    // 获取支付类    Wxpay wxpay = Wxpay.getInstance(activity);    // 设置支付回调监听    wxpay.setPayListener(new Wxpay.PayListener() {        @Override        public void onPaySuccess(BaseResp resp) {            showToast(activity, &quot;支付成功&quot;);        }        @Override        public void onPayCanceled(BaseResp resp) {            showToast(activity, &quot;支付取消&quot;);        }        @Override        public void onPayFailure(BaseResp resp) {            showToast(activity, &quot;支付失败&quot;);        }    });    // 这里是服务端下单，内容是统一下单返回的xml    if (!TextUtils.isEmpty(orderInfo)) {        PayReq req = OrderInfoUtil.getPayReq(orderInfo);        wxpay.pay(req);    }    else { // 客户端下单        Wxpay.DEBUG = true; // 开启日志        // API密钥，在微信商户平台设置        Wxpay.Config.api_key = &quot;32位的字串&quot;;        // APPID，在微信开放平台创建应用后生成        Wxpay.Config.app_id = &quot;wx...&quot;;        // 商户ID，注册商户平台后生成        Wxpay.Config.mch_id = &quot;14...&quot;;        // 支付结果异步通知接口，由后台开发提供        Wxpay.Config.notify_url = &quot;http://www.ieclipse.cn/app/pay/wxpay_notify.do&quot;;        // 创建统一下单异步任务        Wxpay.DefaultOrderTask task = new Wxpay.DefaultOrderTask(wxpay);        // 这个商户订单号，由后台返回，在这里随便生成一个        String outTradeNo = OrderInfoUtil2_0.genOutTradeNo();        // 设置统一下单的请求参数        task.setParams(OrderInfoUtil.buildOrderParamMap(outTradeNo, &quot;测试支付&quot;, &quot;&quot;, &quot;1&quot;, null, null, null));        task.execute();    }}</code></pre><p>附上完整的支付过程中的日志<br><img src="http://dl.ieclipse.cn/screenshots/af-pay-wechat.png" alt="完整日志"></p><p>如果是服务端下单，客户端只需生成PayReq对象，然后调用<code>wxpay.pay(PayReq)</code>即可。<a href="https://github.com/Jamling/af-pay" target="_blank" rel="noopener">af-pay</a>已经配置好回调的WXPayActivity和Receiver。详细信息请访问Github。</p><h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">https://github.com/Jamling/QuickAF</a><br>微信支付开发文档：<a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_1" target="_blank" rel="noopener">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_1</a></p><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/05/24/Android/quickaf-wechat-pay/](https://www.ieclipse.cn/2017/05/24/Android/quickaf-wechat-pay/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      Android微信支付大全,微信支付踩的坑,微信支付常见问题
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="https://www.ieclipse.cn/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="https://www.ieclipse.cn/tags/Android/"/>
+    
+      <category term="QuickAF" scheme="https://www.ieclipse.cn/tags/QuickAF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android中实现圆角图片的几种姿势</title>
+    <link href="https://www.ieclipse.cn/2017/05/18/Android/quickaf-round/"/>
+    <id>https://www.ieclipse.cn/2017/05/18/Android/quickaf-round/</id>
+    <published>2017-05-18T02:00:00.000Z</published>
+    <updated>2019-07-22T11:25:01.901Z</updated>
+    
+    <content type="html"><![CDATA[<p> Android中实现圆角图片有多种姿势，不知你解锁了几种？</p><a id="more"></a><h2 id="方法一：setXfermode法"><a href="#方法一：setXfermode法" class="headerlink" title="方法一：setXfermode法"></a>方法一：setXfermode法</h2><p>此种方式就是再new一个相同尺寸的bitmap，然后使用paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));先画圆角矩形，再画原始bitmap，然后就得到了一个圆角的bitmap了。</p><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="java">public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, float roundPx) {    Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Config.ARGB_8888);    Canvas canvas = new Canvas(output);    final int color = 0xff424242;    final Paint paint = new Paint();    final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());    final RectF rectF = new RectF(rect);    paint.setAntiAlias(true);    canvas.drawARGB(0, 0, 0, 0);    paint.setColor(color);    canvas.drawRoundRect(rectF, roundPx, roundPx, paint);    paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));    canvas.drawBitmap(bitmap, rect, rect, paint);    return output;}</code></pre><p>点评：<br>早期用得较多，占用bitmap双倍内存。</p><h2 id="方法二：使用BitmapShader"><a href="#方法二：使用BitmapShader" class="headerlink" title="方法二：使用BitmapShader"></a>方法二：使用BitmapShader</h2><p>此种方式是先将bitmap生成BitmapShader，然后将其绘制到canvas中, 部分关键代码如下，完整代码请参考<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中的RoundImageView</p><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="java">bitmapShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);paint.setShader(bitmapShader);</code></pre><pre><code class="java">@Overridepublic void draw(Canvas canvas) {    Rect bounds = getBounds();    canvas.drawRoundRect(fillRect, radius, radius, paint);    if (mBorderWidth &gt; 0) {        if (mIsCircle) {            canvas.drawCircle(bounds.width() / 2, bounds.height() / 2, radius, strokePaint);        }        else {            canvas.drawRoundRect(fillRect, radius, radius, strokePaint);        }    }}&lt;p class=&quot;code-caption&quot; data-lang=&quot;&quot; data-line_number=&quot;frontend&quot; data-trim_indent=&quot;backend&quot; data-label_position=&quot;outer&quot; data-labels_left=&quot;Code&quot; data-labels_right=&quot;:&quot; data-labels_copy=&quot;Copy Code&quot;&gt;&lt;span class=&quot;code-caption-label&quot;&gt;&lt;/span&gt;&lt;a class=&quot;code-caption-copy&quot;&gt;Copy Code&lt;/a&gt;&lt;/p&gt;</code></pre><p>点评：<br>占用内存较大，实现有点小复杂。</p><h2 id="方法三：图片加载库"><a href="#方法三：图片加载库" class="headerlink" title="方法三：图片加载库"></a>方法三：图片加载库</h2><p>目前github上有许多流行的图片加载库，基于上都附带圆角图片功能，只需要稍微配置一下，即可轻松的实现想要的效果。其实在底层，无非也是使用上面的两种方式。比如<a href="Android-Universal-Image-Loader">Android-Universal-Image-Loader</a> 早期的RoundedBitmapDisplayer使用setXfermode来实现，后来使用BitmapShader实现。</p><pre><code class="java">DisplayImageOptions options = new DisplayImageOptions.Builder()        .displayer(new RoundedBitmapDisplayer()) // display rounded bitmap        .build();</code></pre><p>再以比较另类的<a href="https://github.com/facebook/fresco" target="_blank" rel="noopener">fresco</a>为例，虽然底层是以C实现，不过在圆角处理上，仍然还是在Java层实现，用的方式还是BitmapShader。不过对于非bitmap的圆角实现，fresco是用Paint直接画的。附上fresco配置。</p><p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="xml">&lt;com.facebook.drawee.view.SimpleDraweeView  android:id=&quot;@+id/my_image_view&quot;  android:layout_width=&quot;20dp&quot;  android:layout_height=&quot;20dp&quot;  fresco:fadeDuration=&quot;300&quot;  fresco:actualImageScaleType=&quot;focusCrop&quot;  fresco:placeholderImage=&quot;@color/wait_color&quot;  fresco:placeholderImageScaleType=&quot;fitCenter&quot;  fresco:failureImage=&quot;@drawable/error&quot;  fresco:failureImageScaleType=&quot;centerInside&quot;  fresco:retryImage=&quot;@drawable/retrying&quot;  fresco:retryImageScaleType=&quot;centerCrop&quot;  fresco:progressBarImage=&quot;@drawable/progress_bar&quot;  fresco:progressBarImageScaleType=&quot;centerInside&quot;  fresco:progressBarAutoRotateInterval=&quot;1000&quot;  fresco:backgroundImage=&quot;@color/blue&quot;  fresco:overlayImage=&quot;@drawable/watermark&quot;  fresco:pressedStateOverlayImage=&quot;@color/red&quot;  fresco:roundAsCircle=&quot;false&quot;  fresco:roundedCornerRadius=&quot;1dp&quot;  fresco:roundTopLeft=&quot;true&quot;  fresco:roundTopRight=&quot;false&quot;  fresco:roundBottomLeft=&quot;false&quot;  fresco:roundBottomRight=&quot;true&quot;  fresco:roundWithOverlayColor=&quot;@color/corner_color&quot;  fresco:roundingBorderWidth=&quot;2dp&quot;  fresco:roundingBorderColor=&quot;@color/border_color&quot;/&gt;</code></pre><p>点评：<br>由框架实现，使用简单，稳定。</p><h2 id="方法四：遮罩"><a href="#方法四：遮罩" class="headerlink" title="方法四：遮罩"></a>方法四：遮罩</h2><p>此种方式还是使用setXfermode，不过与方法一不同的是：不对图片作任何更改，只在圆角之外再画一层与背景颜色相同的四个角来遮挡，在视觉上造成圆角图片的效果。关键代码如下：</p><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="java">@Overrideprotected void onDraw(Canvas canvas) {    super.onDraw(canvas);    if (src != null &amp;&amp; dst != null) {        int w = getMeasuredWidth(), h = getMeasuredHeight();        int sc = canvas.saveLayer(0, 0, w, h, null,            Canvas.MATRIX_SAVE_FLAG | Canvas.CLIP_SAVE_FLAG | Canvas.HAS_ALPHA_LAYER_SAVE_FLAG                | Canvas.FULL_COLOR_LAYER_SAVE_FLAG | Canvas.CLIP_TO_LAYER_SAVE_FLAG);        canvas.drawBitmap(dst, 0, 0, paint); // 圆角矩形        paint.setXfermode(mode); // new PorterDuffXfermode(PorterDuff.Mode.SRC_OUT);        canvas.drawBitmap(src, 0, 0, paint); // 长方形        paint.setXfermode(null);        canvas.restoreToCount(sc);    }}</code></pre><p>详细代码请参考<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中的RoundMaskView</p><p>使用这种方式，圆角化的对象不限于ImageView，还可以是任意的layout哦，比如下面的示例</p><p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="xml">&lt;FrameLayout    android:layout_width=&quot;match_parent&quot;    android:layout_height=&quot;wrap_content&quot;&gt;    &lt;LinearLayout        android:layout_width=&quot;match_parent&quot;        android:layout_height=&quot;wrap_content&quot;        android:orientation=&quot;vertical&quot;&gt;        &lt;ImageView            android:layout_width=&quot;match_parent&quot;            android:layout_height=&quot;150dp&quot;            android:src=&quot;@color/colorAccent&quot;/&gt;        &lt;TextView            android:layout_width=&quot;match_parent&quot;            android:layout_height=&quot;wrap_content&quot;            android:layout_gravity=&quot;bottom&quot;            android:background=&quot;@color/black_alpha_50&quot;            android:padding=&quot;12dp&quot;            android:text=&quot;I am text&quot;/&gt;    &lt;/LinearLayout&gt;    &lt;cn.ieclipse.af.view.RoundMaskView        android:layout_width=&quot;match_parent&quot;        android:layout_height=&quot;match_parent&quot;        android:radius=&quot;10dp&quot;        app:af_borderColor=&quot;@color/white&quot;        app:af_borderWidth=&quot;1dp&quot;/&gt;&lt;/FrameLayout&gt;</code></pre><p>配合FrameLayout，将LinearLayout实现了圆角，在视觉效果上，ImageView左上和右上圆角，TextView左下和右下圆角。</p><p>点评：<br>具有一定的局限性，不过不限于图片，所有的Layout都可以在视觉上实现圆角。</p><h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">https://github.com/Jamling/QuickAF</a></p><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/05/18/Android/quickaf-round/](https://www.ieclipse.cn/2017/05/18/Android/quickaf-round/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt; Android中实现圆角图片有多种姿势，不知你解锁了几种？&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="https://www.ieclipse.cn/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="https://www.ieclipse.cn/tags/Android/"/>
+    
+      <category term="QuickAF" scheme="https://www.ieclipse.cn/tags/QuickAF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>QuickAF网络连接及数据解析简介</title>
+    <link href="https://www.ieclipse.cn/2017/05/12/Android/quickaf-rest/"/>
+    <id>https://www.ieclipse.cn/2017/05/12/Android/quickaf-rest/</id>
+    <published>2017-05-12T02:16:41.000Z</published>
+    <updated>2019-07-22T11:25:01.900Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中使用Volley进行网络连接，使用Gson来解析响应数据。为了更方便地执行REST API网络请求，<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>对Volley+Gson进行了简单的封装。</p><a id="more"></a><h2 id="接口请求与响应设计"><a href="#接口请求与响应设计" class="headerlink" title="接口请求与响应设计"></a>接口请求与响应设计</h2><h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p>REST接口是基于HTTP协议的，一个接口的定义包含请求地址，请求方法，请求参数，响应信息。请求地址为一个URL，由基地址和接口路径和查询字符串组成。比如<a href="http://127.0.0.1:8080/meituan/api/1.0/user/login?token=xxxxxxx" target="_blank" rel="noopener">http://127.0.0.1:8080/meituan/api/1.0/user/login?token=xxxxxxx</a>; <a href="http://127.0.0.1:8080/meituan/api/1.0/" target="_blank" rel="noopener">http://127.0.0.1:8080/meituan/api/1.0/</a> 为基地址，一套api，其基地址是相同的。1.0为接口版本，user/login为接口路径，token=xxxxxx为查询字符串。请求方法有GET/POST/PUT/DELETE等。<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>将接口地址抽象为IUrl接口</p><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="java">public interface IUrl {    /**     * return http method, see {@link com.android.volley.Request.Method}     *     * @return http method     * @see com.android.volley.Request.Method     */    int getMethod();    /**     * return the full url     *     * @return     */    String getUrl();    /**     * set query string to url.     *     * @param query query string, it a request parameter of string format usually     */    void setQuery(String query);}</code></pre><h3 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h3><p>一般来说接口的请求比较简单，如果请求是application/json，将请求对象转为json字符串即可。但是实际当中，仍然有许多接口使用的还是application/x-www-form-urlencoded，这种方式简单，而且适用于网页。<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>默认以后者来提交http请求，并且支持以下两种请求格式</p><ol><li>键值对，这也是早期使用最多的，通过Map来存储请求参数。</li><li>对象，通过反射机制将对象的属性及属性值转化对键值对，具有很高的可扩展性，一旦接口有变更，比如接口要求添加uuid参数，可以非常方便的修改请求基类来满足业务需求，<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>建议使用这种方式来封装请求。</li></ol><p>通常在REST API中包含appKey, secret, uuid等全局请求参数，<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>的sample app中定义的请求基类如下：</p><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="java">public class BaseRequest implements java.io.Serializable {    public String appKey;    public String secret;    public String version;    public String uuid;}</code></pre><p>具体的业务API只需要继承BaseRequest，然后添加具体的业务请求参数，比如注册的请求</p><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="java">public class RegisterRequest extends BaseRequest {    public String phone;    public String code;    public String password;}</code></pre><p>对于GET请求，将请求对象转为查询字符串附在url中，对于POST请求，则将请求对象写入body中。</p><h3 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h3><p>REST API接口响应一般包含状态码(status)，提示信息(message)及业务对象(data)，需要经过json工具将其转为对象，这个对象我们姑且称之为接口对象。伪代码如下：</p><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="java">class MyResponse {  int code;//业务响应状态码  String message;//业务响应信息，比如投票失败  Object data;//业务响应对象，比如登录，返回的是一个User对象}</code></pre><p>其实业务模块往往关心的只有业务对象(data)，因为对于业务操作不成功的处理，可以在基类中统一处理。在<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中，将接口对象抽象为IBaseResponse接口。</p><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="java">public interface IBaseResponse&lt;Output&gt; extends java.io.Serializable{    /**     * Return the business data object     *     * @return concrete business data     */    Output getData();}</code></pre><h3 id="请求任务"><a href="#请求任务" class="headerlink" title="请求任务"></a>请求任务</h3><p>如果我们将请求视为输入，响应视为输出，那么对于一次网络请求，使用代码实现的话，就是：</p><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="java">abstract class MyTask&lt;Input,Output&gt; {  void onSuccess(Output output); // 业务请求成功  void onError(RestError error);//业务请求失败  Url getUrl();//业务请求地址}</code></pre><p>在<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中，已经实现了网络请求与数据解析功能，所以对开发者来说，只需专注于业务接口，即：接口地址，请求对象，返回的业务对象(data)。业务请求成功，在相关的界面填充业务数据(data)，请求失败，给出相应的错误信息(message)。</p><p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>有两个执行任务的方法</p><ol><li>如果输出为对象(Output)是一个对象，则需调用load方法，将Output的class传进去。</li><li>如果输出为集合(List)，则需调用load2List方法，将集合中的元素class传进去。</li><li>自动识别，调用load方法，无需传入Output的class。</li></ol><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="java">// method 1class MyTask&lt;Object, User&gt; {  //... 获取单个用户，输入为object，输出为User}// 执行任务new MyTask().load(/*request*/null, User.class, /*don&#39;t load cache*/false);// method 2 for Listclass MyListTask&lt;Object, List&lt;User&gt;&gt; {  //... 获取用户列表，输入为object, 输出为List&lt;User&gt;集合}new MyListTask().load2List(null, User.class, /*use cache*/true);// method 3, auto loadnew MyTask().load(null, false);// sampe to load(null, User.class, false)new MyListTask().load(null, true);// sampe to load2List(null, User.class, false)</code></pre><h2 id="进阶操作"><a href="#进阶操作" class="headerlink" title="进阶操作"></a>进阶操作</h2><h3 id="配置接口对象"><a href="#配置接口对象" class="headerlink" title="配置接口对象"></a>配置接口对象</h3><p>接口对象，一个app，一般只有一个。定义如下</p><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code" data-hide="false" data-title="BaseResponse.java"><span class="code-caption-label">(`BaseResponse.java`)</span><a class="code-caption-copy">Copy Code</a></p><pre><code class="java">public class BaseResponse&lt;Output&gt; implements IBaseResponse {    private static final long serialVersionUID = -3440061414071692254L;    /**     * 状态码     */    public int code;    /**     * 消息     */    public String message;    /**     * 数据，业务对象     */    public Output data;    public Output getData() {      return data;    }}</code></pre><p>然后可以在Application.onCreate()中配置。</p><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="java">// typically, you just config volley in Application.onCreateVolleyConfig config = new VolleyConfig.Builder()    .setBaseResponseClass(WeatherBaseResponse.class)    .build();VolleyManager.init(getApplicationContext(), config);</code></pre><p>如果有喜欢使用OkHttp的同学，还可配置网络连接使用OkHttp，需要写一个OkHttpStack继承自Volley的HurlStack，参考<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>示例app中的OkHttpStack.java.sample。</p><h3 id="接口统一处理"><a href="#接口统一处理" class="headerlink" title="接口统一处理"></a>接口统一处理</h3><p>主要是根据接口业务状态码进行处理。比如定义业务操作成功，响应码为0，那么不为0的时候，就不应该解析业务对象，转入错误分支。</p><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="java">protected abstract class AppBaseTask&lt;Input, Output&gt; extends RequestObjectTask&lt;Input, Output&gt; {    @Override    public boolean onInterceptor(IBaseResponse response) throws Exception {        if (response instanceof BaseResponse) {            BaseResponse resp = (BaseResponse) response;            if (0 != resp.code) {                onLogicError(new LogicError(null, resp.code, resp.message));                throw new InterceptorError();            }        }        return false;    }    public void onLogicError(LogicError error) {        if (404 == error.getCode() || 104 == error.getCode()) { {            // LoginActivity.go(MyApplication.instance);            return;        }        onError(new RestError(error));    }}</code></pre><h3 id="数据模拟"><a href="#数据模拟" class="headerlink" title="数据模拟"></a>数据模拟</h3><p>接口对象或业务对象类需在mock()方法中给对象填充模拟值，参考示例工程中BaseInfo.java（这个类是所有业务对象模型的基类）。</p><h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><ul><li>所有的请求继承一个BaseRequest，接口定义的全局请求参数在BaseRequest中定义</li><li>一套接口API，定义一个全局的AppController及AppBaseTask来处理公共的业务，比如业务拦截。</li><li>所有的业务模型继承一个BaseInfo</li><li>一个Controller对应一个界面，应继承AppController，包含若干网络请求Task</li><li>网络请求Task回调作为内部interface定义在具体的Controller中。</li></ul><p>更多请参考demo app工程</p><h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">https://github.com/Jamling/QuickAF</a></p><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/05/12/Android/quickaf-rest/](https://www.ieclipse.cn/2017/05/12/Android/quickaf-rest/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://github.com/Jamling/QuickAF&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;QuickAF&lt;/a&gt;中使用Volley进行网络连接，使用Gson来解析响应数据。为了更方便地执行REST API网络请求，&lt;a href=&quot;https://github.com/Jamling/QuickAF&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;QuickAF&lt;/a&gt;对Volley+Gson进行了简单的封装。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="https://www.ieclipse.cn/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="https://www.ieclipse.cn/tags/Android/"/>
+    
+      <category term="QuickAF" scheme="https://www.ieclipse.cn/tags/QuickAF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>有奖破解网页密码第四弹</title>
+    <link href="https://www.ieclipse.cn/2017/04/01/Web/hexo-encryptv4_1/"/>
+    <id>https://www.ieclipse.cn/2017/04/01/Web/hexo-encryptv4_1/</id>
+    <published>2017-04-01T13:30:30.000Z</published>
+    <updated>2019-07-22T11:25:01.940Z</updated>
+    
+    <content type="html"><![CDATA[<p>在今日24:00之前破解密码的，将送月球一日游<del>欢迎大家跳跃报名参加</del></p><a id="more"></a><p>不好意思，我只是开个玩笑啦~祝愚人节快乐！</p><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/04/01/Web/hexo-encryptv4_1/](https://www.ieclipse.cn/2017/04/01/Web/hexo-encryptv4_1/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在今日24:00之前破解密码的，将送月球一日游&lt;del&gt;欢迎大家跳跃报名参加&lt;/del&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Web" scheme="https://www.ieclipse.cn/categories/Web/"/>
+    
+    
+      <category term="Hexo" scheme="https://www.ieclipse.cn/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>安全杂谈二之入侵公司OA系统</title>
+    <link href="https://www.ieclipse.cn/2017/03/29/other/safe_ajax_cross/"/>
+    <id>https://www.ieclipse.cn/2017/03/29/other/safe_ajax_cross/</id>
+    <published>2017-03-29T06:46:29.000Z</published>
+    <updated>2019-07-22T11:25:01.949Z</updated>
+    
+    <content type="html"><![CDATA[<p>本次讲一个入侵公司OA系统，获取公司员工薪资待遇的故事。首先声明一下，入侵人不是我，是我的一个朋友，为方便叙述，在这里使用第一人称。</p><a id="more"></a><p>之前在某软件公司，使用的OA系统是由一家比较知名的另一软件公司深度定制的。里面使用了大量的javascript。有一次公司OA上新增了一个模块，用于查询员工的XX信息。当时我点击进去一看，XX的值竟然有光标闪烁，而且还可以输入值，当时我的第一反应就是，这应该是一个text域，一看源代码，果然是。那么我就想，既然是可编辑的text域，那么我可不可以提交此值呢？接着就去研究相关的源代码，然后竟然发现了查询XX值的SQL语句！哈哈，有了SQL我什么事不能做？不过SQL并不能直接执行。通过更深入的研究，又破解了SQL执行机制。然后，激动人心的时刻到了，我把XX的update sql通过脚本执行的时候，弹出了一个乱码提示框，而且重新加载XX信息界面，XX的值并没有更改。当时心里还是蛮慌的，以为失败了。而且，本次入侵，我使用的是局域网，人事/IT会不会来找我？过了两天发现我修改的XX竟然生效了~ 而且也没有谁来找我。于是，我邪恶地笑了，接下来是研究我的工资模块。有了之前的研究成果，我的进展很顺利，我可以在我的脚本写顺序查询自己的工资。接下来，就是研究怎么查询他人的工资了。我试着通过调试程序，将某个熟悉的同事的工号等信息替换成我的，然后继续执行。结果成功的查询到了。然后，通过再次深入的研究OA系统，并不断的优化。实现了点击一个按钮，将全公司除了隶属总公司的员工薪水信息导出到excel中。</p><p>PS1：IE虽然不受前端工程师欢迎，不过拿来做入侵还是不错的。<br>PS2：前端不要暴露表结构，哪怕是跟表结构相关的。<br>PS3：世人无难事，就怕有心人，虽然花了不少时间，但还是值得的。</p><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/03/29/other/safe_ajax_cross/](https://www.ieclipse.cn/2017/03/29/other/safe_ajax_cross/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本次讲一个入侵公司OA系统，获取公司员工薪资待遇的故事。首先声明一下，入侵人不是我，是我的一个朋友，为方便叙述，在这里使用第一人称。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="其它" scheme="https://www.ieclipse.cn/categories/other/"/>
+    
+    
+      <category term="安全" scheme="https://www.ieclipse.cn/tags/%E5%AE%89%E5%85%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>安全杂谈一之SQL注入</title>
+    <link href="https://www.ieclipse.cn/2017/03/28/other/safe_sql_inject/"/>
+    <id>https://www.ieclipse.cn/2017/03/28/other/safe_sql_inject/</id>
+    <published>2017-03-28T06:46:29.000Z</published>
+    <updated>2019-07-22T11:25:01.949Z</updated>
+    
+    <content type="html"><![CDATA[<p>Web系统非常容易受到攻击，SQL注入做为一个常用的攻击方式，常见于一些老的系统。危害相当大。在这里讲一个SQL注入相关的例子。</p><a id="more"></a><p>那是多年以前的事，再次见到她，不禁怦然心动，几年不见，她已是亭亭玉立，作为一枚单身狗，当然会有一些想法。在得知她仍单身的情况后，心中狂喜，满以为能通过这次的邂逅，拉近双方的距离，或许能终结我的单身生活也说不定，哈哈。不过，接下来的事却令我失望，漂亮的女生总是高冷的，但这并没有让我退却。我想方设法得到她的更多信息，如此才好展开攻势。不过她好像觉察到了我的意图，或是之前也有人使用过相同的伎俩，她拒绝向我透漏更多的个人信息。不过，这难不倒我这个技术出身的，我相信在网络的时代，我终会找到一丝蛛丝马迹。我先百度到了她所读的大学，然后在就业中找到了毕业生去向查询入口，不过需要登录才能查询。我仔细看了下，地址的后缀是.asp，表示这是一个比较老的系统了，或许我可以通过SQL注入来绕过。于是，我先在用户名中输入带特殊符合的SQL，很不幸，用户名不允许输入字符，需要输入真实姓名（用户名为真实姓名）。然后我将注入的SQL写在记事中，仔细地在密码域中一个一个输入，完毕之后，再重重敲击了一下Enter，奇迹发生了，我成功的登录了！而且，查询到了她毕业后的进入的公司。</p><p>不过后面的事，我就不讲了，我仍然做我的单身青年，她仍然做她的高冷女神。</p><p>写在最后：其实，我们程序员，并不全是呆板木讷的。我们有想法，有智商，同时也有手段。认真最一件事的时候，爆发力可是相当高的。在此与提醒同为做技术的同学们，Web系统的安全性一定要做好，SQL不要拼接，使用预处理SQL，服务端的校验一定要做，必要时加密。</p><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/03/28/other/safe_sql_inject/](https://www.ieclipse.cn/2017/03/28/other/safe_sql_inject/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Web系统非常容易受到攻击，SQL注入做为一个常用的攻击方式，常见于一些老的系统。危害相当大。在这里讲一个SQL注入相关的例子。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="其它" scheme="https://www.ieclipse.cn/categories/other/"/>
+    
+    
+      <category term="安全" scheme="https://www.ieclipse.cn/tags/%E5%AE%89%E5%85%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>将多说评论换成畅言</title>
+    <link href="https://www.ieclipse.cn/2017/03/23/Web/hexo-duoshuo2changyan/"/>
+    <id>https://www.ieclipse.cn/2017/03/23/Web/hexo-duoshuo2changyan/</id>
+    <published>2017-03-23T04:30:30.000Z</published>
+    <updated>2019-07-22T11:25:01.939Z</updated>
+    
+    <content type="html"><![CDATA[<p>多说在3月21日发布了重要通知，<a href="http://dev.duoshuo.com/threads/58d1169ae293b89a20c57241" target="_blank" rel="noopener">全文</a>如下：</p><a id="more"></a><p>因公司业务调整，非常遗憾的向大家宣布多说项目即将关闭。 我们将于2017年6月1日正式关停服务，在此之前您可以通过后台的数据导出功能导出自己站点的评论数据。 对此给您造成的不便，我们深表歉意，感谢您的一路相伴。</p><p>听到这则消息，我当时也是震惊的，不是说好的永久免费的吗？然则静心而论，免费而无盈利，终究不是长久之路。我对此也非常的理解。不管怎样，未雨绸缪，准备的工作还是要做的。所以在第一时间得为自己找一个备选的第三方评论系统。主要的选择如下：</p><ul><li>友言，其实最开始，我是使用友言的，博客也积累了一些评论，不过，功能有点单一，不如多说，所以决定换，在换成多说后，发现原来的评论无法导出，联系客服，说是维护中，好吧，维护大半年了，至今仍不能导出。所以不敢用了。</li><li>网易云跟贴，网易家大业大，相信产品质量还是可以的。不过云跟贴，现在还是beta版本。待稳定再说吧。</li><li>搜狐畅言，了解了一下，支持的功能比多说还多，还有一些特色功能，比如打赏，广告，而且也开放了API。<br>综上，决定使用畅言。说干就干，将<a href="https://github.com/Jamling/hexo-theme-nova" target="_blank" rel="noopener">hexo-theme-nova</a>添加了对畅言的支持。具体的代码呢，请参考github上的<a href="https://github.com/Jamling/hexo-theme-nova" target="_blank" rel="noopener">hexo-theme-nova</a>项目。</li></ul><p>不过在此特别强调一下<br>1，畅言要求网站有ICP备案，如果没有，或者不匹配，评论框无法加载。<br>2，畅言本地调试不支持localhost(127.0.0.1)，只能进行在线测试。<br>3，畅言的设置需延迟生效（有缓存），所以更改一项设置，要等十几分钟才能看到效果。<br>4，畅言的导入功能不太正常，我昨天导入的多说，提示成功，可后台前台始终未见数据。结果我又导了一次，仍然不成功。我仔细看了看，两家的json格式不一样，还以为格式有问题，差点就想动手写插件转换了。不过手头有工作，暂时放下，今天一看，前台已经有原来多说的评论数据了，后台还是没有。</p><p>最后一句：不要XXX了，我们欠YYY一个ZZZ。希望大家能尊重他人劳动成果~</p><!-- more--><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/03/23/Web/hexo-duoshuo2changyan/](https://www.ieclipse.cn/2017/03/23/Web/hexo-duoshuo2changyan/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      多说即将关闭，需要将多说换成其它第三方评论系统
+    
+    </summary>
+    
+    
+      <category term="Web" scheme="https://www.ieclipse.cn/categories/Web/"/>
+    
+    
+      <category term="Hexo" scheme="https://www.ieclipse.cn/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>有奖破解网页密码第三弹</title>
+    <link href="https://www.ieclipse.cn/2017/03/08/Web/hexo-encryptv2_1/"/>
+    <id>https://www.ieclipse.cn/2017/03/08/Web/hexo-encryptv2_1/</id>
+    <published>2017-03-08T13:30:30.000Z</published>
+    <updated>2019-07-22T11:25:01.940Z</updated>
+    
+    <content type="html"><![CDATA[<p>本次不设奖金，因为破解的速度实在太快啦。</p><a id="more"></a><p>Fuck Lotte&amp;Fuck Thaad</p><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/03/08/Web/hexo-encryptv2_1/](https://www.ieclipse.cn/2017/03/08/Web/hexo-encryptv2_1/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本次不设奖金，因为破解的速度实在太快啦。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Web" scheme="https://www.ieclipse.cn/categories/Web/"/>
+    
+    
+      <category term="Hexo" scheme="https://www.ieclipse.cn/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>有奖破解网页密码第二弹</title>
+    <link href="https://www.ieclipse.cn/2017/03/08/Web/hexo-encryptv2/"/>
+    <id>https://www.ieclipse.cn/2017/03/08/Web/hexo-encryptv2/</id>
+    <published>2017-03-08T12:30:30.000Z</published>
+    <updated>2019-07-22T11:25:01.940Z</updated>
+    
+    <content type="html"><![CDATA[<p>限时破解密码有奖，截止2017年3月8号24点前，第一个破解的人，请将页面密码作为内容评论，核实正确之后将得到20元人民币奖励。</p><a id="more"></a><p>恭喜您破解了本页密码！您属于以下人群之一：</p><ol><li>Web前端高手，js的加密，混淆等技术难不倒您。</li><li>善于思考的智者，善于从蛛丝马迹中发现端倪。</li><li>Hexo Geeker，您对Hexo有较深入的了解，而不是普通的使用者。</li><li>猎奇者，您只是好奇本页内容是什么而已。</li></ol><p>其实，说了那么多，我就是在扯蛋，因为密码就在源码中~</p><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/03/08/Web/hexo-encryptv2/](https://www.ieclipse.cn/2017/03/08/Web/hexo-encryptv2/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;限时破解密码有奖，截止2017年3月8号24点前，第一个破解的人，请将页面密码作为内容评论，核实正确之后将得到20元人民币奖励。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Web" scheme="https://www.ieclipse.cn/categories/Web/"/>
+    
+    
+      <category term="Hexo" scheme="https://www.ieclipse.cn/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>有奖破解网页密码第一弹</title>
+    <link href="https://www.ieclipse.cn/2017/03/07/Web/hexo-encrypt/"/>
+    <id>https://www.ieclipse.cn/2017/03/07/Web/hexo-encrypt/</id>
+    <published>2017-03-07T12:30:30.000Z</published>
+    <updated>2019-07-22T11:25:01.940Z</updated>
+    
+    <content type="html"><![CDATA[<p>限时破解密码有奖，截止2017年3月8号24点前，第一个破解的人，请将页面密码作为内容评论，核实正确之后将得到10元人民币奖励。<br>(已结束，奖励已发放，密码为lady)</p><a id="more"></a><p>恭喜您破解了本页密码！您属于以下人群之一：</p><ol><li>Web前端高手，js的加密，混淆等技术难不倒您。</li><li>善于思考的智者，善于从蛛丝马迹中发现端倪。</li><li>Hexo Geeker，您对Hexo有较深入的了解，而不是普通的使用者。</li><li>猎奇者，您只是好奇本页内容是什么而已。</li></ol><p>其实，说了那么多，我就是在扯蛋，因为密码就在源码中~</p><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/03/07/Web/hexo-encrypt/](https://www.ieclipse.cn/2017/03/07/Web/hexo-encrypt/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;限时破解密码有奖，截止2017年3月8号24点前，第一个破解的人，请将页面密码作为内容评论，核实正确之后将得到10元人民币奖励。&lt;br&gt;(已结束，奖励已发放，密码为lady)&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Web" scheme="https://www.ieclipse.cn/categories/Web/"/>
+    
+    
+      <category term="Hexo" scheme="https://www.ieclipse.cn/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>QuickAF中的下拉刷新</title>
+    <link href="https://www.ieclipse.cn/2017/03/03/Android/quickaf-refreshlayout/"/>
+    <id>https://www.ieclipse.cn/2017/03/03/Android/quickaf-refreshlayout/</id>
+    <published>2017-03-03T04:16:41.000Z</published>
+    <updated>2019-07-22T11:25:01.898Z</updated>
+    
+    <content type="html"><![CDATA[<img src="/2017/03/03/Android/quickaf-refreshlayout/RefreshLayout.png"><p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>使用<code>RefreshLayout</code>控件进行下拉刷新和上拉加载，通过在布局中定义<code>app:ptr_content</code>和<code>app:ptr_empty</code>或api中设置内容layout和错误view。<br><code>RefreshLayout</code>的特点如下：</p><ul><li>支持任意Layout的下拉刷新和上拉加载，默认支持<code>VScrollView</code>,<code>RecyclerView</code>, <code>ListView</code>, <code>GridView</code>上拉/下拉，还可以通过registerDetector来支持更多的Layout;</li><li>支持自定义EmptyView，一个EmptyView包含loading, empty, error三个子view</li><li>支持empty view的下拉刷新</li><li>支持FooterView，FooterView一般在Adapter中定义</li></ul><a id="more"></a><h2 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h2><p>请参考<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中的<code>BaseListFragment.java</code></p><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="java">public abstract class BaseListFragment&lt;T&gt; extends BaseFragment implements RefreshLayout.OnRefreshListener {    protected RefreshLayout mRefreshLayout;    protected RefreshRecyclerHelper mRefreshHelper;    protected RecyclerView mListView;    protected AfRecyclerAdapter&lt;T&gt; mAdapter;    @Override    protected int getContentLayout() {        return R.layout.base_refresh_recycler;    }    @Override    protected void initContentView(View view) {        super.initContentView(view);        mRefreshLayout = (RefreshLayout) view.findViewById(R.id.refresh);        mRefreshLayout.setOnRefreshListener(this);        mRefreshLayout.setMode(RefreshLayout.REFRESH_MODE_BOTH);        mListView = (RecyclerView) mRefreshLayout.findViewById(R.id.rv);        mRefreshHelper = generateRefreshHelper();        mAdapter = generateAdapter();        mRefreshHelper.setAdapter(mAdapter);    }    @Override    public void onRefresh() {        load(false);    }    @Override    public void onLoadMore() {        load(false);    }    protected void load(boolean needCache) {    }    protected RefreshRecyclerHelper generateRefreshHelper() {        AppRefreshRecyclerHelper helper = new AppRefreshRecyclerHelper(mRefreshLayout);        return helper;    }    protected abstract AfRecyclerAdapter&lt;T&gt; generateAdapter();}</code></pre><p>布局</p><p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code" data-hide="false" data-title="base_refresh_recycler.xml"><span class="code-caption-label">(`base_refresh_recycler.xml`)</span><a class="code-caption-copy">Copy Code</a></p><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;cn.ieclipse.af.view.refresh.RefreshLayout    android:id=&quot;@+id/refresh&quot;    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;    android:layout_width=&quot;match_parent&quot;    android:layout_height=&quot;match_parent&quot;    app:ptr_content=&quot;@layout/base_rv&quot;    app:ptr_empty=&quot;@layout/ptr_empty_view&quot;&gt;&lt;/cn.ieclipse.af.view.refresh.RefreshLayout&gt;</code></pre><p>ptr_content布局</p><p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code" data-hide="false" data-title="base_rv.xml"><span class="code-caption-label">(`base_rv.xml`)</span><a class="code-caption-copy">Copy Code</a></p><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;android.support.v7.widget.RecyclerView    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    android:layout_width=&quot;match_parent&quot;    android:layout_height=&quot;match_parent&quot;    android:id=&quot;@+id/rv&quot;    style=&quot;@style/base_rv&quot;&gt;&lt;/android.support.v7.widget.RecyclerView&gt;</code></pre><h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">https://github.com/Jamling/QuickAF</a></p><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/03/03/Android/quickaf-refreshlayout/](https://www.ieclipse.cn/2017/03/03/Android/quickaf-refreshlayout/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/2017/03/03/Android/quickaf-refreshlayout/RefreshLayout.png&quot;&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/Jamling/QuickAF&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;QuickAF&lt;/a&gt;使用&lt;code&gt;RefreshLayout&lt;/code&gt;控件进行下拉刷新和上拉加载，通过在布局中定义&lt;code&gt;app:ptr_content&lt;/code&gt;和&lt;code&gt;app:ptr_empty&lt;/code&gt;或api中设置内容layout和错误view。&lt;br&gt;&lt;code&gt;RefreshLayout&lt;/code&gt;的特点如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持任意Layout的下拉刷新和上拉加载，默认支持&lt;code&gt;VScrollView&lt;/code&gt;,&lt;code&gt;RecyclerView&lt;/code&gt;, &lt;code&gt;ListView&lt;/code&gt;, &lt;code&gt;GridView&lt;/code&gt;上拉/下拉，还可以通过registerDetector来支持更多的Layout;&lt;/li&gt;
+&lt;li&gt;支持自定义EmptyView，一个EmptyView包含loading, empty, error三个子view&lt;/li&gt;
+&lt;li&gt;支持empty view的下拉刷新&lt;/li&gt;
+&lt;li&gt;支持FooterView，FooterView一般在Adapter中定义&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="https://www.ieclipse.cn/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="https://www.ieclipse.cn/tags/Android/"/>
+    
+      <category term="QuickAF" scheme="https://www.ieclipse.cn/tags/QuickAF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>VectorDrawble踩过的坑</title>
+    <link href="https://www.ieclipse.cn/2017/03/02/Android/vector-trap/"/>
+    <id>https://www.ieclipse.cn/2017/03/02/Android/vector-trap/</id>
+    <published>2017-03-02T13:00:00.000Z</published>
+    <updated>2019-07-22T11:25:01.905Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Android 从5.0（代号L）开始支持矢量图，心想，这个好哇，drawable/mipmap图片资源终于可以瘦身了！后来还特地翻墙在YouTube上观看了Google IO大会上在Android Studio中创建Vector drawable的视频。本着匆用新版本的原则。一直对它处于了解阶段。并未在项目中实践。前一阵子，实践了一把，结果差点被坑死。下面列举一下本人亲自踩过的坑。</p><a id="more"></a><h2 id="fillColor无法在低于API21的版本使用引用颜色"><a href="#fillColor无法在低于API21的版本使用引用颜色" class="headerlink" title="fillColor无法在低于API21的版本使用引用颜色"></a>fillColor无法在低于API21的版本使用引用颜色</h2><p>在项目中，使用定义了<code>colorPrimary</code>作为主题首选色，比如蓝色。现引用一个Vector，要求颜色与主题首选色一致。第一时间想到的就是，在Vector中作如下定义：</p><p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="xml">&lt;path        android:fillColor=&quot;@color/colorPrimary&quot;        android:pathData=&quot;...&quot;/&gt;</code></pre><p>然而在5.0以下的设备中运行时发现，图标为黑色，<code>fillColor</code>设置无效。Google之后，说应该使用Tint来对vector着色，好吧，于是写了一个util方法进行处理。</p><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="java">public static Drawable tintDrawable(Drawable drawable, int color) {    if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.LOLLIPOP) {        drawable.setTint(color);        return drawable;    }    else {        final Drawable wrappedDrawable = DrawableCompat.wrap(drawable);        DrawableCompat.setTint(wrappedDrawable, color);        return wrappedDrawable;    }}</code></pre><h2 id="TextView-compound-drawable无法着色"><a href="#TextView-compound-drawable无法着色" class="headerlink" title="TextView compound drawable无法着色"></a>TextView compound drawable无法着色</h2><p>我有一个带Compound Drawable的<code>TextView</code></p><p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="xml">&lt;TextView    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    android:layout_width=&quot;wrap_content&quot;    android:layout_height=&quot;wrap_content&quot;    android:drawableLeft=&quot;@drawable/ic_back&quot;    android:gravity=&quot;center&quot;    android:minHeight=&quot;40dp&quot;    android:minWidth=&quot;40dp&quot;    android:paddingRight=&quot;5dp&quot;    android:text=&quot;@string/common_back&quot;    android:textColor=&quot;@color/white&quot;    android:textSize=&quot;16sp&quot;&gt;&lt;/TextView&gt;</code></pre><p>ic_back是VectorDrawble，我想设置图片颜色与文字一致，都为白色。本以为加上<code>android:drawableTint=&quot;#FFF&quot;</code>就行了，然而发现并不起作用。于是尝试将<code>TextView</code>换成<code>AppcompatTextView</code>，竟然还是不起作用，debug了一把，发现<code>AppcompatTextHelper</code>无法生成<code>TintInfo</code></p><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="java">protected static TintInfo createTintInfo(Context context,        AppCompatDrawableManager drawableManager, int drawableId) {    final ColorStateList tintList = drawableManager.getTintList(context, drawableId);    if (tintList != null) {        final TintInfo tintInfo = new TintInfo();        tintInfo.mHasTintList = true;        tintInfo.mTintList = tintList;        return tintInfo;    }    return null;}</code></pre><p>我不明白<code>ImageView</code>的<code>android:tint</code>可以生效，而<code>TextView</code>不可以，又不想将<code>TextView</code>拆分为<code>ImageView</code>和<code>TextView</code>。所以呢，没办法，我只能复制一份ic_back.xml，然后修改fillColor为white之后另存为ic_back_white.xml。</p><h2 id="VectorDrawble无法在selector中使用"><a href="#VectorDrawble无法在selector中使用" class="headerlink" title="VectorDrawble无法在selector中使用"></a>VectorDrawble无法在selector中使用</h2><p>这里其实有两个问问题。<br>为了提高用户体验，上面的<code>TextView</code>点击颜色会变换，我想让图片也跟着一起变色。我本是这么定义的</p><p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code" data-hide="false" data-title="ic_back_selector.xml"><span class="code-caption-label">(`ic_back_selector.xml`)</span><a class="code-caption-copy">Copy Code</a></p><pre><code class="xml">&lt;selector    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;&gt;    &lt;item android:state_pressed=&quot;true&quot;&gt;        &lt;bitmap android:tint=&quot;#f00&quot;                android:src=&quot;@drawable/ic_back&quot;                /&gt;    &lt;/item&gt;    &lt;item&gt;        &lt;bitmap android:src=&quot;@drawable/ic_back&quot;            android:tint=&quot;#00f&quot;/&gt;    &lt;/item&gt;&lt;/selector&gt;</code></pre><p>首先在5.0之前的系统上运行，发现tint根本不起作用。所以我又定义了一个ic_back_pressed.xml。<br>然后在5.0上的系统运行时，直接crash了。根据<code>Caused by: android.content.res.Resources$NotFoundException: File res/drawable/ic_back_selector.xml from drawable resource ID #0x7f02005d</code>错误，stackOverflow上又找到了答案，原来gradle中需要配置android.defaultConfig.vectorDrawables.useSupportLibrary = true。然而并没有卵用，gradle sync之后，还是crash。不过Android Studio有新的错误提示，意思是要使用app:srcCompat代替android:src，按照这个提示，又修改了一次。结果又是crash，提示<code>Caused by: org.xmlpull.v1.XmlPullParserException: Binary XML file line #6: &lt;bitmap&gt; requires a valid src attribute</code>。好吧，我认输了。drawable下面已经有ic_back.xml，ic_back_pressed.xml，ic_back_white.xml，ic_back_selector.xml这么多vectorDrawable了，而且我想要的效果还不能实现。这坑就不填了。</p><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/03/02/Android/vector-trap/](https://www.ieclipse.cn/2017/03/02/Android/vector-trap/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;Android 从5.0（代号L）开始支持矢量图，心想，这个好哇，drawable/mipmap图片资源终于可以瘦身了！后来还特地翻墙在YouTube上观看了Google IO大会上在Android Studio中创建Vector drawable的视频。本着匆用新版本的原则。一直对它处于了解阶段。并未在项目中实践。前一阵子，实践了一把，结果差点被坑死。下面列举一下本人亲自踩过的坑。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="https://www.ieclipse.cn/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="https://www.ieclipse.cn/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Gradle Compile Exclude</title>
+    <link href="https://www.ieclipse.cn/2016/11/29/Android/gradle-compile-exclude/"/>
+    <id>https://www.ieclipse.cn/2016/11/29/Android/gradle-compile-exclude/</id>
+    <published>2016-11-29T04:00:00.000Z</published>
+    <updated>2019-07-22T11:25:01.895Z</updated>
+    
+    <content type="html"><![CDATA[<p>Android兼容库从24.2.0开始，对support-v4做了分库处理，原有的support-v4库拆分成为了support-compat、support-core-ui、support-fragment等库，本着稳定的原则，一直到25.0.0才开始在项目中升级support-v4库，将原有的support-v4替换为support-core-ui（其实，项目中只用到了ViewPager，SwipeRefreshLayout而已）以减少apk体积。然而问题来了，编译时出错，提示存在重复的类库。为保证support库版本一致，我还统一定义并使用了各模块的support版本变量，使用<code>gradle dependencies</code>查看依赖的时候，发现有个第三方库依赖于于support-v4:23.0.0。结果导致编译不通过。google了一把，发现gradle complie竟然还可以传参数。来exclude某些库。</p><a id="more"></a><p>特记录如下：</p><p class="code-caption" data-lang="gradle" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="gradle">compile(&quot;com.timehop.stickyheadersrecyclerview:library:0.4.3&quot;) {    exclude group: &#39;com.android.support&#39;//, module: &#39;support-v4&#39;}compile (&#39;com.google.android:flexbox:0.1.2&#39;) {    exclude group: &#39;com.android.support&#39;}</code></pre><p>附：不想频繁更新不稳定library的方法</p><p class="code-caption" data-lang="gradle" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="gradle">repositories {    flatDir { dirs &#39;libs&#39; }}dependencies {    compile fileTree(include: [&#39;*.jar&#39;], dir: &#39;libs&#39;)    testCompile &#39;junit:junit:4.12&#39;    compile &#39;com.android.support:appcompat-v7:23.3.0&#39;    // compile &#39;com.nostra13.universalimageloader:universal-image-loader:1.9.5&#39;    // compile &#39;cn.ieclipse.af:af-library:1.0.0&#39;    compile(name: &#39;af-library-release&#39;, ext: &#39;aar&#39;)    compile &#39;com.android.volley:volley:1.0.0&#39;    compile &#39;com.google.code.gson:gson:2.3&#39;}</code></pre><p>缺点就是library的依赖库，必须手动在app模块中配置</p><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/11/29/Android/gradle-compile-exclude/](https://www.ieclipse.cn/2016/11/29/Android/gradle-compile-exclude/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      Gradle Compile Exclude
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="https://www.ieclipse.cn/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="https://www.ieclipse.cn/tags/Android/"/>
+    
+      <category term="Gradle" scheme="https://www.ieclipse.cn/tags/Gradle/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Fragment加载WebView</title>
+    <link href="https://www.ieclipse.cn/2016/11/26/Android/fragment-h5/"/>
+    <id>https://www.ieclipse.cn/2016/11/26/Android/fragment-h5/</id>
+    <published>2016-11-26T04:00:00.000Z</published>
+    <updated>2019-07-22T11:25:01.895Z</updated>
+    
+    <content type="html"><![CDATA[<p>做Android 5年多了，第一次在Fragment中使用WebView，先将Activity中的代码复制过来改改，没有想到，竟然无法正常显示，而是打开手机浏览器渲染WebView，返回后，Fragment一片空白。这还能忍受？Google一把，说是要继承WebViewFragment，但是一旦继承，就破坏了我的框架结构。然后看了下WebViewFragment的源码，并不复杂。所以就将相关的源码合并到现有的fragment中，本以为可以妥妥地解决问题，结果还是那样。最后在stackoverflow上解决了终极解决办法，那就是需要设置特殊的WebViewClient。</p><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="java">private class H5WebViewClient extends WebViewClient {    @Override    public boolean shouldOverrideUrlLoading(WebView webView, String s) {        webView.loadUrl(s);        //  一定要return true，不然就会使用浏览器打开        return true;    }}</code></pre><a id="more"></a><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/11/26/Android/fragment-h5/](https://www.ieclipse.cn/2016/11/26/Android/fragment-h5/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      在Fragment中使用WebView网页的问题
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="https://www.ieclipse.cn/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="https://www.ieclipse.cn/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android ADB连接海马玩模拟器</title>
+    <link href="https://www.ieclipse.cn/2016/09/19/other/haimawan-adb/"/>
+    <id>https://www.ieclipse.cn/2016/09/19/other/haimawan-adb/</id>
+    <published>2016-09-19T13:00:00.000Z</published>
+    <updated>2019-07-22T11:25:01.948Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用海马玩模拟器来调试Android还是挺方便的。最近因为真机连接不稳定，又想到了海马玩，不知道怎么回事，竟然运行不了模拟器了，只好下载了一个新版本，然后重新安装。安装完毕之后，竟然找不到devices。我记得，以前可是好好的呢。搜索了一下。说是要手动连接</p><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="bash">adb connect 127.0.0.1:53001</code></pre><p>可是，出现了<code>unable to connect错误</code>。后来在官方论坛里找到了原因。原来是自从0.8.5版本之后，海马玩的adb端口不是固定的。我下载的是新版本（0.10.5），当然连接不上了。官方论坛帖子中有说明需要下载修改器修改。存放在网盘上的文件，下载还要注册。懒得搞。因为海马玩经常在待机时无响应，所以对它的进程还是蛮熟悉的（VBoxHeadless.exe），于是自己动手查找它的端口号。再使用adb connect指令连接，果然又成功地连接上了。</p><p>步骤如下：</p><ol><li>查找海马玩的进程ID，可以通过任务管理器查看（查看-&gt;选择列-&gt;把PID（进程标识符）勾上），也可以通过命令查看<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li></ol><pre><code class="bash">tasklist | findstr VBox*C:\Users\Jamling&gt;tasklist | findstr VBox*VBoxSVC.exe                   6536 Console                    1     13,332 KVBoxHeadless.exe              6616 Console                    1    106,572 K</code></pre><p>注意大小写，6616就是PID了。<br>2. 通过netstat指令来查看端口号</p><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="bash">C:\Users\Jamling&gt;netstat -o | findstr 6616  TCP    127.0.0.1:26941        lijiaming-PC:54961     ESTABLISHED     6616  TCP    127.0.0.1:26941        lijiaming-PC:56864     ESTABLISHED     6616  TCP    127.0.0.1:26942        lijiaming-PC:56905     ESTABLISHED     6616  TCP    127.0.0.1:26943        lijiaming-PC:56920     ESTABLISHED     6616  TCP    127.0.0.1:26944        lijiaming-PC:56934     ESTABLISHED     6616  TCP    127.0.0.1:26945        lijiaming-PC:56980     ESTABLISHED     6616  TCP    127.0.0.1:26946        lijiaming-PC:54962     ESTABLISHED     6616  TCP    127.0.0.1:26947        lijiaming-PC:54963     ESTABLISHED     6616  TCP    127.0.0.1:26948        lijiaming-PC:54610     ESTABLISHED     6616  TCP    192.168.133.15:55467   103.28.9.11:http       ESTABLISHED     6616  TCP    192.168.133.15:57223   115.239.210.246:5287   ESTABLISHED     6616  TCP    192.168.133.15:60100   183.131.26.108:http    CLOSE_WAIT      6616  TCP    192.168.133.15:60298   ti-in-f100:https       SYN_SENT        6616</code></pre><p>看第2列就是VBoxHeadless本机的TCP地址与端口号。（其实，一开始只有26941, 26946, 26947, 26948这4个），但是<code>adb connect 127.0.0.1:26941</code>之后，提示成功，但设备状态却是offline，然后，从26941开始到26945试了个遍。没想到真正的端口是26944。</p><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="bash">C:\Users\Jamling&gt;adb devicesList of devices attached127.0.0.1:26945 offline127.0.0.1:26944 device127.0.0.1:26943 offline127.0.0.1:26942 offline127.0.0.1:26941 offline</code></pre><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/09/19/other/haimawan-adb/](https://www.ieclipse.cn/2016/09/19/other/haimawan-adb/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      Android ADB连接海马玩模拟器的方法, 海马玩模拟器连接不上, ADB devices offline
+    
+    </summary>
+    
+    
+      <category term="奇淫巧技" scheme="https://www.ieclipse.cn/categories/trick/"/>
+    
+    
+      <category term="Android" scheme="https://www.ieclipse.cn/tags/Android/"/>
+    
+  </entry>
+  
+</feed>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Eclipse Marketplace介绍（译）</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Eclipse 插件,Eclipse,Eclipse Marketplace介绍（译）">
+  <meta name="description" content="简介Eclipse Marketplace是为了提供基于Eclipse解决方案、产品和附加特性。每月有成千上万的开发者访问Marketplace，基本上是寻找新的创新解决方案。受此驱动，解决方案提供商在Marketplace发布他们的产品以供Eclipse开发者社区使用。2010年6月，作为Helios版本的一部分，Eclipse内置了Marketplace客户端，带给Eclipse“应用商店”一样的体验。Marketplace客户端允许开发者直接在Eclipse中浏览和安装基于Eclipse的产品。">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="静勤居">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="Eclipse Marketplace介绍（译）">
+  <meta name="og:url" content="https://www.ieclipse.cn/2015/01/03/Eclipse/Eclipse-Marketplace/">
+  <meta name="og:description" content="简介Eclipse Marketplace是为了提供基于Eclipse解决方案、产品和附加特性。每月有成千上万的开发者访问Marketplace，基本上是寻找新的创新解决方案。受此驱动，解决方案提供商在Marketplace发布他们的产品以供Eclipse开发者社区使用。2010年6月，作为Helios版本的一部分，Eclipse内置了Marketplace客户端，带给Eclipse“应用商店”一样的体验。Marketplace客户端允许开发者直接在Eclipse中浏览和安装基于Eclipse的产品。">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="静勤居">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="Eclipse Marketplace介绍（译）">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="简介Eclipse Marketplace是为了提供基于Eclipse解决方案、产品和附加特性。每月有成千上万的开发者访问Marketplace，基本上是寻找新的创新解决方案。受此驱动，解决方案提供商在Marketplace发布他们的产品以供Eclipse开发者社区使用。2010年6月，作为Helios版本的一部分，Eclipse内置了Marketplace客户端，带给Eclipse“应用商店”一样的体验。Marketplace客户端允许开发者直接在Eclipse中浏览和安装基于Eclipse的产品。">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/2015/01/03/Eclipse/Eclipse-Marketplace/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/about/" class="main-nav">关于</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2015/01/03/Eclipse/Eclipse-Marketplace/">简体中文</a></li>
+              
+              <li><a href="/en/2015/01/03/Eclipse/Eclipse-Marketplace/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>当前路径：<a class="category-item" href="/">文章</a><a class="category-item" href="/categories/pde/">Eclipse 插件</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline"></h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">发表于</span>
+      <time datetime="2015-01-03T04:48:31.000Z" itemprop="datePublished"><time datetime="2015-01-03T04:48:31.000Z">2015-01-03</time></time>
+      </span>
+      
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">分享</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" id="changyan_count_unit" data-thread-key="016a4da2c7c15e93f9ef11a415b09d1b"></span><span class="hidden-xs">评论</span></a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">喜欢</span></a>-->
+        <a href="#" class="icon nova-eye leancloud_visitors" id="016a4da2c7c15e93f9ef11a415b09d1b" data-flag-title="“Eclipse" marketplace介绍（译）”><span class="count lc-count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2015-01-03T04:48:31.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Eclipse Marketplace是为了提供基于Eclipse解决方案、产品和附加特性。每月有成千上万的开发者访问Marketplace，基本上是寻找新的创新解决方案。受此驱动，解决方案提供商在Marketplace发布他们的产品以供Eclipse开发者社区使用。<br>2010年6月，作为Helios版本的一部分，Eclipse内置了Marketplace客户端，带给Eclipse“应用商店”一样的体验。Marketplace客户端允许开发者直接在Eclipse中浏览和安装基于Eclipse的产品。</p>
+<a id="more"></a>
+
+<h2 id="在Eclipse-Marketplace发布您的产品"><a href="#在Eclipse-Marketplace发布您的产品" class="headerlink" title="在Eclipse Marketplace发布您的产品"></a>在Eclipse Marketplace发布您的产品</h2><ol>
+<li>首先，在发布之前，您需要创建一个账号并登陆，Marketplace账号可以和Eclipse Bugzilla共用同一账号，如果您有需求，请点击这里创建账号。</li>
+<li>只要您登陆到Eclipse Marketplace，您将可以在网站上方的导航栏中看到“Add Content”连接。<br>Eclipse Marketplace允许发布内容有两种类型<ul>
+<li>解决方案－可以被下载和安装的产品，可以是完整的产品、RCP应用程序或者插件。</li>
+<li>培训＆咨询－为公司提供的培训及咨询服务，期望在Eclipse Marketplace中做广告。</li>
+</ul>
+</li>
+<li>如果您已经将你的产品提交发布，它将出现在缓冲队列中，在之后的24小时内，通过审批后，将出现在Eclipse Marketplace中。</li>
+<li>如果您想编辑产品，请访问面页上方导航栏上的“My Marketplace”链接</li>
+</ol>
+<h2 id="为Eclipse-Marketplace客户端做准备"><a href="#为Eclipse-Marketplace客户端做准备" class="headerlink" title="为Eclipse Marketplace客户端做准备"></a>为Eclipse Marketplace客户端做准备</h2><p>Eclipse Marketplace是2010年6发布的Eclipse Helios版本中的新特性。它带给开发者一种“应用商店”式的体验。旨在帮助开发者搜寻他们期望的Eclpse解决方案。上百万的Eclipse用户现在可以直接在Eclipse中看到Marketplace解决方案提供商。<br>Marketplace客户端列出的解决方案包含Eclipse基金会会员的商业化解决方案和所有的开源解决方案。为确保您的产品能够出现Marketplace客户端中，请遵循以下步骤：</p>
+<ol>
+<li>如果您有商业化的产品，您需要提供免费版本，Eclipse Marketplace中没有任何需要付费使用的商业化产品。</li>
+<li>您的产品必须能够在某个Eclipse中安装，有点遗憾的是，Marketplace客户端不提供安装产品所信赖的Eclipse下载和安装。</li>
+<li>为确保您的产品可以在Marketplace中出现和安装，有两个信息，您必须填写完整。<ol>
+<li>产品能够支持从Eclipse p2更新站点下载，所以更新站点（Update Site) url必须填写正确。</li>
+<li>必须定义产品的默认安装，默认安装包含1个或多个可安装的特性,特性具有唯一标识ID。所以您需要指定默认特性的ID。如果提供特性信息，请详见后面的说明。</li>
+</ol>
+</li>
+<li>我们推荐您使用当前版本的Marketplace客户端测试您的产品，Eclipse3.6及其之后版本都内置了Marketplace客户端，您可以通过Help-&gt;Eclipse Marketplace打开客户端。</li>
+</ol>
+<p>＊更多信息请访问Marketplace客户端内容包容策略</p>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2015/01/03/Eclipse/Eclipse-Marketplace/](https://www.ieclipse.cn/2015/01/03/Eclipse/Eclipse-Marketplace/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.906Z" itemprop="dateModified">
+    最后更新：2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="静勤居" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/2015/12/26/Android/Android-invoke-hide-api/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">上一页</span></a></li><li class="next"><a href="/2015/01/03/Eclipse/Eclipse-Publish-Guide/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">下一页</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    打赏
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>各位看官，鄙人借网络这块宝地在此献丑，望有钱的捧个钱场（打赏任意金额），没钱的捧个人场（分享）</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">打赏</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="016a4da2c7c15e93f9ef11a415b09d1b"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: '016a4da2c7c15e93f9ef11a415b09d1b',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          目录
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#简介">简介</a></li><li><a href="#在Eclipse-Marketplace发布您的产品">在Eclipse Marketplace发布您的产品</a></li><li><a href="#为Eclipse-Marketplace客户端做准备">为Eclipse Marketplace客户端做准备</a></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "代码",
+        right: "如下：",
+        copy: "复制"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

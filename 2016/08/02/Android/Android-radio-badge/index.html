@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Android底部栏添加消息提醒小红点功能</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Android,QuickAF,Android底部栏添加消息提醒小红点功能">
+  <meta name="description" content="Android底部栏显示小红点, Android RadioButton添加BadgeView">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="静勤居">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="Android底部栏添加消息提醒小红点功能">
+  <meta name="og:url" content="https://www.ieclipse.cn/2016/08/02/Android/Android-radio-badge/">
+  <meta name="og:description" content="Android底部栏显示小红点, Android RadioButton添加BadgeView">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="静勤居">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="Android底部栏添加消息提醒小红点功能">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="Android底部栏显示小红点, Android RadioButton添加BadgeView">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/2016/08/02/Android/Android-radio-badge/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/about/" class="main-nav">关于</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2016/08/02/Android/Android-radio-badge/">简体中文</a></li>
+              
+              <li><a href="/en/2016/08/02/Android/Android-radio-badge/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>当前路径：<a class="category-item" href="/">文章</a><a class="category-item" href="/categories/Android/">Android</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline"></h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">发表于</span>
+      <time datetime="2016-08-02T13:00:00.000Z" itemprop="datePublished"><time datetime="2016-08-02T13:00:00.000Z">2016-08-02</time></time>
+      </span>
+      
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">分享</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" id="changyan_count_unit" data-thread-key="059c1db75095d8f3fb48ece6094f8b31"></span><span class="hidden-xs">评论</span></a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">喜欢</span></a>-->
+        <a href="#" class="icon nova-eye leancloud_visitors" id="059c1db75095d8f3fb48ece6094f8b31" data-flag-title="“Android底部栏添加消息提醒小红点功能”"><span class="count lc-count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2016-08-02T13:00:00.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <p>目前许多Android App都带有一个底部栏，通过底部栏可以切换Tab，比如微信，QQ都是这种风格。对于像小红点之类的醒目提醒，用得最多的就是BadgeView了，不过，如果底部栏是RadioGroup的话，那么不好意思BadgeView可不支持哦（如果使用BadgeView，RadioGroup就不能愉快地工作了）。那么如何即保留使用RadioGroup又能添加BadgeView的功能呢？请接着阅读本文。</p>
+<p>本文阐述的是使用<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>的RadioBadgeView来解决RadioButton与BadgeView的冲突。在RadioButton上显示Badge消息提醒，需要将原来的RadioButton替换成RadioBadgeView。</p>
+<h2 id="RadioBadgeView"><a href="#RadioBadgeView" class="headerlink" title="RadioBadgeView"></a>RadioBadgeView</h2><p>RadioBadgeView继承自RadioButton，可以视为RadioButton的加强版。与RadioButton不同的时，它在初始化时会生成一个BadgeView2对象（BadgeView2用于展现小红点，后文有详细介绍）。在onDraw时，调用BadegView2的draw方法将小红点画到界面上。</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">@Override
+protected void onDraw(Canvas canvas) {
+    super.onDraw(canvas);
+    drawBadge(canvas);
+}
+
+private void drawBadge(Canvas canvas) {
+    Point p = getBadgePosition();
+    canvas.save();
+    canvas.translate(p.x, p.y);
+    badgeView.draw(canvas);
+    canvas.restore();
+}
+
+/**
+ * Calculate the badge view position, default is the top-right of the radio
+ * button with a top drawable.
+ *
+ * 
+ * @return the position of badge view relative to target
+ */
+protected Point getBadgePosition() {
+    int offw = getMeasuredWidth() &gt;&gt; 1;
+    int offh = getMeasuredHeight() &gt;&gt; 1;
+    // 注意这里不考虑复杂的布局
+    Drawable d = getCompoundDrawables()[1]; // top drawable;
+    if (d != null) {
+        offw += d.getIntrinsicWidth() &gt;&gt; 1;
+        offh -= (getCompoundDrawablePadding() + d.getIntrinsicHeight()
+                + (getPaint().descent() - getPaint().ascent())) / 2;
+        offh -= badgeView.getMeasureHeight() / 2;
+        if (offh &lt; 0) {
+            offh = 0;
+        }
+    }
+    return new Point(offw, offh);
+}</code></pre>
+<p>从上面的代码可以看到，<code>drawBadge</code>用来画BadgeView, <code>getBadgePosition()</code>用于获取BadgeView的位置。注意了，这个位置坐标位于top drawable的右上角，如果你的页面要求小红点位于其它地方，比如右下角，那么需要参考本类的实现，重写<code>getBadgePosition()</code>方法。</p>
+<p>如何控制显示的数目呢？</p>
+<p>请看以下代码：</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">public BadgeView2 getBadgeView() {
+    return badgeView;
+}
+
+public int getBadgeCount() {
+    return badgeView.getBadgeCount();
+}
+
+public void setBadgeCount(int count) {
+    badgeView.setBadgeCount(count);
+}
+
+public void incrementBadgeCount(int increment) {
+    int count = getBadgeCount();
+    setBadgeCount(increment + count);
+}
+
+public void decrementBadgeCount(int decrement) {
+    incrementBadgeCount(-decrement);
+}</code></pre>
+<p>像常用的对BadgeView数目的操作，都委托<var>badgeView</var>去执行了。更多的操作，需要通过<code>getBadgeView()</code>返回<var>badgeView</var>来执行。</p>
+<p>那么可以认为RadioBadgeView相当于一个Decorator。真正的玄机还在BadgeView2类中。</p>
+<h2 id="BadgeView2"><a href="#BadgeView2" class="headerlink" title="BadgeView2"></a>BadgeView2</h2><p>BadgeView2与BadgeView很像，熟悉BadgeView的同学阅读BadgeView2的代码应该很容易，由于BadgeView2的代码较长，这里只讲部分重点功能。</p>
+<h3 id="设置显示Style"><a href="#设置显示Style" class="headerlink" title="设置显示Style"></a>设置显示Style</h3><p>BadgeView2提供三种显示风格</p>
+<ul>
+<li>显示背景，背景一般都是一个小圆点</li>
+<li>显示数字，比如QQ的消息数目，有最大值限制，可以自定义</li>
+<li>都显示（显示背景+显示数字）</li>
+</ul>
+<p>代码如下：</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">/**
+ * Set badge view display style
+ * 
+ * @param badgeStyle combined value of {@link #STYLE_BACKGROUND}, {@link #STYLE_TEXT}
+ * @see BadgeView2#STYLE_BOTH
+ * @see BadgeView2#STYLE_BACKGROUND
+ * @see BadgeView2#STYLE_TEXT
+ *      
+ */
+public void setBadgeStyle(int badgeStyle) {
+    if (this.badgeStyle != badgeStyle) {
+        this.badgeStyle = badgeStyle;
+        requestLayout();
+    }
+}</code></pre>
+<h3 id="设置背景"><a href="#设置背景" class="headerlink" title="设置背景"></a>设置背景</h3><p>提供两个API来设置背景</p>
+<ul>
+<li>通过指定背景半径(radius)和背景色(bgColor)来设置（背景为ShapeDrawable）</li>
+<li>通过设置背景图片（png或9.png）</li>
+</ul>
+<p>详细代码如下：</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">/**
+ * &lt;p&gt;
+ * Set shape drawable as background. If set
+ * {@link BadgeView2#STYLE_BACKGROUND} style the background will displayed
+ * as circle with assigned radius.
+ * 
+ * &lt;/p&gt;
+ * &lt;p&gt;
+ * &lt;b&gt;&lt;em&gt;Note &lt;/em&gt;&lt;/b&gt;
+ * If badge count less than 10 or {@link #badgeStyle} set to
+ * {@link #STYLE_BACKGROUND} the background will display as circle
+ * &lt;/p&gt;
+ * If radius assigned, set a default horizontal padding of radius also.
+ * 
+ * @param radius
+ *            the radius of circle background under
+ *            {@link BadgeView2#STYLE_BACKGROUND} style, px unit
+ * @param bgColor
+ *            background color, ARGB format
+ */
+public void setBadgeBackground(int radius, int bgColor) {
+    float[] radiusArray = new float[] { radius, radius, radius, radius,
+            radius, radius, radius, radius };
+    padding = new Rect(radius, 0, radius, 0);
+    RoundRectShape roundRect = new RoundRectShape(radiusArray, null, null);
+    ShapeDrawable bgDrawable = new ShapeDrawable(roundRect);
+    bgDrawable.getPaint().setColor(bgColor);
+    bgDrawable.setPadding(padding);
+    this.badgeBackground = bgDrawable;
+    requestLayout();
+}
+
+/**
+ * Set badge background, may be a .9.png, to get well display effect, you
+ * may call {@link BadgeView2#setBadgePadding(int, int, int, int)} to set
+ * paddings
+ * 
+ * 
+ * @param d
+ *            background drawable
+ * @see BadgeView2#setBadgePadding(int, int, int, int)
+ */
+public void setBadgeBackground(Drawable d) {
+    if (this.badgeBackground != d) {
+        badgeBackground = d;
+        requestLayout();
+    }
+}</code></pre>
+<p>其它的API就不详细介绍了，有兴趣可以查看<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>源代码。</p>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>在<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>的sample app中，底部的导航栏使用的就是RadioBageView，另外，在示例中还包含RadioBadgeView的三种使用方式</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">int r = AppUtils.dp2px(view.getContext(), 4);
+int ts = AppUtils.sp2px(view.getContext(), 12);
+
+rb1 = (RadioBadgeView) findViewById(R.id.radio_badge1);
+rb2 = (RadioBadgeView) findViewById(R.id.radio_badge2);
+rb3 = (RadioBadgeView) findViewById(R.id.radio_badge3);
+
+rb1.getBadgeView().setBadgeBackground(ts &gt;&gt; 1, 0xffff0000);
+rb1.getBadgeView().setTextSize(ts);
+rb1.getBadgeView().setMax(10, null);
+
+rb2.getBadgeView().setBadgeBackground(
+        getResources().getDrawable(android.R.drawable.btn_radio));
+rb2.getBadgeView().setTextColor(0xff00ff00);
+rb2.getBadgeView().setTextSize(ts * 3 / 2);
+rb2.getBadgeView().setBadgePadding(r, 0, r, 0);
+
+rb3.getBadgeView().setBadgeBackground(
+        getResources().getDrawable(R.mipmap.logo));
+rb3.getBadgeView().setTextColor(0xff0000ff);
+rb3.getBadgeView().setTextSize(ts * 2 / 3);</code></pre>
+<p>layout中有三个RadioBadgeView，分别为rb1, rb2和rb3。</p>
+<ul>
+<li><strong>rb1</strong>：使用ShapeDrawable作背景，最大数目显示10</li>
+<li><strong>rb2</strong>：使用9.png作背景</li>
+<li><strong>rb3</strong>：使用png图片作背景</li>
+</ul>
+<p>布局Layout如下：</p>
+<p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="xml">&lt;RadioGroup
+    android:id=&quot;@+id/radioGroup2&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:layout_marginTop=&quot;20dp&quot;
+    android:background=&quot;#ffeeeeaa&quot;
+    android:gravity=&quot;center_vertical&quot;
+    android:minHeight=&quot;55dp&quot;
+    android:orientation=&quot;horizontal&quot; &gt;
+
+    &lt;cn.ieclipse.af.view.RadioBadgeView
+        android:id=&quot;@+id/radio_badge1&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_weight=&quot;1&quot;
+        android:button=&quot;@null&quot;
+        android:drawableTop=&quot;@android:drawable/ic_menu_camera&quot;
+        android:gravity=&quot;center&quot;
+        android:padding=&quot;8dp&quot;
+        android:text=&quot;Shape bg&quot; /&gt;
+
+    &lt;cn.ieclipse.af.view.RadioBadgeView
+        android:id=&quot;@+id/radio_badge2&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_weight=&quot;1&quot;
+        android:button=&quot;@null&quot;
+        android:drawableTop=&quot;@android:drawable/ic_menu_save&quot;
+        android:gravity=&quot;center&quot;
+        android:padding=&quot;8dp&quot;
+        android:text=&quot;9png bg&quot; /&gt;
+
+    &lt;cn.ieclipse.af.view.RadioBadgeView
+        android:id=&quot;@+id/radio_badge3&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_weight=&quot;1&quot;
+        android:button=&quot;@null&quot;
+        android:drawableTop=&quot;@android:drawable/ic_menu_manage&quot;
+        android:gravity=&quot;center&quot;
+        android:padding=&quot;8dp&quot;
+        android:text=&quot;png bg&quot; /&gt;
+&lt;/RadioGroup&gt;</code></pre>
+<p>大家可以在<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>的sample app中修改显示风格，设置padding，增加或减少数目来查看效果。</p>
+<h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a> 是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>BadgeView: <a href="https://github.com/stefanjauker/BadgeView" target="_blank" rel="noopener">https://github.com/stefanjauker/BadgeView</a><br>QuickAF: <a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">https://github.com/Jamling/QuickAF</a></p>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/08/02/Android/Android-radio-badge/](https://www.ieclipse.cn/2016/08/02/Android/Android-radio-badge/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.895Z" itemprop="dateModified">
+    最后更新：2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="静勤居" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/2016/08/02/Android/Android-code-states/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">上一页</span></a></li><li class="next"><a href="/2016/07/28/Web/Hexo-dev-post-views/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">下一页</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    打赏
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>各位看官，鄙人借网络这块宝地在此献丑，望有钱的捧个钱场（打赏任意金额），没钱的捧个人场（分享）</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">打赏</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="059c1db75095d8f3fb48ece6094f8b31"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: '059c1db75095d8f3fb48ece6094f8b31',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          目录
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#RadioBadgeView">RadioBadgeView</a></li><li><a href="#BadgeView2">BadgeView2</a><ul class="nav toc-ul"><li><a href="#设置显示Style">设置显示Style</a></li><li><a href="#设置背景">设置背景</a></li><li><a href="#使用方法">使用方法</a></li></ul></li><li><a href="#关于">关于</a></li><li><a href="#参考">参考</a></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "代码",
+        right: "如下：",
+        copy: "复制"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>概览|Android-ORM</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="概览">
+  <meta name="description" content>
+  
+
+  <meta name="og:type" content="website">
+  <meta name="og:site_name" content="静勤居">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="概览">
+  <meta name="og:url" content="https://www.ieclipse.cn/p/Android-ORM/index.html">
+  <meta name="og:description" content>
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="静勤居">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="概览">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content>
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/p/Android-ORM/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/about/" class="main-nav">关于</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/p/Android-ORM/index.html">简体中文</a></li>
+              
+              <li><a href="/en/p/Android-ORM/index.html">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+  
+   
+    
+    <div class="container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-12 col-md-2 col-lg-2" role="navigation">
+        <aside>
+      <div id="project_tree"></div>
+      <style>
+      .treeview li{
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+      }
+      </style>
+      
+      <script src="//cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+      <script>
+      $('#project_tree').treeview({
+        enableLinks: true,
+        color: '#428bca',
+        expandIcon: 'icon nova-arrow-right2',
+        collapseIcon: 'icon nova-arrow-down2',
+        //levels: 3,
+        //node-icon: '',
+        //selectedColor: '#ff0000',
+        onNodeSelected: function(event, data) {
+          if (data.state.selected){
+            return;
+          }
+        },
+        data: [{"text":"概览","color":null,"href":"index.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":true}},{"text":"下载","color":null,"href":"download.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}},{"text":"用户指南","color":null,"href":"userguide.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}},{"text":"更新日志","color":null,"href":"change.html","selectable":false,"state":{"disabled":false,"expanded":false,"selected":false}}]
+      });
+      function pnav(liobj){
+        var as = $(liobj).find('a');
+        if (as && as.length > 0){
+          var href = as.attr("href");
+          if(href == '#'){
+            // as.trigger('click');
+          } else if (href) {
+            location.href = href;
+          }
+        }
+      }
+      
+      $('.node-project_tree').each(function(i){
+        //$(this).attr('onclick', 'pnav(this)');
+	    });
+      
+      $(document).ready(function(e){
+        $(document).on("click",'.node-project_tree',function(e){pnav(this);  });
+      });
+      </script>
+    </aside>
+  </div>
+  <div class="col-sx-12 col-sm-8 col-md-8 col-lg-8 project">
+    <a id="project" href="https://github.com/Jamling/Android-ORM/raw/master/"></a>
+    
+<article class="article " itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <h1 class="article-title" itemprop="name headline">
+      概览
+      <a href="https://github.com/Jamling/Android-ORM/edit/master/README_zh.md" class="article-edit-link" title="改进本文"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+      
+    </h1>
+    <meta content="2016-01-30T09:43:26.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <p><a href="https://travis-ci.org/Jamling/Android-ORM"><img src="https://travis-ci.org/Jamling/Android-ORM.svg?branch=master" alt="Build Status"></a><br><a href="https://github.com/Jamling/Android-ORM"><img src="https://img.shields.io/github/release/jamling/Android-ORM.svg?maxAge=3600" alt="GitHub release"></a><br><a href="https://bintray.com/jamling/maven/Android-ORM"><img src="https://img.shields.io/bintray/v/jamling/maven/Android-ORM.svg?maxAge=86400" alt="Bintray"></a><br><a href="https://android-arsenal.com/details/1/4306"><img src="https://img.shields.io/badge/Android%20Arsenal-Android_ORM-green.svg?style=flat" alt="Android Arsenal"></a></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>您是否在Android上使用sqlite来存储您的应用数据呢？如果是，或许您会对Android存取sqlite数据感觉有点小复杂。本人从2010年开始从事Android开发，对于Android的数据库操纵这一块，感觉还是比较复杂的，尤其是可维护性及或可扩展性方面，都是比较差的。<br>也正是从这时开始，我决定在Android平台上实现像Hibernate那样的ORM框架，来简化开发工作。使得开发者在使用sqlite数据库时，无需关注底层数据库实现，更多的是关注上层业务逻辑实现。<br>如果您对此项目感兴趣，欢迎您的加入！</p>
+<h1 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h1><ul>
+<li>简洁的ORM映射配置, 只需在Java Bean的属性中添加<code>@Column</code>的注解即可完成到数据库字段的映射配置.</li>
+<li>支持原生<code>ConntentProvider</code>，可以方便的使用Android <code>ContentProvider</code>机制来共享数据，初始化/升级/降级数据库</li>
+<li>强大的正向工程支持, 有Eclipse <a href="https://github.com/Jamling/adt-extensions">Android ADT-extensions</a>和Android Studio <a href="https://github.com/Jamling/Android-ORM-ASPlugin">Android ORM Tool</a>插件来自动生成DDL和ContentProvider.</li>
+<li>给力的辅助工具, 向导式新建Activity/Service/BroadcastReceiver并且自动配置到AndroidManifest.xml.</li>
+<li>…<br>更多特性，请自行体验.</li>
+</ul>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>最新版本 <code>$latest</code> 为: <a href="https://github.com/Jamling/Android-ORM"><img src="https://img.shields.io/github/release/jamling/Android-ORM.svg?maxAge=3600" alt="latest release"></a>, <strong>在使用中请将<code>$latest</code>替换为具体的版本</strong>.</p>
+<h2 id="Eclipse"><a href="#Eclipse" class="headerlink" title="Eclipse"></a>Eclipse</h2><p>下载aorm-core-<code>$latest</code>.jar并放入libs/目录下</p>
+<p>推荐安装<a href="https://github.com/Jamling/adt-extensions">Android ADT-extensions</a>插件</p>
+<h2 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a>Android Studio</h2><p>Aorm已经发布到jcenter，在您的app/build.gradle中添加以下依赖。</p>
+<pre><code class="gradle"><span class="keyword">dependencies</span> {
+    <span class="keyword">compile</span> <span class="string">'cn.ieclipse.aorm:aorm-core:$latest'</span>
+}</code></pre>
+<p>推荐安装Android Studio上的<a href="https://github.com/Jamling/Android-ORM-ASPlugin">Android ORM Tool</a>插件，可以快速生成相关代码。</p>
+<h1 id="类似orm库比较"><a href="#类似orm库比较" class="headerlink" title="类似orm库比较"></a>类似orm库比较</h1><p>简单试验结果:</p>
+<p><img src="screenshot/simpletrial.png" alt="Simple Trial" title="Simple Trial"></p>
+<p>复杂试验结果:</p>
+<p><img src="screenshot/complextrial.png" alt="Complex Trial" title="Complex Trial"></p>
+<p>测试工程代码请参考: <a href="https://github.com/Raizlabs/AndroidDatabaseLibraryComparison">https://github.com/Raizlabs/AndroidDatabaseLibraryComparison</a></p>
+<h1 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h1><h2 id="创建映射"><a href="#创建映射" class="headerlink" title="创建映射"></a>创建映射</h2><p>只需添加类<code>@Table</code>注解及<code>@Column</code>属性注解即可完成表与字段的映射。</p>
+<pre><code class="java"><span class="meta">@Table</span>(name = <span class="string">"student"</span>)
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>{
+
+    <span class="meta">@Column</span>(name = <span class="string">"_id"</span>, id = <span class="keyword">true</span>)
+    <span class="keyword">public</span> <span class="keyword">long</span> id; <span class="comment">//id is Primary key.</span>
+
+    <span class="meta">@Column</span>(name=<span class="string">"_name"</span>)
+    <span class="keyword">public</span> String name; <span class="comment">//mapping to _name and auto column type</span>
+
+    <span class="meta">@Column</span>()
+    <span class="keyword">public</span> <span class="keyword">int</span> age; <span class="comment">//auto column type and name</span>
+
+    <span class="meta">@Column</span>(defaultValue=<span class="string">"''"</span>)
+    <span class="keyword">public</span> String phone; <span class="comment">// default value in empty</span>
+
+    <span class="keyword">public</span> String address; <span class="comment">// no mapping</span>
+}</code></pre>
+<h2 id="Create-database"><a href="#Create-database" class="headerlink" title="Create database"></a>Create database</h2><pre><code class="java"><span class="keyword">package</span> cn.ieclipse.aorm.example;
+
+<span class="keyword">import</span> android.content.ContentProvider;
+<span class="keyword">import</span> android.content.ContentValues;
+<span class="keyword">import</span> android.database.Cursor;
+<span class="keyword">import</span> android.database.sqlite.SQLiteDatabase;
+<span class="keyword">import</span> android.database.sqlite.SQLiteOpenHelper;
+<span class="keyword">import</span> android.net.Uri;
+<span class="keyword">import</span> cn.ieclipse.aorm.Aorm;
+<span class="keyword">import</span> cn.ieclipse.aorm.Session;
+<span class="keyword">import</span> cn.ieclipse.aorm.example.bean.Course;
+<span class="keyword">import</span> cn.ieclipse.aorm.example.bean.Grade;
+<span class="keyword">import</span> cn.ieclipse.aorm.example.bean.Student;
+
+<span class="comment">/**</span>
+<span class="comment"> * <span class="doctag">@author</span> Jamling</span>
+<span class="comment"> * </span>
+<span class="comment"> */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleContentProvider</span> <span class="keyword">extends</span> <span class="title">ContentProvider</span> </span>{
+
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String AUTH = <span class="string">"cn.ieclipse.aorm.example.provider"</span>;
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Uri URI = Uri.parse(<span class="string">"content://"</span> + AUTH);
+    <span class="keyword">private</span> SQLiteOpenHelper mOpenHelper;
+    <span class="keyword">private</span> <span class="keyword">static</span> Session session;
+
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">delete</span><span class="params">(Uri arg0, String arg1, String[] arg2)</span> </span>{
+        <span class="keyword">return</span> <span class="number">0</span>;
+    }
+
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> String <span class="title">getType</span><span class="params">(Uri arg0)</span> </span>{
+        <span class="keyword">return</span> <span class="keyword">null</span>;
+    }
+
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> Uri <span class="title">insert</span><span class="params">(Uri arg0, ContentValues arg1)</span> </span>{
+        <span class="keyword">return</span> <span class="keyword">null</span>;
+    }
+
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> Cursor <span class="title">query</span><span class="params">(Uri arg0, String[] arg1, String arg2, String[] arg3,</span></span>
+<span class="function"><span class="params">            String arg4)</span> </span>{
+        <span class="keyword">return</span> <span class="keyword">null</span>;
+    }
+
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(Uri arg0, ContentValues arg1, String arg2, String[] arg3)</span> </span>{
+        <span class="keyword">return</span> <span class="number">0</span>;
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Session <span class="title">getSession</span><span class="params">()</span> </span>{
+        <span class="keyword">return</span> session;
+    }
+
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onCreate</span><span class="params">()</span> </span>{
+        mOpenHelper = <span class="keyword">new</span> SQLiteOpenHelper(<span class="keyword">this</span>.getContext(), <span class="string">"example.db"</span>,
+                <span class="keyword">null</span>, <span class="number">1</span>) {
+            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(SQLiteDatabase db)</span> </span>{
+                <span class="comment">// method 3: use AORM to create table</span>
+                Aorm.createTable(db, Grade.class);
+                Aorm.createTable(db, Student.class);
+                Aorm.createTable(db, Course.class);
+            }
+
+            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onUpgrade</span><span class="params">(SQLiteDatabase db, <span class="keyword">int</span> oldVersion,</span></span>
+<span class="function"><span class="params">                    <span class="keyword">int</span> newVersion)</span> </span>{
+                <span class="comment">// update table, suggested to wrapper in if block</span>
+                Aorm.updateTable(db, Grade.class);
+                Aorm.updateTable(db, Student.class);
+                Aorm.updateTable(db, Course.class);
+            }
+        };
+        session = <span class="keyword">new</span> Session(mOpenHelper, getContext().getContentResolver());
+        <span class="keyword">return</span> <span class="keyword">true</span>;
+    }
+
+}</code></pre>
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><pre><code class="java">Session session = ExampleContentProvider.getSession();
+<span class="comment">// 最简单的查询：查询所有的学生信息.</span>
+Criteria criteria = Criteria.create(Student.class);
+<span class="comment">// 添加条件: id相等</span>
+criteria.add(Restrictions.eq(<span class="string">"id"</span>, <span class="number">1</span>));
+<span class="comment">// 添加条件: name like Jamling</span>
+criteria.add(Restrictions.like(<span class="string">"name"</span>, <span class="string">"Jaming"</span>));
+<span class="comment">// add restriction: age &lt; 30</span>
+criteria.add(Restrictions.lt(<span class="string">"age"</span>, <span class="number">30</span>));
+<span class="comment">// add order</span>
+criteria.addOrder(Order.asc(<span class="string">"age"</span>));
+<span class="comment">// set district</span>
+criteria.setDistinct(<span class="keyword">true</span>);
+<span class="comment">// set limit from row 10 to 20</span>
+criteria.setLimit(<span class="number">10</span>, <span class="number">10</span>);
+
+List&lt;Student&gt; list = session.list(Student.class);
+<span class="comment">// if you use Android CursorAdapter you can:</span>
+Cursor c = session.query(criteria);
+
+<span class="comment">// set alias, so the project will be alias.columnn. e.g. s.name</span>
+<span class="comment">// criteria.setAlias("s");</span>
+<span class="comment">// multi-table query</span>
+criteria.addChild(StudentMore.class, <span class="string">"m"</span>, Criteria.INNER_JOIN,
+        Restrictions.geProperty(<span class="string">"s.id"</span>, <span class="string">"m.id"</span>));
+<span class="comment">// query to cursor</span>
+c = session.query(criteria);
+<span class="comment">// convert to list.</span>
+List&lt;Object[]&gt; ret = CursorUtils.getFromCursor(c,
+        <span class="keyword">new</span> Class[] { Student.class }, <span class="keyword">new</span> String[] { <span class="string">"s"</span>, <span class="string">"m"</span> });
+<span class="comment">// query to list.</span>
+ret = session.listAll(criteria);
+Object[] item = ret.get(<span class="number">0</span>);
+Student s = (Student) item[<span class="number">0</span>];
+StudentMore m = (StudentMore) item[<span class="number">1</span>];
+<span class="comment">//</span></code></pre>
+<h2 id="其它操作"><a href="#其它操作" class="headerlink" title="其它操作"></a>其它操作</h2><pre><code class="java">Session session = ExampleContentProvider.getSession();
+<span class="comment">// insert</span>
+Student s = <span class="keyword">new</span> Student();
+s.setName(<span class="string">"Jamling"</span>);
+<span class="keyword">long</span> rowId = session.insert(s, <span class="keyword">null</span>);
+<span class="comment">// update student's name to Jame whose id is 1</span>
+s.setId(<span class="number">1</span>);
+s.setName(<span class="string">"Jame"</span>);
+<span class="keyword">int</span> rows = session.update(s);
+<span class="comment">// delete student whose id is 2</span>
+session.deleteById(Student.class, <span class="number">2</span>);
+<span class="comment">// query student whose id is 4</span>
+s = session.get(Student.class, <span class="number">4</span>);</code></pre>
+<h1 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h1><p>请参考 <a href="http://www.ieclipse.cn/p/Android-ORM/userguide.html">http://www.ieclipse.cn/p/Android-ORM/userguide.html</a></p>
+<h1 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h1><p>Jamling (<a href="mailto:li.jamling@gmail.com">li.jamling@gmail.com</a>)</p>
+
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.993Z" itemprop="dateModified">
+    最后更新：2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="静勤居" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="next"><a href="/p/Android-ORM/download.html"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">下一页</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    打赏
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>各位看官，鄙人借网络这块宝地在此献丑，望有钱的捧个钱场（打赏任意金额），没钱的捧个人场（分享）</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">打赏</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="d5afd5a9fabff7e4121a3c04cf7a795a"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: 'd5afd5a9fabff7e4121a3c04cf7a795a',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+  </div>
+  <!-- aside -->
+  <div class="col-sx-2 col-sm-2 col-md-2 col-lg-2 hidden-xs">
+  <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          目录
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#简介">简介</a></li><li><a href="#特性">特性</a></li><li><a href="#使用">使用</a><ul class="nav toc-ul"><li><a href="#Eclipse">Eclipse</a></li><li><a href="#Android-Studio">Android Studio</a></li></ul></li><li><a href="#类似orm库比较">类似orm库比较</a></li><li><a href="#示例代码">示例代码</a><ul class="nav toc-ul"><li><a href="#创建映射">创建映射</a></li><li><a href="#Create-database">Create database</a></li><li><a href="#查询">查询</a></li><li><a href="#其它操作">其它操作</a></li></ul></li><li><a href="#文档">文档</a></li><li><a href="#作者">作者</a></li></ul>
+        </div>
+      </nav>
+</div>
+
+  </div>
+</div>
+<script>
+  {
+    var base = $('a#project').attr('href');
+    // Article
+    $('.article').each(function (i) {
+      // image
+      $(this).find('img').each(function () {
+        var src = $(this).attr('src');
+        if (src && !(src.indexOf('http://') == 0 || src.indexOf('https://') == 0 || src.indexOf('//') == 0)) {
+          console.log(src, 'need to prepend base url');
+          $(this).attr('src', base + src);
+          var p = $(this).parent();
+          if ($(p).is('a')) {
+            $(p).attr('href', base + src);
+          }
+        }
+      });
+    });
+  }
+</script>
+</div>
+
+  
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "代码",
+        right: "如下：",
+        copy: "复制"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>

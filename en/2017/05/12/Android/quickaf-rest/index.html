@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>QuickAF网络连接及数据解析简介</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Android,QuickAF,QuickAF网络连接及数据解析简介">
+  <meta name="description" content="QuickAF中使用Volley进行网络连接，使用Gson来解析响应数据。为了更方便地执行REST API网络请求，QuickAF对Volley+Gson进行了简单的封装。">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="Jamling's Blog and Project Site">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="QuickAF网络连接及数据解析简介">
+  <meta name="og:url" content="https://www.ieclipse.cn/2017/05/12/Android/quickaf-rest/">
+  <meta name="og:description" content="QuickAF中使用Volley进行网络连接，使用Gson来解析响应数据。为了更方便地执行REST API网络请求，QuickAF对Volley+Gson进行了简单的封装。">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="Jamling's Blog and Project Site">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="QuickAF网络连接及数据解析简介">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="QuickAF中使用Volley进行网络连接，使用Gson来解析响应数据。为了更方便地执行REST API网络请求，QuickAF对Volley+Gson进行了简单的封装。">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/en/2017/05/12/Android/quickaf-rest/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+</head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/en/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/en/" class="main-nav">Home</a></li><li><a href="/en/p/" class="main-nav">Projects</a></li><li><a href="/en/categories/" class="main-nav">Category</a></li><li><a href="/en/archives/" class="main-nav">Archive</a></li><li><a href="/en/donate/" class="main-nav">Donate</a></li><li><a href="/en/about/" class="main-nav">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2017/05/12/Android/quickaf-rest/">简体中文</a></li>
+              
+              <li><a href="/en/2017/05/12/Android/quickaf-rest/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>Path: <a class="category-item" href="/en/">Blog</a><a class="category-item" href="/en/categories/Android/">Android</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline"></h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">Post at: </span>
+      <time datetime="2017-05-12T02:16:41.000Z" itemprop="datePublished"><time datetime="2017-05-12T02:16:41.000Z">2017-05-12</time></time>
+      </span>
+      
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">Share</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" id="changyan_count_unit" data-thread-key="c10bdbe9702897699fed171a68e9ddb3"></span><span class="hidden-xs">Comment</span></a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">Like</span></a>-->
+        <a href="#" class="icon nova-eye leancloud_visitors" id="c10bdbe9702897699fed171a68e9ddb3" data-flag-title="“QuickAF网络连接及数据解析简介”"><span class="count lc-count leancloud-visitors-count"></span><span class="hidden-xs">Views</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2017-05-12T02:16:41.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中使用Volley进行网络连接，使用Gson来解析响应数据。为了更方便地执行REST API网络请求，<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>对Volley+Gson进行了简单的封装。</p>
+<a id="more"></a>
+
+<h2 id="接口请求与响应设计"><a href="#接口请求与响应设计" class="headerlink" title="接口请求与响应设计"></a>接口请求与响应设计</h2><h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p>REST接口是基于HTTP协议的，一个接口的定义包含请求地址，请求方法，请求参数，响应信息。请求地址为一个URL，由基地址和接口路径和查询字符串组成。比如<a href="http://127.0.0.1:8080/meituan/api/1.0/user/login?token=xxxxxxx" target="_blank" rel="noopener">http://127.0.0.1:8080/meituan/api/1.0/user/login?token=xxxxxxx</a>; <a href="http://127.0.0.1:8080/meituan/api/1.0/" target="_blank" rel="noopener">http://127.0.0.1:8080/meituan/api/1.0/</a> 为基地址，一套api，其基地址是相同的。1.0为接口版本，user/login为接口路径，token=xxxxxx为查询字符串。请求方法有GET/POST/PUT/DELETE等。<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>将接口地址抽象为IUrl接口</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">public interface IUrl {
+    /**
+     * return http method, see {@link com.android.volley.Request.Method}
+     *
+     * @return http method
+     * @see com.android.volley.Request.Method
+     */
+    int getMethod();
+
+    /**
+     * return the full url
+     *
+     * @return
+     */
+    String getUrl();
+
+    /**
+     * set query string to url.
+     *
+     * @param query query string, it a request parameter of string format usually
+     */
+    void setQuery(String query);
+}</code></pre>
+<h3 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h3><p>一般来说接口的请求比较简单，如果请求是application/json，将请求对象转为json字符串即可。但是实际当中，仍然有许多接口使用的还是application/x-www-form-urlencoded，这种方式简单，而且适用于网页。<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>默认以后者来提交http请求，并且支持以下两种请求格式</p>
+<ol>
+<li>键值对，这也是早期使用最多的，通过Map来存储请求参数。</li>
+<li>对象，通过反射机制将对象的属性及属性值转化对键值对，具有很高的可扩展性，一旦接口有变更，比如接口要求添加uuid参数，可以非常方便的修改请求基类来满足业务需求，<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>建议使用这种方式来封装请求。</li>
+</ol>
+<p>通常在REST API中包含appKey, secret, uuid等全局请求参数，<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>的sample app中定义的请求基类如下：</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">public class BaseRequest implements java.io.Serializable {
+    public String appKey;
+    public String secret;
+    public String version;
+    public String uuid;
+}</code></pre>
+<p>具体的业务API只需要继承BaseRequest，然后添加具体的业务请求参数，比如注册的请求</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">public class RegisterRequest extends BaseRequest {
+    public String phone;
+    public String code;
+    public String password;
+}</code></pre>
+<p>对于GET请求，将请求对象转为查询字符串附在url中，对于POST请求，则将请求对象写入body中。</p>
+<h3 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h3><p>REST API接口响应一般包含状态码(status)，提示信息(message)及业务对象(data)，需要经过json工具将其转为对象，这个对象我们姑且称之为接口对象。伪代码如下：</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">class MyResponse {
+  int code;//业务响应状态码
+  String message;//业务响应信息，比如投票失败
+  Object data;//业务响应对象，比如登录，返回的是一个User对象
+}</code></pre>
+<p>其实业务模块往往关心的只有业务对象(data)，因为对于业务操作不成功的处理，可以在基类中统一处理。在<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中，将接口对象抽象为IBaseResponse接口。</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">public interface IBaseResponse&lt;Output&gt; extends java.io.Serializable{
+    /**
+     * Return the business data object
+     *
+     * @return concrete business data
+     */
+    Output getData();
+}</code></pre>
+<h3 id="请求任务"><a href="#请求任务" class="headerlink" title="请求任务"></a>请求任务</h3><p>如果我们将请求视为输入，响应视为输出，那么对于一次网络请求，使用代码实现的话，就是：</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">abstract class MyTask&lt;Input,Output&gt; {
+  void onSuccess(Output output); // 业务请求成功
+  void onError(RestError error);//业务请求失败
+  Url getUrl();//业务请求地址
+}</code></pre>
+<p>在<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中，已经实现了网络请求与数据解析功能，所以对开发者来说，只需专注于业务接口，即：接口地址，请求对象，返回的业务对象(data)。业务请求成功，在相关的界面填充业务数据(data)，请求失败，给出相应的错误信息(message)。</p>
+<p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>有两个执行任务的方法</p>
+<ol>
+<li>如果输出为对象(Output)是一个对象，则需调用load方法，将Output的class传进去。</li>
+<li>如果输出为集合(List)，则需调用load2List方法，将集合中的元素class传进去。</li>
+<li>自动识别，调用load方法，无需传入Output的class。</li>
+</ol>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">// method 1
+class MyTask&lt;Object, User&gt; {
+  //... 获取单个用户，输入为object，输出为User
+}
+// 执行任务
+new MyTask().load(/*request*/null, User.class, /*don&#39;t load cache*/false);
+
+// method 2 for List
+class MyListTask&lt;Object, List&lt;User&gt;&gt; {
+  //... 获取用户列表，输入为object, 输出为List&lt;User&gt;集合
+}
+new MyListTask().load2List(null, User.class, /*use cache*/true);
+
+// method 3, auto load
+new MyTask().load(null, false);// sampe to load(null, User.class, false)
+new MyListTask().load(null, true);// sampe to load2List(null, User.class, false)</code></pre>
+<h2 id="进阶操作"><a href="#进阶操作" class="headerlink" title="进阶操作"></a>进阶操作</h2><h3 id="配置接口对象"><a href="#配置接口对象" class="headerlink" title="配置接口对象"></a>配置接口对象</h3><p>接口对象，一个app，一般只有一个。定义如下</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code" data-hide="false" data-title="BaseResponse.java"><span class="code-caption-label">(`BaseResponse.java`)</span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">public class BaseResponse&lt;Output&gt; implements IBaseResponse {
+    private static final long serialVersionUID = -3440061414071692254L;
+
+    /**
+     * 状态码
+     */
+    public int code;
+
+    /**
+     * 消息
+     */
+    public String message;
+
+    /**
+     * 数据，业务对象
+     */
+    public Output data;
+    public Output getData() {
+      return data;
+    }
+}</code></pre>
+<p>然后可以在Application.onCreate()中配置。</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">// typically, you just config volley in Application.onCreate
+VolleyConfig config = new VolleyConfig.Builder()
+    .setBaseResponseClass(WeatherBaseResponse.class)
+    .build();
+VolleyManager.init(getApplicationContext(), config);</code></pre>
+<p>如果有喜欢使用OkHttp的同学，还可配置网络连接使用OkHttp，需要写一个OkHttpStack继承自Volley的HurlStack，参考<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>示例app中的OkHttpStack.java.sample。</p>
+<h3 id="接口统一处理"><a href="#接口统一处理" class="headerlink" title="接口统一处理"></a>接口统一处理</h3><p>主要是根据接口业务状态码进行处理。比如定义业务操作成功，响应码为0，那么不为0的时候，就不应该解析业务对象，转入错误分支。</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">protected abstract class AppBaseTask&lt;Input, Output&gt; extends RequestObjectTask&lt;Input, Output&gt; {
+
+    @Override
+    public boolean onInterceptor(IBaseResponse response) throws Exception {
+        if (response instanceof BaseResponse) {
+            BaseResponse resp = (BaseResponse) response;
+            if (0 != resp.code) {
+                onLogicError(new LogicError(null, resp.code, resp.message));
+                throw new InterceptorError();
+            }
+        }
+        return false;
+    }
+
+    public void onLogicError(LogicError error) {
+        if (404 == error.getCode() || 104 == error.getCode()) { {
+            // LoginActivity.go(MyApplication.instance);
+            return;
+        }
+        onError(new RestError(error));
+    }
+}</code></pre>
+<h3 id="数据模拟"><a href="#数据模拟" class="headerlink" title="数据模拟"></a>数据模拟</h3><p>接口对象或业务对象类需在mock()方法中给对象填充模拟值，参考示例工程中BaseInfo.java（这个类是所有业务对象模型的基类）。</p>
+<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><ul>
+<li>所有的请求继承一个BaseRequest，接口定义的全局请求参数在BaseRequest中定义</li>
+<li>一套接口API，定义一个全局的AppController及AppBaseTask来处理公共的业务，比如业务拦截。</li>
+<li>所有的业务模型继承一个BaseInfo</li>
+<li>一个Controller对应一个界面，应继承AppController，包含若干网络请求Task</li>
+<li>网络请求Task回调作为内部interface定义在具体的Controller中。</li>
+</ul>
+<p>更多请参考demo app工程</p>
+<h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">https://github.com/Jamling/QuickAF</a></p>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/05/12/Android/quickaf-rest/](https://www.ieclipse.cn/2017/05/12/Android/quickaf-rest/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  <script src="/js/decrypt.min.js"></script>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2019-07-22T11:25:01.900Z" itemprop="dateModified">
+    Last updated: 2019-07-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="Jamling's Blog and Project Site" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="previous"><a href="/en/2017/05/18/Android/quickaf-round/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">Prev</span></a></li><li class="next"><a href="/en/2017/04/01/Web/hexo-encryptv4_1/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">Next</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    Donate
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>Dear reader, if you feel this good, could you rewark me a `bread` as awark? Thank you very much~</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">Donate</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="c10bdbe9702897699fed171a68e9ddb3"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: 'c10bdbe9702897699fed171a68e9ddb3',
+        recordIP: true,
+        visitor: 'true'
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          Table Of Contents
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#接口请求与响应设计">接口请求与响应设计</a><ul class="nav toc-ul"><li><a href="#接口">接口</a></li><li><a href="#请求">请求</a></li><li><a href="#响应">响应</a></li><li><a href="#请求任务">请求任务</a></li></ul></li><li><a href="#进阶操作">进阶操作</a><ul class="nav toc-ul"><li><a href="#配置接口对象">配置接口对象</a></li><li><a href="#接口统一处理">接口统一处理</a></li><li><a href="#数据模拟">数据模拟</a></li></ul></li><li><a href="#最佳实践">最佳实践</a></li><li><a href="#关于">关于</a></li><li><a href="#参考">参考</a></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "Code",
+        right: ":",
+        copy: "Copy to clipboard"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script>
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+
+    
+
+</body>
+</html>
