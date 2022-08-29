@@ -27,10 +27,10 @@
   <link rel="canonical" href="https://www.ieclipse.cn/archives/2006/index.html">
   <!-- Alternative links -->
   <!-- CSS and JS-->
-  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
-<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
 <script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
 <link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
@@ -123,7 +123,7 @@
 
 <style>
 #local-search-result {
-    overflow:scroll;
+    overflow-y: auto;
     max-height: 3in;
 }
 #local-search-result .search-keyword {
@@ -144,7 +144,7 @@
 </div>
 <script src="/js/search.js"></script>
 <script>
-    var search_path = "search.json";
+    var search_path = "search.xml";
     if (search_path.length == 0) {
     	search_path = "search.xml";
     }
@@ -283,27 +283,134 @@
     <script src="/js/hljs.js"></script>
     <script src="/js/script.js"></script>
     
-    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
-<script>
-(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
-</script>
-
     
+
+<!-- LeanClound官方Javascript SDK -->
+<script>
+  var page_layout = 'false'
+  var lc_debug = true;
+
+  var lc_config = {
+    xid : '8506362d9d08d08d10b77ddcffc8c27d',
+    url : 'archives/2006/index.html' || '',
+    title : '归档－2006'
+  };
+  lc_debug && console.log('lcconfig', lc_config);
+
+  var lc_table = 'Counter' || 'Counter';
+
+  function lc_page_views() {
+    var query = new AV.Query(lc_table);
+    //query.select(['-ACL']);
+    query.equalTo('xid', lc_config.xid);
+    query.find().then(results => {
+        // results is an array of AV.Object.
+        if (typeof results === 'undefined' || results.length == 0) {
+          insert();
+          return;
+        }
+        update(results);
+        show(results);
+      });
+
+    function insert() {
+      
+        lc_debug && console.log('data is null new object');
+        var M = AV.Object.extend(lc_table);
+        let data = new M();
+        data.set('time', 1);
+      
+      for ( var key in lc_config) {
+        data.set(key, lc_config[key]);
+      }
+      data.save().then(function(data) {
+        lc_debug && console.log('created objectId is ' + data.id);
+      }, function(error) {
+        lc_debug && console.log("create object failed", error);
+      });
+    }
+
+    function update(data) {
+      for ( var key in lc_config) {
+        if (key !== 'xid')
+        data.set(key, lc_config[key]);
+      }
+      lc_debug && console.log("after change,data", data);
+      data.increment('time', 1);
+      data.save().then(function(data) {
+        lc_debug && console.log("update to " + data.get('time'));
+      }, function(error) {
+        lc_debug && console.log("update object failed", error);
+      });
+    }
+
+    function show(data) {
+      $(".lc-count").html(data.get('time'));
+    }
+    function show_count(count) {
+      $(".lc-count").html(count);
+    }
+  };
+
+  function lc_index_views() {
+    // load views count from leanclound
+    // make sure you are created Counter table on leanclound
+    function lc_load_views(selector, options) {
+      var o = options || {};
+      var tkeys = [];
+      $(selector).each(function(i) {
+        var tkey = $(this).data('tkey');
+        tkeys.push(tkey);
+      });
+
+      var query = new AV.Query(lc_table);
+      query.select([ '-ACL', '-createdAt', '-updatedAt', '-url' ]);
+      query.containedIn('xid', tkeys);
+      query.find().then(function(results) {
+        $(selector).each(function(i) {
+          var tkey = $(this).data('tkey');
+          for (var i = 0; i < results.length; i++) {
+            var t = results[i];
+            if (t.get('xid') === tkey) {
+              var c = t.get('time') + '';
+              $(this).find(o.p.views).html(c);
+            }
+          }
+        });
+      }, function(error) {
+      });
+    }
+
+    lc_load_views('.card-action', {
+      style : 'hidden-xs',
+      p : {
+        views : '.nova-eye .count'
+      }
+    });
+  }
+
+  if(typeof AV === 'undefined') {
+    $.getScript('//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js',function() {
+      lc_debug && console.log('init AV after av.js loaded');
+        AV.init({
+          appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+          appKey : 'QwGBjKlSYOBtjMa5aTGeO3cb',
+          serverURLs : 'https://lc.ieclipse.cn'
+        });
+        if (page_layout === 'true') {
+          lc_index_views('.card-action', {
+            style : 'hidden-xs',
+            p : {
+              views : '.nova-eye .count'
+            }
+          })
+        }
+        lc_page_views();
+    });
+  } else {
+    lc_page_views();
+  }
+</script>
 
 </body>
 </html>

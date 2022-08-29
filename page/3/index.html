@@ -5,7 +5,7 @@
   <title>静勤居</title>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="keywords" content="Android,Eclipse 插件,Java,Web,奇淫巧技,其它,Eclipse,ADT,QuickAF,Gradle,CI,J2EE,Swing,SWT,xml,PHP,Ajax,MySQL,Hexo,js,Node.js,git,安全">
+  <meta name="keywords" content="Eclipse 插件,Android,Java,Web,奇淫巧技,其它,Eclipse,ADT,QuickAF,Gradle,CI,J2EE,Swing,SWT,xml,PHP,Ajax,MySQL,Hexo,js,Node.js,git,安全">
   <meta name="description" content="Jamling's 技术文章博客.">
   
 
@@ -27,10 +27,10 @@
   <link rel="canonical" href="https://www.ieclipse.cn/page/3/index.html">
   <!-- Alternative links -->
   <!-- CSS and JS-->
-  <script src="//cdn.staticfile.org/jquery/2.2.0/jquery.min.js"></script>
-<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="//cdn.usebootstrap.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script src="//cdn.usebootstrap.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
 <script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
 <link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
@@ -397,7 +397,7 @@
           </div>
           <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
             <div class="card-content">
-              <h3 class="card-title"><a itemprop="name headline" href="/2016/08/12/Android/quickaf-controller-sample/" class="article-title">QuickAF解析REST API综合示例</a></h3>
+              <h3 class="card-title"><a itemprop="name headline" href="/2016/08/12/Android/quickaf-preference/" class="article-title">QuickAF Preference介绍</a></h3>
               <div class="divider"></div>
               <div class="section post-header clearfix">
                 <!-- sub element must be span -->
@@ -409,20 +409,21 @@
               <div class="nova-flex excerpt-box">
               
               <div class="excerpt" itemprop="description articleBody">
-              <img src="/2016/08/12/Android/quickaf-controller-sample/weather.png">
+              <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>首先上个图</p>
+<img src="/2016/08/12/Android/quickaf-preference/preference.png">
 
-<p>在<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中使用基于Volley的网络数据连接框架。能够方便地执行REST API网络请求，并与界面进行交互。在本文中通过一个天气查询的综合示例来讲解<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中如何进行网络请求。</p>
+<p>Preference控件的目的在于替换Android自带的Preference，在<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中，Preference被设计为控件，可以在layout/Activity中随意使用，不必像自带的Preference，需要配合res/xml/xxx_preference、PreferenceFragment/PreferenceActivity使用。</p>
               </div>
               </div>
             </div>
             <div class="divider"></div>
 
             <div class="card-action" data-tkey>
-              <a class="icon nova-bubbles action-item" href="/2016/08/12/Android/quickaf-controller-sample/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="9e5152924aeb954ecc6b17e176c75234" data-flag-title="“QuickAF解析REST" api综合示例” href="/2016/08/12/Android/quickaf-controller-sample/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2016/08/12/Android/quickaf-controller-sample/"><span>阅读全文</span></a>
+              <a class="icon nova-bubbles action-item" href="/2016/08/12/Android/quickaf-preference/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
+              <a class="icon nova-eye action-item leancloud_visitors" id="4d8947211a38d2f5101ed2d77cf19f0c" data-flag-title="“QuickAF" preference介绍” href="/2016/08/12/Android/quickaf-preference/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
+              <a class="icon nova-hand-right action-item" href="/2016/08/12/Android/quickaf-preference/"><span>阅读全文</span></a>
             </div>
-            <meta itemprop="url" content="https://www.ieclipse.cn/2016/08/12/Android/quickaf-controller-sample/">
+            <meta itemprop="url" content="https://www.ieclipse.cn/2016/08/12/Android/quickaf-preference/">
             <meta itemprop="dateModified" content="2019-07-22T11:25:01.896Z">
             <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
               <meta content="https://www.ieclipse.cn" itemprop="url">
@@ -446,7 +447,7 @@
 
 <style>
 #local-search-result {
-    overflow:scroll;
+    overflow-y: auto;
     max-height: 3in;
 }
 #local-search-result .search-keyword {
@@ -467,7 +468,7 @@
 </div>
 <script src="/js/search.js"></script>
 <script>
-    var search_path = "search.json";
+    var search_path = "search.xml";
     if (search_path.length == 0) {
     	search_path = "search.xml";
     }
@@ -583,7 +584,7 @@
         appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
         path: 'd41d8cd98f00b204e9800998ecf8427e',
         recordIP: true,
-        visitor: true
+        visitor: false
     })
 </script>
     </div>
@@ -621,27 +622,134 @@
     <script src="/js/hljs.js"></script>
     <script src="/js/script.js"></script>
     
-    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
-<script>
-(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'https://znsv.baidu.com/customer_search/api/js?sid=11812712506721118476' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
-</script>
-
     
+
+<!-- LeanClound官方Javascript SDK -->
+<script>
+  var page_layout = 'true'
+  var lc_debug = true;
+
+  var lc_config = {
+    xid : 'd41d8cd98f00b204e9800998ecf8427e',
+    url : 'page/3/index.html' || '',
+    title : '首页'
+  };
+  lc_debug && console.log('lcconfig', lc_config);
+
+  var lc_table = 'Counter' || 'Counter';
+
+  function lc_page_views() {
+    var query = new AV.Query(lc_table);
+    //query.select(['-ACL']);
+    query.equalTo('xid', lc_config.xid);
+    query.find().then(results => {
+        // results is an array of AV.Object.
+        if (typeof results === 'undefined' || results.length == 0) {
+          insert();
+          return;
+        }
+        update(results);
+        show(results);
+      });
+
+    function insert() {
+      
+        lc_debug && console.log('data is null new object');
+        var M = AV.Object.extend(lc_table);
+        let data = new M();
+        data.set('time', 1);
+      
+      for ( var key in lc_config) {
+        data.set(key, lc_config[key]);
+      }
+      data.save().then(function(data) {
+        lc_debug && console.log('created objectId is ' + data.id);
+      }, function(error) {
+        lc_debug && console.log("create object failed", error);
+      });
+    }
+
+    function update(data) {
+      for ( var key in lc_config) {
+        if (key !== 'xid')
+        data.set(key, lc_config[key]);
+      }
+      lc_debug && console.log("after change,data", data);
+      data.increment('time', 1);
+      data.save().then(function(data) {
+        lc_debug && console.log("update to " + data.get('time'));
+      }, function(error) {
+        lc_debug && console.log("update object failed", error);
+      });
+    }
+
+    function show(data) {
+      $(".lc-count").html(data.get('time'));
+    }
+    function show_count(count) {
+      $(".lc-count").html(count);
+    }
+  };
+
+  function lc_index_views() {
+    // load views count from leanclound
+    // make sure you are created Counter table on leanclound
+    function lc_load_views(selector, options) {
+      var o = options || {};
+      var tkeys = [];
+      $(selector).each(function(i) {
+        var tkey = $(this).data('tkey');
+        tkeys.push(tkey);
+      });
+
+      var query = new AV.Query(lc_table);
+      query.select([ '-ACL', '-createdAt', '-updatedAt', '-url' ]);
+      query.containedIn('xid', tkeys);
+      query.find().then(function(results) {
+        $(selector).each(function(i) {
+          var tkey = $(this).data('tkey');
+          for (var i = 0; i < results.length; i++) {
+            var t = results[i];
+            if (t.get('xid') === tkey) {
+              var c = t.get('time') + '';
+              $(this).find(o.p.views).html(c);
+            }
+          }
+        });
+      }, function(error) {
+      });
+    }
+
+    lc_load_views('.card-action', {
+      style : 'hidden-xs',
+      p : {
+        views : '.nova-eye .count'
+      }
+    });
+  }
+
+  if(typeof AV === 'undefined') {
+    $.getScript('//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js',function() {
+      lc_debug && console.log('init AV after av.js loaded');
+        AV.init({
+          appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+          appKey : 'QwGBjKlSYOBtjMa5aTGeO3cb',
+          serverURLs : 'https://lc.ieclipse.cn'
+        });
+        if (page_layout === 'true') {
+          lc_index_views('.card-action', {
+            style : 'hidden-xs',
+            p : {
+              views : '.nova-eye .count'
+            }
+          })
+        }
+        lc_page_views();
+    });
+  } else {
+    lc_page_views();
+  }
+</script>
 
 </body>
 </html>
