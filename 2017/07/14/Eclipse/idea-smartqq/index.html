@@ -216,12 +216,14 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
 
   <a id="comment"></a>
 
+<script src="//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js"></script>
 <script src="//unpkg.com/valine/dist/Valine.min.js">
 </script>
 <!--PC和WAP自适应版-->
 <div id="vcomments" data-sid="59b8e06bb5dfc177e11317a52189ebae"></div>
 <script>
     new Valine({
+        av: AV,
         el: '#vcomments',
         appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
         appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
@@ -306,7 +308,7 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
 <!-- LeanClound官方Javascript SDK -->
 <script>
   var page_layout = 'false'
-  var lc_debug = true;
+  var lc_debug = false;
 
   var lc_config = {
     xid : '59b8e06bb5dfc177e11317a52189ebae',
@@ -318,8 +320,11 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
   var lc_table = 'Counter' || 'Counter';
 
   function lc_page_views() {
+    if (page_layout === 'true') {
+      lc_index_views();
+    }
     var query = new AV.Query(lc_table);
-    //query.select(['-ACL']);
+    query.select(['-ACL']);
     query.equalTo('xid', lc_config.xid);
     query.find().then(results => {
         // results is an array of AV.Object.
@@ -327,12 +332,11 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
           insert();
           return;
         }
-        update(results);
-        show(results);
+        update(results[0]);
+        show(results[0]);
       });
 
     function insert() {
-      
         lc_debug && console.log('data is null new object');
         var M = AV.Object.extend(lc_table);
         let data = new M();
@@ -349,7 +353,7 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
     }
 
     function update(data) {
-      for ( var key in lc_config) {
+      for (var key in lc_config) {
         if (key !== 'xid')
         data.set(key, lc_config[key]);
       }
@@ -377,7 +381,7 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
       var o = options || {};
       var tkeys = [];
       $(selector).each(function(i) {
-        var tkey = $(this).data('tkey');
+        var tkey = $(this).attr('id');
         tkeys.push(tkey);
       });
 
@@ -385,8 +389,11 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
       query.select([ '-ACL', '-createdAt', '-updatedAt', '-url' ]);
       query.containedIn('xid', tkeys);
       query.find().then(function(results) {
+        if (typeof results === 'undefined' || results.length == 0) {
+          return;
+        }
         $(selector).each(function(i) {
-          var tkey = $(this).data('tkey');
+          var tkey = $(this).attr('id');
           for (var i = 0; i < results.length; i++) {
             var t = results[i];
             if (t.get('xid') === tkey) {
@@ -398,31 +405,28 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
       }, function(error) {
       });
     }
-
-    lc_load_views('.card-action', {
+    lc_load_views('.card-action .leancloud_visitors', {
       style : 'hidden-xs',
       p : {
-        views : '.nova-eye .count'
+        views : '.count'
       }
     });
   }
 
-  if(typeof AV === 'undefined') {
+  var loadedAV = !(typeof AV === 'undefined');
+  if (!loadedAV) {
     $.getScript('//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js',function() {
       lc_debug && console.log('init AV after av.js loaded');
+        loadedAV = !(typeof AV === 'undefined');
+        if (!loadedAV) {
+          lc_debug && console.log('AV not loaded');
+
+        }
         AV.init({
           appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
           appKey : 'QwGBjKlSYOBtjMa5aTGeO3cb',
           serverURLs : 'https://lc.ieclipse.cn'
         });
-        if (page_layout === 'true') {
-          lc_index_views('.card-action', {
-            style : 'hidden-xs',
-            p : {
-              views : '.nova-eye .count'
-            }
-          })
-        }
         lc_page_views();
     });
   } else {
