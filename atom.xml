@@ -221,29 +221,6 @@
   </entry>
   
   <entry>
-    <title>有奖破解网页密码第四弹</title>
-    <link href="https://www.ieclipse.cn/2017/04/01/Web/hexo-encryptv4_1/"/>
-    <id>https://www.ieclipse.cn/2017/04/01/Web/hexo-encryptv4_1/</id>
-    <published>2017-04-01T13:30:30.000Z</published>
-    <updated>2019-07-22T11:25:01.940Z</updated>
-    
-    <content type="html"><![CDATA[<p>在今日24:00之前破解密码的，将送月球一日游<del>欢迎大家跳跃报名参加</del></p><a id="more"></a><p>不好意思，我只是开个玩笑啦~祝愚人节快乐！</p><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/04/01/Web/hexo-encryptv4_1/](https://www.ieclipse.cn/2017/04/01/Web/hexo-encryptv4_1/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在今日24:00之前破解密码的，将送月球一日游&lt;del&gt;欢迎大家跳跃报名参加&lt;/del&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Web" scheme="https://www.ieclipse.cn/categories/Web/"/>
-    
-    
-      <category term="Hexo" scheme="https://www.ieclipse.cn/tags/Hexo/"/>
-    
-  </entry>
-  
-  <entry>
     <title>安全杂谈二之入侵公司OA系统</title>
     <link href="https://www.ieclipse.cn/2017/03/29/other/safe_ajax_cross/"/>
     <id>https://www.ieclipse.cn/2017/03/29/other/safe_ajax_cross/</id>
@@ -301,29 +278,6 @@
     <summary type="html">
     
       多说即将关闭，需要将多说换成其它第三方评论系统
-    
-    </summary>
-    
-    
-      <category term="Web" scheme="https://www.ieclipse.cn/categories/Web/"/>
-    
-    
-      <category term="Hexo" scheme="https://www.ieclipse.cn/tags/Hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>有奖破解网页密码第三弹</title>
-    <link href="https://www.ieclipse.cn/2017/03/08/Web/hexo-encryptv2_1/"/>
-    <id>https://www.ieclipse.cn/2017/03/08/Web/hexo-encryptv2_1/</id>
-    <published>2017-03-08T13:30:30.000Z</published>
-    <updated>2019-07-22T11:25:01.940Z</updated>
-    
-    <content type="html"><![CDATA[<p>本次不设奖金，因为破解的速度实在太快啦。</p><a id="more"></a><p>Fuck Lotte&amp;Fuck Thaad</p><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/03/08/Web/hexo-encryptv2_1/](https://www.ieclipse.cn/2017/03/08/Web/hexo-encryptv2_1/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本次不设奖金，因为破解的速度实在太快啦。&lt;/p&gt;
     
     </summary>
     
@@ -505,6 +459,60 @@
     
     
       <category term="Android" scheme="https://www.ieclipse.cn/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>将hexo博客部署到coding.net</title>
+    <link href="https://www.ieclipse.cn/2016/09/08/Web/hexo-coding-pages/"/>
+    <id>https://www.ieclipse.cn/2016/09/08/Web/hexo-coding-pages/</id>
+    <published>2016-09-08T08:14:00.000Z</published>
+    <updated>2019-07-22T11:25:01.931Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="/2016/08/29/Web/Hexo-deploy-lines/">Hexo博客双线部署</a>的姐妹篇。详细详述如何将hexo博客部署到coding.net</p><h2 id="注册coding-net"><a href="#注册coding-net" class="headerlink" title="注册coding.net"></a>注册coding.net</h2><p>如果你原来有gitcafe账号，那么根据官方的向导，将数据从gitcafe迁移到coding。如果没有，那么就注册一个吧。</p><h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><p>登录成功后，可以创建项目，在<a href="/2016/08/29/Web/Hexo-deploy-lines/">Hexo博客双线部署</a>中，我介绍的是用户pages，在这里，我介绍项目pages，所以创建的是一个普通项目。创建过程如下所示：</p><img src="/2016/09/08/Web/hexo-coding-pages/create_project.png"><p>简单填下项目名称和简介就行。</p><p><strong><em>注意：那个使用README.md文件初始化项目不要勾选</em></strong></p><h2 id="开启Coding-Pages服务"><a href="#开启Coding-Pages服务" class="headerlink" title="开启Coding Pages服务"></a>开启Coding Pages服务</h2><img src="/2016/09/08/Web/hexo-coding-pages/open_pages.png"><p>在项目管理台，点击<code>Pages服务</code>选项卡，再点击<code>开启服务</code>按钮来开启服务。服务开启之后，可以绑定域名。</p><img src="/2016/09/08/Web/hexo-coding-pages/pages_bind.png"><p>建议绑定域名，比如，我已经有一个用户pages服务了，访问项目pages，好像相当于访问用户pages下的子目录。有许多资源出现404，导致页面显示不正常。</p><p>注：公开的项目Pages使用http协议</p><h2 id="DNS解析"><a href="#DNS解析" class="headerlink" title="DNS解析"></a>DNS解析</h2><p>先绑定域名再说，因为域名解析不是马上就生效的。登录你的域名控制台，添加域名dns解析规则，如下图所示：</p><img src="/2016/09/08/Web/hexo-coding-pages/dns.png"><p>添加一条CNAME的记录解析到pages.coding.me就可以了。</p><h2 id="创建项目-Pages"><a href="#创建项目-Pages" class="headerlink" title="创建项目 Pages"></a>创建项目 Pages</h2><p>参考<a href="https://coding.net/help/doc/pages/index.html" target="_blank" rel="noopener">Coding Pages 帮助</a>，创建项目Pages。我使用master分支来存放hexo的源文件，站点生成之后，部署到coding-pages分支。简要的步骤如下：</p><ul><li>使用<code>git clone</code>命令将项目克隆到本地</li><li>使用<code>git checkout --orphan coding-pages</code>生成一个新的空分支</li><li>使用<code>git rm -rf .</code>命令删除coding-pages中已有的文件（如果没有用README.md初始化项目，可以跳过此步骤，不过建议执行一下此命令）</li><li>新建一个测试的<code>index.html</code>文件，符合html标准，内容随意，我是使用<code>vim index.html</code>编辑的，不熟悉vim的，可以直接使用记事本等工具来生成</li><li>使用<code>git push -u origin coding-pages</code>来推送到coding-pages分支</li></ul><p>下面是我的详细操作过程</p><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="bash">Jamling@lijiaming-PC MINGW64 /e/hexo$ git clone git@git.coding.net:Jamling/life.gitCloning into &#39;life&#39;...remote: Counting objects: 3, done.remote: Total 3 (delta 0), reused 0 (delta 0)Receiving objects: 100% (3/3), done.Checking connectivity... done.Jamling@lijiaming-PC MINGW64 /e/hexo$ cd life/Jamling@lijiaming-PC MINGW64 /e/hexo/life (master)$ git checkout --orphan coding-pagesSwitched to a new branch &#39;coding-pages&#39;Jamling@lijiaming-PC MINGW64 /e/hexo/life (coding-pages)$ lsREADME.mdJamling@lijiaming-PC MINGW64 /e/hexo/life (coding-pages)$ git rm -rf .rm &#39;README.md&#39;Jamling@lijiaming-PC MINGW64 /e/hexo/life (coding-pages)$ vim index.htmlJamling@lijiaming-PC MINGW64 /e/hexo/life (coding-pages)$ git statusOn branch coding-pagesInitial commitUntracked files:  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)        index.htmlnothing added to commit but untracked files present (use &quot;git add&quot; to track)Jamling@lijiaming-PC MINGW64 /e/hexo/life (coding-pages)$ git add .warning: LF will be replaced by CRLF in index.html.The file will have its original line endings in your working directory.Jamling@lijiaming-PC MINGW64 /e/hexo/life (coding-pages)$ git commit -m &quot;init commit&quot;[coding-pages (root-commit) be74fbf] init commitwarning: LF will be replaced by CRLF in index.html.The file will have its original line endings in your working directory. 1 file changed, 4 insertions(+) create mode 100644 index.htmlJamling@lijiaming-PC MINGW64 /e/hexo/life (coding-pages)$ git push -u origin coding-pagesCounting objects: 3, done.Delta compression using up to 4 threads.Compressing objects: 100% (2/2), done.Writing objects: 100% (3/3), 286 bytes | 0 bytes/s, done.Total 3 (delta 0), reused 0 (delta 0)To git@git.coding.net:Jamling/life.git * [new branch]      coding-pages -&gt; coding-pagesBranch coding-pages set up to track remote branch coding-pages from origin.Jamling@lijiaming-PC MINGW64 /e/hexo/life (coding-pages)$</code></pre><h2 id="部署验证"><a href="#部署验证" class="headerlink" title="部署验证"></a>部署验证</h2><p>上面的步骤做完，dns缓存应该也更新好了。使用浏览器访问一下，看一下coding-pages是否正确部署了。</p><img src="/2016/09/08/Web/hexo-coding-pages/url1.png"><img src="/2016/09/08/Web/hexo-coding-pages/url2.png"><h2 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h2><ul><li>使用<code>git checkout master</code>将分支切到master分支</li><li>使用<code>hexo init</code>来初始化博客，注意，执行过程中，会将.git仓库删除掉，后面需要重新初始化git</li><li>使用<code>git init</code>重新初始化git仓库</li><li>使用<code>git remote add</code>重新设置git仓库远程路径</li><li>使用<code>git pull</code>将远程内容与本地内容合并</li></ul><p>具体的操作步骤如下：</p><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="bash">Jamling@lijiaming-PC MINGW64 /e/hexo/life (master)$ hexo initINFO  Cloning hexo-starter to E:\hexo\lifefatal: destination path &#39;E:\hexo\life&#39; already exists and is not an empty directory.WARN  git clone failed. Copying data insteadINFO  Install dependencies// 此处忽略hexo的安装输出日志INFO  Start blogging with Hexo!Jamling@lijiaming-PC MINGW64 /e/hexo/life$ git statusfatal: Not a git repository (or any of the parent directories): .git #.git被hexo干掉了 :(Jamling@lijiaming-PC MINGW64 /e/hexo/life$ rm README.md #一定要删除，不然下面的git pull会执行不了Jamling@lijiaming-PC MINGW64 /e/hexo/life$ git remote add origin git@git.coding.net:Jamling/life.gitfatal: Not a git repository (or any of the parent directories): .gitJamling@lijiaming-PC MINGW64 /e/hexo/life$ git initInitialized empty Git repository in E:/hexo/life/.git/ #木有事，我重新初始化git仓库Jamling@lijiaming-PC MINGW64 /e/hexo/life (master)$ git remote add origin git@git.coding.net:Jamling/life.git #我再重新设置远程仓库路径Jamling@lijiaming-PC MINGW64 /e/hexo/life (master)$ git pull origin masterremote: Counting objects: 3, done.remote: Total 3 (delta 0), reused 0 (delta 0)Unpacking objects: 100% (3/3), done.From git.coding.net:Jamling/life * branch            master     -&gt; FETCH_HEAD * [new branch]      master     -&gt; origin/masterJamling@lijiaming-PC MINGW64 /e/hexo/life (master)$ git statusOn branch masterUntracked files:  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)        .npmignore        _config.yml        node_modules/        package.json        scaffolds/        source/        themes/nothing added to commit but untracked files present (use &quot;git add&quot; to track)Jamling@lijiaming-PC MINGW64 /e/hexo/life (master)$ vim .gitignoreJamling@lijiaming-PC MINGW64 /e/hexo/life (master)$ git statusOn branch masterUntracked files:  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)        .gitignore        .npmignore        _config.yml        package.json        scaffolds/        source/        themes/nothing added to commit but untracked files present (use &quot;git add&quot; to track)Jamling@lijiaming-PC MINGW64 /e/hexo/life (master)$</code></pre><p>是否先初始化hexo博客，再checkout coding项目，是不是会简单一些呢？我没有试过，试过的请告诉我一下哈。</p><p>建议将themes目录也加入.gitignore文件。</p><h2 id="Hexo设置"><a href="#Hexo设置" class="headerlink" title="Hexo设置"></a>Hexo设置</h2><p>先安装hexo-deployer-git插件，然后配置</p><p class="code-caption" data-lang="yaml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code" data-hide="false" data-title="_config.yml"><span class="code-caption-label">(`_config.yml`)</span><a class="code-caption-copy">Copy Code</a></p><pre><code class="yaml">deploy:  type: git  repo:     coding: git@git.coding.net:Jamling/life,coding-pages</code></pre><p>repo可以写多个，格式为git仓库地址+英文逗号+分支名称，以实现多线部署。</p><h2 id="编写博客"><a href="#编写博客" class="headerlink" title="编写博客"></a>编写博客</h2><p>这就不多说了，装插件，装主题，写内容，这些属于hexo的基本操作。不懂的百度。本地测试通过之后，可以使用<code>hexo g -d</code>部署到coding。</p><h2 id="提交hexo源文件"><a href="#提交hexo源文件" class="headerlink" title="提交hexo源文件"></a>提交hexo源文件</h2><p>博客测试完毕之后，就可以将博客源文件提交到master分支了，这样就算换了电脑，可以从远程仓库获取源代码，又可以愉快地写博客了。</p><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="bash">Jamling@lijiaming-PC MINGW64 /e/hexo/life (master)$ git add .// 此处省略文件列表Jamling@lijiaming-PC MINGW64 /e/hexo/life (master)$ git commit -m &quot;add sources&quot;//此处省略文件列表Jamling@lijiaming-PC MINGW64 /e/hexo/life (master)$ git push origin masterCounting objects: 73, done.Delta compression using up to 4 threads.Compressing objects: 100% (70/70), done.Writing objects: 100% (73/73), 95.92 KiB | 0 bytes/s, done.Total 73 (delta 0), reused 0 (delta 0)To git@git.coding.net:Jamling/life.git   e40018e..0efa99d  master -&gt; masterJamling@lijiaming-PC MINGW64 /e/hexo/life (master)$</code></pre><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>Coding Pages 帮助: <a href="https://coding.net/help/doc/pages/index.html" target="_blank" rel="noopener">https://coding.net/help/doc/pages/index.html</a><br>Hexo博客双线部署: /2016/08/29/Web/Hexo-deploy-lines/</p><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/09/08/Web/hexo-coding-pages/](https://www.ieclipse.cn/2016/09/08/Web/hexo-coding-pages/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;a href=&quot;/2016/08/29/Web/Hexo-deploy-lines/&quot;&gt;Hexo博客双线部署&lt;/a&gt;的姐妹篇。详细详述如何将hexo博客部署到coding.net&lt;/p&gt;
+&lt;h2 id=&quot;注册coding-net&quot;&gt;&lt;a href=&quot;#注册coding-n
+      
+    
+    </summary>
+    
+    
+      <category term="Web" scheme="https://www.ieclipse.cn/categories/Web/"/>
+    
+    
+      <category term="Hexo" scheme="https://www.ieclipse.cn/tags/Hexo/"/>
+    
+      <category term="git" scheme="https://www.ieclipse.cn/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用Travis-CI构建Android应用</title>
+    <link href="https://www.ieclipse.cn/2016/09/06/Android/travis-ci-android/"/>
+    <id>https://www.ieclipse.cn/2016/09/06/Android/travis-ci-android/</id>
+    <published>2016-09-06T13:00:00.000Z</published>
+    <updated>2019-07-22T11:25:01.904Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>注册Travis-CI都N长时间了，但是一直没有使用它来构建。今天先使用它构建了两个小的node.js项目，还算顺序，然后使用它来构建<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>，没有想到竟然是一条如此艰辛的路！特地将构建过程记录如下。</p><a id="more"></a><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>参考官方文档<a href="https://docs.travis-ci.com/user/languages/android/" target="_blank" rel="noopener">https://docs.travis-ci.com/user/languages/android/</a>的配置，稍做改动就提交构建了。还以为能像node.js那样顺风顺水，没有想到竟然是一次又一次的失败。</p><h2 id="gradle版本"><a href="#gradle版本" class="headerlink" title="gradle版本"></a>gradle版本</h2><p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code>FAILURE: Build failed with an exception.* Where:Build file &#39;/home/travis/build/Jamling/QuickAF/library/build.gradle&#39; line: 12* What went wrong:A problem occurred evaluating project &#39;:af-library&#39;.&gt; Failed to apply plugin [id &#39;com.android.library&#39;]   &gt; Minimum supported Gradle version is 2.14.1.  Current version is 2.2.1. If using the gradle wrapper, try editing the distributionUrl in /home/travis/build/Jamling/QuickAF/gradle/wrapper/gradle-wrapper.properties to gradle-2.14.1-all.zip* Try:Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.BUILD FAILEDTotal time: 42.348 secs</code></pre><p>根据以上日志，travis-ci上默认的gradle版本比较旧，所以需要自己下载gradle，并配置环境。</p><p class="code-caption" data-lang="yaml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="yaml">before_install:  # Gradle  - wget http://services.gradle.org/distributions/gradle-2.14.1-bin.zip  - unzip -n gradle-2.14.1-bin.zip  - export GRADLE_HOME=$PWD/gradle-2.14.1  - export PATH=$GRADLE_HOME/bin:$PATH</code></pre><p><strong><em>我有gradle/wrapper/gradle-wrapper.properties文件，而且里面的版本就是2.14.1，为毛不起作用啊！！！</em></strong><br><strong><em>unzip 要使用-n参数，不然，目录存在，会一直卡死在unzip</em></strong></p><p>如果不想每次下载gradle，可以在root project的build.gradle中手动设置gradle版本</p><p class="code-caption" data-lang="gradle" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="gradle">task wrapper(type: Wrapper) {    gradleVersion = &#39;3.3&#39;}</code></pre><p>然后执行的命令使用<code>./gradle app:assembleRelease</code></p><p>但接着又发现<code>./gradlew: Permission denied</code> gradlew因为权限问题而导致执行失败。</p><p>解决办法如下：参考<a href="http://stackoverflow.com/questions/33820638/travis-yml-gradlew-permission-denied" target="_blank" rel="noopener">http://stackoverflow.com/questions/33820638/travis-yml-gradlew-permission-denied</a></p><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p><pre><code class="bash">git update-index --chmod=+x gradlewgit commit -m &quot;permission access for travis&quot;git ls-tree HEAD</code></pre><p>如果gradlew权限为100755表示成功给它加上了执行权限</p><h2 id="SDK设置"><a href="#SDK设置" class="headerlink" title="SDK设置"></a>SDK设置</h2><p>sdk的配置一定要对应好。不然编译会失败</p><h2 id="jdk设置"><a href="#jdk设置" class="headerlink" title="jdk设置"></a>jdk设置</h2><p>好像build tool 24以上的版本需要使用jdk8</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>遇到各种错误，编译了21次，终于通过了。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">https://github.com/Jamling/QuickAF</a><br><a href="https://docs.travis-ci.com/user/languages/android/" target="_blank" rel="noopener">https://docs.travis-ci.com/user/languages/android/</a></p><blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/09/06/Android/travis-ci-android/](https://www.ieclipse.cn/2016/09/06/Android/travis-ci-android/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      使用Travis-CI构建github上的Android应用
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="https://www.ieclipse.cn/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="https://www.ieclipse.cn/tags/Android/"/>
+    
+      <category term="CI" scheme="https://www.ieclipse.cn/tags/CI/"/>
     
   </entry>
   

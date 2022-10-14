@@ -46,10 +46,27 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 <link rel="stylesheet" href="/css/nova_font.css">
 <link rel="stylesheet" href="/css/bs/nova.css">
+<script src="//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js"></script>
+<script src="/js/leancloud.js"></script>
 
   <!-- RSS -->
   <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
   <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+  <script>
+        lc.init({
+          appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+          appKey : 'QwGBjKlSYOBtjMa5aTGeO3cb',
+          serverURL : 'https://lc.ieclipse.cn'
+        }, {
+          xid : 'd04baa6bc1b54f9d65c3a5cedc0e717d',
+          url : 'en/archives/2017/03/index.html',
+          title : 'Archives－archives－2017－03'
+        }, {
+          counterTable: '',
+          commentTable: '',
+          donateTable: ''
+        });
+  </script>
 <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
 </head>
 <body>
@@ -71,6 +88,7 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
         <li><a href="/en/" class="main-nav">Home</a></li><li><a href="/en/p/" class="main-nav">Projects</a></li><li><a href="/en/categories/" class="main-nav">Category</a></li><li><a href="/en/archives/" class="main-nav">Archive</a></li><li><a href="/en/donate/" class="main-nav">Donate</a></li><li><a href="/en/about/" class="main-nav">About</a></li>
+        <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
@@ -111,11 +129,6 @@
 <article class="archive-article archive-type-post">
 <header class="archive-article-header">
 <h3><a href="/en/2017/03/23/Web/hexo-duoshuo2changyan/">将多说评论换成畅言 <small>2017-03-23</small></a></h3>
-</header>
-</article>
-<article class="archive-article archive-type-post">
-<header class="archive-article-header">
-<h3><a href="/en/2017/03/08/Web/hexo-encryptv2_1/">有奖破解网页密码第三弹 <small>2017-03-08</small></a></h3>
 </header>
 </article>
 <article class="archive-article archive-type-post">
@@ -188,28 +201,25 @@
         <h3 class="panel-title">Announce</h3>
       </div>
       <div class="panel-body" id="widget_announce">
-        本站评论系统已由友言切换为多说，原有的友言评论数据在友言云端数据迁移完毕之后再导入，在此期间，原先的评论暂不可见，请见谅！
+        <div class="text-center">Loading...</div>
       </div>
     </div>
     <script>
-    function loadAnnounce() {
-      var ds_top_url = '/other/announce.html';
-      var ds_top_dom = $('#widget_announce');
-      $.ajax({
-        url : ds_top_url,
-        dataType : "html",
-        type : 'get',
-        success : function(data) {
-          if (data) {
-            ds_top_dom.html(data);
-          }
-        },
-        error: function (xhr, msg, e) {
-          ds_top_dom.html('<div class="text-center">Load failed</div>');
-        }
-      });
-    }
-    loadAnnounce();
+    $(document).ready(function(e) { 
+      let dom = $('#widget_announce');
+      lc.getAnnounce({
+    				debug: false
+    			}).then(arr => {
+    				if (arr === undefined) {
+    					dom.html('<div class="text-center">No data</div>');
+    				} else {
+    					dom.html(arr.value);
+    				}
+          }, err => {
+            console.warn(err);
+            dom.html('<div class="text-center">Load failed</div>');
+          });
+    });
     </script>
 
 
@@ -243,7 +253,7 @@
       </div>
       
       <!-- use category tree -->
-      <ul class="list-group"><li class="list-group-item"><a class="list-group-link" href="/en/categories/Android/">Android</a><span class="badge">22</span></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/pde/">Eclipse 插件</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/Java/">Java</a><span class="badge">9</span></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/Web/">Web</a><span class="badge">24</span></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/other/">其它</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/trick/">奇淫巧技</a><span class="badge">6</span></li></ul>
+      <ul class="list-group"><li class="list-group-item"><a class="list-group-link" href="/en/categories/Android/">Android</a><span class="badge">22</span></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/pde/">Eclipse 插件</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/Java/">Java</a><span class="badge">9</span></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/Web/">Web</a><span class="badge">22</span></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/other/">其它</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/trick/">奇淫巧技</a><span class="badge">6</span></li></ul>
     </div>
     
 
@@ -256,6 +266,86 @@
       <a href="/en/tags/ADT/" style="font-size: 10px; color: #795548">ADT</a> <a href="/en/tags/Ajax/" style="font-size: 10px; color: #795548">Ajax</a> <a href="/en/tags/Android/" style="font-size: 20px; color: #212121">Android</a> <a href="/en/tags/CI/" style="font-size: 10px; color: #795548">CI</a> <a href="/en/tags/Eclipse/" style="font-size: 16.25px; color: #423530">Eclipse</a> <a href="/en/tags/Gradle/" style="font-size: 11.25px; color: #6e4f43">Gradle</a> <a href="/en/tags/Hexo/" style="font-size: 18.75px; color: #2c2826">Hexo</a> <a href="/en/tags/J2EE/" style="font-size: 12.5px; color: #63483e">J2EE</a> <a href="/en/tags/Java/" style="font-size: 12.5px; color: #63483e">Java</a> <a href="/en/tags/MySQL/" style="font-size: 10px; color: #795548">MySQL</a> <a href="/en/tags/Node-js/" style="font-size: 13.75px; color: #584239">Node.js</a> <a href="/en/tags/PHP/" style="font-size: 12.5px; color: #63483e">PHP</a> <a href="/en/tags/QuickAF/" style="font-size: 17.5px; color: #372e2b">QuickAF</a> <a href="/en/tags/SWT/" style="font-size: 10px; color: #795548">SWT</a> <a href="/en/tags/Swing/" style="font-size: 10px; color: #795548">Swing</a> <a href="/en/tags/git/" style="font-size: 15px; color: #4d3b35">git</a> <a href="/en/tags/js/" style="font-size: 13.75px; color: #584239">js</a> <a href="/en/tags/xml/" style="font-size: 11.25px; color: #6e4f43">xml</a> <a href="/en/tags/安全/" style="font-size: 11.25px; color: #6e4f43">安全</a>
       </div>
     </div>
+
+    <div class="panel panel-primary animated slideInUp faster">
+      <div class="panel-heading">
+        <h3 class="panel-title">Hot Posts</h3>
+      </div>
+      <div class="list-group" id="top-threads" data-range="weekly" data-num-items="5">
+        <div class="text-center">Loading...</div>
+      </div>
+    </div>
+    <script>
+    $(document).ready(function(e) {
+    		var $dom = $('#top-threads');
+    		var $param = $dom.data();
+    			lc.topViews({
+    				limit: $param.numItems
+    			}).then(arr => {
+    				if (arr.length == 0) {
+    					$dom.html('<div class="text-center">No hot post</div>');
+    				} else {
+    					$dom.html('');
+    					for (var i = 0; i < arr.length; i++) {
+    						let item = arr[i].toJSON();
+    						var url = item.url;
+                // TODO need fix url issue
+    						var a = $('<a></a>').text(item.title).attr('href', url).addClass('list-group-item');
+    						$dom.append(a);
+    					}
+    				}
+          }, err => {
+            console.warn(err);
+            $dom.html('<div class="text-center">Load failed</div>');
+          });
+    });
+    </script>
+
+    <div class="panel panel-primary animated slideInUp faster">
+      <div class="panel-heading">
+        <h3 class="panel-title">Recent Comments</h3>
+      </div>
+      <div class="list-group" id="valine-recent-comments" data-num-items="5">
+        <div class="text-center">Loading...</div>
+      </div>
+    </div>
+    <script>
+    $(document).ready(function(e) {
+    	var dom = $('#valine-recent-comments');
+    	var param = dom.data();
+
+    	lc.recentComment({
+    		limit: param.numItems,
+			debug: false
+    	}).then(arr => {
+    		if (arr.length == 0) {
+    			dom.html('<div class="text-center">No comments~</div>');
+    		} else {
+    			dom.html('');
+    			for (var i = 0; i < arr.length; i++) {
+    				let item = arr[i].toJSON();
+					let link = item.link;
+					let nick = item.nick ? (item.nick.length > 5 ? (item.nick.substring(0, 5) + "...") : item.nick) : '';
+					let comment = item.comment.length > 20 ? (item.comment.substring(0, 20) + "...") : item.comment;
+    				var url = item.url;
+    				// TODO need fix url issue
+					let span = $('<span></span').addClass('list-group-item');
+					let nickNode = $('<a></a>').text(nick);
+					if (link) {
+						nickNode.attr('href', link);
+					}
+					span.append(nickNode);
+    				var a = $('<a></a>').text(comment).attr('href', url);
+					span.append(a);
+    				dom.append(span);
+    			}
+    		}
+    	}, err => {
+    		console.warn(e);
+    		dom.html('<div class="text-center">Load failed</div>');
+    	});
+    });
+    </script>
 
     <div class="panel panel-primary animated slideInUp faster">
       <div class="panel-heading">
@@ -281,7 +371,7 @@
       <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
     </div>
     <div>
-      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+      <a href="//beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
     </div>
   </div>
 </footer>
@@ -315,135 +405,12 @@
     <script src="/js/script.js"></script>
     
     
-
-<!-- LeanClound官方Javascript SDK -->
 <script>
-  var page_layout = 'false'
-  var lc_debug = false;
+  lc.countCounter({});
 
-  var lc_config = {
-    xid : 'd04baa6bc1b54f9d65c3a5cedc0e717d',
-    url : 'en/archives/2017/03/index.html' || '',
-    title : 'Archives－archives－2017－03'
-  };
-  lc_debug && console.log('lcconfig', lc_config);
-
-  var lc_table = 'Counter' || 'Counter';
-
-  function lc_page_views() {
-    if (page_layout === 'true') {
-      lc_index_views();
-    }
-    var query = new AV.Query(lc_table);
-    query.select(['-ACL']);
-    query.equalTo('xid', lc_config.xid);
-    query.find().then(results => {
-        // results is an array of AV.Object.
-        if (typeof results === 'undefined' || results.length == 0) {
-          insert();
-          return;
-        }
-        update(results[0]);
-        show(results[0]);
-      });
-
-    function insert() {
-        lc_debug && console.log('data is null new object');
-        var M = AV.Object.extend(lc_table);
-        let data = new M();
-        data.set('time', 1);
-      
-      for ( var key in lc_config) {
-        data.set(key, lc_config[key]);
-      }
-      data.save().then(function(data) {
-        lc_debug && console.log('created objectId is ' + data.id);
-      }, function(error) {
-        lc_debug && console.log("create object failed", error);
-      });
-    }
-
-    function update(data) {
-      for (var key in lc_config) {
-        if (key !== 'xid')
-        data.set(key, lc_config[key]);
-      }
-      lc_debug && console.log("after change,data", data);
-      data.increment('time', 1);
-      data.save().then(function(data) {
-        lc_debug && console.log("update to " + data.get('time'));
-      }, function(error) {
-        lc_debug && console.log("update object failed", error);
-      });
-    }
-
-    function show(data) {
-      $(".lc-count").html(data.get('time'));
-    }
-    function show_count(count) {
-      $(".lc-count").html(count);
-    }
-  };
-
-  function lc_index_views() {
-    // load views count from leanclound
-    // make sure you are created Counter table on leanclound
-    function lc_load_views(selector, options) {
-      var o = options || {};
-      var tkeys = [];
-      $(selector).each(function(i) {
-        var tkey = $(this).attr('id');
-        tkeys.push(tkey);
-      });
-
-      var query = new AV.Query(lc_table);
-      query.select([ '-ACL', '-createdAt', '-updatedAt', '-url' ]);
-      query.containedIn('xid', tkeys);
-      query.find().then(function(results) {
-        if (typeof results === 'undefined' || results.length == 0) {
-          return;
-        }
-        $(selector).each(function(i) {
-          var tkey = $(this).attr('id');
-          for (var i = 0; i < results.length; i++) {
-            var t = results[i];
-            if (t.get('xid') === tkey) {
-              var c = t.get('time') + '';
-              $(this).find(o.p.views).html(c);
-            }
-          }
-        });
-      }, function(error) {
-      });
-    }
-    lc_load_views('.card-action .leancloud_visitors', {
-      style : 'hidden-xs',
-      p : {
-        views : '.count'
-      }
-    });
-  }
-
-  var loadedAV = !(typeof AV === 'undefined');
-  if (!loadedAV) {
-    $.getScript('//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js',function() {
-      lc_debug && console.log('init AV after av.js loaded');
-        loadedAV = !(typeof AV === 'undefined');
-        if (!loadedAV) {
-          lc_debug && console.log('AV not loaded');
-
-        }
-        AV.init({
-          appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
-          appKey : 'QwGBjKlSYOBtjMa5aTGeO3cb',
-          serverURLs : 'https://lc.ieclipse.cn'
-        });
-        lc_page_views();
-    });
-  } else {
-    lc_page_views();
-  }
+  lc.countComment({
+    index: false
+  });
 </script>
-
 </body>
 </html>

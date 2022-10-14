@@ -46,10 +46,27 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 <link rel="stylesheet" href="/css/nova_font.css">
 <link rel="stylesheet" href="/css/bs/nova.css">
+<script src="//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js"></script>
+<script src="/js/leancloud.js"></script>
 
   <!-- RSS -->
   <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
   <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+  <script>
+        lc.init({
+          appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+          appKey : 'QwGBjKlSYOBtjMa5aTGeO3cb',
+          serverURL : 'https://lc.ieclipse.cn'
+        }, {
+          xid : 'c4c5c8dd9c11b18c28816828daa93d19',
+          url : 'other/resume.html',
+          title : '示例简历'
+        }, {
+          counterTable: '',
+          commentTable: '',
+          donateTable: ''
+        });
+  </script>
 <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
 </head>
 <body>
@@ -71,6 +88,7 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
         <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/about/" class="main-nav">关于</a></li>
+        <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
@@ -92,426 +110,202 @@
   
 
 <style>
-.glyphicon {
-  top: 5px;
-}
 
-#cv span {
-  display: inline-block;
-}
-
-#cv .label-value {
-  width: 200px;
-  vertical-align: top;
-}
-
-h1, h2, h3, h4, h5 {
-  font-weight: 500;
-  color: #5bc0de;
-  line-height: 1.5;
-}
-
-.progress-list div {
-  width: 100%;
-  margin-left: 200px;
-}
-
-.info-list, .progress-list {
-  list-style: none;
-  padding-left: 0px;
-  font-size: 16px;
-  line-height: 2;
-}
-
-.stack-list {
-  list-style: none;
-  padding-left: 0px;
-  line-height: 1.5;
-}
-
-.stack-list li {
-  margin-bottom: 12px;
-}
-
-.right-list li {
-  margin-bottom: 12px;
-}
-
-hr {
-  margin-bottom: 8px;
-  color: #ccc;
-}
-
-.info-unit {
-  color: #666;
-  margin-bottom: 20px;
-}
-
-.remodal-img h3 {
-  float: left;
-  margin-bottom: 10px;
-}
-
-.remodal-img input {
-  float: left;
-  width: 480px;
-  height: 42px;
-  font-size: 20px;
-  padding: 6px;
-  color: #666;
-}
-
-.remodal-img button {
-  float: right;
-  background: #5bc0de;
-}
-
-.remodal-img button:hover {
-  float: right;
-  background: #5bc0de;
-}
-
-p {
-  line-height: 1.5;
-}
-
-progress {
-  background-color: #f6f6f6;
-  display: inline;
-  /*width: 195px;*/
-  height: 1em;
-}
-
-progress::-webkit-progress-bar {
-  background-color: #e0eaf0;
-}
-
-progress::-webkit-progress-value {
-  background-color: #00796b;
-}
-
-progress::-moz-progress-bar {
-  background-color: #e0eaf0;
-}
-
-progress::-moz-progress-value {
-  background-color: #00796b;
-}
-
-.progress-list {
-  line-height: 2;
-}
-
-.me {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.weixin {
-  margin-top: 20px;
-  background-color: #e0eaf0;
-  position: relative;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  text-align: center;
-}
-
-.weixin img {
-  width: 200px;
-}
-
-.left-label {
-  display: inline-block;
-  width: 120px;
-}
-
-.portrait {
-  margin: 0 auto;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  background-image:
-    url('https://avatars3.githubusercontent.com/u/5350591?v=3&s=160');
-  background-size: 120%;
-  background-position: center;
-  border-radius: 50%;
-  border: 5px solid #5bc0de;
-  width: 160px;
-  height: 160px;
-}
-
-.side {
-  background-color: whitesmoke;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.main {
-  padding: 20px;
-  background-color: white;
-}
-@media print {
-  .side {
-    width: 33.3%;
-  }
-  .main {
-    width: 66.6%
-  }
-}
-
-.info-header:hover {
-  background-color: #d4dee4;
-}
-
-.info-unit ul li:hover {
-  background-color: #d4dee4;
-}
-
-.info-header .unit-remove {
-  float: right;
-  margin-left: 20px;
-  visibility: hidden;
-  cursor: pointer;
-}
-
-.info-header .item-add {
-  float: right;
-  margin-left: 20px;
-  margin-right: 2px;
-  visibility: hidden;
-  cursor: pointer;
-}
-
-.item-remove {
-  position: absolute;
-  top: 1px;
-  right: 2px;
-  margin-right: 2px;
-  visibility: hidden;
-  cursor: pointer;
-  color: red;
-}
-
-ul li {
-  position: relative;
-}
-
-.experience-list .item-remove {
-  position: absolute;
-  right: 2px;
-  top: 0px;
-  margin-right: 2px;
-  visibility: hidden;
-  cursor: pointer;
-}
-
-.stack-list .item-remove {
-  position: absolute;
-  right: 2px;
-  top: 0px;
-  margin-right: 2px;
-  visibility: hidden;
-  cursor: pointer;
-}
-.unit-remove {
-  color: red;
-}
-.item-add {
-  color: green;
-}
-.btn-print-bar {
-  visibility: hidden;
-  position: absolute;
-  top: .5em;
-  right: 1em;
-}
-.btn-print-bar .glyphicon {
-  top: 1px;
-}
 </style>
+<link rel="stylesheet" href="/css/bs/resume.css">
 
-
-<div class="page-body">
-
-  
-<div class="container" id="cv">
+<div class="container page-body">
   <div class="row">
     <div class="side col-xs-12 col-md-4">
       <div class="me">
-        <div class="portrait" data-toggle="modal" data-target="#input-modal" data-type="bg" data-selector=".portrait"></div>
-        <h1 id="username">Jamling</h1>
-        <h4 id="persona-tag">Java / Android / Web</h4>
+        <img class="avatar" src="https://avatars3.githubusercontent.com/u/5350591?v=3&s=160" alt="avatar">
+        <h2 class="name" role="link">Jamling</h2>
+        <h5 class="summary">Android / Java / Web</h5>
       </div>
-      <div class="profile info-unit">
-        <h2 class="info-header">
-          <span class="glyphicon glyphicon-user"></span> <span class="info-title">基本信息</span>
-        </h2>
-        <hr>
-        <ul class="info-list">
-          <li><label class="left-label">姓名</label><span class="label-value">李四</span></li>
-          <li><label class="left-label">出生年月</label><span class="label-value">保密</span></li>
-          <li><label class="left-label">毕业院校</label><span class="label-value">社会大学</span></li>
-          <li><label class="left-label">毕业年份</label><span class="label-value">保密</span></li>
-          <li><label class="left-label">学历</label><span class="label-value">保密</span></li>
-          <li><label class="left-label">求职意向</label><span class="label-value">保密</span></li>
-        </ul>
-      </div>
-      <div class="contact info-unit">
-        <h2 class="info-header">
-          <span class="glyphicon glyphicon-earphone"></span> <span class="info-title">联系方式</span>
-        </h2>
-        <hr>
-        <ul class="info-list">
-          <li><label class="left-label">手机</label><span class="label-value">保密</span></li>
-          <li><label class="left-label">邮箱</label><span class="label-value link"><a href="mailto:" target="_blank" rel="noopener">保密</a></span></li>
-          <li><label class="left-label">个人主页</label><span class="label-value link"><a href="http://www.ieclipse.cn">http://www.ieclipse.cn</a></span></li>
-          <li><label class="left-label">Github</label><span class="label-value link"><a href="https://github.com/Jamling" target="_blank" rel="noopener">Jamling</a></span></li>
-        </ul>
-      </div>
-      <div class="skill info-unit">
-        <h2 class="info-header">
-          <span class="glyphicon glyphicon-star"></span> <span class="info-title">技能点</span>
-        </h2>
-        <hr>
-        <ul class="progress-list">
-          <li><label class="left-label">Java</label> <progress value="90" max="100"></progress></li>
-          <li><label class="left-label">Android</label> <progress value="95" max="100"></progress></li>
-          <li><label class="left-label">Web</label> <progress value="70" max="100"></progress></li>
-          <li><label class="left-label">技术x</label> <progress value="80" max="100"></progress></li>
-        </ul>
-      </div>
-      <div class="stack info-unit">
-        <h2 class="info-header">
-          <span class="glyphicon glyphicon-wrench"></span> <span class="info-title">技术栈</span>
-        </h2>
-        <hr>
-        <ul class="stack-list">
-          <li><label class="left-label">Java</label><span class="label-value">SSH、Eclipse RCP/Plugin</span></li>
-          <li><label class="left-label">Android</label><span class="label-value">QuickAF、Aorm</span></li>
-          <li><label class="left-label">Web</label><span class="label-value">CSS、Html、JavaScript、Node.js</span></li>
-        </ul>
-      </div>
-      <!--             <div class="code info-unit"> -->
-      <!--                 <h2 class="info-header"><span class="glyphicon glyphicon-user"></span> <span class="info-title">个人微信</span></h2> -->
-      <!--                 <hr> -->
-      <!--                 <div class="weixin" data-toggle="modal" data-target="#input-modal" data-type="src" data-selector=".weixin img"> -->
-      <!--                     <img src="static/image/weixin.png" alt=""> -->
-      <!--                 </div> -->
-      <!--             </div> -->
-    </div>
+      <div class="panelx animated slideInUp faster group">
+        <h3 class="panelx-title">
+          <span class="glyphicon glyphicon-user"></span>
+          基本信息
+        </h3>
+        <div class="panelx-body">
+        
+        <div class="info-list">
+          <span class="info-label">姓名</span>
+          <span class="info-value">
+           XXX
+          </span>
+        </div>
+        
+        <div class="info-list">
+          <span class="info-label">毕业院校</span>
+          <span class="info-value">
+           XXX
+          </span>
+        </div>
+        
+        <div class="info-list">
+          <span class="info-label">学历</span>
+          <span class="info-value">
+           本科
+          </span>
+        </div>
+        
+        <div class="info-list">
+          <span class="info-label">求职意向</span>
+          <span class="info-value">
+           XXX
+          </span>
+        </div>
+        
+        
+        </div><!-- end panel-boxy -->
+      </div><!-- end group -->
+      <div class="panelx animated slideInUp faster group">
+        <h3 class="panelx-title">
+          <span class="glyphicon glyphicon-earphone"></span>
+          联系方式
+        </h3>
+        <div class="panelx-body">
+        
+        <div class="info-list">
+          <span class="info-label">手机</span>
+          <span class="info-value">
+           1XX XXXX XXXX
+          </span>
+        </div>
+        
+        <div class="info-list">
+          <span class="info-label">邮箱</span>
+          <span class="info-value">
+           <p><a href="mailto:XXX@XXX.com">XXX@XXX.com</a></p>
+ 
+          
+          </span>
+        </div>
+        
+        <div class="info-list">
+          <span class="info-label">个人主页</span>
+          <span class="info-value">
+           <p><a href="https://www.ieclipse.cn">https://www.ieclipse.cn</a></p>
+ 
+          
+          </span>
+        </div>
+        
+        <div class="info-list">
+          <span class="info-label">Github</span>
+          <span class="info-value">
+           <p><a href="https://github.com/Jamling">Jamling</a></p>
+ 
+          
+          </span>
+        </div>
+        
+        
+        </div><!-- end panel-boxy -->
+      </div><!-- end group -->
+      <div class="panelx animated slideInUp faster group">
+        <h3 class="panelx-title">
+          <span class="glyphicon glyphicon-star"></span>
+          技术标签
+        </h3>
+        <div class="panelx-body">
+        
+        <div class="info-list">
+          <span class="info-label">Android</span>
+          <span class="info-value">
+           Jetpack、ORM、IPC、IM、Framework、性能优化、稳定性、安全、开源框架
+          </span>
+        </div>
+        
+        <div class="info-list">
+          <span class="info-label">Java</span>
+          <span class="info-value">
+           SSM、Spring Cloud、Eclipse RCP/SWT、Swing、设计模式
+          </span>
+        </div>
+        
+        <div class="info-list">
+          <span class="info-label">Web</span>
+          <span class="info-value">
+           HTML、JavaScript、CSS、VUE2、uni-app、微信小程序
+          </span>
+        </div>
+        
+        <div class="info-list">
+          <span class="info-label">其它</span>
+          <span class="info-value">
+           Git、ThinkPHP、Docker、MySQL数据库、蓝牙、Hexo
+          </span>
+        </div>
+        
+        
+        </div><!-- end panel-boxy -->
+      </div><!-- end group -->
+      <div class="panelx animated slideInUp faster group">
+        <h3 class="panelx-title">
+          <span class="glyphicon glyphicon-fire"></span>
+          自定义
+        </h3>
+        <div class="panelx-body">
+        
+        <div class="info-list">
+          <span class="info-label">自定义</span>
+          <span class="info-value">
+           <p>自定义</p>
+ 
+          
+          </span>
+        </div>
+        
+        <div class="info-list">
+          <span class="info-label">XXX</span>
+          <span class="info-value">
+           XXX
+          </span>
+        </div>
+        
+        <div class="info-list">
+          <span class="info-label">YYY</span>
+          <span class="info-value">
+           ZZZ
+          </span>
+        </div>
+        
+        
+        </div><!-- end panel-boxy -->
+      </div><!-- end group -->
+    </div><!-- end side -->
     <div class="main col-xs-12 col-md-8">
       <div class="btn-print-bar">
-        <button type="button" class="btn btn-info" onclick="javascript: toggle_print()">
-            <span class="glyphicon glyphicon-print"></span> 打印准备
-        </button>
-        <button type="button" class="btn btn-primary" onclick="javascript: printdiv()">
+        <button type="button" class="btn btn-primary" onclick="javascript: printContent(true)">
             <span class="glyphicon glyphicon-print"></span> 打印
         </button>
+        <button type="button" class="btn btn-info" style="display:none;" onclick="javascript: cancelPrint()">
+            <span class="glyphicon glyphicon-refresh"></span> 恢复
+        </button>
       </div>
-      <!--             <div class="education info-unit right-list"> -->
-      <!--                 <h2 class="info-header"><span class="glyphicon glyphicon-book"></span> <span class="info-title">教育经历</span></h2> -->
-      <!--                 <hr> -->
-      <!--                 <ul class="experience-list"> -->
-      <!--                     <li> -->
-      <!--                         <h3>北京邮电大学 - 网络工程专业（本科）2012-2017</h3> -->
-      <!--                         <p> -->
-      <!--                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. -->
-      <!--                         </p> -->
-      <!--                     </li> -->
-      <!--                 </ul> -->
-      <!--             </div> -->
-      <div class="work info-unit right-list">
-        <h2 class="info-header">
-          <span class="glyphicon glyphicon-briefcase"></span> <span class="info-title">工作经历</span>
-        </h2>
-        <hr>
-        <ul class="experience-list">
-          <li>
-            <h3>XX科技有限公司（2015.06－）</h3>
-            <p>带领Android团队完成公司旗下Android客户端产品研发，包括XX产品、YY产品、ZZ产品等。</p>
-          </li>
-          <li>
-            <h3>XX科技有限公司（2014.5－2015.4）</h3>
-            <p>负责XX项目开发及管理。</p>
-          </li>
-          <li>
-            <h3>XX信息研发有限公司（2011.6－2014.4）</h3>
-            <p>参与XX项目，做了XX事。</p>
-          </li>
-          <li>
-            <h3>XX软件技术有限公司（2008.8－2011.5）</h3>
-            <ul>
-              <li>第一年怎么样</li>
-              <li>第二年又如何</li>
-              <li>第三年做什么</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      <div class="project info-unit right-list">
-        <h2 class="info-header">
-          <span class="glyphicon glyphicon-tasks"></span> <span class="info-title">项目经验</span>
-        </h2>
-        <hr>
-        <ul class="experience-list">
-          <li>
-            <h3>项目一（14.05-15.4）</h3>
-            <p>项目的介绍，个人在其中担任什么角色，做了什么事</p>
-          </li>
-          <li>
-            <h3>项目二（14.05-15.4）</h3>
-            <p>项目的介绍，个人在其中担任什么角色，做了什么事</p>
-          </li>
-          <li>
-            <h3>项目三（14.05-15.4）</h3>
-            <p>项目的介绍，个人在其中担任什么角色，做了什么事</p>
-          </li>
-        </ul>
-      </div>
-      <!--
-      <div class="trophy info-unit">
-        <h2 class="info-header">
-          <span class="glyphicon glyphicon-gift"></span> <span class="info-title">奖项与证书</span>
-        </h2>
-        <hr>
-        <ul class="experience-list">
-          <li>
-            <h3>小学生作文二等奖</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-              et dolore magna aliqua. Ut enim ad minim veniam。</p>
-          </li>
-          <li>
-            <h3>曾获统一冰红茶“再来一瓶”奖</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-              et dolore magna aliqua. Ut enim ad minim veniam。</p>
-          </li>
-          <li>
-            <h3>这一行也是为了凑版面</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-              et dolore magna aliqua. Ut enim ad minim veniam。</p>
-          </li>
-        </ul>
-      </div>
-       -->
-      <div class="aboutme info-unit right-paragraph">
-        <h2 class="info-header">
-          <span class="glyphicon glyphicon-bookmark"></span> <span class="info-title">自我评价</span>
-        </h2>
-        <hr>
-        简单介绍一下<br>
-        本简历模板是在<a href="https://www.shiyanlou.com/courses/624" target="_blank" rel="noopener">在Github Pages上部署自己的简历</a>的基础上修改而成
+      
+        <h2 id="工作经历"><a href="#工作经历" class="headerlink" title=" 工作经历"></a><span class="glyphicon glyphicon-list-alt"></span> 工作经历</h2><h3 id="XX公司-职位-（开始时间－结束时间）"><a href="#XX公司-职位-（开始时间－结束时间）" class="headerlink" title="XX公司 职位 （开始时间－结束时间）"></a>XX公司 <small>职位</small> <span>（开始时间－结束时间）</span></h3><ul>
+<li>岗位职责描述</li>
+<li>做出了什么业绩</li>
+</ul>
+<h2 id="项目经历"><a href="#项目经历" class="headerlink" title=" 项目经历"></a><span class="glyphicon glyphicon-list"></span> 项目经历</h2><h3 id="项目二"><a href="#项目二" class="headerlink" title="项目二"></a>项目二</h3><p>项目的介绍，个人在其中担任什么角色，做了什么事</p>
+<h3 id="项目一"><a href="#项目一" class="headerlink" title="项目一"></a>项目一</h3><h4 id="职责"><a href="#职责" class="headerlink" title="职责"></a>职责</h4><ul>
+<li>负责XXX</li>
+</ul>
+<h4 id="业绩"><a href="#业绩" class="headerlink" title="业绩"></a>业绩</h4><ul>
+<li>成本降低XXX</li>
+</ul>
 
-      </div>
+      
     </div>
   </div>
-</div>
-
-
 </div>
 <script src="/js/decrypt.min.js"></script>
 
 <div class="container page-footer">
   <div style="margin: 1em 0">
-  
 <a id="share"></a>
 <div class="social-share"></div>
 <script>
@@ -521,11 +315,8 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
 
   </div>
   <div class="divider"></div>
-  
+<a id="comment"></a>
 
-  <a id="comment"></a>
-
-<script src="//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js"></script>
 <script src="//unpkg.com/valine/dist/Valine.min.js">
 </script>
 <!--PC和WAP自适应版-->
@@ -536,7 +327,7 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
         el: '#vcomments',
         appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
         appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
-        path: 'c4c5c8dd9c11b18c28816828daa93d19',
+        path: 'other/resume.html',
         recordIP: true,
         visitor: false
     })
@@ -545,63 +336,25 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
 
 
 </div>
-
-<div class="modal fade" id="input-modal" tabindex="-1" role="dialog" aria-labelledby="edit image">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title">请输入图片地址</h3>
-      </div>
-      <div class="modal-body">
-          <input type="text" class="input-url form-control">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary ok">确定</button>
-      </div>
-    </div>
-  </div>
-</div>
 <script>
-$('#input-modal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    $('#input-modal .ok').data(button.data());
-    $("#input-modal .ok").click(function(event) {
 
-      var src_type = $("#input-modal .ok").data('type');
-      var src_selector = $("#input-modal .ok").data('selector');
-      var url = $("#input-modal .input-url").val();
-      if (src_type === 'bg') {
-        $(src_selector).css('background-image', 'url("{0}")'.format(url));
-      } else if (src_type  === 'src') {
-        $(src_selector).attr('src', url);
-      }
-      $('#input-modal').modal('hide');
-
-    });
-});
-
-function share(){
-    $('#share-modal').modal('hide')
-}
-
-function printdiv(selector){
-  var selector = selector || '.article-content';
-  var div = $(selector).html();
-  var old = $(document.body).html();
-  $(document.body).html(div);
+function printContent(p) {
+  $('#body-header').hide();
+  $('#body-footer').hide();
+  $('.page-footer').hide();
+  $('.panelx-body').show();
+  $(document.body).css('padding-top', '0px');
   $('.btn-print-bar').css('visibility', 'hidden');
-  window.print();
-  $(document.body).html(old);
-}
-function toggle_print(p) {
-  $('#body-header').toggle();
-  $('#body-footer').toggle();
-  $('.page-footer').toggle();
   if (p) {
     window.print();
   }
+}
+function cancelPrint() {
+  $('#body-header').show();
+  $(document.body).css('padding-top', '60px');
+  $('#body-footer').show();
+  $('.page-footer').show();
+
 }
 
 //First, checks if it isn't implemented yet.
@@ -617,43 +370,52 @@ if (!String.prototype.format) {
   };
 }
 
+function nextH3(node, arr) {
+  let n = node.next();
+  if (n && n.get(0)) {
+    let e = n.get(0);
+    if (e.nodeName !== 'H3' && e.nodeName !== 'H2') {
+      arr.push(n);
+      nextH3(n, arr);
+    }
+  }
+}
 
 jQuery(document).ready(function($) {
-    $(".left-label").attr('contenteditable', 'true');
-    $(".label-value").attr('contenteditable', 'true');
-    $(".info-title").attr('contenteditable', 'true');
-    $("h3").attr('contenteditable', 'true');
-    $("p").attr('contenteditable', 'true');
-    $(".right-paragraph p").attr('contenteditable', 'true');
-    $("#username").attr('contenteditable', 'true');
-    $("#persona-tag").attr('contenteditable', 'true');
-    $(".info-unit ul li").append('<span class="item-remove"><span class="glyphicon glyphicon-remove"></span></span>');
-    $(".link").attr('contenteditable', 'false');
-
-    $(".info-unit").filter(function(index) {
-        return ($(this).children('ul').length);
-    }).children("h2").append('<span class="item-add"><span class="glyphicon glyphicon-plus"></span></span>');
-
-    $(".info-unit h2").append('<span class="unit-remove"><span class="glyphicon glyphicon-remove"></span></span>');
-
-    $('.info-header').hover(function() {
-        /* Stuff to do when the mouse enters the element */
-        $(this).children('.unit-remove').css('visibility', 'visible');
-        $(this).children('.item-add').css('visibility', 'visible');
-
-    }, function() {
-        /* Stuff to do when the mouse leaves the element */
-        $(this).children('.unit-remove').css('visibility', 'hidden');
-        $(this).children('.item-add').css('visibility', 'hidden');
+    $('.main h3').each(function (h3) {
+        let parent = $(this).parent();
+        
+        let nexts = [];//$(this).nextUntil('mark');
+        nextH3($(this), nexts);
+        let panelx = $('<div/>').addClass('panelx animated slideInUp faster');
+        let panelxBody = $('<div/>').addClass('panelx-body');
+        if (Array.isArray(nexts)) {
+          nexts = [nexts];
+        }
+        nexts.forEach((next, index) => {
+          panelxBody.append(next);
+        });
+        let p = $(this).wrap(panelx);
+        panelx = $(this).parent();
+        panelx.append(panelxBody);
     });
+    /* Handle panel expand/collapse */
+    $(".panelx").filter(function(index) {
+        return ($(this).children('h3').length);
+    }).children("h3").append('<span class="item-toggle"><span class="glyphicon glyphicon-collapse-up"></span></span>');
 
-    $('.info-unit ul li').hover(function() {
+    $('.panelx').hover(function() {
         /* Stuff to do when the mouse enters the element */
-        $(this).children('.item-remove').css('visibility', 'visible');
-
+        $(this).find('.item-toggle').css('visibility', 'visible');
+        //$(this).css('padding', '0.5rem');
     }, function() {
         /* Stuff to do when the mouse leaves the element */
-        $(this).children('.item-remove').css('visibility', 'hidden');
+        $(this).find('.item-toggle').css('visibility', 'hidden');
+        //$(this).css('padding', '0em');
+    });
+    $('.panelx h3 .item-toggle').parent().click(function(event) {
+        var unit = $(this).parent().find(".panelx-body");
+        $(unit).toggle();
     });
 
     $('.main').hover(function() {
@@ -662,25 +424,9 @@ jQuery(document).ready(function($) {
     }, function() {
       /* Stuff to do when the mouse leaves the element */
       $('.btn-print-bar').css('visibility', 'hidden');
+      cancelPrint();
     });
-
-    $('.unit-remove').click(function(event) {
-        $(this).closest(".info-unit").remove();
-    });
-
-    $('.item-remove').click(function(event) {
-        $(this).closest("li").remove();
-    });
-
-    $('.item-add').click(function(event) {
-        var unit = $(this).closest(".info-unit");
-        if (unit.children('ul')){
-            var list = unit.children('ul');
-            var clone = list.children('li:first-child').clone(true);
-            list.append(clone);
-        }
-
-    });
+    
     $("progress").click(function(event) {
         $(this).attr("value", event.offsetX/$(this).width()/0.8 * $(this).attr("max"));
     });
@@ -699,7 +445,7 @@ jQuery(document).ready(function($) {
       <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
     </div>
     <div>
-      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+      <a href="//beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
     </div>
   </div>
 </footer>
@@ -733,135 +479,12 @@ jQuery(document).ready(function($) {
     <script src="/js/script.js"></script>
     
     
-
-<!-- LeanClound官方Javascript SDK -->
 <script>
-  var page_layout = 'false'
-  var lc_debug = false;
+  lc.countCounter({});
 
-  var lc_config = {
-    xid : 'c4c5c8dd9c11b18c28816828daa93d19',
-    url : 'other/resume.html' || 'https://www.ieclipse.cn/other/resume.html',
-    title : '示例简历'
-  };
-  lc_debug && console.log('lcconfig', lc_config);
-
-  var lc_table = 'Counter' || 'Counter';
-
-  function lc_page_views() {
-    if (page_layout === 'true') {
-      lc_index_views();
-    }
-    var query = new AV.Query(lc_table);
-    query.select(['-ACL']);
-    query.equalTo('xid', lc_config.xid);
-    query.find().then(results => {
-        // results is an array of AV.Object.
-        if (typeof results === 'undefined' || results.length == 0) {
-          insert();
-          return;
-        }
-        update(results[0]);
-        show(results[0]);
-      });
-
-    function insert() {
-        lc_debug && console.log('data is null new object');
-        var M = AV.Object.extend(lc_table);
-        let data = new M();
-        data.set('time', 1);
-      
-      for ( var key in lc_config) {
-        data.set(key, lc_config[key]);
-      }
-      data.save().then(function(data) {
-        lc_debug && console.log('created objectId is ' + data.id);
-      }, function(error) {
-        lc_debug && console.log("create object failed", error);
-      });
-    }
-
-    function update(data) {
-      for (var key in lc_config) {
-        if (key !== 'xid')
-        data.set(key, lc_config[key]);
-      }
-      lc_debug && console.log("after change,data", data);
-      data.increment('time', 1);
-      data.save().then(function(data) {
-        lc_debug && console.log("update to " + data.get('time'));
-      }, function(error) {
-        lc_debug && console.log("update object failed", error);
-      });
-    }
-
-    function show(data) {
-      $(".lc-count").html(data.get('time'));
-    }
-    function show_count(count) {
-      $(".lc-count").html(count);
-    }
-  };
-
-  function lc_index_views() {
-    // load views count from leanclound
-    // make sure you are created Counter table on leanclound
-    function lc_load_views(selector, options) {
-      var o = options || {};
-      var tkeys = [];
-      $(selector).each(function(i) {
-        var tkey = $(this).attr('id');
-        tkeys.push(tkey);
-      });
-
-      var query = new AV.Query(lc_table);
-      query.select([ '-ACL', '-createdAt', '-updatedAt', '-url' ]);
-      query.containedIn('xid', tkeys);
-      query.find().then(function(results) {
-        if (typeof results === 'undefined' || results.length == 0) {
-          return;
-        }
-        $(selector).each(function(i) {
-          var tkey = $(this).attr('id');
-          for (var i = 0; i < results.length; i++) {
-            var t = results[i];
-            if (t.get('xid') === tkey) {
-              var c = t.get('time') + '';
-              $(this).find(o.p.views).html(c);
-            }
-          }
-        });
-      }, function(error) {
-      });
-    }
-    lc_load_views('.card-action .leancloud_visitors', {
-      style : 'hidden-xs',
-      p : {
-        views : '.count'
-      }
-    });
-  }
-
-  var loadedAV = !(typeof AV === 'undefined');
-  if (!loadedAV) {
-    $.getScript('//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js',function() {
-      lc_debug && console.log('init AV after av.js loaded');
-        loadedAV = !(typeof AV === 'undefined');
-        if (!loadedAV) {
-          lc_debug && console.log('AV not loaded');
-
-        }
-        AV.init({
-          appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
-          appKey : 'QwGBjKlSYOBtjMa5aTGeO3cb',
-          serverURLs : 'https://lc.ieclipse.cn'
-        });
-        lc_page_views();
-    });
-  } else {
-    lc_page_views();
-  }
+  lc.countComment({
+    index: false
+  });
 </script>
-
 </body>
 </html>

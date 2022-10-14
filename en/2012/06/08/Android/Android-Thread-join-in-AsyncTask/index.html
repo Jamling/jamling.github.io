@@ -46,10 +46,27 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 <link rel="stylesheet" href="/css/nova_font.css">
 <link rel="stylesheet" href="/css/bs/nova.css">
+<script src="//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js"></script>
+<script src="/js/leancloud.js"></script>
 
   <!-- RSS -->
   <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
   <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+  <script>
+        lc.init({
+          appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+          appKey : 'QwGBjKlSYOBtjMa5aTGeO3cb',
+          serverURL : 'https://lc.ieclipse.cn'
+        }, {
+          xid : '08e37a172fb615b57b123d6e83cfa3b9',
+          url : 'en/2012/06/08/Android/Android-Thread-join-in-AsyncTask/',
+          title : 'Thread.join()在AsyncTask中的妙用'
+        }, {
+          counterTable: '',
+          commentTable: '',
+          donateTable: ''
+        });
+  </script>
 <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
 </head>
 <body>
@@ -71,6 +88,7 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
         <li><a href="/en/" class="main-nav">Home</a></li><li><a href="/en/p/" class="main-nav">Projects</a></li><li><a href="/en/categories/" class="main-nav">Category</a></li><li><a href="/en/archives/" class="main-nav">Archive</a></li><li><a href="/en/donate/" class="main-nav">Donate</a></li><li><a href="/en/about/" class="main-nav">About</a></li>
+        <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
@@ -96,19 +114,25 @@
     
 <article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
   <header class="article-header">
-    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>Path: <a class="category-item" href="/en/">Blog</a><a class="category-item" href="/en/categories/Android/">Android</a></span></div>
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>Path: <a class="category-item" href="/en/">Blog</a><a class="category-item" href="/en/categories/Android/">Android</a><a class="category-item">Thread.join()在AsyncTask中的妙用</a></span></div>
     <div class="divider"></div>
-      <h1 class="article-title" itemprop="name headline"></h1>
+      <h1 class="article-title" itemprop="name headline">Thread.join()在AsyncTask中的妙用</h1>
     <div class="post-header clearfix">
       <span class="post-date"><span class="hidden-xs icon nova-calendar">Post at: </span>
       <time datetime="2012-06-08T13:00:00.000Z" itemprop="datePublished"><time datetime="2012-06-08T13:00:00.000Z">2012-06-08</time></time>
       </span>
       
-      <span class="post-share">
-        <a href="#share" class="icon nova-share"><span class="hidden-xs">Share</span><span class="jiathis_counter_style"></span></a>
-        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" id="changyan_count_unit" data-thread-key="08e37a172fb615b57b123d6e83cfa3b9"></span><span class="hidden-xs">Comment</span></a>
+      <span class="post-share xxx-count" data-xid="08e37a172fb615b57b123d6e83cfa3b9" data-title="Thread.join()在AsyncTask中的妙用" data-url="en/2012/06/08/Android/Android-Thread-join-in-AsyncTask/">
+        <a href="#share" class="icon nova-share">
+          <span class="hidden-xs">Share</span><span class="jiathis_counter_style"></span>
+        </a>
+        <a href="#comment" class="icon nova-bubbles comment-count">
+          <span class="count"></span><span class="hidden-xs">Comment</span>
+        </a>
         <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">Like</span></a>-->
-        <a href="#" class="icon nova-eye leancloud_visitors" id="08e37a172fb615b57b123d6e83cfa3b9" data-flag-title="“Thread.join()在AsyncTask中的妙用”"><span class="count lc-count leancloud-visitors-count"></span><span class="hidden-xs">Views</span></a>
+        <a href="#" class="icon nova-eye view-count">
+          <span class="count"></span><span class="hidden-xs">Views</span>
+        </a>
       </span>
     </div>
     <div class="divider"></div>
@@ -224,7 +248,6 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
 
   <a id="comment"></a>
 
-<script src="//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js"></script>
 <script src="//unpkg.com/valine/dist/Valine.min.js">
 </script>
 <!--PC和WAP自适应版-->
@@ -235,7 +258,7 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
         el: '#vcomments',
         appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
         appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
-        path: '08e37a172fb615b57b123d6e83cfa3b9',
+        path: 'en/2012/06/08/Android/Android-Thread-join-in-AsyncTask/',
         recordIP: true,
         visitor: false
     })
@@ -278,7 +301,7 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
       <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
     </div>
     <div>
-      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+      <a href="//beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
     </div>
   </div>
 </footer>
@@ -312,135 +335,12 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
     <script src="/js/script.js"></script>
     
     
-
-<!-- LeanClound官方Javascript SDK -->
 <script>
-  var page_layout = 'false'
-  var lc_debug = false;
+  lc.countCounter({});
 
-  var lc_config = {
-    xid : '08e37a172fb615b57b123d6e83cfa3b9',
-    url : 'en/2012/06/08/Android/Android-Thread-join-in-AsyncTask/' || 'https://www.ieclipse.cn/2012/06/08/Android/Android-Thread-join-in-AsyncTask/',
-    title : 'Thread.join()在AsyncTask中的妙用'
-  };
-  lc_debug && console.log('lcconfig', lc_config);
-
-  var lc_table = 'Counter' || 'Counter';
-
-  function lc_page_views() {
-    if (page_layout === 'true') {
-      lc_index_views();
-    }
-    var query = new AV.Query(lc_table);
-    query.select(['-ACL']);
-    query.equalTo('xid', lc_config.xid);
-    query.find().then(results => {
-        // results is an array of AV.Object.
-        if (typeof results === 'undefined' || results.length == 0) {
-          insert();
-          return;
-        }
-        update(results[0]);
-        show(results[0]);
-      });
-
-    function insert() {
-        lc_debug && console.log('data is null new object');
-        var M = AV.Object.extend(lc_table);
-        let data = new M();
-        data.set('time', 1);
-      
-      for ( var key in lc_config) {
-        data.set(key, lc_config[key]);
-      }
-      data.save().then(function(data) {
-        lc_debug && console.log('created objectId is ' + data.id);
-      }, function(error) {
-        lc_debug && console.log("create object failed", error);
-      });
-    }
-
-    function update(data) {
-      for (var key in lc_config) {
-        if (key !== 'xid')
-        data.set(key, lc_config[key]);
-      }
-      lc_debug && console.log("after change,data", data);
-      data.increment('time', 1);
-      data.save().then(function(data) {
-        lc_debug && console.log("update to " + data.get('time'));
-      }, function(error) {
-        lc_debug && console.log("update object failed", error);
-      });
-    }
-
-    function show(data) {
-      $(".lc-count").html(data.get('time'));
-    }
-    function show_count(count) {
-      $(".lc-count").html(count);
-    }
-  };
-
-  function lc_index_views() {
-    // load views count from leanclound
-    // make sure you are created Counter table on leanclound
-    function lc_load_views(selector, options) {
-      var o = options || {};
-      var tkeys = [];
-      $(selector).each(function(i) {
-        var tkey = $(this).attr('id');
-        tkeys.push(tkey);
-      });
-
-      var query = new AV.Query(lc_table);
-      query.select([ '-ACL', '-createdAt', '-updatedAt', '-url' ]);
-      query.containedIn('xid', tkeys);
-      query.find().then(function(results) {
-        if (typeof results === 'undefined' || results.length == 0) {
-          return;
-        }
-        $(selector).each(function(i) {
-          var tkey = $(this).attr('id');
-          for (var i = 0; i < results.length; i++) {
-            var t = results[i];
-            if (t.get('xid') === tkey) {
-              var c = t.get('time') + '';
-              $(this).find(o.p.views).html(c);
-            }
-          }
-        });
-      }, function(error) {
-      });
-    }
-    lc_load_views('.card-action .leancloud_visitors', {
-      style : 'hidden-xs',
-      p : {
-        views : '.count'
-      }
-    });
-  }
-
-  var loadedAV = !(typeof AV === 'undefined');
-  if (!loadedAV) {
-    $.getScript('//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js',function() {
-      lc_debug && console.log('init AV after av.js loaded');
-        loadedAV = !(typeof AV === 'undefined');
-        if (!loadedAV) {
-          lc_debug && console.log('AV not loaded');
-
-        }
-        AV.init({
-          appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
-          appKey : 'QwGBjKlSYOBtjMa5aTGeO3cb',
-          serverURLs : 'https://lc.ieclipse.cn'
-        });
-        lc_page_views();
-    });
-  } else {
-    lc_page_views();
-  }
+  lc.countComment({
+    index: false
+  });
 </script>
-
 </body>
 </html>

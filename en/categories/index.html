@@ -46,10 +46,27 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 <link rel="stylesheet" href="/css/nova_font.css">
 <link rel="stylesheet" href="/css/bs/nova.css">
+<script src="//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js"></script>
+<script src="/js/leancloud.js"></script>
 
   <!-- RSS -->
   <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
   <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+  <script>
+        lc.init({
+          appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+          appKey : 'QwGBjKlSYOBtjMa5aTGeO3cb',
+          serverURL : 'https://lc.ieclipse.cn'
+        }, {
+          xid : 'b1ccbd874ee3fc58be7a7083354f9b8e',
+          url : 'en/categories/index.html',
+          title : 'Category'
+        }, {
+          counterTable: '',
+          commentTable: '',
+          donateTable: ''
+        });
+  </script>
 <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
 </head>
 <body>
@@ -71,6 +88,7 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
         <li><a href="/en/" class="main-nav">Home</a></li><li><a href="/en/p/" class="main-nav">Projects</a></li><li><a href="/en/categories/" class="main-nav">Category</a></li><li><a href="/en/archives/" class="main-nav">Archive</a></li><li><a href="/en/donate/" class="main-nav">Donate</a></li><li><a href="/en/about/" class="main-nav">About</a></li>
+        <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
@@ -161,7 +179,7 @@ jmnodes.theme-primary jmexpander:hover{}
       /* 数据格式声明 */
       "format":"node_tree",
       /* 数据内容 */
-      "data":{id:"root", topic:"Jamling's Blog and Project Site", children:[{id:"cl7cnlxst001f740snb71woik",topic:'<a class="category-link" href="/en/categories/Android/">Android</a>', direction:"left"}, {id:"cl7cnlxs5000k740s9qg9tdw0",topic:'<a class="category-link" href="/en/categories/pde/">Eclipse 插件</a>', direction:"right"}, {id:"cl7cnlxtn003j740sf14tu5xb",topic:'<a class="category-link" href="/en/categories/Java/">Java</a>', direction:"left"}, {id:"cl7cnlxu3004j740seeya76xu",topic:'<a class="category-link" href="/en/categories/Web/">Web</a>', direction:"right"}, {id:"cl7cnlxv70072740shy9pyv7d",topic:'<a class="category-link" href="/en/categories/other/">其它</a>', direction:"left"}, {id:"cl7cnlxv0006m740slsl6fufc",topic:'<a class="category-link" href="/en/categories/trick/">奇淫巧技</a>', direction:"right"}]}
+      "data":{id:"root", topic:"Jamling's Blog and Project Site", children:[{id:"cl93twdzc000ki90slnnu4f5x",topic:'<a class="category-link" href="/en/categories/Android/">Android</a>', direction:"left"}, {id:"cl93twe0i0022i90s8vzaklqy",topic:'<a class="category-link" href="/en/categories/pde/">Eclipse 插件</a>', direction:"right"}, {id:"cl93twe0r002ri90sbtqg384d",topic:'<a class="category-link" href="/en/categories/Java/">Java</a>', direction:"left"}, {id:"cl93twe16003vi90srp8n6r9h",topic:'<a class="category-link" href="/en/categories/Web/">Web</a>', direction:"right"}, {id:"cl93twe270061i90sej5cycr0",topic:'<a class="category-link" href="/en/categories/other/">其它</a>', direction:"left"}, {id:"cl93twe23005si90sd76slsbr",topic:'<a class="category-link" href="/en/categories/trick/">奇淫巧技</a>', direction:"right"}]}
       };
     var options = {
         container:'jsmind_container',
@@ -191,7 +209,7 @@ jmnodes.theme-primary jmexpander:hover{}
       <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
     </div>
     <div>
-      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+      <a href="//beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
     </div>
   </div>
 </footer>
@@ -225,135 +243,12 @@ jmnodes.theme-primary jmexpander:hover{}
     <script src="/js/script.js"></script>
     
     
-
-<!-- LeanClound官方Javascript SDK -->
 <script>
-  var page_layout = 'false'
-  var lc_debug = false;
+  lc.countCounter({});
 
-  var lc_config = {
-    xid : 'b1ccbd874ee3fc58be7a7083354f9b8e',
-    url : 'en/categories/index.html' || 'https://www.ieclipse.cn/categories/index.html',
-    title : 'Category'
-  };
-  lc_debug && console.log('lcconfig', lc_config);
-
-  var lc_table = 'Counter' || 'Counter';
-
-  function lc_page_views() {
-    if (page_layout === 'true') {
-      lc_index_views();
-    }
-    var query = new AV.Query(lc_table);
-    query.select(['-ACL']);
-    query.equalTo('xid', lc_config.xid);
-    query.find().then(results => {
-        // results is an array of AV.Object.
-        if (typeof results === 'undefined' || results.length == 0) {
-          insert();
-          return;
-        }
-        update(results[0]);
-        show(results[0]);
-      });
-
-    function insert() {
-        lc_debug && console.log('data is null new object');
-        var M = AV.Object.extend(lc_table);
-        let data = new M();
-        data.set('time', 1);
-      
-      for ( var key in lc_config) {
-        data.set(key, lc_config[key]);
-      }
-      data.save().then(function(data) {
-        lc_debug && console.log('created objectId is ' + data.id);
-      }, function(error) {
-        lc_debug && console.log("create object failed", error);
-      });
-    }
-
-    function update(data) {
-      for (var key in lc_config) {
-        if (key !== 'xid')
-        data.set(key, lc_config[key]);
-      }
-      lc_debug && console.log("after change,data", data);
-      data.increment('time', 1);
-      data.save().then(function(data) {
-        lc_debug && console.log("update to " + data.get('time'));
-      }, function(error) {
-        lc_debug && console.log("update object failed", error);
-      });
-    }
-
-    function show(data) {
-      $(".lc-count").html(data.get('time'));
-    }
-    function show_count(count) {
-      $(".lc-count").html(count);
-    }
-  };
-
-  function lc_index_views() {
-    // load views count from leanclound
-    // make sure you are created Counter table on leanclound
-    function lc_load_views(selector, options) {
-      var o = options || {};
-      var tkeys = [];
-      $(selector).each(function(i) {
-        var tkey = $(this).attr('id');
-        tkeys.push(tkey);
-      });
-
-      var query = new AV.Query(lc_table);
-      query.select([ '-ACL', '-createdAt', '-updatedAt', '-url' ]);
-      query.containedIn('xid', tkeys);
-      query.find().then(function(results) {
-        if (typeof results === 'undefined' || results.length == 0) {
-          return;
-        }
-        $(selector).each(function(i) {
-          var tkey = $(this).attr('id');
-          for (var i = 0; i < results.length; i++) {
-            var t = results[i];
-            if (t.get('xid') === tkey) {
-              var c = t.get('time') + '';
-              $(this).find(o.p.views).html(c);
-            }
-          }
-        });
-      }, function(error) {
-      });
-    }
-    lc_load_views('.card-action .leancloud_visitors', {
-      style : 'hidden-xs',
-      p : {
-        views : '.count'
-      }
-    });
-  }
-
-  var loadedAV = !(typeof AV === 'undefined');
-  if (!loadedAV) {
-    $.getScript('//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js',function() {
-      lc_debug && console.log('init AV after av.js loaded');
-        loadedAV = !(typeof AV === 'undefined');
-        if (!loadedAV) {
-          lc_debug && console.log('AV not loaded');
-
-        }
-        AV.init({
-          appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
-          appKey : 'QwGBjKlSYOBtjMa5aTGeO3cb',
-          serverURLs : 'https://lc.ieclipse.cn'
-        });
-        lc_page_views();
-    });
-  } else {
-    lc_page_views();
-  }
+  lc.countComment({
+    index: false
+  });
 </script>
-
 </body>
 </html>

@@ -5,7 +5,7 @@
   <title>静勤居</title>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="keywords" content="Eclipse 插件,Android,Java,Web,奇淫巧技,其它,Eclipse,ADT,QuickAF,Gradle,CI,J2EE,Swing,SWT,xml,PHP,Ajax,MySQL,Hexo,js,Node.js,git,安全">
+  <meta name="keywords" content="Android,Eclipse 插件,Java,Web,奇淫巧技,其它,Eclipse,ADT,QuickAF,Gradle,CI,J2EE,Swing,SWT,xml,PHP,Ajax,MySQL,Hexo,js,Node.js,git,安全">
   <meta name="description" content="Jamling's 技术文章博客.">
   
 
@@ -46,10 +46,27 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 <link rel="stylesheet" href="/css/nova_font.css">
 <link rel="stylesheet" href="/css/bs/nova.css">
+<script src="//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js"></script>
+<script src="/js/leancloud.js"></script>
 
   <!-- RSS -->
   <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
   <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+  <script>
+        lc.init({
+          appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+          appKey : 'QwGBjKlSYOBtjMa5aTGeO3cb',
+          serverURL : 'https://lc.ieclipse.cn'
+        }, {
+          xid : 'd41d8cd98f00b204e9800998ecf8427e',
+          url : 'index.html',
+          title : '首页'
+        }, {
+          counterTable: '',
+          commentTable: '',
+          donateTable: ''
+        });
+  </script>
 <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
 </head>
 <body>
@@ -71,6 +88,7 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
         <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/about/" class="main-nav">关于</a></li>
+        <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
@@ -118,10 +136,16 @@
             </div>
             <div class="divider"></div>
 
-            <div class="card-action">
-              <a class="icon nova-bubbles action-item" href="/2018/01/29/PHP/php-wnl/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="0aad56a2b6c4b882872eb89d7d196979" data-flag-title="万年历接口" href="/2018/01/29/PHP/php-wnl/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2018/01/29/PHP/php-wnl/"><span>阅读全文</span></a>
+            <div class="card-action xxx-count" data-xid="0aad56a2b6c4b882872eb89d7d196979" data-url="2018/01/29/PHP/php-wnl/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2018/01/29/PHP/php-wnl/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2018/01/29/PHP/php-wnl/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2018/01/29/PHP/php-wnl/">
+                <span>阅读全文</span>
+              </a>
             </div>
             <meta itemprop="url" content="https://www.ieclipse.cn/2018/01/29/PHP/php-wnl/">
             <meta itemprop="dateModified" content="2019-10-17T03:13:35.719Z">
@@ -151,10 +175,16 @@
             </div>
             <div class="divider"></div>
 
-            <div class="card-action">
-              <a class="icon nova-bubbles action-item" href="/2017/07/14/Eclipse/idea-smartqq/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="59b8e06bb5dfc177e11317a52189ebae" data-flag-title="防Boss利器SmartIM4Intellij" href="/2017/07/14/Eclipse/idea-smartqq/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2017/07/14/Eclipse/idea-smartqq/"><span>阅读全文</span></a>
+            <div class="card-action xxx-count" data-xid="59b8e06bb5dfc177e11317a52189ebae" data-url="2017/07/14/Eclipse/idea-smartqq/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2017/07/14/Eclipse/idea-smartqq/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2017/07/14/Eclipse/idea-smartqq/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2017/07/14/Eclipse/idea-smartqq/">
+                <span>阅读全文</span>
+              </a>
             </div>
             <meta itemprop="url" content="https://www.ieclipse.cn/2017/07/14/Eclipse/idea-smartqq/">
             <meta itemprop="dateModified" content="2019-11-08T10:17:28.674Z">
@@ -184,10 +214,16 @@
             </div>
             <div class="divider"></div>
 
-            <div class="card-action">
-              <a class="icon nova-bubbles action-item" href="/2017/06/28/Eclipse/Eclipse-smartqq/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="e839db874042d72bbfddfae1053951f0" data-flag-title="防Boss利器SmartIM4Eclipse" href="/2017/06/28/Eclipse/Eclipse-smartqq/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2017/06/28/Eclipse/Eclipse-smartqq/"><span>阅读全文</span></a>
+            <div class="card-action xxx-count" data-xid="e839db874042d72bbfddfae1053951f0" data-url="2017/06/28/Eclipse/Eclipse-smartqq/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2017/06/28/Eclipse/Eclipse-smartqq/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2017/06/28/Eclipse/Eclipse-smartqq/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2017/06/28/Eclipse/Eclipse-smartqq/">
+                <span>阅读全文</span>
+              </a>
             </div>
             <meta itemprop="url" content="https://www.ieclipse.cn/2017/06/28/Eclipse/Eclipse-smartqq/">
             <meta itemprop="dateModified" content="2019-11-08T10:17:03.843Z">
@@ -217,10 +253,16 @@
             </div>
             <div class="divider"></div>
 
-            <div class="card-action">
-              <a class="icon nova-bubbles action-item" href="/2017/06/14/Android/Android-bitmap-config/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="a52938c1be8b6b60ec58aacdae4dc50c" data-flag-title="Android bitmap config你理解对了吗？" href="/2017/06/14/Android/Android-bitmap-config/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2017/06/14/Android/Android-bitmap-config/"><span>阅读全文</span></a>
+            <div class="card-action xxx-count" data-xid="a52938c1be8b6b60ec58aacdae4dc50c" data-url="2017/06/14/Android/Android-bitmap-config/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2017/06/14/Android/Android-bitmap-config/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2017/06/14/Android/Android-bitmap-config/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2017/06/14/Android/Android-bitmap-config/">
+                <span>阅读全文</span>
+              </a>
             </div>
             <meta itemprop="url" content="https://www.ieclipse.cn/2017/06/14/Android/Android-bitmap-config/">
             <meta itemprop="dateModified" content="2019-07-22T11:25:01.894Z">
@@ -250,10 +292,16 @@
             </div>
             <div class="divider"></div>
 
-            <div class="card-action">
-              <a class="icon nova-bubbles action-item" href="/2017/06/06/PHP/php-app-token/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="87a523d001614d0d9c52b4a7ea21d575" data-flag-title="我是怎么做App token认证的" href="/2017/06/06/PHP/php-app-token/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2017/06/06/PHP/php-app-token/"><span>阅读全文</span></a>
+            <div class="card-action xxx-count" data-xid="87a523d001614d0d9c52b4a7ea21d575" data-url="2017/06/06/PHP/php-app-token/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2017/06/06/PHP/php-app-token/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2017/06/06/PHP/php-app-token/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2017/06/06/PHP/php-app-token/">
+                <span>阅读全文</span>
+              </a>
             </div>
             <meta itemprop="url" content="https://www.ieclipse.cn/2017/06/06/PHP/php-app-token/">
             <meta itemprop="dateModified" content="2019-10-18T14:20:08.385Z">
@@ -283,10 +331,16 @@
             </div>
             <div class="divider"></div>
 
-            <div class="card-action">
-              <a class="icon nova-bubbles action-item" href="/2017/05/24/Android/quickaf-wechat-pay/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="b0f5a0ab8064e195c97cdbfad4ce6e36" data-flag-title="谈谈那些年微信支付踩过的坑" href="/2017/05/24/Android/quickaf-wechat-pay/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2017/05/24/Android/quickaf-wechat-pay/"><span>阅读全文</span></a>
+            <div class="card-action xxx-count" data-xid="b0f5a0ab8064e195c97cdbfad4ce6e36" data-url="2017/05/24/Android/quickaf-wechat-pay/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2017/05/24/Android/quickaf-wechat-pay/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2017/05/24/Android/quickaf-wechat-pay/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2017/05/24/Android/quickaf-wechat-pay/">
+                <span>阅读全文</span>
+              </a>
             </div>
             <meta itemprop="url" content="https://www.ieclipse.cn/2017/05/24/Android/quickaf-wechat-pay/">
             <meta itemprop="dateModified" content="2019-07-22T11:25:01.902Z">
@@ -316,10 +370,16 @@
             </div>
             <div class="divider"></div>
 
-            <div class="card-action">
-              <a class="icon nova-bubbles action-item" href="/2017/05/18/Android/quickaf-round/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="9136d5db05a424455f4245691b3bde1c" data-flag-title="Android中实现圆角图片的几种姿势" href="/2017/05/18/Android/quickaf-round/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2017/05/18/Android/quickaf-round/"><span>阅读全文</span></a>
+            <div class="card-action xxx-count" data-xid="9136d5db05a424455f4245691b3bde1c" data-url="2017/05/18/Android/quickaf-round/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2017/05/18/Android/quickaf-round/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2017/05/18/Android/quickaf-round/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2017/05/18/Android/quickaf-round/">
+                <span>阅读全文</span>
+              </a>
             </div>
             <meta itemprop="url" content="https://www.ieclipse.cn/2017/05/18/Android/quickaf-round/">
             <meta itemprop="dateModified" content="2019-07-22T11:25:01.901Z">
@@ -349,46 +409,19 @@
             </div>
             <div class="divider"></div>
 
-            <div class="card-action">
-              <a class="icon nova-bubbles action-item" href="/2017/05/12/Android/quickaf-rest/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="c10bdbe9702897699fed171a68e9ddb3" data-flag-title="QuickAF网络连接及数据解析简介" href="/2017/05/12/Android/quickaf-rest/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2017/05/12/Android/quickaf-rest/"><span>阅读全文</span></a>
+            <div class="card-action xxx-count" data-xid="c10bdbe9702897699fed171a68e9ddb3" data-url="2017/05/12/Android/quickaf-rest/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2017/05/12/Android/quickaf-rest/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2017/05/12/Android/quickaf-rest/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2017/05/12/Android/quickaf-rest/">
+                <span>阅读全文</span>
+              </a>
             </div>
             <meta itemprop="url" content="https://www.ieclipse.cn/2017/05/12/Android/quickaf-rest/">
             <meta itemprop="dateModified" content="2019-07-22T11:25:01.900Z">
-            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
-              <meta content="https://www.ieclipse.cn" itemprop="url">
-              <meta content="静勤居" itemprop="name">
-              <meta content="/image/logo.png" itemprop="logo">
-            </span>
-          </div>
-          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
-            <div class="card-content">
-              <h3 class="card-title"><a itemprop="name headline" href="/2017/04/01/Web/hexo-encryptv4_1/" class="article-title">有奖破解网页密码第四弹</a></h3>
-              <div class="divider"></div>
-              <div class="section post-header clearfix">
-                <!-- sub element must be span -->
-                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2017-04-01T13:30:30.000Z"><time datetime="2017-04-01T13:30:30.000Z">2017-04-01</time></time></span>
-                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/Web/">Web</a></span>
-                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/Hexo/">Hexo</a></span>
-              </div>
-              <div class="divider"></div>
-              <div class="nova-flex excerpt-box">
-              
-              <div class="excerpt" itemprop="description articleBody">
-              <p>在今日24:00之前破解密码的，将送月球一日游<del>欢迎大家跳跃报名参加</del></p>
-              </div>
-              </div>
-            </div>
-            <div class="divider"></div>
-
-            <div class="card-action">
-              <a class="icon nova-bubbles action-item" href="/2017/04/01/Web/hexo-encryptv4_1/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="1a478dc130da73ad897e9de703ec5d3e" data-flag-title="有奖破解网页密码第四弹" href="/2017/04/01/Web/hexo-encryptv4_1/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2017/04/01/Web/hexo-encryptv4_1/"><span>阅读全文</span></a>
-            </div>
-            <meta itemprop="url" content="https://www.ieclipse.cn/2017/04/01/Web/hexo-encryptv4_1/">
-            <meta itemprop="dateModified" content="2019-07-22T11:25:01.940Z">
             <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
               <meta content="https://www.ieclipse.cn" itemprop="url">
               <meta content="静勤居" itemprop="name">
@@ -415,12 +448,57 @@
             </div>
             <div class="divider"></div>
 
-            <div class="card-action">
-              <a class="icon nova-bubbles action-item" href="/2017/03/29/other/safe_ajax_cross/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="9c1b6b36d85d0fa5aa89c0401ce40a0a" data-flag-title="安全杂谈二之入侵公司OA系统" href="/2017/03/29/other/safe_ajax_cross/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2017/03/29/other/safe_ajax_cross/"><span>阅读全文</span></a>
+            <div class="card-action xxx-count" data-xid="9c1b6b36d85d0fa5aa89c0401ce40a0a" data-url="2017/03/29/other/safe_ajax_cross/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2017/03/29/other/safe_ajax_cross/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2017/03/29/other/safe_ajax_cross/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2017/03/29/other/safe_ajax_cross/">
+                <span>阅读全文</span>
+              </a>
             </div>
             <meta itemprop="url" content="https://www.ieclipse.cn/2017/03/29/other/safe_ajax_cross/">
+            <meta itemprop="dateModified" content="2019-07-22T11:25:01.949Z">
+            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+              <meta content="https://www.ieclipse.cn" itemprop="url">
+              <meta content="静勤居" itemprop="name">
+              <meta content="/image/logo.png" itemprop="logo">
+            </span>
+          </div>
+          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
+            <div class="card-content">
+              <h3 class="card-title"><a itemprop="name headline" href="/2017/03/28/other/safe_sql_inject/" class="article-title">安全杂谈一之SQL注入</a></h3>
+              <div class="divider"></div>
+              <div class="section post-header clearfix">
+                <!-- sub element must be span -->
+                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2017-03-28T06:46:29.000Z"><time datetime="2017-03-28T06:46:29.000Z">2017-03-28</time></time></span>
+                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/other/">其它</a></span>
+                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/安全/">安全</a></span>
+              </div>
+              <div class="divider"></div>
+              <div class="nova-flex excerpt-box">
+              
+              <div class="excerpt" itemprop="description articleBody">
+              <p>Web系统非常容易受到攻击，SQL注入做为一个常用的攻击方式，常见于一些老的系统。危害相当大。在这里讲一个SQL注入相关的例子。</p>
+              </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+
+            <div class="card-action xxx-count" data-xid="fcf1fd88d308f170856c702d6addcf7a" data-url="2017/03/28/other/safe_sql_inject/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2017/03/28/other/safe_sql_inject/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2017/03/28/other/safe_sql_inject/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2017/03/28/other/safe_sql_inject/">
+                <span>阅读全文</span>
+              </a>
+            </div>
+            <meta itemprop="url" content="https://www.ieclipse.cn/2017/03/28/other/safe_sql_inject/">
             <meta itemprop="dateModified" content="2019-07-22T11:25:01.949Z">
             <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
               <meta content="https://www.ieclipse.cn" itemprop="url">
@@ -479,28 +557,25 @@
         <h3 class="panel-title">公告</h3>
       </div>
       <div class="panel-body" id="widget_announce">
-        本站评论系统已由友言切换为多说，原有的友言评论数据在友言云端数据迁移完毕之后再导入，在此期间，原先的评论暂不可见，请见谅！
+        <div class="text-center">正在载入...</div>
       </div>
     </div>
     <script>
-    function loadAnnounce() {
-      var ds_top_url = '/other/announce.html';
-      var ds_top_dom = $('#widget_announce');
-      $.ajax({
-        url : ds_top_url,
-        dataType : "html",
-        type : 'get',
-        success : function(data) {
-          if (data) {
-            ds_top_dom.html(data);
-          }
-        },
-        error: function (xhr, msg, e) {
-          ds_top_dom.html('<div class="text-center">加载失败</div>');
-        }
-      });
-    }
-    loadAnnounce();
+    $(document).ready(function(e) { 
+      let dom = $('#widget_announce');
+      lc.getAnnounce({
+    				debug: false
+    			}).then(arr => {
+    				if (arr === undefined) {
+    					dom.html('<div class="text-center">暂无内容</div>');
+    				} else {
+    					dom.html(arr.value);
+    				}
+          }, err => {
+            console.warn(err);
+            dom.html('<div class="text-center">加载失败</div>');
+          });
+    });
     </script>
 
 
@@ -534,7 +609,7 @@
       </div>
       
       <!-- use category tree -->
-      <ul class="list-group"><li class="list-group-item"><a class="list-group-link" href="/categories/Android/">Android</a><span class="badge">22</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/pde/">Eclipse 插件</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Java/">Java</a><span class="badge">9</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Web/">Web</a><span class="badge">24</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/other/">其它</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/trick/">奇淫巧技</a><span class="badge">6</span></li></ul>
+      <ul class="list-group"><li class="list-group-item"><a class="list-group-link" href="/categories/Android/">Android</a><span class="badge">22</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/pde/">Eclipse 插件</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Java/">Java</a><span class="badge">9</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Web/">Web</a><span class="badge">22</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/other/">其它</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/trick/">奇淫巧技</a><span class="badge">6</span></li></ul>
     </div>
     
 
@@ -547,6 +622,86 @@
       <a href="/tags/ADT/" style="font-size: 10px; color: #795548">ADT</a> <a href="/tags/Ajax/" style="font-size: 10px; color: #795548">Ajax</a> <a href="/tags/Android/" style="font-size: 20px; color: #212121">Android</a> <a href="/tags/CI/" style="font-size: 10px; color: #795548">CI</a> <a href="/tags/Eclipse/" style="font-size: 16.25px; color: #423530">Eclipse</a> <a href="/tags/Gradle/" style="font-size: 11.25px; color: #6e4f43">Gradle</a> <a href="/tags/Hexo/" style="font-size: 18.75px; color: #2c2826">Hexo</a> <a href="/tags/J2EE/" style="font-size: 12.5px; color: #63483e">J2EE</a> <a href="/tags/Java/" style="font-size: 12.5px; color: #63483e">Java</a> <a href="/tags/MySQL/" style="font-size: 10px; color: #795548">MySQL</a> <a href="/tags/Node-js/" style="font-size: 13.75px; color: #584239">Node.js</a> <a href="/tags/PHP/" style="font-size: 12.5px; color: #63483e">PHP</a> <a href="/tags/QuickAF/" style="font-size: 17.5px; color: #372e2b">QuickAF</a> <a href="/tags/SWT/" style="font-size: 10px; color: #795548">SWT</a> <a href="/tags/Swing/" style="font-size: 10px; color: #795548">Swing</a> <a href="/tags/git/" style="font-size: 15px; color: #4d3b35">git</a> <a href="/tags/js/" style="font-size: 13.75px; color: #584239">js</a> <a href="/tags/xml/" style="font-size: 11.25px; color: #6e4f43">xml</a> <a href="/tags/安全/" style="font-size: 11.25px; color: #6e4f43">安全</a>
       </div>
     </div>
+
+    <div class="panel panel-primary animated slideInUp faster">
+      <div class="panel-heading">
+        <h3 class="panel-title">热点文章</h3>
+      </div>
+      <div class="list-group" id="top-threads" data-range="weekly" data-num-items="5">
+        <div class="text-center">正在载入...</div>
+      </div>
+    </div>
+    <script>
+    $(document).ready(function(e) {
+    		var $dom = $('#top-threads');
+    		var $param = $dom.data();
+    			lc.topViews({
+    				limit: $param.numItems
+    			}).then(arr => {
+    				if (arr.length == 0) {
+    					$dom.html('<div class="text-center">暂无热点文章</div>');
+    				} else {
+    					$dom.html('');
+    					for (var i = 0; i < arr.length; i++) {
+    						let item = arr[i].toJSON();
+    						var url = item.url;
+                // TODO need fix url issue
+    						var a = $('<a></a>').text(item.title).attr('href', url).addClass('list-group-item');
+    						$dom.append(a);
+    					}
+    				}
+          }, err => {
+            console.warn(err);
+            $dom.html('<div class="text-center">加载失败</div>');
+          });
+    });
+    </script>
+
+    <div class="panel panel-primary animated slideInUp faster">
+      <div class="panel-heading">
+        <h3 class="panel-title">最新评论</h3>
+      </div>
+      <div class="list-group" id="valine-recent-comments" data-num-items="5">
+        <div class="text-center">正在载入...</div>
+      </div>
+    </div>
+    <script>
+    $(document).ready(function(e) {
+    	var dom = $('#valine-recent-comments');
+    	var param = dom.data();
+
+    	lc.recentComment({
+    		limit: param.numItems,
+			debug: false
+    	}).then(arr => {
+    		if (arr.length == 0) {
+    			dom.html('<div class="text-center">暂无评论文章，快去发表第一个评论吧～</div>');
+    		} else {
+    			dom.html('');
+    			for (var i = 0; i < arr.length; i++) {
+    				let item = arr[i].toJSON();
+					let link = item.link;
+					let nick = item.nick ? (item.nick.length > 5 ? (item.nick.substring(0, 5) + "...") : item.nick) : '';
+					let comment = item.comment.length > 20 ? (item.comment.substring(0, 20) + "...") : item.comment;
+    				var url = item.url;
+    				// TODO need fix url issue
+					let span = $('<span></span').addClass('list-group-item');
+					let nickNode = $('<a></a>').text(nick);
+					if (link) {
+						nickNode.attr('href', link);
+					}
+					span.append(nickNode);
+    				var a = $('<a></a>').text(comment).attr('href', url);
+					span.append(a);
+    				dom.append(span);
+    			}
+    		}
+    	}, err => {
+    		console.warn(e);
+    		dom.html('<div class="text-center">加载失败</div>');
+    	});
+    });
+    </script>
 
     <div class="panel panel-primary animated slideInUp faster">
       <div class="panel-heading">
@@ -570,12 +725,13 @@
     <div id="footer-copyright">
       &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
       <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
-      <span class="leancloud_visitors" id="d41d8cd98f00b204e9800998ecf8427e" data-flag-title="“首页”">
-      本站访问数：<span class="count lc-count leancloud-visitors-count"></span>
+      <span class="home-count" data-xid="d41d8cd98f00b204e9800998ecf8427e" data-title="首页" data-url="index.html">
+      本站访问数：<span class="count"></span>
+
       </span>
     </div>
     <div>
-      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+      <a href="//beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
     </div>
   </div>
 </footer>
@@ -609,135 +765,20 @@
     <script src="/js/script.js"></script>
     
     
-
-<!-- LeanClound官方Javascript SDK -->
 <script>
-  var page_layout = 'true'
-  var lc_debug = false;
+  /* 列表中的阅读数 */
+  lc.countCounter({
+      index: true
+  });
+  /* 首页阅读数 */
+  lc.countCounter({
+      selector: '.home-count',
+      subSelector: '.count'
+  });
 
-  var lc_config = {
-    xid : 'd41d8cd98f00b204e9800998ecf8427e',
-    url : 'index.html' || '',
-    title : '首页'
-  };
-  lc_debug && console.log('lcconfig', lc_config);
-
-  var lc_table = 'Counter' || 'Counter';
-
-  function lc_page_views() {
-    if (page_layout === 'true') {
-      lc_index_views();
-    }
-    var query = new AV.Query(lc_table);
-    query.select(['-ACL']);
-    query.equalTo('xid', lc_config.xid);
-    query.find().then(results => {
-        // results is an array of AV.Object.
-        if (typeof results === 'undefined' || results.length == 0) {
-          insert();
-          return;
-        }
-        update(results[0]);
-        show(results[0]);
-      });
-
-    function insert() {
-        lc_debug && console.log('data is null new object');
-        var M = AV.Object.extend(lc_table);
-        let data = new M();
-        data.set('time', 1);
-      
-      for ( var key in lc_config) {
-        data.set(key, lc_config[key]);
-      }
-      data.save().then(function(data) {
-        lc_debug && console.log('created objectId is ' + data.id);
-      }, function(error) {
-        lc_debug && console.log("create object failed", error);
-      });
-    }
-
-    function update(data) {
-      for (var key in lc_config) {
-        if (key !== 'xid')
-        data.set(key, lc_config[key]);
-      }
-      lc_debug && console.log("after change,data", data);
-      data.increment('time', 1);
-      data.save().then(function(data) {
-        lc_debug && console.log("update to " + data.get('time'));
-      }, function(error) {
-        lc_debug && console.log("update object failed", error);
-      });
-    }
-
-    function show(data) {
-      $(".lc-count").html(data.get('time'));
-    }
-    function show_count(count) {
-      $(".lc-count").html(count);
-    }
-  };
-
-  function lc_index_views() {
-    // load views count from leanclound
-    // make sure you are created Counter table on leanclound
-    function lc_load_views(selector, options) {
-      var o = options || {};
-      var tkeys = [];
-      $(selector).each(function(i) {
-        var tkey = $(this).attr('id');
-        tkeys.push(tkey);
-      });
-
-      var query = new AV.Query(lc_table);
-      query.select([ '-ACL', '-createdAt', '-updatedAt', '-url' ]);
-      query.containedIn('xid', tkeys);
-      query.find().then(function(results) {
-        if (typeof results === 'undefined' || results.length == 0) {
-          return;
-        }
-        $(selector).each(function(i) {
-          var tkey = $(this).attr('id');
-          for (var i = 0; i < results.length; i++) {
-            var t = results[i];
-            if (t.get('xid') === tkey) {
-              var c = t.get('time') + '';
-              $(this).find(o.p.views).html(c);
-            }
-          }
-        });
-      }, function(error) {
-      });
-    }
-    lc_load_views('.card-action .leancloud_visitors', {
-      style : 'hidden-xs',
-      p : {
-        views : '.count'
-      }
-    });
-  }
-
-  var loadedAV = !(typeof AV === 'undefined');
-  if (!loadedAV) {
-    $.getScript('//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js',function() {
-      lc_debug && console.log('init AV after av.js loaded');
-        loadedAV = !(typeof AV === 'undefined');
-        if (!loadedAV) {
-          lc_debug && console.log('AV not loaded');
-
-        }
-        AV.init({
-          appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
-          appKey : 'QwGBjKlSYOBtjMa5aTGeO3cb',
-          serverURLs : 'https://lc.ieclipse.cn'
-        });
-        lc_page_views();
-    });
-  } else {
-    lc_page_views();
-  }
+  lc.countComment({
+    index: true
+  });
 </script>
-
 </body>
 </html>

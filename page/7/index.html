@@ -5,7 +5,7 @@
   <title>静勤居</title>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="keywords" content="Eclipse 插件,Android,Java,Web,奇淫巧技,其它,Eclipse,ADT,QuickAF,Gradle,CI,J2EE,Swing,SWT,xml,PHP,Ajax,MySQL,Hexo,js,Node.js,git,安全">
+  <meta name="keywords" content="Android,Eclipse 插件,Java,Web,奇淫巧技,其它,Eclipse,ADT,QuickAF,Gradle,CI,J2EE,Swing,SWT,xml,PHP,Ajax,MySQL,Hexo,js,Node.js,git,安全">
   <meta name="description" content="Jamling's 技术文章博客.">
   
 
@@ -46,10 +46,27 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 <link rel="stylesheet" href="/css/nova_font.css">
 <link rel="stylesheet" href="/css/bs/nova.css">
+<script src="//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js"></script>
+<script src="/js/leancloud.js"></script>
 
   <!-- RSS -->
   <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
   <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+  <script>
+        lc.init({
+          appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+          appKey : 'QwGBjKlSYOBtjMa5aTGeO3cb',
+          serverURL : 'https://lc.ieclipse.cn'
+        }, {
+          xid : 'd41d8cd98f00b204e9800998ecf8427e',
+          url : 'page/7/index.html',
+          title : '首页'
+        }, {
+          counterTable: '',
+          commentTable: '',
+          donateTable: ''
+        });
+  </script>
 <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
 </head>
 <body>
@@ -71,6 +88,7 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
         <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/about/" class="main-nav">关于</a></li>
+        <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
@@ -100,80 +118,6 @@
 <main>
           <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
             <div class="card-content">
-              <h3 class="card-title"><a itemprop="name headline" href="/2015/01/01/Android/Android-adt-extensions/" class="article-title">ADT extensions</a></h3>
-              <div class="divider"></div>
-              <div class="section post-header clearfix">
-                <!-- sub element must be span -->
-                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2015-01-01T04:48:31.000Z"><time datetime="2015-01-01T04:48:31.000Z">2015-01-01</time></time></span>
-                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/Android/">Android</a></span>
-                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/Eclipse/">Eclipse</a><a class="tag-item" href="/tags/Android/">Android</a><a class="tag-item" href="/tags/ADT/">ADT</a></span>
-              </div>
-              <div class="divider"></div>
-              <div class="nova-flex excerpt-box">
-              
-              <div class="excerpt" itemprop="description articleBody">
-              <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>![Alt text] (adt_ext_new_activity.png?200)</p>
-<p>Quickly new Activity/Service/BroadcastReceiver/ContentProvider in Android Project with a wizard and configurate in AndroidManifest.xml.</p>
-<p>Main function list:</p>
-<ul>
-<li>New Activity/Service/BroadcastReceiver.</li>
-<li>Customize action and category for intent-filter.</li>
-<li>New ContentProvider.</li>
-<li>Customize authorities for ContentProvider.</li>
-</ul>
-              </div>
-              </div>
-            </div>
-            <div class="divider"></div>
-
-            <div class="card-action">
-              <a class="icon nova-bubbles action-item" href="/2015/01/01/Android/Android-adt-extensions/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="9625d49b41f9e6627aa80e8c4d79ff00" data-flag-title="ADT extensions" href="/2015/01/01/Android/Android-adt-extensions/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2015/01/01/Android/Android-adt-extensions/"><span>阅读全文</span></a>
-            </div>
-            <meta itemprop="url" content="https://www.ieclipse.cn/2015/01/01/Android/Android-adt-extensions/">
-            <meta itemprop="dateModified" content="2019-07-22T11:25:01.893Z">
-            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
-              <meta content="https://www.ieclipse.cn" itemprop="url">
-              <meta content="静勤居" itemprop="name">
-              <meta content="/image/logo.png" itemprop="logo">
-            </span>
-          </div>
-          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
-            <div class="card-content">
-              <h3 class="card-title"><a itemprop="name headline" href="/2012/06/08/Android/Android-Thread-join-in-AsyncTask/" class="article-title">Thread.join()在AsyncTask中的妙用</a></h3>
-              <div class="divider"></div>
-              <div class="section post-header clearfix">
-                <!-- sub element must be span -->
-                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2012-06-08T13:00:00.000Z"><time datetime="2012-06-08T13:00:00.000Z">2012-06-08</time></time></span>
-                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/Android/">Android</a></span>
-                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/Android/">Android</a><a class="tag-item" href="/tags/Java/">Java</a></span>
-              </div>
-              <div class="divider"></div>
-              <div class="nova-flex excerpt-box">
-              
-              <div class="excerpt" itemprop="description articleBody">
-              <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>在Android Email当中，在设置接收服务器和发送服务器时，点击下一步，系统会弹出进度框，并执行服务器设置检验。如果用户设置信息不正确，在执行校验时，大约会花1分钟的时间去校验，最后才会提示设置信息不正确。如果用户在等待过程中点击了“取消”，然后再点下一步，发会现，不再弹出等待提示框，也不执行校验了。</p>
-              </div>
-              </div>
-            </div>
-            <div class="divider"></div>
-
-            <div class="card-action">
-              <a class="icon nova-bubbles action-item" href="/2012/06/08/Android/Android-Thread-join-in-AsyncTask/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="08e37a172fb615b57b123d6e83cfa3b9" data-flag-title="Thread.join()在AsyncTask中的妙用" href="/2012/06/08/Android/Android-Thread-join-in-AsyncTask/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2012/06/08/Android/Android-Thread-join-in-AsyncTask/"><span>阅读全文</span></a>
-            </div>
-            <meta itemprop="url" content="https://www.ieclipse.cn/2012/06/08/Android/Android-Thread-join-in-AsyncTask/">
-            <meta itemprop="dateModified" content="2019-07-22T11:25:01.893Z">
-            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
-              <meta content="https://www.ieclipse.cn" itemprop="url">
-              <meta content="静勤居" itemprop="name">
-              <meta content="/image/logo.png" itemprop="logo">
-            </span>
-          </div>
-          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
-            <div class="card-content">
               <h3 class="card-title"><a itemprop="name headline" href="/2012/03/01/Android/Android-send-email-background/" class="article-title">Android平台邮件自动发送功能实现</a></h3>
               <div class="divider"></div>
               <div class="section post-header clearfix">
@@ -192,10 +136,16 @@
             </div>
             <div class="divider"></div>
 
-            <div class="card-action">
-              <a class="icon nova-bubbles action-item" href="/2012/03/01/Android/Android-send-email-background/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="a0b0683ce115e7d67c825f7b9f255e4b" data-flag-title="Android平台邮件自动发送功能实现" href="/2012/03/01/Android/Android-send-email-background/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2012/03/01/Android/Android-send-email-background/"><span>阅读全文</span></a>
+            <div class="card-action xxx-count" data-xid="a0b0683ce115e7d67c825f7b9f255e4b" data-url="2012/03/01/Android/Android-send-email-background/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2012/03/01/Android/Android-send-email-background/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2012/03/01/Android/Android-send-email-background/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2012/03/01/Android/Android-send-email-background/">
+                <span>阅读全文</span>
+              </a>
             </div>
             <meta itemprop="url" content="https://www.ieclipse.cn/2012/03/01/Android/Android-send-email-background/">
             <meta itemprop="dateModified" content="2019-07-22T11:25:01.895Z">
@@ -225,10 +175,16 @@
             </div>
             <div class="divider"></div>
 
-            <div class="card-action">
-              <a class="icon nova-bubbles action-item" href="/2011/08/01/Android/Android-Complie-OpenCV/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="6446a7a0b7bdf6e6b26607ce74f8efab" data-flag-title="使用Android NDK编译OpenCV应用" href="/2011/08/01/Android/Android-Complie-OpenCV/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2011/08/01/Android/Android-Complie-OpenCV/"><span>阅读全文</span></a>
+            <div class="card-action xxx-count" data-xid="6446a7a0b7bdf6e6b26607ce74f8efab" data-url="2011/08/01/Android/Android-Complie-OpenCV/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2011/08/01/Android/Android-Complie-OpenCV/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2011/08/01/Android/Android-Complie-OpenCV/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2011/08/01/Android/Android-Complie-OpenCV/">
+                <span>阅读全文</span>
+              </a>
             </div>
             <meta itemprop="url" content="https://www.ieclipse.cn/2011/08/01/Android/Android-Complie-OpenCV/">
             <meta itemprop="dateModified" content="2019-07-22T11:25:01.893Z">
@@ -262,10 +218,16 @@
             </div>
             <div class="divider"></div>
 
-            <div class="card-action">
-              <a class="icon nova-bubbles action-item" href="/2011/04/14/Java/Java-swt-run/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="0c4e9761a6c0e4d5bd33cd5a8c09a2ac" data-flag-title="也谈SWT的运行" href="/2011/04/14/Java/Java-swt-run/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2011/04/14/Java/Java-swt-run/"><span>阅读全文</span></a>
+            <div class="card-action xxx-count" data-xid="0c4e9761a6c0e4d5bd33cd5a8c09a2ac" data-url="2011/04/14/Java/Java-swt-run/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2011/04/14/Java/Java-swt-run/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2011/04/14/Java/Java-swt-run/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2011/04/14/Java/Java-swt-run/">
+                <span>阅读全文</span>
+              </a>
             </div>
             <meta itemprop="url" content="https://www.ieclipse.cn/2011/04/14/Java/Java-swt-run/">
             <meta itemprop="dateModified" content="2019-07-22T11:25:01.909Z">
@@ -295,10 +257,16 @@
             </div>
             <div class="divider"></div>
 
-            <div class="card-action">
-              <a class="icon nova-bubbles action-item" href="/2010/04/02/Java/Java-swing-layouts/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="ab863890575f8edcb81fc0e8a10fda90" data-flag-title="Swing 布局管理器" href="/2010/04/02/Java/Java-swing-layouts/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2010/04/02/Java/Java-swing-layouts/"><span>阅读全文</span></a>
+            <div class="card-action xxx-count" data-xid="ab863890575f8edcb81fc0e8a10fda90" data-url="2010/04/02/Java/Java-swing-layouts/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2010/04/02/Java/Java-swing-layouts/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2010/04/02/Java/Java-swing-layouts/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2010/04/02/Java/Java-swing-layouts/">
+                <span>阅读全文</span>
+              </a>
             </div>
             <meta itemprop="url" content="https://www.ieclipse.cn/2010/04/02/Java/Java-swing-layouts/">
             <meta itemprop="dateModified" content="2019-07-22T11:25:01.909Z">
@@ -328,10 +296,16 @@
             </div>
             <div class="divider"></div>
 
-            <div class="card-action">
-              <a class="icon nova-bubbles action-item" href="/2010/03/31/Eclipse/Eclipse-rcp-i18n/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="f805620546fc99d2f81ef52ea2253996" data-flag-title="Eclipse RCP产品国际化" href="/2010/03/31/Eclipse/Eclipse-rcp-i18n/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2010/03/31/Eclipse/Eclipse-rcp-i18n/"><span>阅读全文</span></a>
+            <div class="card-action xxx-count" data-xid="f805620546fc99d2f81ef52ea2253996" data-url="2010/03/31/Eclipse/Eclipse-rcp-i18n/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2010/03/31/Eclipse/Eclipse-rcp-i18n/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2010/03/31/Eclipse/Eclipse-rcp-i18n/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2010/03/31/Eclipse/Eclipse-rcp-i18n/">
+                <span>阅读全文</span>
+              </a>
             </div>
             <meta itemprop="url" content="https://www.ieclipse.cn/2010/03/31/Eclipse/Eclipse-rcp-i18n/">
             <meta itemprop="dateModified" content="2019-07-22T11:25:01.907Z">
@@ -361,10 +335,16 @@
             </div>
             <div class="divider"></div>
 
-            <div class="card-action">
-              <a class="icon nova-bubbles action-item" href="/2008/09/29/Java/带NameSpace的xml XPath搜索/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="db914fd0ee49a3f55e795f56d8f86f9a" data-flag-title="带NameSpace的xml XPath搜索" href="/2008/09/29/Java/带NameSpace的xml XPath搜索/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2008/09/29/Java/带NameSpace的xml XPath搜索/"><span>阅读全文</span></a>
+            <div class="card-action xxx-count" data-xid="db914fd0ee49a3f55e795f56d8f86f9a" data-url="2008/09/29/Java/带NameSpace的xml XPath搜索/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2008/09/29/Java/带NameSpace的xml XPath搜索/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2008/09/29/Java/带NameSpace的xml XPath搜索/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2008/09/29/Java/带NameSpace的xml XPath搜索/">
+                <span>阅读全文</span>
+              </a>
             </div>
             <meta itemprop="url" content="https://www.ieclipse.cn/2008/09/29/Java/带NameSpace的xml XPath搜索/">
             <meta itemprop="dateModified" content="2019-07-22T11:25:01.909Z">
@@ -394,10 +374,16 @@
             </div>
             <div class="divider"></div>
 
-            <div class="card-action">
-              <a class="icon nova-bubbles action-item" href="/2008/08/16/Java/jdom解析xml/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="63663364d88124ad025b335bb6371a41" data-flag-title="jdom解析xml" href="/2008/08/16/Java/jdom解析xml/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2008/08/16/Java/jdom解析xml/"><span>阅读全文</span></a>
+            <div class="card-action xxx-count" data-xid="63663364d88124ad025b335bb6371a41" data-url="2008/08/16/Java/jdom解析xml/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2008/08/16/Java/jdom解析xml/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2008/08/16/Java/jdom解析xml/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2008/08/16/Java/jdom解析xml/">
+                <span>阅读全文</span>
+              </a>
             </div>
             <meta itemprop="url" content="https://www.ieclipse.cn/2008/08/16/Java/jdom解析xml/">
             <meta itemprop="dateModified" content="2019-07-22T11:25:01.909Z">
@@ -427,13 +413,97 @@
             </div>
             <div class="divider"></div>
 
-            <div class="card-action">
-              <a class="icon nova-bubbles action-item" href="/2007/10/23/Java/Java-清除与初始化/#comment"><span class="count"></span><span class="hidden-xs">评论</span></a>
-              <a class="icon nova-eye action-item leancloud_visitors" id="ab68a9fae4f58abfc920d7eeca68bae4" data-flag-title="清除与初始化" href="/2007/10/23/Java/Java-清除与初始化/"><span class="count leancloud-visitors-count"></span><span class="hidden-xs">次阅读</span></a>
-              <a class="icon nova-hand-right action-item" href="/2007/10/23/Java/Java-清除与初始化/"><span>阅读全文</span></a>
+            <div class="card-action xxx-count" data-xid="ab68a9fae4f58abfc920d7eeca68bae4" data-url="2007/10/23/Java/Java-清除与初始化/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2007/10/23/Java/Java-清除与初始化/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2007/10/23/Java/Java-清除与初始化/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2007/10/23/Java/Java-清除与初始化/">
+                <span>阅读全文</span>
+              </a>
             </div>
             <meta itemprop="url" content="https://www.ieclipse.cn/2007/10/23/Java/Java-清除与初始化/">
             <meta itemprop="dateModified" content="2019-07-22T11:25:01.909Z">
+            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+              <meta content="https://www.ieclipse.cn" itemprop="url">
+              <meta content="静勤居" itemprop="name">
+              <meta content="/image/logo.png" itemprop="logo">
+            </span>
+          </div>
+          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
+            <div class="card-content">
+              <h3 class="card-title"><a itemprop="name headline" href="/2007/08/31/Java/J2EE真不是个东西四之Servlet篇/" class="article-title">J2EE真不是个东西四之Servlet篇</a></h3>
+              <div class="divider"></div>
+              <div class="section post-header clearfix">
+                <!-- sub element must be span -->
+                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2007-08-31T11:46:00.000Z"><time datetime="2007-08-31T11:46:00.000Z">2007-08-31</time></time></span>
+                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/Java/">Java</a></span>
+                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/J2EE/">J2EE</a></span>
+              </div>
+              <div class="divider"></div>
+              <div class="nova-flex excerpt-box">
+              
+              <div class="excerpt" itemprop="description articleBody">
+              <p>J2EE真不是个东西四之Servlet篇</p>
+              </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+
+            <div class="card-action xxx-count" data-xid="f2ed45bdbf0a346166595d8c980a4fae" data-url="2007/08/31/Java/J2EE真不是个东西四之Servlet篇/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2007/08/31/Java/J2EE真不是个东西四之Servlet篇/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2007/08/31/Java/J2EE真不是个东西四之Servlet篇/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2007/08/31/Java/J2EE真不是个东西四之Servlet篇/">
+                <span>阅读全文</span>
+              </a>
+            </div>
+            <meta itemprop="url" content="https://www.ieclipse.cn/2007/08/31/Java/J2EE真不是个东西四之Servlet篇/">
+            <meta itemprop="dateModified" content="2019-07-22T11:25:01.908Z">
+            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+              <meta content="https://www.ieclipse.cn" itemprop="url">
+              <meta content="静勤居" itemprop="name">
+              <meta content="/image/logo.png" itemprop="logo">
+            </span>
+          </div>
+          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
+            <div class="card-content">
+              <h3 class="card-title"><a itemprop="name headline" href="/2007/08/30/Java/J2EE真不是个东西三之JSP篇/" class="article-title">J2EE真不是个东西三之JSP篇</a></h3>
+              <div class="divider"></div>
+              <div class="section post-header clearfix">
+                <!-- sub element must be span -->
+                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2007-08-30T11:39:00.000Z"><time datetime="2007-08-30T11:39:00.000Z">2007-08-30</time></time></span>
+                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/Java/">Java</a></span>
+                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/J2EE/">J2EE</a></span>
+              </div>
+              <div class="divider"></div>
+              <div class="nova-flex excerpt-box">
+              
+              <div class="excerpt" itemprop="description articleBody">
+              <p>J2EE真不是个东西三之JSP篇</p>
+              </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+
+            <div class="card-action xxx-count" data-xid="5cc5d9fe934301253ed576e173cbb4ba" data-url="2007/08/30/Java/J2EE真不是个东西三之JSP篇/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2007/08/30/Java/J2EE真不是个东西三之JSP篇/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2007/08/30/Java/J2EE真不是个东西三之JSP篇/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2007/08/30/Java/J2EE真不是个东西三之JSP篇/">
+                <span>阅读全文</span>
+              </a>
+            </div>
+            <meta itemprop="url" content="https://www.ieclipse.cn/2007/08/30/Java/J2EE真不是个东西三之JSP篇/">
+            <meta itemprop="dateModified" content="2019-07-22T11:25:01.908Z">
             <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
               <meta content="https://www.ieclipse.cn" itemprop="url">
               <meta content="静勤居" itemprop="name">
@@ -491,28 +561,25 @@
         <h3 class="panel-title">公告</h3>
       </div>
       <div class="panel-body" id="widget_announce">
-        本站评论系统已由友言切换为多说，原有的友言评论数据在友言云端数据迁移完毕之后再导入，在此期间，原先的评论暂不可见，请见谅！
+        <div class="text-center">正在载入...</div>
       </div>
     </div>
     <script>
-    function loadAnnounce() {
-      var ds_top_url = '/other/announce.html';
-      var ds_top_dom = $('#widget_announce');
-      $.ajax({
-        url : ds_top_url,
-        dataType : "html",
-        type : 'get',
-        success : function(data) {
-          if (data) {
-            ds_top_dom.html(data);
-          }
-        },
-        error: function (xhr, msg, e) {
-          ds_top_dom.html('<div class="text-center">加载失败</div>');
-        }
-      });
-    }
-    loadAnnounce();
+    $(document).ready(function(e) { 
+      let dom = $('#widget_announce');
+      lc.getAnnounce({
+    				debug: false
+    			}).then(arr => {
+    				if (arr === undefined) {
+    					dom.html('<div class="text-center">暂无内容</div>');
+    				} else {
+    					dom.html(arr.value);
+    				}
+          }, err => {
+            console.warn(err);
+            dom.html('<div class="text-center">加载失败</div>');
+          });
+    });
     </script>
 
 
@@ -546,7 +613,7 @@
       </div>
       
       <!-- use category tree -->
-      <ul class="list-group"><li class="list-group-item"><a class="list-group-link" href="/categories/Android/">Android</a><span class="badge">22</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/pde/">Eclipse 插件</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Java/">Java</a><span class="badge">9</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Web/">Web</a><span class="badge">24</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/other/">其它</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/trick/">奇淫巧技</a><span class="badge">6</span></li></ul>
+      <ul class="list-group"><li class="list-group-item"><a class="list-group-link" href="/categories/Android/">Android</a><span class="badge">22</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/pde/">Eclipse 插件</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Java/">Java</a><span class="badge">9</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Web/">Web</a><span class="badge">22</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/other/">其它</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/trick/">奇淫巧技</a><span class="badge">6</span></li></ul>
     </div>
     
 
@@ -559,6 +626,86 @@
       <a href="/tags/ADT/" style="font-size: 10px; color: #795548">ADT</a> <a href="/tags/Ajax/" style="font-size: 10px; color: #795548">Ajax</a> <a href="/tags/Android/" style="font-size: 20px; color: #212121">Android</a> <a href="/tags/CI/" style="font-size: 10px; color: #795548">CI</a> <a href="/tags/Eclipse/" style="font-size: 16.25px; color: #423530">Eclipse</a> <a href="/tags/Gradle/" style="font-size: 11.25px; color: #6e4f43">Gradle</a> <a href="/tags/Hexo/" style="font-size: 18.75px; color: #2c2826">Hexo</a> <a href="/tags/J2EE/" style="font-size: 12.5px; color: #63483e">J2EE</a> <a href="/tags/Java/" style="font-size: 12.5px; color: #63483e">Java</a> <a href="/tags/MySQL/" style="font-size: 10px; color: #795548">MySQL</a> <a href="/tags/Node-js/" style="font-size: 13.75px; color: #584239">Node.js</a> <a href="/tags/PHP/" style="font-size: 12.5px; color: #63483e">PHP</a> <a href="/tags/QuickAF/" style="font-size: 17.5px; color: #372e2b">QuickAF</a> <a href="/tags/SWT/" style="font-size: 10px; color: #795548">SWT</a> <a href="/tags/Swing/" style="font-size: 10px; color: #795548">Swing</a> <a href="/tags/git/" style="font-size: 15px; color: #4d3b35">git</a> <a href="/tags/js/" style="font-size: 13.75px; color: #584239">js</a> <a href="/tags/xml/" style="font-size: 11.25px; color: #6e4f43">xml</a> <a href="/tags/安全/" style="font-size: 11.25px; color: #6e4f43">安全</a>
       </div>
     </div>
+
+    <div class="panel panel-primary animated slideInUp faster">
+      <div class="panel-heading">
+        <h3 class="panel-title">热点文章</h3>
+      </div>
+      <div class="list-group" id="top-threads" data-range="weekly" data-num-items="5">
+        <div class="text-center">正在载入...</div>
+      </div>
+    </div>
+    <script>
+    $(document).ready(function(e) {
+    		var $dom = $('#top-threads');
+    		var $param = $dom.data();
+    			lc.topViews({
+    				limit: $param.numItems
+    			}).then(arr => {
+    				if (arr.length == 0) {
+    					$dom.html('<div class="text-center">暂无热点文章</div>');
+    				} else {
+    					$dom.html('');
+    					for (var i = 0; i < arr.length; i++) {
+    						let item = arr[i].toJSON();
+    						var url = item.url;
+                // TODO need fix url issue
+    						var a = $('<a></a>').text(item.title).attr('href', url).addClass('list-group-item');
+    						$dom.append(a);
+    					}
+    				}
+          }, err => {
+            console.warn(err);
+            $dom.html('<div class="text-center">加载失败</div>');
+          });
+    });
+    </script>
+
+    <div class="panel panel-primary animated slideInUp faster">
+      <div class="panel-heading">
+        <h3 class="panel-title">最新评论</h3>
+      </div>
+      <div class="list-group" id="valine-recent-comments" data-num-items="5">
+        <div class="text-center">正在载入...</div>
+      </div>
+    </div>
+    <script>
+    $(document).ready(function(e) {
+    	var dom = $('#valine-recent-comments');
+    	var param = dom.data();
+
+    	lc.recentComment({
+    		limit: param.numItems,
+			debug: false
+    	}).then(arr => {
+    		if (arr.length == 0) {
+    			dom.html('<div class="text-center">暂无评论文章，快去发表第一个评论吧～</div>');
+    		} else {
+    			dom.html('');
+    			for (var i = 0; i < arr.length; i++) {
+    				let item = arr[i].toJSON();
+					let link = item.link;
+					let nick = item.nick ? (item.nick.length > 5 ? (item.nick.substring(0, 5) + "...") : item.nick) : '';
+					let comment = item.comment.length > 20 ? (item.comment.substring(0, 20) + "...") : item.comment;
+    				var url = item.url;
+    				// TODO need fix url issue
+					let span = $('<span></span').addClass('list-group-item');
+					let nickNode = $('<a></a>').text(nick);
+					if (link) {
+						nickNode.attr('href', link);
+					}
+					span.append(nickNode);
+    				var a = $('<a></a>').text(comment).attr('href', url);
+					span.append(a);
+    				dom.append(span);
+    			}
+    		}
+    	}, err => {
+    		console.warn(e);
+    		dom.html('<div class="text-center">加载失败</div>');
+    	});
+    });
+    </script>
 
     <div class="panel panel-primary animated slideInUp faster">
       <div class="panel-heading">
@@ -582,12 +729,13 @@
     <div id="footer-copyright">
       &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
       <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
-      <span class="leancloud_visitors" id="d41d8cd98f00b204e9800998ecf8427e" data-flag-title="“首页”">
-      本站访问数：<span class="count lc-count leancloud-visitors-count"></span>
+      <span class="home-count" data-xid="d41d8cd98f00b204e9800998ecf8427e" data-title="首页" data-url="page/7/index.html">
+      本站访问数：<span class="count"></span>
+
       </span>
     </div>
     <div>
-      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+      <a href="//beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
     </div>
   </div>
 </footer>
@@ -621,135 +769,20 @@
     <script src="/js/script.js"></script>
     
     
-
-<!-- LeanClound官方Javascript SDK -->
 <script>
-  var page_layout = 'true'
-  var lc_debug = false;
+  /* 列表中的阅读数 */
+  lc.countCounter({
+      index: true
+  });
+  /* 首页阅读数 */
+  lc.countCounter({
+      selector: '.home-count',
+      subSelector: '.count'
+  });
 
-  var lc_config = {
-    xid : 'd41d8cd98f00b204e9800998ecf8427e',
-    url : 'page/7/index.html' || '',
-    title : '首页'
-  };
-  lc_debug && console.log('lcconfig', lc_config);
-
-  var lc_table = 'Counter' || 'Counter';
-
-  function lc_page_views() {
-    if (page_layout === 'true') {
-      lc_index_views();
-    }
-    var query = new AV.Query(lc_table);
-    query.select(['-ACL']);
-    query.equalTo('xid', lc_config.xid);
-    query.find().then(results => {
-        // results is an array of AV.Object.
-        if (typeof results === 'undefined' || results.length == 0) {
-          insert();
-          return;
-        }
-        update(results[0]);
-        show(results[0]);
-      });
-
-    function insert() {
-        lc_debug && console.log('data is null new object');
-        var M = AV.Object.extend(lc_table);
-        let data = new M();
-        data.set('time', 1);
-      
-      for ( var key in lc_config) {
-        data.set(key, lc_config[key]);
-      }
-      data.save().then(function(data) {
-        lc_debug && console.log('created objectId is ' + data.id);
-      }, function(error) {
-        lc_debug && console.log("create object failed", error);
-      });
-    }
-
-    function update(data) {
-      for (var key in lc_config) {
-        if (key !== 'xid')
-        data.set(key, lc_config[key]);
-      }
-      lc_debug && console.log("after change,data", data);
-      data.increment('time', 1);
-      data.save().then(function(data) {
-        lc_debug && console.log("update to " + data.get('time'));
-      }, function(error) {
-        lc_debug && console.log("update object failed", error);
-      });
-    }
-
-    function show(data) {
-      $(".lc-count").html(data.get('time'));
-    }
-    function show_count(count) {
-      $(".lc-count").html(count);
-    }
-  };
-
-  function lc_index_views() {
-    // load views count from leanclound
-    // make sure you are created Counter table on leanclound
-    function lc_load_views(selector, options) {
-      var o = options || {};
-      var tkeys = [];
-      $(selector).each(function(i) {
-        var tkey = $(this).attr('id');
-        tkeys.push(tkey);
-      });
-
-      var query = new AV.Query(lc_table);
-      query.select([ '-ACL', '-createdAt', '-updatedAt', '-url' ]);
-      query.containedIn('xid', tkeys);
-      query.find().then(function(results) {
-        if (typeof results === 'undefined' || results.length == 0) {
-          return;
-        }
-        $(selector).each(function(i) {
-          var tkey = $(this).attr('id');
-          for (var i = 0; i < results.length; i++) {
-            var t = results[i];
-            if (t.get('xid') === tkey) {
-              var c = t.get('time') + '';
-              $(this).find(o.p.views).html(c);
-            }
-          }
-        });
-      }, function(error) {
-      });
-    }
-    lc_load_views('.card-action .leancloud_visitors', {
-      style : 'hidden-xs',
-      p : {
-        views : '.count'
-      }
-    });
-  }
-
-  var loadedAV = !(typeof AV === 'undefined');
-  if (!loadedAV) {
-    $.getScript('//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js',function() {
-      lc_debug && console.log('init AV after av.js loaded');
-        loadedAV = !(typeof AV === 'undefined');
-        if (!loadedAV) {
-          lc_debug && console.log('AV not loaded');
-
-        }
-        AV.init({
-          appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
-          appKey : 'QwGBjKlSYOBtjMa5aTGeO3cb',
-          serverURLs : 'https://lc.ieclipse.cn'
-        });
-        lc_page_views();
-    });
-  } else {
-    lc_page_views();
-  }
+  lc.countComment({
+    index: true
+  });
 </script>
-
 </body>
 </html>
