@@ -114,8 +114,22 @@
     
 <section class="archive-wrap">
 <div class="archive-heading">
+<h1><a class="archive-heading-link" href="/archives/2015/">2015</a></h1><hr></div>
+<div class="archive-body">
+<article class="archive-article archive-type-post">
+<header class="archive-article-header">
+<h3><a href="/2015/01/01/Android/Android-adt-extensions/">ADT extensions <small>2015-01-01</small></a></h3>
+</header>
+</article>
+</div>
+<div class="archive-heading">
 <h1><a class="archive-heading-link" href="/archives/2012/">2012</a></h1><hr></div>
 <div class="archive-body">
+<article class="archive-article archive-type-post">
+<header class="archive-article-header">
+<h3><a href="/2012/06/08/Android/Android-Thread-join-in-AsyncTask/">Thread.join()在AsyncTask中的妙用 <small>2012-06-08</small></a></h3>
+</header>
+</article>
 <article class="archive-article archive-type-post">
 <header class="archive-article-header">
 <h3><a href="/2012/03/01/Android/Android-send-email-background/">Android平台邮件自动发送功能实现 <small>2012-03-01</small></a></h3>
@@ -184,12 +198,12 @@
 </article>
 <article class="archive-article archive-type-post">
 <header class="archive-article-header">
-<h3><a href="/2007/08/24/Java/J2EE真不是个东西二之配置篇/">J2EE真不是个东西二之配置篇 <small>2007-08-24</small></a></h3>
+<h3><a href="/2007/08/24/Java/J2EE真不是个东西一之开场篇/">J2EE真不是个东西一之开场篇 <small>2007-08-24</small></a></h3>
 </header>
 </article>
 <article class="archive-article archive-type-post">
 <header class="archive-article-header">
-<h3><a href="/2007/08/24/Java/J2EE真不是个东西一之开场篇/">J2EE真不是个东西一之开场篇 <small>2007-08-24</small></a></h3>
+<h3><a href="/2007/08/24/Java/J2EE真不是个东西二之配置篇/">J2EE真不是个东西二之配置篇 <small>2007-08-24</small></a></h3>
 </header>
 </article>
 <article class="archive-article archive-type-post">
@@ -313,7 +327,7 @@
       </div>
       
       <!-- use category tree -->
-      <ul class="list-group"><li class="list-group-item"><a class="list-group-link" href="/categories/Android/">Android</a><span class="badge">22</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/pde/">Eclipse 插件</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Java/">Java</a><span class="badge">9</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Web/">Web</a><span class="badge">22</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/other/">其它</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/trick/">奇淫巧技</a><span class="badge">6</span></li></ul>
+      <ul class="list-group"><li class="list-group-item"><a class="list-group-link" href="/categories/Android/">Android</a><span class="badge">22</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/pde/">Eclipse 插件</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Java/">Java</a><span class="badge">9</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Web/">Web</a><span class="badge">23</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/other/">其它</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/trick/">奇淫巧技</a><span class="badge">6</span></li></ul>
     </div>
     
 
@@ -350,7 +364,7 @@
     						let item = arr[i].toJSON();
     						var url = item.url;
                 // TODO need fix url issue
-    						var a = $('<a></a>').text(item.title).attr('href', url).addClass('list-group-item');
+    						var a = $('<a></a>').text(item.title).attr('href', url).addClass('list-group-item text-line-1');
     						$dom.append(a);
     					}
     				}
@@ -384,19 +398,26 @@
     			dom.html('');
     			for (var i = 0; i < arr.length; i++) {
     				let item = arr[i].toJSON();
-					let link = item.link;
-					let nick = item.nick ? (item.nick.length > 5 ? (item.nick.substring(0, 5) + "...") : item.nick) : '';
-					let comment = item.comment.length > 20 ? (item.comment.substring(0, 20) + "...") : item.comment;
+					let link = item.link || '';
+					let nick = item.nick || '';
+					let comment = item.comment;
     				var url = item.url;
     				// TODO need fix url issue
-					let span = $('<span></span').addClass('list-group-item');
-					let nickNode = $('<a></a>').text(nick);
+					let span = $('<div></div').addClass('list-group-item');
+					let nickNode = $('<a></a>').text(nick).addClass('normal-color').css('margin-left', 'auto');
 					if (link) {
 						nickNode.attr('href', link);
 					}
-					span.append(nickNode);
-    				var a = $('<a></a>').text(comment).attr('href', url);
+					let line1 = $('<small/>').addClass('nova-row-center');
+					if (item.title) {
+						$post = $('<span/>').text(item.title).addClass('normal-color text-line-1');
+						line1.append($post);
+					}
+					line1.append(nickNode);
+
+    				var a = $('<a></a>').text(comment).attr('href', url).addClass('text-line-2 normal-color');
 					span.append(a);
+					span.append(line1);
     				dom.append(span);
     			}
     		}

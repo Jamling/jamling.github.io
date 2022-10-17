@@ -5,7 +5,7 @@
   <title>静勤居</title>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="keywords" content="Android,Eclipse 插件,Java,Web,奇淫巧技,其它,Eclipse,ADT,QuickAF,Gradle,CI,J2EE,Swing,SWT,xml,PHP,Ajax,MySQL,Hexo,js,Node.js,git,安全">
+  <meta name="keywords" content="Android,Eclipse 插件,Java,Web,奇淫巧技,其它,QuickAF,Eclipse,ADT,Gradle,CI,J2EE,Swing,SWT,xml,PHP,Ajax,Hexo,MySQL,js,Node.js,git,安全">
   <meta name="description" content="Jamling's 技术文章博客.">
   
 
@@ -116,6 +116,92 @@
     <meta content itemprop="name">
 </div>
 <main>
+          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
+            <div class="card-content">
+              <h3 class="card-title"><a itemprop="name headline" href="/2015/01/01/Android/Android-adt-extensions/" class="article-title">ADT extensions</a></h3>
+              <div class="divider"></div>
+              <div class="section post-header clearfix">
+                <!-- sub element must be span -->
+                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2015-01-01T04:48:31.000Z"><time datetime="2015-01-01T04:48:31.000Z">2015-01-01</time></time></span>
+                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/Android/">Android</a></span>
+                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/Android/">Android</a><a class="tag-item" href="/tags/Eclipse/">Eclipse</a><a class="tag-item" href="/tags/ADT/">ADT</a></span>
+              </div>
+              <div class="divider"></div>
+              <div class="nova-flex excerpt-box">
+              
+              <div class="excerpt" itemprop="description articleBody">
+              <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>![Alt text] (adt_ext_new_activity.png?200)</p>
+<p>Quickly new Activity/Service/BroadcastReceiver/ContentProvider in Android Project with a wizard and configurate in AndroidManifest.xml.</p>
+<p>Main function list:</p>
+<ul>
+<li>New Activity/Service/BroadcastReceiver.</li>
+<li>Customize action and category for intent-filter.</li>
+<li>New ContentProvider.</li>
+<li>Customize authorities for ContentProvider.</li>
+</ul>
+              </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+
+            <div class="card-action xxx-count" data-xid="9625d49b41f9e6627aa80e8c4d79ff00" data-url="2015/01/01/Android/Android-adt-extensions/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2015/01/01/Android/Android-adt-extensions/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2015/01/01/Android/Android-adt-extensions/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2015/01/01/Android/Android-adt-extensions/">
+                <span>阅读全文</span>
+              </a>
+            </div>
+            <meta itemprop="url" content="https://www.ieclipse.cn/2015/01/01/Android/Android-adt-extensions/">
+            <meta itemprop="dateModified" content="2019-07-22T11:25:01.893Z">
+            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+              <meta content="https://www.ieclipse.cn" itemprop="url">
+              <meta content="静勤居" itemprop="name">
+              <meta content="/image/logo.png" itemprop="logo">
+            </span>
+          </div>
+          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
+            <div class="card-content">
+              <h3 class="card-title"><a itemprop="name headline" href="/2012/06/08/Android/Android-Thread-join-in-AsyncTask/" class="article-title">Thread.join()在AsyncTask中的妙用</a></h3>
+              <div class="divider"></div>
+              <div class="section post-header clearfix">
+                <!-- sub element must be span -->
+                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2012-06-08T13:00:00.000Z"><time datetime="2012-06-08T13:00:00.000Z">2012-06-08</time></time></span>
+                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/Android/">Android</a></span>
+                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/Android/">Android</a><a class="tag-item" href="/tags/Java/">Java</a></span>
+              </div>
+              <div class="divider"></div>
+              <div class="nova-flex excerpt-box">
+              
+              <div class="excerpt" itemprop="description articleBody">
+              <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>在Android Email当中，在设置接收服务器和发送服务器时，点击下一步，系统会弹出进度框，并执行服务器设置检验。如果用户设置信息不正确，在执行校验时，大约会花1分钟的时间去校验，最后才会提示设置信息不正确。如果用户在等待过程中点击了“取消”，然后再点下一步，发会现，不再弹出等待提示框，也不执行校验了。</p>
+              </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+
+            <div class="card-action xxx-count" data-xid="08e37a172fb615b57b123d6e83cfa3b9" data-url="2012/06/08/Android/Android-Thread-join-in-AsyncTask/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2012/06/08/Android/Android-Thread-join-in-AsyncTask/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2012/06/08/Android/Android-Thread-join-in-AsyncTask/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2012/06/08/Android/Android-Thread-join-in-AsyncTask/">
+                <span>阅读全文</span>
+              </a>
+            </div>
+            <meta itemprop="url" content="https://www.ieclipse.cn/2012/06/08/Android/Android-Thread-join-in-AsyncTask/">
+            <meta itemprop="dateModified" content="2019-07-22T11:25:01.893Z">
+            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+              <meta content="https://www.ieclipse.cn" itemprop="url">
+              <meta content="静勤居" itemprop="name">
+              <meta content="/image/logo.png" itemprop="logo">
+            </span>
+          </div>
           <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
             <div class="card-content">
               <h3 class="card-title"><a itemprop="name headline" href="/2012/03/01/Android/Android-send-email-background/" class="article-title">Android平台邮件自动发送功能实现</a></h3>
@@ -432,84 +518,6 @@
               <meta content="/image/logo.png" itemprop="logo">
             </span>
           </div>
-          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
-            <div class="card-content">
-              <h3 class="card-title"><a itemprop="name headline" href="/2007/08/31/Java/J2EE真不是个东西四之Servlet篇/" class="article-title">J2EE真不是个东西四之Servlet篇</a></h3>
-              <div class="divider"></div>
-              <div class="section post-header clearfix">
-                <!-- sub element must be span -->
-                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2007-08-31T11:46:00.000Z"><time datetime="2007-08-31T11:46:00.000Z">2007-08-31</time></time></span>
-                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/Java/">Java</a></span>
-                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/J2EE/">J2EE</a></span>
-              </div>
-              <div class="divider"></div>
-              <div class="nova-flex excerpt-box">
-              
-              <div class="excerpt" itemprop="description articleBody">
-              <p>J2EE真不是个东西四之Servlet篇</p>
-              </div>
-              </div>
-            </div>
-            <div class="divider"></div>
-
-            <div class="card-action xxx-count" data-xid="f2ed45bdbf0a346166595d8c980a4fae" data-url="2007/08/31/Java/J2EE真不是个东西四之Servlet篇/">
-              <a class="icon nova-bubbles action-item comment-count" href="/2007/08/31/Java/J2EE真不是个东西四之Servlet篇/#comment">
-                <span class="count"></span><span class="hidden-xs">评论</span>
-              </a>
-              <a class="icon nova-eye action-item view-count" href="/2007/08/31/Java/J2EE真不是个东西四之Servlet篇/">
-                <span class="count"></span><span class="hidden-xs">次阅读</span>
-                </a>
-              <a class="icon nova-hand-right action-item" href="/2007/08/31/Java/J2EE真不是个东西四之Servlet篇/">
-                <span>阅读全文</span>
-              </a>
-            </div>
-            <meta itemprop="url" content="https://www.ieclipse.cn/2007/08/31/Java/J2EE真不是个东西四之Servlet篇/">
-            <meta itemprop="dateModified" content="2019-07-22T11:25:01.908Z">
-            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
-              <meta content="https://www.ieclipse.cn" itemprop="url">
-              <meta content="静勤居" itemprop="name">
-              <meta content="/image/logo.png" itemprop="logo">
-            </span>
-          </div>
-          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
-            <div class="card-content">
-              <h3 class="card-title"><a itemprop="name headline" href="/2007/08/30/Java/J2EE真不是个东西三之JSP篇/" class="article-title">J2EE真不是个东西三之JSP篇</a></h3>
-              <div class="divider"></div>
-              <div class="section post-header clearfix">
-                <!-- sub element must be span -->
-                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2007-08-30T11:39:00.000Z"><time datetime="2007-08-30T11:39:00.000Z">2007-08-30</time></time></span>
-                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/Java/">Java</a></span>
-                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/J2EE/">J2EE</a></span>
-              </div>
-              <div class="divider"></div>
-              <div class="nova-flex excerpt-box">
-              
-              <div class="excerpt" itemprop="description articleBody">
-              <p>J2EE真不是个东西三之JSP篇</p>
-              </div>
-              </div>
-            </div>
-            <div class="divider"></div>
-
-            <div class="card-action xxx-count" data-xid="5cc5d9fe934301253ed576e173cbb4ba" data-url="2007/08/30/Java/J2EE真不是个东西三之JSP篇/">
-              <a class="icon nova-bubbles action-item comment-count" href="/2007/08/30/Java/J2EE真不是个东西三之JSP篇/#comment">
-                <span class="count"></span><span class="hidden-xs">评论</span>
-              </a>
-              <a class="icon nova-eye action-item view-count" href="/2007/08/30/Java/J2EE真不是个东西三之JSP篇/">
-                <span class="count"></span><span class="hidden-xs">次阅读</span>
-                </a>
-              <a class="icon nova-hand-right action-item" href="/2007/08/30/Java/J2EE真不是个东西三之JSP篇/">
-                <span>阅读全文</span>
-              </a>
-            </div>
-            <meta itemprop="url" content="https://www.ieclipse.cn/2007/08/30/Java/J2EE真不是个东西三之JSP篇/">
-            <meta itemprop="dateModified" content="2019-07-22T11:25:01.908Z">
-            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
-              <meta content="https://www.ieclipse.cn" itemprop="url">
-              <meta content="静勤居" itemprop="name">
-              <meta content="/image/logo.png" itemprop="logo">
-            </span>
-          </div>
 </main>
     <nav> <ul class="pagination"><li><a href="/page/6/" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li><li><a href="/">1</a></li><li><span class="space">&hellip;</span></li><li><a href="/page/5/">5</a></li><li><a href="/page/6/">6</a></li><li class="active"><span class="sronly">7</span></li><li><a href="/page/8/">8</a></li><li><a href="/page/8/" aria-label="Next" rel="next">&raquo;</a></li></ul> </nav>
 
@@ -613,7 +621,7 @@
       </div>
       
       <!-- use category tree -->
-      <ul class="list-group"><li class="list-group-item"><a class="list-group-link" href="/categories/Android/">Android</a><span class="badge">22</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/pde/">Eclipse 插件</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Java/">Java</a><span class="badge">9</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Web/">Web</a><span class="badge">22</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/other/">其它</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/trick/">奇淫巧技</a><span class="badge">6</span></li></ul>
+      <ul class="list-group"><li class="list-group-item"><a class="list-group-link" href="/categories/Android/">Android</a><span class="badge">22</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/pde/">Eclipse 插件</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Java/">Java</a><span class="badge">9</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Web/">Web</a><span class="badge">23</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/other/">其它</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/trick/">奇淫巧技</a><span class="badge">6</span></li></ul>
     </div>
     
 
@@ -650,7 +658,7 @@
     						let item = arr[i].toJSON();
     						var url = item.url;
                 // TODO need fix url issue
-    						var a = $('<a></a>').text(item.title).attr('href', url).addClass('list-group-item');
+    						var a = $('<a></a>').text(item.title).attr('href', url).addClass('list-group-item text-line-1');
     						$dom.append(a);
     					}
     				}
@@ -684,19 +692,26 @@
     			dom.html('');
     			for (var i = 0; i < arr.length; i++) {
     				let item = arr[i].toJSON();
-					let link = item.link;
-					let nick = item.nick ? (item.nick.length > 5 ? (item.nick.substring(0, 5) + "...") : item.nick) : '';
-					let comment = item.comment.length > 20 ? (item.comment.substring(0, 20) + "...") : item.comment;
+					let link = item.link || '';
+					let nick = item.nick || '';
+					let comment = item.comment;
     				var url = item.url;
     				// TODO need fix url issue
-					let span = $('<span></span').addClass('list-group-item');
-					let nickNode = $('<a></a>').text(nick);
+					let span = $('<div></div').addClass('list-group-item');
+					let nickNode = $('<a></a>').text(nick).addClass('normal-color').css('margin-left', 'auto');
 					if (link) {
 						nickNode.attr('href', link);
 					}
-					span.append(nickNode);
-    				var a = $('<a></a>').text(comment).attr('href', url);
+					let line1 = $('<small/>').addClass('nova-row-center');
+					if (item.title) {
+						$post = $('<span/>').text(item.title).addClass('normal-color text-line-1');
+						line1.append($post);
+					}
+					line1.append(nickNode);
+
+    				var a = $('<a></a>').text(comment).attr('href', url).addClass('text-line-2 normal-color');
 					span.append(a);
+					span.append(line1);
     				dom.append(span);
     			}
     		}
@@ -731,7 +746,14 @@
       <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
       <span class="home-count" data-xid="d41d8cd98f00b204e9800998ecf8427e" data-title="首页" data-url="page/7/index.html">
       本站访问数：<span class="count"></span>
-
+      <script>
+        $(document).ready(function(e) {
+          lc.getVisitors({debug: true}).then(res => {
+            $('.home-count .count').html(res.value);
+          });
+        })
+        
+      </script>
       </span>
     </div>
     <div>
@@ -777,7 +799,7 @@
   /* 首页阅读数 */
   lc.countCounter({
       selector: '.home-count',
-      subSelector: '.count'
+      subSelector: '.count-nothing' //
   });
 
   lc.countComment({
