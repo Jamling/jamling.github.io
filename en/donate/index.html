@@ -209,6 +209,7 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <span class="modal-title" id="myModalLabel">Donate</span>
+        <small style="color:red;">实名认证：李 * * </small>
       </div>
       <div class="modal-body"><!--
         <table>
@@ -274,14 +275,23 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
     topLimit: 5,
     page: 0
   }
+  let donateFormat = {
+    cny: new Intl.NumberFormat('zh-CN', {
+      style: 'currency',
+      currency: 'CNY',
+      minimumFractionDigits: 2,
+    }),
+    date: new Intl.DateTimeFormat('en-CA', { dateStyle: 'short' })
+  };
   function listCallback(res) {
     $("#donate-list tr:not(:first)").remove();
         res.list.forEach((item, index)=> {
-          let time = new Date(item.donatedAt).toLocaleDateString();
+          let time = donateFormat.date.format(new Date(item.donatedAt));
+          let amount = donateFormat.cny.format(item.amount);
           let html = $(`<tr>
           <td>${index+1}</td>
           <td>${item.uname}</td>
-          <td>${item.amount}</td>
+          <td>${amount}</td>
           <td>${time}</td>
           </tr>`);
           if (item.usite) {
@@ -295,10 +305,11 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
   function topAmountCallback(res) {
     res.forEach((item, index)=> {
           let time = new Date(item.donatedAt).toLocaleDateString();
+          let amount = donateFormat.cny.format(item.amount);
           let html = `<tr>
           <td>${index+1}</td>
           <td>${item.uname}</td>
-          <td>${item.amount}</td>
+          <td>${amount}</td>
           </tr>`;
           let row = $(html).addClass(topTrClass(index));
           $("#donate-top-sum tr:last").after(row);
@@ -388,31 +399,6 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
     loadRecords();
     topWidget();
   });
-
-  function val_donate(){
-    var f = $('#donateForm');
-    var fe = f.elements;
-    var rg = $('#donateForm :radio');
-    var s = $('#donateForm select');
-    var s1 = "alipay";
-
-    for (var i=0;i<rg.length;i++){
-      var r = rg[i];
-      if (r.checked){
-        s1 = r.value;
-        break;
-      }
-    }
-    s1 = s1 || 'alipay';
-    var src = '/image/donate_' + s1;
-
-    src += '.png';
-    $('#donate_pic').attr('src',src);
-  }
-
-  $('#DonateModal').on('show.bs.modal', function (e) {
-    $('#donateForm').reset();
-  })
 </script>
 
 
