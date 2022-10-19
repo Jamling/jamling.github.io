@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   <title>J2EE真不是个东西三之JSP篇</title>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -13,7 +13,7 @@
   <meta name="og:site_name" content="Jamling's Blog and Project Site">
   <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
   <meta name="og:title" content="J2EE真不是个东西三之JSP篇">
-  <meta name="og:url" content="https://www.ieclipse.cn/2007/08/30/Java/J2EE真不是个东西三之JSP篇/">
+  <meta name="og:url" content="https://www.ieclipse.cn/2007/08/30/Java/J2EE%E7%9C%9F%E4%B8%8D%E6%98%AF%E4%B8%AA%E4%B8%9C%E8%A5%BF%E4%B8%89%E4%B9%8BJSP%E7%AF%87/">
   <meta name="og:description" content="J2EE真不是个东西三之JSP篇">
 
   <meta name="twitter:card" content="summary">
@@ -24,34 +24,76 @@
   <meta name="twitter:description" content="J2EE真不是个东西三之JSP篇">
 
   <!-- Canonical links -->
-  <link rel="canonical" href="https://www.ieclipse.cn/en/2007/08/30/Java/J2EE真不是个东西三之JSP篇/index.html">
+  <link rel="canonical" href="https://www.ieclipse.cn/en/2007/08/30/Java/J2EE%E7%9C%9F%E4%B8%8D%E6%98%AF%E4%B8%AA%E4%B8%9C%E8%A5%BF%E4%B8%89%E4%B9%8BJSP%E7%AF%87/index.html">
   <!-- Alternative links -->
   <!-- CSS and JS-->
-  <script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+  
+<script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+
+
 <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
 <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+
 <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 <script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+
+
 <script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+
+
 <link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+
+
 <link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+
+
 <script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+
+
 <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+
+
 <script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
 <script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
 <link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+
+
 <link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+
+
 <script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+
+
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+
 <link rel="stylesheet" href="/css/nova_font.css">
+
+
 <link rel="stylesheet" href="/css/bs/nova.css">
+
+
 <script src="//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js"></script>
+
+
 <script src="/js/leancloud.js"></script>
 
+
   <!-- RSS -->
-  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
-  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon" />
   <script>
         lc.init({
           appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
@@ -67,8 +109,7 @@
           donateTable: ''
         });
   </script>
-<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 <body>
   <!-- header -->
   <header id="body-header">
@@ -88,7 +129,6 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
         <li><a href="/en/" class="main-nav">Home</a></li><li><a href="/en/p/" class="main-nav">Projects</a></li><li><a href="/en/categories/" class="main-nav">Category</a></li><li><a href="/en/archives/" class="main-nav">Archive</a></li><li><a href="/en/donate/" class="main-nav">Donate</a></li><li><a href="/en/about/" class="main-nav">About</a></li>
-        <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
@@ -157,7 +197,9 @@
   
   </div>
 
-  <script src="/js/decrypt.min.js"></script>
+  
+<script src="/js/decrypt.min.js"></script>
+
   <footer class="article-footer">
     <time class="article-footer-updated" datetime="2019-07-22T11:25:01.908Z" itemprop="dateModified">
     Last updated: 2019-07-22
@@ -179,7 +221,7 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
 </article>
 
 <div class="page-footer">
-  <nav><ul class="pager"><li class="previous"><a href="/en/2007/08/31/Java/J2EE真不是个东西四之Servlet篇/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">Prev</span></a></li><li class="next"><a href="/en/2007/08/24/Java/J2EE真不是个东西一之开场篇/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">Next</span></a></li></ul></nav>
+  <nav><ul class="pager"><li class="previous"><a href="/en/2007/08/31/Java/J2EE%E7%9C%9F%E4%B8%8D%E6%98%AF%E4%B8%AA%E4%B8%9C%E8%A5%BF%E5%9B%9B%E4%B9%8BServlet%E7%AF%87/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">Prev</span></a></li><li class="next"><a href="/en/2007/08/24/Java/J2EE%E7%9C%9F%E4%B8%8D%E6%98%AF%E4%B8%AA%E4%B8%9C%E8%A5%BF%E4%BA%8C%E4%B9%8B%E9%85%8D%E7%BD%AE%E7%AF%87/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">Next</span></a></li></ul></nav>
   
 <!-- Button trigger modal -->
 <blockquote class="donate"><!--
@@ -199,7 +241,6 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <span class="modal-title" id="myModalLabel">Donate</span>
-        <small style="color:red;">实名认证：李 * * </small>
       </div>
       <div class="modal-body"><!--
         <table>
@@ -217,13 +258,13 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
         <div class="col-md-6">
           <div class="text-center">
             <span style="display:block;">支付宝</span>
-            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate" />
           </div>
         </div>
         <div class="col-md-6">
           <div class="text-center">
             <span style="display:block;">微信支付</span>
-            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate" />
           </div>
         </div>
         </div>
@@ -241,7 +282,7 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
 <script src="//unpkg.com/valine/dist/Valine.min.js">
 </script>
 <!--PC和WAP自适应版-->
-<div id="vcomments" data-sid="5cc5d9fe934301253ed576e173cbb4ba"></div>
+<div id="vcomments" data-sid="5cc5d9fe934301253ed576e173cbb4ba" ></div>
 <script>
     new Valine({
         av: AV,
@@ -321,8 +362,12 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
         copy: "Copy to clipboard"
     }
     </script>
-    <script src="/js/hljs.js"></script>
-    <script src="/js/script.js"></script>
+    
+<script src="/js/hljs.js"></script>
+
+    
+<script src="/js/script.js"></script>
+
     
     
 <script>

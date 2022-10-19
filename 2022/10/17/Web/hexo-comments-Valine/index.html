@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   <title>为Hexo博客增强Valine评论功能</title>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="keywords" content="为Hexo博客增强Valine评论功能">
+  <meta name="keywords" content="Web,Hexo,为Hexo博客增强Valine评论功能">
   <meta name="description" content="Valine 诞生于2017年8月7日，是一款基于LeanCloud的快速、简洁且高效的无后端评论系统。
 理论上支持但不限于静态博客，目前已有Hexo、Jekyll、Typecho、Hugo、Ghost、Docsify 等博客和文档程序在使用Valine。">
    
@@ -30,31 +30,73 @@
   <link rel="canonical" href="https://www.ieclipse.cn/2022/10/17/Web/hexo-comments-Valine/index.html">
   <!-- Alternative links -->
   <!-- CSS and JS-->
-  <script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+  
+<script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+
+
 <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
 <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+
 <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 <script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+
+
 <script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+
+
 <link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+
+
 <link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+
+
 <script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+
+
 <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+
+
 <script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
 <script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
 <link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+
+
 <link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+
+
 <script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+
+
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+
 <link rel="stylesheet" href="/css/nova_font.css">
+
+
 <link rel="stylesheet" href="/css/bs/nova.css">
+
+
 <script src="//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js"></script>
+
+
 <script src="/js/leancloud.js"></script>
 
+
   <!-- RSS -->
-  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
-  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon" />
   <script>
         lc.init({
           appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
@@ -70,8 +112,7 @@
           donateTable: ''
         });
   </script>
-<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 <body>
   <!-- header -->
   <header id="body-header">
@@ -91,7 +132,6 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
         <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/about/" class="main-nav">关于</a></li>
-        <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
@@ -117,7 +157,7 @@
     
 <article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
   <header class="article-header">
-    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>当前路径：<a class="category-item" href="/">文章</a><a class="category-item">为Hexo博客增强Valine评论功能</a></span></div>
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>当前路径：<a class="category-item" href="/">文章</a><a class="category-item" href="/categories/Web/">Web</a><a class="category-item">为Hexo博客增强Valine评论功能</a></span></div>
     <div class="divider"></div>
       <h1 class="article-title" itemprop="name headline">为Hexo博客增强Valine评论功能</h1>
     <div class="post-header clearfix">
@@ -145,7 +185,7 @@
   
     <p>Valine 诞生于2017年8月7日，是一款基于LeanCloud的快速、简洁且高效的无后端评论系统。</p>
 <p>理论上支持但不限于静态博客，目前已有Hexo、Jekyll、Typecho、Hugo、Ghost、Docsify 等博客和文档程序在使用Valine。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="评论系统现状"><a href="#评论系统现状" class="headerlink" title="评论系统现状"></a>评论系统现状</h2><p>关于hexo的评论系统，先后研究过友言、多说、disqus、搜狐畅言、网易云跟贴、Valine，目前的现状如下</p>
 <ul>
@@ -154,7 +194,7 @@
 <li>disqus，外国的，在大陆速度慢</li>
 <li>搜狐畅言，忘了从什么时候开始需备案，这个备案条件比较高，放弃了</li>
 <li>网易云跟贴，停止服务了</li>
-<li>Valine，似乎是目前唯一可用的，推荐，详细文档可访问<a href="https://valine.js.org" target="_blank" rel="noopener">https://valine.js.org</a></li>
+<li>Valine，似乎是目前唯一可用的，推荐，详细文档可访问<a target="_blank" rel="noopener" href="https://valine.js.org">https://valine.js.org</a></li>
 </ul>
 <h2 id="Valine的阅读计数"><a href="#Valine的阅读计数" class="headerlink" title="Valine的阅读计数"></a>Valine的阅读计数</h2><p>因本站长时间未更新，原来的文章阅读量功能已过时，需要重新适配，发现新版本的Valine已支持文章阅读数，不过在集成Valine的过程中，遇到一些问题，由于某些原因，Valine的src目录将从v1.4.0后暂停更新，提交Issue及联系作者无果后，最终决定停止Valine的阅读访问功能，在原hexo-theme-nova的阅读计数基础上进行适配。<br>原hexo-nova-theme的Counter表设计为 <code>title</code>，<code>url</code>,<code>pageId</code>, <code>count</code>字段。Valine则为<code>title</code>,<code>url</code>,<code>xid</code>,<code>time</code>字段，为保持兼容，将表设计修改为与Valine的设计一致，所以如果要升级Nova主题，则需要手动修改Counter表设计</p>
 <p>不过Valine在首页等文章列表页对计数功能不太友好，且无法对当前页面进行计数。所以并不建议使用Valine的阅读计数功能。</p>
@@ -164,10 +204,12 @@
   
   </div>
 
-  <script src="/js/decrypt.min.js"></script>
+  
+<script src="/js/decrypt.min.js"></script>
+
   <footer class="article-footer">
-    <time class="article-footer-updated" datetime="2022-10-17T04:40:30.270Z" itemprop="dateModified">
-    最后更新：2022-10-17
+    <time class="article-footer-updated" datetime="2022-10-19T02:09:47.021Z" itemprop="dateModified">
+    最后更新：2022-10-19
     </time>
     <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
       <meta content="https://www.ieclipse.cn" itemprop="url">
@@ -206,7 +248,6 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <span class="modal-title" id="myModalLabel">打赏</span>
-        <small style="color:red;">实名认证：李 * * </small>
       </div>
       <div class="modal-body"><!--
         <table>
@@ -224,13 +265,13 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
         <div class="col-md-6">
           <div class="text-center">
             <span style="display:block;">支付宝</span>
-            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate" />
           </div>
         </div>
         <div class="col-md-6">
           <div class="text-center">
             <span style="display:block;">微信支付</span>
-            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate" />
           </div>
         </div>
         </div>
@@ -248,7 +289,7 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
 <script src="//unpkg.com/valine/dist/Valine.min.js">
 </script>
 <!--PC和WAP自适应版-->
-<div id="vcomments" data-sid="51e67e3e2e53638e0457364407553169"></div>
+<div id="vcomments" data-sid="51e67e3e2e53638e0457364407553169" ></div>
 <script>
     new Valine({
         av: AV,
@@ -316,8 +357,12 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
         copy: "复制"
     }
     </script>
-    <script src="/js/hljs.js"></script>
-    <script src="/js/script.js"></script>
+    
+<script src="/js/hljs.js"></script>
+
+    
+<script src="/js/script.js"></script>
+
     
     
 <script>

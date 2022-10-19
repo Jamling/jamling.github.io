@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   <title>JavaScript正则表达式验证表单</title>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -13,7 +13,7 @@
   <meta name="og:site_name" content="静勤居">
   <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
   <meta name="og:title" content="JavaScript正则表达式验证表单">
-  <meta name="og:url" content="https://www.ieclipse.cn/2007/06/07/Web/JavaScript正则表达式验证表单/">
+  <meta name="og:url" content="https://www.ieclipse.cn/2007/06/07/Web/JavaScript%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E9%AA%8C%E8%AF%81%E8%A1%A8%E5%8D%95/">
   <meta name="og:description" content="原理：基于自定义的标签；实现：目前只有文本框和密码域的验证">
 
   <meta name="twitter:card" content="summary">
@@ -24,34 +24,76 @@
   <meta name="twitter:description" content="原理：基于自定义的标签；实现：目前只有文本框和密码域的验证">
 
   <!-- Canonical links -->
-  <link rel="canonical" href="https://www.ieclipse.cn/2007/06/07/Web/JavaScript正则表达式验证表单/index.html">
+  <link rel="canonical" href="https://www.ieclipse.cn/2007/06/07/Web/JavaScript%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E9%AA%8C%E8%AF%81%E8%A1%A8%E5%8D%95/index.html">
   <!-- Alternative links -->
   <!-- CSS and JS-->
-  <script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+  
+<script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+
+
 <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
 <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+
 <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 <script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+
+
 <script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+
+
 <link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+
+
 <link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+
+
 <script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+
+
 <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+
+
 <script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
 <script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
 <link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+
+
 <link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+
+
 <script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+
+
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+
 <link rel="stylesheet" href="/css/nova_font.css">
+
+
 <link rel="stylesheet" href="/css/bs/nova.css">
+
+
 <script src="//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js"></script>
+
+
 <script src="/js/leancloud.js"></script>
 
+
   <!-- RSS -->
-  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
-  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon" />
   <script>
         lc.init({
           appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
@@ -67,8 +109,7 @@
           donateTable: ''
         });
   </script>
-<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 <body>
   <!-- header -->
   <header id="body-header">
@@ -88,7 +129,6 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
         <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/about/" class="main-nav">关于</a></li>
-        <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
@@ -209,7 +249,9 @@ function checkForm2(form) {
   
   </div>
 
-  <script src="/js/decrypt.min.js"></script>
+  
+<script src="/js/decrypt.min.js"></script>
+
   <footer class="article-footer">
     <time class="article-footer-updated" datetime="2019-07-22T11:25:01.931Z" itemprop="dateModified">
     最后更新：2019-07-22
@@ -231,7 +273,7 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
 </article>
 
 <div class="page-footer">
-  <nav><ul class="pager"><li class="previous"><a href="/2007/08/24/Java/J2EE真不是个东西二之配置篇/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">上一页</span></a></li><li class="next"><a href="/2006/04/27/other/轻松做ICO图标/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">下一页</span></a></li></ul></nav>
+  <nav><ul class="pager"><li class="previous"><a href="/2007/08/24/Java/J2EE%E7%9C%9F%E4%B8%8D%E6%98%AF%E4%B8%AA%E4%B8%9C%E8%A5%BF%E4%B8%80%E4%B9%8B%E5%BC%80%E5%9C%BA%E7%AF%87/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">上一页</span></a></li><li class="next"><a href="/2006/04/27/other/%E8%BD%BB%E6%9D%BE%E5%81%9AICO%E5%9B%BE%E6%A0%87/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">下一页</span></a></li></ul></nav>
   
 <!-- Button trigger modal -->
 <blockquote class="donate"><!--
@@ -251,7 +293,6 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <span class="modal-title" id="myModalLabel">打赏</span>
-        <small style="color:red;">实名认证：李 * * </small>
       </div>
       <div class="modal-body"><!--
         <table>
@@ -269,13 +310,13 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
         <div class="col-md-6">
           <div class="text-center">
             <span style="display:block;">支付宝</span>
-            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate" />
           </div>
         </div>
         <div class="col-md-6">
           <div class="text-center">
             <span style="display:block;">微信支付</span>
-            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate" />
           </div>
         </div>
         </div>
@@ -293,7 +334,7 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
 <script src="//unpkg.com/valine/dist/Valine.min.js">
 </script>
 <!--PC和WAP自适应版-->
-<div id="vcomments" data-sid="943d0aecdf06d3131502726ec188b7c3"></div>
+<div id="vcomments" data-sid="943d0aecdf06d3131502726ec188b7c3" ></div>
 <script>
     new Valine({
         av: AV,
@@ -361,8 +402,12 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
         copy: "复制"
     }
     </script>
-    <script src="/js/hljs.js"></script>
-    <script src="/js/script.js"></script>
+    
+<script src="/js/hljs.js"></script>
+
+    
+<script src="/js/script.js"></script>
+
     
     
 <script>

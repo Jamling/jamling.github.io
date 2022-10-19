@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   <title>Android 无法接收推送的问题</title>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -45,31 +45,73 @@
   <link rel="canonical" href="https://www.ieclipse.cn/2016/08/12/Android/Android-Push-Restart/index.html">
   <!-- Alternative links -->
   <!-- CSS and JS-->
-  <script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+  
+<script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+
+
 <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
 <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+
 <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 <script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+
+
 <script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+
+
 <link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+
+
 <link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+
+
 <script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+
+
 <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+
+
 <script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
 <script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
 <link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+
+
 <link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+
+
 <script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+
+
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+
 <link rel="stylesheet" href="/css/nova_font.css">
+
+
 <link rel="stylesheet" href="/css/bs/nova.css">
+
+
 <script src="//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js"></script>
+
+
 <script src="/js/leancloud.js"></script>
 
+
   <!-- RSS -->
-  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site">
-  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon" />
   <script>
         lc.init({
           appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
@@ -85,8 +127,7 @@
           donateTable: ''
         });
   </script>
-<link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 <body>
   <!-- header -->
   <header id="body-header">
@@ -106,7 +147,6 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
         <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/about/" class="main-nav">关于</a></li>
-        <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
@@ -190,7 +230,9 @@
   
   </div>
 
-  <script src="/js/decrypt.min.js"></script>
+  
+<script src="/js/decrypt.min.js"></script>
+
   <footer class="article-footer">
     <time class="article-footer-updated" datetime="2019-07-22T11:25:01.893Z" itemprop="dateModified">
     最后更新：2019-07-22
@@ -232,7 +274,6 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <span class="modal-title" id="myModalLabel">打赏</span>
-        <small style="color:red;">实名认证：李 * * </small>
       </div>
       <div class="modal-body"><!--
         <table>
@@ -250,13 +291,13 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
         <div class="col-md-6">
           <div class="text-center">
             <span style="display:block;">支付宝</span>
-            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate">
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate" />
           </div>
         </div>
         <div class="col-md-6">
           <div class="text-center">
             <span style="display:block;">微信支付</span>
-            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate">
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate" />
           </div>
         </div>
         </div>
@@ -274,7 +315,7 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
 <script src="//unpkg.com/valine/dist/Valine.min.js">
 </script>
 <!--PC和WAP自适应版-->
-<div id="vcomments" data-sid="5afcc433aededc55f4471d548681bbf7"></div>
+<div id="vcomments" data-sid="5afcc433aededc55f4471d548681bbf7" ></div>
 <script>
     new Valine({
         av: AV,
@@ -342,8 +383,12 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
         copy: "复制"
     }
     </script>
-    <script src="/js/hljs.js"></script>
-    <script src="/js/script.js"></script>
+    
+<script src="/js/hljs.js"></script>
+
+    
+<script src="/js/script.js"></script>
+
     
     
 <script>
