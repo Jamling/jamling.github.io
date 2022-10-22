@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head>
+  <meta charset="utf-8">
+  <title>Android 13 Zygote进程启动流程分析</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Android,Framework,Android 13 Zygote进程启动流程分析">
+  <meta name="description" content="最新Android 13源码zygote进程启动流程分析，具体是如何启动的，涉及哪些代码，以及如何fork system server进程">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="Jamling's Blog and Project Site">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="Android 13 Zygote进程启动流程分析">
+  <meta name="og:url" content="https://www.ieclipse.cn/2022/10/22/Android/fwk/android-13-zygote-init/">
+  <meta name="og:description" content="最新Android 13源码zygote进程启动流程分析，具体是如何启动的，涉及哪些代码，以及如何fork system server进程">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="Jamling's Blog and Project Site">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="Android 13 Zygote进程启动流程分析">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="最新Android 13源码zygote进程启动流程分析，具体是如何启动的，涉及哪些代码，以及如何fork system server进程">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/en/2022/10/22/Android/fwk/android-13-zygote-init/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  
+<script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+
+<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+
+
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+
+
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+
+
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+
+
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+
+
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+
+
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+
+
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+
+<link rel="stylesheet" href="/css/nova_font.css">
+
+
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+
+<script src="//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js"></script>
+
+
+<script src="/js/leancloud.js"></script>
+
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon" />
+  <script>
+        lc.init({
+          appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+          appKey : 'QwGBjKlSYOBtjMa5aTGeO3cb',
+          serverURL : 'https://lc.ieclipse.cn'
+        }, {
+          xid : '852bd42cc54607901546069fe351c685',
+          url : 'en/2022/10/22/Android/fwk/android-13-zygote-init/',
+          title : 'Android 13 Zygote进程启动流程分析'
+        }, {
+          counterTable: '',
+          commentTable: '',
+          donateTable: ''
+        });
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/en/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/en/" class="main-nav">Home</a></li><li><a href="/en/p/" class="main-nav">Projects</a></li><li><a href="/en/categories/" class="main-nav">Category</a></li><li><a href="/en/archives/" class="main-nav">Archive</a></li><li><a href="/en/donate/" class="main-nav">Donate</a></li><li><a href="/en/about/" class="main-nav">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2022/10/22/Android/fwk/android-13-zygote-init/">简体中文</a></li>
+              
+              <li><a href="/en/2022/10/22/Android/fwk/android-13-zygote-init/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>Path: <a class="category-item" href="/en/">Blog</a><a class="category-item" href="/en/categories/Android/">Android</a><a class="category-item" href="/en/categories/Android/Framework/">Framework</a><a class="category-item">Android 13 Zygote进程启动流程分析</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline">Android 13 Zygote进程启动流程分析</h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">Post at: </span>
+      <time datetime="2022-10-22T03:48:31.000Z" itemprop="datePublished"><time datetime="2022-10-22T03:48:31.000Z">2022-10-22</time></time>
+      </span>
+      
+      <span class="post-share xxx-count" data-xid="852bd42cc54607901546069fe351c685" data-title="Android 13 Zygote进程启动流程分析" data-url="en/2022/10/22/Android/fwk/android-13-zygote-init/">
+        <a href="#share" class="icon nova-share">
+          <span class="hidden-xs">Share</span><span class="jiathis_counter_style"></span>
+        </a>
+        <a href="#comment" class="icon nova-bubbles comment-count">
+          <span class="count"></span><span class="hidden-xs">Comment</span>
+        </a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">Like</span></a>-->
+        <a href="#" class="icon nova-eye view-count">
+          <span class="count"></span><span class="hidden-xs">Views</span>
+        </a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2022-10-22T03:48:31.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="Zygote"><a href="#Zygote" class="headerlink" title="Zygote"></a>Zygote</h3><p>借用5W2H法</p>
+<p>What？zygote是Android中用来fork App进程的进程，它的作用就是fork出其它需要JVM的进程，比如你写的一个App应用，也可以理解为应用进程的守护进程。</p>
+<p>Why？Android应用层，各App（进程）都运行在虚拟机上，都需要一个Android运行时环境，在应用启动时，实时创建虚拟机，加载运行时环境及资源？显然不是，借用linux的fork函数，可以将启动应用所要做的事情提前做好，待有进程启动时，zygote就”复制”一份运行时环境给进程，以提高性能。</p>
+<p>Who，When？Where？Zytoge进程是init进程(pid=1)启动的。具体是在init的第三个阶段（解析init.rc后）通过<code>/system/bin/app_process</code>命令行带参数来启动。具体的启动流程是重点，后续详细介绍。</p>
+<h3 id="zygote-模式"><a href="#zygote-模式" class="headerlink" title="zygote 模式"></a>zygote 模式</h3><ul>
+<li><p>zygote模式，初始化zygote进程时带<code>–start-system-server</code>参数，表示是zygote模式，会fork出zygote的第一个子进程：SystemServer，SystemServer会创建许多Framework层的系统服务，比如ActivityManagerService (AMS)，WindowManagerService (WMS)等</p>
+</li>
+<li><p>application模式，启动普通应用程序，传递的参数有class名字以及class带的参数</p>
+</li>
+</ul>
+<h2 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h2><h3 id="入口：app-main-cpp-main"><a href="#入口：app-main-cpp-main" class="headerlink" title="入口：app_main.cpp#main()"></a>入口：app_main.cpp#main()</h3><p>platform_frameworks_base/cmds/app_process/app_main.cpp</p>
+<p class="code-caption" data-lang="c++" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="c++">int main(int argc, char* const argv[])
+&#123;
+    if (!LOG_NDEBUG) &#123;
+      ALOGV(&quot;app_process main with argv: %s&quot;, argv_String.string());
+    &#125;
+    // 构造内部AppRuntime对象，AppRuntime为AndroidRuntime的子类
+    AppRuntime runtime(argv[0], computeArgBlockSize(argc, argv));
+    // Process command line arguments
+    // ignore argv[0]
+    argc--;
+    argv++;
+    // Parse runtime arguments.  Stop at first unrecognized option.
+    bool zygote = false; // 带--zygote参数为true
+    bool startSystemServer = false; // 带--start-system-server为true
+    bool application = false; // 带--appliction参数为true
+      String8 niceName; // 参数--nice-name=的值，会将原始的app_process的进程名修改为zygote或zygote64
+    String8 className; // 剩下的参数 --后面的值
+      // 参数解析忽略
+      Vector&lt;String8&gt; args; // 
+    if (!className.isEmpty()) &#123;
+        // application 模式, 将applicationw传给RuntimeInit.
+        // The Remainder of args get passed to startup class main(). Make
+        // copies of them before we overwrite them with the process name.
+        args.add(application ? String8(&quot;application&quot;) : String8(&quot;tool&quot;));
+        runtime.setClassNameAndArgs(className, argc - i, argv + i);
+
+        if (!LOG_NDEBUG) &#123;
+          ...
+          ALOGV(&quot;Class name = %s, args = %s&quot;, className.string(), restOfArgs.string());
+        &#125;
+    &#125; else &#123;
+        // zygote 模式.
+        maybeCreateDalvikCache(); // 创建/data/dalvik-cache
+        if (startSystemServer) &#123;
+            args.add(String8(&quot;start-system-server&quot;));
+        &#125;
+                ...
+        // 所有的参数传入zygote main() 方法.
+        for (; i &lt; argc; ++i) &#123;
+            args.add(String8(argv[i]));
+        &#125;
+    &#125;
+        ...
+    if (zygote) &#123;
+        runtime.start(&quot;com.android.internal.os.ZygoteInit&quot;, args, zygote);
+    &#125; else if (!className.isEmpty()) &#123;
+        runtime.start(&quot;com.android.internal.os.RuntimeInit&quot;, args, zygote);
+    &#125; else &#123;
+        fprintf(stderr, &quot;Error: no class name or --zygote supplied.\n&quot;);
+    &#125;</code></pre>
+<p>可知main入口方法主要做参数解析及构造传给AndroidRuntime.start方法所需的参数。</p>
+<h3 id="native：AndroidRuntime-cpp"><a href="#native：AndroidRuntime-cpp" class="headerlink" title="native：AndroidRuntime.cpp"></a>native：AndroidRuntime.cpp</h3><p>platform_frameworks_base/core/jni/AndroidRuntime.cpp</p>
+<p class="code-caption" data-lang="c++" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="c++">void AndroidRuntime::start(const char* className, const Vector&lt;String8&gt;&amp; options, bool zygote)
+&#123;
+    ALOGD(&quot;&gt;&gt;&gt;&gt;&gt;&gt; START %s uid %d &lt;&lt;&lt;&lt;&lt;&lt;\n&quot;,
+            className != NULL ? className : &quot;(unknown)&quot;, getuid());
+
+    static const String8 startSystemServer(&quot;start-system-server&quot;);
+    // 是否primary_zygote？, 为true会fork system server进程.
+    bool primary_zygote = false;
+        ...
+
+    const char* rootDir = getenv(&quot;ANDROID_ROOT&quot;); // 默认为/system
+    const char* artRootDir = getenv(&quot;ANDROID_ART_ROOT&quot;);
+    const char* i18nRootDir = getenv(&quot;ANDROID_I18N_ROOT&quot;);
+    const char* tzdataRootDir = getenv(&quot;ANDROID_TZDATA_ROOT&quot;);
+    // 上面几个dir，如果不存在则return
+    /* 启动Java虚拟机 */
+    JniInvocation jni_invocation;
+    jni_invocation.Init(NULL);
+    JNIEnv* env;
+    if (startVm(&amp;mJavaVM, &amp;env, zygote, primary_zygote) != 0) &#123;
+        return; // 启动失败return
+    &#125;
+      // VM启动回调，为空实现 
+    onVmCreated(env);
+
+    /*
+     * 注册JNI
+     */
+    if (startReg(env) &lt; 0) &#123;
+        ALOGE(&quot;Unable to register all android natives\n&quot;);
+        return;
+    &#125;
+    jclass stringClass; // java.lang.String
+    jobjectArray strArray; // String[]
+    jstring classNameStr; // className e.g. &quot;com.android.internal.os.ZygoteInit&quot;
+        /*
+         * 省略一段JNI反射调用Java的代码，转成Java代码大致如下
+         * String[] strArray = new String[options.length + 1];
+         * strArray[0] = className;
+         * 剩下的options填充strArray数组;
+         * 
+         */
+
+    /*
+     * 使用JNI反射调用className类对应的main()方法
+     */
+&#125;</code></pre>
+<p>可以看出，start()方法主要做了两件事</p>
+<ul>
+<li><p>startVM()：创建虚拟机，主要是设置VM运行时的参数，比如设置初始堆大小（-Xms）为dalvik.vm.heapstartsize属性值</p>
+</li>
+<li><p>startReg()：注册JNI，内部调用<code>register_jni_procs</code>通过JNI函数动态注册注册<code>gRegJNI</code>函数指针数组</p>
+</li>
+</ul>
+<p>最后调用Java对应className类的main()函数，进入Java世界的大门</p>
+<h3 id="Java：ZygoteInit-java"><a href="#Java：ZygoteInit-java" class="headerlink" title="Java：ZygoteInit.java"></a>Java：ZygoteInit.java</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">public static void main(String[] argv) &#123;
+    ZygoteServer zygoteServer = null;
+
+    // 设置zygote启动标志. 如果有其它线程执行，会抛出错误
+    ZygoteHooks.startZygoteNoThreadCreation();
+
+    // Zygote进入自己的线程组，设置gid为0
+    try &#123;
+        Os.setpgid(0, 0);
+    &#125; catch (ErrnoException ex) &#123;
+        throw new RuntimeException(&quot;Failed to setpgid(0,0)&quot;, ex);
+    &#125;
+
+    Runnable caller;
+    try &#123;
+        // Store now for StatsLogging later.
+        final long startTime = SystemClock.elapsedRealtime();
+        final boolean isRuntimeRestarted = &quot;1&quot;.equals(
+                SystemProperties.get(&quot;sys.boot_completed&quot;));
+            // systrace的TAG
+        String bootTimeTag = Process.is64Bit() ? &quot;Zygote64Timing&quot; : &quot;Zygote32Timing&quot;;
+        TimingsTraceLog bootTimingsTraceLog = new TimingsTraceLog(bootTimeTag,
+                Trace.TRACE_TAG_DALVIK);
+          // init开始，详见android systrace工具相关文档
+        bootTimingsTraceLog.traceBegin(&quot;ZygoteInit&quot;);
+           // 主要是开启DDMS及覆盖Mime
+        RuntimeInit.preForkInit();
+
+        boolean startSystemServer = false;
+        String zygoteSocketName = &quot;zygote&quot;;
+        String abiList = null;
+        boolean enableLazyPreload = false;
+          // 解析从AndroidRuntime.cpp传过来的参数
+        for (int i = 1; i &lt; argv.length; i++) &#123;
+            if (&quot;start-system-server&quot;.equals(argv[i])) &#123;
+                startSystemServer = true;
+            &#125; else if (&quot;--enable-lazy-preload&quot;.equals(argv[i])) &#123;
+                enableLazyPreload = true;
+            &#125; else if (argv[i].startsWith(ABI_LIST_ARG)) &#123;
+                abiList = argv[i].substring(ABI_LIST_ARG.length());
+            &#125; else if (argv[i].startsWith(SOCKET_NAME_ARG)) &#123;
+                  // socket名字
+                zygoteSocketName = argv[i].substring(SOCKET_NAME_ARG.length());
+            &#125; else &#123;
+                throw new RuntimeException(&quot;Unknown command line argument: &quot; + argv[i]);
+            &#125;
+        &#125;
+            // primary zygote: /dev/socket/zygote
+        // secondary zygote: /dev/socket/secondary_zygote
+        final boolean isPrimaryZygote = zygoteSocketName.equals(Zygote.PRIMARY_SOCKET_NAME);
+        if (!isRuntimeRestarted) &#123;
+            if (isPrimaryZygote) &#123;
+                FrameworkStatsLog.write(FrameworkStatsLog.BOOT_TIME_EVENT_ELAPSED_TIME_REPORTED,
+                        BOOT_TIME_EVENT_ELAPSED_TIME__EVENT__ZYGOTE_INIT_START,
+                        startTime);
+            &#125; else if (zygoteSocketName.equals(Zygote.SECONDARY_SOCKET_NAME)) &#123;
+                FrameworkStatsLog.write(FrameworkStatsLog.BOOT_TIME_EVENT_ELAPSED_TIME_REPORTED,
+                        BOOT_TIME_EVENT_ELAPSED_TIME__EVENT__SECONDARY_ZYGOTE_INIT_START,
+                        startTime);
+            &#125;
+        &#125;
+
+        if (abiList == null) &#123;
+            throw new RuntimeException(&quot;No ABI list supplied.&quot;);
+        &#125;
+
+        // 第一次zygote启动时, enableLazyPreload为false，会preload一些资源及class.
+        // In such cases, we will preload things prior to our first fork.
+        if (!enableLazyPreload) &#123;
+            bootTimingsTraceLog.traceBegin(&quot;ZygotePreload&quot;);
+            EventLog.writeEvent(LOG_BOOT_PROGRESS_PRELOAD_START,
+                    SystemClock.uptimeMillis());
+              // 1. preload
+            preload(bootTimingsTraceLog);
+            EventLog.writeEvent(LOG_BOOT_PROGRESS_PRELOAD_END,
+                    SystemClock.uptimeMillis());
+            bootTimingsTraceLog.traceEnd(); // ZygotePreload
+        &#125;
+
+        // 做一次GC
+        bootTimingsTraceLog.traceBegin(&quot;PostZygoteInitGC&quot;);
+        gcAndFinalize(); // ZygoteHooks.gcAndFinalize();
+        bootTimingsTraceLog.traceEnd(); // PostZygoteInitGC
+
+        bootTimingsTraceLog.traceEnd(); // ZygoteInit
+            // 初始化Zygote的native状态
+        Zygote.initNativeState(isPrimaryZygote);
+
+        ZygoteHooks.stopZygoteNoThreadCreation();
+            // 2. 创建ZygoteServer，建立socket server端
+        zygoteServer = new ZygoteServer(isPrimaryZygote);
+
+        if (startSystemServer) &#123;
+            // 3. fork system_server进程
+            Runnable r = forkSystemServer(abiList, zygoteSocketName, zygoteServer);
+
+            // &#123;@code r == null&#125; in the parent (zygote) process, and &#123;@code r != null&#125; in the
+            // child (system_server) process.
+              // r为空表示zygote进程本身，r!=null表示是system_server子进程
+            if (r != null) &#123;
+                r.run(); // 执行com.android.server.SystemServer.main()
+                return;
+            &#125;
+        &#125;
+
+        Log.i(TAG, &quot;Accepting command socket connections&quot;);
+
+        // 循环等待AMS请求Zygote进程fork子进程
+        caller = zygoteServer.runSelectLoop(abiList);
+    &#125; catch (Throwable ex) &#123;
+        Log.e(TAG, &quot;System zygote died with fatal exception&quot;, ex);
+        throw ex;
+    &#125; finally &#123;
+        if (zygoteServer != null) &#123;
+            zygoteServer.closeServerSocket();
+        &#125;
+    &#125;
+
+    // 子进程已退出select loop. 继续执行命令
+    if (caller != null) &#123;
+        caller.run();
+    &#125;
+&#125;</code></pre>
+<p>总结一下main方法主要做了以下几件事</p>
+<ul>
+<li>预加载，加载一些共享的资源，这样fork的子进程能够复用这些共享的资源，以提升性能</li>
+<li>Fork system_server子进程，system_server进程会创建各种系统Service</li>
+<li>创建ZygoteServer并循环等待fork请求，创建zygote进程对应的socket 来接受AMS发出的创建App进程请求，从Android 10 (Q)开始，引入了USAP(unspecialized app process)池(可以理解为进程池，像线程池一样)，提前创建好一批进程，当有新的应用启动时，节省fork动作从而提升性能。如何具体fork子进程，后续另开专题分析。</li>
+</ul>
+<h4 id="预加载：preload"><a href="#预加载：preload" class="headerlink" title="预加载：preload()"></a>预加载：preload()</h4><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">static void preload(TimingsTraceLog bootTimingsTraceLog) &#123;
+    Log.d(TAG, &quot;begin preload&quot;);
+    bootTimingsTraceLog.traceBegin(&quot;BeginPreload&quot;);
+    beginPreload(); // ZygoteHooks.onBeginPreload();
+    bootTimingsTraceLog.traceEnd(); // BeginPreload
+    bootTimingsTraceLog.traceBegin(&quot;PreloadClasses&quot;);
+    preloadClasses(); // 加载/system/etc/preloaded-classes文件中的类
+    bootTimingsTraceLog.traceEnd(); // PreloadClasses
+    bootTimingsTraceLog.traceBegin(&quot;CacheNonBootClasspathClassLoaders&quot;);
+    cacheNonBootClasspathClassLoaders();
+    bootTimingsTraceLog.traceEnd(); // CacheNonBootClasspathClassLoaders
+    bootTimingsTraceLog.traceBegin(&quot;PreloadResources&quot;);
+    preloadResources(); // com.android.internal.R.array.preload_xxx中的一些图片及颜色等资源
+    bootTimingsTraceLog.traceEnd(); // PreloadResources
+    Trace.traceBegin(Trace.TRACE_TAG_DALVIK, &quot;PreloadAppProcessHALs&quot;);
+    nativePreloadAppProcessHALs(); // native方法没注释
+    Trace.traceEnd(Trace.TRACE_TAG_DALVIK);
+    Trace.traceBegin(Trace.TRACE_TAG_DALVIK, &quot;PreloadGraphicsDriver&quot;);
+    maybePreloadGraphicsDriver(); // native方法没注释
+    Trace.traceEnd(Trace.TRACE_TAG_DALVIK);
+    preloadSharedLibraries(); // System.loadLibrary &quot;android&quot;，&quot;compiler_rt&quot;，&quot;jnigraphics&quot;
+    preloadTextResources(); // Hyphenator及字体
+    // Ask the WebViewFactory to do any initialization that must run in the zygote process,
+    // for memory sharing purposes.
+    WebViewFactory.prepareWebViewInZygote();
+    endPreload();
+    warmUpJcaProviders();
+    Log.d(TAG, &quot;end preload&quot;);
+
+    sPreloadComplete = true;
+&#125;</code></pre>
+<h4 id="启动系统服务：forkSystemServer"><a href="#启动系统服务：forkSystemServer" class="headerlink" title="启动系统服务：forkSystemServer"></a>启动系统服务：forkSystemServer</h4><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">/**
+ * 准备参数并fork system server进程.
+ *
+ * @return A &#123;@code Runnable&#125; 提供system_server子进程业务入口
+ * process; &#123;@code null&#125; in the parent.
+ */
+private static Runnable forkSystemServer(String abiList, String socketName,
+        ZygoteServer zygoteServer) &#123;
+    long capabilities = posixCapabilitiesAsBits(
+            OsConstants.CAP_IPC_LOCK,
+            OsConstants.CAP_KILL,
+            OsConstants.CAP_NET_ADMIN,
+            OsConstants.CAP_NET_BIND_SERVICE,
+            OsConstants.CAP_NET_BROADCAST,
+            OsConstants.CAP_NET_RAW,
+            OsConstants.CAP_SYS_MODULE,
+            OsConstants.CAP_SYS_NICE,
+            OsConstants.CAP_SYS_PTRACE,
+            OsConstants.CAP_SYS_TIME,
+            OsConstants.CAP_SYS_TTY_CONFIG,
+            OsConstants.CAP_WAKE_ALARM,
+            OsConstants.CAP_BLOCK_SUSPEND
+    );
+    /* Containers run without some capabilities, so drop any caps that are not available. */
+    StructCapUserHeader header = new StructCapUserHeader(
+            OsConstants._LINUX_CAPABILITY_VERSION_3, 0);
+    StructCapUserData[] data;
+    try &#123;
+        data = Os.capget(header);
+    &#125; catch (ErrnoException ex) &#123;
+        throw new RuntimeException(&quot;Failed to capget()&quot;, ex);
+    &#125;
+    capabilities &amp;= ((long) data[0].effective) | (((long) data[1].effective) &lt;&lt; 32);
+
+    /* 启动system server进程的参数是硬编码的，这里可以看出其特殊的UID 1000 */
+    String[] args = &#123;
+            &quot;--setuid=1000&quot;,
+            &quot;--setgid=1000&quot;,
+            &quot;--setgroups=1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1018,1021,1023,&quot;
+                    + &quot;1024,1032,1065,3001,3002,3003,3005,3006,3007,3009,3010,3011,3012&quot;,
+            &quot;--capabilities=&quot; + capabilities + &quot;,&quot; + capabilities,
+            &quot;--nice-name=system_server&quot;,
+            &quot;--runtime-args&quot;,
+            &quot;--target-sdk-version=&quot; + VMRuntime.SDK_VERSION_CUR_DEVELOPMENT,
+            &quot;com.android.server.SystemServer&quot;,
+    &#125;;
+    ZygoteArguments parsedArgs;
+
+    int pid;
+
+    try &#123;
+        ZygoteCommandBuffer commandBuffer = new ZygoteCommandBuffer(args);
+        try &#123;
+              // 参数转个格式转换
+            parsedArgs = ZygoteArguments.getInstance(commandBuffer);
+        &#125; catch (EOFException e) &#123;
+            throw new AssertionError(&quot;Unexpected argument error for forking system server&quot;, e);
+        &#125;
+        commandBuffer.close();
+        Zygote.applyDebuggerSystemProperty(parsedArgs);
+        Zygote.applyInvokeWithSystemProperty(parsedArgs);
+            // 这块内存标记扩展特性参考https://source.android.google.cn/docs/security/test/memory-safety/arm-mte
+        if (Zygote.nativeSupportsMemoryTagging()) &#123;
+            String mode = SystemProperties.get(&quot;arm64.memtag.process.system_server&quot;, &quot;&quot;);
+            if (mode.isEmpty()) &#123;
+              /* The system server has ASYNC MTE by default, in order to allow
+               * system services to specify their own MTE level later, as you
+               * can&#39;t re-enable MTE once it&#39;s disabled. */
+              mode = SystemProperties.get(&quot;persist.arm64.memtag.default&quot;, &quot;async&quot;);
+            &#125;
+            if (mode.equals(&quot;async&quot;)) &#123;
+                parsedArgs.mRuntimeFlags |= Zygote.MEMORY_TAG_LEVEL_ASYNC;
+            &#125; else if (mode.equals(&quot;sync&quot;)) &#123;
+                parsedArgs.mRuntimeFlags |= Zygote.MEMORY_TAG_LEVEL_SYNC;
+            &#125; else if (!mode.equals(&quot;off&quot;)) &#123;
+                /* When we have an invalid memory tag level, keep the current level. */
+                parsedArgs.mRuntimeFlags |= Zygote.nativeCurrentTaggingLevel();
+                Slog.e(TAG, &quot;Unknown memory tag level for the system server: \&quot;&quot; + mode + &quot;\&quot;&quot;);
+            &#125;
+        &#125; else if (Zygote.nativeSupportsTaggedPointers()) &#123;
+            /* Enable pointer tagging in the system server. Hardware support for this is present
+             * in all ARMv8 CPUs. */
+            parsedArgs.mRuntimeFlags |= Zygote.MEMORY_TAG_LEVEL_TBI;
+        &#125;
+
+        /* Enable gwp-asan on the system server with a small probability. This is the same
+         * policy as applied to native processes and system apps. */
+        parsedArgs.mRuntimeFlags |= Zygote.GWP_ASAN_LEVEL_LOTTERY;
+
+        if (shouldProfileSystemServer()) &#123;
+            parsedArgs.mRuntimeFlags |= Zygote.PROFILE_SYSTEM_SERVER;
+        &#125;
+
+        /* Request to fork the system server process */
+          /*
+           * 会调用C层的nativeForkSystemServer，其中zygote::ForkCommon函数中，终于见到了fork()函数
+           */
+        pid = Zygote.forkSystemServer(
+                parsedArgs.mUid, parsedArgs.mGid,
+                parsedArgs.mGids,
+                parsedArgs.mRuntimeFlags,
+                null,
+                parsedArgs.mPermittedCapabilities,
+                parsedArgs.mEffectiveCapabilities);
+    &#125; catch (IllegalArgumentException ex) &#123;
+        throw new RuntimeException(ex);
+    &#125;
+
+    /* For child process */
+    if (pid == 0) &#123;
+        if (hasSecondZygote(abiList)) &#123;
+            waitForSecondaryZygote(socketName);
+        &#125;
+            // fork时会copy socket，system server需要主动关闭
+        zygoteServer.closeServerSocket();
+          // fork完之后的流程，比如创建PathClassLoader, ZygoteInit.zygoteInit()
+        return handleSystemServerProcess(parsedArgs);
+    &#125;
+
+    return null;
+&#125;</code></pre>
+<pre><code class="java">    public static Runnable zygoteInit(int targetSdkVersion, long[] disabledCompatChanges,
+            String[] argv, ClassLoader classLoader) &#123;
+        if (RuntimeInit.DEBUG) &#123;
+            Slog.d(RuntimeInit.TAG, &quot;RuntimeInit: Starting application from zygote&quot;);
+        &#125;
+
+        Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, &quot;ZygoteInit&quot;);
+        RuntimeInit.redirectLogStreams();
+
+        RuntimeInit.commonInit();
+        ZygoteInit.nativeZygoteInit();
+          // 会找到java类（com.android.server.SystemServer）的main入口方法MethodAndArgsCaller
+          // Runnable的run方法其实就是反射调用main()方法
+        return RuntimeInit.applicationInit(targetSdkVersion, disabledCompatChanges, argv,
+                classLoader);
+    &#125;
+&lt;p class=&quot;code-caption&quot; data-lang=&quot;&quot; data-line_number=&quot;frontend&quot; data-trim_indent=&quot;backend&quot; data-label_position=&quot;outer&quot; data-labels_left=&quot;Code&quot; data-labels_right=&quot;:&quot; data-labels_copy=&quot;Copy Code&quot;&gt;&lt;span class=&quot;code-caption-label&quot;&gt;&lt;/span&gt;&lt;a class=&quot;code-caption-copy&quot;&gt;Copy Code&lt;/a&gt;&lt;/p&gt;
+</code></pre>
+<h3 id="Java-RuntimeInit-java"><a href="#Java-RuntimeInit-java" class="headerlink" title="Java: RuntimeInit.java"></a>Java: RuntimeInit.java</h3><p>RuntimeInit是zygote application模式的启动类，它比ZygoteInit简单多了</p>
+<pre><code class="java">    public static final void main(String[] argv) &#123;
+        preForkInit();
+        if (argv.length == 2 &amp;&amp; argv[1].equals(&quot;application&quot;)) &#123;
+            if (DEBUG) Slog.d(TAG, &quot;RuntimeInit: Starting application&quot;);
+            redirectLogStreams();
+        &#125; else &#123;
+            if (DEBUG) Slog.d(TAG, &quot;RuntimeInit: Starting tool&quot;);
+        &#125;
+
+        commonInit();
+
+        /*
+         * Now that we&#39;re running in interpreted code, call back into native code
+         * to run the system.
+         */
+        nativeFinishInit();
+
+        if (DEBUG) Slog.d(TAG, &quot;Leaving RuntimeInit!&quot;);
+    &#125;</code></pre>
+<h4 id="commonInit"><a href="#commonInit" class="headerlink" title="commonInit()"></a>commonInit()</h4><p>主要设置日志及异常处理器</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">protected static final void commonInit() &#123;
+    if (DEBUG) Slog.d(TAG, &quot;Entered RuntimeInit!&quot;);
+
+    /*
+     * set handlers; these apply to all threads in the VM. Apps can replace
+     * the default handler, but not the pre handler.
+     */
+    LoggingHandler loggingHandler = new LoggingHandler();
+    RuntimeHooks.setUncaughtExceptionPreHandler(loggingHandler);
+      // 未处理的异常处理器，与java不一样，android app 任意线程发生了未捕获的异常，进程会终止
+      // 面试官常问的问题之一，Android与Java线程的异常处理有何不同
+    Thread.setDefaultUncaughtExceptionHandler(new KillApplicationHandler(loggingHandler));
+
+    /*
+     * Install a time zone supplier that uses the Android persistent time zone system property.
+     */
+    RuntimeHooks.setTimeZoneIdSupplier(() -&gt; SystemProperties.get(&quot;persist.sys.timezone&quot;));
+
+    /*
+     * 重置JDK log处理器，android会向root logger注册AndroidLogHandler
+     */
+    LogManager.getLogManager().reset();
+    new AndroidConfig();
+
+    /*
+     * 默认的UA为Dalvik/1.1.0 (Linux; U; Android Eclair Build/MAIN)这种
+     */
+    String userAgent = getDefaultUserAgent();
+    System.setProperty(&quot;http.agent&quot;, userAgent);
+
+    /*
+     * 流量统计
+     */
+    TrafficStats.attachSocketTagger();
+
+    initialized = true;
+&#125;</code></pre>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>最后上一张流程图<br><img src="./zygote.png" alt="sequence"></p>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2022/10/22/Android/fwk/android-13-zygote-init/](https://www.ieclipse.cn/2022/10/22/Android/fwk/android-13-zygote-init/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  
+<script src="/js/decrypt.min.js"></script>
+
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2022-10-22T07:21:00.383Z" itemprop="dateModified">
+    Last updated: 2022-10-22
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="Jamling's Blog and Project Site" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="next"><a href="/en/2022/10/20/Android/jetpack-compose-env/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">Next</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    Donate
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>Dear reader, if you feel this good, could you rewark me a `bread` as awark? Thank you very much~</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">Donate</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate" />
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="852bd42cc54607901546069fe351c685" ></div>
+<script>
+    new Valine({
+        av: AV,
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: 'en/2022/10/22/Android/fwk/android-13-zygote-init/',
+        recordIP: true,
+        visitor: false
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          Table Of Contents
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#简介">简介</a><ul class="nav toc-ul"><li><a href="#Zygote">Zygote</a></li><li><a href="#zygote-模式">zygote 模式</a></li></ul></li><li><a href="#启动流程">启动流程</a><ul class="nav toc-ul"><li><a href="#入口：app-main-cpp-main">入口：app_main.cpp#main()</a></li><li><a href="#native：AndroidRuntime-cpp">native：AndroidRuntime.cpp</a></li><li><a href="#Java：ZygoteInit-java">Java：ZygoteInit.java</a><ul class="nav toc-ul"><li><a href="#预加载：preload">预加载：preload()</a></li><li><a href="#启动系统服务：forkSystemServer">启动系统服务：forkSystemServer</a></li></ul></li><li><a href="#Java-RuntimeInit-java">Java: RuntimeInit.java</a><ul class="nav toc-ul"><li><a href="#commonInit">commonInit()</a></li></ul></li></ul></li><li><a href="#总结">总结</a></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="//beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "Code",
+        right: ":",
+        copy: "Copy to clipboard"
+    }
+    </script>
+    
+<script src="/js/hljs.js"></script>
+
+    
+<script src="/js/script.js"></script>
+
+    
+    
+<script>
+  lc.countCounter({});
+
+  lc.countComment({
+    index: false
+  });
+</script>
+</body>
+</html>

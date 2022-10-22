@@ -5,7 +5,7 @@
   <title>静勤居</title>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="keywords" content="Android,Eclipse 插件,Java,Web,奇淫巧技,其它,Eclipse,ADT,QuickAF,Gradle,CI,J2EE,Swing,SWT,xml,PHP,Ajax,MySQL,Hexo,js,Node.js,git,安全">
+  <meta name="keywords" content="Android,Eclipse 插件,Java,Web,奇淫巧技,其它,Compose,Framework,Eclipse,ADT,QuickAF,Gradle,CI,J2EE,Swing,SWT,xml,PHP,Ajax,MySQL,Hexo,js,Node.js,git,安全">
   <meta name="description" content="Jamling's 技术文章博客.">
   
 
@@ -156,6 +156,133 @@
     <meta content="" itemprop="name"/>
 </div>
 <main>
+          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
+            <div class="card-content">
+              <h3 class="card-title"><a itemprop="name headline" href="/2016/11/29/Android/gradle-compile-exclude/" class="article-title">Gradle Compile Exclude</a></h3>
+              <div class="divider"></div>
+              <div class="section post-header clearfix">
+                <!-- sub element must be span -->
+                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2016-11-29T04:00:00.000Z"><time datetime="2016-11-29T04:00:00.000Z">2016-11-29</time></time></span>
+                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/Android/">Android</a></span>
+                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/Android/">Android</a><a class="tag-item" href="/tags/Gradle/">Gradle</a></span>
+              </div>
+              <div class="divider"></div>
+              <div class="nova-flex excerpt-box">
+              
+              <div class="excerpt" itemprop="description articleBody">
+              <p>Android兼容库从24.2.0开始，对support-v4做了分库处理，原有的support-v4库拆分成为了support-compat、support-core-ui、support-fragment等库，本着稳定的原则，一直到25.0.0才开始在项目中升级support-v4库，将原有的support-v4替换为support-core-ui（其实，项目中只用到了ViewPager，SwipeRefreshLayout而已）以减少apk体积。然而问题来了，编译时出错，提示存在重复的类库。为保证support库版本一致，我还统一定义并使用了各模块的support版本变量，使用<code>gradle dependencies</code>查看依赖的时候，发现有个第三方库依赖于于support-v4:23.0.0。结果导致编译不通过。google了一把，发现gradle complie竟然还可以传参数。来exclude某些库。</p>
+              </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+
+            <div class="card-action xxx-count" data-xid="384754210cc69dfb1c7c078384c7509b" data-url="2016/11/29/Android/gradle-compile-exclude/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2016/11/29/Android/gradle-compile-exclude/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2016/11/29/Android/gradle-compile-exclude/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2016/11/29/Android/gradle-compile-exclude/" >
+                <span>阅读全文</span>
+              </a>
+            </div>
+            <meta itemprop="url" content="https://www.ieclipse.cn/2016/11/29/Android/gradle-compile-exclude/">
+            <meta itemprop="dateModified" content="2019-07-22T11:25:01.895Z">
+            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+              <meta content="https://www.ieclipse.cn" itemprop="url">
+              <meta content="静勤居" itemprop="name">
+              <meta content="/image/logo.png" itemprop="logo">
+            </span>
+          </div>
+          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
+            <div class="card-content">
+              <h3 class="card-title"><a itemprop="name headline" href="/2016/11/26/Android/fragment-h5/" class="article-title">Fragment加载WebView</a></h3>
+              <div class="divider"></div>
+              <div class="section post-header clearfix">
+                <!-- sub element must be span -->
+                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2016-11-26T04:00:00.000Z"><time datetime="2016-11-26T04:00:00.000Z">2016-11-26</time></time></span>
+                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/Android/">Android</a></span>
+                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/Android/">Android</a></span>
+              </div>
+              <div class="divider"></div>
+              <div class="nova-flex excerpt-box">
+              
+              <div class="excerpt" itemprop="description articleBody">
+              <p>做Android 5年多了，第一次在Fragment中使用WebView，先将Activity中的代码复制过来改改，没有想到，竟然无法正常显示，而是打开手机浏览器渲染WebView，返回后，Fragment一片空白。这还能忍受？Google一把，说是要继承WebViewFragment，但是一旦继承，就破坏了我的框架结构。然后看了下WebViewFragment的源码，并不复杂。所以就将相关的源码合并到现有的fragment中，本以为可以妥妥地解决问题，结果还是那样。最后在stackoverflow上解决了终极解决办法，那就是需要设置特殊的WebViewClient。</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">private class H5WebViewClient extends WebViewClient {
+    @Override
+    public boolean shouldOverrideUrlLoading(WebView webView, String s) {
+        webView.loadUrl(s);
+        //  一定要return true，不然就会使用浏览器打开
+        return true;
+    }
+}</code></pre>
+              </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+
+            <div class="card-action xxx-count" data-xid="35f3217d0031e02f5c83ceae0eaea5f5" data-url="2016/11/26/Android/fragment-h5/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2016/11/26/Android/fragment-h5/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2016/11/26/Android/fragment-h5/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2016/11/26/Android/fragment-h5/" >
+                <span>阅读全文</span>
+              </a>
+            </div>
+            <meta itemprop="url" content="https://www.ieclipse.cn/2016/11/26/Android/fragment-h5/">
+            <meta itemprop="dateModified" content="2019-07-22T11:25:01.895Z">
+            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+              <meta content="https://www.ieclipse.cn" itemprop="url">
+              <meta content="静勤居" itemprop="name">
+              <meta content="/image/logo.png" itemprop="logo">
+            </span>
+          </div>
+          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
+            <div class="card-content">
+              <h3 class="card-title"><a itemprop="name headline" href="/2016/09/19/other/haimawan-adb/" class="article-title">Android ADB连接海马玩模拟器</a></h3>
+              <div class="divider"></div>
+              <div class="section post-header clearfix">
+                <!-- sub element must be span -->
+                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2016-09-19T13:00:00.000Z"><time datetime="2016-09-19T13:00:00.000Z">2016-09-19</time></time></span>
+                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/trick/">奇淫巧技</a></span>
+                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/Android/">Android</a></span>
+              </div>
+              <div class="divider"></div>
+              <div class="nova-flex excerpt-box">
+              
+              <div class="excerpt" itemprop="description articleBody">
+              <p>使用海马玩模拟器来调试Android还是挺方便的。最近因为真机连接不稳定，又想到了海马玩，不知道怎么回事，竟然运行不了模拟器了，只好下载了一个新版本，然后重新安装。安装完毕之后，竟然找不到devices。我记得，以前可是好好的呢。搜索了一下。说是要手动连接</p>
+              </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+
+            <div class="card-action xxx-count" data-xid="bf53b2a06bf7b4fda3e043e5d9f0320a" data-url="2016/09/19/other/haimawan-adb/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2016/09/19/other/haimawan-adb/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2016/09/19/other/haimawan-adb/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2016/09/19/other/haimawan-adb/" >
+                <span>阅读全文</span>
+              </a>
+            </div>
+            <meta itemprop="url" content="https://www.ieclipse.cn/2016/09/19/other/haimawan-adb/">
+            <meta itemprop="dateModified" content="2019-07-22T11:25:01.948Z">
+            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+              <meta content="https://www.ieclipse.cn" itemprop="url">
+              <meta content="静勤居" itemprop="name">
+              <meta content="/image/logo.png" itemprop="logo">
+            </span>
+          </div>
           <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
             <div class="card-content">
               <h3 class="card-title"><a itemprop="name headline" href="/2016/09/08/Web/hexo-coding-pages/" class="article-title">将hexo博客部署到coding.net</a></h3>
@@ -429,126 +556,6 @@
               <meta content="/image/logo.png" itemprop="logo">
             </span>
           </div>
-          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
-            <div class="card-content">
-              <h3 class="card-title"><a itemprop="name headline" href="/2016/08/25/PHP/php-mysql-mb-insert/" class="article-title">PHP + MySQL批量插入测试</a></h3>
-              <div class="divider"></div>
-              <div class="section post-header clearfix">
-                <!-- sub element must be span -->
-                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2016-08-25T10:30:30.000Z"><time datetime="2016-08-25T10:30:30.000Z">2016-08-25</time></time></span>
-                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/Web/">Web</a></span>
-                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/PHP/">PHP</a><a class="tag-item" href="/tags/MySQL/">MySQL</a></span>
-              </div>
-              <div class="divider"></div>
-              <div class="nova-flex excerpt-box">
-              
-              <div class="excerpt" itemprop="description articleBody">
-              <p>使用PHP + MySQL来测试插入百万条数据，看看到底要多久。</p>
-              </div>
-              </div>
-            </div>
-            <div class="divider"></div>
-
-            <div class="card-action xxx-count" data-xid="ff758aae42b826e2a2024fbc6405512c" data-url="2016/08/25/PHP/php-mysql-mb-insert/">
-              <a class="icon nova-bubbles action-item comment-count" href="/2016/08/25/PHP/php-mysql-mb-insert/#comment">
-                <span class="count"></span><span class="hidden-xs">评论</span>
-              </a>
-              <a class="icon nova-eye action-item view-count" href="/2016/08/25/PHP/php-mysql-mb-insert/">
-                <span class="count"></span><span class="hidden-xs">次阅读</span>
-                </a>
-              <a class="icon nova-hand-right action-item" href="/2016/08/25/PHP/php-mysql-mb-insert/" >
-                <span>阅读全文</span>
-              </a>
-            </div>
-            <meta itemprop="url" content="https://www.ieclipse.cn/2016/08/25/PHP/php-mysql-mb-insert/">
-            <meta itemprop="dateModified" content="2019-07-22T11:25:01.912Z">
-            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
-              <meta content="https://www.ieclipse.cn" itemprop="url">
-              <meta content="静勤居" itemprop="name">
-              <meta content="/image/logo.png" itemprop="logo">
-            </span>
-          </div>
-          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
-            <div class="card-content">
-              <h3 class="card-title"><a itemprop="name headline" href="/2016/08/18/other/scratch-compile/" class="article-title">Scratch源代码编译小记</a></h3>
-              <div class="divider"></div>
-              <div class="section post-header clearfix">
-                <!-- sub element must be span -->
-                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2016-08-18T07:34:08.000Z"><time datetime="2016-08-18T07:34:08.000Z">2016-08-18</time></time></span>
-                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/other/">其它</a></span>
-                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/Gradle/">Gradle</a></span>
-              </div>
-              <div class="divider"></div>
-              <div class="nova-flex excerpt-box">
-              
-              <div class="excerpt" itemprop="description articleBody">
-              <p>这几天搞Scratch源代码的编译，遇到不少坑，特此记录一下。</p>
-              </div>
-              </div>
-            </div>
-            <div class="divider"></div>
-
-            <div class="card-action xxx-count" data-xid="23c496c3553b390c254acf97b749f00c" data-url="2016/08/18/other/scratch-compile/">
-              <a class="icon nova-bubbles action-item comment-count" href="/2016/08/18/other/scratch-compile/#comment">
-                <span class="count"></span><span class="hidden-xs">评论</span>
-              </a>
-              <a class="icon nova-eye action-item view-count" href="/2016/08/18/other/scratch-compile/">
-                <span class="count"></span><span class="hidden-xs">次阅读</span>
-                </a>
-              <a class="icon nova-hand-right action-item" href="/2016/08/18/other/scratch-compile/" >
-                <span>阅读全文</span>
-              </a>
-            </div>
-            <meta itemprop="url" content="https://www.ieclipse.cn/2016/08/18/other/scratch-compile/">
-            <meta itemprop="dateModified" content="2019-07-22T11:25:01.950Z">
-            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
-              <meta content="https://www.ieclipse.cn" itemprop="url">
-              <meta content="静勤居" itemprop="name">
-              <meta content="/image/logo.png" itemprop="logo">
-            </span>
-          </div>
-          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
-            <div class="card-content">
-              <h3 class="card-title"><a itemprop="name headline" href="/2016/08/12/Android/quickaf-preference/" class="article-title">QuickAF Preference介绍</a></h3>
-              <div class="divider"></div>
-              <div class="section post-header clearfix">
-                <!-- sub element must be span -->
-                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2016-08-12T02:16:41.000Z"><time datetime="2016-08-12T02:16:41.000Z">2016-08-12</time></time></span>
-                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/Android/">Android</a></span>
-                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/Android/">Android</a><a class="tag-item" href="/tags/QuickAF/">QuickAF</a></span>
-              </div>
-              <div class="divider"></div>
-              <div class="nova-flex excerpt-box">
-              
-              <div class="excerpt" itemprop="description articleBody">
-              <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>首先上个图</p>
-<img src="/2016/08/12/Android/quickaf-preference/preference.png">
-
-<p>Preference控件的目的在于替换Android自带的Preference，在<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中，Preference被设计为控件，可以在layout/Activity中随意使用，不必像自带的Preference，需要配合res/xml/xxx_preference、PreferenceFragment/PreferenceActivity使用。</p>
-              </div>
-              </div>
-            </div>
-            <div class="divider"></div>
-
-            <div class="card-action xxx-count" data-xid="4d8947211a38d2f5101ed2d77cf19f0c" data-url="2016/08/12/Android/quickaf-preference/">
-              <a class="icon nova-bubbles action-item comment-count" href="/2016/08/12/Android/quickaf-preference/#comment">
-                <span class="count"></span><span class="hidden-xs">评论</span>
-              </a>
-              <a class="icon nova-eye action-item view-count" href="/2016/08/12/Android/quickaf-preference/">
-                <span class="count"></span><span class="hidden-xs">次阅读</span>
-                </a>
-              <a class="icon nova-hand-right action-item" href="/2016/08/12/Android/quickaf-preference/" >
-                <span>阅读全文</span>
-              </a>
-            </div>
-            <meta itemprop="url" content="https://www.ieclipse.cn/2016/08/12/Android/quickaf-preference/">
-            <meta itemprop="dateModified" content="2019-07-22T11:25:01.896Z">
-            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
-              <meta content="https://www.ieclipse.cn" itemprop="url">
-              <meta content="静勤居" itemprop="name">
-              <meta content="/image/logo.png" itemprop="logo">
-            </span>
-          </div>
 </main>
     <nav> <ul class=pagination><li><a href="/page/2/" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li><li><a href="/">1</a></li><li><a href="/page/2/">2</a></li><li class="active"><span class="sronly">3</span><li><a href="/page/4/">4</a></li><li><a href="/page/5/">5</a></li><li><span class="space">&hellip;</span></li><li><a href="/page/8/">8</a></li><li><a href="/page/4/" aria-label="Next" rel="next">&raquo;</a></li></ul> </nav>
 
@@ -654,7 +661,7 @@
       </div>
       
       <!-- use category tree -->
-      <ul class="list-group"><li class="list-group-item"><a class="list-group-link" href="/categories/Android/">Android</a><span class="badge">22</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/pde/">Eclipse 插件</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Java/">Java</a><span class="badge">9</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Web/">Web</a><span class="badge">24</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/other/">其它</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/trick/">奇淫巧技</a><span class="badge">6</span></li></ul>
+      <ul class="list-group"><li class="list-group-item category"><a class="list-group-link" href="/categories/Android/">Android</a><span class="badge">25</span><ul class="list-group category"><li class="list-group-item"><a class="list-group-link" href="/categories/Android/Compose/">Compose</a><span class="badge">2</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Android/Framework/">Framework</a><span class="badge">1</span></li></ul></li><li class="list-group-item"><a class="list-group-link" href="/categories/pde/">Eclipse 插件</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Java/">Java</a><span class="badge">9</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Web/">Web</a><span class="badge">24</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/other/">其它</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/trick/">奇淫巧技</a><span class="badge">6</span></li></ul>
     </div>
     
 
@@ -664,7 +671,7 @@
       </div>
       
       <div class="panel-body">
-      <a href="/tags/ADT/" style="font-size: 10px; color: #795548">ADT</a> <a href="/tags/Ajax/" style="font-size: 10px; color: #795548">Ajax</a> <a href="/tags/Android/" style="font-size: 20px; color: #212121">Android</a> <a href="/tags/CI/" style="font-size: 10px; color: #795548">CI</a> <a href="/tags/Eclipse/" style="font-size: 16.25px; color: #423530">Eclipse</a> <a href="/tags/Gradle/" style="font-size: 11.25px; color: #6e4f43">Gradle</a> <a href="/tags/Hexo/" style="font-size: 18.75px; color: #2c2826">Hexo</a> <a href="/tags/J2EE/" style="font-size: 12.5px; color: #63483e">J2EE</a> <a href="/tags/Java/" style="font-size: 12.5px; color: #63483e">Java</a> <a href="/tags/MySQL/" style="font-size: 10px; color: #795548">MySQL</a> <a href="/tags/Node-js/" style="font-size: 13.75px; color: #584239">Node.js</a> <a href="/tags/PHP/" style="font-size: 12.5px; color: #63483e">PHP</a> <a href="/tags/QuickAF/" style="font-size: 17.5px; color: #372e2b">QuickAF</a> <a href="/tags/SWT/" style="font-size: 10px; color: #795548">SWT</a> <a href="/tags/Swing/" style="font-size: 10px; color: #795548">Swing</a> <a href="/tags/git/" style="font-size: 15px; color: #4d3b35">git</a> <a href="/tags/js/" style="font-size: 13.75px; color: #584239">js</a> <a href="/tags/xml/" style="font-size: 11.25px; color: #6e4f43">xml</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 11.25px; color: #6e4f43">安全</a>
+      <a href="/tags/ADT/" style="font-size: 10px; color: #795548">ADT</a> <a href="/tags/Ajax/" style="font-size: 10px; color: #795548">Ajax</a> <a href="/tags/Android/" style="font-size: 20px; color: #212121">Android</a> <a href="/tags/CI/" style="font-size: 10px; color: #795548">CI</a> <a href="/tags/Compose/" style="font-size: 11.25px; color: #6e4f43">Compose</a> <a href="/tags/Eclipse/" style="font-size: 16.25px; color: #423530">Eclipse</a> <a href="/tags/Framework/" style="font-size: 10px; color: #795548">Framework</a> <a href="/tags/Gradle/" style="font-size: 11.25px; color: #6e4f43">Gradle</a> <a href="/tags/Hexo/" style="font-size: 18.75px; color: #2c2826">Hexo</a> <a href="/tags/J2EE/" style="font-size: 12.5px; color: #63483e">J2EE</a> <a href="/tags/Java/" style="font-size: 12.5px; color: #63483e">Java</a> <a href="/tags/MySQL/" style="font-size: 10px; color: #795548">MySQL</a> <a href="/tags/Node-js/" style="font-size: 13.75px; color: #584239">Node.js</a> <a href="/tags/PHP/" style="font-size: 12.5px; color: #63483e">PHP</a> <a href="/tags/QuickAF/" style="font-size: 17.5px; color: #372e2b">QuickAF</a> <a href="/tags/SWT/" style="font-size: 10px; color: #795548">SWT</a> <a href="/tags/Swing/" style="font-size: 10px; color: #795548">Swing</a> <a href="/tags/git/" style="font-size: 15px; color: #4d3b35">git</a> <a href="/tags/js/" style="font-size: 13.75px; color: #584239">js</a> <a href="/tags/xml/" style="font-size: 11.25px; color: #6e4f43">xml</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 11.25px; color: #6e4f43">安全</a>
       </div>
     </div>
 

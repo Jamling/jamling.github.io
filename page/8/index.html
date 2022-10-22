@@ -5,7 +5,7 @@
   <title>静勤居</title>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="keywords" content="Android,Eclipse 插件,Java,Web,奇淫巧技,其它,Eclipse,ADT,QuickAF,Gradle,CI,J2EE,Swing,SWT,xml,PHP,Ajax,MySQL,Hexo,js,Node.js,git,安全">
+  <meta name="keywords" content="Android,Eclipse 插件,Java,Web,奇淫巧技,其它,Compose,Framework,Eclipse,ADT,QuickAF,Gradle,CI,J2EE,Swing,SWT,xml,PHP,Ajax,MySQL,Hexo,js,Node.js,git,安全">
   <meta name="description" content="Jamling's 技术文章博客.">
   
 
@@ -156,6 +156,123 @@
     <meta content="" itemprop="name"/>
 </div>
 <main>
+          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
+            <div class="card-content">
+              <h3 class="card-title"><a itemprop="name headline" href="/2008/09/29/Java/%E5%B8%A6NameSpace%E7%9A%84xml%20XPath%E6%90%9C%E7%B4%A2/" class="article-title">带NameSpace的xml XPath搜索</a></h3>
+              <div class="divider"></div>
+              <div class="section post-header clearfix">
+                <!-- sub element must be span -->
+                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2008-09-29T02:56:00.000Z"><time datetime="2008-09-29T02:56:00.000Z">2008-09-29</time></time></span>
+                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/Java/">Java</a></span>
+                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/xml/">xml</a></span>
+              </div>
+              <div class="divider"></div>
+              <div class="nova-flex excerpt-box">
+              
+              <div class="excerpt" itemprop="description articleBody">
+              <p>以典型的J2EE web.xml文件为例，某次要解析此文件。使用Xpath搜索得到的都是null。使用System.out.println（root）打印节点，发现比不带NameSpace的XML root多了一个uri，那么在Xpath中加入uri（setNameSpace(“”,uri)），结果搜索的结果还是null。后来google了一下，才知道原来当NameSpace的prefix为“”时，在Xpath中需要加入“default”prefix。<br>因此，自己可以定义一个比较通用的Xpath搜索方法：</p>
+              </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+
+            <div class="card-action xxx-count" data-xid="db914fd0ee49a3f55e795f56d8f86f9a" data-url="2008/09/29/Java/带NameSpace的xml XPath搜索/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2008/09/29/Java/%E5%B8%A6NameSpace%E7%9A%84xml%20XPath%E6%90%9C%E7%B4%A2/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2008/09/29/Java/%E5%B8%A6NameSpace%E7%9A%84xml%20XPath%E6%90%9C%E7%B4%A2/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2008/09/29/Java/%E5%B8%A6NameSpace%E7%9A%84xml%20XPath%E6%90%9C%E7%B4%A2/" >
+                <span>阅读全文</span>
+              </a>
+            </div>
+            <meta itemprop="url" content="https://www.ieclipse.cn/2008/09/29/Java/%E5%B8%A6NameSpace%E7%9A%84xml%20XPath%E6%90%9C%E7%B4%A2/">
+            <meta itemprop="dateModified" content="2019-07-22T11:25:01.909Z">
+            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+              <meta content="https://www.ieclipse.cn" itemprop="url">
+              <meta content="静勤居" itemprop="name">
+              <meta content="/image/logo.png" itemprop="logo">
+            </span>
+          </div>
+          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
+            <div class="card-content">
+              <h3 class="card-title"><a itemprop="name headline" href="/2008/08/16/Java/jdom%E8%A7%A3%E6%9E%90xml/" class="article-title">jdom解析xml</a></h3>
+              <div class="divider"></div>
+              <div class="section post-header clearfix">
+                <!-- sub element must be span -->
+                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2008-08-16T14:21:00.000Z"><time datetime="2008-08-16T14:21:00.000Z">2008-08-16</time></time></span>
+                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/Java/">Java</a></span>
+                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/xml/">xml</a></span>
+              </div>
+              <div class="divider"></div>
+              <div class="nova-flex excerpt-box">
+              
+              <div class="excerpt" itemprop="description articleBody">
+              <p>添加依赖包jdom.jar和jaxen.jar，源代码如下</p>
+              </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+
+            <div class="card-action xxx-count" data-xid="63663364d88124ad025b335bb6371a41" data-url="2008/08/16/Java/jdom解析xml/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2008/08/16/Java/jdom%E8%A7%A3%E6%9E%90xml/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2008/08/16/Java/jdom%E8%A7%A3%E6%9E%90xml/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2008/08/16/Java/jdom%E8%A7%A3%E6%9E%90xml/" >
+                <span>阅读全文</span>
+              </a>
+            </div>
+            <meta itemprop="url" content="https://www.ieclipse.cn/2008/08/16/Java/jdom%E8%A7%A3%E6%9E%90xml/">
+            <meta itemprop="dateModified" content="2019-07-22T11:25:01.909Z">
+            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+              <meta content="https://www.ieclipse.cn" itemprop="url">
+              <meta content="静勤居" itemprop="name">
+              <meta content="/image/logo.png" itemprop="logo">
+            </span>
+          </div>
+          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
+            <div class="card-content">
+              <h3 class="card-title"><a itemprop="name headline" href="/2007/10/23/Java/Java-%E6%B8%85%E9%99%A4%E4%B8%8E%E5%88%9D%E5%A7%8B%E5%8C%96/" class="article-title">清除与初始化</a></h3>
+              <div class="divider"></div>
+              <div class="section post-header clearfix">
+                <!-- sub element must be span -->
+                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2007-10-23T12:13:00.000Z"><time datetime="2007-10-23T12:13:00.000Z">2007-10-23</time></time></span>
+                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/Java/">Java</a></span>
+                
+              </div>
+              <div class="divider"></div>
+              <div class="nova-flex excerpt-box">
+              
+              <div class="excerpt" itemprop="description articleBody">
+              <p>构造函数构建函数(Constructor)属于一种较特殊的方法类型,因为它没有返回值.这与void返回值存在着明显的区别。对于void返回值，尽管方法本身不会自动返回什么，但仍然可以让它返回另一些东西。构建器则不同，它不仅什么也不会自动返回，而且根本不能有任何选择.若创建一个没有构件器的类,则编译器会自动创建一个默认构件器.</p>
+              </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+
+            <div class="card-action xxx-count" data-xid="ab68a9fae4f58abfc920d7eeca68bae4" data-url="2007/10/23/Java/Java-清除与初始化/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2007/10/23/Java/Java-%E6%B8%85%E9%99%A4%E4%B8%8E%E5%88%9D%E5%A7%8B%E5%8C%96/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2007/10/23/Java/Java-%E6%B8%85%E9%99%A4%E4%B8%8E%E5%88%9D%E5%A7%8B%E5%8C%96/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2007/10/23/Java/Java-%E6%B8%85%E9%99%A4%E4%B8%8E%E5%88%9D%E5%A7%8B%E5%8C%96/" >
+                <span>阅读全文</span>
+              </a>
+            </div>
+            <meta itemprop="url" content="https://www.ieclipse.cn/2007/10/23/Java/Java-%E6%B8%85%E9%99%A4%E4%B8%8E%E5%88%9D%E5%A7%8B%E5%8C%96/">
+            <meta itemprop="dateModified" content="2019-07-22T11:25:01.909Z">
+            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+              <meta content="https://www.ieclipse.cn" itemprop="url">
+              <meta content="静勤居" itemprop="name">
+              <meta content="/image/logo.png" itemprop="logo">
+            </span>
+          </div>
           <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
             <div class="card-content">
               <h3 class="card-title"><a itemprop="name headline" href="/2007/08/31/Java/J2EE%E7%9C%9F%E4%B8%8D%E6%98%AF%E4%B8%AA%E4%B8%9C%E8%A5%BF%E5%9B%9B%E4%B9%8BServlet%E7%AF%87/" class="article-title">J2EE真不是个东西四之Servlet篇</a></h3>
@@ -534,7 +651,7 @@
       </div>
       
       <!-- use category tree -->
-      <ul class="list-group"><li class="list-group-item"><a class="list-group-link" href="/categories/Android/">Android</a><span class="badge">22</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/pde/">Eclipse 插件</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Java/">Java</a><span class="badge">9</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Web/">Web</a><span class="badge">24</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/other/">其它</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/trick/">奇淫巧技</a><span class="badge">6</span></li></ul>
+      <ul class="list-group"><li class="list-group-item category"><a class="list-group-link" href="/categories/Android/">Android</a><span class="badge">25</span><ul class="list-group category"><li class="list-group-item"><a class="list-group-link" href="/categories/Android/Compose/">Compose</a><span class="badge">2</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Android/Framework/">Framework</a><span class="badge">1</span></li></ul></li><li class="list-group-item"><a class="list-group-link" href="/categories/pde/">Eclipse 插件</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Java/">Java</a><span class="badge">9</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Web/">Web</a><span class="badge">24</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/other/">其它</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/trick/">奇淫巧技</a><span class="badge">6</span></li></ul>
     </div>
     
 
@@ -544,7 +661,7 @@
       </div>
       
       <div class="panel-body">
-      <a href="/tags/ADT/" style="font-size: 10px; color: #795548">ADT</a> <a href="/tags/Ajax/" style="font-size: 10px; color: #795548">Ajax</a> <a href="/tags/Android/" style="font-size: 20px; color: #212121">Android</a> <a href="/tags/CI/" style="font-size: 10px; color: #795548">CI</a> <a href="/tags/Eclipse/" style="font-size: 16.25px; color: #423530">Eclipse</a> <a href="/tags/Gradle/" style="font-size: 11.25px; color: #6e4f43">Gradle</a> <a href="/tags/Hexo/" style="font-size: 18.75px; color: #2c2826">Hexo</a> <a href="/tags/J2EE/" style="font-size: 12.5px; color: #63483e">J2EE</a> <a href="/tags/Java/" style="font-size: 12.5px; color: #63483e">Java</a> <a href="/tags/MySQL/" style="font-size: 10px; color: #795548">MySQL</a> <a href="/tags/Node-js/" style="font-size: 13.75px; color: #584239">Node.js</a> <a href="/tags/PHP/" style="font-size: 12.5px; color: #63483e">PHP</a> <a href="/tags/QuickAF/" style="font-size: 17.5px; color: #372e2b">QuickAF</a> <a href="/tags/SWT/" style="font-size: 10px; color: #795548">SWT</a> <a href="/tags/Swing/" style="font-size: 10px; color: #795548">Swing</a> <a href="/tags/git/" style="font-size: 15px; color: #4d3b35">git</a> <a href="/tags/js/" style="font-size: 13.75px; color: #584239">js</a> <a href="/tags/xml/" style="font-size: 11.25px; color: #6e4f43">xml</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 11.25px; color: #6e4f43">安全</a>
+      <a href="/tags/ADT/" style="font-size: 10px; color: #795548">ADT</a> <a href="/tags/Ajax/" style="font-size: 10px; color: #795548">Ajax</a> <a href="/tags/Android/" style="font-size: 20px; color: #212121">Android</a> <a href="/tags/CI/" style="font-size: 10px; color: #795548">CI</a> <a href="/tags/Compose/" style="font-size: 11.25px; color: #6e4f43">Compose</a> <a href="/tags/Eclipse/" style="font-size: 16.25px; color: #423530">Eclipse</a> <a href="/tags/Framework/" style="font-size: 10px; color: #795548">Framework</a> <a href="/tags/Gradle/" style="font-size: 11.25px; color: #6e4f43">Gradle</a> <a href="/tags/Hexo/" style="font-size: 18.75px; color: #2c2826">Hexo</a> <a href="/tags/J2EE/" style="font-size: 12.5px; color: #63483e">J2EE</a> <a href="/tags/Java/" style="font-size: 12.5px; color: #63483e">Java</a> <a href="/tags/MySQL/" style="font-size: 10px; color: #795548">MySQL</a> <a href="/tags/Node-js/" style="font-size: 13.75px; color: #584239">Node.js</a> <a href="/tags/PHP/" style="font-size: 12.5px; color: #63483e">PHP</a> <a href="/tags/QuickAF/" style="font-size: 17.5px; color: #372e2b">QuickAF</a> <a href="/tags/SWT/" style="font-size: 10px; color: #795548">SWT</a> <a href="/tags/Swing/" style="font-size: 10px; color: #795548">Swing</a> <a href="/tags/git/" style="font-size: 15px; color: #4d3b35">git</a> <a href="/tags/js/" style="font-size: 13.75px; color: #584239">js</a> <a href="/tags/xml/" style="font-size: 11.25px; color: #6e4f43">xml</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 11.25px; color: #6e4f43">安全</a>
       </div>
     </div>
 

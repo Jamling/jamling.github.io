@@ -256,25 +256,25 @@
 <h2 id="打印"><a href="#打印" class="headerlink" title="打印"></a>打印</h2><p>原模板在打印上不太友好，优化后的打印效果基本同当前所见到的页面，不会出现效果相差巨大的问题。</p>
 <p class="code-caption" data-lang="css" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="css">@media print {
-    .side {
+<pre><code class="css">@media print &#123;
+    .side &#123;
         width: 33.3%;
-    }
+    &#125;
 
-    .main {
+    .main &#123;
         width: 66.6%
-    }
+    &#125;
 
-    a:after {
+    a:after &#123;
         content: &quot;&quot; !important;
-    }
-    h2 {
+    &#125;
+    h2 &#123;
         font-size: 1.5em;
-    }
-    h3 {
+    &#125;
+    h3 &#123;
         font-size: 1.2em;
-    }
-}</code></pre>
+    &#125;
+&#125;</code></pre>
 <p>完整的css请参考<code>resume.scss</code></p>
 <h2 id="隐私"><a href="#隐私" class="headerlink" title="隐私"></a>隐私</h2><p>可利用Nova特有的加密功能开启隐私保护，在Front-matter中添加passord: your passowrd即可，密码输入不对，无法查看。</p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2022/10/17/Web/hexo-your-resume/](https://www.ieclipse.cn/2022/10/17/Web/hexo-your-resume/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
@@ -285,8 +285,8 @@
 <script src="/js/decrypt.min.js"></script>
 
   <footer class="article-footer">
-    <time class="article-footer-updated" datetime="2022-10-17T05:21:26.214Z" itemprop="dateModified">
-    Last updated: 2022-10-17
+    <time class="article-footer-updated" datetime="2022-10-20T07:37:10.778Z" itemprop="dateModified">
+    Last updated: 2022-10-20
     </time>
     <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
       <meta content="https://www.ieclipse.cn" itemprop="url">
@@ -305,7 +305,7 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
 </article>
 
 <div class="page-footer">
-  <nav><ul class="pager"><li class="next"><a href="/en/2022/10/17/Web/hexo-comments-Valine/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">Next</span></a></li></ul></nav>
+  <nav><ul class="pager"><li class="previous"><a href="/en/2022/10/20/Android/jetpack-compose-basic/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">Prev</span></a></li><li class="next"><a href="/en/2022/10/17/Web/hexo-comments-Valine/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">Next</span></a></li></ul></nav>
   
 <!-- Button trigger modal -->
 <blockquote class="donate"><!--
@@ -389,6 +389,18 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
   <!-- aside -->
   <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
     <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          Table Of Contents
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#文件列表">文件列表</a></li><li><a href="#排版">排版</a><ul class="nav toc-ul"><li><a href="#数据源">数据源</a></li></ul></li><li><a href="#打印">打印</a></li><li><a href="#隐私">隐私</a></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
     </aside>
   </div> <!-- end aside column  -->
 </div> <!-- end row -->
