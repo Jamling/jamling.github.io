@@ -181,7 +181,7 @@
   <div class="article-content" itemprop="articleBody">
   
     <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>在Android Email当中，在设置接收服务器和发送服务器时，点击下一步，系统会弹出进度框，并执行服务器设置检验。如果用户设置信息不正确，在执行校验时，大约会花1分钟的时间去校验，最后才会提示设置信息不正确。如果用户在等待过程中点击了“取消”，然后再点下一步，发会现，不再弹出等待提示框，也不执行校验了。</p>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>通过分析源码发现，在点击“下一步”执行校验时，会执行一个AsyncTask，在doIngBackground（）中，去打开socket连接，完成相应的校验。同时弹出一个等待提示框。如果用户点击“取消”, 会终止此AsyncTask，并重新生成一个AsyncTask并执行。</p>
 <p>但通过debug发现，后面的AsyncTask并没有真正执行。原因是因为前面的Task阻塞在了联网校验上。通过查阅Android文档得知，AsyncTask，是异步处理类。它会新生成一个线程去执行doInBackground。对外，开发者不能获取此线程的引用，就算获取到了，对于像socket连接或IO操作会导致阻塞的作业，强行interrupt线程并不能退出阻塞。</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>所以为避免之后的AsyncTask能够被正常执行，请记住:</p>
@@ -190,20 +190,20 @@
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">@Override  
-protected Object doInBackground(Void... params) {  
-    Thread thread = new Thread(){  
-           public void run(){  
+protected Object doInBackground(Void... params) &#123;  
+    Thread thread = new Thread()&#123;  
+           public void run()&#123;  
                   mResult = getFromServer();// 从网络上获取数据  
-           }  
-    };  
+           &#125;  
+    &#125;;  
     thread.start();  
-    try{  
+    try&#123;  
         thread.join(); // 阻塞当前线程，等待thread执行完毕，可以带参数，最多等待多长时间  
-    } catch (InterruptedException e) {  
+    &#125; catch (InterruptedException e) &#123;  
         // Thread.join()可以被interrupt，调用AsyncTask.cancel(true);即可退出等待  
         return null;  
-    }
-}</code></pre>
+    &#125;
+&#125;</code></pre>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2012/06/08/Android/Android-Thread-join-in-AsyncTask/](https://www.ieclipse.cn/2012/06/08/Android/Android-Thread-join-in-AsyncTask/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
   </div>

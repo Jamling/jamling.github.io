@@ -181,18 +181,18 @@
   <div class="article-content" itemprop="articleBody">
   
     <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文简述的是在Android平台如何自动发送邮件（没有邮件编写界面），主要应用场景为忘记密码等安全等级较高的操作，比如我忘记密码了，点击“发送密码到我的邮箱”系统会将密码发送到注册时的电子邮件地址。</p>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="Android平台邮件客户端"><a href="#Android平台邮件客户端" class="headerlink" title="Android平台邮件客户端"></a>Android平台邮件客户端</h2><ul>
 <li>Gmail: Gmai电子邮件客户端</li>
 <li>Email: 通用的电子邮件客户端</li>
 </ul>
 <h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="Gmail"><a href="#Gmail" class="headerlink" title="Gmail"></a>Gmail</h3><p>Gmail已经支持自动发送了，所以非常简单。在使用时，需要添加<br><code>&lt;uses-permission android:name=&quot;com.google.android.gm.permission.AUTO_SEND&quot; /&gt;</code><br>到AndroidManifest.xml</p>
 <p>示例代码如下：</p>
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>Intent intent = new Intent(&quot;com.google.android.gm.action.AUTO_SEND&quot;);  
 intent.setType(&quot;plain/text&quot;);  
-String[] reciver = new String[] { &quot;xxxx@xxx.com&quot; };  
+String[] reciver = new String[] &#123; &quot;xxxx@xxx.com&quot; &#125;;  
 String subject = &quot;email title&quot;;  
 String body = &quot;email body&quot;;  
 intent.putExtra(android.content.Intent.EXTRA_EMAIL, reciver);  
@@ -200,7 +200,7 @@ intent.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
 intent.putExtra(android.content.Intent.EXTRA_TEXT, body);</code></pre><h3 id="Email"><a href="#Email" class="headerlink" title="Email"></a>Email</h3><p>Email不支持自动发送，但又是默认邮件客户端，所以需要添加自动发送功能。主要实现步骤为：</p>
 <h4 id="编写一个自动发送邮件类"><a href="#编写一个自动发送邮件类" class="headerlink" title="编写一个自动发送邮件类"></a>编写一个自动发送邮件类</h4><p>主要功能为：接收用户输入，组装message对象，获取Sender实例，将message发送出去，最后删除message对象（这样已发送的邮件内容不会出现在client中，提高发安全性）</p>
 <p>Java代码</p>
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>package com.android.email.activity;  
 
@@ -234,7 +234,7 @@ import com.android.email.mail.Sender;
  *  
  * &lt;pre&gt; 
  * Intent intent = new Intent(&amp;quot;com.android.email.intent.action.sendInBack&amp;quot;); 
- * String[] reciver = new String[] { &amp;quot;your_name@corp.com&amp;quot; }; 
+ * String[] reciver = new String[] &#123; &amp;quot;your_name@corp.com&amp;quot; &#125;; 
  * String subject = &amp;quot;email title&amp;quot;; 
  * String body = &amp;quot;email body &amp;quot;; 
  * intent.putExtra(android.content.Intent.EXTRA_EMAIL, reciver[0]); 
@@ -248,7 +248,7 @@ import com.android.email.mail.Sender;
  * @author melord 
  *  
  */  
-public class EmailSendAutoActivity extends Activity implements SendListener {  
+public class EmailSendAutoActivity extends Activity implements SendListener &#123;  
 
     private static String tag = &quot;EmailSendAutoAcitivity&quot;;  
     private Context mContext;  
@@ -274,7 +274,7 @@ public class EmailSendAutoActivity extends Activity implements SendListener {
     private long mAccountId = -1;  
 
     @Override  
-    protected void onCreate(Bundle savedInstanceState) {  
+    protected void onCreate(Bundle savedInstanceState) &#123;  
         super.onCreate(savedInstanceState);  
         this.mContext = this;  
         requestWindowFeature(Window.FEATURE_NO_TITLE);  
@@ -286,30 +286,30 @@ public class EmailSendAutoActivity extends Activity implements SendListener {
 
         new SendTask().execute();  
         String msg = intent.getStringExtra(&quot;sendMsg&quot;);  
-        if (msg == null) {  
+        if (msg == null) &#123;  
             msg = &quot;Sending message...&quot;;  
-        }  
+        &#125;  
         // mWaiting = ProgressDialog.show(this, &quot;&quot;, &quot;sending...&quot;, true, true,  
         // null);  
         mWaiting = Toast.makeText(this, msg, Toast.LENGTH_LONG);  
         mWaiting.show();  
-    }  
+    &#125;  
 
     @Override  
-    public void onBackPressed() {  
-        if (mWaiting != null) {  
+    public void onBackPressed() &#123;  
+        if (mWaiting != null) &#123;  
             mWaiting.cancel();  
-        }  
+        &#125;  
         super.onBackPressed();  
-    }  
+    &#125;  
 
     @Override  
-    public void finish() {  
-        if (mWaiting != null) {  
+    public void finish() &#123;  
+        if (mWaiting != null) &#123;  
             mWaiting.cancel();  
-        }  
+        &#125;  
         super.finish();  
-    }  
+    &#125;  
 
     /** 
      * Initialize sending account from intent. 
@@ -317,25 +317,25 @@ public class EmailSendAutoActivity extends Activity implements SendListener {
      * @param intent 
      *            imcoming intent 
      */  
-    private void initAccountFromIntent(Intent intent) {  
+    private void initAccountFromIntent(Intent intent) &#123;  
         String email = intent.getStringExtra(&quot;sendAccount&quot;);  
-        if (email != null) {  
+        if (email != null) &#123;  
             log(String.format(&quot;send email use account (%s) &quot;, email));  
             mSendEmail = email;  
             Long[] ids = EmailContent.Account.getAllAccountIds(this);  
-            if (ids != null &amp;&amp; ids.length &gt; 0) {  
-                for (int i = 0; i &lt; ids.length; i++) {  
+            if (ids != null &amp;&amp; ids.length &gt; 0) &#123;  
+                for (int i = 0; i &lt; ids.length; i++) &#123;  
                     EmailContent.Account temp = EmailContent.Account  
                             .restoreAccountWithId(this, ids[i]);  
-                    if (temp != null &amp;&amp; email.equals(temp.getEmailAddress())) {  
+                    if (temp != null &amp;&amp; email.equals(temp.getEmailAddress())) &#123;  
                         log(&quot;valid account&quot;);  
                         mAccountId = ids[i];  
                         break;  
-                    }  
-                }  
-            }  
-        }  
-    }  
+                    &#125;  
+                &#125;  
+            &#125;  
+        &#125;  
+    &#125;  
 
     /** 
      * Initialize message from intent. 
@@ -343,7 +343,7 @@ public class EmailSendAutoActivity extends Activity implements SendListener {
      * @param intent 
      *            intent 
      */  
-    private void initMessageFromIntent(Intent intent) {  
+    private void initMessageFromIntent(Intent intent) &#123;  
         String to = intent.getStringExtra(Intent.EXTRA_EMAIL);  
         mTo = composeAddress(to);  
 
@@ -361,7 +361,7 @@ public class EmailSendAutoActivity extends Activity implements SendListener {
         log(&quot;cc:&quot; + mCc);  
         log(&quot;bcc:&quot; + mBcc);  
 
-    }  
+    &#125;  
 
     /** 
      * change to stand email address reference to Rfc822 
@@ -370,14 +370,14 @@ public class EmailSendAutoActivity extends Activity implements SendListener {
      *            email address 
      * @return RFC822 format email address 
      */  
-    private String composeAddress(String address) {  
+    private String composeAddress(String address) &#123;  
         String addr = null;  
-        if (!TextUtils.isEmpty(address)) {  
+        if (!TextUtils.isEmpty(address)) &#123;  
             Address[] addresses = Address.parse(address.trim());  
             addr = Address.pack(addresses);  
-        }  
+        &#125;  
         return addr;  
-    }  
+    &#125;  
 
     /** 
      * Update message. fill fields. 
@@ -387,10 +387,10 @@ public class EmailSendAutoActivity extends Activity implements SendListener {
      * @param account 
      *            sending account 
      */  
-    private void updateMessage(Message message, Account account) {  
-        if (message.mMessageId == null || message.mMessageId.length() == 0) {  
+    private void updateMessage(Message message, Account account) &#123;  
+        if (message.mMessageId == null || message.mMessageId.length() == 0) &#123;  
             message.mMessageId = Utility.generateMessageId();  
-        }  
+        &#125;  
         message.mTimeStamp = System.currentTimeMillis();  
         // it will : Name&lt;Address&gt;  
         message.mFrom = new Address(account.getEmailAddress(), account  
@@ -406,13 +406,13 @@ public class EmailSendAutoActivity extends Activity implements SendListener {
         message.mFlagRead = true;  
         message.mFlagLoaded = Message.FLAG_LOADED_COMPLETE;  
 
-    }  
+    &#125;  
 
-    private void log(String msg) {  
-        if (enableLog) {  
+    private void log(String msg) &#123;  
+        if (enableLog) &#123;  
             Log.i(tag, msg);  
-        }  
-    }  
+        &#125;  
+    &#125;  
 
     /** 
      * Really send message. 
@@ -422,11 +422,11 @@ public class EmailSendAutoActivity extends Activity implements SendListener {
      * @param messageId 
      *            message id 
      */  
-    public void sendMessage(Account account, long messageId) {  
+    public void sendMessage(Account account, long messageId) &#123;  
         // message uri  
         Uri uri = ContentUris.withAppendedId(EmailContent.Message.CONTENT_URI,  
                 messageId);  
-        try {  
+        try &#123;  
             // get a sender, ex. smtp sender.  
             Sender sender = Sender.getInstance(mContext, account  
                     .getSenderUri(mContext));  
@@ -437,34 +437,34 @@ public class EmailSendAutoActivity extends Activity implements SendListener {
             // send completed  
             mListener.onCompleted(account.mId);  
 
-        } catch (MessagingException me) {  
+        &#125; catch (MessagingException me) &#123;  
             // report error  
             mListener.onFailed(account.mId, messageId, me);  
-        } finally {  
-            try {  
+        &#125; finally &#123;  
+            try &#123;  
                 // delete this message whenever send successfully or not  
                 mContext.getContentResolver().delete(uri, null, null);  
-            } catch (Exception ex) {  
+            &#125; catch (Exception ex) &#123;  
                 Log.w(tag, &quot;delete message occur exception message uri:&quot; + uri);  
-            }  
-        }  
-    }  
+            &#125;  
+        &#125;  
+    &#125;  
 
-    public void onCompleted(long accountId) {  
+    public void onCompleted(long accountId) &#123;  
         log(&quot;send mail ok&quot;);  
         // return Activity.RESULT_OK when send successfully  
         setResult(RESULT_OK);  
         finish();  
-    }  
+    &#125;  
 
-    public void onFailed(long accountId, long messageId, Exception ex) {  
+    public void onFailed(long accountId, long messageId, Exception ex) &#123;  
         log(&quot;send mail failed : &quot; + ex.toString());  
         finish();  
-    }  
+    &#125;  
 
-    public void onStarted(long messageId, long accountId) {  
+    public void onStarted(long messageId, long accountId) &#123;  
         log(&quot;send mail started&quot;);  
-    }  
+    &#125;  
 
     /** 
      * Send message task, it is an async task 
@@ -472,21 +472,21 @@ public class EmailSendAutoActivity extends Activity implements SendListener {
      * @author melord_li 
      *  
      */  
-    private class SendTask extends AsyncTask&lt;Void, Void, Void&gt; {  
+    private class SendTask extends AsyncTask&lt;Void, Void, Void&gt; &#123;  
         @Override  
-        protected Void doInBackground(Void... params) {  
+        protected Void doInBackground(Void... params) &#123;  
             // get default account, if not set, first record is treated as  
             // default.  
             // long id = Account.getDefaultAccountId(mContext);  
             long id = mAccountId;  
-            if (id &lt; 0) {  
+            if (id &lt; 0) &#123;  
                 id = Account.getDefaultAccountId(mContext);  
-            }  
-            if (id &lt; 0) {  
+            &#125;  
+            if (id &lt; 0) &#123;  
                 Log.w(tag, &quot;no account exists&quot;);  
                 finish();  
                 return null;  
-            }  
+            &#125;  
             // get full account message  
             Account account = Account.restoreAccountWithId(mContext, id);  
 
@@ -498,18 +498,18 @@ public class EmailSendAutoActivity extends Activity implements SendListener {
             // Save this message. Because send API will read message in message  
             // db.  
             Uri uri = message.save(mContext);  
-            if (uri == null) {  
+            if (uri == null) &#123;  
                 Log.e(tag, &quot;save message occured an error&quot;);  
                 finish();  
                 return null;  
-            }  
+            &#125;  
 
             // send  
             sendMessage(account, message.mId);  
             return null;  
-        }  
-    }  
-}  
+        &#125;  
+    &#125;  
+&#125;  
 
 /** 
  * Sending monitor 
@@ -517,7 +517,7 @@ public class EmailSendAutoActivity extends Activity implements SendListener {
  * @author melord 
  *  
  */  
-interface SendListener {  
+interface SendListener &#123;  
 
     /** 
      * Send failed. 
@@ -548,7 +548,7 @@ interface SendListener {
      *            account id 
      */  
     void onCompleted(long accountId);  
-}</code></pre><h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>Xml代码</p>
+&#125;</code></pre><h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>Xml代码</p>
 <p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="xml">&lt;activity android:name=&quot;.activity.EmailSendAutoActivity&quot; android:theme=&quot;@android:style/Theme.Translucent&quot;&gt;  
@@ -562,7 +562,7 @@ interface SendListener {
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">Intent intent = new Intent(&quot;com.android.email.intent.action.sendInBack&quot;);  
-String[] reciver = new String[] { &quot;yourname@corp.com&quot; };  
+String[] reciver = new String[] &#123; &quot;yourname@corp.com&quot; &#125;;  
 String subject = &quot;email title&quot;;  
 String body = &quot;email body&quot;;  
 intent.putExtra(android.content.Intent.EXTRA_EMAIL, reciver[0]);  

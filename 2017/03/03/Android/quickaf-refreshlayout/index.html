@@ -204,33 +204,33 @@ QuickAF使用RefreshLayout控件进行下拉刷新和上拉加载，通过在布
   </header>
   <div class="article-content" itemprop="articleBody">
   
-    <img src="/2017/03/03/Android/quickaf-refreshlayout/RefreshLayout.png">
+    <img src="/2017/03/03/Android/quickaf-refreshlayout/RefreshLayout.png" class="">
 
-<p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>使用<code>RefreshLayout</code>控件进行下拉刷新和上拉加载，通过在布局中定义<code>app:ptr_content</code>和<code>app:ptr_empty</code>或api中设置内容layout和错误view。<br><code>RefreshLayout</code>的特点如下：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>使用<code>RefreshLayout</code>控件进行下拉刷新和上拉加载，通过在布局中定义<code>app:ptr_content</code>和<code>app:ptr_empty</code>或api中设置内容layout和错误view。<br><code>RefreshLayout</code>的特点如下：</p>
 <ul>
 <li>支持任意Layout的下拉刷新和上拉加载，默认支持<code>VScrollView</code>,<code>RecyclerView</code>, <code>ListView</code>, <code>GridView</code>上拉/下拉，还可以通过registerDetector来支持更多的Layout;</li>
 <li>支持自定义EmptyView，一个EmptyView包含loading, empty, error三个子view</li>
 <li>支持empty view的下拉刷新</li>
 <li>支持FooterView，FooterView一般在Adapter中定义</li>
 </ul>
-<a id="more"></a>
+<span id="more"></span>
 
-<h2 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h2><p>请参考<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中的<code>BaseListFragment.java</code></p>
+<h2 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h2><p>请参考<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>中的<code>BaseListFragment.java</code></p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="java">public abstract class BaseListFragment&lt;T&gt; extends BaseFragment implements RefreshLayout.OnRefreshListener {
+<pre><code class="java">public abstract class BaseListFragment&lt;T&gt; extends BaseFragment implements RefreshLayout.OnRefreshListener &#123;
     protected RefreshLayout mRefreshLayout;
     protected RefreshRecyclerHelper mRefreshHelper;
     protected RecyclerView mListView;
     protected AfRecyclerAdapter&lt;T&gt; mAdapter;
 
     @Override
-    protected int getContentLayout() {
+    protected int getContentLayout() &#123;
         return R.layout.base_refresh_recycler;
-    }
+    &#125;
 
     @Override
-    protected void initContentView(View view) {
+    protected void initContentView(View view) &#123;
         super.initContentView(view);
 
         mRefreshLayout = (RefreshLayout) view.findViewById(R.id.refresh);
@@ -241,28 +241,28 @@ QuickAF使用RefreshLayout控件进行下拉刷新和上拉加载，通过在布
         mRefreshHelper = generateRefreshHelper();
         mAdapter = generateAdapter();
         mRefreshHelper.setAdapter(mAdapter);
-    }
+    &#125;
 
     @Override
-    public void onRefresh() {
+    public void onRefresh() &#123;
         load(false);
-    }
+    &#125;
 
     @Override
-    public void onLoadMore() {
+    public void onLoadMore() &#123;
         load(false);
-    }
+    &#125;
 
-    protected void load(boolean needCache) {
-    }
+    protected void load(boolean needCache) &#123;
+    &#125;
 
-    protected RefreshRecyclerHelper generateRefreshHelper() {
+    protected RefreshRecyclerHelper generateRefreshHelper() &#123;
         AppRefreshRecyclerHelper helper = new AppRefreshRecyclerHelper(mRefreshLayout);
         return helper;
-    }
+    &#125;
 
     protected abstract AfRecyclerAdapter&lt;T&gt; generateAdapter();
-}</code></pre>
+&#125;</code></pre>
 <p>布局</p>
 <p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code" data-hide="false" data-title="base_refresh_recycler.xml"><span class="code-caption-label">(`base_refresh_recycler.xml`)</span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -289,8 +289,8 @@ QuickAF使用RefreshLayout控件进行下拉刷新和上拉加载，通过在布
     style=&quot;@style/base_rv&quot;&gt;
 
 &lt;/android.support.v7.widget.RecyclerView&gt;</code></pre>
-<h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">https://github.com/Jamling/QuickAF</a></p>
+<h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">https://github.com/Jamling/QuickAF</a></p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/03/03/Android/quickaf-refreshlayout/](https://www.ieclipse.cn/2017/03/03/Android/quickaf-refreshlayout/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
   </div>

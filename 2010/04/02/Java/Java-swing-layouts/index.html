@@ -181,7 +181,7 @@
   <div class="article-content" itemprop="articleBody">
   
     <h2 id="Null-Layout"><a href="#Null-Layout" class="headerlink" title="Null Layout"></a>Null Layout</h2><p>Null layout也称绝对布局管理器，如果一个容器使用绝对布局的话，那么其中的组件要调用setBounds()方法以确定在哪个位置显示组件，否则组件将不显示。 如果不用WindowsBuilder之类的界面开发插件，使用绝对定位将是一件痛苦的事。 在界面较复杂的情况下，一般不会使用绝对布局</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="FlowLayout"><a href="#FlowLayout" class="headerlink" title="FlowLayout"></a>FlowLayout</h2><p>使用此布局管理器将容器内的组件按从左到右或从右到左排列，如果剩余空间小于组件，那么组件将在新行显示。</p>
 <h2 id="BorderLayout"><a href="#BorderLayout" class="headerlink" title="BorderLayout"></a>BorderLayout</h2><p>是某些容器组件的默认布局管理器，它将容器分为NORTH, SOUTH,CENTER，WEST，EAST五个区域，每个区域最多只能有一个组件，所以它也只适用于容器内组件较少（不大于5个）的布局管理。 使用方式：<br>Container.add（component, BorderLayout. SOUTH）;<br>如果第二个参数未指定，那么默认在BorderLayout. CENTER区域显示。<br>如果对同一个区域添加了多个组件，那么只显示最后添加的组件。</p>

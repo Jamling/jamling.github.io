@@ -181,46 +181,46 @@
   <div class="article-content" itemprop="articleBody">
   
     <p>上篇介绍了Gerrit的安装与配置，本篇介绍的是Gerrit的使用</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="生成ssh-key"><a href="#生成ssh-key" class="headerlink" title="生成ssh key"></a>生成ssh key</h2><p>Windows下，打开gitbash等终端工具输入ssh-keygen生成公钥和私钥<br>Linux下直接在终端命令中输入ssh-keygen</p>
 <p class="code-caption" data-lang="shell" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="shell">$ssh-keygen</code></pre>
-{% asset_img image001.png %}
+<img src="/2016/05/14/other/tech-gerrit-guide/image001.png" class="">
 
-<h2 id="登录gerrit"><a href="#登录gerrit" class="headerlink" title="登录gerrit"></a>登录gerrit</h2><p>在浏览器中输入gerrit地址：<a href="http://192.168.135.48/gerrit/" target="_blank" rel="noopener">http://192.168.135.48/gerrit/</a><br>然后在弹出的身份验证对话框中输入账号及密码<br><strong>注：注意用户名大小写</strong></p>
+<h2 id="登录gerrit"><a href="#登录gerrit" class="headerlink" title="登录gerrit"></a>登录gerrit</h2><p>在浏览器中输入gerrit地址：<a target="_blank" rel="noopener" href="http://192.168.135.48/gerrit/">http://192.168.135.48/gerrit/</a><br>然后在弹出的身份验证对话框中输入账号及密码<br><strong>注：注意用户名大小写</strong></p>
 <p>首次登录成功后，进入注册页面，如下所示：</p>
-{% asset_img image003.png %}
+<img src="/2016/05/14/other/tech-gerrit-guide/image003.png" class="">
 
 <p>此界面可以添加ssh（亦可后续添加）</p>
 <p>输入Full Name，并点击Register New Email注册邮件地址。Gerrit会向输入的邮箱地址发送一封注册确认邮件。然后登录自己的邮箱，查收文件，点击验证链接，完成验证。验证通过后，将成功注册用户，就可以Review Code / Upload Code啦。</p>
-{% asset_img image005.png %}
+<img src="/2016/05/14/other/tech-gerrit-guide/image005.png" class="">
 
 <h3 id="设置full-name和email"><a href="#设置full-name和email" class="headerlink" title="设置full-name和email"></a>设置full-name和email</h3><p>点击Settings -&gt; Contact Information更新姓名及邮箱地址。</p>
-{% asset_img image007.png %}
+<img src="/2016/05/14/other/tech-gerrit-guide/image007.png" class="">
 
 <p>当email 不为空时，才算是正式的注册用户。才具备git 操作权限。</p>
 <p>这里的username和preferred email必须和git config配置的完全一致，才能upload代码到gerrit</p>
 <h3 id="设置ssh-public-key"><a href="#设置ssh-public-key" class="headerlink" title="设置ssh public key"></a>设置ssh public key</h3><p>点击settings -&gt; SSH Public Keys链接，将生成的ssh 公钥添加到gerrit</p>
-{% asset_img image009.png %}
+<img src="/2016/05/14/other/tech-gerrit-guide/image009.png" class="">
 
 <h3 id="测试ssh连接"><a href="#测试ssh连接" class="headerlink" title="测试ssh连接"></a>测试ssh连接</h3><p>命令格式：<code>ssh –p port your_user_name@gerrit_host</code></p>
 <p class="code-caption" data-lang="shell" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="shell">$ ssh –p 29418 lijiaming@192.168.135.48</code></pre>
-<img src="/2016/05/14/other/tech-gerrit-guide/image011.png">
+<img src="/2016/05/14/other/tech-gerrit-guide/image011.png" class="">
 
 <p>连接成功之后，就可以从gerrit上检出代码了</p>
 <h2 id="从gerrit检出代码"><a href="#从gerrit检出代码" class="headerlink" title="从gerrit检出代码"></a>从gerrit检出代码</h2><p>登录gerrit，点击Projects选项卡，在project list中点击要检出的工程<br>进入工程详情界面</p>
-<img src="/2016/05/14/other/tech-gerrit-guide/image013.png">
+<img src="/2016/05/14/other/tech-gerrit-guide/image013.png" class="">
 
 <p>点击ssh选项卡，复制代码检出命令<br>回到git bash终端，粘贴或手动输入git clone命令</p>
-<img src="/2016/05/14/other/tech-gerrit-guide/image015.png">
+<img src="/2016/05/14/other/tech-gerrit-guide/image015.png" class="">
 
 <p><strong>注：这里使用的是ssh协议哦</strong></p>
 <h2 id="git本地设置"><a href="#git本地设置" class="headerlink" title="git本地设置"></a>git本地设置</h2><h3 id="设置用户"><a href="#设置用户" class="headerlink" title="设置用户"></a>设置用户</h3><p>用户名登录gerrit的用户名<br>email地址为gerrit上注册的邮箱地址<br>必须完全与gerrit上配置的一致，否则将不能push代码</p>
-<img src="/2016/05/14/other/tech-gerrit-guide/image017.png">
+<img src="/2016/05/14/other/tech-gerrit-guide/image017.png" class="">
 
 <h3 id="下载commit模板"><a href="#下载commit模板" class="headerlink" title="下载commit模板"></a>下载commit模板</h3><p>先cd到仓库目录，然后再下载commit-msg</p>
 <p class="code-caption" data-lang="shell" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -230,12 +230,12 @@
 $ scp -p -P 29418 yourname@host:hooks/commit-msg .git/hooks/
 
 $ scp -p -P 29418 lijiaming@192.168.135.48:hooks/commit-msg .git/hooks/</code></pre>
-<img src="/2016/05/14/other/tech-gerrit-guide/image019.png">
+<img src="/2016/05/14/other/tech-gerrit-guide/image019.png" class="">
 
 <h3 id="设置默认push"><a href="#设置默认push" class="headerlink" title="设置默认push"></a>设置默认push</h3><p>编辑./git/config文件，在[remote “origin”]下添加<br><code>push = +refs/heads/*:refs/for/*</code><br>也可以通过<code>git config origin.remote.push= xxx</code>来设置哦</p>
 <p>这样，push代码时，可以直接使用git push origin branch名称将代码提交到gerrit</p>
 <p>如果不设置，需要使用git push origin HEAD:refs/for/master来提交到远程master分支</p>
-<h3 id="邮件提醒"><a href="#邮件提醒" class="headerlink" title="邮件提醒"></a>邮件提醒</h3><p>当gerrit上有事件发生时，会向相关的用户发送邮件，建议使用邮件客户端打开提醒功能，并设置过滤器，如来自<a href="mailto:gerrit@your_company.com" target="_blank" rel="noopener">gerrit@your_company.com</a>的邮件都存放在特定的文件夹下</p>
+<h3 id="邮件提醒"><a href="#邮件提醒" class="headerlink" title="邮件提醒"></a>邮件提醒</h3><p>当gerrit上有事件发生时，会向相关的用户发送邮件，建议使用邮件客户端打开提醒功能，并设置过滤器，如来自<a href="mailto:gerrit@your_company.com">gerrit@your_company.com</a>的邮件都存放在特定的文件夹下</p>
 <h3 id="提交代码"><a href="#提交代码" class="headerlink" title="提交代码"></a>提交代码</h3><h4 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h4><p class="code-caption" data-lang="shell" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="shell">$ git status</code></pre>
@@ -270,29 +270,29 @@ $ scp -p -P 29418 lijiaming@192.168.135.48:hooks/commit-msg .git/hooks/</code></
 
 <pre><code class="bash">$ git stash apply</code></pre>
 <p>将暂时区的代码恢复到当前分支，后面可以跟stash{position}，将第position次的暂存恢复。</p>
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>$ git stash pop</code></pre><p>同git stash apply，并且从stash中删除</p>
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>$ git stash list</code></pre><p>列出暂时区列表</p>
 <h2 id="Gerrit工作流"><a href="#Gerrit工作流" class="headerlink" title="Gerrit工作流"></a>Gerrit工作流</h2><h3 id="Upload代码"><a href="#Upload代码" class="headerlink" title="Upload代码"></a>Upload代码</h3><p>请见上一节提交代码</p>
 <h3 id="Review代码"><a href="#Review代码" class="headerlink" title="Review代码"></a>Review代码</h3><p>当upload成功之后，就可以在gerrit上看到提交了</p>
-<img src="/2016/05/14/other/tech-gerrit-guide/image021.png">
+<img src="/2016/05/14/other/tech-gerrit-guide/image021.png" class="">
 
 <h3 id="添加Reviewer"><a href="#添加Reviewer" class="headerlink" title="添加Reviewer"></a>添加Reviewer</h3><p>点击提交日志进去，添加reviewer</p>
-<img src="/2016/05/14/other/tech-gerrit-guide/image023.png">
+<img src="/2016/05/14/other/tech-gerrit-guide/image023.png" class="">
 
 <p>注：输入reviewer的邮箱地址会自动联想，点击点击Add Reviewer确认添加</p>
 <h3 id="评审代码"><a href="#评审代码" class="headerlink" title="评审代码"></a>评审代码</h3><p>点击文件查看修改</p>
-<img src="/2016/05/14/other/tech-gerrit-guide/image025.png"> 
+<img src="/2016/05/14/other/tech-gerrit-guide/image025.png" class=""> 
 
 <p>可以双击修改后的代码位置写入评审信息</p>
 <p>提交或评审</p>
-<img src="/2016/05/14/other/tech-gerrit-guide/image027.png">
+<img src="/2016/05/14/other/tech-gerrit-guide/image027.png" class="">
 
 <p>点击Review，选择Review结果</p>
-<img src="/2016/05/14/other/tech-gerrit-guide/image029.png">
+<img src="/2016/05/14/other/tech-gerrit-guide/image029.png" class="">
 
 <p>如果评审没有问题，则选择+2或+1，如果代码不正确或存在问题，则选择-1或-2。</p>
 <p>最后选择评审动作，是否提交到git</p>
@@ -342,7 +342,7 @@ git push --tags</code></pre>
 </ol>
 <h3 id="Push代码被拒绝"><a href="#Push代码被拒绝" class="headerlink" title="Push代码被拒绝"></a>Push代码被拒绝</h3><ul>
 <li><p><code>[remote rejected] HEAD -&gt; refs/for/master (missing Change-Id in commit messag</code><br>push代码时，出现以下错误：</p>
-<img src="/2016/05/14/other/tech-gerrit-guide/image033.png">
+<img src="/2016/05/14/other/tech-gerrit-guide/image033.png" class="">
 
 <p>解决办法</p>
 <ol>

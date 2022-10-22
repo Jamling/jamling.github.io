@@ -213,10 +213,10 @@
   </header>
   <div class="article-content" itemprop="articleBody">
   
-    <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a> 4.x版本是一个重构版本。它对平台资源与特定语言版本下的eclipse资源进行了解耦。这样，方便开发者将<a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a>集成到自己的RCP产品中，或者开发支持特定语言eclipse版本（如Eclipse for Java IDE）的explorer插件。</p>
+    <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a> 4.x版本是一个重构版本。它对平台资源与特定语言版本下的eclipse资源进行了解耦。这样，方便开发者将<a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a>集成到自己的RCP产品中，或者开发支持特定语言eclipse版本（如Eclipse for Java IDE）的explorer插件。</p>
 <p>Eclipse Explorer的目标是打造最强大的explorer插件！如果您对此感兴趣，诚邀您和我们一起共同改进此项目。</p>
 <h2 id="开发规范"><a href="#开发规范" class="headerlink" title="开发规范"></a>开发规范</h2><ul>
-<li>Fragment工程须提交到<a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a></li>
+<li>Fragment工程须提交到<a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a></li>
 <li>Bundle-Name 建议使用explorer4xxx，xxx为开发语言，如explorer4java</li>
 <li>Feature Name 建议使用Eclipse explorer for xxx，如Eclipse explorer for CDT</li>
 </ul>
@@ -229,7 +229,7 @@
 </ul>
 <p><img src="/p/eclipse-explorer/develop/new_fragment_project1.png" alt="image"></p>
 <ul>
-<li>设置宿主插件<br>添加<a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a>做为宿主插件</li>
+<li>设置宿主插件<br>添加<a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a>做为宿主插件</li>
 </ul>
 <p><img src="/p/eclipse-explorer/develop/new_fragment_project3.png" alt="image"></p>
 <ul>
@@ -241,23 +241,23 @@
 </li>
 </ul>
 <pre><code class="java">@Override
-public IExplorable getExplorable(Object obj) {
+public IExplorable getExplorable(Object obj) &#123;
     String path = null;
-    if (obj instanceof IJavaElement) {
+    if (obj instanceof IJavaElement) &#123;
         // java project.
-        if (obj instanceof IJavaProject) {
+        if (obj instanceof IJavaProject) &#123;
             path = ((IJavaProject) obj).getProject().getLocation()
                     .toOSString();
             return new Explorer(path, null);
-        }
+        &#125;
         // jar resource is null
-        else if (obj instanceof JarPackageFragmentRoot) {
+        else if (obj instanceof JarPackageFragmentRoot) &#123;
             String file = ((IPackageFragmentRoot) obj).getPath()
                     .toOSString();
             // get folder
             return new Explorer(null, file);
-        }
-        else if (obj instanceof IPackageFragmentRoot) {
+        &#125;
+        else if (obj instanceof IPackageFragmentRoot) &#123;
             // src folder
             IPackageFragmentRoot src = ((IPackageFragmentRoot) obj);
             IProject p = src.getJavaProject().getProject();
@@ -266,21 +266,21 @@ public IExplorable getExplorable(Object obj) {
                     .getAbsolutePath();
             return new Explorer(path, null);
             // System.out.println(path);
-        }
-        else if (obj instanceof IPackageFragment) {// other : package
+        &#125;
+        else if (obj instanceof IPackageFragment) &#123;// other : package
             IResource resource = ((IPackageFragment) obj).getResource();
             path = resource.getLocation().toOSString();
             return new Explorer(path, null);
-        }
-        else {// member:filed:
+        &#125;
+        else &#123;// member:filed:
             IResource resource = ((IJavaElement) obj).getResource();
             String file = resource.getLocation().toOSString();
             // get folder
             return new Explorer(null, file);
-        }
-    }
+        &#125;
+    &#125;
     return null;
-}</code></pre>
+&#125;</code></pre>
 <ul>
 <li>配置fragment扩展<br>在fragment.xml，Extensions选项卡，添加org.eclipse.core.runtime.adapters扩展点<p> ![image](/p/eclipse-explorer/develop/new_extension.png) ![image](/p/eclipse-explorer/develop/add_adapter_factory_extension.png)</p>
 示例：
@@ -304,8 +304,8 @@ public IExplorable getExplorable(Object obj) {
 <li><p>创建feature<br>调试并测试完毕之后，在Eclipse中，新建工程，选择Plugin Development目录下的Feature Project，为fragment工程创建feature。<br>Feature 创建完毕之后，请在cn.ieclipse.pde.explorer.feature工程中Included Features选项卡添加创建的feature，然后对cn.ieclipse.pde.explorer.site重新Build All。Build完之后，对Feature做安装测试并验证</p>
 </li>
 </ul>
-<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><p>在发布之前，应当充分测试fragment/feature/update site，测试通过后，可以选择将此fragment发布到Eclipse marketplace或作为<a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a>的补丁发布。发布成功后，请在<a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a>项目<br>测试及发布成功后，可以选择在fork <a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a> README.md中添加您的fragment插件及作者信息并提交Pull request.</p>
-<p>如果作为<a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a>的补丁发布（推荐使用此方式），请<a href="mailto:li.jaming@gmail.com" target="_blank" rel="noopener">mail</a>管理员在Eclipse Marketplace上更新fragment。</p>
+<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><p>在发布之前，应当充分测试fragment/feature/update site，测试通过后，可以选择将此fragment发布到Eclipse marketplace或作为<a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a>的补丁发布。发布成功后，请在<a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a>项目<br>测试及发布成功后，可以选择在fork <a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a> README.md中添加您的fragment插件及作者信息并提交Pull request.</p>
+<p>如果作为<a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a>的补丁发布（推荐使用此方式），请<a href="mailto:li.jaming@gmail.com">mail</a>管理员在Eclipse Marketplace上更新fragment。</p>
 
   
   </div>

@@ -181,7 +181,7 @@
   <div class="article-content" itemprop="articleBody">
   
     <p>在写本文之前，我还以为自己对android的bitmap很熟悉，直到自己亲手写代码实践，才发现自己错了很多年。真是汗颜啊！</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="Bitmap-Config"><a href="#Bitmap-Config" class="headerlink" title="Bitmap Config"></a>Bitmap Config</h2><p>首先，根据Android API 25的文档简要说明一下Android的Bitmap.Config以下4个选项</p>
 <ul>
@@ -227,36 +227,36 @@
 <p><em>以下是通过代码准确计算</em></p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="java">public static int getSizeInBytes(@Nullable Bitmap bitmap) {
-    if (bitmap == null) {
+<pre><code class="java">public static int getSizeInBytes(@Nullable Bitmap bitmap) &#123;
+    if (bitmap == null) &#123;
         return 0;
-    }
+    &#125;
 
     // There&#39;s a known issue in KitKat where getAllocationByteCount() can throw an NPE. This was
     // apparently fixed in MR1: http://bit.ly/1IvdRpd. So we do a version check here, and
     // catch any potential NPEs just to be safe.
-    if (Build.VERSION.SDK_INT &gt; Build.VERSION_CODES.KITKAT) {
-        try {
+    if (Build.VERSION.SDK_INT &gt; Build.VERSION_CODES.KITKAT) &#123;
+        try &#123;
             return bitmap.getAllocationByteCount();
-        } catch (NullPointerException npe) {
+        &#125; catch (NullPointerException npe) &#123;
             // Swallow exception and try fallbacks.
-        }
-    }
+        &#125;
+    &#125;
 
-    if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.HONEYCOMB_MR1) {
+    if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.HONEYCOMB_MR1) &#123;
         return bitmap.getByteCount();
-    }
+    &#125;
 
     // Estimate for earlier platforms.
     return bitmap.getWidth() * bitmap.getRowBytes();
-}</code></pre>
+&#125;</code></pre>
 <p>以一张1024<em>1024的图片为例，使用ARGB_8888，占用的内存为1024</em>1024*4=4M。像现在的手机摄像头动不动就是上千万像素，拍出来的照片如果按默认的ARGB_8888 config加载，则至少是几十M的内存占用。</p>
 <p>Android的图片资源主要分两部分：</p>
 <ol>
 <li>一种是apk中自带的，多为png格式，由系统加载，支持缩放，代码中通过R.xxx引用，decode时使用的是默认的ARGB_8888选项，图像质量高；</li>
 <li>另一种是网络图片或本地图片，多为jpg格式，加载时一般使用第三方的图片加载库，为节省内存decode时多为RGB_565选项。</li>
 </ol>
-<p>平时都是这么用，也没发现问题，优化内存占用时，一般也是从图片的尺寸方面入手。不过最近优化一个跟图片相关的功能，在图片尺寸无法缩放的条件下，只能通过更改bitmap config来降低内存的占用。然后意外的发现，导致颠覆了我的三观。为此我特地写了一个测试sample，代码详见<a href="https://github.com/Jamling/BitmapConfig" target="_blank" rel="noopener">github</a>，特地创建了一张背景色透明，图片内容为A（黑色50%透明度）R（红色）G（绿色）B（蓝色）图片，然后分别导出为：png8（alpha透明）、png24（不透明）、png32和jpeg（不透明）格式的图，分别使用ALPHA_8, ARGB_4444, ARGB_8888, RGB_565四种config加载图片，得到的实际结果如下（假设图像总像素为X）。</p>
+<p>平时都是这么用，也没发现问题，优化内存占用时，一般也是从图片的尺寸方面入手。不过最近优化一个跟图片相关的功能，在图片尺寸无法缩放的条件下，只能通过更改bitmap config来降低内存的占用。然后意外的发现，导致颠覆了我的三观。为此我特地写了一个测试sample，代码详见<a target="_blank" rel="noopener" href="https://github.com/Jamling/BitmapConfig">github</a>，特地创建了一张背景色透明，图片内容为A（黑色50%透明度）R（红色）G（绿色）B（蓝色）图片，然后分别导出为：png8（alpha透明）、png24（不透明）、png32和jpeg（不透明）格式的图，分别使用ALPHA_8, ARGB_4444, ARGB_8888, RGB_565四种config加载图片，得到的实际结果如下（假设图像总像素为X）。</p>
 <h2 id="实践结果"><a href="#实践结果" class="headerlink" title="实践结果"></a>实践结果</h2><h3 id="运行截图"><a href="#运行截图" class="headerlink" title="运行截图"></a>运行截图</h3><p><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/screenshot.jpg" alt="screenshot"></p>
 <h3 id="结果统计"><a href="#结果统计" class="headerlink" title="结果统计"></a>结果统计</h3><table>
 <thead>
@@ -269,28 +269,28 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/png8.png" alt>png8</td>
+<td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/png8.png" alt="">png8</td>
 <td align="center"><strong>4</strong><del><code>1</code></del> X</td>
 <td align="center">2 X</td>
 <td align="center">4 X</td>
 <td align="center"><strong>4</strong><del><code>2</code></del> X A <del><code>不</code></del> 透明</td>
 </tr>
 <tr>
-<td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/png24.png" alt>png24</td>
+<td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/png24.png" alt="">png24</td>
 <td align="center"><strong>4</strong><del><code>1</code></del> X</td>
 <td align="center">2 X</td>
 <td align="center">4 X</td>
 <td align="center"><strong>2</strong> X</td>
 </tr>
 <tr>
-<td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/png32.png" alt>png32</td>
+<td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/png32.png" alt="">png32</td>
 <td align="center"><strong>4</strong><del><code>1</code></del> X</td>
 <td align="center">2 X</td>
 <td align="center">4 X</td>
 <td align="center"><strong>4</strong><del><code>2</code></del> X A <del><code>不</code></del> 透明</td>
 </tr>
 <tr>
-<td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/jpeg_80.jpg" alt>jpeg</td>
+<td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/jpeg_80.jpg" alt="">jpeg</td>
 <td align="center"><strong>4</strong><del><code>1</code></del> X</td>
 <td align="center">2 X</td>
 <td align="center">4 X</td>
@@ -303,7 +303,7 @@
 <li>RGB_565：在png8和png32中，图片中的A都保持了50%的透明度，而且占用的内存也和ARGB_8888一样，不是说RGB_565不包含alpha么？不是说占用的内存是ARGB_8888的一半么？</li>
 <li>ARGB_4444：在android 6.0上面，png8和png32看不见（全透明），png24和jpeg显示为一块黑色区域，在android 4.2上则显示正常。</li>
 </ol>
-<p>带着上面的疑问，在网上进行了相关的搜索，也没有找到答案。好吧，我是懵了，不知道各位看客如何？附上github上的示例工程：<a href="https://github.com/Jamling/BitmapConfig" target="_blank" rel="noopener">https://github.com/Jamling/BitmapConfig</a></p>
+<p>带着上面的疑问，在网上进行了相关的搜索，也没有找到答案。好吧，我是懵了，不知道各位看客如何？附上github上的示例工程：<a target="_blank" rel="noopener" href="https://github.com/Jamling/BitmapConfig">https://github.com/Jamling/BitmapConfig</a></p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/06/14/Android/Android-bitmap-config/](https://www.ieclipse.cn/2017/06/14/Android/Android-bitmap-config/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
   </div>

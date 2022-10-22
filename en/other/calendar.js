@@ -216,7 +216,8 @@ var calendar = {
       * @eg:var MonthDay = calendar.monthDays(1987,9) ;//MonthDay=29
       */
     monthDays:function(y,m) {
-        if(m>12 || m<1) {return -1} 月份参数从1至12，参数错误返回-1 return( (calendar.lunarinfo[y-1900] & (0x10000>>m))? 30: 29 );
+        if(m>12 || m<1) {return -1}//月份参数从1至12，参数错误返回-1
+        return( (calendar.lunarInfo[y-1900] & (0x10000>>m))? 30: 29 );
     },
 
     /**
@@ -226,7 +227,58 @@ var calendar = {
       * @eg:var solarMonthDay = calendar.leapDays(1987) ;//solarMonthDay=30
       */
     solarDays:function(y,m) {
-        if(m>12 || m<1) 2 {return -1} 若参数错误 返回-1 var ms="m-1;" if(ms="=1)" { 2月份的闰平规律测算后确认返回28或29 return(((y%4="=" 0) && (y%100 !="0)" || (y%400="=" 0))? 29: 28); }else return(calendar.solarmonth[ms]); } }, ** * 农历年份转换为干支纪年 @param lyear 农历年的年份数 @return cn string toganzhiyear:function(lyear) gankey="(lYear" - 3) % 10; zhikey="(lYear" 12; if(gankey="=" if(zhikey="=" return calendar.gan[gankey-1] + calendar.zhi[zhikey-1]; 公历月、日判断所属星座 cmonth [description] cday toastro:function(cmonth,cday) s="\u9b54\u7faf\u6c34\u74f6\u53cc\u9c7c\u767d\u7f8a\u91d1\u725b\u53cc\u5b50\u5de8\u87f9\u72ee\u5b50\u5904\u5973\u5929\u79e4\u5929\u874e\u5c04\u624b\u9b54\u7faf" ; arr="[20,19,21,21,21,22,23,23,23,23,22,22];" s.substr(cmonth*2 (cday < arr[cmonth-1] ? : 0),2) "\u5ea7"; 座 传入offset偏移量返回干支 offset 相对甲子的偏移量 toganzhi:function(offset) calendar.gan[offset%10] calendar.zhi[offset%12]; 传入公历(!)y年获得该年第n个节气的公历日期 y公历年(1900-2100)；n二十四节气中的第几个节气(1~24)；从n="1(小寒)算起" day number @eg:var _24="calendar.getTerm(1987,3)" getterm:function(y,n) if(y<1900 y>2100) {return -1;}
+        if(m>12 || m<1) {return -1} //若参数错误 返回-1
+        var ms = m-1;
+        if(ms==1) { //2月份的闰平规律测算后确认返回28或29
+            return(((y%4 == 0) && (y%100 != 0) || (y%400 == 0))? 29: 28);
+        }else {
+            return(calendar.solarMonth[ms]);
+        }
+    },
+
+    /**
+     * 农历年份转换为干支纪年
+     * @param  lYear 农历年的年份数
+     * @return Cn string
+     */
+    toGanZhiYear:function(lYear) {
+        var ganKey = (lYear - 3) % 10;
+        var zhiKey = (lYear - 3) % 12;
+        if(ganKey == 0) ganKey = 10;//如果余数为0则为最后一个天干
+        if(zhiKey == 0) zhiKey = 12;//如果余数为0则为最后一个地支
+        return calendar.Gan[ganKey-1] + calendar.Zhi[zhiKey-1];
+        
+    },
+
+    /**
+     * 公历月、日判断所属星座
+     * @param  cMonth [description]
+     * @param  cDay [description]
+     * @return Cn string
+     */
+    toAstro:function(cMonth,cDay) {
+        var s   = "\u9b54\u7faf\u6c34\u74f6\u53cc\u9c7c\u767d\u7f8a\u91d1\u725b\u53cc\u5b50\u5de8\u87f9\u72ee\u5b50\u5904\u5973\u5929\u79e4\u5929\u874e\u5c04\u624b\u9b54\u7faf";
+        var arr = [20,19,21,21,21,22,23,23,23,23,22,22];
+        return s.substr(cMonth*2 - (cDay < arr[cMonth-1] ? 2 : 0),2) + "\u5ea7";//座
+    },
+
+    /**
+      * 传入offset偏移量返回干支
+      * @param offset 相对甲子的偏移量
+      * @return Cn string
+      */
+    toGanZhi:function(offset) {
+        return calendar.Gan[offset%10] + calendar.Zhi[offset%12];
+    },
+
+    /**
+      * 传入公历(!)y年获得该年第n个节气的公历日期
+      * @param y公历年(1900-2100)；n二十四节气中的第几个节气(1~24)；从n=1(小寒)算起 
+      * @return day Number
+      * @eg:var _24 = calendar.getTerm(1987,3) ;//_24=4;意即1987年2月4日立春
+      */
+    getTerm:function(y,n) {
+        if(y<1900 || y>2100) {return -1;}
         if(n<1 || n>24) {return -1;}
         var _table = calendar.sTermInfo[y-1900];
         var _info = [
@@ -278,7 +330,19 @@ var calendar = {
       * @eg:var cnMonth = calendar.toChinaMonth(12) ;//cnMonth='腊月'
       */
     toChinaMonth:function(m) { // 月 => \u6708
-        if(m>12 || m<1) {return -1} 若参数错误 返回-1 var s="calendar.nStr3[m-1];" s+="\u6708" ; 加上月字 return s; }, ** * 传入农历日期数字返回汉字表示法 @param lunar day @return cn string @eg:var cnday="calendar.toChinaDay(21)" cnmonth="廿一" tochinaday:function(d){ 日> \u65e5
+        if(m>12 || m<1) {return -1} //若参数错误 返回-1
+        var s = calendar.nStr3[m-1];
+        s+= "\u6708";//加上月字
+        return s;
+    },
+
+    /**
+      * 传入农历日期数字返回汉字表示法
+      * @param lunar day
+      * @return Cn string
+      * @eg:var cnDay = calendar.toChinaDay(21) ;//cnMonth='廿一'
+      */
+    toChinaDay:function(d){ //日 => \u65e5
         var s;
         switch (d) {
             case 10:
@@ -316,8 +380,35 @@ var calendar = {
       */
     solar2lunar:function (y,m,d) { //参数区间1900.1.31~2100.12.31
         if(y<1900 || y>2100) {return -1;}//年份限定、上限
-        if(y==1900&&m==1&&d<31) {return -1;} 下限 if(!y) { 未传参 获得当天 var objdate="new" date(); }else date(y,parseint(m)-1,d) } i, leap="0," temp="0;" 修正ymd参数 y="objDate.getFullYear(),m" = objdate.getmonth()+1,d="objDate.getDate();" offset="(Date.UTC(objDate.getFullYear(),objDate.getMonth(),objDate.getDate())" - date.utc(1900,0,31)) 86400000; for(i="1900;" i<2101 &&>0; i++) { temp=calendar.lYearDays(i); offset-=temp; }
-        if(offset<0) { offset+="temp;" i--; } 是否今天 var istodayobj="new" date(),istoday="false;" if(istodayobj.getfullyear()="=y" && istodayobj.getmonth()+1="=m" istodayobj.getdate()="=d)" istoday="true;" 星期几 nweek="objDate.getDay(),cWeek" = calendar.nstr1[nweek]; if(nweek="=0)" {nweek="7;}//数字表示周几顺应天朝周一开始的惯例" 农历年 year="i;" leap="calendar.leapMonth(i);" 闰哪个月 isleap="false;" 效验闰月 for(i="1;" i<13 offset>0; i++) {
+        if(y==1900&&m==1&&d<31) {return -1;}//下限
+        if(!y) { //未传参  获得当天
+            var objDate = new Date();
+        }else {
+            var objDate = new Date(y,parseInt(m)-1,d)
+        }
+        var i, leap=0, temp=0;
+        //修正ymd参数
+        var y = objDate.getFullYear(),m = objDate.getMonth()+1,d = objDate.getDate();
+        var offset   = (Date.UTC(objDate.getFullYear(),objDate.getMonth(),objDate.getDate()) - Date.UTC(1900,0,31))/86400000;
+        for(i=1900; i<2101 && offset>0; i++) { temp=calendar.lYearDays(i); offset-=temp; }
+        if(offset<0) { offset+=temp; i--; }
+        
+        //是否今天
+        var isTodayObj = new Date(),isToday=false;
+        if(isTodayObj.getFullYear()==y && isTodayObj.getMonth()+1==m && isTodayObj.getDate()==d) {
+            isToday = true;
+        }
+        //星期几
+        var nWeek = objDate.getDay(),cWeek = calendar.nStr1[nWeek];
+        if(nWeek==0) {nWeek =7;}//数字表示周几顺应天朝周一开始的惯例
+        //农历年
+        var year = i;
+        
+        var leap = calendar.leapMonth(i); //闰哪个月
+        var isLeap = false;
+        
+        //效验闰月
+        for(i=1; i<13 && offset>0; i++) {
             //闰月
             if(leap>0 && i==(leap+1) && isLeap==false){ 
                 --i;
@@ -337,7 +428,23 @@ var calendar = {
         }else{ 
             isLeap = true; --i;
         }
-        if(offset<0){ offset +="temp;" --i; } 农历月 var month="i;" 农历日 day="offset" 1; 天干地支处理 sm="m-1;" gzy="calendar.toGanZhiYear(year);" 月柱 1900年1月小寒以前为 丙子月(60进制12) firstnode="calendar.getTerm(year,(m*2-1));//返回当月「节」为几日开始" secondnode="calendar.getTerm(year,(m*2));//返回当月「节」为几日开始" 依据12节气修正干支月 gzm="calendar.toGanZhi((y-1900)*12+m+11);" if(d>=firstNode) {
+        if(offset<0){ offset += temp; --i; }
+        //农历月
+        var month   = i;
+        //农历日
+        var day     = offset + 1;
+        
+        //天干地支处理
+        var sm      =   m-1;
+        var gzY     =   calendar.toGanZhiYear(year);
+        
+        //月柱 1900年1月小寒以前为 丙子月(60进制12)
+        var firstNode   = calendar.getTerm(year,(m*2-1));//返回当月「节」为几日开始
+        var secondNode  = calendar.getTerm(year,(m*2));//返回当月「节」为几日开始
+        
+        //依据12节气修正干支月
+        var gzM     =   calendar.toGanZhi((y-1900)*12+m+11);
+        if(d>=firstNode) {
             gzM     =   calendar.toGanZhi((y-1900)*12+m+12);
         }
         
@@ -376,11 +483,26 @@ var calendar = {
         var leapMonth   = calendar.leapMonth(y);
         var leapDay     = calendar.leapDays(y);
         if(isLeapMonth&&(leapMonth!=m)) {return -1;}//传参要求计算该闰月公历 但该年得出的闰月与传参的月份并不同
-        if(y==2100&&m==12&&d>1 || y==1900&&m==1&&d<31) 1900 {return -1;} 超出了最大极限值 var day="calendar.monthDays(y,m);" _day="day;" bugfix 2016-9-25 if month is leap, use leapdays method if(isleapmonth) { } if(y < || y> 2100 || d > _day) {return -1;}//参数合法性效验
+        if(y==2100&&m==12&&d>1 || y==1900&&m==1&&d<31) {return -1;}//超出了最大极限值 
+        var day  = calendar.monthDays(y,m); 
+        var _day = day;
+        //bugFix 2016-9-25 
+        //if month is leap, _day use leapDays method 
+        if(isLeapMonth) {
+            _day = calendar.leapDays(y,m);
+        }
+        if(y < 1900 || y > 2100 || d > _day) {return -1;}//参数合法性效验
         
         //计算农历的时间差
         var offset = 0;
-        for(var i=1900;i<y;i++) { offset+="calendar.lYearDays(i);" } var leap="0,isAdd=" false; for(var i="1;i<m;i++)" if(!isadd) 处理闰月 if(leap<="i" &&>0) {
+        for(var i=1900;i<y;i++) {
+            offset+=calendar.lYearDays(i);
+        }
+        var leap = 0,isAdd= false;
+        for(var i=1;i<m;i++) {
+            leap = calendar.leapMonth(y);
+            if(!isAdd) {//处理闰月
+                if(leap<=i && leap>0) {
                     offset+=calendar.leapDays(y);isAdd = true;
                 }
             }
@@ -397,4 +519,4 @@ var calendar = {
 
         return calendar.solar2lunar(cY,cM,cD);
     }
-};</y;i++)></31)></=></0){></0)></31)></1900></=></1)></1></1)></1)></=>
+};

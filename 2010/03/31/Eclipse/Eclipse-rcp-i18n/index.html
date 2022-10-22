@@ -181,7 +181,7 @@
   <div class="article-content" itemprop="articleBody">
   
     <p>对rcp的国际化主要是通过添加插件工程来完成。这一部分可以从网上或者书上找到不少的资料。在这里我主要阐述一下导出的RCP产品如何对使用的 eclipse内容及其它插件的国际化。<br>举个例子，你创建了一个jface对话框，确定按钮显示的是OK。如果你的rcp依赖于p2，那么检查更新的菜单显示的是Check for Updates。</p>
-<a id="more"></a>
+<span id="more"></span>
 <p>国际化步骤如下：</p>
 <h2 id="一、下载并安装eclipse中文语言包"><a href="#一、下载并安装eclipse中文语言包" class="headerlink" title="一、下载并安装eclipse中文语言包"></a>一、下载并安装eclipse中文语言包</h2><p>可以在download/Eclipse Technology Project/Babel 频道下载相关的语言包。<br>我所使用的eclipse版本为伽利略（3.5.0）。分别下了eclipse语言包和rt-equinox语言包。<br>下载完成之后分别解压到%eclipse_home%/dropins/eclipse_zh和%eclipse_home %/dropins/p2_zh（详细请参考eclipse插件安装方法）。<br>重启eclipse，如果发现eclipse里面的菜单变成中文，说明 eclipse语言包安装成功；如果帮助菜单下的检查更新也变成中文，那么p2语言包插件也安装成功。</p>
 <h2 id="二、添加feature工程"><a href="#二、添加feature工程" class="headerlink" title="二、添加feature工程"></a>二、添加feature工程</h2><p>在feature.xml Plug-ins选项卡中，添加要国际化段工程，如p2.sdk.nl_zh。<br><strong>注意，添加的插件段工程不能有警告。</strong></p>

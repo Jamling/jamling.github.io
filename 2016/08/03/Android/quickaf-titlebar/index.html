@@ -180,18 +180,18 @@
   </header>
   <div class="article-content" itemprop="articleBody">
   
-    <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>框架中，标题栏不使用Android自带的ActionBar或ToolBar，而是使用一个IOS风格的TitleBar来实现。TitleBar的使用非常灵活，主要分为三块区域：</p>
+    <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>框架中，标题栏不使用Android自带的ActionBar或ToolBar，而是使用一个IOS风格的TitleBar来实现。TitleBar的使用非常灵活，主要分为三块区域：</p>
 <ul>
 <li>左侧区域，一般放置一个返回按钮，父类AfActivity已经默认点击为finish操作</li>
 <li>中间区域，一般显示页面的标题，如“订单详情”</li>
 <li>右侧区域，一般放置本页面的相关操作图标或文本按钮</li>
 </ul>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>一般来说，一个App的页面风格应该是统一的，所以一般在BaseActivity/BaseFragment中对TitleBar进行初始化。初始化方法一般是放在<code>initHeaderView()</code>中，如下所示：</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="java">protected void initHeaderView() {
+<pre><code class="java">protected void initHeaderView() &#123;
     mTitleLeftView = (TextView) View.inflate(this, R.layout.title_left_tv, null);
     mTitleTextView = (TextView) View.inflate(this, R.layout.title_middle_tv, null);
 
@@ -200,12 +200,12 @@
 
     int padding = AppUtils.dp2px(this, 8);
     mTitleBar.setPadding(padding, 0, padding, 0);
-    if(!isOverlay()){
+    if(!isOverlay())&#123;
         mTitleBar.setBackgroundColor(getStatusBarColor());
         mTitleBar.setBottomDrawable(AppUtils.getColor(this, R.color.divider));
-    }
+    &#125;
     setOnClickListener(mTitleLeftView);
-}</code></pre>
+&#125;</code></pre>
 <p>通常，BaseActivity/BaseFragment中已经对TitleBar初始化过了，所以子页面的初始化主要的就是控制TitleBar的右侧区域以及设置标题文字。设置标题文字调用<code>setTitle(&quot;titleName&quot;)</code>就可以了，下面主要描述对TitleBar右侧区域的初始化。</p>
 <p>TitleBar提供了一个<code>addRightView()</code>的API来添加右侧菜单项。参数类型可以是layout resource或View对象。如此，用户可以自由控制菜单项的属性，比如设置图片，设置文字，添加onClick事件等。</p>
 <ul>
@@ -241,8 +241,8 @@ mManageTv.setText(isMyList() ? R.string.note_my_book_title_manage : R.string.not
 <h3 id="隐藏标题栏"><a href="#隐藏标题栏" class="headerlink" title="隐藏标题栏"></a>隐藏标题栏</h3><p>TitleBar可以通过<code>View.setVisibility()</code>来控制显示或隐藏，如果是页面不需要标题栏，建议是在<code>initWindowFeature()</code>方法中通过<code>setShowTitleBar(false)</code>来设置。</p>
 <h3 id="悬浮标题栏"><a href="#悬浮标题栏" class="headerlink" title="悬浮标题栏"></a>悬浮标题栏</h3><p>TitleBar支持设置其是否悬浮在页面上（不随页面滚动），可以在<code>initWindowFeature()</code>方法中通过<code>setOverlay(false)</code>来设置。</p>
 <h2 id="PopupMenu"><a href="#PopupMenu" class="headerlink" title="PopupMenu"></a>PopupMenu</h2><p>TitleBar内部未实现popup menu，如果需要使用下拉菜单，可以在特定的页面中结合PopupWindowUtils或自己实现一个下拉菜单</p>
-<h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">https://github.com/Jamling/QuickAF</a></p>
+<h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">https://github.com/Jamling/QuickAF</a></p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/08/03/Android/quickaf-titlebar/](https://www.ieclipse.cn/2016/08/03/Android/quickaf-titlebar/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
   </div>

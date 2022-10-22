@@ -181,7 +181,7 @@
   <div class="article-content" itemprop="articleBody">
   
     <p>构造函数构建函数(Constructor)属于一种较特殊的方法类型,因为它没有返回值.这与void返回值存在着明显的区别。对于void返回值，尽管方法本身不会自动返回什么，但仍然可以让它返回另一些东西。构建器则不同，它不仅什么也不会自动返回，而且根本不能有任何选择.若创建一个没有构件器的类,则编译器会自动创建一个默认构件器.</p>
-<a id="more"></a>
+<span id="more"></span>
 <p>gc()与finalize()gc只能清除在堆上分配的内存(纯java语言的所有对象都在堆上使用new分配内存),而不能清除栈上分配的内存（当使用JNI技术时,可能会在栈上分配内存,例如java调用c程序，而该c程序使用malloc分配内存时）.因此,如果某些对象被分配了栈上的内存区域,那gc就管不着了,对这样的对象进行内存回收就要靠finalize().</p>
 <p>举个例子来说,当java 调用非java方法时（这种方法可能是c或是c++的）,在非java代码内部也许调用了c的malloc()函数来分配内存，而且除非调用那个了free() 否则不会释放内存(因为free()是c的函数),这个时候要进行释放内存的工作,gc是不起作用的,因而需要在finalize()内部的一个固有方法调用它(free()).</p>
 <p>finalize的工作原理应该是这样的：一旦垃圾收集器准备好释放对象占用的存储空间，它首先调用finalize()，而且只有在下一次垃圾收集过程中，才会真正回收对象的内存.所以如果使用finalize()，就可以在垃圾收集期间进行一些重要的清除或清扫工作.</p>
@@ -203,18 +203,18 @@ System.out.println(this.i);//can not be i:The local variable i may not have been
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">package ch2;
-public class Test {
+public class Test &#123;
     int i;
-    public void menberInit() {
+    public void menberInit() &#123;
        int i;
        String s;
        System.out.println(this.i);// can not be i:The local variable i may not
        // have been initialized
-    }
+    &#125;
     /**
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) &#123;
        // Test t = new Test();
        // t.menberInit();
        /*static init
@@ -226,64 +226,64 @@ public class Test {
        t3.f3(1);
        */
        Mugs x = new Mugs();
-    }
+    &#125;
     //static Table t2 = new Table();// 1,初始化静态成员t2.
     //static Cupboard t3 = new Cupboard();// 8
-}
-class Bowl {
-    Bowl(int marker) {// 3,没有静态成员/方法,执行构造函数//5
+&#125;
+class Bowl &#123;
+    Bowl(int marker) &#123;// 3,没有静态成员/方法,执行构造函数//5
        System.out.println(&quot;Bowl(&quot; + marker + &quot;)&quot;);
-    }
-    void f(int marker) {
+    &#125;
+    void f(int marker) &#123;
        System.out.println(&quot;f(&quot; + marker + &quot;)&quot;);
-    }
-}
-class Table {
+    &#125;
+&#125;
+class Table &#123;
     static Bowl b1 = new Bowl(1);// 2,初始化静态成员b1
-    Table() {// 6
+    Table() &#123;// 6
        System.out.println(&quot;Table()&quot;);
        b2.f(1);// 7
-    }
-    void f2(int marker) {
+    &#125;
+    void f2(int marker) &#123;
        System.out.println(&quot;f2(&quot; + marker + &quot;)&quot;);
-    }
+    &#125;
     static Bowl b2 = new Bowl(2);// 4,初始化静态成员b2
-}
-class Cupboard {
+&#125;
+class Cupboard &#123;
     Bowl b3 = new Bowl(3);// 11最后才是非静态
     static Bowl b4 = new Bowl(4);// 9,先静态
-    Cupboard() {// 12
+    Cupboard() &#123;// 12
        System.out.println(&quot;Cupboard()&quot;);
        b4.f(2);
-    }
-    void f3(int marker) {
+    &#125;
+    void f3(int marker) &#123;
        System.out.println(&quot;f3(&quot; + marker + &quot;)&quot;);
-    }
+    &#125;
     static Bowl b5 = new Bowl(5);// 10,第二个静态
-}
+&#125;
 /**
 * non-static init
 */
-class Mug {
-    Mug(int marker) {
+class Mug &#123;
+    Mug(int marker) &#123;
        System.out.println(&quot;Mug(&quot; + marker + &quot;)&quot;);
-    }
-    void f(int marker) {
+    &#125;
+    void f(int marker) &#123;
        System.out.println(&quot;f(&quot; + marker + &quot;)&quot;);
-    }
-}
-class Mugs {
+    &#125;
+&#125;
+class Mugs &#123;
     Mug c1;
     Mug c2;
-    {
+    &#123;
        c1 = new Mug(1);
        c2 = new Mug(2);
        System.out.println(&quot;c1 &amp; c2 initialized&quot;);
-    }
-    Mugs() {
+    &#125;
+    Mugs() &#123;
        System.out.println(&quot;Mugs()&quot;);
-    }
-}</code></pre>
+    &#125;
+&#125;</code></pre>
 <p>请注意程序中注释中的序号，我喜欢用机器的方式思考方式来解这种题。</p>
 <ol>
 <li>发现静态成员t1，它新建一个Table对象。<br>在Table对象中，发现静态变量b1，新建一个Bowl对象，初始化Bowl，执行构造<br>在Table对象中，发现静态变量b2，新建一个Bowl对象，初始化Bowl，执行构造<br>Table.class没有成员/静态方法了，进行构造方法。</li>

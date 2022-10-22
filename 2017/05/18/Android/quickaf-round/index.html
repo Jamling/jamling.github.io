@@ -181,12 +181,12 @@
   <div class="article-content" itemprop="articleBody">
   
     <p> Android中实现圆角图片有多种姿势，不知你解锁了几种？</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="方法一：setXfermode法"><a href="#方法一：setXfermode法" class="headerlink" title="方法一：setXfermode法"></a>方法一：setXfermode法</h2><p>此种方式就是再new一个相同尺寸的bitmap，然后使用paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));先画圆角矩形，再画原始bitmap，然后就得到了一个圆角的bitmap了。</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="java">public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, float roundPx) {
+<pre><code class="java">public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, float roundPx) &#123;
 
     Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Config.ARGB_8888);
     Canvas canvas = new Canvas(output);
@@ -205,26 +205,26 @@
     canvas.drawBitmap(bitmap, rect, rect, paint);
 
     return output;
-}</code></pre>
+&#125;</code></pre>
 <p>点评：<br>早期用得较多，占用bitmap双倍内存。</p>
-<h2 id="方法二：使用BitmapShader"><a href="#方法二：使用BitmapShader" class="headerlink" title="方法二：使用BitmapShader"></a>方法二：使用BitmapShader</h2><p>此种方式是先将bitmap生成BitmapShader，然后将其绘制到canvas中, 部分关键代码如下，完整代码请参考<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中的RoundImageView</p>
+<h2 id="方法二：使用BitmapShader"><a href="#方法二：使用BitmapShader" class="headerlink" title="方法二：使用BitmapShader"></a>方法二：使用BitmapShader</h2><p>此种方式是先将bitmap生成BitmapShader，然后将其绘制到canvas中, 部分关键代码如下，完整代码请参考<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>中的RoundImageView</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">bitmapShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
 paint.setShader(bitmapShader);</code></pre>
 <pre><code class="java">@Override
-public void draw(Canvas canvas) {
+public void draw(Canvas canvas) &#123;
     Rect bounds = getBounds();
     canvas.drawRoundRect(fillRect, radius, radius, paint);
-    if (mBorderWidth &gt; 0) {
-        if (mIsCircle) {
+    if (mBorderWidth &gt; 0) &#123;
+        if (mIsCircle) &#123;
             canvas.drawCircle(bounds.width() / 2, bounds.height() / 2, radius, strokePaint);
-        }
-        else {
+        &#125;
+        else &#123;
             canvas.drawRoundRect(fillRect, radius, radius, strokePaint);
-        }
-    }
-}
+        &#125;
+    &#125;
+&#125;
 &lt;p class=&quot;code-caption&quot; data-lang=&quot;&quot; data-line_number=&quot;frontend&quot; data-trim_indent=&quot;backend&quot; data-label_position=&quot;outer&quot; data-labels_left=&quot;Code&quot; data-labels_right=&quot;:&quot; data-labels_copy=&quot;Copy Code&quot;&gt;&lt;span class=&quot;code-caption-label&quot;&gt;&lt;/span&gt;&lt;a class=&quot;code-caption-copy&quot;&gt;Copy Code&lt;/a&gt;&lt;/p&gt;
 </code></pre>
 <p>点评：<br>占用内存较大，实现有点小复杂。</p>
@@ -232,7 +232,7 @@ public void draw(Canvas canvas) {
 <pre><code class="java">DisplayImageOptions options = new DisplayImageOptions.Builder()
         .displayer(new RoundedBitmapDisplayer()) // display rounded bitmap
         .build();</code></pre>
-<p>再以比较另类的<a href="https://github.com/facebook/fresco" target="_blank" rel="noopener">fresco</a>为例，虽然底层是以C实现，不过在圆角处理上，仍然还是在Java层实现，用的方式还是BitmapShader。不过对于非bitmap的圆角实现，fresco是用Paint直接画的。附上fresco配置。</p>
+<p>再以比较另类的<a target="_blank" rel="noopener" href="https://github.com/facebook/fresco">fresco</a>为例，虽然底层是以C实现，不过在圆角处理上，仍然还是在Java层实现，用的方式还是BitmapShader。不过对于非bitmap的圆角实现，fresco是用Paint直接画的。附上fresco配置。</p>
 <p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="xml">&lt;com.facebook.drawee.view.SimpleDraweeView
@@ -268,9 +268,9 @@ public void draw(Canvas canvas) {
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">@Override
-protected void onDraw(Canvas canvas) {
+protected void onDraw(Canvas canvas) &#123;
     super.onDraw(canvas);
-    if (src != null &amp;&amp; dst != null) {
+    if (src != null &amp;&amp; dst != null) &#123;
         int w = getMeasuredWidth(), h = getMeasuredHeight();
         int sc = canvas.saveLayer(0, 0, w, h, null,
             Canvas.MATRIX_SAVE_FLAG | Canvas.CLIP_SAVE_FLAG | Canvas.HAS_ALPHA_LAYER_SAVE_FLAG
@@ -280,9 +280,9 @@ protected void onDraw(Canvas canvas) {
         canvas.drawBitmap(src, 0, 0, paint); // 长方形
         paint.setXfermode(null);
         canvas.restoreToCount(sc);
-    }
-}</code></pre>
-<p>详细代码请参考<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中的RoundMaskView</p>
+    &#125;
+&#125;</code></pre>
+<p>详细代码请参考<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>中的RoundMaskView</p>
 <p>使用这种方式，圆角化的对象不限于ImageView，还可以是任意的layout哦，比如下面的示例</p>
 <p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -318,8 +318,8 @@ protected void onDraw(Canvas canvas) {
 &lt;/FrameLayout&gt;</code></pre>
 <p>配合FrameLayout，将LinearLayout实现了圆角，在视觉效果上，ImageView左上和右上圆角，TextView左下和右下圆角。</p>
 <p>点评：<br>具有一定的局限性，不过不限于图片，所有的Layout都可以在视觉上实现圆角。</p>
-<h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">https://github.com/Jamling/QuickAF</a></p>
+<h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">https://github.com/Jamling/QuickAF</a></p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/05/18/Android/quickaf-round/](https://www.ieclipse.cn/2017/05/18/Android/quickaf-round/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
   </div>

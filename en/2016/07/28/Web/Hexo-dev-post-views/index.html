@@ -180,10 +180,10 @@
   </header>
   <div class="article-content" itemprop="articleBody">
   
-    <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>Hexo的NexT主题非常流行，之前看过某博友的博客，使用的就是NexT主题，在文章列表页面，竟然还显示了文章的阅读次数！Hexo是静态博客，像阅读次数的实现必须借助第三方工具。早期<a href="http://github.com/Jamling/hexo-theme-nova" target="_blank" rel="noopener">Nova</a>主题使用的是友言评论，不像多说评论开放了许多API，所以，从版本0.1.0开始，本站使用的<a href="http://github.com/Jamling/hexo-theme-nova" target="_blank" rel="noopener">Nova</a>主题就换成了多说。在多说的<a href="http://dev.duoshuo.com/docs/50615732a834c63c56004257" target="_blank" rel="noopener">获取文章评论、转发数API</a>中，<code>views</code>即为文章阅读数，不过好像多说对非官方的网站不开放此字段，<code>views</code>返回的一直为0。昨天阅读了一下博友的<a href="https://notes.wanghao.work/2015-10-21-%E4%B8%BANexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD.html#%E9%85%8D%E7%BD%AELeanCloud" target="_blank" rel="noopener">为NexT主题添加文章阅读量统计功能</a>这篇文章，原来NextT的阅读数是借助云API来实现了。所以，立即动手，也为本站的<a href="http://github.com/Jamling/hexo-theme-nova" target="_blank" rel="noopener">Nova</a>主题添加阅读计数功能。</p>
+    <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>Hexo的NexT主题非常流行，之前看过某博友的博客，使用的就是NexT主题，在文章列表页面，竟然还显示了文章的阅读次数！Hexo是静态博客，像阅读次数的实现必须借助第三方工具。早期<a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-theme-nova">Nova</a>主题使用的是友言评论，不像多说评论开放了许多API，所以，从版本0.1.0开始，本站使用的<a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-theme-nova">Nova</a>主题就换成了多说。在多说的<a target="_blank" rel="noopener" href="http://dev.duoshuo.com/docs/50615732a834c63c56004257">获取文章评论、转发数API</a>中，<code>views</code>即为文章阅读数，不过好像多说对非官方的网站不开放此字段，<code>views</code>返回的一直为0。昨天阅读了一下博友的<a target="_blank" rel="noopener" href="https://notes.wanghao.work/2015-10-21-%E4%B8%BANexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD.html#%E9%85%8D%E7%BD%AELeanCloud">为NexT主题添加文章阅读量统计功能</a>这篇文章，原来NextT的阅读数是借助云API来实现了。所以，立即动手，也为本站的<a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-theme-nova">Nova</a>主题添加阅读计数功能。</p>
 <p>如果有使用非NexT主题，也想实现文章阅读计数的博主们，不妨跟我一起折腾，一起来修改主题吧！再次声明，本系列需要一定的前端基础知识。</p>
-<h2 id="LeanClound配置"><a href="#LeanClound配置" class="headerlink" title="LeanClound配置"></a>LeanClound配置</h2><h3 id="注册验证"><a href="#注册验证" class="headerlink" title="注册验证"></a>注册验证</h3><p>如果还没有<a href="http://www.leanclound.cn" target="_blank" rel="noopener">LeanClound</a>账号，先去<a href="http://www.leanclound.cn" target="_blank" rel="noopener">LeanClound</a>上注册账号，并通过邮箱验证。</p>
-<h3 id="创建应用"><a href="#创建应用" class="headerlink" title="创建应用"></a>创建应用</h3><img src="/2016/07/28/Web/Hexo-dev-post-views/lc_console.png">
+<h2 id="LeanClound配置"><a href="#LeanClound配置" class="headerlink" title="LeanClound配置"></a>LeanClound配置</h2><h3 id="注册验证"><a href="#注册验证" class="headerlink" title="注册验证"></a>注册验证</h3><p>如果还没有<a target="_blank" rel="noopener" href="http://www.leanclound.cn">LeanClound</a>账号，先去<a target="_blank" rel="noopener" href="http://www.leanclound.cn">LeanClound</a>上注册账号，并通过邮箱验证。</p>
+<h3 id="创建应用"><a href="#创建应用" class="headerlink" title="创建应用"></a>创建应用</h3><img src="/2016/07/28/Web/Hexo-dev-post-views/lc_console.png" class="">
 
 <p>登录后，在控制台创建一个应用，比如ieclipse.cn，然后在应用-&gt;设置-&gt;应用Key-&gt;下将App ID和App Key配置到主题<code>_config.yml</code>配置文件中。</p>
 <p class="code-caption" data-lang="yaml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -193,140 +193,140 @@
   class: Counter # leanclound上的class名称
   app_id: rYUER9KxmGUXSpfEtu7wCFMo-gzGzoHsz
   app_key: k7hzTkcS0blxgry4VT9rJjYj</code></pre>
-<h3 id="应用安全"><a href="#应用安全" class="headerlink" title="应用安全"></a>应用安全</h3><p>在控制台应用-&gt;设置-&gt;安全中心-&gt;Web 安全域名项，将网站的安全域名写全，每行一个域名，换行分隔，协议、域名和端口号都需严格一致（3 分钟后生效）。注，如开发调试阶段，可以将本地的Hexo地址(<a href="http://127.0.0.1:4000)写上，但开发调试完毕之后记得删除。" target="_blank" rel="noopener">http://127.0.0.1:4000)写上，但开发调试完毕之后记得删除。</a></p>
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<h3 id="应用安全"><a href="#应用安全" class="headerlink" title="应用安全"></a>应用安全</h3><p>在控制台应用-&gt;设置-&gt;安全中心-&gt;Web 安全域名项，将网站的安全域名写全，每行一个域名，换行分隔，协议、域名和端口号都需严格一致（3 分钟后生效）。注，如开发调试阶段，可以将本地的Hexo地址(<a href="http://127.0.0.1:4000)写上，但开发调试完毕之后记得删除。">http://127.0.0.1:4000)写上，但开发调试完毕之后记得删除。</a></p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>http://ieclipse.cn
 http://www.ieclipse.cn
 http://jamling.github.io
 http://jamling.github.com
 http://jamling.coding.me</code></pre><p>配置完毕之后点击保存。</p>
-<h3 id="创建Class"><a href="#创建Class" class="headerlink" title="创建Class"></a>创建Class</h3><p>我们要使用<a href="http://www.leanclound.cn" target="_blank" rel="noopener">LeanClound</a>的数据保存功能，将文章的阅读次数及相关信息保存到<a href="http://www.leanclound.cn" target="_blank" rel="noopener">LeanClound</a></p>
+<h3 id="创建Class"><a href="#创建Class" class="headerlink" title="创建Class"></a>创建Class</h3><p>我们要使用<a target="_blank" rel="noopener" href="http://www.leanclound.cn">LeanClound</a>的数据保存功能，将文章的阅读次数及相关信息保存到<a target="_blank" rel="noopener" href="http://www.leanclound.cn">LeanClound</a></p>
 <p>在控制台应用-&gt;存储选项，创建一个Class（Class相当于数据库中的表），注意创建Class时，弹出的对话框中<strong>设置数据条目的默认 ACL 权限 **要勾选</strong>无限制**（所有人可读可写）。因为，每个访客点击文章，均需要更新数据库，请阅读自增1。</p>
-<img src="/2016/07/28/Web/Hexo-dev-post-views/lc_storage.png">
+<img src="/2016/07/28/Web/Hexo-dev-post-views/lc_storage.png" class="">
 
 <p>如果不想修改主题配置，则创建的Class名称须为<strong>Counter</strong>，如果名字不为主题默认的<strong>Counter</strong>，记得在主题配置中修改。</p>
 <p>Counter表创建成功之后，无需添加数据库字段。点击博客文章进去之后，会自动将博客文章的信息写入此Class。除了<code>views</code>字段，还有</p>
 <ul>
-<li><code>pageId</code> 用于标识文章唯一ID，使用<a href="http://github.com/Jamling/hexo-theme-nova" target="_blank" rel="noopener">Nova</a>主题，可以使用<code>page_uid()</code>方法来生成。如果访问的文章<code>pageId</code>相同，那么<code>views</code>则加1。</li>
+<li><code>pageId</code> 用于标识文章唯一ID，使用<a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-theme-nova">Nova</a>主题，可以使用<code>page_uid()</code>方法来生成。如果访问的文章<code>pageId</code>相同，那么<code>views</code>则加1。</li>
 <li><code>url</code> 文章页面的url，主题中可以使用<code>page.permalink</code>来写入</li>
 <li><code>title</code> 文章页面的标题，如<code>page.title</code></li>
 </ul>
-<p>关于更多信息，可以参考<a href="https://notes.wanghao.work/2015-10-21-%E4%B8%BANexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD.html#%E9%85%8D%E7%BD%AELeanCloud" target="_blank" rel="noopener">为NexT主题添加文章阅读量统计功能</a></p>
+<p>关于更多信息，可以参考<a target="_blank" rel="noopener" href="https://notes.wanghao.work/2015-10-21-%E4%B8%BANexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD.html#%E9%85%8D%E7%BD%AELeanCloud">为NexT主题添加文章阅读量统计功能</a></p>
 <h3 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h3><p>待成功生成第一条数据之后，需要对<code>Counter</code> Class生成唯一索引，以防止出现对同一文章出现多次统计的错误。如下图所示：</p>
-<img src="/2016/07/28/Web/Hexo-dev-post-views/lc_index.png">
+<img src="/2016/07/28/Web/Hexo-dev-post-views/lc_index.png" class="">
 
 <p>点击“其它”-&gt;“索引”，在弹出的对话框中选择<code>pageId</code>，再点击“创建”按钮，如果Class中的数据<code>pageId</code>唯一的话，那么将会成功创建索引。否则，需要手动删除重复数据再创建索引。</p>
 <h2 id="功能实现"><a href="#功能实现" class="headerlink" title="功能实现"></a>功能实现</h2><p>上面的准备工作做完之后，就可以在主题中实现文章阅读计数功能了。</p>
-<h3 id="阅读计数"><a href="#阅读计数" class="headerlink" title="阅读计数"></a>阅读计数</h3><p>我的思想是，当hexo页面加载的时候，使用AJAX向<a href="http://www.leanclound.cn" target="_blank" rel="noopener">LeanClound</a>查询当前页面信息，如果不存在，则创建一条新记录；存在则对计数器加1后再更新到数据库。<a href="http://www.leanclound.cn" target="_blank" rel="noopener">LeanClound</a>有javascript sdk，使用官方SDK来执行相关操作。代码（<code>layout/partial/lc.swig</code>）如下：</p>
+<h3 id="阅读计数"><a href="#阅读计数" class="headerlink" title="阅读计数"></a>阅读计数</h3><p>我的思想是，当hexo页面加载的时候，使用AJAX向<a target="_blank" rel="noopener" href="http://www.leanclound.cn">LeanClound</a>查询当前页面信息，如果不存在，则创建一条新记录；存在则对计数器加1后再更新到数据库。<a target="_blank" rel="noopener" href="http://www.leanclound.cn">LeanClound</a>有javascript sdk，使用官方SDK来执行相关操作。代码（<code>layout/partial/lc.swig</code>）如下：</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="js">{%- if theme.lc %}
+<pre><code class="js">&#123;%- if theme.lc %&#125;
 &lt;!-- LeanClound官方Javascript SDK --&gt;
 &lt;script src=&quot;https://cdn1.lncld.net/static/js/av-min-1.2.1.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
-  AV.init({
-    appId : &#39;{{theme.lc.app_id}}&#39;,
-    appKey : &#39;{{theme.lc.app_key}}&#39;
-  });
+  AV.init(&#123;
+    appId : &#39;&#123;&#123;theme.lc.app_id&#125;&#125;&#39;,
+    appKey : &#39;&#123;&#123;theme.lc.app_key&#125;&#125;&#39;
+  &#125;);
 
-  var lc_config = {
-    pageId : &#39;{{page_uid()}}&#39;,
-    url : &#39;{{page.permalink}}&#39;,
-    title : &#39;{{page_title()}}&#39;
-  };
+  var lc_config = &#123;
+    pageId : &#39;&#123;&#123;page_uid()&#125;&#125;&#39;,
+    url : &#39;&#123;&#123;page.permalink&#125;&#125;&#39;,
+    title : &#39;&#123;&#123;page_title()&#125;&#125;&#39;
+  &#125;;
 
-  var lc_table = &#39;{{theme.lc.class}}&#39; || &#39;Counter&#39;;
+  var lc_table = &#39;&#123;&#123;theme.lc.class&#125;&#125;&#39; || &#39;Counter&#39;;
 
-  (function() {
+  (function() &#123;
 
     var query = new AV.Query(lc_table);
     query.select([&#39;-ACL&#39;]);
     query.equalTo(&#39;pageId&#39;, lc_config.pageId);
-    query.first().then(function(data) {
-      if (!data) {
+    query.first().then(function(data) &#123;
+      if (!data) &#123;
         insert(data);
         return;
-      }
+      &#125;
       update(data);
-    });
+    &#125;);
 
-    function insert(data) {
-      if (!data) {
+    function insert(data) &#123;
+      if (!data) &#123;
         console.log(&#39;data is null new object&#39;);
         var M = AV.Object.extend(lc_table);
         data = new M();
         data.set(&#39;views&#39;, 1);
-      }
-      for ( var key in lc_config) {
+      &#125;
+      for ( var key in lc_config) &#123;
         data.set(key, lc_config[key]);
-      }
-      data.save().then(function(data) {
+      &#125;
+      data.save().then(function(data) &#123;
         console.log(&#39;created objectId is &#39; + data.id);
-      }, function(error) {
+      &#125;, function(error) &#123;
         console.log(&quot;create object failed&quot;);
         console.log(error);
-      });
-    }
+      &#125;);
+    &#125;
 
-    function update(data) {
+    function update(data) &#123;
       data.increment(&#39;views&#39;, 1);
-      data.save().then(function(data) {
+      data.save().then(function(data) &#123;
         console.log(&quot;update to &quot; + data.get(&#39;views&#39;));
-      }, function(error) {
+      &#125;, function(error) &#123;
         console.log(&quot;update object failed&quot;);
         console.log(error);
-      });
-    }
-  })();
+      &#125;);
+    &#125;
+  &#125;)();
 &lt;/script&gt;
-{%- endif %}</code></pre>
-<p>以上代码，<code>lc_config</code>和<code>lc_table</code>如果使用的不是<a href="http://github.com/Jamling/hexo-theme-nova" target="_blank" rel="noopener">Nova</a>主题，请根据当前主题做出相应的修改。</p>
+&#123;%- endif %&#125;</code></pre>
+<p>以上代码，<code>lc_config</code>和<code>lc_table</code>如果使用的不是<a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-theme-nova">Nova</a>主题，请根据当前主题做出相应的修改。</p>
 <h3 id="获取计数"><a href="#获取计数" class="headerlink" title="获取计数"></a>获取计数</h3><p>在文章首页，需要获取计数。代码（<code>layout/post/index_script_lc.swig</code>）如下：</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="js">{%- if theme.lc.enable %}
+<pre><code class="js">&#123;%- if theme.lc.enable %&#125;
 &lt;script&gt;
-  $(document).ready(function() {
+  $(document).ready(function() &#123;
     // load views count from leanclound
     // make sure you are created Counter table on leanclound
-    function lc_load_views(selector, options) {
-      var o = options || {};
+    function lc_load_views(selector, options) &#123;
+      var o = options || &#123;&#125;;
       var tkeys = [];
-      $(selector).each(function(i) {
+      $(selector).each(function(i) &#123;
         var tkey = $(this).data(&#39;tkey&#39;);
         tkeys.push(tkey);
-      });
+      &#125;);
 
       var query = new AV.Query(lc_table);
       query.select([ &#39;-ACL&#39;, &#39;-createdAt&#39;, &#39;-updatedAt&#39;, &#39;-url&#39; ]);
       query.containedIn(&#39;pageId&#39;, tkeys);
-      query.find().then(function(results) {
-        $(selector).each(function(i) {
+      query.find().then(function(results) &#123;
+        $(selector).each(function(i) &#123;
           var tkey = $(this).data(&#39;tkey&#39;);
-          for (var i = 0; i &lt; results.length; i++) {
+          for (var i = 0; i &lt; results.length; i++) &#123;
             var t = results[i];
-            if (t.get(&#39;pageId&#39;) === tkey) {
+            if (t.get(&#39;pageId&#39;) === tkey) &#123;
               var c = t.get(&#39;views&#39;) + &#39;&#39;;
               $(this).find(o.p.views).html(c);
-            }
-          }
-        });
-      }, function(error) {
-      });
-    }
+            &#125;
+          &#125;
+        &#125;);
+      &#125;, function(error) &#123;
+      &#125;);
+    &#125;
 
-    lc_load_views(&#39;.card-action&#39;, {
+    lc_load_views(&#39;.card-action&#39;, &#123;
       style : &#39;hidden-xs&#39;,
-      p : {
+      p : &#123;
         views : &#39;.nova-eye .count&#39;
-      }
-    });
-  });
+      &#125;
+    &#125;);
+  &#125;);
 &lt;/script&gt;
-{%- endif %}</code></pre>
-<p>以上代码需要在文章列表项底部div中添加<code>data-tkey</code>属性，值为<code>pageId</code>，非<a href="http://github.com/Jamling/hexo-theme-nova" target="_blank" rel="noopener">Nova</a>主题，需要修改<code>lc_load_views()</code>方法的选项或自定义。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>JavaScript 数据存储开发指南: <a href="https://leancloud.cn/docs/leanstorage_guide-js.html" target="_blank" rel="noopener">https://leancloud.cn/docs/leanstorage_guide-js.html</a><br>LeanClound REST API详解: <a href="https://leancloud.cn/docs/rest_api.html" target="_blank" rel="noopener">https://leancloud.cn/docs/rest_api.html</a></p>
+&#123;%- endif %&#125;</code></pre>
+<p>以上代码需要在文章列表项底部div中添加<code>data-tkey</code>属性，值为<code>pageId</code>，非<a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-theme-nova">Nova</a>主题，需要修改<code>lc_load_views()</code>方法的选项或自定义。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>JavaScript 数据存储开发指南: <a target="_blank" rel="noopener" href="https://leancloud.cn/docs/leanstorage_guide-js.html">https://leancloud.cn/docs/leanstorage_guide-js.html</a><br>LeanClound REST API详解: <a target="_blank" rel="noopener" href="https://leancloud.cn/docs/rest_api.html">https://leancloud.cn/docs/rest_api.html</a></p>
 <h2 id="文档历史"><a href="#文档历史" class="headerlink" title="文档历史"></a>文档历史</h2><ul>
 <li>2016-07-29 添加<a href="#创建索引">创建索引</a>一节 </li>
 </ul>

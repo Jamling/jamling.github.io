@@ -181,25 +181,25 @@
   <div class="article-content" itemprop="articleBody">
   
     <p>Android兼容库从24.2.0开始，对support-v4做了分库处理，原有的support-v4库拆分成为了support-compat、support-core-ui、support-fragment等库，本着稳定的原则，一直到25.0.0才开始在项目中升级support-v4库，将原有的support-v4替换为support-core-ui（其实，项目中只用到了ViewPager，SwipeRefreshLayout而已）以减少apk体积。然而问题来了，编译时出错，提示存在重复的类库。为保证support库版本一致，我还统一定义并使用了各模块的support版本变量，使用<code>gradle dependencies</code>查看依赖的时候，发现有个第三方库依赖于于support-v4:23.0.0。结果导致编译不通过。google了一把，发现gradle complie竟然还可以传参数。来exclude某些库。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <p>特记录如下：</p>
 <p class="code-caption" data-lang="gradle" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="gradle">compile(&quot;com.timehop.stickyheadersrecyclerview:library:0.4.3&quot;) {
+<pre><code class="gradle">compile(&quot;com.timehop.stickyheadersrecyclerview:library:0.4.3&quot;) &#123;
     exclude group: &#39;com.android.support&#39;//, module: &#39;support-v4&#39;
-}
-compile (&#39;com.google.android:flexbox:0.1.2&#39;) {
+&#125;
+compile (&#39;com.google.android:flexbox:0.1.2&#39;) &#123;
     exclude group: &#39;com.android.support&#39;
-}</code></pre>
+&#125;</code></pre>
 <p>附：不想频繁更新不稳定library的方法</p>
 <p class="code-caption" data-lang="gradle" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="gradle">repositories {
-    flatDir { dirs &#39;libs&#39; }
-}
+<pre><code class="gradle">repositories &#123;
+    flatDir &#123; dirs &#39;libs&#39; &#125;
+&#125;
 
-dependencies {
+dependencies &#123;
     compile fileTree(include: [&#39;*.jar&#39;], dir: &#39;libs&#39;)
     testCompile &#39;junit:junit:4.12&#39;
     compile &#39;com.android.support:appcompat-v7:23.3.0&#39;
@@ -208,7 +208,7 @@ dependencies {
     compile(name: &#39;af-library-release&#39;, ext: &#39;aar&#39;)
     compile &#39;com.android.volley:volley:1.0.0&#39;
     compile &#39;com.google.code.gson:gson:2.3&#39;
-}</code></pre>
+&#125;</code></pre>
 <p>缺点就是library的依赖库，必须手动在app模块中配置</p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/11/29/Android/gradle-compile-exclude/](https://www.ieclipse.cn/2016/11/29/Android/gradle-compile-exclude/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   

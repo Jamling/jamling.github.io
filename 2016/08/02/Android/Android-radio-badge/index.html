@@ -181,23 +181,23 @@
   <div class="article-content" itemprop="articleBody">
   
     <p>目前许多Android App都带有一个底部栏，通过底部栏可以切换Tab，比如微信，QQ都是这种风格。对于像小红点之类的醒目提醒，用得最多的就是BadgeView了，不过，如果底部栏是RadioGroup的话，那么不好意思BadgeView可不支持哦（如果使用BadgeView，RadioGroup就不能愉快地工作了）。那么如何即保留使用RadioGroup又能添加BadgeView的功能呢？请接着阅读本文。</p>
-<p>本文阐述的是使用<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>的RadioBadgeView来解决RadioButton与BadgeView的冲突。在RadioButton上显示Badge消息提醒，需要将原来的RadioButton替换成RadioBadgeView。</p>
+<p>本文阐述的是使用<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>的RadioBadgeView来解决RadioButton与BadgeView的冲突。在RadioButton上显示Badge消息提醒，需要将原来的RadioButton替换成RadioBadgeView。</p>
 <h2 id="RadioBadgeView"><a href="#RadioBadgeView" class="headerlink" title="RadioBadgeView"></a>RadioBadgeView</h2><p>RadioBadgeView继承自RadioButton，可以视为RadioButton的加强版。与RadioButton不同的时，它在初始化时会生成一个BadgeView2对象（BadgeView2用于展现小红点，后文有详细介绍）。在onDraw时，调用BadegView2的draw方法将小红点画到界面上。</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">@Override
-protected void onDraw(Canvas canvas) {
+protected void onDraw(Canvas canvas) &#123;
     super.onDraw(canvas);
     drawBadge(canvas);
-}
+&#125;
 
-private void drawBadge(Canvas canvas) {
+private void drawBadge(Canvas canvas) &#123;
     Point p = getBadgePosition();
     canvas.save();
     canvas.translate(p.x, p.y);
     badgeView.draw(canvas);
     canvas.restore();
-}
+&#125;
 
 /**
  * Calculate the badge view position, default is the top-right of the radio
@@ -206,47 +206,47 @@ private void drawBadge(Canvas canvas) {
  * 
  * @return the position of badge view relative to target
  */
-protected Point getBadgePosition() {
+protected Point getBadgePosition() &#123;
     int offw = getMeasuredWidth() &gt;&gt; 1;
     int offh = getMeasuredHeight() &gt;&gt; 1;
     // 注意这里不考虑复杂的布局
     Drawable d = getCompoundDrawables()[1]; // top drawable;
-    if (d != null) {
+    if (d != null) &#123;
         offw += d.getIntrinsicWidth() &gt;&gt; 1;
         offh -= (getCompoundDrawablePadding() + d.getIntrinsicHeight()
                 + (getPaint().descent() - getPaint().ascent())) / 2;
         offh -= badgeView.getMeasureHeight() / 2;
-        if (offh &lt; 0) {
+        if (offh &lt; 0) &#123;
             offh = 0;
-        }
-    }
+        &#125;
+    &#125;
     return new Point(offw, offh);
-}</code></pre>
+&#125;</code></pre>
 <p>从上面的代码可以看到，<code>drawBadge</code>用来画BadgeView, <code>getBadgePosition()</code>用于获取BadgeView的位置。注意了，这个位置坐标位于top drawable的右上角，如果你的页面要求小红点位于其它地方，比如右下角，那么需要参考本类的实现，重写<code>getBadgePosition()</code>方法。</p>
 <p>如何控制显示的数目呢？</p>
 <p>请看以下代码：</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="java">public BadgeView2 getBadgeView() {
+<pre><code class="java">public BadgeView2 getBadgeView() &#123;
     return badgeView;
-}
+&#125;
 
-public int getBadgeCount() {
+public int getBadgeCount() &#123;
     return badgeView.getBadgeCount();
-}
+&#125;
 
-public void setBadgeCount(int count) {
+public void setBadgeCount(int count) &#123;
     badgeView.setBadgeCount(count);
-}
+&#125;
 
-public void incrementBadgeCount(int increment) {
+public void incrementBadgeCount(int increment) &#123;
     int count = getBadgeCount();
     setBadgeCount(increment + count);
-}
+&#125;
 
-public void decrementBadgeCount(int decrement) {
+public void decrementBadgeCount(int decrement) &#123;
     incrementBadgeCount(-decrement);
-}</code></pre>
+&#125;</code></pre>
 <p>像常用的对BadgeView数目的操作，都委托<var>badgeView</var>去执行了。更多的操作，需要通过<code>getBadgeView()</code>返回<var>badgeView</var>来执行。</p>
 <p>那么可以认为RadioBadgeView相当于一个Decorator。真正的玄机还在BadgeView2类中。</p>
 <h2 id="BadgeView2"><a href="#BadgeView2" class="headerlink" title="BadgeView2"></a>BadgeView2</h2><p>BadgeView2与BadgeView很像，熟悉BadgeView的同学阅读BadgeView2的代码应该很容易，由于BadgeView2的代码较长，这里只讲部分重点功能。</p>
@@ -262,18 +262,18 @@ public void decrementBadgeCount(int decrement) {
 <pre><code class="java">/**
  * Set badge view display style
  * 
- * @param badgeStyle combined value of {@link #STYLE_BACKGROUND}, {@link #STYLE_TEXT}
+ * @param badgeStyle combined value of &#123;@link #STYLE_BACKGROUND&#125;, &#123;@link #STYLE_TEXT&#125;
  * @see BadgeView2#STYLE_BOTH
  * @see BadgeView2#STYLE_BACKGROUND
  * @see BadgeView2#STYLE_TEXT
  *      
  */
-public void setBadgeStyle(int badgeStyle) {
-    if (this.badgeStyle != badgeStyle) {
+public void setBadgeStyle(int badgeStyle) &#123;
+    if (this.badgeStyle != badgeStyle) &#123;
         this.badgeStyle = badgeStyle;
         requestLayout();
-    }
-}</code></pre>
+    &#125;
+&#125;</code></pre>
 <h3 id="设置背景"><a href="#设置背景" class="headerlink" title="设置背景"></a>设置背景</h3><p>提供两个API来设置背景</p>
 <ul>
 <li>通过指定背景半径(radius)和背景色(bgColor)来设置（背景为ShapeDrawable）</li>
@@ -285,26 +285,26 @@ public void setBadgeStyle(int badgeStyle) {
 <pre><code class="java">/**
  * &lt;p&gt;
  * Set shape drawable as background. If set
- * {@link BadgeView2#STYLE_BACKGROUND} style the background will displayed
+ * &#123;@link BadgeView2#STYLE_BACKGROUND&#125; style the background will displayed
  * as circle with assigned radius.
  * 
  * &lt;/p&gt;
  * &lt;p&gt;
  * &lt;b&gt;&lt;em&gt;Note &lt;/em&gt;&lt;/b&gt;
- * If badge count less than 10 or {@link #badgeStyle} set to
- * {@link #STYLE_BACKGROUND} the background will display as circle
+ * If badge count less than 10 or &#123;@link #badgeStyle&#125; set to
+ * &#123;@link #STYLE_BACKGROUND&#125; the background will display as circle
  * &lt;/p&gt;
  * If radius assigned, set a default horizontal padding of radius also.
  * 
  * @param radius
  *            the radius of circle background under
- *            {@link BadgeView2#STYLE_BACKGROUND} style, px unit
+ *            &#123;@link BadgeView2#STYLE_BACKGROUND&#125; style, px unit
  * @param bgColor
  *            background color, ARGB format
  */
-public void setBadgeBackground(int radius, int bgColor) {
-    float[] radiusArray = new float[] { radius, radius, radius, radius,
-            radius, radius, radius, radius };
+public void setBadgeBackground(int radius, int bgColor) &#123;
+    float[] radiusArray = new float[] &#123; radius, radius, radius, radius,
+            radius, radius, radius, radius &#125;;
     padding = new Rect(radius, 0, radius, 0);
     RoundRectShape roundRect = new RoundRectShape(radiusArray, null, null);
     ShapeDrawable bgDrawable = new ShapeDrawable(roundRect);
@@ -312,11 +312,11 @@ public void setBadgeBackground(int radius, int bgColor) {
     bgDrawable.setPadding(padding);
     this.badgeBackground = bgDrawable;
     requestLayout();
-}
+&#125;
 
 /**
  * Set badge background, may be a .9.png, to get well display effect, you
- * may call {@link BadgeView2#setBadgePadding(int, int, int, int)} to set
+ * may call &#123;@link BadgeView2#setBadgePadding(int, int, int, int)&#125; to set
  * paddings
  * 
  * 
@@ -324,14 +324,14 @@ public void setBadgeBackground(int radius, int bgColor) {
  *            background drawable
  * @see BadgeView2#setBadgePadding(int, int, int, int)
  */
-public void setBadgeBackground(Drawable d) {
-    if (this.badgeBackground != d) {
+public void setBadgeBackground(Drawable d) &#123;
+    if (this.badgeBackground != d) &#123;
         badgeBackground = d;
         requestLayout();
-    }
-}</code></pre>
-<p>其它的API就不详细介绍了，有兴趣可以查看<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>源代码。</p>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>在<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>的sample app中，底部的导航栏使用的就是RadioBageView，另外，在示例中还包含RadioBadgeView的三种使用方式</p>
+    &#125;
+&#125;</code></pre>
+<p>其它的API就不详细介绍了，有兴趣可以查看<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>源代码。</p>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>在<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>的sample app中，底部的导航栏使用的就是RadioBageView，另外，在示例中还包含RadioBadgeView的三种使用方式</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">int r = AppUtils.dp2px(view.getContext(), 4);
@@ -407,9 +407,9 @@ rb3.getBadgeView().setTextSize(ts * 2 / 3);</code></pre>
         android:padding=&quot;8dp&quot;
         android:text=&quot;png bg&quot; /&gt;
 &lt;/RadioGroup&gt;</code></pre>
-<p>大家可以在<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>的sample app中修改显示风格，设置padding，增加或减少数目来查看效果。</p>
-<h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a> 是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>BadgeView: <a href="https://github.com/stefanjauker/BadgeView" target="_blank" rel="noopener">https://github.com/stefanjauker/BadgeView</a><br>QuickAF: <a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">https://github.com/Jamling/QuickAF</a></p>
+<p>大家可以在<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>的sample app中修改显示风格，设置padding，增加或减少数目来查看效果。</p>
+<h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a> 是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>BadgeView: <a target="_blank" rel="noopener" href="https://github.com/stefanjauker/BadgeView">https://github.com/stefanjauker/BadgeView</a><br>QuickAF: <a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">https://github.com/Jamling/QuickAF</a></p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/08/02/Android/Android-radio-badge/](https://www.ieclipse.cn/2016/08/02/Android/Android-radio-badge/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
   </div>

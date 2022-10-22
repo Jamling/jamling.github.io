@@ -186,10 +186,10 @@
   </header>
   <div class="article-content" itemprop="articleBody">
   
-    <img src="/2016/08/12/Android/quickaf-controller-sample/weather.png">
+    <img src="/2016/08/12/Android/quickaf-controller-sample/weather.png" class="">
 
-<p>在<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中使用基于Volley的网络数据连接框架。能够方便地执行REST API网络请求，并与界面进行交互。在本文中通过一个天气查询的综合示例来讲解<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中如何进行网络请求。</p>
-<a id="more"></a>
+<p>在<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>中使用基于Volley的网络数据连接框架。能够方便地执行REST API网络请求，并与界面进行交互。在本文中通过一个天气查询的综合示例来讲解<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>中如何进行网络请求。</p>
+<span id="more"></span>
 
 <h2 id="框架设置"><a href="#框架设置" class="headerlink" title="框架设置"></a>框架设置</h2><p>在使用网络数据框架之前，须先配置，一般在Application.onCreate()中配置，当然，也可以使用前配置，比如Activity.onCreate()</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -201,7 +201,7 @@ VolleyConfig config = new VolleyConfig.Builder()
 VolleyManager.init(getApplicationContext(), config);</code></pre>
 <p>如果有喜欢使用OkHttp的同学，还可配置网络连接使用OkHttp。</p>
 <h3 id="接口响应对象"><a href="#接口响应对象" class="headerlink" title="接口响应对象"></a>接口响应对象</h3><p><code>WeatherBaseResponse.class</code>为接口返回对象class，一般一套接口标准中只有唯一的一个。接口返回的对象一般包含状态码(status)，提示信息(message)及业务对象（data）。对于业务模块，只需要关心业务对象(data)即可，框架中还可以定义拦截器，如果接口请求成功，业务操作不成功，则不会进入业务逻辑层。</p>
-<h2 id="接口API"><a href="#接口API" class="headerlink" title="接口API"></a>接口API</h2><p>在这里，使用的是<a href="http://apistore.baidu.com/apiworks/servicedetail/112.html" target="_blank" rel="noopener">百度api store中的天气api</a>，其中了其中的两个API</p>
+<h2 id="接口API"><a href="#接口API" class="headerlink" title="接口API"></a>接口API</h2><p>在这里，使用的是<a target="_blank" rel="noopener" href="http://apistore.baidu.com/apiworks/servicedetail/112.html">百度api store中的天气api</a>，其中了其中的两个API</p>
 <ol>
 <li>查询城市可用列表，通过输入的城市名称，查询该城市下的城市（或区）列表。</li>
 <li>查询指定城市（或区）的天气详情</li>
@@ -212,28 +212,28 @@ VolleyManager.init(getApplicationContext(), config);</code></pre>
 
 </li>
 </ul>
-<pre><code class="java">public class BaseRequest implements Serializable {
+<pre><code class="java">public class BaseRequest implements Serializable &#123;
     public String cityname;
-}</code></pre>
+&#125;</code></pre>
 <ul>
 <li>查询城市列表响应 <code>List&lt;CityInfo&gt;</code><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 </li>
 </ul>
-<pre><code class="java">public class CityInfo implements Serializable {
+<pre><code class="java">public class CityInfo implements Serializable &#123;
     public String province_cn;
     public String district_cn;
     public String name_cn;
     public String name_en;
     public String area_id;
-}</code></pre>
+&#125;</code></pre>
 <ul>
 <li>查询城市天气详情请求 <code>CityInfo</code>，与查询城市列表响应返回的列表项一样</li>
 <li>查询城市天气详情响应 <code>WeatherInfo</code><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 </li>
 </ul>
-<pre><code class="java">public class WeatherInfo implements Serializable {
+<pre><code class="java">public class WeatherInfo implements Serializable &#123;
     public String city;
     public String pinyin;
     public String citycode;
@@ -251,8 +251,8 @@ VolleyManager.init(getApplicationContext(), config);</code></pre>
     public String WS;
     public String sunrise;
     public String sunset;
-}</code></pre>
-<h2 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h2><p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中通过Controller来执行API请求，一般来说，一个界面对应一个Controller，在Controller中提供了页面操作需要调用的接口API。在Controller内部，每个网络请求都是一个Task。所有的Controller须继承自<code>cn.ieclipse.af.volley.Controller</code>。通常，一个App只有一套接口API，所以，可以定义一个<code>AppController</code>继承自<code>cn.ieclipse.af.volley.Controller</code>。然后各业务模块的Controller继承<code>AppController</code>并向外提供一个回调Listener。</p>
+&#125;</code></pre>
+<h2 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h2><p><a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>中通过Controller来执行API请求，一般来说，一个界面对应一个Controller，在Controller中提供了页面操作需要调用的接口API。在Controller内部，每个网络请求都是一个Task。所有的Controller须继承自<code>cn.ieclipse.af.volley.Controller</code>。通常，一个App只有一套接口API，所以，可以定义一个<code>AppController</code>继承自<code>cn.ieclipse.af.volley.Controller</code>。然后各业务模块的Controller继承<code>AppController</code>并向外提供一个回调Listener。</p>
 <h3 id="Task"><a href="#Task" class="headerlink" title="Task"></a>Task</h3><p>Task是Controller中的内部类，用于执行网络请求。可以<code>AppController</code>中定义一个<code>AppTask</code>并继承自父Controller中的<code>RequestObjectTask</code>，来执行一些常用的操作，比如API调用错误处理，给接口API统一添加appKey等http头等。这样子各个业务模块只需专注模块业务即可。<br>Task的调用有两种方式</p>
 <ul>
 <li><code>load(Input input, Class&lt;Output&gt; clazz, boolean needCache)</code>，接口返回为对象，如果模型不匹配，编译时将会报错。</li>
@@ -264,99 +264,99 @@ VolleyManager.init(getApplicationContext(), config);</code></pre>
 <li>onXXXFailure(error object)<br>当接口API调用失败时的回调，参数为错误对象，比如网络错误等。</li>
 </ul>
 <p><strong><em>注：回调接口中的方法可以在UI线程中调用</em></strong></p>
-<h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><p>在Task中可以设置是否允许缓存，相应地，在接口回调中，会标识此次接口调用是来自于缓存还是实时的接口响应。在<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>中，有自己的API缓存，与Volley不太一样，主要是在国内我们的大后端，一般不会在HTTP中控制缓存（反正我工作快10年了，没有见过一个后端这么做）。</p>
+<h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><p>在Task中可以设置是否允许缓存，相应地，在接口回调中，会标识此次接口调用是来自于缓存还是实时的接口响应。在<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>中，有自己的API缓存，与Volley不太一样，主要是在国内我们的大后端，一般不会在HTTP中控制缓存（反正我工作快10年了，没有见过一个后端这么做）。</p>
 <h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>下面来看看<code>WeatherController</code>。</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="java">public class WeatherController extends AppController&lt;WeatherController.WeatherListener&gt; {
+<pre><code class="java">public class WeatherController extends AppController&lt;WeatherController.WeatherListener&gt; &#123;
 
-    public WeatherController(WeatherListener l) {
+    public WeatherController(WeatherListener l) &#123;
         super(l);
-    }
+    &#125;
 
-    public void loadCityList(BaseRequest req, boolean needCache) {
+    public void loadCityList(BaseRequest req, boolean needCache) &#123;
         CityListTask task = new CityListTask();
         task.load2List(req, CityInfo.class, needCache);
-    }
+    &#125;
 
-    public void loadWeather(BaseRequest req) {
+    public void loadWeather(BaseRequest req) &#123;
         CityWeatherTask task = new CityWeatherTask();
         task.load(req, WeatherInfo.class, false);
-    }
+    &#125;
 
-    private class CityListTask extends AppBaseTask&lt;BaseRequest, List&lt;CityInfo&gt;&gt; {
+    private class CityListTask extends AppBaseTask&lt;BaseRequest, List&lt;CityInfo&gt;&gt; &#123;
 
         @Override
-        public IUrl getUrl() {
+        public IUrl getUrl() &#123;
             return new URLConst.AbsoluteUrl(&quot;http://apis.baidu.com/apistore/weatherservice/citylist&quot;).get();
-        }
+        &#125;
 
         @Override
-        public void onSuccess(List&lt;CityInfo&gt; out, boolean fromCache) {
+        public void onSuccess(List&lt;CityInfo&gt; out, boolean fromCache) &#123;
             mListener.onLoadCityListSuccess(out, fromCache);
-        }
+        &#125;
 
         @Override
-        public void onError(RestError error) {
+        public void onError(RestError error) &#123;
             mListener.onLoadCityListFailure(error);
-        }
+        &#125;
 
         @Override
-        public boolean onInterceptor(IBaseResponse response) throws Exception {
-            if (response instanceof WeatherBaseResponse) {
+        public boolean onInterceptor(IBaseResponse response) throws Exception &#123;
+            if (response instanceof WeatherBaseResponse) &#123;
                 WeatherBaseResponse resp = (WeatherBaseResponse) response;
-                if (resp.errNum != 0) {
+                if (resp.errNum != 0) &#123;
                     throw new LogicError(null, String.valueOf(resp.errNum), resp.errMsg);
-                }
-            }
+                &#125;
+            &#125;
             return false;
-        }
+        &#125;
 
         @Override
-        protected GsonRequest buildRequest(IUrl url, String body) {
+        protected GsonRequest buildRequest(IUrl url, String body) &#123;
             GsonRequest request = super.buildRequest(url, body);
             request.addHeader(&quot;apikey&quot;, &quot;e8c043231152d9cbcf30a648382ca4c5&quot;);
             return  request;
-        }
-    }
+        &#125;
+    &#125;
 
-    private class CityWeatherTask extends AppBaseTask&lt;BaseRequest, WeatherInfo&gt; {
+    private class CityWeatherTask extends AppBaseTask&lt;BaseRequest, WeatherInfo&gt; &#123;
 
         @Override
-        public IUrl getUrl() {
+        public IUrl getUrl() &#123;
             return new URLConst.AbsoluteUrl(&quot;http://apis.baidu.com/apistore/weatherservice/cityname&quot;).get();
-        }
+        &#125;
 
         @Override
-        public void onSuccess(WeatherInfo out, boolean fromCache) {
+        public void onSuccess(WeatherInfo out, boolean fromCache) &#123;
             mListener.onLoadWeatherSuccess(out, fromCache);
-        }
+        &#125;
 
         @Override
-        public void onError(RestError error) {
+        public void onError(RestError error) &#123;
             mListener.onLoadWeatherError(error);
-        }
+        &#125;
 
         @Override
-        public boolean onInterceptor(IBaseResponse response) throws Exception {
-            if (response instanceof WeatherBaseResponse) {
+        public boolean onInterceptor(IBaseResponse response) throws Exception &#123;
+            if (response instanceof WeatherBaseResponse) &#123;
                 WeatherBaseResponse resp = (WeatherBaseResponse) response;
-                if (resp.errNum != 0) {
+                if (resp.errNum != 0) &#123;
                     throw new LogicError(null, String.valueOf(resp.errNum), resp.errMsg);
-                }
-            }
+                &#125;
+            &#125;
             return false;
-        }
+        &#125;
 
         @Override
-        protected GsonRequest buildRequest(IUrl url, String body) {
+        protected GsonRequest buildRequest(IUrl url, String body) &#123;
             GsonRequest request = super.buildRequest(url, body);
             request.addHeader(&quot;apikey&quot;, &quot;e8c043231152d9cbcf30a648382ca4c5&quot;);
             return  request;
-        }
-    }
+        &#125;
+    &#125;
 
-    public interface WeatherListener {
+    public interface WeatherListener &#123;
         void onLoadCityListSuccess(List&lt;CityInfo&gt; out, boolean fromCache);
 
         void onLoadCityListFailure(RestError error);
@@ -364,11 +364,11 @@ VolleyManager.init(getApplicationContext(), config);</code></pre>
         void onLoadWeatherSuccess(WeatherInfo out, boolean fromCache);
 
         void onLoadWeatherError(RestError error);
-    }</code></pre>
+    &#125;</code></pre>
 <h2 id="界面"><a href="#界面" class="headerlink" title="界面"></a>界面</h2><p>终于到界面了，先看看<code>WeatherActivity</code>的代码</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="java">public class WeatherActivity extends BaseActivity implements WeatherController.WeatherListener {
+<pre><code class="java">public class WeatherActivity extends BaseActivity implements WeatherController.WeatherListener &#123;
 
     TextView tv;
     EditText et;
@@ -377,18 +377,18 @@ VolleyManager.init(getApplicationContext(), config);</code></pre>
     WeatherController controller;
 
     @Override
-    protected int getContentLayout() {
+    protected int getContentLayout() &#123;
         return R.layout.sample_activity_volley_weather;
-    }
+    &#125;
 
     @Override
-    protected void initHeaderView() {
+    protected void initHeaderView() &#123;
         super.initHeaderView();
         setTitle(&quot;Weather Sample&quot;);
-    }
+    &#125;
 
     @Override
-    protected void initContentView(View view) {
+    protected void initContentView(View view) &#123;
         super.initContentView(view);
         // typically, you just config volley in Application.onCreate
         VolleyConfig config = new VolleyConfig.Builder().setBaseResponseClass(WeatherBaseResponse.class).build();
@@ -398,18 +398,18 @@ VolleyManager.init(getApplicationContext(), config);</code></pre>
         spn.setAdapter(adapter);
         et = (EditText) findViewById(R.id.et_text);
         tv = (TextView) findViewById(R.id.tv);
-    }
+    &#125;
 
     @Override
-    protected void initData() {
+    protected void initData() &#123;
         super.initData();
         controller = new WeatherController(this);
         String name = et.getText().toString();
-        if (TextUtils.isEmpty(name)) {
+        if (TextUtils.isEmpty(name)) &#123;
             name = et.getHint().toString();
-        }
+        &#125;
         loadCityList(name, true);
-    }</code></pre>
+    &#125;</code></pre>
 <p><code>WeatherActivity</code>实现了<code>WeatherController.WeatherListener</code>回调接口，在初始化时，调用了<code>loadCityList</code>来获取城市列表。</p>
 <p>下面再看4个跟接口API相关的方法。</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -419,57 +419,57 @@ VolleyManager.init(getApplicationContext(), config);</code></pre>
  * @param name
  * @param needCache
  */
-public void loadCityList(String name, boolean needCache) {
+public void loadCityList(String name, boolean needCache) &#123;
     BaseRequest req = new BaseRequest();
     req.cityname = name;
     controller.loadCityList(req, needCache);
-}
+&#125;
 
 /**
  * 获取城市天气详情
  */
-public void loadWeather() {
+public void loadWeather() &#123;
     BaseRequest req = new BaseRequest();
     CityInfo city = (CityInfo)spn.getSelectedItem();
-    if (city != null) {
+    if (city != null) &#123;
         req.cityname = city.name_cn;
         controller.loadWeather(req);
-    }
-}
+    &#125;
+&#125;
 
 @Override
-public void onLoadCityListSuccess(List&lt;CityInfo&gt; out, boolean fromCache) {
+public void onLoadCityListSuccess(List&lt;CityInfo&gt; out, boolean fromCache) &#123;
     adapter.setDataList(out);
     adapter.notifyDataSetChanged();
-}
+&#125;
 
 @Override
-public void onLoadCityListFailure(RestError error) {
+public void onLoadCityListFailure(RestError error) &#123;
     VolleyUtils.showError(tv, error);
-}
+&#125;
 
 @Override
-public void onLoadWeatherSuccess(WeatherInfo out, boolean fromCache) {
+public void onLoadWeatherSuccess(WeatherInfo out, boolean fromCache) &#123;
     String msg = String.format(&quot;city:%s\ntemp:%sC (%s - %s)\nwind:%s(%s)&quot;, out.city, out.temp, out.l_tmp, out.h_tmp,
         out.WD, out.WS);
     tv.setText(msg);
-}
+&#125;
 
 @Override
-public void onLoadWeatherError(RestError error) {
+public void onLoadWeatherError(RestError error) &#123;
     VolleyUtils.showError(tv, error);
-}</code></pre>
+&#125;</code></pre>
 <p>在回调onXXXSuccess方法中，将模型设置到界面控件中以显示在UI中。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>使用<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>请求REST API非常的方便，开发相当快，重点步骤如下</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>使用<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>请求REST API非常的方便，开发相当快，重点步骤如下</p>
 <ol>
 <li>设置，设置好接口返回大对象IBaseResponse, AppController，这个一般在工程初始化中做。</li>
 <li>根据接口API生成模型，可以通过GsonFormat之类的工具来生成</li>
 <li>编写Controller，根据模块业务编写对应的Controller，一个API对应一个Task。</li>
 <li>界面中实现Controller，在适当的地方比如点击按钮调用Controller中的方法，在回调方法中处理业务逻辑。</li>
 </ol>
-<p>本示例中的所有代码，可以访问：<a href="https://github.com/Jamling/QuickAF/tree/master/sample/src/main/java/cn/ieclipse/af/demo/sample/volley/weather" target="_blank" rel="noopener">https://github.com/Jamling/QuickAF/tree/master/sample/src/main/java/cn/ieclipse/af/demo/sample/volley/weather</a> 查看。</p>
-<h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">https://github.com/Jamling/QuickAF</a></p>
+<p>本示例中的所有代码，可以访问：<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF/tree/master/sample/src/main/java/cn/ieclipse/af/demo/sample/volley/weather">https://github.com/Jamling/QuickAF/tree/master/sample/src/main/java/cn/ieclipse/af/demo/sample/volley/weather</a> 查看。</p>
+<h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">https://github.com/Jamling/QuickAF</a></p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/08/12/Android/quickaf-controller-sample/](https://www.ieclipse.cn/2016/08/12/Android/quickaf-controller-sample/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
   </div>
@@ -498,7 +498,7 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
 </article>
 
 <div class="page-footer">
-  <nav><ul class="pager"><li class="previous"><a href="/en/2016/08/12/Android/quickaf-preference/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">Prev</span></a></li><li class="next"><a href="/en/2016/08/12/Android/Android-Push-Restart/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">Next</span></a></li></ul></nav>
+  <nav><ul class="pager"><li class="previous"><a href="/en/2016/08/18/other/scratch-compile/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">Prev</span></a></li><li class="next"><a href="/en/2016/08/12/Android/quickaf-preference/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">Next</span></a></li></ul></nav>
   
 <!-- Button trigger modal -->
 <blockquote class="donate"><!--

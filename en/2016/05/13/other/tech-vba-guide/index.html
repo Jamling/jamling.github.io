@@ -186,10 +186,10 @@ VBA简介VBAVBA (Visual Basic for Application)，是一种应用程序自动化�
   </header>
   <div class="article-content" itemprop="articleBody">
   
-    <script src="http://cdn.bootcss.com/highlight.js/9.1.0/languages/vbscript.min.js"></script>
+    <script src="http://cdn.bootcss.com/highlight.js/9.1.0/languages/vbscript.min.js" ></script>
 
 <h1 id="VBA简介"><a href="#VBA简介" class="headerlink" title="VBA简介"></a>VBA简介</h1><h2 id="VBA"><a href="#VBA" class="headerlink" title="VBA"></a>VBA</h2><p>VBA (Visual Basic for Application)，是一种应用程序自动化语言，所谓的应用程序自动化，就是通过程序或者脚本（VBS）让应用程序（Word, Excel）自动化完成一些工作（自动填充内容，自动计算等）。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="宏与VBA"><a href="#宏与VBA" class="headerlink" title="宏与VBA"></a>宏与VBA</h2><p>宏其实是Excel自动生成的VBA代码。<br>可以通过菜单栏工具→宏→录制新宏，然后点击工具栏中字体颜色设置颜色为红色，设置对齐方式为居中对齐，再点击停止宏。<br>再选择其它单元格，点击菜单栏工具→宏→选择刚才录制的宏。这样所选择的单元格都变成红色字体，居中对齐了。</p>
 <p>所以，通过宏，相信大家对VBA有了更深入的了解了吧？没错就是自动化操作。让原本相对相对复杂的操作通过VBA包装起来，再让电脑自动去完成这些操作。</p>
@@ -199,14 +199,14 @@ VBA简介VBAVBA (Visual Basic for Application)，是一种应用程序自动化�
 <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>首先，你需要安装Office Excel，然后新建一个新建一个Excel文档，重命名为个人所得税计算器。</p>
 <p><strong>注：本教程使用的Office为Office 2003简体中文精简版。如果遇到与本文档不符合的地方，请自行解决。</strong></p>
 <p>其次，通过基本的Excel操作，将表格设计成个人所得税计算器，如下图所示：</p>
-<img src="/2016/05/13/other/tech-vba-guide/image001.png">
+<img src="/2016/05/13/other/tech-vba-guide/image001.png" class="">
 
 <p>以上基本的Excel操作，相信是个用电脑工作的人，应该都会的。<br>下面，通过学习VBA，来开启Excel的高级应用吧。</p>
 <h1 id="VBA-for-Excel"><a href="#VBA-for-Excel" class="headerlink" title="VBA for Excel"></a>VBA for Excel</h1><h2 id="VBA编辑器简介"><a href="#VBA编辑器简介" class="headerlink" title="VBA编辑器简介"></a>VBA编辑器简介</h2><h3 id="打开VBA编辑器"><a href="#打开VBA编辑器" class="headerlink" title="打开VBA编辑器"></a>打开VBA编辑器</h3><p>菜单栏：视图→工具栏→Visual Basic，打开VB工具栏（后面的Visual Basic，一律简称为VB）</p>
-<img src="/2016/05/13/other/tech-vba-guide/image003.png">
+<img src="/2016/05/13/other/tech-vba-guide/image003.png" class="">
 
 <p>点击VB编辑器图标，打开VB编辑器</p>
-<img src="/2016/05/13/other/tech-vba-guide/image005.png">
+<img src="/2016/05/13/other/tech-vba-guide/image005.png" class="">
 
 <p>打开后的界面如下</p>
 
@@ -216,7 +216,7 @@ VBA简介VBAVBA (Visual Basic for Application)，是一种应用程序自动化�
 <h3 id="属性窗口"><a href="#属性窗口" class="headerlink" title="属性窗口"></a>属性窗口</h3><p>显示当前所选对象的属性，比如上图中，我所选的是第一个sheet（2012个人所得税计算器），属性窗口中的Name属性即为2012个人所得税计算器，当然，属性除了给你看之外，你还可以编辑属性值哟，不信，你试试将Name属性值变更为“个体工商经营所得税计算器”试试。</p>
 <h3 id="代码窗口"><a href="#代码窗口" class="headerlink" title="代码窗口"></a>代码窗口</h3><p>个人理解，这里就是编辑器啦，只不过，可以切换成代码模式（代码窗口）和可视化设计模式（对象窗口）两种模式，你可以在此编辑程序的代码或设计程序窗口。</p>
 <p>可视化设计模式只针对窗体有效哦，你可以双击工程资源管理器中的FormCalculator窗体试试，默认打开的就是对象窗口哦，如下图所示：</p>
-<img src="/2016/05/13/other/tech-vba-guide/image009.png">
+<img src="/2016/05/13/other/tech-vba-guide/image009.png" class="">
 
 <p>不过因为我们研究的是VBA，所以，我们不需要画应用程序的窗口，直接使用Excel表格就可以完成了，如果你感兴趣的话，可以将工程导出，然后使用VB创建.exe应用程序哦。</p>
 <h3 id="立即窗口"><a href="#立即窗口" class="headerlink" title="立即窗口"></a>立即窗口</h3><p>如果你学过其它计算机语言的话，可能会很奇怪，为什么叫这个名字，其实它就是调试程序的输出窗口，类似于C++的输出窗口，Java IDE的Console。代码中使用Debug.Print输出的内容都会在此窗口打印出来。</p>
@@ -468,7 +468,7 @@ End Function</code></pre>
 <h3 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h3><p>嗯，我想的是这样，我有一个类模块，在类模块初始化（创建）的时候，里面已经包含一些基本的信息了，如税率级，起征点，用户可以选择含税级或不含税级两种计税方式，不过，必须得事先设置好。然后用户输入一个数值，这个类可以计算出应缴纳的税款，税后收入，税率等级，关于计税算法呢，嗯，我就采用百度百科上的示例算法吧（根据对应的税率级按税率扣税，再减去速算扣除数）。然后我想，对应的税级，应缴税款，是根据税前工资决定的，你们可以读它，但是你不可以随意指定它（它必须是经过我计算得出的）。</p>
 <p>我再想得长远一点，这个计算器，如果比较受欢迎的话，或者考虑到没有安装Office的人也能够应用。我得将数据，与界面分离，以达到代码的重复利用。嗯，暂时就想这么多吧，下面开始写我们的代码吧。</p>
 <h2 id="VBA实战"><a href="#VBA实战" class="headerlink" title="VBA实战"></a>VBA实战</h2><h3 id="插入类模块"><a href="#插入类模块" class="headerlink" title="插入类模块"></a>插入类模块</h3><p>右键单击工程资源管理器中的任意地方，插入类模块。</p>
-<img src="/2016/05/13/other/tech-vba-guide/image019.png">
+<img src="/2016/05/13/other/tech-vba-guide/image019.png" class="">
 <p>并在属性窗口中将其重命名为：TaxPersonal。并双击此类模块，以打开代码编辑窗口。</p>
 <h3 id="定义类属性"><a href="#定义类属性" class="headerlink" title="定义类属性"></a>定义类属性</h3><p>定义如起征点等属性。</p>
 <p class="code-caption" data-lang="vbscript" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -549,7 +549,7 @@ End Property</code></pre>
 <p>注意：获取个人所得税公式函数中，因为字符太长，使用 _ 换行写了。</p>
 <h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><p>插入一个新模块，名字定义为TaxCalucator，再写一个test Sub来测试及调试我们将才写的类。</p>
 <p>在这里，我使用单步调试。</p>
-<img src="/2016/05/13/other/tech-vba-guide/image029.png">
+<img src="/2016/05/13/other/tech-vba-guide/image029.png" class="">
 <p>不知道细心的朋友，有没有发现代码中有一处bug呢？</p>
 <p>呵呵，通过本地窗口，可以发现我鼠标选中的那一行，读取的level属性是不对滴，因为在未调用calc函数之前，它应该是默认的0才是。我在TaxPersonal类模块中定义的pLevel有效值是-1到6（内部定义，方便计算，因为数组下标是从0开始计算的），但给别人看的属性level是国家法律中规定的1到7。</p>
 <p>可以自己想想，在哪里，应该怎么修复此bug。</p>
@@ -596,7 +596,7 @@ ErrorHandle:
   Err.Clear &#39;最后别忘了清除Error对象
 
 End Sub</code></pre>
-<p>注意，我在代码中还添加了一个错误处理，当有错误产生时，会在最后一行中给出一些错误信息。如果有人发现了bug，可以将输入信息及错误信息发送到<a href="mailto:li.jamling@gmail.com" target="_blank" rel="noopener">li.jamling@gmail.com</a></p>
+<p>注意，我在代码中还添加了一个错误处理，当有错误产生时，会在最后一行中给出一些错误信息。如果有人发现了bug，可以将输入信息及错误信息发送到<a href="mailto:li.jamling@gmail.com">li.jamling@gmail.com</a></p>
 <h3 id="调用AutoCalc-Sub"><a href="#调用AutoCalc-Sub" class="headerlink" title="调用AutoCalc Sub"></a>调用AutoCalc Sub</h3><p>什么时候触发此Sub呢，我想单元格变更的时候吧，这样，当用户输入完税前工资后，就可以立即自动计算了。</p>
 <p class="code-caption" data-lang="vbscript" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -606,21 +606,21 @@ End Sub</code></pre>
 <p>选择WorkSheet的SelectionChange Sub，在Sub中调用AutoCalc Sub就可以了。</p>
 <h2 id="VBA工程的签名"><a href="#VBA工程的签名" class="headerlink" title="VBA工程的签名"></a>VBA工程的签名</h2><h3 id="签名的好处"><a href="#签名的好处" class="headerlink" title="签名的好处"></a>签名的好处</h3><p>为什么要签名呢？因为Office默认的宏安全级别为高，如果你的VBA工程未签名，那么默认情况下，此宏是被禁用的。</p>
 <p>签名之后，在打开有宏的Excel时，会弹出一个警告框，如下图所示：</p>
-<img src="/2016/05/13/other/tech-vba-guide/image035.png">
+<img src="/2016/05/13/other/tech-vba-guide/image035.png" class="">
 <p>在勾选“总是相信来自此发布者的宏（A）”复选框时，下边的“启用宏(E)”按钮才可以点击。</p>
 <p>数字签名，还可以保护代码不被修改，如果代码修改过了，那么签名校验就不会通过。</p>
 <h3 id="签名过程"><a href="#签名过程" class="headerlink" title="签名过程"></a>签名过程</h3><p>开始→程序→Microsoft Office→Microsoft Office工具→VBA项目的数字证书。</p>
-<img src="/2016/05/13/other/tech-vba-guide/image037.png">
-<img src="/2016/05/13/other/tech-vba-guide/image039.png">
+<img src="/2016/05/13/other/tech-vba-guide/image037.png" class="">
+<img src="/2016/05/13/other/tech-vba-guide/image039.png" class="">
 <p>输入您的证书名称后确定。<br>在VBA 编辑器中，菜单栏工具→数字签名→选择刚才创建的证书即可。</p>
 <h3 id="VBA宏保护"><a href="#VBA宏保护" class="headerlink" title="VBA宏保护"></a>VBA宏保护</h3><p>通过VBA的工程属性，可以设置一个工程进入密码，可以防止别人查看，修改你的VBA代码</p>
 <p>工具→工程属性，点击保护选项卡，输入工程保护密码即可</p>
-<img src="/2016/05/13/other/tech-vba-guide/image041.png"> 
+<img src="/2016/05/13/other/tech-vba-guide/image041.png" class=""> 
 
 <h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>在熟悉VBA之后，使用VBA实现一个《个体工商户的生产经营所得税计算器》。附录工程中包含答案。</p>
-<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p>完整工程<br>个人所得税计算器VBA工程：<a href="/2016/05/13/other/tech-vba-guide/个人所得税计算器.xls" title="个人所得税计算器.xls">个人所得税计算器.xls</a></p>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p>完整工程<br>个人所得税计算器VBA工程：<a href="/2016/05/13/other/tech-vba-guide/%E4%B8%AA%E4%BA%BA%E6%89%80%E5%BE%97%E7%A8%8E%E8%AE%A1%E7%AE%97%E5%99%A8.xls" title="个人所得税计算器.xls">个人所得税计算器.xls</a></p>
 <h1 id="关于作者"><a href="#关于作者" class="headerlink" title="关于作者"></a>关于作者</h1><p>Jamling，男，资深宅男，85年生，目前就职于南京一家软件公司，主要从事Java软件设计及研发。在工作之余，喜欢搞一些与软件相关的研究性课题，姑且算是一名技术宅吧。</p>
-<p>Email: <a href="mailto:li.jamling@gmail.com" target="_blank" rel="noopener">li.jamling@gmail.com</a></p>
+<p>Email: <a href="mailto:li.jamling@gmail.com">li.jamling@gmail.com</a></p>
 <p>注：<br>后面我可能会再制作Excel VBA高级教程，面向的读者是已有VBA基础的读者。</p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/05/13/other/tech-vba-guide/](https://www.ieclipse.cn/2016/05/13/other/tech-vba-guide/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   

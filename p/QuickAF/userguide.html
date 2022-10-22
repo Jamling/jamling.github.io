@@ -217,39 +217,39 @@
 <h2 id="BaseActivity-BaseFragment"><a href="#BaseActivity-BaseFragment" class="headerlink" title="BaseActivity/BaseFragment"></a>BaseActivity/BaseFragment</h2><p>app中的所有activity，建议都继承BaseActivity，所有Fragment建议都继承BaseFragment。<br>下面对BaseActivity/BaseFragment中的界面初始化方法做简单的说明</p>
 <h3 id="初始化窗体"><a href="#初始化窗体" class="headerlink" title="初始化窗体"></a>初始化窗体</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="java">protected void initWindowFeature() {
+<pre><code class="java">protected void initWindowFeature() &#123;
     requestWindowFeature(Window.FEATURE_NO_TITLE);
-}</code></pre>
+&#125;</code></pre>
 <p>在此方法中，可以设置界面窗体特征，比如，标题栏是否可以，是否全屏，是否沉浸式效果，是否显示标题栏，是否悬浮标题栏等。<br><em>*BaseFragment无此方法</em></p>
 <h3 id="初始化参数"><a href="#初始化参数" class="headerlink" title="初始化参数"></a>初始化参数</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="java">protected void initIntent(Bundle bundle) {
+<pre><code class="java">protected void initIntent(Bundle bundle) &#123;
 
-}</code></pre>
+&#125;</code></pre>
 <p>在此方法中，可以初始化参数，如activity/fragment恢复状态，或是从其它界面传入的参数。</p>
 <h3 id="初始化顶部"><a href="#初始化顶部" class="headerlink" title="初始化顶部"></a>初始化顶部</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="java">protected void initHeaderView() {
+<pre><code class="java">protected void initHeaderView() &#123;
     // 
-}</code></pre>
+&#125;</code></pre>
 <p>比如左边设置一个返回的text view，中间设置一个text view用于显示标题</p>
 <h3 id="初始化主体"><a href="#初始化主体" class="headerlink" title="初始化主体"></a>初始化主体</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="java">protected void initContentView(View view) {
+<pre><code class="java">protected void initContentView(View view) &#123;
 
-}</code></pre>
+&#125;</code></pre>
 <p>初始化界面主体（中间）部分</p>
 <h3 id="初始化底部"><a href="#初始化底部" class="headerlink" title="初始化底部"></a>初始化底部</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="java">protected void initBottomView() {
+<pre><code class="java">protected void initBottomView() &#123;
 
-}</code></pre>
+&#125;</code></pre>
 <p><em>BaseFragment无此方法</em></p>
 <h3 id="初始化数据"><a href="#初始化数据" class="headerlink" title="初始化数据"></a>初始化数据</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="java">protected void initData() {
+<pre><code class="java">protected void initData() &#123;
 
-}</code></pre>
+&#125;</code></pre>
 <h3 id="设置悬浮标题栏"><a href="#设置悬浮标题栏" class="headerlink" title="设置悬浮标题栏"></a>设置悬浮标题栏</h3><p>void cn.ieclipse.af.app.AfActivity.setOverlay(boolean overlay)</p>
 <p>仅在标题栏可见时有效</p>
 <h3 id="设置标题栏可见"><a href="#设置标题栏可见" class="headerlink" title="设置标题栏可见"></a>设置标题栏可见</h3><p>void cn.ieclipse.af.app.AfActivity.setShowTitleBar(boolean showTitleBar)<br>设置是否显示标题栏<br>注：如果在initWindowFeature中设置为不可见，那么initHeaderView将不会被调用</p>

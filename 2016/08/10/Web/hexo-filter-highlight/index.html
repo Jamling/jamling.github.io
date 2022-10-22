@@ -182,13 +182,13 @@
   
     <p>之前本站介绍了《<a href="/2016/08/10/Web/highlight-js-numbering/">Highlight.js 添加代码行号</a>》和《<a href="/2016/07/18/Web/Hexo-dev-highlight/">Hexo高级教程之代码高亮</a>》算是对Hexo的代码高亮有比较深的了解了。所以萌生出了写一个<br>Hexo的静态代码高亮插件的想法。在原来代码高亮的基础上，允许添加代码提示及相关元数据，比如代码链接，代码标题。</p>
 <p>注：阅读本文需要一定的前端基础知识。</p>
-<h2 id="Hexo自带高亮"><a href="#Hexo自带高亮" class="headerlink" title="Hexo自带高亮"></a>Hexo自带高亮</h2><p>Hexo中插入代码有两种写法。一种叫<a href="https://hexo.io/docs/tag-plugins.html#Code-Block" target="_blank" rel="noopener">Code Block</a></p>
+<h2 id="Hexo自带高亮"><a href="#Hexo自带高亮" class="headerlink" title="Hexo自带高亮"></a>Hexo自带高亮</h2><p>Hexo中插入代码有两种写法。一种叫<a target="_blank" rel="noopener" href="https://hexo.io/docs/tag-plugins.html#Code-Block">Code Block</a></p>
 <p class="code-caption" data-lang="plain" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="plain">{% codeblock [title] [lang:language] [url] [link text] %}
+<pre><code class="plain">&#123;% codeblock [title] [lang:language] [url] [link text] %&#125;
 code snippet
-{% endcodeblock %}</code></pre>
-<p>还有一种是<a href="https://hexo.io/docs/tag-plugins.html#Backtick-Code-Block" target="_blank" rel="noopener">Backtick Code Block</a></p>
+&#123;% endcodeblock %&#125;</code></pre>
+<p>还有一种是<a target="_blank" rel="noopener" href="https://hexo.io/docs/tag-plugins.html#Backtick-Code-Block">Backtick Code Block</a></p>
 ``` [language] [title] [url] [link text] code snippet ```
 
 <h2 id="Markdown代码高亮"><a href="#Markdown代码高亮" class="headerlink" title="Markdown代码高亮"></a>Markdown代码高亮</h2><p>Markdown中插入代码，是通过添加三个反引号（`）或三个波浪号（~）来实现的。如下示例</p>
@@ -214,51 +214,51 @@ code snippet
 <p>除了hexo配置，还需在主题在前端脚本上加入代码高亮脚本，如此，才会对代码块高亮。</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code" data-hide="false" data-href="https://github.com/Jamling/hexo-theme-nova/blob/master/source/js/hljs.js"><span class="code-caption-label">([hljs.js](https://github.com/Jamling/hexo-theme-nova/blob/master/source/js/hljs.js))</span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="js">$(&#39;.article pre code&#39;).each(function(i, block) {
+<pre><code class="js">$(&#39;.article pre code&#39;).each(function(i, block) &#123;
   var ds = $(this).parent().prev(code_caption_selector).data();
   var texts = $(this).text().split(&#39;\n&#39;);
-  if (ds.trim_indent === &#39;frontend&#39;) {
+  if (ds.trim_indent === &#39;frontend&#39;) &#123;
     console.log(&quot;trim indent in front-end&quot;);
-    var tab = texts[0].match(/^\s{0,}/);
-    if (tab) {
+    var tab = texts[0].match(/^\s&#123;0,&#125;/);
+    if (tab) &#123;
       var arr = [];
-      texts.forEach(function(temp) {
+      texts.forEach(function(temp) &#123;
         arr.push(temp.replace(tab, &#39;&#39;));
-      });
+      &#125;);
       $(this).text(arr.join(&#39;\n&#39;));
-    }
-  }
+    &#125;
+  &#125;
 
-  if (ds.line_number === &#39;frontend&#39;) {
+  if (ds.line_number === &#39;frontend&#39;) &#123;
     console.log(&quot;show line number in front-end&quot;);
     var lines = texts.length - 1;
     var $numbering = $(&#39;&lt;ul/&gt;&#39;).addClass(&#39;pre-numbering&#39;);
     $(this).addClass(&#39;has-numbering&#39;).parent().append($numbering);
-    for (i = 1; i &lt;= lines; i++) {
+    for (i = 1; i &lt;= lines; i++) &#123;
       $numbering.append($(&#39;&lt;li/&gt;&#39;).text(i));
-    }
-  }
+    &#125;
+  &#125;
 
   hljs.highlightBlock(block);
-});</code></pre>
+&#125;);</code></pre>
 <p>设置前端显示样式</p>
 <p class="code-caption" data-lang="css" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="css">.code-caption {
+<pre><code class="css">.code-caption &#123;
   clear: both;
   position: relative;
   top: 0; /*empty p height*/
-}
+&#125;
 
-.code-caption .code-caption-label {
+.code-caption .code-caption-label &#123;
   font-style: italic;
   font-weight: bold;
- }
+ &#125;
 
-.code-caption .code-caption-copy {
+.code-caption .code-caption-copy &#123;
   float: right;
   @include user-select-none();
-}</code></pre>
+&#125;</code></pre>
 <p><strong><em>注：其它样式请参考[Highlight.js 添加代码行号]</em></strong></p>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>语法规则如下：</p>
 ``` [language] [title] [link] show:off|false <br>code here <br>```
@@ -274,13 +274,13 @@ code snippet
 <p class="code-caption" data-lang="html" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="html">&lt;script type=&quot;text/javascript&quot;&gt;
-var hljs_labels = {
-    left: &quot;{{__('hljs.left')}}&quot;,
-    right: &quot;{{__('hljs.right')}}&quot;,
-    copy: &quot;{{__('hljs.copy')}}&quot;
-}
+var hljs_labels = &#123;
+    left: &quot;&#123;&#123;__('hljs.left')&#125;&#125;&quot;,
+    right: &quot;&#123;&#123;__('hljs.right')&#125;&#125;&quot;,
+    copy: &quot;&#123;&#123;__('hljs.copy')&#125;&#125;&quot;
+&#125;
 &lt;/script&gt;</code></pre>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>syntax-highlighting-with-highlightjs: <a href="http://idodev.co.uk/2013/03/syntax-highlighting-with-highlightjs/" target="_blank" rel="noopener">http://idodev.co.uk/2013/03/syntax-highlighting-with-highlightjs/</a><br>jquery.zeroclipboard: <a href="https://github.com/zeroclipboard/jquery.zeroclipboard" target="_blank" rel="noopener">https://github.com/zeroclipboard/jquery.zeroclipboard</a><br>Hexo高级教程之代码高亮: <a href="http://www.ieclipse.cn/2016/07/18/Web/Hexo-dev-highlight/">http://www.ieclipse.cn/2016/07/18/Web/Hexo-dev-highlight/</a><br>hexo-filter-highlight: <a href="https://github.com/Jamling/hexo-filter-highlight/" target="_blank" rel="noopener">https://github.com/Jamling/hexo-filter-highlight/</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>syntax-highlighting-with-highlightjs: <a target="_blank" rel="noopener" href="http://idodev.co.uk/2013/03/syntax-highlighting-with-highlightjs/">http://idodev.co.uk/2013/03/syntax-highlighting-with-highlightjs/</a><br>jquery.zeroclipboard: <a target="_blank" rel="noopener" href="https://github.com/zeroclipboard/jquery.zeroclipboard">https://github.com/zeroclipboard/jquery.zeroclipboard</a><br>Hexo高级教程之代码高亮: <a href="http://www.ieclipse.cn/2016/07/18/Web/Hexo-dev-highlight/">http://www.ieclipse.cn/2016/07/18/Web/Hexo-dev-highlight/</a><br>hexo-filter-highlight: <a target="_blank" rel="noopener" href="https://github.com/Jamling/hexo-filter-highlight/">https://github.com/Jamling/hexo-filter-highlight/</a></p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/08/10/Web/hexo-filter-highlight/](https://www.ieclipse.cn/2016/08/10/Web/hexo-filter-highlight/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
   </div>

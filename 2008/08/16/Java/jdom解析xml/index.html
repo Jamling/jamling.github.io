@@ -181,7 +181,7 @@
   <div class="article-content" itemprop="articleBody">
   
     <p>添加依赖包jdom.jar和jaxen.jar，源代码如下</p>
-<a id="more"></a>
+<span id="more"></span>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">package upload;
@@ -209,103 +209,103 @@ import org.xml.sax.SAXParseException;
 *       2.deal document include add/remove element. 3.write document to a file
 *       with a format.
 */
-public class JDOMParse {
+public class JDOMParse &#123;
 /**
   * root element of an XML document.
   */
 static Element root;
-static {
+static &#123;
   SAXBuilder builder = new SAXBuilder();
-  builder.setErrorHandler(new ErrorHandler() {
-   public void error(SAXParseException exception) throws SAXException {
+  builder.setErrorHandler(new ErrorHandler() &#123;
+   public void error(SAXParseException exception) throws SAXException &#123;
     print(exception);
-   }
+   &#125;
    public void fatalError(SAXParseException exception)
-     throws SAXException {
+     throws SAXException &#123;
     print(exception);
-   }
+   &#125;
    public void warning(SAXParseException exception)
-     throws SAXException {
+     throws SAXException &#123;
     print(exception);
-   }
-   private void print(SAXParseException e) {
+   &#125;
+   private void print(SAXParseException e) &#123;
     String str = e.getSystemId();
     str += &quot;\r\n&quot; + e.getLineNumber() + e.getColumnNumber();
     str += &quot;\r\n&quot; + e.getMessage();
     System.out.println(str);
-   }
-  });
-  try {
+   &#125;
+  &#125;);
+  try &#123;
    root = builder.build(new File(&quot;D:/ver.xml&quot;)).getRootElement();
-  } catch (JDOMException e) {
+  &#125; catch (JDOMException e) &#123;
    e.printStackTrace();
-  } catch (IOException e) {
+  &#125; catch (IOException e) &#123;
    e.printStackTrace();
-  }
-}
-static Element addDownload(Element e, Download d) {
+  &#125;
+&#125;
+static Element addDownload(Element e, Download d) &#123;
   Element download = new Element(&quot;download&quot;).setAttribute(&quot;desc&quot;, d.desc)
     .addContent(d.url);
   return e.getChild(&quot;downloads&quot;) == null ? e.addContent(new Element(
     &quot;downloads&quot;).addContent(download)) : e.getChild(&quot;downloads&quot;)
     .addContent(download);
-}
-static Element removeDownload(Element e, Download d) {
+&#125;
+static Element removeDownload(Element e, Download d) &#123;
   Element downloads = e.getChild(&quot;downloads&quot;);
-  try {
+  try &#123;
    downloads.removeContent((Element) XPath.selectSingleNode(downloads,
      &quot;./download[@desc=&#39;&quot; + d.desc + &quot;&#39;]&quot; + &quot;[text()=&#39;&quot; + d.url
        + &quot;&#39;]&quot;));
-  } catch (JDOMException e1) {
+  &#125; catch (JDOMException e1) &#123;
    e1.printStackTrace();
-  }
+  &#125;
   return e;
-}
+&#125;
 /**
   * @param args
   * @throws FileNotFoundException
   */
-public static void main(String[] args) throws IOException {
+public static void main(String[] args) throws IOException &#123;
   Download d = new Download(&quot;local&quot;, http://apache.org);
   JDOMParse.removeDownload(JDOMParse.root, d);
   XMLWriter.write(new File(&quot;D:/ver.xml&quot;));
   BufferedReader br = new BufferedReader(new InputStreamReader(
     new FileInputStream(&quot;D://ver.xml&quot;)));
   String str = null;
-  do {
+  do &#123;
    str = br.readLine();
    System.out.println(str);
-  } while (str != null);
-}
-}
-class Download {
+  &#125; while (str != null);
+&#125;
+&#125;
+class Download &#123;
 public String desc = &quot;local&quot;;
 public String url = &quot;&quot;;
-Download(String desc, String url) {
+Download(String desc, String url) &#123;
   this.desc = desc;
   this.url = url;
-}
-}
-class XMLWriter {
+&#125;
+&#125;
+class XMLWriter &#123;
 static XMLOutputter out;
 static Format format;
-static {
+static &#123;
   out = new XMLOutputter();
   format = Format.getPrettyFormat()
     .setTextMode(Format.TextMode.NORMALIZE);
   format.setEncoding(&quot;GBK&quot;);
   out.setFormat(format);
-}
-static void write(File f) {
-  try {
+&#125;
+static void write(File f) &#123;
+  try &#123;
    out.output(JDOMParse.root, new FileOutputStream(f));
-  } catch (FileNotFoundException e) {
+  &#125; catch (FileNotFoundException e) &#123;
    e.printStackTrace();
-  } catch (IOException e) {
+  &#125; catch (IOException e) &#123;
    e.printStackTrace();
-  }
-}
-}</code></pre>
+  &#125;
+&#125;
+&#125;</code></pre>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2008/08/16/Java/jdom解析xml/](https://www.ieclipse.cn/2008/08/16/Java/jdom解析xml/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
   </div>

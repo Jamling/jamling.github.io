@@ -185,47 +185,47 @@
   
     <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>使用ADB连接手机进行调试，开发、文件传输</p>
 <p>使用adb文件传输优点：无需卸载或挂载SD卡</p>
-<a id="more"></a>
+<span id="more"></span>
 
-<h2 id="官方指南"><a href="#官方指南" class="headerlink" title="官方指南"></a>官方指南</h2><p>请访问<a href="http://developer.android.com/tools/device.html配置你的设备，也可以下载驱动" target="_blank" rel="noopener">http://developer.android.com/tools/device.html配置你的设备，也可以下载驱动</a></p>
+<h2 id="官方指南"><a href="#官方指南" class="headerlink" title="官方指南"></a>官方指南</h2><p>请访问<a target="_blank" rel="noopener" href="http://developer.android.com/tools/device.html配置你的设备，也可以下载驱动">http://developer.android.com/tools/device.html配置你的设备，也可以下载驱动</a></p>
 <h2 id="操作实践"><a href="#操作实践" class="headerlink" title="操作实践"></a>操作实践</h2><h3 id="在Win7上连接手机。"><a href="#在Win7上连接手机。" class="headerlink" title="在Win7上连接手机。"></a>在Win7上连接手机。</h3><ol>
 <li><p>使用USB线将PC与手机连接起来</p>
 </li>
 <li><p>打开cmd，输入adb devices查看设备状态</p>
-<img src="/2016/05/14/other/tech-adb-mobile/image001.jpg">
+<img src="/2016/05/14/other/tech-adb-mobile/image001.jpg" class="">
 
 <p>注：adb 命令找不到，将先配置系统环境变量</p>
 </li>
 </ol>
 <p>从上图可以看到，目前adb识别到的设备数为0。为什么呢？因为缺少驱动。需要安装驱动。不信，可以在设备管理器查看一下，如下图所示：</p>
-<p><img src="/2016/05/14/other/tech-adb-mobile/image002.jpg"></p>
+<p><img src="/2016/05/14/other/tech-adb-mobile/image002.jpg" class=""></p>
 
 <p>显示黄色！图标的表示我的手机没有相应的驱动，不能被电脑识别。</p>
 <h3 id="安装驱动"><a href="#安装驱动" class="headerlink" title="安装驱动"></a>安装驱动</h3><p>下载Android SDK，启动SDK Manager，在Extras中勾选Google USB Driver并点击“Install packages…”安装。</p>
-<p><img src="/2016/05/14/other/tech-adb-mobile/image004.jpg"></p>
+<p><img src="/2016/05/14/other/tech-adb-mobile/image004.jpg" class=""></p>
 
 <p>如果你不是专业的Android开发人员，请自行百度并下载Google USB驱动。下载好驱动之后，进入驱动所在的目录，如我的电脑存放在：<br><code>D:\adt-bundle-windows-x86\sdk\extras\google\usb_driver</code><br>在此目录下，有一个<kbd>android_winusb.inf</kbd>文件，使用像记事本等文本编辑器打开它。</p>
-<p><img src="/2016/05/14/other/tech-adb-mobile/image005.jpg"></p>
+<p><img src="/2016/05/14/other/tech-adb-mobile/image005.jpg" class=""></p>
 
 <p>文件内容如下图，像Google的亲儿子Nexus系统手机，它都配置好了VID和PID，可以直接安装驱动。但是好多手机，需要我们自己配置，谁叫你买的不是Google的产品呢~</p>
-<img src="/2016/05/14/other/tech-adb-mobile/image006.jpg">
+<img src="/2016/05/14/other/tech-adb-mobile/image006.jpg" class="">
 
 <p>回到设备管理器，右键点击自己手机-&gt;属性，点击第三个选项卡：“详细信息”，在属性下拉列表中设备硬件Id，OK，看到了吧，你手机的VID，及PID信息都在这呢。选择这两项，右键copy。</p>
-<img src="/2016/05/14/other/tech-adb-mobile/image007.jpg">
+<img src="/2016/05/14/other/tech-adb-mobile/image007.jpg" class="">
 <p>回到android_winusb.inf文件，先将硬件PID，VID粘贴到空白处，copy一个原有的配置，再将VID，PID剪切替换一下，如下图所示：</p>
-<img src="/2016/05/14/other/tech-adb-mobile/image009.jpg">
+<img src="/2016/05/14/other/tech-adb-mobile/image009.jpg" class="">
 <p>最后，别忘了保存。然后在设备管理器中，右键选择没有驱动的手机设备，选择“更新驱动程序”，然后选择本地驱动（点击“从计算机的…”这一项），点击“浏览”选择驱动所在的目录。按下一步继续。</p>
-<img src="/2016/05/14/other/tech-adb-mobile/image011.jpg">
+<img src="/2016/05/14/other/tech-adb-mobile/image011.jpg" class="">
 <p>如果弹出驱动验证警告，不管它，点击始终安装就是。</p>
-<img src="/2016/05/14/other/tech-adb-mobile/image012.jpg">
+<img src="/2016/05/14/other/tech-adb-mobile/image012.jpg" class="">
 <p>安装完毕之后，在设备管理器中，会多出一个Android Phone的组，下面有Android ADB Interface 这一项，即表示驱动安装成功，基本上你的电脑就能连上手机了。如果还是不行，建议将跟你手机名字相关的设备按上述方法 （查看VID，PID，写入inf，再更新驱动）</p>
-<img src="/2016/05/14/other/tech-adb-mobile/image013.jpg">
+<img src="/2016/05/14/other/tech-adb-mobile/image013.jpg" class="">
 
 <p>连接成功之后，我们就可愉快的使用adb来连接手机啦</p>
-<img src="/2016/05/14/other/tech-adb-mobile/image014.jpg">
+<img src="/2016/05/14/other/tech-adb-mobile/image014.jpg" class="">
 
 <p>运行monitor查看手机</p>
-<img src="/2016/05/14/other/tech-adb-mobile/image016.jpg"> 
+<img src="/2016/05/14/other/tech-adb-mobile/image016.jpg" class=""> 
 
 
 

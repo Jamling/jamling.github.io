@@ -181,7 +181,7 @@
   <div class="article-content" itemprop="articleBody">
   
     <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Eclipse 4.6.0 Neon无法启动问题，先占个坑。<br>环境如下：<br>Windows 7 64位, JDK 1.8<br>之前Mars版本安装运行均无问题。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="无法启动"><a href="#无法启动" class="headerlink" title="无法启动"></a>无法启动</h2><p>前几天收到邮件，Eclipse 4.6 Neon版本将于2016/06/22执行新的Marketplace策略，所以去下载了eclipse新版本：Neon。</p>
 <p>下载安装都很顺利，但是在运行的时候，竟然直接跳出一个错误：</p>
@@ -221,7 +221,7 @@ java.lang.IllegalStateException: Unable to acquire application service. Ensure t
     at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:673)
     at org.eclipse.equinox.launcher.Main.basicRun(Main.java:610)
     at org.eclipse.equinox.launcher.Main.run(Main.java:1519)</code></pre>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>参考：<a href="http://stackoverflow.com/questions/2493415/unable-to-acquire-application-service-error-while-launching-eclipse" target="_blank" rel="noopener">http://stackoverflow.com/questions/2493415/unable-to-acquire-application-service-error-while-launching-eclipse</a></p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>参考：<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/2493415/unable-to-acquire-application-service-error-while-launching-eclipse">http://stackoverflow.com/questions/2493415/unable-to-acquire-application-service-error-while-launching-eclipse</a></p>
 <p>在<var>ecipse.ini</var>或configuration/<var>config.ini</var>中添加<code>org.eclipse.core.runtime</code><br>我尝试了一下，发现在<var>eclipse.ini</var>中添加有效。</p>
 <p class="code-caption" data-lang="ini" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -282,11 +282,11 @@ java.lang.NullPointerException
 <p>已向eclipse提问求助。期待他们能够尽量回复给出解决方案</p>
 <h3 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h3><p>原来是eclipse installer的bug，需下载新版本再安装。</p>
 <blockquote><p>Sorry, there was a bug in the RC3 installer. I’ve just created an RC3a<br>build to fix it. Until they update the link on the website</p>
-<p><a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=495523" target="_blank" rel="noopener">https://bugs.eclipse.org/bugs/show_bug.cgi?id=495523</a></p>
+<p><a target="_blank" rel="noopener" href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=495523">https://bugs.eclipse.org/bugs/show_bug.cgi?id=495523</a></p>
 <p>you could get the fixed version from here:</p>
-<p><a href="https://hudson.eclipse.org/oomph/job/integration/lastSuccessfulBuild/artifact/products/" target="_blank" rel="noopener">https://hudson.eclipse.org/oomph/job/integration/lastSuccessfulBuild/artifact/products/</a></p>
+<p><a target="_blank" rel="noopener" href="https://hudson.eclipse.org/oomph/job/integration/lastSuccessfulBuild/artifact/products/">https://hudson.eclipse.org/oomph/job/integration/lastSuccessfulBuild/artifact/products/</a></p>
 <p>Or you could switch to Advance mode and use the button at the bottom of<br>the wizard to update your installer to the fixed version.</p>
-<footer><strong>Eclipse</strong><cite><a href="https://www.eclipse.org/forums/index.php/m/1734197/#msg_1734197" target="_blank" rel="noopener">Forums</a></cite></footer></blockquote>
+<footer><strong>Eclipse</strong><cite><a target="_blank" rel="noopener" href="https://www.eclipse.org/forums/index.php/m/1734197/#msg_1734197">Forums</a></cite></footer></blockquote>
 
 <h2 id="配置启动问题汇总"><a href="#配置启动问题汇总" class="headerlink" title="配置启动问题汇总"></a>配置启动问题汇总</h2><blockquote><h2 id="Problems-on-Configuration-Start-Up-and-Shutdown"><a href="#Problems-on-Configuration-Start-Up-and-Shutdown" class="headerlink" title="Problems on Configuration, Start-Up, and Shutdown"></a>Problems on Configuration, Start-Up, and Shutdown</h2><h3 id="Why-won’t-my-application-start"><a href="#Why-won’t-my-application-start" class="headerlink" title="Why won’t my application start?"></a>Why won’t my application start?</h3><p>E4AP products require having the following plugins:</p>
 <p>org.eclipse.equinox.ds (must be started)<br>org.eclipse.equinox.event (must be started)<br>Note that org.eclipse.equinox.ds and org.eclipse.equinox.event must be explicitly started. In your product file, you should have a section like the following:</p>
@@ -298,9 +298,9 @@ java.lang.NullPointerException
    <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">id</span>=<span class="string">"org.eclipse.equinox.event"</span> <span class="attr">autoStart</span>=<span class="string">"true"</span> <span class="attr">startLevel</span>=<span class="string">"3"</span> /&gt;</span>
 <span class="tag">&lt;/<span class="name">configurations</span>&gt;</span></code></pre>
 <p>Failure to set the auto-start levels usually manifest as runtime errors like</p>
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code>Unable to acquire application service. Ensure that the org.eclipse.core.runtime bundle is resolved and started (see config.ini)</code></pre><footer><strong>EclipseWiki</strong><cite><a href="https://wiki.eclipse.org/Eclipse4/RCP/FAQ#Why_won.27t_my_application_start.3F" target="_blank" rel="noopener">wiki.eclipse.org/Eclipse4/RCP/FAQ#Why_won.27t_my_application_start.3F</a></cite></footer></blockquote>
+<pre><code>Unable to acquire application service. Ensure that the org.eclipse.core.runtime bundle is resolved and started (see config.ini)</code></pre><footer><strong>EclipseWiki</strong><cite><a target="_blank" rel="noopener" href="https://wiki.eclipse.org/Eclipse4/RCP/FAQ#Why_won.27t_my_application_start.3F">wiki.eclipse.org/Eclipse4/RCP/FAQ#Why_won.27t_my_application_start.3F</a></cite></footer></blockquote>
 
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/06/06/Eclipse/Eclipse-neon-stratup/](https://www.ieclipse.cn/2016/06/06/Eclipse/Eclipse-neon-stratup/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   

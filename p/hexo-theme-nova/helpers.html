@@ -301,7 +301,7 @@ page_excerpt@param post the post, if undefined means current pageReturn page exc
   <div class="article-content" itemprop="articleBody">
   
     <blockquote><p>Helpers are used in templates to help you insert snippets quickly.  Helpers cannot be used in source files.</p>
-<footer><strong>hexo.io</strong><cite><a href="https://hexo.io/docs/helpers.html" target="_blank" rel="noopener">Helpers</a></cite></footer></blockquote>
+<footer><strong>hexo.io</strong><cite><a target="_blank" rel="noopener" href="https://hexo.io/docs/helpers.html">Helpers</a></cite></footer></blockquote>
 
 <p>Helpers of nova are located under theme <code>scripts</code> folder</p>
 <h2 id="helpers-js"><a href="#helpers-js" class="headerlink" title="helpers.js"></a>helpers.js</h2><h3 id="head-title"><a href="#head-title" class="headerlink" title="head_title"></a>head_title</h3><p>Returns page title. <code>title2</code> assigned in front-marker the title will be i18n output</p>
@@ -329,7 +329,7 @@ page_excerpt@param post the post, if undefined means current pageReturn page exc
 <td>glyphicon glyphicon-folder-close</td>
 </tr>
 </tbody></table>
-<h3 id="page-excerpt"><a href="#page-excerpt" class="headerlink" title="page_excerpt"></a>page_excerpt</h3><p>@param <code>post</code> the post, if undefined means current page<br>Return page excerpt, if <a id="more"></a> not avaliable in .md, return the first paragraph as excerpt.</p>
+<h3 id="page-excerpt"><a href="#page-excerpt" class="headerlink" title="page_excerpt"></a>page_excerpt</h3><p>@param <code>post</code> the post, if undefined means current page<br>Return page excerpt, if <span id="more"></span> not avaliable in .md, return the first paragraph as excerpt.</p>
 <h3 id="post-cates"><a href="#post-cates" class="headerlink" title="post_cates"></a>post_cates</h3><p>@param <code>post</code>  the post<br>@param <code>options</code> the options<br>Retrun categories in post</p>
 <table>
 <thead>
@@ -370,7 +370,7 @@ page_excerpt@param post the post, if undefined means current pageReturn page exc
 <td>glyphicon glyphicon-tags</td>
 </tr>
 </tbody></table>
-<h3 id="page-share-jiathis"><a href="#page-share-jiathis" class="headerlink" title="page_share_jiathis"></a><del>page_share_jiathis</del></h3><p>@param <code>post</code> the post, if undefined means current page<br>@param <code>webid</code> <a href="http://www.jiathis.com/help/html/support-media-website" target="_blank" rel="noopener">the webib of jiathis share</a>, if empty will redirect to share target page of jiathis.<br>Return share link of post</p>
+<h3 id="page-share-jiathis"><a href="#page-share-jiathis" class="headerlink" title="page_share_jiathis"></a><del>page_share_jiathis</del></h3><p>@param <code>post</code> the post, if undefined means current page<br>@param <code>webid</code> <a target="_blank" rel="noopener" href="http://www.jiathis.com/help/html/support-media-website">the webib of jiathis share</a>, if empty will redirect to share target page of jiathis.<br>Return share link of post</p>
 <h3 id="page-uid"><a href="#page-uid" class="headerlink" title="page_uid"></a>page_uid</h3><p>@param <code>page</code> page or this.page if undefined.<br>Return the unique id of page</p>
 <h3 id="widget-cates"><a href="#widget-cates" class="headerlink" title="widget_cates"></a>widget_cates</h3><p>List categories in post widget.</p>
 <table>
@@ -730,7 +730,7 @@ page_excerpt@param post the post, if undefined means current pageReturn page exc
 <p><strong>Examples:</strong></p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="js">{{ nova_toc(page.content, {class:'nav toc-ul', deep: 6, expand:6}) }}</code></pre>
+<pre><code class="js">&#123;&#123; nova_toc(page.content, &#123;class:'nav toc-ul', deep: 6, expand:6&#125;) &#125;&#125;</code></pre>
 
   
   </div>

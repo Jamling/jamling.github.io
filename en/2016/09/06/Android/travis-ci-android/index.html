@@ -180,11 +180,11 @@
   </header>
   <div class="article-content" itemprop="articleBody">
   
-    <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>注册Travis-CI都N长时间了，但是一直没有使用它来构建。今天先使用它构建了两个小的node.js项目，还算顺序，然后使用它来构建<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>，没有想到竟然是一条如此艰辛的路！特地将构建过程记录如下。</p>
-<a id="more"></a>
+    <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>注册Travis-CI都N长时间了，但是一直没有使用它来构建。今天先使用它构建了两个小的node.js项目，还算顺序，然后使用它来构建<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>，没有想到竟然是一条如此艰辛的路！特地将构建过程记录如下。</p>
+<span id="more"></span>
 
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>参考官方文档<a href="https://docs.travis-ci.com/user/languages/android/" target="_blank" rel="noopener">https://docs.travis-ci.com/user/languages/android/</a>的配置，稍做改动就提交构建了。还以为能像node.js那样顺风顺水，没有想到竟然是一次又一次的失败。</p>
-<h2 id="gradle版本"><a href="#gradle版本" class="headerlink" title="gradle版本"></a>gradle版本</h2><p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>参考官方文档<a target="_blank" rel="noopener" href="https://docs.travis-ci.com/user/languages/android/">https://docs.travis-ci.com/user/languages/android/</a>的配置，稍做改动就提交构建了。还以为能像node.js那样顺风顺水，没有想到竟然是一次又一次的失败。</p>
+<h2 id="gradle版本"><a href="#gradle版本" class="headerlink" title="gradle版本"></a>gradle版本</h2><p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>FAILURE: Build failed with an exception.
 
@@ -219,12 +219,12 @@ Total time: 42.348 secs</code></pre><p>根据以上日志，travis-ci上默认�
 <p>如果不想每次下载gradle，可以在root project的build.gradle中手动设置gradle版本</p>
 <p class="code-caption" data-lang="gradle" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="gradle">task wrapper(type: Wrapper) {
+<pre><code class="gradle">task wrapper(type: Wrapper) &#123;
     gradleVersion = &#39;3.3&#39;
-}</code></pre>
+&#125;</code></pre>
 <p>然后执行的命令使用<code>./gradle app:assembleRelease</code></p>
 <p>但接着又发现<code>./gradlew: Permission denied</code> gradlew因为权限问题而导致执行失败。</p>
-<p>解决办法如下：参考<a href="http://stackoverflow.com/questions/33820638/travis-yml-gradlew-permission-denied" target="_blank" rel="noopener">http://stackoverflow.com/questions/33820638/travis-yml-gradlew-permission-denied</a></p>
+<p>解决办法如下：参考<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/33820638/travis-yml-gradlew-permission-denied">http://stackoverflow.com/questions/33820638/travis-yml-gradlew-permission-denied</a></p>
 <p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="bash">git update-index --chmod=+x gradlew
@@ -234,7 +234,7 @@ git ls-tree HEAD</code></pre>
 <h2 id="SDK设置"><a href="#SDK设置" class="headerlink" title="SDK设置"></a>SDK设置</h2><p>sdk的配置一定要对应好。不然编译会失败</p>
 <h2 id="jdk设置"><a href="#jdk设置" class="headerlink" title="jdk设置"></a>jdk设置</h2><p>好像build tool 24以上的版本需要使用jdk8</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>遇到各种错误，编译了21次，终于通过了。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">https://github.com/Jamling/QuickAF</a><br><a href="https://docs.travis-ci.com/user/languages/android/" target="_blank" rel="noopener">https://docs.travis-ci.com/user/languages/android/</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">https://github.com/Jamling/QuickAF</a><br><a target="_blank" rel="noopener" href="https://docs.travis-ci.com/user/languages/android/">https://docs.travis-ci.com/user/languages/android/</a></p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/09/06/Android/travis-ci-android/](https://www.ieclipse.cn/2016/09/06/Android/travis-ci-android/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
   </div>

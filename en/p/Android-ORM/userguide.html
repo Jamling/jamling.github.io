@@ -221,11 +221,11 @@ Android studioCopy Code">
 
 </li>
 </ul>
-<pre><code class="gradle">dependencies {
+<pre><code class="gradle">dependencies &#123;
     compile &#39;cn.ieclipse.aorm:aorm-core:1.1.2&#39;
-}</code></pre>
+&#125;</code></pre>
 <ul>
-<li>Eclipse<br>Install <a href="https://marketplace.eclipse.org/content/android-adt-extensions" target="_blank" rel="noopener">Android ADT-extension</a> plugin</li>
+<li>Eclipse<br>Install <a target="_blank" rel="noopener" href="https://marketplace.eclipse.org/content/android-adt-extensions">Android ADT-extension</a> plugin</li>
 </ul>
 <h2 id="Settings"><a href="#Settings" class="headerlink" title="Settings"></a>Settings</h2><p>Optional settings, setting the Aorm globally.</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -237,9 +237,9 @@ Aorm.setExactInsertOrUpdate(true);//Set use actuarial insertOrUpdate. If true, w
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">@Table(name = &quot;student&quot;)
-public class Student implements java.ioSerializable{
+public class Student implements java.ioSerializable&#123;
     //...
-}</code></pre>
+&#125;</code></pre>
 <h3 id="Add-column-mapping"><a href="#Add-column-mapping" class="headerlink" title="Add column mapping"></a>Add column mapping</h3><p>Add @Column annotation for java bean field</p>
 <ul>
 <li>pk (primary key field)<br>id is true<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -270,14 +270,14 @@ private int age;</code></pre>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">mOpenHelper = new SQLiteOpenHelper(this.getContext(), &quot;example.db&quot;,
-        null, 1) {
-    public void onCreate(SQLiteDatabase db) {
+        null, 1) &#123;
+    public void onCreate(SQLiteDatabase db) &#123;
         // method 3: use AORM to create table
         Aorm.createTable(db, Grade.class);
         Aorm.createTable(db, Student.class);
         Aorm.createTable(db, Course.class);
-    }
-};</code></pre>
+    &#125;
+&#125;;</code></pre>
 <h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><h3 id="Query"><a href="#Query" class="headerlink" title="Query"></a>Query</h3><h4 id="Simple-query"><a href="#Simple-query" class="headerlink" title="Simple query"></a>Simple query</h4><p>Query all students</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -310,15 +310,15 @@ criteria.add(Restrictions.like(&quot;name&quot;, &quot;Jaming&quot;));</code></p
 <pre><code class="java">// add restriction: age &gt; 30
 criteria.add(Restrictions.gt(&quot;age&quot;, 30));</code></pre>
 <p>Order</p>
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>// add order
 criteria.addOrder(Order.asc(&quot;age&quot;));</code></pre><p>Distinct</p>
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>// set district
 criteria.setDistinct(true);</code></pre><p>Limit</p>
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>// set limit from row 10 to 20
 criteria.setLimit(10, 10);</code></pre><h4 id="Join-query"><a href="#Join-query" class="headerlink" title="Join query"></a>Join query</h4><p>The Criteria support four join</p>

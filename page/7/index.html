@@ -5,7 +5,7 @@
   <title>静勤居</title>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="keywords" content="Android,Eclipse 插件,Java,Web,奇淫巧技,其它,Compose,Framework,Eclipse,ADT,QuickAF,Gradle,CI,J2EE,Swing,SWT,xml,PHP,Ajax,MySQL,Hexo,js,Node.js,git,安全">
+  <meta name="keywords" content="Android,Compose,Eclipse 插件,Java,Web,其它,奇淫巧技,Framework,Eclipse,ADT,QuickAF,Gradle,CI,J2EE,Swing,SWT,xml,PHP,Ajax,MySQL,git,安全,Hexo,js,Node.js">
   <meta name="description" content="Jamling's 技术文章博客.">
   
 
@@ -156,45 +156,6 @@
     <meta content="" itemprop="name"/>
 </div>
 <main>
-          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
-            <div class="card-content">
-              <h3 class="card-title"><a itemprop="name headline" href="/2015/01/03/Eclipse/Eclipse-mpc-content/" class="article-title">Eclipse MPC内容管理策略（译）</a></h3>
-              <div class="divider"></div>
-              <div class="section post-header clearfix">
-                <!-- sub element must be span -->
-                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2015-01-03T04:48:31.000Z"><time datetime="2015-01-03T04:48:31.000Z">2015-01-03</time></time></span>
-                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/pde/">Eclipse 插件</a></span>
-                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/Eclipse/">Eclipse</a></span>
-              </div>
-              <div class="divider"></div>
-              <div class="nova-flex excerpt-box">
-              
-              <div class="excerpt" itemprop="description articleBody">
-              <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Eclipse Marketplace Client(MPC)，是Eclipse新插件，它允许Eclipse用户在Marketplace上搜寻和安装基于Eclipse的产品。MPC的目的旨在为Eclipse社区提供AppStore式的体验。MPC将做为Eclipse的内置插件，在eclipse.org下载界面中列出的所有的Eclipse安装包都会包含此插件。</p>
-              </div>
-              </div>
-            </div>
-            <div class="divider"></div>
-
-            <div class="card-action xxx-count" data-xid="3d2c102316e0e1a257d3ac407a59d21c" data-url="2015/01/03/Eclipse/Eclipse-mpc-content/">
-              <a class="icon nova-bubbles action-item comment-count" href="/2015/01/03/Eclipse/Eclipse-mpc-content/#comment">
-                <span class="count"></span><span class="hidden-xs">评论</span>
-              </a>
-              <a class="icon nova-eye action-item view-count" href="/2015/01/03/Eclipse/Eclipse-mpc-content/">
-                <span class="count"></span><span class="hidden-xs">次阅读</span>
-                </a>
-              <a class="icon nova-hand-right action-item" href="/2015/01/03/Eclipse/Eclipse-mpc-content/" >
-                <span>阅读全文</span>
-              </a>
-            </div>
-            <meta itemprop="url" content="https://www.ieclipse.cn/2015/01/03/Eclipse/Eclipse-mpc-content/">
-            <meta itemprop="dateModified" content="2019-07-22T11:25:01.907Z">
-            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
-              <meta content="https://www.ieclipse.cn" itemprop="url">
-              <meta content="静勤居" itemprop="name">
-              <meta content="/image/logo.png" itemprop="logo">
-            </span>
-          </div>
           <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
             <div class="card-content">
               <h3 class="card-title"><a itemprop="name headline" href="/2015/01/01/Android/Android-Compile-Source/" class="article-title">编译Android源代码</a></h3>
@@ -455,7 +416,7 @@
               <p>前一段时间，写了两个关于j2me打包签名的工具，界面技术使用的是SWT。在eclipse测试OK之后，将src打包为jar。其中META-INF/MENIFEST.MF中指定Main-Class为 我的main类，并且classpath等也加进去了。但在双击jar并不能成功运行。</p>
 <p>没办法，只好写bat文件来启动swt。但惊奇的发现，竟然找不到某些类。主要还是swt包中的。刚开始还以为是java.library.path的问题，最后确定不是，当时还懵了一下子，不知道怎么解决。</p>
 <p>后来去eclipse swt网站查看swt example的运行。才恍然大悟，原来要这样运行。兹记之</p>
-<p>原文请参考：<a href="http://www.eclipse.org/swt/examples.php" target="_blank" rel="noopener">http://www.eclipse.org/swt/examples.php</a></p>
+<p>原文请参考：<a target="_blank" rel="noopener" href="http://www.eclipse.org/swt/examples.php">http://www.eclipse.org/swt/examples.php</a></p>
 <p>简而言之，就是将你要运行的jar也加入classpath，然后将要运行的类，使用全称附在java 命令后面。如<br><code>java -cp \lib\swt.jar;mypackager.jar; org.melord.swt.packager.Main</code><br>表示运行 org.melord.swt.packager.Main类。</p>
               </div>
               </div>
@@ -553,6 +514,45 @@
             </div>
             <meta itemprop="url" content="https://www.ieclipse.cn/2010/03/31/Eclipse/Eclipse-rcp-i18n/">
             <meta itemprop="dateModified" content="2019-07-22T11:25:01.907Z">
+            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+              <meta content="https://www.ieclipse.cn" itemprop="url">
+              <meta content="静勤居" itemprop="name">
+              <meta content="/image/logo.png" itemprop="logo">
+            </span>
+          </div>
+          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
+            <div class="card-content">
+              <h3 class="card-title"><a itemprop="name headline" href="/2008/09/29/Java/%E5%B8%A6NameSpace%E7%9A%84xml%20XPath%E6%90%9C%E7%B4%A2/" class="article-title">带NameSpace的xml XPath搜索</a></h3>
+              <div class="divider"></div>
+              <div class="section post-header clearfix">
+                <!-- sub element must be span -->
+                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2008-09-29T02:56:00.000Z"><time datetime="2008-09-29T02:56:00.000Z">2008-09-29</time></time></span>
+                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/Java/">Java</a></span>
+                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/xml/">xml</a></span>
+              </div>
+              <div class="divider"></div>
+              <div class="nova-flex excerpt-box">
+              
+              <div class="excerpt" itemprop="description articleBody">
+              <p>以典型的J2EE web.xml文件为例，某次要解析此文件。使用Xpath搜索得到的都是null。使用System.out.println（root）打印节点，发现比不带NameSpace的XML root多了一个uri，那么在Xpath中加入uri（setNameSpace(“”,uri)），结果搜索的结果还是null。后来google了一下，才知道原来当NameSpace的prefix为“”时，在Xpath中需要加入“default”prefix。<br>因此，自己可以定义一个比较通用的Xpath搜索方法：</p>
+              </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+
+            <div class="card-action xxx-count" data-xid="db914fd0ee49a3f55e795f56d8f86f9a" data-url="2008/09/29/Java/带NameSpace的xml XPath搜索/">
+              <a class="icon nova-bubbles action-item comment-count" href="/2008/09/29/Java/%E5%B8%A6NameSpace%E7%9A%84xml%20XPath%E6%90%9C%E7%B4%A2/#comment">
+                <span class="count"></span><span class="hidden-xs">评论</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/2008/09/29/Java/%E5%B8%A6NameSpace%E7%9A%84xml%20XPath%E6%90%9C%E7%B4%A2/">
+                <span class="count"></span><span class="hidden-xs">次阅读</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/2008/09/29/Java/%E5%B8%A6NameSpace%E7%9A%84xml%20XPath%E6%90%9C%E7%B4%A2/" >
+                <span>阅读全文</span>
+              </a>
+            </div>
+            <meta itemprop="url" content="https://www.ieclipse.cn/2008/09/29/Java/%E5%B8%A6NameSpace%E7%9A%84xml%20XPath%E6%90%9C%E7%B4%A2/">
+            <meta itemprop="dateModified" content="2019-07-22T11:25:01.909Z">
             <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
               <meta content="https://www.ieclipse.cn" itemprop="url">
               <meta content="静勤居" itemprop="name">
@@ -664,7 +664,7 @@
       </div>
       
       <!-- use category tree -->
-      <ul class="list-group"><li class="list-group-item category"><a class="list-group-link" href="/categories/Android/">Android</a><span class="badge">25</span><ul class="list-group category"><li class="list-group-item"><a class="list-group-link" href="/categories/Android/Compose/">Compose</a><span class="badge">2</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Android/Framework/">Framework</a><span class="badge">1</span></li></ul></li><li class="list-group-item"><a class="list-group-link" href="/categories/pde/">Eclipse 插件</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Java/">Java</a><span class="badge">9</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Web/">Web</a><span class="badge">24</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/other/">其它</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/trick/">奇淫巧技</a><span class="badge">6</span></li></ul>
+      <ul class="list-group"><li class="list-group-item category"><a class="list-group-link" href="/categories/Android/">Android</a><span class="badge">24</span><ul class="list-group category"><li class="list-group-item"><a class="list-group-link" href="/categories/Android/Compose/">Compose</a><span class="badge">1</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Android/Framework/">Framework</a><span class="badge">1</span></li></ul></li><li class="list-group-item"><a class="list-group-link" href="/categories/pde/">Eclipse 插件</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Java/">Java</a><span class="badge">9</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/Web/">Web</a><span class="badge">24</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/other/">其它</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/categories/trick/">奇淫巧技</a><span class="badge">6</span></li></ul>
     </div>
     
 
@@ -674,7 +674,7 @@
       </div>
       
       <div class="panel-body">
-      <a href="/tags/ADT/" style="font-size: 10px; color: #795548">ADT</a> <a href="/tags/Ajax/" style="font-size: 10px; color: #795548">Ajax</a> <a href="/tags/Android/" style="font-size: 20px; color: #212121">Android</a> <a href="/tags/CI/" style="font-size: 10px; color: #795548">CI</a> <a href="/tags/Compose/" style="font-size: 11.25px; color: #6e4f43">Compose</a> <a href="/tags/Eclipse/" style="font-size: 16.25px; color: #423530">Eclipse</a> <a href="/tags/Framework/" style="font-size: 10px; color: #795548">Framework</a> <a href="/tags/Gradle/" style="font-size: 11.25px; color: #6e4f43">Gradle</a> <a href="/tags/Hexo/" style="font-size: 18.75px; color: #2c2826">Hexo</a> <a href="/tags/J2EE/" style="font-size: 12.5px; color: #63483e">J2EE</a> <a href="/tags/Java/" style="font-size: 12.5px; color: #63483e">Java</a> <a href="/tags/MySQL/" style="font-size: 10px; color: #795548">MySQL</a> <a href="/tags/Node-js/" style="font-size: 13.75px; color: #584239">Node.js</a> <a href="/tags/PHP/" style="font-size: 12.5px; color: #63483e">PHP</a> <a href="/tags/QuickAF/" style="font-size: 17.5px; color: #372e2b">QuickAF</a> <a href="/tags/SWT/" style="font-size: 10px; color: #795548">SWT</a> <a href="/tags/Swing/" style="font-size: 10px; color: #795548">Swing</a> <a href="/tags/git/" style="font-size: 15px; color: #4d3b35">git</a> <a href="/tags/js/" style="font-size: 13.75px; color: #584239">js</a> <a href="/tags/xml/" style="font-size: 11.25px; color: #6e4f43">xml</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 11.25px; color: #6e4f43">安全</a>
+      <a href="/tags/ADT/" style="font-size: 10px; color: #795548">ADT</a> <a href="/tags/Ajax/" style="font-size: 10px; color: #795548">Ajax</a> <a href="/tags/Android/" style="font-size: 20px; color: #212121">Android</a> <a href="/tags/CI/" style="font-size: 10px; color: #795548">CI</a> <a href="/tags/Compose/" style="font-size: 10px; color: #795548">Compose</a> <a href="/tags/Eclipse/" style="font-size: 16.25px; color: #423530">Eclipse</a> <a href="/tags/Framework/" style="font-size: 10px; color: #795548">Framework</a> <a href="/tags/Gradle/" style="font-size: 11.25px; color: #6e4f43">Gradle</a> <a href="/tags/Hexo/" style="font-size: 18.75px; color: #2c2826">Hexo</a> <a href="/tags/J2EE/" style="font-size: 12.5px; color: #63483e">J2EE</a> <a href="/tags/Java/" style="font-size: 12.5px; color: #63483e">Java</a> <a href="/tags/MySQL/" style="font-size: 10px; color: #795548">MySQL</a> <a href="/tags/Node-js/" style="font-size: 13.75px; color: #584239">Node.js</a> <a href="/tags/PHP/" style="font-size: 12.5px; color: #63483e">PHP</a> <a href="/tags/QuickAF/" style="font-size: 17.5px; color: #372e2b">QuickAF</a> <a href="/tags/SWT/" style="font-size: 10px; color: #795548">SWT</a> <a href="/tags/Swing/" style="font-size: 10px; color: #795548">Swing</a> <a href="/tags/git/" style="font-size: 15px; color: #4d3b35">git</a> <a href="/tags/js/" style="font-size: 13.75px; color: #584239">js</a> <a href="/tags/xml/" style="font-size: 11.25px; color: #6e4f43">xml</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 11.25px; color: #6e4f43">安全</a>
       </div>
     </div>
 

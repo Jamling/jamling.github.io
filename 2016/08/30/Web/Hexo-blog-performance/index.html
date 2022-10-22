@@ -181,24 +181,24 @@
   <div class="article-content" itemprop="articleBody">
   
     <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>影响网页打开速度的原因有许多种，本文主要对部署在github上的hexo博客页面的加载速度做一个分析。然后给出几点相关的优化建议。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="加载速度对比"><a href="#加载速度对比" class="headerlink" title="加载速度对比"></a>加载速度对比</h2><p>先看下面几个站点的加载速度</p>
 <ul>
 <li><p><a href="http://www.ieclipse.cn">www.ieclipse.cn</a><br>这是我自己的站点，使用了双线部署，国内节点为coding.net。</p>
-<img src="/2016/08/30/Web/Hexo-blog-performance/ieclipse.cn.png">
+<img src="/2016/08/30/Web/Hexo-blog-performance/ieclipse.cn.png" class="">
 <p>请求非常多，52个请求，页面加载用时427ms，加上其它的异步请求，总用时1.54s。相当于页面秒开。加载相对较慢的有nova.css和那个自动隐藏导航栏的js脚本。其它的像jq和bootstrap都使用了cdn，加载还是相当快的。</p>
 </li>
 <li><p>csdoker.com</p>
-<img src="/2016/08/30/Web/Hexo-blog-performance/csdoker.com.png">
+<img src="/2016/08/30/Web/Hexo-blog-performance/csdoker.com.png" class="">
 <p>请求虽然少，只有14个，但是加载速度非常慢，主要是博客部署在github上，国内访问较慢，页面呈现用时5s，全部加载总用时11.74s。相对加载速度较慢的主要是背景，头像和字体文件。总体来说加载慢。</p>
 </li>
 <li><p>fatdoge.cn</p>
-<img src="/2016/08/30/Web/Hexo-blog-performance/fatdoge.cn.png">
+<img src="/2016/08/30/Web/Hexo-blog-performance/fatdoge.cn.png" class="">
 <p>请求也少，只有12个，但是加载速度却是相当地慢，光域名解析建立连接就将近5s，剩下的大家看图。到我截完图，它还在加载其它的一些资源。</p>
 </li>
 <li><p>login926.github.io</p>
-<img src="/2016/08/30/Web/Hexo-blog-performance/login926.github.io.png">
+<img src="/2016/08/30/Web/Hexo-blog-performance/login926.github.io.png" class="">
 <p>请求较多，影响页面呈现的只有前5个请求，在1.4s内加载完成。因为脚本和css少。呈现非常快。页面总加载耗时3.95s。如果考虑数据量的话，此网站的加载速度是最快的。</p>
 </li>
 </ul>

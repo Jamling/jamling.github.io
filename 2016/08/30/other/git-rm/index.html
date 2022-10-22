@@ -181,7 +181,7 @@
   <div class="article-content" itemprop="articleBody">
   
     <p>在提交代码时，有许多的初学者甚至是老程序员也会犯一个错误，那就是把一些不应该提交到源代码仓库的文件也提交到仓库，比如编译后的输出bin/目录，本地工程的一些设置文件如.idea，.settings。如果一旦提交到远程仓库，那么还将影响到团队中的其他成员。每次更新的时候，都会将别人的设置更新下来，可能会导致编译不通过等诸多问题。一旦这些文件受git管控，那么想删掉它就麻烦了。如果本地删除，再commit和push，那么其他成员更新代码的时候，他本地的也会被删除。对于编译输出的文件还好，再编译一次就可以。如果是环境设置类的文件，那么对方就惨了。会导致许多莫名的错误。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <p>所以平时提交代码的时候，一定要细心，可以使用<code>git status</code>查看状态。不要一味的<code>git add .</code>添加所有的修改。<code>git add</code>之后，也可以再次<code>git status</code>确认哪些要commit。</p>
 <p>但是如果确实不小心commit并push了不必要的文件，那也没关系。git提供了<code>git rm</code>指令来删除文件。删除方式有两种</p>

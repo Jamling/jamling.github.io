@@ -197,18 +197,18 @@ CentOS Linux release 7.1.1503 (Core)
 <li>ubuntu 14.10 amd-64 server版</li>
 <li>CentOS Linux release 7.1.1503 (Core)</li>
 </ol>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="软件环境"><a href="#软件环境" class="headerlink" title="软件环境"></a>软件环境</h2><p>安装gerrit所需的相关软件包</p>
 <h3 id="jdk-jre"><a href="#jdk-jre" class="headerlink" title="jdk/jre"></a>jdk/jre</h3><ul>
 <li><p>ubuntu 安装Java（jre） </p>
-<img src="/2016/05/14/other/tech-gerrit-install/image001.png"></li>
+<img src="/2016/05/14/other/tech-gerrit-install/image001.png" class=""></li>
 <li><p>centos<br><code># yum -y list java*</code><br>列出可安装的软件包<br><code># yum -y install java-1.7.0-openjdk.x86_64</code><br>安装jdk 7</p>
 <h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3></li>
 <li><p>ubuntu<br><code>$ sudo apt-get install git git-core git-doc</code></p>
 
 
-<img src="/2016/05/14/other/tech-gerrit-install/image011.png">
+<img src="/2016/05/14/other/tech-gerrit-install/image011.png" class="">
 
 </li>
 </ul>
@@ -216,12 +216,12 @@ CentOS Linux release 7.1.1503 (Core)
 
 <pre><code class="bash">$ sudo apt-get install apache2 apache2.2-common apache2-utils</code></pre>
 <p>其中，使用htpasswd指令需要安装apache2-utils包</p>
-{% asset_img image003.png %}
+<img src="/2016/05/14/other/tech-gerrit-install/image003.png" class="">
 
-{% asset_img image005.png %}
+<img src="/2016/05/14/other/tech-gerrit-install/image005.png" class="">
 
 <p>安装成功后，在/etc/apache2/sites-enable/目录下，新建<kbd>gerrit.conf</kbd>用于配置gerrit服务<br>ubuntu下，需要手动添加LoadModule proxy_http_module<br>添加后 <kbd>/etc/apache2/mods-enabled/proxy.load</kbd>内容如下：</p>
-{% asset_img image007.png %}
+<img src="/2016/05/14/other/tech-gerrit-install/image007.png" class="">
 
 <h4 id="centos"><a href="#centos" class="headerlink" title="centos"></a>centos</h4><p><code># yum install httpd</code><br>安装成功后，在<strong>/etc/httpd/conf.d/</strong>目录下，新建gerrit.conf用于配置gerrit服务</p>
 <h4 id="apache配置"><a href="#apache配置" class="headerlink" title="apache配置"></a>apache配置</h4><p><kbd>gerrit.conf</kbd>内容如下：</p>
@@ -257,7 +257,7 @@ NameVirtualHost *:80
 <li>gerrit.conf的内容与gerrit/etc/gerrit.config有关联。gerrit的配置请见后文</li>
 </ul>
 <h2 id="Gerrit安装"><a href="#Gerrit安装" class="headerlink" title="Gerrit安装"></a>Gerrit安装</h2><h3 id="下载gerrit"><a href="#下载gerrit" class="headerlink" title="下载gerrit"></a>下载gerrit</h3><p>因为国内code.google比较难访问，建议先在windows上先下载gerrit安装包然后上传到服务器</p>
-<p>gerrit release包列表：<a href="http://gerrit-releases.storage.googleapis.com/index.html" target="_blank" rel="noopener">http://gerrit-releases.storage.googleapis.com/index.html</a></p>
+<p>gerrit release包列表：<a target="_blank" rel="noopener" href="http://gerrit-releases.storage.googleapis.com/index.html">http://gerrit-releases.storage.googleapis.com/index.html</a></p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ol>
 <li>创建专有账号（可选）<br>在centos上，创建了专有账号gerrit及gerrit组，并且禁止gerrit账户登录系统。<p class="code-caption" data-lang="shell" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -331,9 +331,9 @@ Install plugin reviewnotes version v2.8.6.1 [y/N]? y
 Install plugin replication version v2.8.6.1 [y/N]? y
 Install plugin commit-message-length-validator version v2.8.6.1 [y/N]? y</code></pre>
 <p> 建议在第二步 Git Repositories选择独立于gerrit安装目录的一个空目录，不然默认使用gerrit/git/作为git仓库目录。<br> 然后其它的步骤基本只需默认即可</p>
-<p> 不同版本的gerrit，使用的ssh key加密库是不一样的，以下是2.8使用的加密库<br> <a href="http://www.bouncycastle.org/download/bcprov-jdk16-144.jar" target="_blank" rel="noopener">http://www.bouncycastle.org/download/bcprov-jdk16-144.jar</a><br> <img src="/2016/05/14/other/tech-gerrit-install/image013.png"><br> 安装完成：<br> <img src="/2016/05/14/other/tech-gerrit-install/image015.png"></p>
+<p> 不同版本的gerrit，使用的ssh key加密库是不一样的，以下是2.8使用的加密库<br> <a target="_blank" rel="noopener" href="http://www.bouncycastle.org/download/bcprov-jdk16-144.jar">http://www.bouncycastle.org/download/bcprov-jdk16-144.jar</a><br> <img src="/2016/05/14/other/tech-gerrit-install/image013.png" class=""><br> 安装完成：<br> <img src="/2016/05/14/other/tech-gerrit-install/image015.png" class=""></p>
 <ol start="3">
-<li>配置<br><kbd>gerrit/etc/gerrit.config</kbd> 配置如下：<img src="/2016/05/14/other/tech-gerrit-install/image017.jpg">
+<li>配置<br><kbd>gerrit/etc/gerrit.config</kbd> 配置如下：<img src="/2016/05/14/other/tech-gerrit-install/image017.jpg" class="">
 
 </li>
 </ol>
@@ -353,7 +353,7 @@ Install plugin commit-message-length-validator version v2.8.6.1 [y/N]? y</code><
 <li><p>centos 上访问gerrit出现http 503<br>输入以下指令，第一个不行，试第二个</p>
 <pre><code class="bash"># /usr/sbin/setsebool httpd_can_network_connect 1
 # /usr/sbin/setsebool -P httpd_can_network_connect 1</code></pre>
-<p>参考：<a href="http://sysadminsjourney.com/content/2010/02/01/apache-modproxy-error-13permission-denied-error-rhel/" target="_blank" rel="noopener">http://sysadminsjourney.com/content/2010/02/01/apache-modproxy-error-13permission-denied-error-rhel/</a></p>
+<p>参考：<a target="_blank" rel="noopener" href="http://sysadminsjourney.com/content/2010/02/01/apache-modproxy-error-13permission-denied-error-rhel/">http://sysadminsjourney.com/content/2010/02/01/apache-modproxy-error-13permission-denied-error-rhel/</a></p>
 </li>
 <li><p>centos 上访问gerrit出现http 500<br>关闭防火墙即可</p>
 <p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -363,8 +363,8 @@ Install plugin commit-message-length-validator version v2.8.6.1 [y/N]? y</code><
 <pre><code class="bash"># systemctl stop firewalld.service</code></pre>
 <p> 因apache和gerrit的配置问题导致gerrit不能正常访问，建议多多查看apache和gerrit的log。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li>Gerrit2安装配置<br><a href="http://openwares.net/linux/gerrit2_setup.html" target="_blank" rel="noopener">http://openwares.net/linux/gerrit2_setup.html</a></li>
-<li>Gerrit Code Review for Git<br><a href="https://gerrit-documentation.storage.googleapis.com/Documentation/2.8.1/index.html" target="_blank" rel="noopener">https://gerrit-documentation.storage.googleapis.com/Documentation/2.8.1/index.html</a></li>
+<li>Gerrit2安装配置<br><a target="_blank" rel="noopener" href="http://openwares.net/linux/gerrit2_setup.html">http://openwares.net/linux/gerrit2_setup.html</a></li>
+<li>Gerrit Code Review for Git<br><a target="_blank" rel="noopener" href="https://gerrit-documentation.storage.googleapis.com/Documentation/2.8.1/index.html">https://gerrit-documentation.storage.googleapis.com/Documentation/2.8.1/index.html</a></li>
 </ul>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/05/14/other/tech-gerrit-install/](https://www.ieclipse.cn/2016/05/14/other/tech-gerrit-install/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   

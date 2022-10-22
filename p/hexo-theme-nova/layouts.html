@@ -269,22 +269,22 @@ layout
 
 <pre><code class="htmlbars">&lt;div class=&quot;container container-fluid&quot;&gt;
 &lt;div class=&quot;row&quot;&gt;
-  &lt;div class=&quot;{{theme.layout.index.main}}&quot;&gt;
-    {% if is_home() %}
-    {{ partial('post/index') }}
-    {% elseif is_archive() || is_category() || is_tag() %}
-    {{ partial('post/archive') }}
-    {% elseif is_post() %}
-    {% set show_toc = theme.toc.post && page.toc %}
-    {{ partial('post/article', {post: page}) }}
-    {% endif %}
+  &lt;div class=&quot;&#123;&#123;theme.layout.index.main&#125;&#125;&quot;&gt;
+    &#123;% if is_home() %&#125;
+    &#123;&#123; partial('post/index') &#125;&#125;
+    &#123;% elseif is_archive() || is_category() || is_tag() %&#125;
+    &#123;&#123; partial('post/archive') &#125;&#125;
+    &#123;% elseif is_post() %&#125;
+    &#123;% set show_toc = theme.toc.post && page.toc %&#125;
+    &#123;&#123; partial('post/article', &#123;post: page&#125;) &#125;&#125;
+    &#123;% endif %&#125;
   &lt;/div&gt;
   &lt;!-- aside --&gt;
-  &lt;div class=&quot;{{theme.layout.index.widgets}}&quot;&gt;
+  &lt;div class=&quot;&#123;&#123;theme.layout.index.widgets&#125;&#125;&quot;&gt;
     &lt;aside&gt;
-      {%- if page_toc() %}
-      {{ partial('./partial/toc', {style: theme.layout.index.widgets}) }}
-      {%- endif %}
+      &#123;%- if page_toc() %&#125;
+      &#123;&#123; partial('./partial/toc', &#123;style: theme.layout.index.widgets&#125;) &#125;&#125;
+      &#123;%- endif %&#125;
     &lt;/aside&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -295,91 +295,91 @@ layout
 <p><code>layout/page.swig</code> dispatcher:</p>
 <p class="code-caption" data-lang="htmlbars" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="htmlbars">{%- if page.type === 'categories' %}
-{{ partial('page/categories', {}) }}
-{%- elseif page.type === 'donates' %}
-{{ partial('page/donates', {}) }}
-{%- else %}
+<pre><code class="htmlbars">&#123;%- if page.type === 'categories' %&#125;
+&#123;&#123; partial('page/categories', &#123;&#125;) &#125;&#125;
+&#123;%- elseif page.type === 'donates' %&#125;
+&#123;&#123; partial('page/donates', &#123;&#125;) &#125;&#125;
+&#123;%- else %&#125;
 &lt;div class=&quot;container container-fluid&quot;&gt;
   &lt;div class=&quot;row&quot;&gt;
-    &lt;div class=&quot;{{theme.layout.page.main}}&quot;&gt;
-      {{ partial('./page/article') }}
+    &lt;div class=&quot;&#123;&#123;theme.layout.page.main&#125;&#125;&quot;&gt;
+      &#123;&#123; partial('./page/article') &#125;&#125;
     &lt;/div&gt;
-    &lt;div class=&quot;{{theme.layout.page.toc}}&quot;&gt;
-      {{ partial('./partial/toc') }}
+    &lt;div class=&quot;&#123;&#123;theme.layout.page.toc&#125;&#125;&quot;&gt;
+      &#123;&#123; partial('./partial/toc') &#125;&#125;
     &lt;/div&gt;
   &lt;/div&gt;&lt;!--  end row --&gt;
 &lt;/div&gt;
-{%- endif %}</code></pre>
+&#123;%- endif %&#125;</code></pre>
 <h3 id="project-1"><a href="#project-1" class="headerlink" title="project"></a>project</h3><p>Projects page, listing repos on github</p>
 <p>Other page, display content in main container, TOC in right aside and nagivation bar in left aside.</p>
 <p><code>layout/project.swig</code> dispatcher:</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="js">{% if page.gh %}
-  {% set gh = gh_opts() %}
-  {% if gh.type === 'get_contents' %} 
-    {% set page.content = gh_contents() %}
-    {{ partial('project/contents', {} )}}
-  {% elseif gh.type === 'get_repos' %}
-    {{ partial('project/projects', {} )}}
-  {% elseif gh.type === 'get_releases' %}
-    {{ partial('project/releases', {} )}}
-  {% endif %}
-{% else %}
-  {{ partial('project/contents', {} )}}
-{% endif %}</code></pre>
-<h1 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a>Plugin</h1><p>There are many <a href="https://hexo.io/plugins" target="_blank" rel="noopener">plugins</a> of [hexo], it’s easy to write a plugin under [hexo].<br>Just write a <var>.js</var> under <var>script</var> in your theme.</p>
+<pre><code class="js">&#123;% if page.gh %&#125;
+  &#123;% set gh = gh_opts() %&#125;
+  &#123;% if gh.type === 'get_contents' %&#125; 
+    &#123;% set page.content = gh_contents() %&#125;
+    &#123;&#123; partial('project/contents', &#123;&#125; )&#125;&#125;
+  &#123;% elseif gh.type === 'get_repos' %&#125;
+    &#123;&#123; partial('project/projects', &#123;&#125; )&#125;&#125;
+  &#123;% elseif gh.type === 'get_releases' %&#125;
+    &#123;&#123; partial('project/releases', &#123;&#125; )&#125;&#125;
+  &#123;% endif %&#125;
+&#123;% else %&#125;
+  &#123;&#123; partial('project/contents', &#123;&#125; )&#125;&#125;
+&#123;% endif %&#125;</code></pre>
+<h1 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a>Plugin</h1><p>There are many <a target="_blank" rel="noopener" href="https://hexo.io/plugins">plugins</a> of [hexo], it’s easy to write a plugin under [hexo].<br>Just write a <var>.js</var> under <var>script</var> in your theme.</p>
 <p>here is a sample (<var>script</var>/<var>helpers.js</var>) to write a helper plugin to return page title.</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="js">// return page title.
-hexo.extend.helper.register(&#39;page_title&#39;, function(){
+hexo.extend.helper.register(&#39;page_title&#39;, function()&#123;
   var p = this.page;
   var ret = &#39;&#39;;
-  if (p.title2) { // if has a title2 in front-matter, i18n title2 value as title
+  if (p.title2) &#123; // if has a title2 in front-matter, i18n title2 value as title
     ret = this.i18n(p.title2);
-  }
-  else if (p.title){ // use title value as title 
+  &#125;
+  else if (p.title)&#123; // use title value as title 
     ret = p.title;
-  }
+  &#125;
   return ret;
-});</code></pre>
+&#125;);</code></pre>
 <p>And another sample of display categories in post:</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="js">// insert category of post
-hexo.extend.helper.register(&#39;post_cates&#39;, function(post){
+hexo.extend.helper.register(&#39;post_cates&#39;, function(post)&#123;
   var cats = post.categories;
   var _self = this;
   var ret = &#39;&#39;;
-  if (cats == null || cats.length == 0) {
+  if (cats == null || cats.length == 0) &#123;
       return ret;
-  }
+  &#125;
   ret += &#39;&lt;span class=&quot;glyphicon glyphicon-folder-close&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&amp;nbsp;&#39; + _self.__(&#39;category.label&#39;) + &#39;&#39;;
   ret += &#39;&lt;ol class=&quot;breadcrumb category&quot;&gt;&#39;;
-  cats.forEach(function(item){
+  cats.forEach(function(item)&#123;
     ret += &#39;&lt;li&gt;&lt;a class=&quot;&quot; href=&quot;&#39; + _self.url_for_lang(item.path) + &#39;&quot;&gt;&#39; + item.name + &#39;&lt;/a&gt;&lt;/li&gt;&#39;;
-  });
+  &#125;);
   ret += &#39;&lt;/ol&gt;&#39;;
   return ret;
-});</code></pre>
+&#125;);</code></pre>
 <p>Use in layout/post.swig</p>
 <p class="code-caption" data-lang="htmlbars" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="htmlbars">&lt;footer class=&quot;post-item-footer&quot;&gt;
-  {{ post_cates(post) }} 
-  {{ post_tags(post) }}
+  &#123;&#123; post_cates(post) &#125;&#125; 
+  &#123;&#123; post_tags(post) &#125;&#125;
 &lt;/footer&gt;</code></pre>
 <p>Will output:</p>
 <pre>
     <footer class="post-item-footer">
-            <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>&nbsp;分类<ol class="breadcrumb category"><li><a class href="/categories/软件技术/">软件技术</a></li><li><a class href="/categories/软件技术/Web/">Web</a></li></ol> 
-            <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>&nbsp;标签<ol class="breadcrumb tag"><li><a class href="/tags/Hexo/">Hexo</a></li><li><a class href="/tags/Node-js/">Node.js</a></li></ol>
+            <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>&nbsp;分类<ol class="breadcrumb category"><li><a class="" href="/categories/软件技术/">软件技术</a></li><li><a class="" href="/categories/软件技术/Web/">Web</a></li></ol> 
+            <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>&nbsp;标签<ol class="breadcrumb tag"><li><a class="" href="/tags/Hexo/">Hexo</a></li><li><a class="" href="/tags/Node-js/">Node.js</a></li></ol>
     </footer>
 </pre>
 
-<p>The [Nova] rewrite lost of helper of [hexo] to simplify the style. Please visit <a href="http://ieclipse.cn/p/hexo-theme-nova/helpers.html" target="_blank" rel="noopener">Helpers</a> for more informations.</p>
+<p>The [Nova] rewrite lost of helper of [hexo] to simplify the style. Please visit <a target="_blank" rel="noopener" href="http://ieclipse.cn/p/hexo-theme-nova/helpers.html">Helpers</a> for more informations.</p>
 
   
   </div>

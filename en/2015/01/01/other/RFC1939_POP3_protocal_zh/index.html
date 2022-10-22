@@ -185,7 +185,7 @@
   
     <h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h2><p>　　对于在网络上的比较小的结点，支持消息传输系统（MTS）是不实际的。例如，一台<br>工作站可能不具有充足的资源允许SMTP服务器和相当的本地邮件传送系统保持序驻留，<br>并持续运行。同样的，将一台个人计算机长时间连接在IP类型网络上的费用也是可观的<br>（结点缺少的资源被称为”联络性”）。</p>
 <p>　　虽然如此，在这样的小结点上允许管理邮件是十分有用的，并且这些结点经常支持一<br>个用户代理来管理邮件。为解决这一问题，能够支持MTS的结点就为这些不能支持的结点提<br>供了邮件存储功能。邮局协议-版本3就是使这样的工作站可以用一种比较实用的方法来访问<br>存储于服务器上的储存邮件。通常，这意味着工作站可以从服务器上取得邮件，而服务器为<br>它暂时保存邮件。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <p>　　在下文中，客户主机指的是利用POP3服务的主机，而服务器主机指的是提供POP3服务的<br>主机。</p>
 <h2 id="2-简单说明"><a href="#2-简单说明" class="headerlink" title="2.简单说明"></a>2.简单说明</h2><p>　　在此文档中不指明客户主机如何将邮件送入到传送系统中去。但这里有一个说明：当用<br>户代理需要将信息送到传送系统时，它在接力主机上建立SMTP连接（这些接力主机可以是<br>POP3主机，也可以不是）。
@@ -223,7 +223,7 @@
 <p>　　·TOPmsgn<br>　　【参数】一个是未被标记为删除的信件数，另一个是非负数（必须提供）<br>　　【限制】仅在”操作”状态下使用。<br>　　【说明】<br>　　如果服务器返回”确认”，响应是多行的。在初始的+OK后，服务器发送信件头，一个空行将信<br>件头和信件体分开，对于多行响应要注意字节填充终止符。  </p>
 <p>　　注意：如果客户要求的行数比信件体中的行数大，服务器会发送整个信件。</p>
 <p>　　【响应】+OK：其后有信件头；<br>　　-ERR：其后无类似消息。<br>　　【例子】</p>
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>C:TOP110
 S:+OK
@@ -233,7 +233,7 @@ S:.
 C:TOP1003
 S:-ERRnosuchmessage</code></pre><p>　　·UIDL[msg]<br>　　【参数】信件数（可选）。如果给出信件数，不包括被标记为删除的信件。<br>　　【限制】仅在”操作”状态下使用。<br>　　【说明】<br>　　如果给出了参数，且POP3服务器返回包括上述信息的”确认”，此行称为信息的”独立-ID表”。<br>　　<br>　　如果没有参数，服务器返回”确认”响应，此响应便以多行给出。在初的+OK后，对于每个信件，<br>服务器均给出相应的响应。此行叫做信件的”独立-ID表”。  </p>
 <p>　　为简化语法分析，所有服务器要求使用独立-ID表的特定格式。它包括空格和信件的独立-ID。<br>　　<br>　　信件的独立-ID由0x21到0x7E字符组成，这个符号在给定的存储邮件中不会重复。<br>　　<br>　　注意：信件不包括被标记为删除的信件。<br>　　<br>　　【响应】+OK：其后是独立-ID表；<br>　　-ERR：其后无类似信件。<br>　　【例子】  </p>
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>C:UIDL
 S:+OK
@@ -250,17 +250,17 @@ S:-ERRnosuchmessage,only2messagesinmaildrop</code></pre><p>　　·APOPnamediges
 <p>　　客户记录下此时间戳，然后以送APOP命令。name语法和USER命令一致。Digest是采用MD5算法产<br>生的包括时间戳和共享密钥的字串。此密钥是客户和服务器共知的，应该注意保护此密钥，如果泄密，<br>任何人都能够以用户身份进入服务器。</p>
 <p>　　如果服务器接到APOP命令，它验证digest，如果正确，服务器返回”确认”，进入”操作”状态；否<br>则，给出”失败”并停留在”确认”状态。</p>
 <p>　　注意：共享密钥的长度增加，解读它的难度也相应增加，这个密钥应该是长字符串。<br>　　<br>　　【响应】+OK：邮件锁住并准备好；<br>　　-ERR：拒绝请求。<br>　　【例子】  </p>
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>S:+OKPOP3serverready&lt;1896.697170952@dbc.mtview.ca.us&gt;
 C:APOPmrosec4c9334bac560ecc979e58001b3e22fb
-S:+OKmaildrophas1message(369octets)</code></pre><p>　　在此例子中，共享密钥<a href="mailto:&#x31;&#x38;&#x39;&#54;&#46;&#54;&#x39;&#55;&#49;&#x37;&#48;&#x39;&#x35;&#x32;&#64;&#x64;&#98;&#99;&#46;&#109;&#x74;&#x76;&#x69;&#x65;&#x77;&#46;&#x63;&#97;&#x2e;&#117;&#115;" target="_blank" rel="noopener">&#x31;&#x38;&#x39;&#54;&#46;&#54;&#x39;&#55;&#49;&#x37;&#48;&#x39;&#x35;&#x32;&#64;&#x64;&#98;&#99;&#46;&#109;&#x74;&#x76;&#x69;&#x65;&#x77;&#46;&#x63;&#97;&#x2e;&#117;&#115;</a>tanstaaf由MD5算法生成，它产生了<br>digest值，c4c9334bac560ecc979e58001b3e22fb</p>
+S:+OKmaildrophas1message(369octets)</code></pre><p>　　在此例子中，共享密钥<a href="mailto:&#49;&#56;&#57;&#x36;&#46;&#54;&#57;&#x37;&#x31;&#x37;&#x30;&#x39;&#x35;&#50;&#x40;&#100;&#98;&#99;&#46;&#x6d;&#x74;&#x76;&#x69;&#101;&#119;&#x2e;&#99;&#x61;&#x2e;&#x75;&#115;">&#49;&#56;&#57;&#x36;&#46;&#54;&#57;&#x37;&#x31;&#x37;&#x30;&#x39;&#x35;&#50;&#x40;&#100;&#98;&#99;&#46;&#x6d;&#x74;&#x76;&#x69;&#101;&#119;&#x2e;&#99;&#x61;&#x2e;&#x75;&#115;</a>tanstaaf由MD5算法生成，它产生了<br>digest值，c4c9334bac560ecc979e58001b3e22fb</p>
 <h2 id="8-POP3命令总结"><a href="#8-POP3命令总结" class="headerlink" title="8.POP3命令总结"></a>8.POP3命令总结</h2><p>基础的POP3命令：<br>USERname在”确认”状态有效<br>PASSstring<br>QUIT  </p>
 <p>STAT在”操作”状态有效<br>LIST[msg]<br>RETRmsg<br>DELEmsg<br>NOOP<br>RSET  </p>
 <p>QUIT在”更新”状态有效<br>　<br>可选的POP3命令：<br>APOPnamedigest在”确认”状态有效<br>TOPmsgn在”操作”状态有效<br>UIDL[msg]  </p>
 <p>POP3响应：<br>+OK<br>-ERR  </p>
 <p>注意：除了STAT，LIST和UIDL的响应外，其它命令的响应均为”+OK”和”-ERR”。响应后的所有文<br>本将被客户略去。</p>
-<h2 id="9-POP3会话实例"><a href="#9-POP3会话实例" class="headerlink" title="9.POP3会话实例"></a>9.POP3会话实例</h2><p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<h2 id="9-POP3会话实例"><a href="#9-POP3会话实例" class="headerlink" title="9.POP3会话实例"></a>9.POP3会话实例</h2><p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>S:&lt;等待连接到TCP端口110&gt;
 C:&lt;打开连接&gt;

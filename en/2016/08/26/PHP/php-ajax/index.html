@@ -196,29 +196,29 @@
 &lt;script src=&quot;//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
 
 &lt;script&gt;
-function my_post() {
+function my_post() &#123;
   var div = $(&#39;#result&#39;);
-  $.ajax({
+  $.ajax(&#123;
           url : &#39;test.php?urlvar1=var1&amp;urlvar2=var2&#39;,
           dataType : &quot;json&quot;,
           type : &#39;post&#39;,
-          headers: {
+          headers: &#123;
             hvar : &#39;hvar&#39;
-          },
-          data : {
+          &#125;,
+          data : &#123;
             foo : &#39;bar&#39;,
-            postvar: [{var1: &#39;var1&#39;, var2: &#39;var2&#39;}, {var1: &#39;var10&#39;, var2: &#39;var20&#39;}]
-          },
-          success : function(data) {
-            if (data.code==0) {
+            postvar: [&#123;var1: &#39;var1&#39;, var2: &#39;var2&#39;&#125;, &#123;var1: &#39;var10&#39;, var2: &#39;var20&#39;&#125;]
+          &#125;,
+          success : function(data) &#123;
+            if (data.code==0) &#123;
               div.html(JSON.stringify(data));
-            }
-          },
-          error: function (xhr, msg, e) {console.log(e);
+            &#125;
+          &#125;,
+          error: function (xhr, msg, e) &#123;console.log(e);
             div.html(&#39;加载失败&#39;);
-          }
-        });
-}
+          &#125;
+        &#125;);
+&#125;
 
 &lt;/script&gt;
  &lt;/head&gt;
@@ -231,7 +231,7 @@ function my_post() {
  &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 <p>请求数据如下图所示：</p>
-<img src="/2016/08/26/PHP/php-ajax/request.png">
+<img src="/2016/08/26/PHP/php-ajax/request.png" class="">
 
 <p>其实请求还包含一个hvar的HTTP请求头，HTTP头通常用于设置授权，加密等接口参数。业务参数一般放在url或表单数据中。如果请求方式为get，那么表单数据会作为查询字符串追加到url中。</p>
 <h2 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h2><p>提交请求后，由后端的test.php来处理请求。只简单地将收到的请求Headers，GET参数及POST参数封装成json并返回。</p>
@@ -241,9 +241,9 @@ function my_post() {
 
 $data = $_POST[&#39;postvar&#39;];
 $headers = getallheaders();
-foreach ($headers as $key =&gt; $value) {
+foreach ($headers as $key =&gt; $value) &#123;
   //echo $key . &quot;=&quot; . $value;
-}
+&#125;
 
 header(&#39;content-type:application/json;charset=utf8&#39;);
 
@@ -257,10 +257,10 @@ exit(json_encode($ret));
 ?&gt;</code></pre>
 <p>接口传过来的json对象，直接会被PHP解析为关联数据。比如<var>$data</var>就是一个array。</p>
 <p>响应结果如下图所示：</p>
-<img src="/2016/08/26/PHP/php-ajax/response.png">
+<img src="/2016/08/26/PHP/php-ajax/response.png" class="">
 
 <p>其中headers包含一个hvar的参数。PHP转json由内置函数<code>json_encode()</code>来完成。</p>
-<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><img src="/2016/08/26/PHP/php-ajax/result.png">
+<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><img src="/2016/08/26/PHP/php-ajax/result.png" class="">
 
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>PHP真是强大，关联数据与json在结构上非常相似，处理json也非常的方便。如果是Java，后端代码写起来就复杂许多了，json处理还得引入第三方库。</p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/08/26/PHP/php-ajax/](https://www.ieclipse.cn/2016/08/26/PHP/php-ajax/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>

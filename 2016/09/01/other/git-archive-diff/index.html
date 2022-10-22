@@ -181,12 +181,12 @@
   <div class="article-content" itemprop="articleBody">
   
     <p>使用git archive可以将传入的文件列表打包为一个zip档案。对于一些大系统，如果只是修复bug，可以做到热替换的话（比如php，js等解释型语言），可以使用此命令将修改的文件添加到zip档案，以提交局方升级。</p>
-<a id="more"></a>
+<span id="more"></span>
 <p>将整个仓库打包</p>
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>git archive -o repo.zip HEAD</code></pre><p>查看自前一次提交修改的文件</p>
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>git diff --name-only HEAD^</code></pre><p>如果想查看前n次提交的修改，可以将HEAD^改为HEAD~n即可。</p>
 <p>综合运用</p>

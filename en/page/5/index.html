@@ -5,7 +5,7 @@
   <title>Jamling's Blog and Project Site</title>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="keywords" content="Android,Eclipse 插件,Java,Web,奇淫巧技,其它,Compose,Framework,Eclipse,ADT,QuickAF,Gradle,CI,J2EE,Swing,SWT,xml,PHP,Ajax,MySQL,Hexo,js,Node.js,git,安全">
+  <meta name="keywords" content="Android,Compose,Eclipse 插件,Java,Web,其它,奇淫巧技,Framework,Eclipse,ADT,QuickAF,Gradle,CI,J2EE,Swing,SWT,xml,PHP,Ajax,MySQL,git,安全,Hexo,js,Node.js">
   <meta name="description" content="Jamling's Open Project include Java, Android, Eclipse and Technology Blog Articles.">
   
 
@@ -158,45 +158,6 @@
 <main>
           <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
             <div class="card-content">
-              <h3 class="card-title"><a itemprop="name headline" href="/en/2016/08/02/Android/Android-radio-badge/" class="article-title">Android底部栏添加消息提醒小红点功能</a></h3>
-              <div class="divider"></div>
-              <div class="section post-header clearfix">
-                <!-- sub element must be span -->
-                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2016-08-02T13:00:00.000Z"><time datetime="2016-08-02T13:00:00.000Z">2016-08-02</time></time></span>
-                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">Category</span><a class="category-item" href="/en/categories/Android/">Android</a></span>
-                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">Tags</span><a class="tag-item" href="/en/tags/Android/">Android</a><a class="tag-item" href="/en/tags/QuickAF/">QuickAF</a></span>
-              </div>
-              <div class="divider"></div>
-              <div class="nova-flex excerpt-box">
-              
-              <div class="excerpt" itemprop="description articleBody">
-              <p>目前许多Android App都带有一个底部栏，通过底部栏可以切换Tab，比如微信，QQ都是这种风格。对于像小红点之类的醒目提醒，用得最多的就是BadgeView了，不过，如果底部栏是RadioGroup的话，那么不好意思BadgeView可不支持哦（如果使用BadgeView，RadioGroup就不能愉快地工作了）。那么如何即保留使用RadioGroup又能添加BadgeView的功能呢？请接着阅读本文。</p>
-              </div>
-              </div>
-            </div>
-            <div class="divider"></div>
-
-            <div class="card-action xxx-count" data-xid="059c1db75095d8f3fb48ece6094f8b31" data-url="2016/08/02/Android/Android-radio-badge/">
-              <a class="icon nova-bubbles action-item comment-count" href="/en/2016/08/02/Android/Android-radio-badge/#comment">
-                <span class="count"></span><span class="hidden-xs">Comment</span>
-              </a>
-              <a class="icon nova-eye action-item view-count" href="/en/2016/08/02/Android/Android-radio-badge/">
-                <span class="count"></span><span class="hidden-xs">Views</span>
-                </a>
-              <a class="icon nova-hand-right action-item" href="/en/2016/08/02/Android/Android-radio-badge/" >
-                <span>Read more</span>
-              </a>
-            </div>
-            <meta itemprop="url" content="https://www.ieclipse.cn/2016/08/02/Android/Android-radio-badge/">
-            <meta itemprop="dateModified" content="2019-07-22T11:25:01.895Z">
-            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
-              <meta content="https://www.ieclipse.cn" itemprop="url">
-              <meta content="Jamling's Blog and Project Site" itemprop="name">
-              <meta content="/image/logo.png" itemprop="logo">
-            </span>
-          </div>
-          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
-            <div class="card-content">
               <h3 class="card-title"><a itemprop="name headline" href="/en/2016/07/28/Web/Hexo-dev-post-views/" class="article-title">Hexo高级教程之文章阅读计数</a></h3>
               <div class="divider"></div>
               <div class="section post-header clearfix">
@@ -209,7 +170,7 @@
               <div class="nova-flex excerpt-box">
               
               <div class="excerpt" itemprop="description articleBody">
-              <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>Hexo的NexT主题非常流行，之前看过某博友的博客，使用的就是NexT主题，在文章列表页面，竟然还显示了文章的阅读次数！Hexo是静态博客，像阅读次数的实现必须借助第三方工具。早期<a href="http://github.com/Jamling/hexo-theme-nova" target="_blank" rel="noopener">Nova</a>主题使用的是友言评论，不像多说评论开放了许多API，所以，从版本0.1.0开始，本站使用的<a href="http://github.com/Jamling/hexo-theme-nova" target="_blank" rel="noopener">Nova</a>主题就换成了多说。在多说的<a href="http://dev.duoshuo.com/docs/50615732a834c63c56004257" target="_blank" rel="noopener">获取文章评论、转发数API</a>中，<code>views</code>即为文章阅读数，不过好像多说对非官方的网站不开放此字段，<code>views</code>返回的一直为0。昨天阅读了一下博友的<a href="https://notes.wanghao.work/2015-10-21-%E4%B8%BANexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD.html#%E9%85%8D%E7%BD%AELeanCloud" target="_blank" rel="noopener">为NexT主题添加文章阅读量统计功能</a>这篇文章，原来NextT的阅读数是借助云API来实现了。所以，立即动手，也为本站的<a href="http://github.com/Jamling/hexo-theme-nova" target="_blank" rel="noopener">Nova</a>主题添加阅读计数功能。</p>
+              <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>Hexo的NexT主题非常流行，之前看过某博友的博客，使用的就是NexT主题，在文章列表页面，竟然还显示了文章的阅读次数！Hexo是静态博客，像阅读次数的实现必须借助第三方工具。早期<a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-theme-nova">Nova</a>主题使用的是友言评论，不像多说评论开放了许多API，所以，从版本0.1.0开始，本站使用的<a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-theme-nova">Nova</a>主题就换成了多说。在多说的<a target="_blank" rel="noopener" href="http://dev.duoshuo.com/docs/50615732a834c63c56004257">获取文章评论、转发数API</a>中，<code>views</code>即为文章阅读数，不过好像多说对非官方的网站不开放此字段，<code>views</code>返回的一直为0。昨天阅读了一下博友的<a target="_blank" rel="noopener" href="https://notes.wanghao.work/2015-10-21-%E4%B8%BANexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD.html#%E9%85%8D%E7%BD%AELeanCloud">为NexT主题添加文章阅读量统计功能</a>这篇文章，原来NextT的阅读数是借助云API来实现了。所以，立即动手，也为本站的<a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-theme-nova">Nova</a>主题添加阅读计数功能。</p>
               </div>
               </div>
             </div>
@@ -287,7 +248,7 @@
               <div class="nova-flex excerpt-box">
               
               <div class="excerpt" itemprop="description articleBody">
-              <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>带过滤功能的<a href="http://hexo.io/" target="_blank" rel="noopener">Hexo</a>首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类/标签的功能。比如，在首页只显示指定分类下面的文章列表。</p>
+              <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>带过滤功能的<a target="_blank" rel="noopener" href="http://hexo.io/">Hexo</a>首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类/标签的功能。比如，在首页只显示指定分类下面的文章列表。</p>
               </div>
               </div>
             </div>
@@ -366,7 +327,7 @@
               <div class="nova-flex excerpt-box">
               
               <div class="excerpt" itemprop="description articleBody">
-              <h2 id="Hexo高亮"><a href="#Hexo高亮" class="headerlink" title="Hexo高亮"></a>Hexo高亮</h2><p>hexo已实现代码高亮，代码封装在hexo-util插件中，使用的是<a href="https://highlightjs.org/" target="_blank" rel="noopener">highlight.js</a>，通过<code>include_code</code>tag标签来使用，功能已经很强大了，而且自带行号显示，可以满足大多数博主的需求了。但是它仍然存在一些局限性，比如在<a href="http://github.com/Jamling/hexo-theme-nova" target="_blank" rel="noopener">Nova</a>主题中，有些语言不支持，无法高亮，而且界面也比较丑，所以个人还是倾向于自由使用[hightlight.js]来高亮代码，使用起来比较灵活，还能扩展一些功能，但是<a href="https://highlightjs.org/" target="_blank" rel="noopener">highlight.js</a>默认是不带行号的。为此，也是遇到了不少坑。后来在某歪果仁的博客中找到一个行号解决方案，在其基础上，终于实现了一个较为理想的代码高亮方案。</p>
+              <h2 id="Hexo高亮"><a href="#Hexo高亮" class="headerlink" title="Hexo高亮"></a>Hexo高亮</h2><p>hexo已实现代码高亮，代码封装在hexo-util插件中，使用的是<a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>，通过<code>include_code</code>tag标签来使用，功能已经很强大了，而且自带行号显示，可以满足大多数博主的需求了。但是它仍然存在一些局限性，比如在<a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-theme-nova">Nova</a>主题中，有些语言不支持，无法高亮，而且界面也比较丑，所以个人还是倾向于自由使用[hightlight.js]来高亮代码，使用起来比较灵活，还能扩展一些功能，但是<a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>默认是不带行号的。为此，也是遇到了不少坑。后来在某歪果仁的博客中找到一个行号解决方案，在其基础上，终于实现了一个较为理想的代码高亮方案。</p>
               </div>
               </div>
             </div>
@@ -408,7 +369,7 @@
               <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote><p>Hexo 有强大的插件系统，使您能轻松扩展功能而不用修改核心模块的源码。在 Hexo 中有两种形式的插件：</p>
 <p>脚本（Scripts）<br>如果您的代码很简单，建议您编写脚本，您只需要把 JavaScript 文件放到 scripts 文件夹，在启动时就会自动载入。</p>
 <p>插件（Packages）<br>如果您的代码较复杂，或是您想要发布到 NPM 上，建议您编写插件。首先，在 node_modules 文件夹中建立文件夹，文件夹名称开头必须为 hexo-，如此一来 Hexo 才会在启动时载入否则 Hexo 将会忽略它。</p>
-<footer><strong>hexo.io</strong><cite><a href="https://hexo.io/zh-cn/docs/plugins.html" target="_blank" rel="noopener">插件</a></cite></footer></blockquote>
+<footer><strong>hexo.io</strong><cite><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/plugins.html">插件</a></cite></footer></blockquote>
               </div>
               </div>
             </div>
@@ -447,7 +408,7 @@
               <div class="nova-flex excerpt-box">
               
               <div class="excerpt" itemprop="description articleBody">
-              <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>有感于<a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>高级教程实在太少，当初本人在开发<a href="/en/p/hexo-theme-nova">Nova</a>主题时，曾遇到过不少坑，为填这些坑，较为深入地学习了<a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>源码，又自学了不少<a href="https://nodejs.org/" target="_blank" rel="noopener">node.js</a>知识，才总算将这些坑基本填完。本着人人为我，我为人人的分享精神，特开一<a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>高级教程专题，希望广大<a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>爱好者拍砖~</p>
+              <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>有感于<a target="_blank" rel="noopener" href="https://hexo.io">hexo</a>高级教程实在太少，当初本人在开发<a href="/en/p/hexo-theme-nova">Nova</a>主题时，曾遇到过不少坑，为填这些坑，较为深入地学习了<a target="_blank" rel="noopener" href="https://hexo.io">hexo</a>源码，又自学了不少<a target="_blank" rel="noopener" href="https://nodejs.org/">node.js</a>知识，才总算将这些坑基本填完。本着人人为我，我为人人的分享精神，特开一<a target="_blank" rel="noopener" href="https://hexo.io">hexo</a>高级教程专题，希望广大<a target="_blank" rel="noopener" href="https://hexo.io">hexo</a>爱好者拍砖~</p>
               </div>
               </div>
             </div>
@@ -544,6 +505,46 @@
             </div>
             <meta itemprop="url" content="https://www.ieclipse.cn/2016/06/02/Web/tech-hexo-i18n/">
             <meta itemprop="dateModified" content="2019-11-08T10:15:36.915Z">
+            <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+              <meta content="https://www.ieclipse.cn" itemprop="url">
+              <meta content="Jamling's Blog and Project Site" itemprop="name">
+              <meta content="/image/logo.png" itemprop="logo">
+            </span>
+          </div>
+          <div class="card index-card hoverable animated fadeInUp" itemscope itemtype="http://schema.org/BlogPosting">
+            <div class="card-content">
+              <h3 class="card-title"><a itemprop="name headline" href="/en/2016/06/02/other/tech-git-submodule/" class="article-title">Git submodule简介</a></h3>
+              <div class="divider"></div>
+              <div class="section post-header clearfix">
+                <!-- sub element must be span -->
+                <span class="post-date"><time class="icon nova-calendar" itemprop="datePublished" datetime="2016-06-02T08:42:28.000Z"><time datetime="2016-06-02T08:42:28.000Z">2016-06-02</time></time></span>
+                <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">Category</span><a class="category-item" href="/en/categories/other/">其它</a></span>
+                <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">Tags</span><a class="tag-item" href="/en/tags/git/">git</a></span>
+              </div>
+              <div class="divider"></div>
+              <div class="nova-flex excerpt-box">
+              
+              <div class="excerpt" itemprop="description articleBody">
+              <h2 id="修改历史"><a href="#修改历史" class="headerlink" title="修改历史"></a>修改历史</h2><p>2016-07-29 修改部分内容</p>
+<p>如果项目很大，分为众多模块，并且需要对每个模块单独进行版本控制的时候，引入git submodule是一个非常不错的选择。尤其是对一些sdk+plugin的项目尤为适用。</p>
+              </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+
+            <div class="card-action xxx-count" data-xid="307eca0ce94ba2fadfa71cc2a7fb9888" data-url="2016/06/02/other/tech-git-submodule/">
+              <a class="icon nova-bubbles action-item comment-count" href="/en/2016/06/02/other/tech-git-submodule/#comment">
+                <span class="count"></span><span class="hidden-xs">Comment</span>
+              </a>
+              <a class="icon nova-eye action-item view-count" href="/en/2016/06/02/other/tech-git-submodule/">
+                <span class="count"></span><span class="hidden-xs">Views</span>
+                </a>
+              <a class="icon nova-hand-right action-item" href="/en/2016/06/02/other/tech-git-submodule/" >
+                <span>Read more</span>
+              </a>
+            </div>
+            <meta itemprop="url" content="https://www.ieclipse.cn/2016/06/02/other/tech-git-submodule/">
+            <meta itemprop="dateModified" content="2019-10-17T02:04:00.013Z">
             <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
               <meta content="https://www.ieclipse.cn" itemprop="url">
               <meta content="Jamling's Blog and Project Site" itemprop="name">
@@ -655,7 +656,7 @@
       </div>
       
       <!-- use category tree -->
-      <ul class="list-group"><li class="list-group-item category"><a class="list-group-link" href="/en/categories/Android/">Android</a><span class="badge">25</span><ul class="list-group category"><li class="list-group-item"><a class="list-group-link" href="/en/categories/Android/Compose/">Compose</a><span class="badge">2</span></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/Android/Framework/">Framework</a><span class="badge">1</span></li></ul></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/pde/">Eclipse 插件</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/Java/">Java</a><span class="badge">9</span></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/Web/">Web</a><span class="badge">24</span></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/other/">其它</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/trick/">奇淫巧技</a><span class="badge">6</span></li></ul>
+      <ul class="list-group"><li class="list-group-item category"><a class="list-group-link" href="/en/categories/Android/">Android</a><span class="badge">24</span><ul class="list-group category"><li class="list-group-item"><a class="list-group-link" href="/en/categories/Android/Compose/">Compose</a><span class="badge">1</span></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/Android/Framework/">Framework</a><span class="badge">1</span></li></ul></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/pde/">Eclipse 插件</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/Java/">Java</a><span class="badge">9</span></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/Web/">Web</a><span class="badge">24</span></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/other/">其它</a><span class="badge">8</span></li><li class="list-group-item"><a class="list-group-link" href="/en/categories/trick/">奇淫巧技</a><span class="badge">6</span></li></ul>
     </div>
     
 
@@ -665,7 +666,7 @@
       </div>
       
       <div class="panel-body">
-      <a href="/en/tags/ADT/" style="font-size: 10px; color: #795548">ADT</a> <a href="/en/tags/Ajax/" style="font-size: 10px; color: #795548">Ajax</a> <a href="/en/tags/Android/" style="font-size: 20px; color: #212121">Android</a> <a href="/en/tags/CI/" style="font-size: 10px; color: #795548">CI</a> <a href="/en/tags/Compose/" style="font-size: 11.25px; color: #6e4f43">Compose</a> <a href="/en/tags/Eclipse/" style="font-size: 16.25px; color: #423530">Eclipse</a> <a href="/en/tags/Framework/" style="font-size: 10px; color: #795548">Framework</a> <a href="/en/tags/Gradle/" style="font-size: 11.25px; color: #6e4f43">Gradle</a> <a href="/en/tags/Hexo/" style="font-size: 18.75px; color: #2c2826">Hexo</a> <a href="/en/tags/J2EE/" style="font-size: 12.5px; color: #63483e">J2EE</a> <a href="/en/tags/Java/" style="font-size: 12.5px; color: #63483e">Java</a> <a href="/en/tags/MySQL/" style="font-size: 10px; color: #795548">MySQL</a> <a href="/en/tags/Node-js/" style="font-size: 13.75px; color: #584239">Node.js</a> <a href="/en/tags/PHP/" style="font-size: 12.5px; color: #63483e">PHP</a> <a href="/en/tags/QuickAF/" style="font-size: 17.5px; color: #372e2b">QuickAF</a> <a href="/en/tags/SWT/" style="font-size: 10px; color: #795548">SWT</a> <a href="/en/tags/Swing/" style="font-size: 10px; color: #795548">Swing</a> <a href="/en/tags/git/" style="font-size: 15px; color: #4d3b35">git</a> <a href="/en/tags/js/" style="font-size: 13.75px; color: #584239">js</a> <a href="/en/tags/xml/" style="font-size: 11.25px; color: #6e4f43">xml</a> <a href="/en/tags/%E5%AE%89%E5%85%A8/" style="font-size: 11.25px; color: #6e4f43">安全</a>
+      <a href="/en/tags/ADT/" style="font-size: 10px; color: #795548">ADT</a> <a href="/en/tags/Ajax/" style="font-size: 10px; color: #795548">Ajax</a> <a href="/en/tags/Android/" style="font-size: 20px; color: #212121">Android</a> <a href="/en/tags/CI/" style="font-size: 10px; color: #795548">CI</a> <a href="/en/tags/Compose/" style="font-size: 10px; color: #795548">Compose</a> <a href="/en/tags/Eclipse/" style="font-size: 16.25px; color: #423530">Eclipse</a> <a href="/en/tags/Framework/" style="font-size: 10px; color: #795548">Framework</a> <a href="/en/tags/Gradle/" style="font-size: 11.25px; color: #6e4f43">Gradle</a> <a href="/en/tags/Hexo/" style="font-size: 18.75px; color: #2c2826">Hexo</a> <a href="/en/tags/J2EE/" style="font-size: 12.5px; color: #63483e">J2EE</a> <a href="/en/tags/Java/" style="font-size: 12.5px; color: #63483e">Java</a> <a href="/en/tags/MySQL/" style="font-size: 10px; color: #795548">MySQL</a> <a href="/en/tags/Node-js/" style="font-size: 13.75px; color: #584239">Node.js</a> <a href="/en/tags/PHP/" style="font-size: 12.5px; color: #63483e">PHP</a> <a href="/en/tags/QuickAF/" style="font-size: 17.5px; color: #372e2b">QuickAF</a> <a href="/en/tags/SWT/" style="font-size: 10px; color: #795548">SWT</a> <a href="/en/tags/Swing/" style="font-size: 10px; color: #795548">Swing</a> <a href="/en/tags/git/" style="font-size: 15px; color: #4d3b35">git</a> <a href="/en/tags/js/" style="font-size: 13.75px; color: #584239">js</a> <a href="/en/tags/xml/" style="font-size: 11.25px; color: #6e4f43">xml</a> <a href="/en/tags/%E5%AE%89%E5%85%A8/" style="font-size: 11.25px; color: #6e4f43">安全</a>
       </div>
     </div>
 

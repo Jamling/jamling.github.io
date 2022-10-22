@@ -201,11 +201,11 @@
 <li>界面B的按钮B2与界面A的按钮B1外观一样，只是颜色不同</li>
 </ul>
 <p>通常我们的解决办法是向UI要按钮的背景图，不同的状态是一张图片。以上为例，我们需要向美工索取4张图片。<br>按钮B1（常态与点击态），按钮B2（常态与点击态），然后再定义selector drawable xml，如果美工给的不是9.png，我们还要使用nine-patch工具将其转为9.png图片。<br>大家可以想象一下，如果状态更多，而页面上的按钮又各不相同的话，天啊！那该有多少图片，多少个selector啊，得花多少时间啊！有没有快捷的解决办法呢？答案当然是有！</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <ul>
 <li>在Android的5.0之后，Android提供了一个Tint着色功能，允许你修改背景图片的颜色来达到复用功能。不过只能在Android5.0以上的系统中使用。</li>
-<li>使用<a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a>的RoundedColorDrawable和RoundButton来实现</li>
+<li>使用<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>的RoundedColorDrawable和RoundButton来实现</li>
 </ul>
 <h2 id="RoundedColorDrawable"><a href="#RoundedColorDrawable" class="headerlink" title="RoundedColorDrawable"></a>RoundedColorDrawable</h2><p>RoundedColorDrawable继承自Drawable，不仅可以设置Drawable的背景和圆角，还可以设置边框。</p>
 <h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>常用的构造函数如下：</p>
@@ -219,10 +219,10 @@
  * @param color
  *            of the drawable
  */
-public RoundedColorDrawable(float radius, int color) {
+public RoundedColorDrawable(float radius, int color) &#123;
     this(color);
     setRadius(radius);
-}</code></pre>
+&#125;</code></pre>
 <p>构造时传入圆角半径和默认的背景颜色。</p>
 <h3 id="设置边框"><a href="#设置边框" class="headerlink" title="设置边框"></a>设置边框</h3><p>如果需要设置边框，需要单独调用setBorder来实现。</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -235,52 +235,52 @@ public RoundedColorDrawable(float radius, int color) {
  * @param width
  *            of the border
  */
-public void setBorder(int color, float width) {
-    if (mBorderColor != color) {
+public void setBorder(int color, float width) &#123;
+    if (mBorderColor != color) &#123;
         mBorderColor = color;
         invalidateSelf();
-    }
+    &#125;
 
-    if (mBorderWidth != width) {
+    if (mBorderWidth != width) &#123;
         mBorderWidth = width;
         updatePath();
         invalidateSelf();
-    }
-}</code></pre>
+    &#125;
+&#125;</code></pre>
 <p><code>setBorder()</code>方法可以对RoundedColorDrawable设置框架厚度和颜色。</p>
 <h3 id="设置状态"><a href="#设置状态" class="headerlink" title="设置状态"></a>设置状态</h3><p>核心的设置状态及其对应的颜色代码如下：</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">private StateListDrawable sld;
-public RoundedColorDrawable setStateColor(int[][] stateSets, int[] colors){
-    if (stateSets != null &amp;&amp; colors != null) {
+public RoundedColorDrawable setStateColor(int[][] stateSets, int[] colors)&#123;
+    if (stateSets != null &amp;&amp; colors != null) &#123;
         int len = Math.min(stateSets.length, colors.length);
-        for (int i = 0; i &lt; len; i++) {
+        for (int i = 0; i &lt; len; i++) &#123;
             RoundedColorDrawable self = new RoundedColorDrawable(mRadii, colors[i]);
             self.setBorder(mBorderColor, mBorderWidth);
             sld.addState(stateSets[i], self);
-        }
-    }
+        &#125;
+    &#125;
     return this;
-}
+&#125;
 
-public RoundedColorDrawable addStateColor(int[] stateSet, int color, int borderColor){
-    if (sld == null) {
+public RoundedColorDrawable addStateColor(int[] stateSet, int color, int borderColor)&#123;
+    if (sld == null) &#123;
         sld = new StateListDrawable();
-    }
+    &#125;
     RoundedColorDrawable self = new RoundedColorDrawable(mRadii, color);
     self.setBorder(borderColor &gt; 0 ? borderColor : mBorderColor, mBorderWidth);
     sld.addState(stateSet, self);
     return this;
-}
+&#125;
 
-public RoundedColorDrawable addStateColor(int[] stateSet, int color){
+public RoundedColorDrawable addStateColor(int[] stateSet, int color)&#123;
     return addStateColor(stateSet, color, 0);
-}
+&#125;
 
-public RoundedColorDrawable addStateColor(int state, int color){
-    return addStateColor(new int[]{state}, color);
-}</code></pre>
+public RoundedColorDrawable addStateColor(int state, int color)&#123;
+    return addStateColor(new int[]&#123;state&#125;, color);
+&#125;</code></pre>
 <p>通过上面的代码可以知道，给RoundedColorDrawable添加状态集对应的drawable，其实都是调用StateListDrawable的addState()方法。而我们定义的selector drawable xml，其实也是生成一个StateListDrawable。RoundedColorDrawable不过是提供类似的方法罢了。</p>
 <h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><p>回到本文开篇的例子，按钮B1定义如下：</p>
 <p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -298,8 +298,8 @@ public RoundedColorDrawable addStateColor(int state, int color){
 // btn2 bg
 intr = AppUtils.dp2px(this, 4); // 圆角半径
 RoundedColorDrawablenormal = new RoundedColorDrawable(r, 0xffff0000); // 默认背景
-normal.addStateColor(newint[]{ android.R.attr.state_pressed}, 0xff00ff00); // pressed时的背景
-normal.addStateColor(newint[]{ android.R.attr.state_selected}, 0xff00ff00); // selected时的背景
+normal.addStateColor(newint[]&#123; android.R.attr.state_pressed&#125;, 0xff00ff00); // pressed时的背景
+normal.addStateColor(newint[]&#123; android.R.attr.state_selected&#125;, 0xff00ff00); // selected时的背景
 
 normal.applyTo(btn2);// 将背景应用到btn2上</code></pre>
 <p>注意顺序，如果Android判断当前的状态符合，则不会继续向下查找状态。在selector xml中，顺序要按状态的范围从小到大写。而java代码中则相反，顺序按状态的范围从大到小add。</p>
@@ -328,8 +328,8 @@ normal.applyTo(btn2);// 将背景应用到btn2上</code></pre>
 btn3.setPressedBgColor(0xff3F51B5);
 btn3.setSelectedBgColor(0xff333333);
 btn3.apply();</code></pre>
-<h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">QuickAF</a> 是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a href="https://github.com/Jamling/QuickAF" target="_blank" rel="noopener">https://github.com/Jamling/QuickAF</a></p>
+<h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a> 是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">https://github.com/Jamling/QuickAF</a></p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/08/02/Android/Android-code-states/](https://www.ieclipse.cn/2016/08/02/Android/Android-code-states/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
   </div>

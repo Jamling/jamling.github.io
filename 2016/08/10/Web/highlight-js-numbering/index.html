@@ -180,14 +180,14 @@
   </header>
   <div class="article-content" itemprop="articleBody">
   
-    <p><a href="https://highlightjs.org/" target="_blank" rel="noopener">highlight.js</a>是一款功能强大的代码高亮Javascript工具，支持162程序语言，自带74种高亮样式，支持自动侦测语言类型，几乎所有的markdown都支持<a href="https://highlightjs.org/" target="_blank" rel="noopener">highlight.js</a>。Hexo在<a href="http://idodev.co.uk/2013/03/syntax-highlighting-with-highlightjs/" target="_blank" rel="noopener">syntax-highlighting-with-highlightjs</a>的基础上成功实现对代码行号的添加，并且做了一些优化和改进。</p>
+    <p><a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>是一款功能强大的代码高亮Javascript工具，支持162程序语言，自带74种高亮样式，支持自动侦测语言类型，几乎所有的markdown都支持<a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>。Hexo在<a target="_blank" rel="noopener" href="http://idodev.co.uk/2013/03/syntax-highlighting-with-highlightjs/">syntax-highlighting-with-highlightjs</a>的基础上成功实现对代码行号的添加，并且做了一些优化和改进。</p>
 <p>注：阅读本文需要一定的前端基础知识。</p>
-<h2 id="加载highlight-js"><a href="#加载highlight-js" class="headerlink" title="加载highlight.js"></a>加载highlight.js</h2><p>使用<a href="https://highlightjs.org/" target="_blank" rel="noopener">highlight.js</a>非常简单，只需引入<a href="https://highlightjs.org/" target="_blank" rel="noopener">highlight.js</a>的css及js（推荐在主题模板中作为全局css和js引入，引入的位置在<code>&lt;head&gt;&lt;/head&gt;</code>之间）。</p>
+<h2 id="加载highlight-js"><a href="#加载highlight-js" class="headerlink" title="加载highlight.js"></a>加载highlight.js</h2><p>使用<a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>非常简单，只需引入<a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>的css及js（推荐在主题模板中作为全局css和js引入，引入的位置在<code>&lt;head&gt;&lt;/head&gt;</code>之间）。</p>
 <p class="code-caption" data-lang="html" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css&quot;&gt;
 &lt;script src=&quot;//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js&quot;&gt;&lt;/script&gt;</code></pre>
-<p><a href="https://highlightjs.org/" target="_blank" rel="noopener">highlight.js</a>有许多代码风格，我在这里使用的是github风格。</p>
+<p><a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>有许多代码风格，我在这里使用的是github风格。</p>
 <p>然后，在文档加载完毕之后初始化（推荐在<code>&lt;/body&gt;</code>之前的<code>&lt;script&gt;&lt;/script&gt;</code>中引入）</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code" data-hide="false" data-href="https://github.com/Jamling/hexo-theme-nova/blob/master/source/js/hljs.js#L3:L4"><span class="code-caption-label">([hljs.js](https://github.com/Jamling/hexo-theme-nova/blob/master/source/js/hljs.js#L3:L4))</span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -197,26 +197,26 @@ hljs.initHighlightingOnLoad();</code></pre>
 <h2 id="添加行号"><a href="#添加行号" class="headerlink" title="添加行号"></a>添加行号</h2><p>添加行号的大致过程是先将代码部分按行切割，得到代码行数。然后生成一个动态的行号列表ul插入到<code>&lt;code&gt;</code>标签之后</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code" data-hide="false" data-href="https://github.com/Jamling/hexo-theme-nova/blob/master/source/js/hljs.js#L51:L59"><span class="code-caption-label">([hljs.js](https://github.com/Jamling/hexo-theme-nova/blob/master/source/js/hljs.js#L51:L59))</span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="js">if (ds.line_number === &#39;frontend&#39;) {
+<pre><code class="js">if (ds.line_number === &#39;frontend&#39;) &#123;
   console.log(&quot;show line number in front-end&quot;);
   var lines = texts.length - 1;
   var $numbering = $(&#39;&lt;ul/&gt;&#39;).addClass(&#39;pre-numbering&#39;);
   $(this).addClass(&#39;has-numbering&#39;).parent().append($numbering);
-  for (i = 1; i &lt;= lines; i++) {
+  for (i = 1; i &lt;= lines; i++) &#123;
     $numbering.append($(&#39;&lt;li/&gt;&#39;).text(i));
-  }
-}</code></pre>
+  &#125;
+&#125;</code></pre>
 <p>对于有行号的<code>&lt;code&gt;</code>标签，多了一个<code>has-numbering</code>的样式，行号列表<code>ul</code>的样式为<code>pre-numbering</code>。通过定义<code>has-numbering</code>和<code>pre-numbering</code>css规则来控制行号与代码块的显示及对齐。</p>
 <p class="code-caption" data-lang="css" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code" data-hide="false" data-href="https://github.com/Jamling/hexo-theme-nova/tree/master/source/css/bs/nova.scss"><span class="code-caption-label">([nova.scss](https://github.com/Jamling/hexo-theme-nova/tree/master/source/css/bs/nova.scss))</span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="css">code.has-numbering {
+<pre><code class="css">code.has-numbering &#123;
   margin-left: 1.7em !important; /*因为显示行号，所以离左边有一定的距离*/
   word-wrap: normal; 
   word-break: keep-all;
   white-space: pre;
-}
+&#125;
 
-.pre-numbering {
+.pre-numbering &#123;
   position: absolute; /*绝对定位*/
   top: 0;
   left: 0;
@@ -230,45 +230,45 @@ hljs.initHighlightingOnLoad();</code></pre>
   font-size: 1.0em; /*字体大小与&lt;code&gt;一致*/
   color: #AAA;
   list-style: none;
-}</code></pre>
+&#125;</code></pre>
 <p>比较重要的规则在上面的css中均有注释说明。完整CSS请参考Nova中的样式。</p>
 <p><strong><em>注，具体的样式需根据当前主题做出适当的修改</em></strong></p>
 <h2 id="处理滚动"><a href="#处理滚动" class="headerlink" title="处理滚动"></a>处理滚动</h2><p>添加了行号，为使行号与代码行不错乱，所以要求代码块在横向允许滚动，一般来说显示行号的<code>&lt;code&gt;</code>标签，还需加上以下css规则。</p>
 <p class="code-caption" data-lang="css" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="css">code {
+<pre><code class="css">code &#123;
     overflow-x: auto;
     overflow-y: auto;
     word-break: keep-all;
     white-space: pre;
-}</code></pre>
+&#125;</code></pre>
 <h2 id="支持响应式"><a href="#支持响应式" class="headerlink" title="支持响应式"></a>支持响应式</h2><p>由于在小屏幕上，尤其是手机浏览器，横向滚动并不好操作，所以，在移动设备上通过媒体查询来设置行号<code>ul</code>不显示，并且覆盖<code>&lt;code&gt;</code>的样式规则为允许断行。</p>
 <p class="code-caption" data-lang="css" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="css">@media (max-width: 767px) {
-  .pre-numbering {
+<pre><code class="css">@media (max-width: 767px) &#123;
+  .pre-numbering &#123;
     display: none;
-  }
-  code.has-numbering {
+  &#125;
+  code.has-numbering &#123;
     margin-left: -0.5px !important;
     word-wrap: break-world !important;
     white-space: pre-wrap !important;
-  }
-}</code></pre>
-<h2 id="支持更多的代码语言"><a href="#支持更多的代码语言" class="headerlink" title="支持更多的代码语言"></a>支持更多的代码语言</h2><p><a href="https://highlightjs.org/" target="_blank" rel="noopener">highlight.js</a>默认支持大部分主流程序语言的高亮，但是也有小部分语言是不支持的，比如<a href="http://www.ieclipse.cn/2016/05/13/tech-vba-guide/">Excel VBA基础实例教程</a>中贴了不少VB代码，需要额外加载<a href="https://highlightjs.org/" target="_blank" rel="noopener">highlight.js</a>的VBScript.js才能高亮，则需要引入额外的高亮脚本<code>vbscript.js</code>即可。如下所示：</p>
+  &#125;
+&#125;</code></pre>
+<h2 id="支持更多的代码语言"><a href="#支持更多的代码语言" class="headerlink" title="支持更多的代码语言"></a>支持更多的代码语言</h2><p><a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>默认支持大部分主流程序语言的高亮，但是也有小部分语言是不支持的，比如<a href="http://www.ieclipse.cn/2016/05/13/tech-vba-guide/">Excel VBA基础实例教程</a>中贴了不少VB代码，需要额外加载<a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>的VBScript.js才能高亮，则需要引入额外的高亮脚本<code>vbscript.js</code>即可。如下所示：</p>
 <p class="code-caption" data-lang="html" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="html">&lt;script src=&quot;http://cdn.bootcss.com/highlight.js/9.1.0/languages/vbscript.min.js&quot; &gt;&lt;/script&gt;</code></pre>
-<h2 id="代码复制"><a href="#代码复制" class="headerlink" title="代码复制"></a>代码复制</h2><p>对于复制这块，比较好的解决方案是引入jquery的zclip插件（<a href="https://github.com/zeroclipboard/jquery.zeroclipboard）。如果用户选择的不仅仅是代码部分，则需要加入css规则来控制行号不被选择。" target="_blank" rel="noopener">https://github.com/zeroclipboard/jquery.zeroclipboard）。如果用户选择的不仅仅是代码部分，则需要加入css规则来控制行号不被选择。</a></p>
+<h2 id="代码复制"><a href="#代码复制" class="headerlink" title="代码复制"></a>代码复制</h2><p>对于复制这块，比较好的解决方案是引入jquery的zclip插件（<a target="_blank" rel="noopener" href="https://github.com/zeroclipboard/jquery.zeroclipboard）。如果用户选择的不仅仅是代码部分，则需要加入css规则来控制行号不被选择。">https://github.com/zeroclipboard/jquery.zeroclipboard）。如果用户选择的不仅仅是代码部分，则需要加入css规则来控制行号不被选择。</a></p>
 <p class="code-caption" data-lang="css" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="css">.pre-numbering {
+<pre><code class="css">.pre-numbering &#123;
   -webkit-user-select: none; /* Chrome all / Safari all */
   -moz-user-select: none; /* Firefox all */
   -ms-user-select: none; /* IE 10+ */
   user-select: none;  /* Likely future */ 
-}</code></pre>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>syntax-highlighting-with-highlightjs: <a href="http://idodev.co.uk/2013/03/syntax-highlighting-with-highlightjs/" target="_blank" rel="noopener">http://idodev.co.uk/2013/03/syntax-highlighting-with-highlightjs/</a><br>jquery.zeroclipboard: <a href="https://github.com/zeroclipboard/jquery.zeroclipboard" target="_blank" rel="noopener">https://github.com/zeroclipboard/jquery.zeroclipboard</a><br>Hexo高级教程之代码高亮: <a href="http://www.ieclipse.cn/2016/07/18/Web/Hexo-dev-highlight/">http://www.ieclipse.cn/2016/07/18/Web/Hexo-dev-highlight/</a></p>
+&#125;</code></pre>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>syntax-highlighting-with-highlightjs: <a target="_blank" rel="noopener" href="http://idodev.co.uk/2013/03/syntax-highlighting-with-highlightjs/">http://idodev.co.uk/2013/03/syntax-highlighting-with-highlightjs/</a><br>jquery.zeroclipboard: <a target="_blank" rel="noopener" href="https://github.com/zeroclipboard/jquery.zeroclipboard">https://github.com/zeroclipboard/jquery.zeroclipboard</a><br>Hexo高级教程之代码高亮: <a href="http://www.ieclipse.cn/2016/07/18/Web/Hexo-dev-highlight/">http://www.ieclipse.cn/2016/07/18/Web/Hexo-dev-highlight/</a></p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/08/10/Web/highlight-js-numbering/](https://www.ieclipse.cn/2016/08/10/Web/highlight-js-numbering/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
   </div>

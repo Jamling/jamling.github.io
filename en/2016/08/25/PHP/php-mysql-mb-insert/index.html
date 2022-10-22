@@ -181,7 +181,7 @@
   <div class="article-content" itemprop="articleBody">
   
     <p>使用PHP + MySQL来测试插入百万条数据，看看到底要多久。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><p>使用MySQL批处理即 insert table (field1, filed2…) values (value1, value2…), … (value n1, value n2) 来插入数据。</p>
 <p class="code-caption" data-lang="php" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -201,37 +201,37 @@ $sql = &quot;insert into oc_project_content2 (gid, gname, fid, fname) values &qu
 // 分m次执行，一条n条
 $m = 1000; $n = 1000;
 $t1 = time(); // 开始计时
-for($i=0; $i&lt;$m; $i++){
+for($i=0; $i&lt;$m; $i++)&#123;
   $arr = array();
-  for($j=0; $j&lt;$n; $j++) {
+  for($j=0; $j&lt;$n; $j++) &#123;
     $gid = ($i * $m + $j);
     $fid = 100;//rand(0, $m*$n)
     $arr[$j] = &#39;(&#39;. $gid . &#39;,&quot;&#39; . randStr(6) . &#39;&quot;,&#39; . $fid . &#39;,&quot;&#39; . randStr(12) . &#39;&quot;)&#39;;
-  }//var_dump($arr);
+  &#125;//var_dump($arr);
   $tmp = join(&#39;,&#39;, $arr);
   $batch = $sql . $tmp;
   // var_dump($batch);
   $db-&gt;execute($batch);
-}
+&#125;
 
 $t2 = time();
 echo $t2 - $t1 . &#39; s escaped &#39; . PHP_EOL; // 查看时间，单位秒
 
 $count = $db-&gt;FirstRow(&quot;SELECT count(*) FROM `oc_project_content2`&quot;);
-foreach ($count as $key =&gt; $value) {
+foreach ($count as $key =&gt; $value) &#123;
   echo $key . &#39;=&gt;&#39; . $value;
-};
+&#125;;
 
 // 生成随机字符串
-function randStr($m = 6) {
+function randStr($m = 6) &#123;
   $new_str = &#39;&#39;;
   $str = &#39;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwsyz0123456789&#39;;
   $max=strlen($str)-1;
-  for ($i = 1; $i &lt;= $m; ++$i) {
+  for ($i = 1; $i &lt;= $m; ++$i) &#123;
     $new_str .=$str[mt_rand(0, $max)];
-  }
+  &#125;
   return $new_str;
-}
+&#125;
 
 ?&gt;</code></pre>
 <h2 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h2><p>以下是4次测试结果， 前3次是100x1000条数据，第4次是1000x1000条数据。</p>

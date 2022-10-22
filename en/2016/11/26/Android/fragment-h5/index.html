@@ -183,15 +183,15 @@
     <p>做Android 5年多了，第一次在Fragment中使用WebView，先将Activity中的代码复制过来改改，没有想到，竟然无法正常显示，而是打开手机浏览器渲染WebView，返回后，Fragment一片空白。这还能忍受？Google一把，说是要继承WebViewFragment，但是一旦继承，就破坏了我的框架结构。然后看了下WebViewFragment的源码，并不复杂。所以就将相关的源码合并到现有的fragment中，本以为可以妥妥地解决问题，结果还是那样。最后在stackoverflow上解决了终极解决办法，那就是需要设置特殊的WebViewClient。</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="java">private class H5WebViewClient extends WebViewClient {
+<pre><code class="java">private class H5WebViewClient extends WebViewClient &#123;
     @Override
-    public boolean shouldOverrideUrlLoading(WebView webView, String s) {
+    public boolean shouldOverrideUrlLoading(WebView webView, String s) &#123;
         webView.loadUrl(s);
         //  一定要return true，不然就会使用浏览器打开
         return true;
-    }
-}</code></pre>
-<a id="more"></a>
+    &#125;
+&#125;</code></pre>
+<span id="more"></span>
 
 
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/11/26/Android/fragment-h5/](https://www.ieclipse.cn/2016/11/26/Android/fragment-h5/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>

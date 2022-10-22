@@ -180,43 +180,43 @@
   </header>
   <div class="article-content" itemprop="articleBody">
   
-    <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>有感于<a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>高级教程实在太少，当初本人在开发<a href="/en/p/hexo-theme-nova">Nova</a>主题时，曾遇到过不少坑，为填这些坑，较为深入地学习了<a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>源码，又自学了不少<a href="https://nodejs.org/" target="_blank" rel="noopener">node.js</a>知识，才总算将这些坑基本填完。本着人人为我，我为人人的分享精神，特开一<a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>高级教程专题，希望广大<a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>爱好者拍砖~</p>
+    <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>有感于<a target="_blank" rel="noopener" href="https://hexo.io">hexo</a>高级教程实在太少，当初本人在开发<a href="/en/p/hexo-theme-nova">Nova</a>主题时，曾遇到过不少坑，为填这些坑，较为深入地学习了<a target="_blank" rel="noopener" href="https://hexo.io">hexo</a>源码，又自学了不少<a target="_blank" rel="noopener" href="https://nodejs.org/">node.js</a>知识，才总算将这些坑基本填完。本着人人为我，我为人人的分享精神，特开一<a target="_blank" rel="noopener" href="https://hexo.io">hexo</a>高级教程专题，希望广大<a target="_blank" rel="noopener" href="https://hexo.io">hexo</a>爱好者拍砖~</p>
 <p>本系列的定位为高级教程，所以要求读者具备以下知识或技能：</p>
 <ul>
-<li>前端技术：前端基础知识不用说了，必须要具备的比如HTML，CSS，Javascript，Node.js。如果知识储备不足，推荐去<a href="http://www.w3school.com.cn/" target="_blank" rel="noopener">W3C School</a>好好学习。</li>
-<li><a href="https://hexo.io/zh-cn/docs/templates.html" target="_blank" rel="noopener">hexo模板</a>：<a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>中的layout模板都是使用某个具体的模板引擎写的，模板引擎有<code>swig</code>,<code>ejs</code>，<code>jade</code>等。layout可以视为MVC模式中的<code>View</code>层，用于负责具体页面的展示。</li>
-<li><a href="https://hexo.io/zh-cn/docs/variables.html" target="_blank" rel="noopener">hexo变量</a>：<a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>内置了不少常用的变量，例如<var>site.posts</var>是站点所有的博客文章， <var>config</var>为<a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>博客设置，<var>page</var>为<a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>页面对象。<a href="https://hexo.io/zh-cn/docs/variables.html" target="_blank" rel="noopener">hexo变量</a>可以视为MVC模式中的<code>Model</code>层，负责给<code>View</code>提供要展示的数据。</li>
+<li>前端技术：前端基础知识不用说了，必须要具备的比如HTML，CSS，Javascript，Node.js。如果知识储备不足，推荐去<a target="_blank" rel="noopener" href="http://www.w3school.com.cn/">W3C School</a>好好学习。</li>
+<li><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/templates.html">hexo模板</a>：<a target="_blank" rel="noopener" href="https://hexo.io">hexo</a>中的layout模板都是使用某个具体的模板引擎写的，模板引擎有<code>swig</code>,<code>ejs</code>，<code>jade</code>等。layout可以视为MVC模式中的<code>View</code>层，用于负责具体页面的展示。</li>
+<li><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/variables.html">hexo变量</a>：<a target="_blank" rel="noopener" href="https://hexo.io">hexo</a>内置了不少常用的变量，例如<var>site.posts</var>是站点所有的博客文章， <var>config</var>为<a target="_blank" rel="noopener" href="https://hexo.io">hexo</a>博客设置，<var>page</var>为<a target="_blank" rel="noopener" href="https://hexo.io">hexo</a>页面对象。<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/variables.html">hexo变量</a>可以视为MVC模式中的<code>Model</code>层，负责给<code>View</code>提供要展示的数据。</li>
 <li>[辅助函数]：hexo中内置了不少[辅助函数]，这些辅助函数可以在模板中直接使用，用于快速地插入要展现的变量内容。辅助函数与MVC中的Controller有点类似，负责数据<code>Model</code>的获取以及如何在<code>View</code>中展示。</li>
 <li>Hexo基础知识：基础知识可以自行度娘或谷歌。PS：个人建议还是看官方文档，有简体中文版本，遗憾的是，官方网站在国内访问有点慢☺。</li>
 </ul>
-<h2 id="主题修改"><a href="#主题修改" class="headerlink" title="主题修改"></a>主题修改</h2><p>在讲到主题开发之前，不得不讲一下主题修改。目前<a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>已有许多成熟的主题。但是未必完全符合博主的要求。灵活性好一些的主题，可能通过修改主题配置可以达到博主的目的，有些则需要修改主题模板或CSS甚至是辅助函数。不过与开发全新的主题相比，工作量还是少了许多。个人建议，如无必要，没有必要开发全新的主题。毕竟博客网站重的是内容，而不是外观。大多数主题，都具备了博客该有的功能，就不必像我如此折腾。当然做为极客的人们则另当别论。</p>
+<h2 id="主题修改"><a href="#主题修改" class="headerlink" title="主题修改"></a>主题修改</h2><p>在讲到主题开发之前，不得不讲一下主题修改。目前<a target="_blank" rel="noopener" href="https://hexo.io">hexo</a>已有许多成熟的主题。但是未必完全符合博主的要求。灵活性好一些的主题，可能通过修改主题配置可以达到博主的目的，有些则需要修改主题模板或CSS甚至是辅助函数。不过与开发全新的主题相比，工作量还是少了许多。个人建议，如无必要，没有必要开发全新的主题。毕竟博客网站重的是内容，而不是外观。大多数主题，都具备了博客该有的功能，就不必像我如此折腾。当然做为极客的人们则另当别论。</p>
 <h3 id="主题配置修改"><a href="#主题配置修改" class="headerlink" title="主题配置修改"></a>主题配置修改</h3><p>这部分相对简单，因为主题一般有相关的文档来告诉你如何修改。</p>
 <p>以主题<a href="/en/p/hexo-theme-nova">Nova</a>为例，<a href="/en/p/hexo-theme-nova">Nova</a>主题在菜单配置上，有项导航菜单叫做捐赠墙，捐赠墙是<a href="http://www.ieclipse.cn">http://www.ieclipse.cn</a> 特有的模块，对于其它博客站点并不适用，那么，只需要将它删除或使用#将其注释即可。这样，它就不会出现在菜单栏中了。</p>
 <h3 id="主题风格修改"><a href="#主题风格修改" class="headerlink" title="主题风格修改"></a>主题风格修改</h3><p>个人推荐在已有主题样式的基础上，新建一个新的CSS文件，并做为引入样式的最后一个。因为CSS按加载的顺序，如果发现有相同选择器的样式，则后面的CSS规则会合并或覆盖原有的规则。举个例子，原来主题中的链接(a标签)颜色为蓝色（<code>#00f</code>），可以重写链接（a标签）的CSS。</p>
 <p>原来的css：</p>
 <p class="code-caption" data-lang="css" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="css">a {
+<pre><code class="css">a &#123;
 color: #00f;
-}</code></pre>
+&#125;</code></pre>
 <p>追加的css：</p>
 <p class="code-caption" data-lang="css" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="css">a {
+<pre><code class="css">a &#123;
 color: #f96;
 text-decoration: none;
-}</code></pre>
+&#125;</code></pre>
 <p>color规则会覆盖原来的color规则，而text-decoration则会作为新规则引入。CSS查看器，基本上浏览器都自带此功能。调试相对来说比较简单。</p>
 <h3 id="主题模板修改"><a href="#主题模板修改" class="headerlink" title="主题模板修改"></a>主题模板修改</h3><p>在此，还是以<a href="/en/p/hexo-theme-nova">Nova</a>主题为例，如果站点不考虑国际化，只做单语言站点，则没有必要保留语言选择功能。遗憾的是，想要不显示，则不能通过修改主题配置来实现，需要修改主题的模板文件。<a href="/en/p/hexo-theme-nova">Nova</a>主题的导航栏菜单位于<code>layout/partial/header.swig</code>中，使用记事本之类的编辑打开它，将</p>
 <p class="code-caption" data-lang="htmlbars" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="htmlbars">&lt;ul class=&quot;nav navbar-nav navbar-right&quot;&gt;
   &lt;li class=&quot;dropdown&quot;&gt;
-    &lt;a href=&quot;#&quot; class=&quot;dropdown-toggle&quot; data-toggle=&quot;dropdown&quot; role=&quot;button&quot; aria-haspopup=&quot;true&quot; aria-expanded=&quot;false&quot;&gt;{{__('page.language')}} &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;dropdown-toggle&quot; data-toggle=&quot;dropdown&quot; role=&quot;button&quot; aria-haspopup=&quot;true&quot; aria-expanded=&quot;false&quot;&gt;&#123;&#123;__('page.language')&#125;&#125; &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/a&gt;
     &lt;ul class=&quot;dropdown-menu&quot;&gt;
-      {%- for lang in get_langs() %}
-      &lt;li&gt;&lt;a href=&quot;{{switch_lang(lang)}}&quot;&gt;{{ lang_name(lang) }}&lt;/a&gt;&lt;/li&gt;
-      {%- endfor %}
+      &#123;%- for lang in get_langs() %&#125;
+      &lt;li&gt;&lt;a href=&quot;&#123;&#123;switch_lang(lang)&#125;&#125;&quot;&gt;&#123;&#123; lang_name(lang) &#125;&#125;&lt;/a&gt;&lt;/li&gt;
+      &#123;%- endfor %&#125;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;</code></pre>
@@ -224,10 +224,10 @@ text-decoration: none;
 <h3 id="辅助函数修改"><a href="#辅助函数修改" class="headerlink" title="辅助函数修改"></a>辅助函数修改</h3><p>以官方的辅助函数list_archives为例，虽然此函数可以设置class参数，不过它的内部在生成ul和li时，都使用了动态的class，自动给class加了后缀。如下所示：</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="js">if (style === &#39;list&#39;) {
+<pre><code class="js">if (style === &#39;list&#39;) &#123;
     result += &#39;&lt;ul class=&quot;&#39; + className + &#39;-list&quot;&gt;&#39;;
 
-    for (i = 0, len = data.length; i &lt; len; i++) {
+    for (i = 0, len = data.length; i &lt; len; i++) &#123;
       item = data[i];
 
       result += &#39;&lt;li class=&quot;&#39; + className + &#39;-list-item&quot;&gt;&#39;;
@@ -236,10 +236,10 @@ text-decoration: none;
 <p>这样css中必须使用.xxx-list作为ul，.xxx-list-item为作li的样式，本着精减html的原则，修改后的代码为：</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="js">if (style === &#39;list&#39;){
+<pre><code class="js">if (style === &#39;list&#39;)&#123;
   result += &#39;&lt;div class=&quot;&#39; + className + &#39;&quot;&gt;&#39;;
 
-  for (i = 0, len = data.length; i &lt; len; i++){
+  for (i = 0, len = data.length; i &lt; len; i++)&#123;
     item = data[i];
 
     result += &#39;&lt;a class=&quot;&#39; + className + &#39;-item&quot; href=&quot;&#39; + link(item) + &#39;&quot;&gt;&#39;;
@@ -266,68 +266,68 @@ text-decoration: none;
 <p class="code-caption" data-lang="htmlbars" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="htmlbars">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;{{ page.lang }}&quot;&gt;
+&lt;html lang=&quot;&#123;&#123; page.lang &#125;&#125;&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;utf-8&quot;&gt;
-  &lt;title&gt;{{ head_title() }}&lt;/title&gt;
+  &lt;title&gt;&#123;&#123; head_title() &#125;&#125;&lt;/title&gt;
   &lt;!--设置浏览器兼容模式 --&gt;
   &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=Edge,chrome=1&quot;&gt;
   &lt;!--支持响应式 --&gt;
   &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
   &lt;!-- 网站关键字，影响SEO --&gt;
-  &lt;meta name=&quot;keywords&quot; content=&quot;{{ head_keywords() }}&quot;&gt;
+  &lt;meta name=&quot;keywords&quot; content=&quot;&#123;&#123; head_keywords() &#125;&#125;&quot;&gt;
   &lt;!--网站描述，影响SEO --&gt;
-  &lt;meta name=&quot;description&quot; content=&quot;{{ head_description() }}&quot;&gt; 
+  &lt;meta name=&quot;description&quot; content=&quot;&#123;&#123; head_description() &#125;&#125;&quot;&gt; 
   &lt;!-- Canonical links --&gt;
-  &lt;link rel=&quot;canonical&quot; href=&quot;{{ url }}&quot;&gt;
+  &lt;link rel=&quot;canonical&quot; href=&quot;&#123;&#123; url &#125;&#125;&quot;&gt;
   &lt;!--加载全局js或css --&gt;
-  {{ head_jscss() }}
+  &#123;&#123; head_jscss() &#125;&#125;
   &lt;!-- RSS --&gt;
-  {{ feed_tag('atom.xml') }}
+  &#123;&#123; feed_tag('atom.xml') &#125;&#125;
 &lt;/head&gt;
 &lt;!--Html主体 --&gt;
 &lt;body&gt;
   &lt;!-- header --&gt;
-  {{ partial('partial/header') }}
+  &#123;&#123; partial('partial/header') &#125;&#125;
   &lt;!-- main --&gt;
-  {{ body }}
+  &#123;&#123; body &#125;&#125;
   &lt;!-- footer --&gt;
-  {{ partial('partial/footer') }}
+  &#123;&#123; partial('partial/footer') &#125;&#125;
   &lt;!-- fixed action bar --&gt;
-  {{ partial('partial/fab') }}
+  &#123;&#123; partial('partial/fab') &#125;&#125;
   &lt;!-- after footer, 第三方脚本放在最后，以免影响网页内容加载 --&gt;
-    {{ js('js/script.js')}}
-    {{ partial('partial/baidu_analytics') }}
-    {{ partial('partial/jiathis_share') }}
+    &#123;&#123; js('js/script.js')&#125;&#125;
+    &#123;&#123; partial('partial/baidu_analytics') &#125;&#125;
+    &#123;&#123; partial('partial/jiathis_share') &#125;&#125;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 <p>index模板作为博客首页的渲染页，其实也是属于post模板的一种。除了layout模板外，我将其它的模板都做了归类，跟博客文章相关的，都在post子目录中；跟单页相关的放置在page子目录中；跟项目相关的，都放置在project子目录中。详细介绍，请访问<a href="/p/hexo-theme-nova/layouts.html">nova layout</a></p>
 <p>下面详细介绍博客文章中的首页和详情页模板</p>
 <h4 id="文章首页"><a href="#文章首页" class="headerlink" title="文章首页"></a>文章首页</h4><p>首页即文章列表页，主栏主要显示文章列表。文章列表项显示标题，日期，分类，标签，文章摘要等信息及分享，评论等操作项，核心代码如下：</p>
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>&lt;main&gt; 
-{%- for post in page.posts %}
+&#123;%- for post in page.posts %&#125;
 &lt;div class=&quot;card hoverable&quot;&gt;
   &lt;div class=&quot;card-content&quot;&gt;
     &lt;h3 class=&quot;card-title&quot;&gt;
-      &lt;a href=&quot;{{ url_for_lang(post.path) }}&quot; class=&quot;article-title&quot;&gt;{{ post.title }}&lt;/a&gt;
+      &lt;a href=&quot;&#123;&#123; url_for_lang(post.path) &#125;&#125;&quot; class=&quot;article-title&quot;&gt;&#123;&#123; post.title &#125;&#125;&lt;/a&gt;
     &lt;/h3&gt;
     &lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
     &lt;div class=&quot;section post-header&quot;&gt;
       &lt;!-- sub element must be span --&gt;
-      &lt;span class=&quot;icon nova-calendar&quot;&gt;{{ time_tag(post.date) }}&lt;/span&gt;
-      {{ post_cates(post) }} {{ post_tags(post) }}
+      &lt;span class=&quot;icon nova-calendar&quot;&gt;&#123;&#123; time_tag(post.date) &#125;&#125;&lt;/span&gt;
+      &#123;&#123; post_cates(post) &#125;&#125; &#123;&#123; post_tags(post) &#125;&#125;
     &lt;/div&gt;
-    &lt;div class=&quot;excerpt&quot;&gt;{{ page_excerpt(post) }}&lt;/div&gt;
+    &lt;div class=&quot;excerpt&quot;&gt;&#123;&#123; page_excerpt(post) &#125;&#125;&lt;/div&gt;
   &lt;/div&gt;
   &lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
   &lt;div class=&quot;card-action&quot;&gt;
     &lt;!--  评论，分享，阅读全文等链接 --&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-{%- endfor %}
-&lt;nav&gt;{{ nova_paginator({total:page.total, class:'pagination'}) }}&lt;/nav&gt;
+&#123;%- endfor %&#125;
+&lt;nav&gt;&#123;&#123; nova_paginator(&#123;total:page.total, class:'pagination'&#125;) &#125;&#125;&lt;/nav&gt;
 &lt;/main&gt;</code></pre><p>输出结果预览：</p>
 
 <main>
@@ -351,7 +351,7 @@ text-decoration: none;
               <a class="icon nova-share action-item" href="{{page_share_jiathis(post)}}" data-toggle="modal" data-target="#share-modal" target="_blank">{{__('sns.share')}}</a>
               <a class="icon nova-bubbles action-item" href="{{ url_for_lang(post.path) }}#comment" id="uyan_count_unit" du="{{ page_uid(post) }}"><span class="hidden-xs">0 {{__('sns.comment')}}</span></a>
               <a class="icon nova-heart2-full action-item" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_likeurl" target="_blank"><span class="hidden-xs">{{__('sns.like')}}</span></a>
-              <a class="icon nova-hand-right action-item" href="{{ url_for_lang(post.path) }}">{{__('page.more')}}</a>
+              <a class="icon nova-hand-right action-item" href="{{ url_for_lang(post.path) }}" >{{__('page.more')}}</a>
             </div>
           </div>
         {%- endfor %}
@@ -359,14 +359,14 @@ text-decoration: none;
 </main>
 
 <p>侧边栏，侧边栏主要由窗口小部件组成。如文章分类</p>
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>&lt;div class=&quot;panel panel-primary&quot; id=&quot;category&quot;&gt;
   &lt;div class=&quot;panel-heading&quot;&gt;
-    &lt;h3 class=&quot;panel-title&quot;&gt;{{ _p('category.name') }}&lt;/h3&gt;
+    &lt;h3 class=&quot;panel-title&quot;&gt;&#123;&#123; _p('category.name') &#125;&#125;&lt;/h3&gt;
   &lt;/div&gt;
   &lt;!-- use category tree --&gt;
-  {{ nova_list_categories(site.categories, {class:'list-group', depth: 10, children_indicator: 'category'}) }}
+  &#123;&#123; nova_list_categories(site.categories, &#123;class:'list-group', depth: 10, children_indicator: 'category'&#125;) &#125;&#125;
 &lt;/div&gt;</code></pre><p>页面预览：</p>
 
     <div class="panel panel-primary" id="category">
@@ -380,44 +380,44 @@ text-decoration: none;
 
 
 <h4 id="文章详情页"><a href="#文章详情页" class="headerlink" title="文章详情页"></a>文章详情页</h4><p>文章详情页，主栏显示文章内容、评论、上一页和下一页导航。</p>
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>&lt;article class=&quot;article post&quot; itemscope itemtype=&quot;http://schema.org/Article&quot;&gt;
   &lt;header class=&quot;article-header&quot;&gt;
-    &lt;div class=&quot;page-path&quot;&gt;&lt;span class=&quot;post-category&quot;&gt;{{ page_path(post)}}&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;page-path&quot;&gt;&lt;span class=&quot;post-category&quot;&gt;&#123;&#123; page_path(post)&#125;&#125;&lt;/span&gt;&lt;/div&gt;
     &lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
-      {%- if is_post() %}
-      &lt;h1 class=&quot;article-title&quot; itemprop=&quot;name&quot;&gt;{{ post.title }}&lt;/h1&gt;
-      {%- else %}
+      &#123;%- if is_post() %&#125;
+      &lt;h1 class=&quot;article-title&quot; itemprop=&quot;name&quot;&gt;&#123;&#123; post.title &#125;&#125;&lt;/h1&gt;
+      &#123;%- else %&#125;
       &lt;h1&gt;
-        &lt;a href=&quot;{{ url_for_lang(post.path) }}&quot; class=&quot;article-title&quot; itemprop=&quot;name&quot;&gt;{{ post.title }}&lt;/a&gt;
+        &lt;a href=&quot;&#123;&#123; url_for_lang(post.path) &#125;&#125;&quot; class=&quot;article-title&quot; itemprop=&quot;name&quot;&gt;&#123;&#123; post.title &#125;&#125;&lt;/a&gt;
       &lt;/h1&gt;
-      {%- endif %}
+      &#123;%- endif %&#125;
     &lt;div class=&quot;post-header&quot;&gt;
-      &lt;span class=&quot;icon nova-calendar&quot;&gt;&lt;span class=&quot;hidden-xs&quot;&gt;{{__('page.written_on')}}&lt;/span&gt;{{ time_tag(post.date) }}&lt;/span&gt;
-      {{ post_tags(post, {class: 'tag-item-simple'}) }}
+      &lt;span class=&quot;icon nova-calendar&quot;&gt;&lt;span class=&quot;hidden-xs&quot;&gt;&#123;&#123;__('page.written_on')&#125;&#125;&lt;/span&gt;&#123;&#123; time_tag(post.date) &#125;&#125;&lt;/span&gt;
+      &#123;&#123; post_tags(post, &#123;class: 'tag-item-simple'&#125;) &#125;&#125;
       &lt;span class=&quot;post-share right&quot;&gt;
-        &lt;a href=&quot;#share&quot; class=&quot;icon nova-share&quot;&gt;&lt;span class=&quot;hidden-xs&quot;&gt;{{__('sns.share')}}&lt;/span&gt;&lt;/a&gt;
-        &lt;a href=&quot;#comment&quot; class=&quot;icon nova-bubbles&quot;&gt;&lt;span class=&quot;hidden-xs&quot;&gt;{{__('sns.comment')}}&lt;/span&gt;&lt;/a&gt;
-        &lt;a href=&quot;#like&quot; class=&quot;icon nova-heart2-full&quot;&gt;&lt;span class=&quot;hidden-xs&quot;&gt;{{__('sns.like')}}&lt;/span&gt;&lt;/a&gt;
+        &lt;a href=&quot;#share&quot; class=&quot;icon nova-share&quot;&gt;&lt;span class=&quot;hidden-xs&quot;&gt;&#123;&#123;__('sns.share')&#125;&#125;&lt;/span&gt;&lt;/a&gt;
+        &lt;a href=&quot;#comment&quot; class=&quot;icon nova-bubbles&quot;&gt;&lt;span class=&quot;hidden-xs&quot;&gt;&#123;&#123;__('sns.comment')&#125;&#125;&lt;/span&gt;&lt;/a&gt;
+        &lt;a href=&quot;#like&quot; class=&quot;icon nova-heart2-full&quot;&gt;&lt;span class=&quot;hidden-xs&quot;&gt;&#123;&#123;__('sns.like')&#125;&#125;&lt;/span&gt;&lt;/a&gt;
       &lt;/span&gt;
     &lt;/div&gt;
     &lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
   &lt;/header&gt;
   &lt;div class=&quot;article-content&quot; itemprop=&quot;articleBody&quot; id=&quot;post-content&quot;&gt;
-    {{ post.content }}
+    &#123;&#123; post.content &#125;&#125;
   &lt;/div&gt;
   &lt;footer class=&quot;article-footer&quot;&gt;
-    &lt;!--&lt;time class=&quot;article-footer-updated&quot; datetime=&quot;{{ date_xml(page.updated) }}&quot; itemprop=&quot;dateModified&quot;&gt;{{ __('page.last_updated', date(page.updated)) }}&lt;/time&gt;--&gt;
+    &lt;!--&lt;time class=&quot;article-footer-updated&quot; datetime=&quot;&#123;&#123; date_xml(page.updated) &#125;&#125;&quot; itemprop=&quot;dateModified&quot;&gt;&#123;&#123; __('page.last_updated', date(page.updated)) &#125;&#125;&lt;/time&gt;--&gt;
 &lt;!-- JiaThis Button BEGIN --&gt;
 &lt;div class=&quot;jiathis_style&quot;&gt;&lt;a name=&quot;share&quot;&gt;&lt;/a&gt;
-    &lt;span class=&quot;jiathis_txt icon nova-share&quot;&gt;{{__('sns.share')}}：&lt;/span&gt;
-    &lt;a class=&quot;jiathis_button_tsina&quot;&gt;{{__('sns.weibo')}}&lt;/a&gt;
-    &lt;a class=&quot;jiathis_button_weixin&quot;&gt;{{__('sns.wechat')}}&lt;/a&gt;
-    &lt;a class=&quot;jiathis_button_twitter&quot;&gt;{{__('sns.twitter')}}&lt;/a&gt;
-    &lt;a class=&quot;jiathis_button_copy&quot;&gt;{{__('sns.copy')}}&lt;/a&gt;
-    &lt;a class=&quot;jiathis_button_ishare&quot;&gt;{{__('sns.one')}}&lt;/a&gt;
-    &lt;a href=&quot;http://www.jiathis.com/share?uid={{theme.share.jiathis.uid}}&quot; class=&quot;jiathis jiathis_txt jiathis_separator jtico jtico_jiathis&quot; target=&quot;_blank&quot;&gt;{{__('sns.more')}}&lt;/a&gt;
+    &lt;span class=&quot;jiathis_txt icon nova-share&quot;&gt;&#123;&#123;__('sns.share')&#125;&#125;：&lt;/span&gt;
+    &lt;a class=&quot;jiathis_button_tsina&quot;&gt;&#123;&#123;__('sns.weibo')&#125;&#125;&lt;/a&gt;
+    &lt;a class=&quot;jiathis_button_weixin&quot;&gt;&#123;&#123;__('sns.wechat')&#125;&#125;&lt;/a&gt;
+    &lt;a class=&quot;jiathis_button_twitter&quot;&gt;&#123;&#123;__('sns.twitter')&#125;&#125;&lt;/a&gt;
+    &lt;a class=&quot;jiathis_button_copy&quot;&gt;&#123;&#123;__('sns.copy')&#125;&#125;&lt;/a&gt;
+    &lt;a class=&quot;jiathis_button_ishare&quot;&gt;&#123;&#123;__('sns.one')&#125;&#125;&lt;/a&gt;
+    &lt;a href=&quot;http://www.jiathis.com/share?uid=&#123;&#123;theme.share.jiathis.uid&#125;&#125;&quot; class=&quot;jiathis jiathis_txt jiathis_separator jtico jtico_jiathis&quot; target=&quot;_blank&quot;&gt;&#123;&#123;__('sns.more')&#125;&#125;&lt;/a&gt;
     &lt;a class=&quot;jiathis_counter_style&quot;&gt;&lt;/a&gt;
   &lt;a name=&quot;like&quot;&gt;&lt;/a&gt;
   &lt;a class=&quot;jiathis_like_qzone&quot;&gt;&lt;/a&gt;
@@ -426,12 +426,12 @@ text-decoration: none;
   &lt;/footer&gt;
 &lt;/article&gt;
 &lt;div&gt;
-  &lt;nav&gt;{{ nova_paginator2({show_name: true}) }}&lt;/nav&gt;
-  {{ partial('../partial/donate') }}
-  {{ partial('../partial/comment') }}
+  &lt;nav&gt;&#123;&#123; nova_paginator2(&#123;show_name: true&#125;) &#125;&#125;&lt;/nav&gt;
+  &#123;&#123; partial('../partial/donate') &#125;&#125;
+  &#123;&#123; partial('../partial/comment') &#125;&#125;
 &lt;/div&gt;</code></pre><h4 id="其它模板"><a href="#其它模板" class="headerlink" title="其它模板"></a>其它模板</h4><ul>
 <li>单页，单页与文章详情页类似。不过没有文章详情页复杂。不做详细介绍。</li>
-<li>项目文档，项目文档页须借助<a href="http://github.com/Jamling/hexo-generator-github" target="_blank" rel="noopener">hexo-generator-github</a>插件使用。在此也不做详细介绍。</li>
+<li>项目文档，项目文档页须借助<a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-generator-github">hexo-generator-github</a>插件使用。在此也不做详细介绍。</li>
 </ul>
 <p>更多的<a href="/p/hexo-theme-nova/layouts.html">nova layout</a>请点击链接查看。</p>
 <h3 id="辅助函数"><a href="#辅助函数" class="headerlink" title="辅助函数"></a>辅助函数</h3>
@@ -447,43 +447,43 @@ text-decoration: none;
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="js">// get page excerpt
-hexo.extend.helper.register(&#39;page_excerpt&#39;, function(post){
+hexo.extend.helper.register(&#39;page_excerpt&#39;, function(post)&#123;
   var p = post ? post : this.page;
   var excerpt = p.excerpt;
-  if (!excerpt) {
+  if (!excerpt) &#123;
     var pos = p.content.indexOf(&#39;&lt;/p&gt;&#39;);
-    if (pos &gt; 0){
+    if (pos &gt; 0)&#123;
       excerpt = p.content.substring(0, pos + 4);
-    }
-  }
+    &#125;
+  &#125;
   return excerpt;
-});</code></pre>
+&#125;);</code></pre>
 <p><code>post_cates()</code>辅助函数代码</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="js">// insert category of post
-hexo.extend.helper.register(&#39;post_cates&#39;, function(post, options){
-  var o = options || {};
+hexo.extend.helper.register(&#39;post_cates&#39;, function(post, options)&#123;
+  var o = options || &#123;&#125;;
   var _class = o.hasOwnProperty(&#39;class&#39;) ? o.class : &#39;category-item&#39;;
   var icon = o.hasOwnProperty(&#39;icon&#39;) ? o.icon : &#39;glyphicon glyphicon-folder-close&#39;;
   var cats = post.categories;
   var _self = this;
   var ret = &#39;&#39;;
-  if (cats == null || cats.length == 0) {
+  if (cats == null || cats.length == 0) &#123;
       return ret;
-  }
+  &#125;
   ret += &#39;&lt;span class=&quot;post-category&quot;&gt;&#39;;
   ret += &#39;&lt;i class=&quot;&#39; + icon + &#39;&quot;&gt;&lt;/i&gt;&lt;span class=&quot;hidden-xs&quot;&gt;&#39; + _self.__(&#39;category.label&#39;) + &#39;&lt;/span&gt;&#39;;
-  cats.forEach(function(item, i){
+  cats.forEach(function(item, i)&#123;
     ret += &#39;&lt;a class=&quot;&#39; + _class + &#39;&quot; href=&quot;&#39; + _self.url_for_lang(item.path) + &#39;&quot;&gt;&#39; + item.name + &#39;&lt;/a&gt;&#39;;
-  });
+  &#125;);
   ret += &#39;&lt;/span&gt;&#39;;
   return ret;
-});</code></pre>
+&#125;);</code></pre>
 <p>在<code>layout/post/index.swig</code>中使用</p>
 <p class="code-caption" data-lang="htmlbars" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="htmlbars">{{ post_cates(post) }}</code></pre>
+<pre><code class="htmlbars">&#123;&#123; post_cates(post) &#125;&#125;</code></pre>
 <p>将输出以下结果：</p>
 <pre>
     <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/tech/">软件技术</a><a class="category-item" href="/categories/tech/Web/">Web</a></span>
@@ -494,16 +494,16 @@ hexo.extend.helper.register(&#39;post_cates&#39;, function(post, options){
 <h3 id="主题资源"><a href="#主题资源" class="headerlink" title="主题资源"></a>主题资源</h3><p>主题当中需要使用到的一些资源有css样式表，js脚本及一些图片资源。资源须放置在主题<code>source</code>目录下。在生成时，这些资源会直接复制到<code>public</code>根目录下，所以在主题模板中对资源的引用，直接以<code>/</code>为前缀+路径加载即可，如下所示：</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="js">{{ css('css/bs/nova.css') }}
-{{ js('js/script.js')}}</code></pre>
-<h3 id="第三方插件"><a href="#第三方插件" class="headerlink" title="第三方插件"></a>第三方插件</h3><p><a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>是静态博客，所以像评论、分享等功能，须借助第三方插件才能实现。以评论为例，常用的评论系统有多说，友言，disqus（国外）等。如若需要使用这些第三方插件，可以到对应的官方网站上查看使用说明或集成文档。</p>
+<pre><code class="js">&#123;&#123; css('css/bs/nova.css') &#125;&#125;
+&#123;&#123; js('js/script.js')&#125;&#125;</code></pre>
+<h3 id="第三方插件"><a href="#第三方插件" class="headerlink" title="第三方插件"></a>第三方插件</h3><p><a target="_blank" rel="noopener" href="https://hexo.io">hexo</a>是静态博客，所以像评论、分享等功能，须借助第三方插件才能实现。以评论为例，常用的评论系统有多说，友言，disqus（国外）等。如若需要使用这些第三方插件，可以到对应的官方网站上查看使用说明或集成文档。</p>
 <h2 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h2><ul>
 <li>主题模板中尽量不要写死可能会变的东西，尽量以主题配置项的方式提供配置。比如最近文章显示几条等。</li>
-<li>第三方插件脚本尽量放在之前，以免影响页面的显示。</li>
+<li>第三方插件脚本尽量放在</body>之前，以免影响页面的显示。</li>
 <li>选择一些比较成熟的前端框架，比如bootstrap以获得更好的兼容性。</li>
 <li>支持响应式</li>
 </ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>hexo: <a href="https://hexo.io" target="_blank" rel="noopener">https://hexo.io</a><br>Nova: <a href="http://www.ieclipse.cn/p/hexo-theme-nova">http://www.ieclipse.cn/p/hexo-theme-nova</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>hexo: <a target="_blank" rel="noopener" href="https://hexo.io">https://hexo.io</a><br>Nova: <a href="http://www.ieclipse.cn/p/hexo-theme-nova">http://www.ieclipse.cn/p/hexo-theme-nova</a></p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/07/14/Web/Hexo-dev-theme/](https://www.ieclipse.cn/2016/07/14/Web/Hexo-dev-theme/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
   </div>

@@ -181,7 +181,7 @@
   <div class="article-content" itemprop="articleBody">
   
     <p>使用PHP写的一个万年历接口</p>
-<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>支持的年份为1900-2100（农历），支持公历和公历互转。接口基地址：<a href="http://api.ieclipse.cn/wnl/" target="_blank" rel="noopener">http://api.ieclipse.cn/wnl/</a> 主要功能列表</p>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>支持的年份为1900-2100（农历），支持公历和公历互转。接口基地址：<a target="_blank" rel="noopener" href="http://api.ieclipse.cn/wnl/">http://api.ieclipse.cn/wnl/</a> 主要功能列表</p>
 <ul>
 <li>公历转农历</li>
 <li>农历转公历</li>
@@ -191,11 +191,11 @@
 </ul>
 <h2 id="示例json"><a href="#示例json" class="headerlink" title="示例json"></a>示例json</h2><p class="code-caption" data-lang="json" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="json">{
+<pre><code class="json">&#123;
     &quot;code&quot;:0, //响应码，为0时表示接口正常响应
     &quot;msg&quot;:&quot;ok&quot;,
     &quot;time&quot;:1517217808,
-    &quot;data&quot;:{
+    &quot;data&quot;:&#123;
         &quot;isToday&quot;:false,
         &quot;sYear&quot;:&quot;2018&quot;, //公历年
         &quot;sMonth&quot;:&quot;03&quot;, //公历月
@@ -220,8 +220,8 @@
         &quot;cMnumber&quot;:1431,
         &quot;cDnumber&quot;:43183,
         &quot;cHour&quot;:&quot;己酉&quot; //汉字干支时
-    } 
-}</code></pre>
+    &#125; 
+&#125;</code></pre>
 <h2 id="接口说明"><a href="#接口说明" class="headerlink" title="接口说明"></a>接口说明</h2><h3 id="请求参数"><a href="#请求参数" class="headerlink" title="请求参数"></a>请求参数</h3><ul>
 <li>date: 日期和时间，以<code>-</code>分隔，如2018-01-29-18，2019-01-29</li>
 <li>l: 是否农历闰月，当date为农历时有效，如<code>l=true</code></li>
@@ -231,8 +231,8 @@
 <li>cAnimal: 农历日期对应的生肖，遇到农历立春时，生肖会变化。</li>
 <li>isLeap: 是否农历闰月</li>
 </ul>
-<h2 id="公历转农历"><a href="#公历转农历" class="headerlink" title="公历转农历"></a>公历转农历</h2><p><a href="http://api.ieclipse.cn/wnl/lunar" target="_blank" rel="noopener">http://api.ieclipse.cn/wnl/lunar</a></p>
-<h2 id="农历转公历"><a href="#农历转公历" class="headerlink" title="农历转公历"></a>农历转公历</h2><p><a href="http://api.ieclipse.cn/wnl/solar" target="_blank" rel="noopener">http://api.ieclipse.cn/wnl/solar</a></p>
+<h2 id="公历转农历"><a href="#公历转农历" class="headerlink" title="公历转农历"></a>公历转农历</h2><p><a target="_blank" rel="noopener" href="http://api.ieclipse.cn/wnl/lunar">http://api.ieclipse.cn/wnl/lunar</a></p>
+<h2 id="农历转公历"><a href="#农历转公历" class="headerlink" title="农历转公历"></a>农历转公历</h2><p><a target="_blank" rel="noopener" href="http://api.ieclipse.cn/wnl/solar">http://api.ieclipse.cn/wnl/solar</a></p>
 <h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ul>
 <li><a href="http://www.ieclipse.cn/birthday-tool">生辰助手</a></li>
 </ul>

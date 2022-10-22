@@ -213,11 +213,11 @@
   </header>
   <div class="article-content" itemprop="articleBody">
   
-    <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a> 4.x is a millstone version. It de-couples the resources and the development language plugin under Eclipse platform. And it’s possible to integrated the <a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a> to your RCP products or other Eclipse IDE for xxx developer. (such as Eclipse for Java IDE).</p>
+    <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a> 4.x is a millstone version. It de-couples the resources and the development language plugin under Eclipse platform. And it’s possible to integrated the <a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a> to your RCP products or other Eclipse IDE for xxx developer. (such as Eclipse for Java IDE).</p>
 <p>Our aim is making the most powerful explorer plugin of Eclipse, if you are insterting, invite you to join us sincerely.</p>
 <h2 id="Suggestions"><a href="#Suggestions" class="headerlink" title="Suggestions"></a>Suggestions</h2><ul>
-<li>Fork <a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a></li>
-<li>Submit fragment project to <a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a></li>
+<li>Fork <a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a></li>
+<li>Submit fragment project to <a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a></li>
 <li>Bundle-Name suggested to explorer4xxx, xxx is the dev lang, e.g. explorer4java</li>
 <li>Feature Name suggested to name as Eclipse explorer for xxx, e.g. Eclipse explorer for CDT</li>
 </ul>
@@ -230,7 +230,7 @@
 </ul>
 <p><img src="/p/eclipse-explorer/develop/new_fragment_project1.png" alt="image"></p>
 <ul>
-<li>Set host plugin<br>Set <a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a> as host plugin</li>
+<li>Set host plugin<br>Set <a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a> as host plugin</li>
 </ul>
 <p><img src="/p/eclipse-explorer/develop/new_fragment_project3.png" alt="image"></p>
 <ul>
@@ -243,23 +243,23 @@
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">@Override
-public IExplorable getExplorable(Object obj) {
+public IExplorable getExplorable(Object obj) &#123;
     String path = null;
-    if (obj instanceof IJavaElement) {
+    if (obj instanceof IJavaElement) &#123;
         // java project.
-        if (obj instanceof IJavaProject) {
+        if (obj instanceof IJavaProject) &#123;
             path = ((IJavaProject) obj).getProject().getLocation()
                     .toOSString();
             return new Explorer(path, null);
-        }
+        &#125;
         // jar resource is null
-        else if (obj instanceof JarPackageFragmentRoot) {
+        else if (obj instanceof JarPackageFragmentRoot) &#123;
             String file = ((IPackageFragmentRoot) obj).getPath()
                     .toOSString();
             // get folder
             return new Explorer(null, file);
-        }
-        else if (obj instanceof IPackageFragmentRoot) {
+        &#125;
+        else if (obj instanceof IPackageFragmentRoot) &#123;
             // src folder
             IPackageFragmentRoot src = ((IPackageFragmentRoot) obj);
             IProject p = src.getJavaProject().getProject();
@@ -268,21 +268,21 @@ public IExplorable getExplorable(Object obj) {
                     .getAbsolutePath();
             return new Explorer(path, null);
             // System.out.println(path);
-        }
-        else if (obj instanceof IPackageFragment) {// other : package
+        &#125;
+        else if (obj instanceof IPackageFragment) &#123;// other : package
             IResource resource = ((IPackageFragment) obj).getResource();
             path = resource.getLocation().toOSString();
             return new Explorer(path, null);
-        }
-        else {// member:filed:
+        &#125;
+        else &#123;// member:filed:
             IResource resource = ((IJavaElement) obj).getResource();
             String file = resource.getLocation().toOSString();
             // get folder
             return new Explorer(null, file);
-        }
-    }
+        &#125;
+    &#125;
     return null;
-}</code></pre>
+&#125;</code></pre>
 <ul>
 <li>Configure extensions<br>In fragment.xml Editor-&gt;Extensions Tab, add org.eclipse.core.runtime.adapters extension.<p> ![image](/p/eclipse-explorer/develop/new_extension.png) ![image](/p/eclipse-explorer/develop/add_adapter_factory_extension.png)</p>
 Sample:
@@ -307,8 +307,8 @@ Sample:
 <li><p>Create feature<br>After debuging and testing, New-&gt;Project-&gt;Plugin Development-&gt;Feature Project to create feature.<br>Add the created feature to cn.ieclipse.pde.explorer.feature project Included Features tab. Finally rebuild the cn.ieclipse.pde.explorer.site project then test the feature installation.</p>
 </li>
 </ul>
-<h2 id="Publish"><a href="#Publish" class="headerlink" title="Publish"></a>Publish</h2><p>Make sure the fragment/feature/update site passing the test, then publish fragment to Eclipse marketplace or published as <a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a> fragment. Finally, fork <a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a> and edit the  README.md to insert the fragment and author info and pull a  request.</p>
-<p>Published as <a href="https://github.com/Jamling/eclipse-explorer" target="_blank" rel="noopener">Eclipse Explorer</a> fragment is recommended, please <a href="mailto:li.jaming@gmail.com" target="_blank" rel="noopener">mail</a> to update the information on Eclipse Marketplace.</p>
+<h2 id="Publish"><a href="#Publish" class="headerlink" title="Publish"></a>Publish</h2><p>Make sure the fragment/feature/update site passing the test, then publish fragment to Eclipse marketplace or published as <a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a> fragment. Finally, fork <a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a> and edit the  README.md to insert the fragment and author info and pull a  request.</p>
+<p>Published as <a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a> fragment is recommended, please <a href="mailto:li.jaming@gmail.com">mail</a> to update the information on Eclipse Marketplace.</p>
 
   
   </div>

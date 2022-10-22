@@ -221,11 +221,11 @@ Android studio在项目build.gradle中添加以下依赖Copy Code">
 
 </li>
 </ul>
-<pre><code class="gradle">dependencies {
+<pre><code class="gradle">dependencies &#123;
     compile &#39;cn.ieclipse.aorm:aorm-core:1.1.2&#39;
-}</code></pre>
+&#125;</code></pre>
 <ul>
-<li>Eclipse<br>安装 <a href="https://marketplace.eclipse.org/content/android-adt-extensions" target="_blank" rel="noopener">Android ADT-extension</a> 插件，然后Add ORM capapility</li>
+<li>Eclipse<br>安装 <a target="_blank" rel="noopener" href="https://marketplace.eclipse.org/content/android-adt-extensions">Android ADT-extension</a> 插件，然后Add ORM capapility</li>
 </ul>
 <h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><p>设置Aorm的一些全局设置</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -237,9 +237,9 @@ Aorm.setExactInsertOrUpdate(true);//设置是否精确的插入或更新操作�
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">@Table(name = &quot;student&quot;)
-public class Student implements java.ioSerializable{
+public class Student implements java.ioSerializable&#123;
     //...
-}</code></pre>
+&#125;</code></pre>
 <h3 id="设置映射字段"><a href="#设置映射字段" class="headerlink" title="设置映射字段"></a>设置映射字段</h3><p>对Java bean的属性添加@Column注解</p>
 <ul>
 <li>pk (标识为主键)<br>id is true<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -258,7 +258,7 @@ private String name;
 @Column(name = &quot;_age&quot;)
 private int age;</code></pre>
 <ul>
-<li>非映射字段<br>如果不想映射数据库字段，则无需设置@Column注解<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<li>非映射字段<br>如果不想映射数据库字段，则无需设置@Column注解<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 </li>
 </ul>
@@ -268,14 +268,14 @@ private int age;</code></pre>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">mOpenHelper = new SQLiteOpenHelper(this.getContext(), &quot;example.db&quot;,
-        null, 1) {
-    public void onCreate(SQLiteDatabase db) {
+        null, 1) &#123;
+    public void onCreate(SQLiteDatabase db) &#123;
         // method 3: use AORM to create table
         Aorm.createTable(db, Grade.class);
         Aorm.createTable(db, Student.class);
         Aorm.createTable(db, Course.class);
-    }
-};</code></pre>
+    &#125;
+&#125;;</code></pre>
 <h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><h4 id="简单查询"><a href="#简单查询" class="headerlink" title="简单查询"></a>简单查询</h4><p>查询所有的学生记录。</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -308,15 +308,15 @@ criteria.add(Restrictions.like(&quot;name&quot;, &quot;Jaming&quot;));</code></p
 <pre><code class="java">// 添加年龄大于30岁条件
 criteria.add(Restrictions.gt(&quot;age&quot;, 30));</code></pre>
 <p>排序</p>
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>// 按年龄升序排序
 criteria.addOrder(Order.asc(&quot;age&quot;));</code></pre><p>Distinct</p>
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>// set district
 criteria.setDistinct(true);</code></pre><p>Limit</p>
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>// 限定查询第10到20条记录
 criteria.setLimit(10, 10);</code></pre><h4 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h4><p>Criteria支持以下四种连接</p>
