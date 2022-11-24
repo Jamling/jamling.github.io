@@ -182,18 +182,20 @@
   
     <h2 id="Hexo高亮"><a href="#Hexo高亮" class="headerlink" title="Hexo高亮"></a>Hexo高亮</h2><p>hexo已实现代码高亮，代码封装在hexo-util插件中，使用的是<a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>，通过<code>include_code</code>tag标签来使用，功能已经很强大了，而且自带行号显示，可以满足大多数博主的需求了。但是它仍然存在一些局限性，比如在<a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-theme-nova">Nova</a>主题中，有些语言不支持，无法高亮，而且界面也比较丑，所以个人还是倾向于自由使用[hightlight.js]来高亮代码，使用起来比较灵活，还能扩展一些功能，但是<a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>默认是不带行号的。为此，也是遇到了不少坑。后来在某歪果仁的博客中找到一个行号解决方案，在其基础上，终于实现了一个较为理想的代码高亮方案。</p>
 <p>如果想和我一样爱折腾，请继续阅读本文，再次声明，本系列需要一定的前端基础知识。</p>
-<h2 id="加载highlight-js"><a href="#加载highlight-js" class="headerlink" title="加载highlight.js"></a>加载highlight.js</h2><p>使用<a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>非常简单，只需以下简单的几步。<br>首先，在博客站点根目录的<var>_config.yml</var>中，将<var>highlight.enable</var>设置为<code>flase</code>以关闭自带的高亮方案。<br><strong><em>注：关闭自带高亮方案后，需hexo clean</em></strong></p>
+<h2 id="加载highlight-js"><a href="#加载highlight-js" class="headerlink" title="加载highlight.js"></a>加载highlight.js</h2><p>使用<a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>非常简单，只需以下简单的几步。<br>首先，在博客站点根目录的<var>_config.yml</var>中，将<var>highlight.enable</var>设置为<code>flase</code>以关闭自带的高亮方案。<br><em><strong>注：关闭自带高亮方案后，需hexo clean</strong></em></p>
 <p>其次，引入<a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>的css及js（推荐在主题模板中作为全局css和js引入，引入的位置在<code>&lt;head&gt;&lt;/head&gt;</code>之间）。</p>
 <p class="code-caption" data-lang="html" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css&quot;&gt;
-&lt;script src=&quot;//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js&quot;&gt;&lt;/script&gt;</code></pre>
+&lt;script src=&quot;//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
 <p><a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>有许多代码风格，博主可以根据博客站点主题风格，选择合适的代码风格，我使用的是github风格。</p>
 <p>然后，在文档加载完毕之后初始化（推荐在<code>&lt;/body&gt;</code>之前的<code>&lt;script&gt;&lt;/script&gt;</code>中引入）</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="js">// highlight
-hljs.initHighlightingOnLoad();</code></pre>
+hljs.initHighlightingOnLoad();
+</code></pre>
 <p>如此，便可以测试及查看代码高亮结果了。</p>
 <h2 id="添加行号"><a href="#添加行号" class="headerlink" title="添加行号"></a>添加行号</h2><p>添加行号的大致过程是先将代码部分按行切割，动态生成行号。然后使用相对布局，将行号显示在代码行前。具体代码如下：</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -209,7 +211,8 @@ hljs.initHighlightingOnLoad();</code></pre>
   for(i=1;i&lt;=lines;i++)&#123;
     $numbering.append($(&#39;&lt;li/&gt;&#39;).text(i));
   &#125;
-&#125;);</code></pre>
+&#125;);
+</code></pre>
 <p>这样<code>&lt;code&gt;</code>标签多了一个<code>has-numbering</code>的样式，在<code>&lt;pre&gt;</code>结节下，动态添加了一个class为<code>pre-numbering</code>的<code>ul</code>列表来显示行号。CSS代码如下：</p>
 <p class="code-caption" data-lang="css" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -234,11 +237,12 @@ hljs.initHighlightingOnLoad();</code></pre>
   font-size: 1.0em;
   color: #AAA;
   list-style: none;
-&#125;</code></pre>
-<p><strong><em>注，具体的样式需根据当前主题做出适当的修改</em></strong></p>
+&#125;
+</code></pre>
+<p><em><strong>注，具体的样式需根据当前主题做出适当的修改</strong></em></p>
 <h2 id="处理滚动"><a href="#处理滚动" class="headerlink" title="处理滚动"></a>处理滚动</h2><p>添加了行号，为使行号与代码行不错乱，所以要求代码块在横向允许滚动，在处理滚动前，先了解以下三个文本换行的css属性。</p>
 <ul>
-<li><code>white-space</code> </li>
+<li><code>white-space</code></li>
 </ul>
 <table>
 <thead>
@@ -273,7 +277,7 @@ hljs.initHighlightingOnLoad();</code></pre>
 </tr>
 </tbody></table>
 <ul>
-<li><code>word-wrap</code> </li>
+<li><code>word-wrap</code></li>
 </ul>
 <table>
 <thead>
@@ -292,7 +296,7 @@ hljs.initHighlightingOnLoad();</code></pre>
 </tr>
 </tbody></table>
 <ul>
-<li><code>word-break</code> </li>
+<li><code>word-break</code></li>
 </ul>
 <table>
 <thead>
@@ -345,7 +349,8 @@ hljs.initHighlightingOnLoad();</code></pre>
 <pre><code class="css">overflow-x: auto;
 overflow-y: auto;
 word-break: keep-all;
-white-space: pre;</code></pre>
+white-space: pre;
+</code></pre>
 <h2 id="支持响应式"><a href="#支持响应式" class="headerlink" title="支持响应式"></a>支持响应式</h2><p>由于在小屏幕上，尤其是手机浏览器，横向滚动并不好操作，所以，须优化，让代码允许断行，这样，行号就不能显示了。</p>
 <p class="code-caption" data-lang="css" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -358,14 +363,16 @@ white-space: pre;</code></pre>
     word-wrap: break-world !important;
     white-space: pre-wrap !important;
   &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h2 id="支持更多的代码语言"><a href="#支持更多的代码语言" class="headerlink" title="支持更多的代码语言"></a>支持更多的代码语言</h2><p><a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>默认支持大部分主流程序语言的高亮，但是也有小部分语言是不支持的，比如<a href="http://www.ieclipse.cn/2016/05/13/tech-vba-guide/">Excel VBA基础实例教程</a>中贴了不少VB代码，需要额外加载<a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>的VBScript.js才能高亮，只需在md源文件内容最前方引入vbscript.js即可。如下所示：</p>
 <p class="code-caption" data-lang="html" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="html">&lt;script src=&quot;http://cdn.bootcss.com/highlight.js/9.1.0/languages/vbscript.min.js&quot; &gt;&lt;/script&gt;
 
 # VBA简介
-## VBA</code></pre>
+## VBA
+</code></pre>
 <h2 id="html高亮优化"><a href="#html高亮优化" class="headerlink" title="html高亮优化"></a>html高亮优化</h2><p>使用<a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>对html代码高亮，有时发现竟然无法高亮，直接输出了html，尤其是贴hexo主题模板代码时，还会导致页面无法被hexo解析。如果遇到这种问题，需要使用<code>htmlbars</code>来标识代码语言，然后代码中的模板控制语句，需要优化，比如swig模板，原来的</p>
 
 <p class="code-caption" data-lang="htmlbars" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>

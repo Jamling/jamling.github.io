@@ -218,84 +218,151 @@
   </header>
   <div class="article-content" itemprop="articleBody">
   
-    <p><a target="_blank" rel="noopener" href="https://travis-ci.org/Jamling/hexo-theme-nova"><img src="https://travis-ci.org/Jamling/hexo-theme-nova.svg?branch=master" alt="Build Status"></a><br><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-theme-nova"><img src="https://img.shields.io/node/v/hexo-theme-nova.svg" alt="node"></a><br><a target="_blank" rel="noopener" href="https://github.com/Jamling/hexo-theme-nova/releases/latest"><img src="https://img.shields.io/github/release/jamling/hexo-theme-nova.svg" alt="GitHub release"></a></p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>nova是使用swig模板引擎编写的<a target="_blank" rel="noopener" href="https://hexo.io">hexo</a>主题，旨在方便快速地创建为github项目创建一个简单的静态网站，如[Github-Pages]。</p>
+    <p><a target="_blank" rel="noopener" href="https://travis-ci.org/Jamling/hexo-theme-nova"><img src="https://travis-ci.org/Jamling/hexo-theme-nova.svg?branch=master" alt="Build Status"></a><br><a target="_blank" rel="noopener" href="https://github.com/Jamling/hexo-theme-nova/releases/latest"><img src="https://img.shields.io/github/release/jamling/hexo-theme-nova.svg" alt="GitHub release"></a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>nova是使用swig模板引擎编写的<a target="_blank" rel="noopener" href="https://hexo.io/">hexo</a>主题，旨在方便快速地为github项目创建一个简单的静态网站，如<a href="https://www.ieclipse.cn/">Github-Pages</a>。</p>
 <p>本主题主要使用以下三种布局来展现页面：</p>
 <ol>
 <li><code>post</code> 用于博客文章</li>
 <li><code>project</code> 用于github项目页面</li>
 <li><code>page</code> 用于其它页面，如关于我</li>
 </ol>
-<p>本主题还使用了一些插件作为辅助函数。如TOC目录生成，项目侧边导航栏等。详情请访问<a href="http://www.ieclipse.cn">我的主页</a> (<a target="_blank" rel="noopener" href="http://www.ieclipse.cn)。">http://www.ieclipse.cn)。</a></p>
-<p>一些好玩的东东<a href="http://www.ieclipse.cn/en/demo/">http://www.ieclipse.cn/en/demo/</a>.</p>
-<h2 id="预览截屏"><a href="#预览截屏" class="headerlink" title="预览截屏"></a>预览截屏</h2><p><img src="https://raw.githubusercontent.com/Jamling/hexo-theme-nova/master/screenshots/bootstrap.png" alt="screenshot"></p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Cd到博客/站点根目录，然后检出代码</p>
-<pre><code class="bash">$ git <span class="built_in">clone</span> git@github.com:Jamling/hexo-theme-nova.git themes/nova</code></pre>
+<p>本主题还使用了一些插件作为辅助函数。如TOC目录生成，项目侧边导航栏等。详情请访问<a href="https://www.ieclipse.cn/">我的主页</a> (<a target="_blank" rel="noopener" href="https://www.ieclipse.cn)./">https://www.ieclipse.cn)。</a></p>
+<p>另有一些好玩的东东，请访问<a href="https://www.ieclipse.cn/en/demo/">主题特色功能</a>查看.</p>
+<h2 id="预览截屏"><a href="#预览截屏" class="headerlink" title="预览截屏"></a>预览截屏</h2><p><img src="https://dingdi.ieclipse.cn/hexo-theme-nova/screenshots/bootstrap.png" alt="screenshot"></p>
+<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
+<li>Bootstrap 响应式设计，支持移动端浏览</li>
+<li>生成唯一的页面ID, 无需担心站点切换</li>
+<li>多种第三方评论组件，支持disqus, valine, <del>duoshuo</del>, <del>gentie</del>, <del>changyan</del>, <del>uayn</del> 等</li>
+<li>支持博客文章加密（无法通过查看源代码解密），须通过输入正确的密码访问</li>
+<li>支持文章阅读数</li>
+<li>支持捐赠</li>
+<li>含前端代码高亮及复制功能</li>
+<li>支持微数据(micro-data)，提供更好的SEO</li>
+<li>支持国际化（一次生成多个语言站点内容）</li>
+<li>支持思维导图，个人简历</li>
+</ul>
+<h2 id="变更"><a href="#变更" class="headerlink" title="变更"></a>变更</h2><h3 id="V0-3-0"><a href="#V0-3-0" class="headerlink" title="V0.3.0"></a>V0.3.0</h3><ul>
+<li><p>停止百度站内搜索及url链接提交，请使用<code>hexo-generator-search</code>及<code>hexo-submit-urls-to-search-engine</code>或其它相似插件代替 </p>
+</li>
+<li><p>更新leancloud文章计数功能，兼容Valine文章计数（不推荐，Valine 1.4之后不开放源码，无法修改bug）本主题文章计数功能更准确，更友好。</p>
+<p>迁移指南，登录LeanCloud控制台，修改Counter计数表，pageId修改为xid，views修改为time。</p>
+</li>
+</ul>
+<h3 id="V0-2-0-重大更新"><a href="#V0-2-0-重大更新" class="headerlink" title="V0.2.0 (重大更新)"></a>V0.2.0 (重大更新)</h3><ul>
+<li>删除已停止服务的友加分享，换上了share.js</li>
+<li>删除material颜色样式 (极大地减少了css文件体积)</li>
+<li>将畅言评论换成了valine，（因为畅言去广告要收费，而且畅言的评论不好导出）</li>
+<li>将代码复制zero clipboard组件换成clipboard.js（因为flash陆续不被各大浏览器厂商所支持）</li>
+<li>重新组织了nova css，使用内联样式风格，可读性得到了增强</li>
+<li>通过W3C校验</li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Cd到博客&#x2F;站点根目录，然后检出代码</p>
+<pre><code class="bash">$ git clone git@github.com:Jamling/hexo-theme-nova.git themes/nova
+</code></pre>
 <p>最后在站点<var>_config.yml</var> 配置文件中设置 <code>theme: nova</code> 来使用nova主题。</p>
-<h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><p>本主题使用了一些第3方的插件，在使用之前，请在博客站点根目录下安装这些插件</p>
+<h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><p>本主题使用了一些第三方的插件，在使用之前，请在博客站点根目录下安装这些插件</p>
 <pre><code class="powershell">npm install hexo-renderer-sass --save
 npm install hexo-generator-i18n --save
 
 npm install hexo-generator-github --save
-npm install hexo-filter-highlight --save</code></pre>
+npm install hexo-filter-highlight --save
+
+npm install cheerio --save // hexo &gt;= 5.0
+npm install hexo-renderer-swig --save // hexo &gt;= 5.0
+</code></pre>
+<p>示例依赖（博客根目录）</p>
+<pre><code>  &quot;dependencies&quot;: {
+    &quot;cheerio&quot;: &quot;^1.0.0-rc.12&quot;, // toc目录需要使用
+    &quot;hexo&quot;: &quot;^6.3.0&quot;, // 可用hexo最新版本
+    &quot;hexo-addlink&quot;: &quot;^1.0.4&quot;,
+    &quot;hexo-algolia&quot;: &quot;^1.3.2&quot;,
+    &quot;hexo-deployer-git&quot;: &quot;^2.1.0&quot;,
+    &quot;hexo-filter-highlight&quot;: &quot;1.0.0&quot;, // 代码高亮
+    &quot;hexo-fs&quot;: &quot;^2.0.1&quot;,
+    &quot;hexo-generator-archive&quot;: &quot;^1.0.0&quot;,
+    &quot;hexo-generator-category&quot;: &quot;^1.0.0&quot;,
+    &quot;hexo-generator-feed&quot;: &quot;^2.2.0&quot;,
+    &quot;hexo-generator-github&quot;: &quot;^1.0.1&quot;, // 同步github项目或页面插件
+    &quot;hexo-generator-i18n&quot;: &quot;^0.0.7&quot;, // 多语言
+    &quot;hexo-generator-index2&quot;: &quot;^0.2.0&quot;, // 首页过滤
+    &quot;hexo-generator-search&quot;: &quot;^2.4.3&quot;,
+    &quot;hexo-generator-tag&quot;: &quot;^1.0.0&quot;,
+    &quot;hexo-renderer-marked&quot;: &quot;^6.0.0&quot;, // markdown渲染
+    &quot;hexo-renderer-sass&quot;: &quot;^0.4.0&quot;, // css
+    &quot;hexo-renderer-stylus&quot;: &quot;^1.1.0&quot;,
+    &quot;hexo-renderer-swig&quot;: &quot;^2.0.0&quot;, // 渲染引擎
+    &quot;hexo-server&quot;: &quot;^1.0.0&quot;,
+    &quot;hexo-submit-urls-to-search-engine&quot;: &quot;^2.1.0&quot; // 提交链接到搜索引擎
+  }
+</code></pre>
 <ul>
 <li><var>hexo-generator-github</var>不是必需的，如果sources中没有<code>project</code>布局页面，则可以不安装此插件。</li>
 <li><var>hexo-filter-highlight</var>不是必需的，如果不想用本主题代码高亮方案，则可以不安装此插件。</li>
 </ul>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="找不到cheerio"><a href="#找不到cheerio" class="headerlink" title="找不到cheerio"></a>找不到cheerio</h3><p><code>Error: Cannot find module &#39;../../../node_modules/cheerio&#39;</code></p>
+<p>从hexo 5.0之后，lodash与cheerio已从依赖中移除，请在博客根目录安装<code>cheerio</code>插件</p>
+<h3 id="首页空白"><a href="#首页空白" class="headerlink" title="首页空白"></a>首页空白</h3><p>首页内容为一堆 {{xxxx}}<br>从hexo 5.0?，默认的渲染引擎从<code>swig</code>换成了<code>nunjucks</code>，请在博客根目录安装<code>hexo-renderer-swig</code>插件</p>
+<h3 id="捐献，文章阅读，访客数，公告等无法使用"><a href="#捐献，文章阅读，访客数，公告等无法使用" class="headerlink" title="捐献，文章阅读，访客数，公告等无法使用"></a>捐献，文章阅读，访客数，公告等无法使用</h3><p>请配置leancloud，数据库设计可参考<a href="./leancloud_schemal.zip">leancloud_schemal.zip</a></p>
 <h2 id="主题配置"><a href="#主题配置" class="headerlink" title="主题配置"></a>主题配置</h2><h3 id="js-css"><a href="#js-css" class="headerlink" title="js_css"></a>js_css</h3><p>配置全局css样式及js脚本，示例：</p>
-<pre><code class="yaml"><span class="attr">js_css:</span>
-<span class="attr">- url:</span> <span class="string">css/nova.css</span>
-<span class="attr">- url:</span> <span class="string">js/script.js</span></code></pre>
+<pre><code class="yaml">js_css:
+- url: css/nova.css
+- url: js/script.js
+</code></pre>
 <h3 id="menu"><a href="#menu" class="headerlink" title="menu"></a>menu</h3><p>配置站点菜单栏，示例：</p>
-<pre><code class="yaml"><span class="attr">menu:</span>
-<span class="attr">- name:</span> <span class="string">home</span>
-<span class="attr">  url:</span> <span class="string">/</span>
-<span class="attr">- name:</span> <span class="string">project</span>
-<span class="attr">  url:</span> <span class="string">/p/</span>
-<span class="attr">- name:</span> <span class="string">category</span>
-<span class="attr">  url:</span> <span class="string">/categories/</span>
-<span class="attr">- name:</span> <span class="string">archive</span>
-<span class="attr">  url:</span> <span class="string">/archives/</span>
-<span class="attr">- name:</span> <span class="string">about</span>
-<span class="attr">  url:</span> <span class="string">/about/</span></code></pre>
+<pre><code class="yaml">menu:
+- name: home
+  url: /
+- name: project
+  url: /p/
+- name: category
+  url: /categories/
+- name: archive
+  url: /archives/
+- name: about
+  url: /about/
+</code></pre>
 <p><strong>the <var>name</var> 将会被国际化输出</strong></p>
-<h3 id="post-widgets"><a href="#post-widgets" class="headerlink" title="post widgets"></a>post widgets</h3><pre><code class="yaml"><span class="comment"># post widgets. see layout/post/widget_xxx.swig</span>
-<span class="attr">post_widgets:</span>
-<span class="comment">#  - search</span>
-<span class="bullet">  -</span> <span class="string">category</span>
-<span class="bullet">  -</span> <span class="string">tag</span>
-<span class="bullet">  -</span> <span class="string">archive</span>
-<span class="bullet">  -</span> <span class="string">recent</span>
+<h3 id="post-widgets"><a href="#post-widgets" class="headerlink" title="post widgets"></a>post widgets</h3><pre><code class="yaml"># post widgets. see layout/post/widget_xxx.swig
+post_widgets:
+#  - search
+  - category
+  - tag
+  - archive
+  - recent
 
-<span class="attr">post_widgets_show_count:</span> <span class="literal">true</span>
-<span class="attr">post_widgets_recent_count:</span> <span class="number">5</span></code></pre>
-<h3 id="archive"><a href="#archive" class="headerlink" title="archive"></a>archive</h3><pre><code class="yaml"><span class="comment"># archive</span>
-<span class="attr">archive:</span>
-<span class="attr">  type:</span> <span class="string">yearly</span> <span class="comment">#yearly|monthly(defaut) see list_archives options</span>
-<span class="attr">  order:</span> <span class="bullet">-1</span> <span class="comment"># 1(asc)|-1(desc) defaut desc</span>
-<span class="attr">  format:</span> <span class="string">YYYY</span>
-<span class="attr">  show_count:</span> <span class="literal">false</span> <span class="comment"># true|false, defaut true</span>
-<span class="attr">  amount:</span> <span class="number">5</span> <span class="comment"># amount in post widgets</span></code></pre>
-<h3 id="toc"><a href="#toc" class="headerlink" title="toc"></a>toc</h3><pre><code class="yaml"><span class="comment"># toc</span>
-<span class="attr">toc:</span>
-<span class="attr">  post:</span> <span class="literal">true</span>
-<span class="attr">  project:</span> <span class="literal">true</span>
-<span class="attr">  page:</span> <span class="literal">true</span></code></pre>
-<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a>打赏</h3><pre><code class="yaml"><span class="attr">donate:</span>
-<span class="attr">  enable:</span> <span class="literal">true</span> <span class="comment"># whether enable page donate</span></code></pre>
+post_widgets_show_count: true
+post_widgets_recent_count: 5
+</code></pre>
+<h3 id="archive"><a href="#archive" class="headerlink" title="archive"></a>archive</h3><pre><code class="yaml"># archive
+archive:
+  type: yearly #yearly|monthly(defaut) see list_archives options
+  order: -1 # 1(asc)|-1(desc) defaut desc
+  format: YYYY
+  show_count: false # true|false, defaut true
+  amount: 5 # amount in post widgets
+</code></pre>
+<h3 id="toc"><a href="#toc" class="headerlink" title="toc"></a>toc</h3><pre><code class="yaml"># toc
+toc:
+  post: true
+  project: true
+  page: true
+</code></pre>
+<h3 id="打赏"><a href="#打赏" class="headerlink" title="打赏"></a>打赏</h3><pre><code class="yaml">donate:
+  enable: true # whether enable page donate
+</code></pre>
 <p>打赏的二维码图片尺寸建议大于200px，打赏图片名称为：donate_aliplay.png和donate_wechat.png</p>
 <h3 id="界面网格css"><a href="#界面网格css" class="headerlink" title="界面网格css"></a>界面网格css</h3><p>配置html最后呈现界面布局的网格系统样式</p>
-<pre><code class="yaml"><span class="attr">layout:</span>
-<span class="attr">  index:</span> <span class="comment"># 首页，博客文章页布局同首页.</span>
-<span class="attr">    main:</span> <span class="string">col-sx-12</span> <span class="string">col-sm-8</span> <span class="string">col-md-9</span> <span class="string">col-lg-9</span>
-<span class="attr">    widgets:</span> <span class="string">col-sx-12</span> <span class="string">col-sm-4</span> <span class="string">col-md-3</span> <span class="string">col-lg-3</span> <span class="string">hidden-xs</span>
-<span class="attr">  page:</span> <span class="comment"># 单页布局</span>
-<span class="attr">    main:</span> <span class="string">col-sx-12</span> <span class="string">col-sm-8</span> <span class="string">col-md-9</span> <span class="string">col-lg-9</span>
-<span class="attr">    toc:</span> <span class="string">col-sx-12</span> <span class="string">col-sm-4</span> <span class="string">col-md-3</span> <span class="string">col-lg-3</span> <span class="string">hidden-xs</span>
-<span class="attr">  p:</span> <span class="comment"># 项目文档页</span>
-<span class="attr">    sidebar:</span> <span class="string">col-sx-12</span> <span class="string">col-sm-12</span> <span class="string">col-md-2</span> <span class="string">col-lg-2</span>
-<span class="attr">    main:</span> <span class="string">col-sx-12</span> <span class="string">col-sm-8</span> <span class="string">col-md-8</span> <span class="string">col-lg-8</span>
-<span class="attr">    toc:</span> <span class="string">col-sx-2</span> <span class="string">col-sm-2</span> <span class="string">col-md-2</span> <span class="string">col-lg-2</span> <span class="string">hidden-xs</span>
+<pre><code class="yaml">layout:
+  index: # 首页，博客文章页布局同首页.
+    main: col-sx-12 col-sm-8 col-md-9 col-lg-9
+    widgets: col-sx-12 col-sm-4 col-md-3 col-lg-3 hidden-xs
+  page: # 单页布局
+    main: col-sx-12 col-sm-8 col-md-9 col-lg-9
+    toc: col-sx-12 col-sm-4 col-md-3 col-lg-3 hidden-xs
+  p: # 项目文档页
+    sidebar: col-sx-12 col-sm-12 col-md-2 col-lg-2
+    main: col-sx-12 col-sm-8 col-md-8 col-lg-8
+    toc: col-sx-2 col-sm-2 col-md-2 col-lg-2 hidden-xs
 </code></pre>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><h3 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h3><p>请参考<a target="_blank" rel="noopener" href="https://ieclipse.cn/p/hexo-theme-nova/layouts.html">nova layouts</a></p>
 <h3 id="Front-matter"><a href="#Front-matter" class="headerlink" title="Front-matter"></a>Front-matter</h3><p>请参考<a target="_blank" rel="noopener" href="https://ieclipse.cn/p/hexo-theme-nova/front-matter.html">nova front-matter</a></p>
@@ -307,6 +374,7 @@ npm install hexo-filter-highlight --save</code></pre>
 <li><a target="_blank" rel="noopener" href="https://github.com/Jamling/hexo-filter-highlight/">hexo-filter-highlight</a> 用于代码高亮</li>
 </ul>
 <p>详情请参考<a target="_blank" rel="noopener" href="https://ieclipse.cn/p/hexo-theme-nova/plugins.html">nova plugins</a></p>
+<h2 id="联系我们"><a href="#联系我们" class="headerlink" title="联系我们"></a>联系我们</h2><p>请在QQ中搜索hexo-theme-nova群（群号：756721335）以获取支持<br><img src="http://hexo.ieclipse.cn/hexo-theme-nova/qq_group.jpg" alt="qq group"></p>
 
   
   </div>
@@ -423,7 +491,7 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
           目录
         </a></div>
         <div id="toc-body" class="in">
-        <ul class="nav toc-ul"><li><a href="#简介">简介</a></li><li><a href="#预览截屏">预览截屏</a></li><li><a href="#安装">安装</a></li><li><a href="#依赖">依赖</a></li><li><a href="#主题配置">主题配置</a><ul class="nav toc-ul"><li><a href="#js-css">js_css</a></li><li><a href="#menu">menu</a></li><li><a href="#post-widgets">post widgets</a></li><li><a href="#archive">archive</a></li><li><a href="#toc">toc</a></li><li><a href="#打赏">打赏</a></li><li><a href="#界面网格css">界面网格css</a></li></ul></li><li><a href="#参考">参考</a><ul class="nav toc-ul"><li><a href="#布局">布局</a></li><li><a href="#Front-matter">Front-matter</a></li><li><a href="#辅助函数">辅助函数</a></li><li><a href="#插件">插件</a></li></ul></li></ul>
+        <ul class="nav toc-ul"><li><a href="#简介">简介</a></li><li><a href="#预览截屏">预览截屏</a></li><li><a href="#特性">特性</a></li><li><a href="#变更">变更</a><ul class="nav toc-ul"><li><a href="#V0-3-0">V0.3.0</a></li><li><a href="#V0-2-0-重大更新">V0.2.0 (重大更新)</a></li></ul></li><li><a href="#安装">安装</a></li><li><a href="#依赖">依赖</a></li><li><a href="#常见问题">常见问题</a><ul class="nav toc-ul"><li><a href="#找不到cheerio">找不到cheerio</a></li><li><a href="#首页空白">首页空白</a></li><li><a href="#捐献，文章阅读，访客数，公告等无法使用">捐献，文章阅读，访客数，公告等无法使用</a></li></ul></li><li><a href="#主题配置">主题配置</a><ul class="nav toc-ul"><li><a href="#js-css">js_css</a></li><li><a href="#menu">menu</a></li><li><a href="#post-widgets">post widgets</a></li><li><a href="#archive">archive</a></li><li><a href="#toc">toc</a></li><li><a href="#打赏">打赏</a></li><li><a href="#界面网格css">界面网格css</a></li></ul></li><li><a href="#参考">参考</a><ul class="nav toc-ul"><li><a href="#布局">布局</a></li><li><a href="#Front-matter">Front-matter</a></li><li><a href="#辅助函数">辅助函数</a></li><li><a href="#插件">插件</a></li></ul></li><li><a href="#联系我们">联系我们</a></li></ul>
         </div>
       </nav>
 </div>

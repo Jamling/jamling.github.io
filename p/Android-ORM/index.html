@@ -222,18 +222,19 @@
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>您是否在Android上使用sqlite来存储您的应用数据呢？如果是，或许您会对Android存取sqlite数据感觉有点小复杂。本人从2010年开始从事Android开发，对于Android的数据库操纵这一块，感觉还是比较复杂的，尤其是可维护性及或可扩展性方面，都是比较差的。<br>也正是从这时开始，我决定在Android平台上实现像Hibernate那样的ORM框架，来简化开发工作。使得开发者在使用sqlite数据库时，无需关注底层数据库实现，更多的是关注上层业务逻辑实现。<br>如果您对此项目感兴趣，欢迎您的加入！</p>
 <h1 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h1><ul>
 <li>简洁的ORM映射配置, 只需在Java Bean的属性中添加<code>@Column</code>的注解即可完成到数据库字段的映射配置.</li>
-<li>支持原生<code>ConntentProvider</code>，可以方便的使用Android <code>ContentProvider</code>机制来共享数据，初始化/升级/降级数据库</li>
+<li>支持原生<code>ConntentProvider</code>，可以方便的使用Android <code>ContentProvider</code>机制来共享数据，初始化&#x2F;升级&#x2F;降级数据库</li>
 <li>强大的正向工程支持, 有Eclipse <a target="_blank" rel="noopener" href="https://github.com/Jamling/adt-extensions">Android ADT-extensions</a>和Android Studio <a target="_blank" rel="noopener" href="https://github.com/Jamling/Android-ORM-ASPlugin">Android ORM Tool</a>插件来自动生成DDL和ContentProvider.</li>
-<li>给力的辅助工具, 向导式新建Activity/Service/BroadcastReceiver并且自动配置到AndroidManifest.xml.</li>
+<li>给力的辅助工具, 向导式新建Activity&#x2F;Service&#x2F;BroadcastReceiver并且自动配置到AndroidManifest.xml.</li>
 <li>…<br>更多特性，请自行体验.</li>
 </ul>
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>最新版本 <code>$latest</code> 为: <a target="_blank" rel="noopener" href="https://github.com/Jamling/Android-ORM"><img src="https://img.shields.io/github/release/jamling/Android-ORM.svg?maxAge=3600" alt="latest release"></a>, <strong>在使用中请将<code>$latest</code>替换为具体的版本</strong>.</p>
-<h2 id="Eclipse"><a href="#Eclipse" class="headerlink" title="Eclipse"></a>Eclipse</h2><p>下载aorm-core-<code>$latest</code>.jar并放入libs/目录下</p>
+<h2 id="Eclipse"><a href="#Eclipse" class="headerlink" title="Eclipse"></a>Eclipse</h2><p>下载aorm-core-<code>$latest</code>.jar并放入libs&#x2F;目录下</p>
 <p>推荐安装<a target="_blank" rel="noopener" href="https://github.com/Jamling/adt-extensions">Android ADT-extensions</a>插件</p>
-<h2 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a>Android Studio</h2><p>Aorm已经发布到jcenter，在您的app/build.gradle中添加以下依赖。</p>
-<pre><code class="gradle"><span class="keyword">dependencies</span> {
-    <span class="keyword">compile</span> <span class="string">'cn.ieclipse.aorm:aorm-core:$latest'</span>
-}</code></pre>
+<h2 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a>Android Studio</h2><p>Aorm已经发布到jcenter，在您的app&#x2F;build.gradle中添加以下依赖。</p>
+<pre><code class="gradle">dependencies {
+    compile &#39;cn.ieclipse.aorm:aorm-core:$latest&#39;
+}
+</code></pre>
 <p>推荐安装Android Studio上的<a target="_blank" rel="noopener" href="https://github.com/Jamling/Android-ORM-ASPlugin">Android ORM Tool</a>插件，可以快速生成相关代码。</p>
 <h1 id="类似orm库比较"><a href="#类似orm库比较" class="headerlink" title="类似orm库比较"></a>类似orm库比较</h1><p>简单试验结果:</p>
 <p><img src="screenshot/simpletrial.png" alt="Simple Trial" title="Simple Trial"></p>
@@ -241,153 +242,157 @@
 <p><img src="screenshot/complextrial.png" alt="Complex Trial" title="Complex Trial"></p>
 <p>测试工程代码请参考: <a target="_blank" rel="noopener" href="https://github.com/Raizlabs/AndroidDatabaseLibraryComparison">https://github.com/Raizlabs/AndroidDatabaseLibraryComparison</a></p>
 <h1 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h1><h2 id="创建映射"><a href="#创建映射" class="headerlink" title="创建映射"></a>创建映射</h2><p>只需添加类<code>@Table</code>注解及<code>@Column</code>属性注解即可完成表与字段的映射。</p>
-<pre><code class="java"><span class="meta">@Table</span>(name = <span class="string">"student"</span>)
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>{
+<pre><code class="java">@Table(name = &quot;student&quot;)
+public class Student implements Serializable {
+    
+    @Column(name = &quot;_id&quot;, id = true)
+    public long id; //id is Primary key.
+    
+    @Column(name=&quot;_name&quot;)
+    public String name; //mapping to _name and auto column type
+    
+    @Column()
+    public int age; //auto column type and name
+    
+    @Column(defaultValue=&quot;&#39;&#39;&quot;)
+    public String phone; // default value in empty
+    
+    public String address; // no mapping
+}
+</code></pre>
+<h2 id="Create-database"><a href="#Create-database" class="headerlink" title="Create database"></a>Create database</h2><pre><code class="java">package cn.ieclipse.aorm.example;
 
-    <span class="meta">@Column</span>(name = <span class="string">"_id"</span>, id = <span class="keyword">true</span>)
-    <span class="keyword">public</span> <span class="keyword">long</span> id; <span class="comment">//id is Primary key.</span>
+import android.content.ContentProvider;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+import cn.ieclipse.aorm.Aorm;
+import cn.ieclipse.aorm.Session;
+import cn.ieclipse.aorm.example.bean.Course;
+import cn.ieclipse.aorm.example.bean.Grade;
+import cn.ieclipse.aorm.example.bean.Student;
 
-    <span class="meta">@Column</span>(name=<span class="string">"_name"</span>)
-    <span class="keyword">public</span> String name; <span class="comment">//mapping to _name and auto column type</span>
-
-    <span class="meta">@Column</span>()
-    <span class="keyword">public</span> <span class="keyword">int</span> age; <span class="comment">//auto column type and name</span>
-
-    <span class="meta">@Column</span>(defaultValue=<span class="string">"''"</span>)
-    <span class="keyword">public</span> String phone; <span class="comment">// default value in empty</span>
-
-    <span class="keyword">public</span> String address; <span class="comment">// no mapping</span>
-}</code></pre>
-<h2 id="Create-database"><a href="#Create-database" class="headerlink" title="Create database"></a>Create database</h2><pre><code class="java"><span class="keyword">package</span> cn.ieclipse.aorm.example;
-
-<span class="keyword">import</span> android.content.ContentProvider;
-<span class="keyword">import</span> android.content.ContentValues;
-<span class="keyword">import</span> android.database.Cursor;
-<span class="keyword">import</span> android.database.sqlite.SQLiteDatabase;
-<span class="keyword">import</span> android.database.sqlite.SQLiteOpenHelper;
-<span class="keyword">import</span> android.net.Uri;
-<span class="keyword">import</span> cn.ieclipse.aorm.Aorm;
-<span class="keyword">import</span> cn.ieclipse.aorm.Session;
-<span class="keyword">import</span> cn.ieclipse.aorm.example.bean.Course;
-<span class="keyword">import</span> cn.ieclipse.aorm.example.bean.Grade;
-<span class="keyword">import</span> cn.ieclipse.aorm.example.bean.Student;
-
-<span class="comment">/**</span>
-<span class="comment"> * <span class="doctag">@author</span> Jamling</span>
-<span class="comment"> * </span>
-<span class="comment"> */</span>
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleContentProvider</span> <span class="keyword">extends</span> <span class="title">ContentProvider</span> </span>{
-
-    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String AUTH = <span class="string">"cn.ieclipse.aorm.example.provider"</span>;
-    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Uri URI = Uri.parse(<span class="string">"content://"</span> + AUTH);
-    <span class="keyword">private</span> SQLiteOpenHelper mOpenHelper;
-    <span class="keyword">private</span> <span class="keyword">static</span> Session session;
-
-    <span class="meta">@Override</span>
-    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">delete</span><span class="params">(Uri arg0, String arg1, String[] arg2)</span> </span>{
-        <span class="keyword">return</span> <span class="number">0</span>;
+/**
+ * @author Jamling
+ * 
+ */
+public class ExampleContentProvider extends ContentProvider {
+    
+    public static final String AUTH = &quot;cn.ieclipse.aorm.example.provider&quot;;
+    public static final Uri URI = Uri.parse(&quot;content://&quot; + AUTH);
+    private SQLiteOpenHelper mOpenHelper;
+    private static Session session;
+    
+    @Override
+    public int delete(Uri arg0, String arg1, String[] arg2) {
+        return 0;
     }
-
-    <span class="meta">@Override</span>
-    <span class="function"><span class="keyword">public</span> String <span class="title">getType</span><span class="params">(Uri arg0)</span> </span>{
-        <span class="keyword">return</span> <span class="keyword">null</span>;
+    
+    @Override
+    public String getType(Uri arg0) {
+        return null;
     }
-
-    <span class="meta">@Override</span>
-    <span class="function"><span class="keyword">public</span> Uri <span class="title">insert</span><span class="params">(Uri arg0, ContentValues arg1)</span> </span>{
-        <span class="keyword">return</span> <span class="keyword">null</span>;
+    
+    @Override
+    public Uri insert(Uri arg0, ContentValues arg1) {
+        return null;
     }
-
-    <span class="meta">@Override</span>
-    <span class="function"><span class="keyword">public</span> Cursor <span class="title">query</span><span class="params">(Uri arg0, String[] arg1, String arg2, String[] arg3,</span></span>
-<span class="function"><span class="params">            String arg4)</span> </span>{
-        <span class="keyword">return</span> <span class="keyword">null</span>;
+    
+    @Override
+    public Cursor query(Uri arg0, String[] arg1, String arg2, String[] arg3,
+            String arg4) {
+        return null;
     }
-
-    <span class="meta">@Override</span>
-    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(Uri arg0, ContentValues arg1, String arg2, String[] arg3)</span> </span>{
-        <span class="keyword">return</span> <span class="number">0</span>;
+    
+    @Override
+    public int update(Uri arg0, ContentValues arg1, String arg2, String[] arg3) {
+        return 0;
     }
-
-    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Session <span class="title">getSession</span><span class="params">()</span> </span>{
-        <span class="keyword">return</span> session;
+    
+    public static Session getSession() {
+        return session;
     }
-
-    <span class="meta">@Override</span>
-    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onCreate</span><span class="params">()</span> </span>{
-        mOpenHelper = <span class="keyword">new</span> SQLiteOpenHelper(<span class="keyword">this</span>.getContext(), <span class="string">"example.db"</span>,
-                <span class="keyword">null</span>, <span class="number">1</span>) {
-            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(SQLiteDatabase db)</span> </span>{
-                <span class="comment">// method 3: use AORM to create table</span>
+    
+    @Override
+    public boolean onCreate() {
+        mOpenHelper = new SQLiteOpenHelper(this.getContext(), &quot;example.db&quot;,
+                null, 1) {
+            public void onCreate(SQLiteDatabase db) {
+                // method 3: use AORM to create table
                 Aorm.createTable(db, Grade.class);
                 Aorm.createTable(db, Student.class);
                 Aorm.createTable(db, Course.class);
             }
-
-            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onUpgrade</span><span class="params">(SQLiteDatabase db, <span class="keyword">int</span> oldVersion,</span></span>
-<span class="function"><span class="params">                    <span class="keyword">int</span> newVersion)</span> </span>{
-                <span class="comment">// update table, suggested to wrapper in if block</span>
+            
+            public void onUpgrade(SQLiteDatabase db, int oldVersion,
+                    int newVersion) {
+                // update table, suggested to wrapper in if block
                 Aorm.updateTable(db, Grade.class);
                 Aorm.updateTable(db, Student.class);
                 Aorm.updateTable(db, Course.class);
             }
         };
-        session = <span class="keyword">new</span> Session(mOpenHelper, getContext().getContentResolver());
-        <span class="keyword">return</span> <span class="keyword">true</span>;
+        session = new Session(mOpenHelper, getContext().getContentResolver());
+        return true;
     }
+    
+}
+</code></pre>
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><pre><code class="java">        Session session = ExampleContentProvider.getSession();
+        // 最简单的查询：查询所有的学生信息.
+        Criteria criteria = Criteria.create(Student.class);
+        // 添加条件: id相等
+        criteria.add(Restrictions.eq(&quot;id&quot;, 1));
+        // 添加条件: name like Jamling
+        criteria.add(Restrictions.like(&quot;name&quot;, &quot;Jaming&quot;));
+        // add restriction: age &lt; 30
+        criteria.add(Restrictions.lt(&quot;age&quot;, 30));
+        // add order
+        criteria.addOrder(Order.asc(&quot;age&quot;));
+        // set district
+        criteria.setDistinct(true);
+        // set limit from row 10 to 20
+        criteria.setLimit(10, 10);
 
-}</code></pre>
-<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><pre><code class="java">Session session = ExampleContentProvider.getSession();
-<span class="comment">// 最简单的查询：查询所有的学生信息.</span>
-Criteria criteria = Criteria.create(Student.class);
-<span class="comment">// 添加条件: id相等</span>
-criteria.add(Restrictions.eq(<span class="string">"id"</span>, <span class="number">1</span>));
-<span class="comment">// 添加条件: name like Jamling</span>
-criteria.add(Restrictions.like(<span class="string">"name"</span>, <span class="string">"Jaming"</span>));
-<span class="comment">// add restriction: age &lt; 30</span>
-criteria.add(Restrictions.lt(<span class="string">"age"</span>, <span class="number">30</span>));
-<span class="comment">// add order</span>
-criteria.addOrder(Order.asc(<span class="string">"age"</span>));
-<span class="comment">// set district</span>
-criteria.setDistinct(<span class="keyword">true</span>);
-<span class="comment">// set limit from row 10 to 20</span>
-criteria.setLimit(<span class="number">10</span>, <span class="number">10</span>);
+        List&lt;Student&gt; list = session.list(Student.class);
+        // if you use Android CursorAdapter you can:
+        Cursor c = session.query(criteria);
 
-List&lt;Student&gt; list = session.list(Student.class);
-<span class="comment">// if you use Android CursorAdapter you can:</span>
-Cursor c = session.query(criteria);
-
-<span class="comment">// set alias, so the project will be alias.columnn. e.g. s.name</span>
-<span class="comment">// criteria.setAlias("s");</span>
-<span class="comment">// multi-table query</span>
-criteria.addChild(StudentMore.class, <span class="string">"m"</span>, Criteria.INNER_JOIN,
-        Restrictions.geProperty(<span class="string">"s.id"</span>, <span class="string">"m.id"</span>));
-<span class="comment">// query to cursor</span>
-c = session.query(criteria);
-<span class="comment">// convert to list.</span>
-List&lt;Object[]&gt; ret = CursorUtils.getFromCursor(c,
-        <span class="keyword">new</span> Class[] { Student.class }, <span class="keyword">new</span> String[] { <span class="string">"s"</span>, <span class="string">"m"</span> });
-<span class="comment">// query to list.</span>
-ret = session.listAll(criteria);
-Object[] item = ret.get(<span class="number">0</span>);
-Student s = (Student) item[<span class="number">0</span>];
-StudentMore m = (StudentMore) item[<span class="number">1</span>];
-<span class="comment">//</span></code></pre>
-<h2 id="其它操作"><a href="#其它操作" class="headerlink" title="其它操作"></a>其它操作</h2><pre><code class="java">Session session = ExampleContentProvider.getSession();
-<span class="comment">// insert</span>
-Student s = <span class="keyword">new</span> Student();
-s.setName(<span class="string">"Jamling"</span>);
-<span class="keyword">long</span> rowId = session.insert(s, <span class="keyword">null</span>);
-<span class="comment">// update student's name to Jame whose id is 1</span>
-s.setId(<span class="number">1</span>);
-s.setName(<span class="string">"Jame"</span>);
-<span class="keyword">int</span> rows = session.update(s);
-<span class="comment">// delete student whose id is 2</span>
-session.deleteById(Student.class, <span class="number">2</span>);
-<span class="comment">// query student whose id is 4</span>
-s = session.get(Student.class, <span class="number">4</span>);</code></pre>
+        // set alias, so the project will be alias.columnn. e.g. s.name
+        // criteria.setAlias(&quot;s&quot;);
+        // multi-table query
+        criteria.addChild(StudentMore.class, &quot;m&quot;, Criteria.INNER_JOIN,
+                Restrictions.geProperty(&quot;s.id&quot;, &quot;m.id&quot;));
+        // query to cursor
+        c = session.query(criteria);
+        // convert to list.
+        List&lt;Object[]&gt; ret = CursorUtils.getFromCursor(c,
+                new Class[] { Student.class }, new String[] { &quot;s&quot;, &quot;m&quot; });
+        // query to list.
+        ret = session.listAll(criteria);
+        Object[] item = ret.get(0);
+        Student s = (Student) item[0];
+        StudentMore m = (StudentMore) item[1];
+        //
+</code></pre>
+<h2 id="其它操作"><a href="#其它操作" class="headerlink" title="其它操作"></a>其它操作</h2><pre><code class="java">        Session session = ExampleContentProvider.getSession();
+        // insert
+        Student s = new Student();
+        s.setName(&quot;Jamling&quot;);
+        long rowId = session.insert(s, null);
+        // update student&#39;s name to Jame whose id is 1
+        s.setId(1);
+        s.setName(&quot;Jame&quot;);
+        int rows = session.update(s);
+        // delete student whose id is 2
+        session.deleteById(Student.class, 2);
+        // query student whose id is 4
+        s = session.get(Student.class, 4);
+</code></pre>
 <h1 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h1><p>请参考 <a href="http://www.ieclipse.cn/p/Android-ORM/userguide.html">http://www.ieclipse.cn/p/Android-ORM/userguide.html</a></p>
-<h1 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h1><p>Jamling (<a href="mailto:li.jamling@gmail.com">li.jamling@gmail.com</a>)</p>
+<h1 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h1><p>Jamling (<a href="mailto:&#108;&#x69;&#x2e;&#106;&#x61;&#x6d;&#x6c;&#105;&#x6e;&#x67;&#x40;&#103;&#x6d;&#x61;&#105;&#108;&#46;&#99;&#111;&#x6d;">&#108;&#x69;&#x2e;&#106;&#x61;&#x6d;&#x6c;&#105;&#x6e;&#x67;&#x40;&#103;&#x6d;&#x61;&#105;&#108;&#46;&#99;&#111;&#x6d;</a>)</p>
 
   
   </div>

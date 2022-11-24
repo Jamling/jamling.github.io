@@ -186,7 +186,7 @@
 <h2 id="Bitmap-Config"><a href="#Bitmap-Config" class="headerlink" title="Bitmap Config"></a>Bitmap Config</h2><p>首先，根据Android API 25的文档简要说明一下Android的Bitmap.Config以下4个选项</p>
 <ul>
 <li>ALPHA_8: 每个像素占用1字节（8位），存储的是透明度信息。</li>
-<li>ARGB_4444: 每个像素占用2字节（4+4+4+4＝16位），ARGB分别占用4位，支持alpha通道。<br><strong>注：从API 13开始不推荐使用，在android 4.4上面，设置的ARGB_4444会被系统使用ARGB_8888替换</strong></li>
+<li>ARGB_4444: 每个像素占用2字节（4+4+4+4＝16位），ARGB分别占用4位，支持alpha通道。<br> <strong>注：从API 13开始不推荐使用，在android 4.4上面，设置的ARGB_4444会被系统使用ARGB_8888替换</strong></li>
 <li>ARGB_8888: 默认的选项，每像素占用4字节，ARGB分别占8位，支持1600万种颜色，质量最高，当然内存占用也高。</li>
 <li>RGB_565: 每像素占用2字节，RGB分别占5，6，5位。支持65535种颜色，不支持alpha。</li>
 </ul>
@@ -201,7 +201,7 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>bytes/pixel</td>
+<td>bytes&#x2F;pixel</td>
 <td align="center">1 byte</td>
 <td align="right">2 byte</td>
 <td align="right">4 byte</td>
@@ -223,7 +223,7 @@
 </ul>
 <h2 id="bitmap内存占用计算"><a href="#bitmap内存占用计算" class="headerlink" title="bitmap内存占用计算"></a>bitmap内存占用计算</h2><p>第三，简要说一下bitmap占用的内存</p>
 <p>Android中bitmap的内存占用是跟图片的尺寸（高和宽）相关。一张图片的内存占用大致的计算公式如下：</p>
-<p><strong>占用内存 = 图像像素总和（width x height）再 x 每像素(bitmap config)占用的字节数</strong></p>
+<p><strong>占用内存 &#x3D; 图像像素总和（width x height）再 x 每像素(bitmap config)占用的字节数</strong></p>
 <p><em>以下是通过代码准确计算</em></p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -249,8 +249,9 @@
 
     // Estimate for earlier platforms.
     return bitmap.getWidth() * bitmap.getRowBytes();
-&#125;</code></pre>
-<p>以一张1024<em>1024的图片为例，使用ARGB_8888，占用的内存为1024</em>1024*4=4M。像现在的手机摄像头动不动就是上千万像素，拍出来的照片如果按默认的ARGB_8888 config加载，则至少是几十M的内存占用。</p>
+&#125;
+</code></pre>
+<p>以一张1024<em>1024的图片为例，使用ARGB_8888，占用的内存为1024</em>1024*4&#x3D;4M。像现在的手机摄像头动不动就是上千万像素，拍出来的照片如果按默认的ARGB_8888 config加载，则至少是几十M的内存占用。</p>
 <p>Android的图片资源主要分两部分：</p>
 <ol>
 <li>一种是apk中自带的，多为png格式，由系统加载，支持缩放，代码中通过R.xxx引用，decode时使用的是默认的ARGB_8888选项，图像质量高；</li>
@@ -269,28 +270,28 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/png8.png" alt="">png8</td>
+<td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/png8.png">png8</td>
 <td align="center"><strong>4</strong><del><code>1</code></del> X</td>
 <td align="center">2 X</td>
 <td align="center">4 X</td>
 <td align="center"><strong>4</strong><del><code>2</code></del> X A <del><code>不</code></del> 透明</td>
 </tr>
 <tr>
-<td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/png24.png" alt="">png24</td>
+<td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/png24.png">png24</td>
 <td align="center"><strong>4</strong><del><code>1</code></del> X</td>
 <td align="center">2 X</td>
 <td align="center">4 X</td>
 <td align="center"><strong>2</strong> X</td>
 </tr>
 <tr>
-<td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/png32.png" alt="">png32</td>
+<td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/png32.png">png32</td>
 <td align="center"><strong>4</strong><del><code>1</code></del> X</td>
 <td align="center">2 X</td>
 <td align="center">4 X</td>
 <td align="center"><strong>4</strong><del><code>2</code></del> X A <del><code>不</code></del> 透明</td>
 </tr>
 <tr>
-<td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/jpeg_80.jpg" alt="">jpeg</td>
+<td align="center"><img src="https://raw.githubusercontent.com/Jamling/BitmapConfig/master/app/src/main/res/mipmap-xhdpi/jpeg_80.jpg">jpeg</td>
 <td align="center"><strong>4</strong><del><code>1</code></del> X</td>
 <td align="center">2 X</td>
 <td align="center">4 X</td>

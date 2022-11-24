@@ -196,8 +196,9 @@
 
 <pre><code class="java">int i;
 String s;
-System.out.println(this.i);//can not be i:The local variable i may not have been initialized</code></pre>
-<p>这使我想到了C/C++，在C/C++中是这样介绍的，如果局部变量没有初始化的话，那么编译器将自动赋给它一个随机值。所以在C/C++中，如果没有给局部变量赋初值（初始化）的话，将是一件“危险”的事，而Java则聪明了许多，没有初始化的局部变量，如果直接使用的话，编译不让你通过，以减少程序出现BUG的机率。</p>
+System.out.println(this.i);//can not be i:The local variable i may not have been initialized
+</code></pre>
+<p>这使我想到了C&#x2F;C++，在C&#x2F;C++中是这样介绍的，如果局部变量没有初始化的话，那么编译器将自动赋给它一个随机值。所以在C&#x2F;C++中，如果没有给局部变量赋初值（初始化）的话，将是一件“危险”的事，而Java则聪明了许多，没有初始化的局部变量，如果直接使用的话，编译不让你通过，以减少程序出现BUG的机率。</p>
 <p>构造函数的初始化没看懂，比仙剑的迷宫还难走。搞了半天，没搞懂，惭愧！以下是原文。</p>
 <p>static 初始化只有在必要的时候才会进行，…它们才会得到初始化在这以后，static 对象都不会重新初始化。初始化顺序首先是 static（如果它们尚未由前一次对象创建过程初始化）接着是非 static对象。大家可从输出结果中找到相应的证据。<br>原来是没有看完，根据以上原则，其它一些原则请参考原文。原文中的原例做一下面的分析。</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -283,17 +284,20 @@ class Mugs &#123;
     Mugs() &#123;
        System.out.println(&quot;Mugs()&quot;);
     &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>请注意程序中注释中的序号，我喜欢用机器的方式思考方式来解这种题。</p>
 <ol>
-<li>发现静态成员t1，它新建一个Table对象。<br>在Table对象中，发现静态变量b1，新建一个Bowl对象，初始化Bowl，执行构造<br>在Table对象中，发现静态变量b2，新建一个Bowl对象，初始化Bowl，执行构造<br>Table.class没有成员/静态方法了，进行构造方法。</li>
+<li>发现静态成员t1，它新建一个Table对象。<br>在Table对象中，发现静态变量b1，新建一个Bowl对象，初始化Bowl，执行构造<br>在Table对象中，发现静态变量b2，新建一个Bowl对象，初始化Bowl，执行构造<br>Table.class没有成员&#x2F;静态方法了，进行构造方法。</li>
 <li>发现静态成员t2，它新建一个Cupbord对象。<br>在Cupboard.class，先初始化静态成员b4,b5,然后才是非静态成员b3,最后执行其构造。</li>
 <li>程序继续往下执行，new Cupbord(), new Cupbord()，注意到这两次初始化，对已经初始化的静态b4,b5是不会进行第二次初始化的，而b3则每new 一次，则初始化一次。</li>
 <li>继续执行。<br>非静态实例的初始化很容易理解。<br>下面是例子运行的结果：<blockquote>
 </blockquote>
-Mug(1)<br>Mug(2)<br>c1 &amp; c2 initialized<br>Mugs()<blockquote>
+<p>Mug(1)<br>Mug(2)<br>c1 &amp; c2 initialized<br>Mugs()</p>
+<blockquote>
 </blockquote>
-注：如果没有把两条static 实例注释掉的话，将有助于理解上面的静态实例初始化。</li>
+<p>注：如果没有把两条static 实例注释掉的话，将有助于理解上面的静态实例初始化。</p>
+</li>
 </ol>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2007/10/23/Java/Java-清除与初始化/](https://www.ieclipse.cn/2007/10/23/Java/Java-清除与初始化/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   

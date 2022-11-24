@@ -183,11 +183,10 @@
     <h2 id="內部API定義"><a href="#內部API定義" class="headerlink" title="內部API定義"></a>內部API定義</h2><p>供Android内部使用，不向SDK开放的类、接口、方法等</p>
 <p>内部API出现的形式</p>
 <ul>
-<li>Hide<br>在public类，方法，（静态）常量使用了/** @hide */注释的java元素。如android.os.ServiceManager类</li>
-<li>internal<br>包名中带有internal标记的所有类或包，如com.android.internal.*<span id="more"></span>
-<h2 id="使用優缺點"><a href="#使用優缺點" class="headerlink" title="使用優缺點"></a>使用優缺點</h2></li>
+<li>Hide<br>在public类，方法，（静态）常量使用了&#x2F;** @hide *&#x2F;注释的java元素。如android.os.ServiceManager类</li>
+<li>internal<br>包名中带有internal标记的所有类或包，如com.android.internal.*<span id="more"></span></li>
 </ul>
-<p>为什么不开放？</p>
+<h2 id="使用優缺點"><a href="#使用優缺點" class="headerlink" title="使用優缺點"></a>使用優缺點</h2><p>为什么不开放？</p>
 <ul>
 <li>版本复杂</li>
 <li>本身不稳定</li>
@@ -203,7 +202,7 @@
 </ol>
 <h2 id="Java反射簡介"><a href="#Java反射簡介" class="headerlink" title="Java反射簡介"></a>Java反射簡介</h2><ul>
 <li>動態語言：允許程序在運行時改變程序結構及變量類型</li>
-<li>Java反射：加載在運行時才知道的class及獲取/調用此類的所有屬性/方法。</li>
+<li>Java反射：加載在運行時才知道的class及獲取&#x2F;調用此類的所有屬性&#x2F;方法。</li>
 </ul>
 <h2 id="Java反射API"><a href="#Java反射API" class="headerlink" title="Java反射API"></a>Java反射API</h2><p>Class Class#forName(String className);<br>Constructor Class#getConstructor();<br>Object Class#newInstance();<br>Constructor Class#getConstructor(Class<?>... constructorTypeParameters);
 Object Constructor#newInstance(Object... constructorParameterValues);
@@ -231,7 +230,8 @@ for (Object pkgUsageStats : oPkgUsageStatsArray) &#123;
     int launchCount = cPkgUsageStats.getDeclaredField(&quot;launchCount&quot;).getInt(pkgUsageStats);
     long usageTime = cPkgUsageStats.getDeclaredField(&quot;usageTime&quot;).getLong(pkgUsageStats);
     System.out.println(packageName + &quot;:&quot; + launchCount + &quot;:&quot; + usageTime);
-&#125;</code></pre>
+&#125;
+</code></pre>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2015/12/26/Android/Android-invoke-hide-api/](https://www.ieclipse.cn/2015/12/26/Android/Android-invoke-hide-api/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
   </div>

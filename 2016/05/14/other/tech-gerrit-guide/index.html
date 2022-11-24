@@ -186,7 +186,8 @@
 <h2 id="生成ssh-key"><a href="#生成ssh-key" class="headerlink" title="生成ssh key"></a>生成ssh key</h2><p>Windows下，打开gitbash等终端工具输入ssh-keygen生成公钥和私钥<br>Linux下直接在终端命令中输入ssh-keygen</p>
 <p class="code-caption" data-lang="shell" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="shell">$ssh-keygen</code></pre>
+<pre><code class="shell">$ssh-keygen
+</code></pre>
 <img src="/2016/05/14/other/tech-gerrit-guide/image001.png" class="">
 
 <h2 id="登录gerrit"><a href="#登录gerrit" class="headerlink" title="登录gerrit"></a>登录gerrit</h2><p>在浏览器中输入gerrit地址：<a target="_blank" rel="noopener" href="http://192.168.135.48/gerrit/">http://192.168.135.48/gerrit/</a><br>然后在弹出的身份验证对话框中输入账号及密码<br><strong>注：注意用户名大小写</strong></p>
@@ -194,9 +195,8 @@
 <img src="/2016/05/14/other/tech-gerrit-guide/image003.png" class="">
 
 <p>此界面可以添加ssh（亦可后续添加）</p>
-<p>输入Full Name，并点击Register New Email注册邮件地址。Gerrit会向输入的邮箱地址发送一封注册确认邮件。然后登录自己的邮箱，查收文件，点击验证链接，完成验证。验证通过后，将成功注册用户，就可以Review Code / Upload Code啦。</p>
+<p>输入Full Name，并点击Register New Email注册邮件地址。Gerrit会向输入的邮箱地址发送一封注册确认邮件。然后登录自己的邮箱，查收文件，点击验证链接，完成验证。验证通过后，将成功注册用户，就可以Review Code &#x2F; Upload Code啦。</p>
 <img src="/2016/05/14/other/tech-gerrit-guide/image005.png" class="">
-
 <h3 id="设置full-name和email"><a href="#设置full-name和email" class="headerlink" title="设置full-name和email"></a>设置full-name和email</h3><p>点击Settings -&gt; Contact Information更新姓名及邮箱地址。</p>
 <img src="/2016/05/14/other/tech-gerrit-guide/image007.png" class="">
 
@@ -208,7 +208,8 @@
 <h3 id="测试ssh连接"><a href="#测试ssh连接" class="headerlink" title="测试ssh连接"></a>测试ssh连接</h3><p>命令格式：<code>ssh –p port your_user_name@gerrit_host</code></p>
 <p class="code-caption" data-lang="shell" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="shell">$ ssh –p 29418 lijiaming@192.168.135.48</code></pre>
+<pre><code class="shell">$ ssh –p 29418 lijiaming@192.168.135.48
+</code></pre>
 <img src="/2016/05/14/other/tech-gerrit-guide/image011.png" class="">
 
 <p>连接成功之后，就可以从gerrit上检出代码了</p>
@@ -229,53 +230,66 @@
 
 $ scp -p -P 29418 yourname@host:hooks/commit-msg .git/hooks/
 
-$ scp -p -P 29418 lijiaming@192.168.135.48:hooks/commit-msg .git/hooks/</code></pre>
+$ scp -p -P 29418 lijiaming@192.168.135.48:hooks/commit-msg .git/hooks/
+</code></pre>
 <img src="/2016/05/14/other/tech-gerrit-guide/image019.png" class="">
 
-<h3 id="设置默认push"><a href="#设置默认push" class="headerlink" title="设置默认push"></a>设置默认push</h3><p>编辑./git/config文件，在[remote “origin”]下添加<br><code>push = +refs/heads/*:refs/for/*</code><br>也可以通过<code>git config origin.remote.push= xxx</code>来设置哦</p>
+<h3 id="设置默认push"><a href="#设置默认push" class="headerlink" title="设置默认push"></a>设置默认push</h3><p>编辑.&#x2F;git&#x2F;config文件，在[remote “origin”]下添加<br><code>push = +refs/heads/*:refs/for/*</code><br>也可以通过<code>git config origin.remote.push= xxx</code>来设置哦</p>
 <p>这样，push代码时，可以直接使用git push origin branch名称将代码提交到gerrit</p>
-<p>如果不设置，需要使用git push origin HEAD:refs/for/master来提交到远程master分支</p>
-<h3 id="邮件提醒"><a href="#邮件提醒" class="headerlink" title="邮件提醒"></a>邮件提醒</h3><p>当gerrit上有事件发生时，会向相关的用户发送邮件，建议使用邮件客户端打开提醒功能，并设置过滤器，如来自<a href="mailto:gerrit@your_company.com">gerrit@your_company.com</a>的邮件都存放在特定的文件夹下</p>
+<p>如果不设置，需要使用git push origin HEAD:refs&#x2F;for&#x2F;master来提交到远程master分支</p>
+<h3 id="邮件提醒"><a href="#邮件提醒" class="headerlink" title="邮件提醒"></a>邮件提醒</h3><p>当gerrit上有事件发生时，会向相关的用户发送邮件，建议使用邮件客户端打开提醒功能，并设置过滤器，如来自<a href="mailto:&#x67;&#101;&#x72;&#114;&#x69;&#116;&#x40;&#x79;&#x6f;&#x75;&#114;&#95;&#x63;&#x6f;&#109;&#112;&#97;&#x6e;&#x79;&#x2e;&#99;&#x6f;&#109;">&#x67;&#101;&#x72;&#114;&#x69;&#116;&#x40;&#x79;&#x6f;&#x75;&#114;&#95;&#x63;&#x6f;&#109;&#112;&#97;&#x6e;&#x79;&#x2e;&#99;&#x6f;&#109;</a>的邮件都存放在特定的文件夹下</p>
 <h3 id="提交代码"><a href="#提交代码" class="headerlink" title="提交代码"></a>提交代码</h3><h4 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h4><p class="code-caption" data-lang="shell" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="shell">$ git status</code></pre>
+<pre><code class="shell">$ git status
+</code></pre>
 <p>查看状态比如，已经加入git管控的文件（绿色），修改的文件（红色），冲突的文件（both modified 红色），新添加的文件（红色）</p>
 <h4 id="添加文件"><a href="#添加文件" class="headerlink" title="添加文件"></a>添加文件</h4><p class="code-caption" data-lang="shell" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="shell">$ git status add</code></pre>
+<pre><code class="shell">$ git status add
+</code></pre>
 <p>添加文件，可以添加目录，文件，也可以使用git add .添加所有文件<br>建议在git add 之前先git status一下</p>
 <h4 id="提交代码-1"><a href="#提交代码-1" class="headerlink" title="提交代码"></a>提交代码</h4><p class="code-caption" data-lang="shell" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="shell">$ git commit –m “[add|mod|del|…]</code></pre>
+<pre><code class="shell">$ git commit –m “[add|mod|del|…]
+</code></pre>
 <p>提交日志内容，尽量精准描述本次提交</p>
-<p>如果忘了带-m参数，可以进入vim/vi界面，按i进入编辑界面，然后输入commit信息，再按esc退出编辑，输入:wq（vim指令， vi指令自行百度）保存并退出</p>
+<p>如果忘了带-m参数，可以进入vim&#x2F;vi界面，按i进入编辑界面，然后输入commit信息，再按esc退出编辑，输入:wq（vim指令， vi指令自行百度）保存并退出</p>
 <h4 id="推送代码"><a href="#推送代码" class="headerlink" title="推送代码"></a>推送代码</h4><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="bash">$ git push origin master</code></pre>
+<pre><code class="bash">$ git push origin master
+</code></pre>
 <p>将当前代码push到远程master分支<br>如果没有设置默认push，则需使用完整命令</p>
 <p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="bash">$ git push origin HEAD:refs/for/master</code></pre>
+<pre><code class="bash">$ git push origin HEAD:refs/for/master
+</code></pre>
 <h4 id="拉取代码"><a href="#拉取代码" class="headerlink" title="拉取代码"></a>拉取代码</h4><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="bash">$ git pull --rebase origin master</code></pre>
+<pre><code class="bash">$ git pull --rebase origin master
+</code></pre>
 <p>从远程分支master上拉取代码，如果本地有修改，会导致拉取失败，需要先暂存本地修改的代码</p>
 <p>此命令相当于svn的svn update</p>
 <p>–rebase的作用是精简commit信息，减少不必要的merge</p>
 <h4 id="暂存代码"><a href="#暂存代码" class="headerlink" title="暂存代码"></a>暂存代码</h4><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="bash">$ git stash</code></pre>
+<pre><code class="bash">$ git stash
+</code></pre>
 <p>将本地修改的代码暂存起来<br>可以添加-u参数，将添加的文件一并加入暂存区</p>
 <h4 id="从暂存区恢复"><a href="#从暂存区恢复" class="headerlink" title="从暂存区恢复"></a>从暂存区恢复</h4><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="bash">$ git stash apply</code></pre>
+<pre><code class="bash">$ git stash apply
+</code></pre>
 <p>将暂时区的代码恢复到当前分支，后面可以跟stash{position}，将第position次的暂存恢复。</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code>$ git stash pop</code></pre><p>同git stash apply，并且从stash中删除</p>
+<pre><code>$ git stash pop
+</code></pre>
+<p>同git stash apply，并且从stash中删除</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code>$ git stash list</code></pre><p>列出暂时区列表</p>
+<pre><code>$ git stash list
+</code></pre>
+<p>列出暂时区列表</p>
 <h2 id="Gerrit工作流"><a href="#Gerrit工作流" class="headerlink" title="Gerrit工作流"></a>Gerrit工作流</h2><h3 id="Upload代码"><a href="#Upload代码" class="headerlink" title="Upload代码"></a>Upload代码</h3><p>请见上一节提交代码</p>
 <h3 id="Review代码"><a href="#Review代码" class="headerlink" title="Review代码"></a>Review代码</h3><p>当upload成功之后，就可以在gerrit上看到提交了</p>
 <img src="/2016/05/14/other/tech-gerrit-guide/image021.png" class="">
@@ -303,14 +317,16 @@ $ scp -p -P 29418 lijiaming@192.168.135.48:hooks/commit-msg .git/hooks/</code></
 <h2 id="git-进阶操作"><a href="#git-进阶操作" class="headerlink" title="git 进阶操作"></a>git 进阶操作</h2><h3 id="切换协议"><a href="#切换协议" class="headerlink" title="切换协议"></a>切换协议</h3><p>如果clone时，使用的是https，则每次提交都需要输入用户名与密码，推荐使用ssh协议，可以使用以下命令将https转为ssh协议</p>
 <p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="bash">git remote set-url origin git@github.com:someaccount/someproject.git</code></pre>
+<pre><code class="bash">git remote set-url origin git@github.com:someaccount/someproject.git
+</code></pre>
 <h3 id="导入仓库"><a href="#导入仓库" class="headerlink" title="导入仓库"></a>导入仓库</h3><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="bash">git init
 git remote add origin git@github.com:Jamling/test.git
-git push -u origin master</code></pre>
+git push -u origin master
+</code></pre>
 <h3 id="提交代码到多个分支"><a href="#提交代码到多个分支" class="headerlink" title="提交代码到多个分支"></a>提交代码到多个分支</h3><p>如果代码需要提交到多个分支，需要使用git cherry-pick功能。以下是一个示例</p>
-<p>PS：master为主干分支，dev为开发版本分支。<br>假设，我们当前在主干分支master，则：<br>1，master分支上git add , git commit，并且记录下commit id<br>2，git pull –rebase origin master // 确保master分支是最新状态<br>3，git push origin master<br>4，git checkout dev切换到dev分支<br>5，git cherry-pick 后面加上master分支下的刚刚提交的commit id<br>6，git pull –rebase origin dev // 确保dev分支是最新的<br>7，git push origin dev</p>
+<p>PS：master为主干分支，dev为开发版本分支。<br>假设，我们当前在主干分支master，则：<br>1，master分支上git add , git commit，并且记录下commit id<br>2，git pull –rebase origin master &#x2F;&#x2F; 确保master分支是最新状态<br>3，git push origin master<br>4，git checkout dev切换到dev分支<br>5，git cherry-pick 后面加上master分支下的刚刚提交的commit id<br>6，git pull –rebase origin dev &#x2F;&#x2F; 确保dev分支是最新的<br>7，git push origin dev</p>
 <h3 id="追加修改"><a href="#追加修改" class="headerlink" title="追加修改"></a>追加修改</h3><p>当push代码之后，review不通过或者想继续修改，可以继续编辑源代码，然后再通过git commit –amend来追加修改</p>
 <p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -319,42 +335,38 @@ $ git commit –m “add test”
 $ git push origin master
 $ git add test2.txt
 $ git commit --amend
-$ git push origin master</code></pre>
+$ git push origin master
+</code></pre>
 <h3 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h3><p>git reset可以实现版本回退</p>
 <p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="bash">git reset --soft HEAD~</code></pre>
-<p>添加–soft选项，则本地修改仍然存在，commit信息将回退<br>HEAD<del>：表示将HEAD版本向前退一个版本</del>表示两个版本，亦可以用HEAD~2表示</p>
+<pre><code class="bash">git reset --soft HEAD~
+</code></pre>
+<p>添加–soft选项，则本地修改仍然存在，commit信息将回退<br>HEAD<del>：表示将HEAD版本向前退一个版本~~表示两个版本，亦可以用HEAD</del>2表示</p>
 <h3 id="提交tag"><a href="#提交tag" class="headerlink" title="提交tag"></a>提交tag</h3><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="bash">git tag -am “commit message” tagname
 git push origin tagname:refs/heads/tagname
-git push --tags</code></pre>
+git push --tags
+</code></pre>
 <h2 id="Gerrit-常见问题"><a href="#Gerrit-常见问题" class="headerlink" title="Gerrit 常见问题"></a>Gerrit 常见问题</h2><h3 id="本地仓库与远程仓库不一致"><a href="#本地仓库与远程仓库不一致" class="headerlink" title="本地仓库与远程仓库不一致"></a>本地仓库与远程仓库不一致</h3><p> <code>Your branch is ahead of &#39;origin/master&#39; by 1 commits.</code></p>
-<p> 使用git status后，提示Your branch is ahead/behind of ‘origin/master’ by x commits. 表示本地仓库与远程仓库不同步，本地仓库比远程仓库提交x次提交。<br> 出现的原因是有以下两种：</p>
+<p> 使用git status后，提示Your branch is ahead&#x2F;behind of ‘origin&#x2F;master’ by x commits. 表示本地仓库与远程仓库不同步，本地仓库比远程仓库提交x次提交。<br> 出现的原因是有以下两种：</p>
 <ol>
-<li><p>本地提交push到gerrit，但是gerrit没有merge到远程仓库。</p>
-</li>
-<li><p>gerrit上已经merge过了，但是本地没有拉取最新的远程仓库。</p>
-<p>解决办法：</p>
-<p>先查看gerrit merge状态。然后再通过拉取代码获取最新的分支代码。如果提交的commit是你自己的，可以简单使用git pull，如果不是，强烈推荐<code>git pull --rebase origin master</code>来拉取分支。</p>
-</li>
+<li>本地提交push到gerrit，但是gerrit没有merge到远程仓库。</li>
+<li>gerrit上已经merge过了，但是本地没有拉取最新的远程仓库。</li>
 </ol>
+<p> 解决办法：</p>
+<p> 先查看gerrit merge状态。然后再通过拉取代码获取最新的分支代码。如果提交的commit是你自己的，可以简单使用git pull，如果不是，强烈推荐<code>git pull --rebase origin master</code>来拉取分支。</p>
 <h3 id="Push代码被拒绝"><a href="#Push代码被拒绝" class="headerlink" title="Push代码被拒绝"></a>Push代码被拒绝</h3><ul>
-<li><p><code>[remote rejected] HEAD -&gt; refs/for/master (missing Change-Id in commit messag</code><br>push代码时，出现以下错误：</p>
-<img src="/2016/05/14/other/tech-gerrit-guide/image033.png" class="">
-
-<p>解决办法</p>
-<ol>
-<li>先确认是否有从远程下载commit-msg模板，如果没有，参考下载commit模板一节，下载commit-msg模板</li>
-<li>使用git status查看状态，发现ahead of ‘origin/master’的数目不对。则使用git log查看提交记录，发现提交记录中有Merge branch ‘master’ of ssh://…，则可以确定是因为pull代码时，出现了分支冲突，git自动合并并提交合并commit。具体的解决办法之一：<br>a)    git reset –soft HEAD<del>将自动merge后的commit全部重置，并且保存到暂存区<br>b)    git reset –hard HEAD</del>将自动merge的commit还原，再pull –rebase拉取最新的分支代码。并解决冲突。<br>c)    从暂存区恢复代码，并且重新提交即可</li>
-</ol>
+<li><code>[remote rejected] HEAD -&gt; refs/for/master (missing Change-Id in commit messag</code><br> push代码时，出现以下错误：</li>
+</ul>
+ <img src="/2016/05/14/other/tech-gerrit-guide/image033.png" class="">
+<p> 解决办法<br>    1.	先确认是否有从远程下载commit-msg模板，如果没有，参考下载commit模板一节，下载commit-msg模板<br>    2.	使用git status查看状态，发现ahead of ‘origin&#x2F;master’的数目不对。则使用git log查看提交记录，发现提交记录中有Merge branch ‘master’ of ssh:&#x2F;&#x2F;…，则可以确定是因为pull代码时，出现了分支冲突，git自动合并并提交合并commit。具体的解决办法之一：<br>        a)	git reset –soft HEAD<del>将自动merge后的commit全部重置，并且保存到暂存区<br>        b)	git reset –hard HEAD</del>将自动merge的commit还原，再pull –rebase拉取最新的分支代码。并解决冲突。<br>        c)	从暂存区恢复代码，并且重新提交即可</p>
+<ul>
+<li><code>warning: push.default is unset</code><br> 是由版本兼容性导致的，低版本的git push如果不指定分支名，就会全部推送，而新版只会推送当前分支。<br> 解决的办法也很简单，我们只需要明确指定应该推送方式即可<ol>
+<li><p>全部推送<br> git config –global push.default matching</p>
 </li>
-<li><p><code>warning: push.default is unset</code><br>是由版本兼容性导致的，低版本的git push如果不指定分支名，就会全部推送，而新版只会推送当前分支。<br>解决的办法也很简单，我们只需要明确指定应该推送方式即可</p>
-<ol>
-<li><p>全部推送<br>git config –global push.default matching</p>
-</li>
-<li><p>部分推送<br>git config –global push.default simple</p>
+<li><p>部分推送<br> git config –global push.default simple</p>
 </li>
 </ol>
 </li>

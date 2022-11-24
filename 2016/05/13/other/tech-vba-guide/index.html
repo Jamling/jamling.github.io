@@ -217,14 +217,13 @@ VBA简介VBAVBA (Visual Basic for Application)，是一种应用程序自动化�
 <h3 id="代码窗口"><a href="#代码窗口" class="headerlink" title="代码窗口"></a>代码窗口</h3><p>个人理解，这里就是编辑器啦，只不过，可以切换成代码模式（代码窗口）和可视化设计模式（对象窗口）两种模式，你可以在此编辑程序的代码或设计程序窗口。</p>
 <p>可视化设计模式只针对窗体有效哦，你可以双击工程资源管理器中的FormCalculator窗体试试，默认打开的就是对象窗口哦，如下图所示：</p>
 <img src="/2016/05/13/other/tech-vba-guide/image009.png" class="">
-
 <p>不过因为我们研究的是VBA，所以，我们不需要画应用程序的窗口，直接使用Excel表格就可以完成了，如果你感兴趣的话，可以将工程导出，然后使用VB创建.exe应用程序哦。</p>
 <h3 id="立即窗口"><a href="#立即窗口" class="headerlink" title="立即窗口"></a>立即窗口</h3><p>如果你学过其它计算机语言的话，可能会很奇怪，为什么叫这个名字，其实它就是调试程序的输出窗口，类似于C++的输出窗口，Java IDE的Console。代码中使用Debug.Print输出的内容都会在此窗口打印出来。</p>
 <h3 id="本地窗口"><a href="#本地窗口" class="headerlink" title="本地窗口"></a>本地窗口</h3><p>此窗口也跟调试程序有关的，在调试程序的过程中，此窗口显示当前范围的变量的值哦，对调试程序来说，有非常大的帮助呢。</p>
 <h3 id="调试工具栏"><a href="#调试工具栏" class="headerlink" title="调试工具栏"></a>调试工具栏</h3><p>为什么要调试呢？就算是顶级的程序员，也不可能保证一次写好代码，而且永不出错。调试的目的在于理解程序的运行，分析及找出bug原因，然后再加以修正，来保证代码的准确无误地按照我们的期望来执行。<br>所以调试是使用非常频繁的，大家可以通过菜单栏：将视图→工具栏→调试勾选上，将它显示在工具栏上。<br>调试可以分单步调试，过程调试等等。具体的操作，请自行体会。</p>
 <p>提示：可以通过菜单栏→编译工程，来检查整个工程是否能顺利编译通过。因为VB编辑器没有像其它语言编辑器自动侦错，自动完成，语法检查那样的高级功能（有是有一点，就是功能不够强大），比如你拼错了一个变量，代码编辑器并不会立即告诉你。需要你运行过程中才提示，而且就算是提示，给的错误信息也不准确，我刚开始学习的时候，也因此烦恼了好一阵。刚开始写的时候，及时写，及时编译，还是很有必要的。</p>
 <h2 id="VBA语法"><a href="#VBA语法" class="headerlink" title="VBA语法"></a>VBA语法</h2><p>在讲到这一节的时候，我有点纠结，因为一门计算机语言的语法是比较复杂的，所以，限于篇幅，我还是只作简单的介绍，详细的请自行参考某些资料，不过与其它部分（如前面的VBA简介）不同的是，要想学好VBA，其语法肯定是必不可少的重要步骤。就像学习英语一样，如果不熟悉其语法，你就没法表达出英语语境下的意思，别人也无法理解你。对于计算机，它只是一台机器，所以，你必须严格的按照其语法来写代码，计算机才能认识你写的代码，并执行它。</p>
-<p>在VB/VBA中，是使用VBScript(VBS)来写代码的，VBScript是一种脚本语言，如果有其它计算机语言基础的话，那么学习VBS，不算一件难事。</p>
+<p>在VB&#x2F;VBA中，是使用VBScript(VBS)来写代码的，VBScript是一种脚本语言，如果有其它计算机语言基础的话，那么学习VBS，不算一件难事。</p>
 <p><em>注：关于VBS学习资料，可以在网上搜索并下载《VBSCRIPT 速查手册.chm》</em></p>
 <h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>VBScript 只有一种数据类型，称为 Variant。Variant 是一种特殊的数据类型，根据使用的方式，它可以包含不同类别的信息。因为 Variant 是 VBScript 中唯一的数据类型，所以它也是 VBScript 中所有函数的返回值的数据类型。</p>
 <p>最简单的 Variant 可以包含数字或字符串信息。Variant 用于数字上下文中时作为数字处理，用于字符串上下文中时作为字符串处理。这就是说，如果使用看起来象是数字的数据，则 VBScript 会假定其为数字并以适用于数字的方式处理。与此类似，如果使用的数据只可能是字符串，则 VBScript 将按字符串处理。当然，也可以将数字包含在英文引号 (“ “) 中使其成为字符串。</p>
@@ -296,13 +295,15 @@ VBA简介VBAVBA (Visual Basic for Application)，是一种应用程序自动化�
 <p class="code-caption" data-lang="vbscript" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="vbscript">Dim a ‘声明一个变量名为a的变量
-Dim a As Integer ‘ 声明一个变量名为a的integer类型变量</code></pre>
+Dim a As Integer ‘ 声明一个变量名为a的integer类型变量
+</code></pre>
 <p>声明多个变量时，使用逗号分隔变量。例如：<br><code>Dim Top, Bottom, Left, Right</code><br>对于数组的声明，可以通过变更名后面加（）来声明，例如<br><code>Dim b(2) ‘声明一个长度为3的数组</code></p>
-<h4 id="变量赋值"><a href="#变量赋值" class="headerlink" title="变量赋值"></a>变量赋值</h4><p>对于常量，可以使用const START = 3500来赋值<br>对于变量，可以使用“=”来赋值，如<code>b(0) = 0 ‘数组下标起始值为0</code><br><code>a = Array(0,1,2)</code><br>对于对象，需要使用Set来赋值，如</p>
+<h4 id="变量赋值"><a href="#变量赋值" class="headerlink" title="变量赋值"></a>变量赋值</h4><p>对于常量，可以使用const START &#x3D; 3500来赋值<br>对于变量，可以使用“&#x3D;”来赋值，如<code>b(0) = 0 ‘数组下标起始值为0</code><br><code>a = Array(0,1,2)</code><br>对于对象，需要使用Set来赋值，如</p>
 <p class="code-caption" data-lang="vbscript" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="vbscript">Dim obj As Collection ‘声明obj是一个集合对象
-Set obj = new Collection ‘创建一个Collection对象并赋值给obj</code></pre>
+Set obj = new Collection ‘创建一个Collection对象并赋值给obj
+</code></pre>
 <h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><p>VBScript 有一套完整的运算符，包括算术运算符、比较运算符、连接运算符和逻辑运算符。</p>
 <p>当表达式包含多种运算符时，首先计算算术运算符，然后计算比较运算符，最后计算逻辑运算符。所有比较运算符的优先级相同，即按照从左到右的顺序计算比较运算符。算术运算符和逻辑运算符的优先级如下所示：</p>
 <h4 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h4><table>
@@ -326,7 +327,7 @@ Set obj = new Collection ‘创建一个Collection对象并赋值给obj</code></
 </tr>
 <tr>
 <td>除</td>
-<td>/</td>
+<td>&#x2F;</td>
 </tr>
 <tr>
 <td>整除</td>
@@ -358,7 +359,7 @@ Set obj = new Collection ‘创建一个Collection对象并赋值给obj</code></
 </thead>
 <tbody><tr>
 <td>等于</td>
-<td>=</td>
+<td>&#x3D;</td>
 </tr>
 <tr>
 <td>不等于</td>
@@ -374,11 +375,11 @@ Set obj = new Collection ‘创建一个Collection对象并赋值给obj</code></
 </tr>
 <tr>
 <td>小于等于</td>
-<td>&lt;=</td>
+<td>&lt;&#x3D;</td>
 </tr>
 <tr>
 <td>大于等于</td>
-<td>&gt;=</td>
+<td>&gt;&#x3D;</td>
 </tr>
 <tr>
 <td>对象引用比较</td>
@@ -429,7 +430,8 @@ Set obj = new Collection ‘创建一个Collection对象并赋值给obj</code></
     Else &#39;剩下的流程
         Debug.Print (&quot;a less than 0&quot;)
     End If &#39;结束
-End Sub</code></pre>
+End Sub
+</code></pre>
 <h4 id="循环流程"><a href="#循环流程" class="headerlink" title="循环流程"></a>循环流程</h4><p>重复执行某些操作</p>
 <p class="code-caption" data-lang="vbscript" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -438,7 +440,8 @@ End Sub</code></pre>
         Debug.Print (i) &#39;可以使用 exit for退出for循环
     Next i
     Debug.Print (&quot;last i is : &quot; &amp; i)
-End Sub</code></pre>
+End Sub
+</code></pre>
 <h3 id="过程与函数"><a href="#过程与函数" class="headerlink" title="过程与函数"></a>过程与函数</h3><h4 id="Sub-过程"><a href="#Sub-过程" class="headerlink" title="Sub 过程"></a>Sub 过程</h4><p>Sub 过程是包含在 Sub 和 End Sub 语句之间的一组 VBScript 语句，执行操作但不返回值。Sub 过程可以使用参数（由调用过程传递的常数、变量或表达式）。如果 Sub 过程无任何参数，则 Sub 语句必须包含空括号 ()。</p>
 <p class="code-caption" data-lang="vbscript" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -451,7 +454,8 @@ End Sub</code></pre>
     b(1) = 1
     b(2) = 2
     Debug.Print (b(2))
-End Sub</code></pre>
+End Sub
+</code></pre>
 <h4 id="Function-过程"><a href="#Function-过程" class="headerlink" title="Function 过程"></a>Function 过程</h4><p>Function 过程是包含在 Function 和 End Function 语句之间的一组 VBScript 语句。Function 过程与 Sub 过程类似，但是 Function 过程可以返回值。Function 过程可以使用参数（由调用过程传递的常数、变量或表达式）。如果 Function 过程无任何参数，则 Function 语句必须包含空括号 ()。Function 过程通过函数名返回一个值，这个值是在过程的语句中赋给函数名的。Function 返回值的数据类型总是 Variant。</p>
 <p class="code-caption" data-lang="vbscript" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -461,7 +465,8 @@ End Function
 
 Function func_param(ByVal x As Integer, ByRef y As Integer) As Integer
     func_param = x + y
-End Function</code></pre>
+End Function
+</code></pre>
 <h1 id="VBA-Excel综合实例"><a href="#VBA-Excel综合实例" class="headerlink" title="VBA + Excel综合实例"></a>VBA + Excel综合实例</h1><p>相信大家对前面的介绍有点烦了吧，我要学习的是VBA + Excel，干嘛整那么多枯燥乏味的VB呢？唉，其实我也不想的，不过，工欲善其事，必先利其器，先把基础学好了，打扎实了，总不会有错的，在现实生活中，要想学好一门知识，可不像武侠电视剧中，一下子学会九阳真经那么简单。下面就进入我们的实战练习吧。</p>
 <h2 id="分析及设计"><a href="#分析及设计" class="headerlink" title="分析及设计"></a>分析及设计</h2><p>相当于打腹稿吧，程序不是你想的那样，想写就写，分析的过程就是理解用户的需求，用户需要什么，一定要弄清楚了。设计呢，就是考虑程序该怎么写，好比建一幢楼，需要先设计，并不是想怎么写就怎么写，与其它模块有什么接口啦，应该保护什么数据啦。这些都是需要事先考虑或协商好的。</p>
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>需求很简单，就是用户输入TA的税前工资，然后可以计算出所扣的税，税后收入是多少，税率等级是多少。不过我在这里，多考虑一件事：税级。个税有两种，一种是含税级，一种是不含税级的，它们之间，除了计税等级不一样，其它的都是一样子滴。</p>
@@ -483,7 +488,8 @@ Private array_deduct &#39;deduct
 Private pLevel &#39;level
 Private pTax &#39;tax
 Private pDiff As Single &#39;
-Private pSalary &#39; salary before tax</code></pre>
+Private pSalary &#39; salary before tax
+</code></pre>
 <p>这里，使用Private 声明变量，表示变量（属性）是私有的，别的工程不能访问它。</p>
 <h3 id="添加构建函数"><a href="#添加构建函数" class="headerlink" title="添加构建函数"></a>添加构建函数</h3><p>定义一个构建函数，用来做一些初始化操作，比如税率。<br>在代码窗口中，选择上方的第一个下拉列表中选择Class，再在第二个下拉列表中选择Initialize，来生成构建函数。</p>
 
@@ -505,24 +511,25 @@ Public Sub calc(beforeTax As Single)
     Else &#39;不含税级
       array_p = array_p2
     End If
-
+    
     For i = 0 To LEVEL_NUM - 2 &#39; 只算到&lt;或=80000
       If (pDiff &lt;= CLng(array_p(i))) Then
         pLevel = i
         Exit For
       End If
     Next i
-
+    
     If (i = LEVEL_NUM - 1) Then &#39;超过了最后一级
       pLevel = LEVEL_NUM - 1
     End If
-
+    
     &#39; 使用计税公式计算扣税
     pTax = pDiff * array_rate(pLevel) / 100 - array_deduct(pLevel)
-
+    
   End If
-
-End Sub</code></pre>
+  
+End Sub
+</code></pre>
 <p>定义属性读写方法</p>
 <p class="code-caption" data-lang="vbscript" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -545,7 +552,8 @@ End Property
 Public Property Get Expression() As String
   Expression = &quot;Level &quot; &amp; level &amp; &quot;:&quot; &amp; pSalary &amp; &quot; - ((&quot; _
   &amp; pSalary &amp; &quot; - &quot; &amp; START &amp; &quot;) * &quot; &amp; array_rate(pLevel) &amp; &quot;% - &quot; &amp; array_deduct(pLevel) &amp; &quot;)&quot;
-End Property</code></pre>
+End Property
+</code></pre>
 <p>注意：获取个人所得税公式函数中，因为字符太长，使用 _ 换行写了。</p>
 <h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><p>插入一个新模块，名字定义为TaxCalucator，再写一个test Sub来测试及调试我们将才写的类。</p>
 <p>在这里，我使用单步调试。</p>
@@ -567,7 +575,7 @@ Private Sub AutoCalc()
   &quot;恭喜您，你已成为了国家纳税人！&quot;, &quot;恭喜您，您应该是温饱不愁了吧？&quot;, _
   &quot;恭喜您，您已经迈入小康了！&quot;, &quot;恭喜您，好好享受一下小资情调吧！&quot;, &quot;恭喜您，您的收入已经达到中产阶级水平了&quot;, _
   &quot;恭喜您，您已经为成了名符其实的资产阶级&quot;, &quot;恭喜您，国家会感谢您为国家所做的贡献的！&quot;)
-
+  
   total = Me.Cells(2, 2).value
   deduct = Me.Cells(3, 2).value
   If (IsNumeric(total)) Then
@@ -582,27 +590,29 @@ Private Sub AutoCalc()
       Me.Cells(7, 2).value = taxObj.tax
       Me.Cells(7, 3).value = levelText(taxObj.level) &#39;根据税级给出一个个性化的提示
       Me.Cells(8, 2).value = taxObj.afterTax &#39;税后收入
-
+      
     Else
       Cells(9, 1).value = &quot;请输入有效的扣除项&quot;
     End If
   Else
     Cells(9, 1).value = &quot;请输入有效的税前收入&quot;
   End If
-
+  
   Exit Sub
 ErrorHandle:
   Cells(9, 1).value = &quot;哇，恭喜您为我找到一个BUG，错误：&quot; &amp; Err.Description &amp; &quot;，类型：&quot; &amp; Err.Number
   Err.Clear &#39;最后别忘了清除Error对象
 
-End Sub</code></pre>
-<p>注意，我在代码中还添加了一个错误处理，当有错误产生时，会在最后一行中给出一些错误信息。如果有人发现了bug，可以将输入信息及错误信息发送到<a href="mailto:li.jamling@gmail.com">li.jamling@gmail.com</a></p>
+End Sub
+</code></pre>
+<p>注意，我在代码中还添加了一个错误处理，当有错误产生时，会在最后一行中给出一些错误信息。如果有人发现了bug，可以将输入信息及错误信息发送到<a href="mailto:&#x6c;&#x69;&#46;&#106;&#97;&#109;&#108;&#105;&#x6e;&#103;&#64;&#x67;&#x6d;&#97;&#x69;&#108;&#x2e;&#99;&#x6f;&#109;">&#x6c;&#x69;&#46;&#106;&#97;&#109;&#108;&#105;&#x6e;&#103;&#64;&#x67;&#x6d;&#97;&#x69;&#108;&#x2e;&#99;&#x6f;&#109;</a></p>
 <h3 id="调用AutoCalc-Sub"><a href="#调用AutoCalc-Sub" class="headerlink" title="调用AutoCalc Sub"></a>调用AutoCalc Sub</h3><p>什么时候触发此Sub呢，我想单元格变更的时候吧，这样，当用户输入完税前工资后，就可以立即自动计算了。</p>
 <p class="code-caption" data-lang="vbscript" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="vbscript">Private Sub Worksheet_SelectionChange(ByVal Target As Range)
   AutoCalc
-End Sub</code></pre>
+End Sub
+</code></pre>
 <p>选择WorkSheet的SelectionChange Sub，在Sub中调用AutoCalc Sub就可以了。</p>
 <h2 id="VBA工程的签名"><a href="#VBA工程的签名" class="headerlink" title="VBA工程的签名"></a>VBA工程的签名</h2><h3 id="签名的好处"><a href="#签名的好处" class="headerlink" title="签名的好处"></a>签名的好处</h3><p>为什么要签名呢？因为Office默认的宏安全级别为高，如果你的VBA工程未签名，那么默认情况下，此宏是被禁用的。</p>
 <p>签名之后，在打开有宏的Excel时，会弹出一个警告框，如下图所示：</p>
@@ -620,7 +630,7 @@ End Sub</code></pre>
 <h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>在熟悉VBA之后，使用VBA实现一个《个体工商户的生产经营所得税计算器》。附录工程中包含答案。</p>
 <h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p>完整工程<br>个人所得税计算器VBA工程：<a href="/2016/05/13/other/tech-vba-guide/%E4%B8%AA%E4%BA%BA%E6%89%80%E5%BE%97%E7%A8%8E%E8%AE%A1%E7%AE%97%E5%99%A8.xls" title="个人所得税计算器.xls">个人所得税计算器.xls</a></p>
 <h1 id="关于作者"><a href="#关于作者" class="headerlink" title="关于作者"></a>关于作者</h1><p>Jamling，男，资深宅男，85年生，目前就职于南京一家软件公司，主要从事Java软件设计及研发。在工作之余，喜欢搞一些与软件相关的研究性课题，姑且算是一名技术宅吧。</p>
-<p>Email: <a href="mailto:li.jamling@gmail.com">li.jamling@gmail.com</a></p>
+<p>Email: <a href="mailto:&#x6c;&#x69;&#46;&#x6a;&#x61;&#109;&#108;&#105;&#x6e;&#x67;&#x40;&#x67;&#x6d;&#97;&#x69;&#108;&#x2e;&#99;&#111;&#109;">&#x6c;&#x69;&#46;&#x6a;&#x61;&#109;&#108;&#105;&#x6e;&#x67;&#x40;&#x67;&#x6d;&#97;&#x69;&#108;&#x2e;&#99;&#111;&#109;</a></p>
 <p>注：<br>后面我可能会再制作Excel VBA高级教程，面向的读者是已有VBA基础的读者。</p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/05/13/other/tech-vba-guide/](https://www.ieclipse.cn/2016/05/13/other/tech-vba-guide/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   

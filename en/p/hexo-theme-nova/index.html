@@ -218,86 +218,133 @@
   </header>
   <div class="article-content" itemprop="articleBody">
   
-    <p><a target="_blank" rel="noopener" href="https://travis-ci.org/Jamling/hexo-theme-nova"><img src="https://travis-ci.org/Jamling/hexo-theme-nova.svg?branch=master" alt="Build Status"></a><br><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-theme-nova"><img src="https://img.shields.io/node/v/hexo-theme-nova.svg" alt="node"></a><br><a target="_blank" rel="noopener" href="https://github.com/Jamling/hexo-theme-nova/releases/latest"><img src="https://img.shields.io/github/release/jamling/hexo-theme-nova.svg" alt="GitHub release"></a></p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>The nova is a <a target="_blank" rel="noopener" href="https://hexo.io">hexo</a> theme using swig template aimed to build your github project site conveniently.</p>
+    <p><a target="_blank" rel="noopener" href="https://travis-ci.org/Jamling/hexo-theme-nova"><img src="https://travis-ci.org/Jamling/hexo-theme-nova.svg?branch=master" alt="Build Status"></a><br><a target="_blank" rel="noopener" href="https://github.com/Jamling/hexo-theme-nova/releases/latest"><img src="https://img.shields.io/github/release/jamling/hexo-theme-nova.svg" alt="GitHub release"></a></p>
+<p><a href="./README_zh.md">简体中文</a></p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>The nova is a <a target="_blank" rel="noopener" href="https://hexo.io/">hexo</a> theme using swig template aimed to build your github project site conveniently.</p>
 <p>The theme provided three layouts to demonstrate the page.</p>
 <ol>
 <li><code>post</code> for blog</li>
 <li><code>project</code> for github project page</li>
 <li><code>page</code> for other pages</li>
+<li><code>resume</code> for resume pages</li>
+<li><code>donate</code> for danate pages</li>
 </ol>
 <p>Nova also provided lots of helper scripts as plugins to co-work with the theme, e.g. donate, toc, project side bar.</p>
 <p>Welcome to visit <a href="https://www.ieclipse.cn/en/">My blog</a> (<a href="https://www.ieclipse.cn/en/">https://www.ieclipse.cn/en/</a>) to see the demo.</p>
 <p><a href="https://www.ieclipse.cn/en/demo/">Here is some special feature</a> of Nova.</p>
-<h2 id="ScreenShot"><a href="#ScreenShot" class="headerlink" title="ScreenShot"></a>ScreenShot</h2><p><img src="https://raw.githubusercontent.com/Jamling/hexo-theme-nova/master/screenshots/bootstrap.png" alt="screenshot"></p>
+<h2 id="ScreenShot"><a href="#ScreenShot" class="headerlink" title="ScreenShot"></a>ScreenShot</h2><p><img src="https://dingdi.ieclipse.cn/hexo-theme-nova/screenshots/bootstrap.png" alt="screenshot"></p>
+<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><ul>
+<li>Bootstrap responsible style</li>
+<li>Unique page ID for each page, there is nothing to worry about deploying blog to any site</li>
+<li>Multi-comment components support, include disqus, valine, <del>duoshuo</del>, <del>gentie</del>, <del>changyan</del>, <del>uayn</del> 3rd comment plugin</li>
+<li>Encrypt&#x2F;decrypt for private post</li>
+<li>Page views counter</li>
+<li>Donate</li>
+<li>Frontend code highlight and copy feature</li>
+<li>Mircodata supported</li>
+<li>Multi-language</li>
+<li>Mind style categories, resume</li>
+</ul>
+<h2 id="Change"><a href="#Change" class="headerlink" title="Change"></a>Change</h2><h3 id="V0-3-0"><a href="#V0-3-0" class="headerlink" title="V0.3.0"></a>V0.3.0</h3><ul>
+<li><p>disable baidu search and url-submit，please use <code>hexo-generator-search</code> and <code>hexo-submit-urls-to-search-engine</code> instead</p>
+</li>
+<li><p>Update leancloud article views counter</p>
+<p>Migrate: visit LeanCloud console，update Counter class，update pageId to xid，views to time。</p>
+</li>
+</ul>
+<h3 id="V0-2-0-Huge"><a href="#V0-2-0-Huge" class="headerlink" title="V0.2.0 (Huge)"></a>V0.2.0 (Huge)</h3><ul>
+<li>remove unvailable jiathis share</li>
+<li>remove material colors style (reduce css file size)</li>
+<li>change changyan comment to valine</li>
+<li>change zero clipboard to clipboard.js</li>
+<li>using nesting style</li>
+<li>pass w3c validations</li>
+</ul>
 <h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><p>Cd to your blog root directory</p>
-<pre><code class="bash">$ git <span class="built_in">clone</span> git@github.com:Jamling/hexo-theme-nova.git themes/nova</code></pre>
-<p>Then change site <var>_config.yml</var> set <code>theme: nova</code> to use the theme</p>
-<h2 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h2><p>Nova theme used some 3rd plugins to help. Need to install these plugins in your site/blog before using nova.</p>
+<pre><code class="bash">$ git clone git@github.com:Jamling/hexo-theme-nova.git themes/nova
+</code></pre>
+<p>Then </p>
+<ol>
+<li>Change site <var>_config.yml</var> set <code>theme: nova</code> to use the theme.</li>
+<li>Make _config.nova.yml under blog dir to overide theme default config.</li>
+<li>Install dependencies under blog dir.</li>
+</ol>
+<h2 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h2><p>Nova theme used some 3rd plugins to help. Need to install these plugins in your site&#x2F;blog before using nova.</p>
 <pre><code class="powershell">npm install hexo-renderer-sass --save
 npm install hexo-generator-i18n --save
 
 npm install hexo-generator-github --save
-npm install hexo-filter-highlight --save</code></pre>
+npm install hexo-filter-highlight --save
+npm install cheerio --save // hexo &gt;= 5.0
+npm install hexo-renderer-swig --save // hexo &gt;= 5.0
+</code></pre>
 <ul>
 <li><var>hexo-generator-github</var> is unnecessary if no <code>project</code> layout page in your sources.</li>
 <li><var>hexo-filter-highlight</var> is unnecessary if you don’t like the nova highlight solution.</li>
 </ul>
+<h2 id="Problems"><a href="#Problems" class="headerlink" title="Problems"></a>Problems</h2><p><code>Error: Cannot find module &#39;../../../node_modules/cheerio&#39;</code><br><code>Error: Cannot find module &#39;../../../node_modules/lodash&#39;</code></p>
+<p>Since hexo 5.0, lodash and cheerio is removed from dependencies, please install them.</p>
 <h2 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h2><h3 id="js-css"><a href="#js-css" class="headerlink" title="js_css"></a>js_css</h3><p>Add global js and css sample:</p>
-<pre><code class="yaml"><span class="attr">js_css:</span>
-<span class="attr">- url:</span> <span class="string">//cdn.bootcss.com/jquery/2.2.0/jquery.min.js</span>
-<span class="attr">- url:</span> <span class="string">//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css</span>
-<span class="attr">- url:</span> <span class="string">css/nova.css</span></code></pre>
+<pre><code class="yaml">js_css:
+- url: //cdn.bootcss.com/jquery/2.2.0/jquery.min.js
+- url: //cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css
+- url: css/nova.css
+</code></pre>
 <h3 id="menu"><a href="#menu" class="headerlink" title="menu"></a>menu</h3><p>Configurate the site menus</p>
-<pre><code class="yaml"><span class="attr">menu:</span>
-<span class="attr">- name:</span> <span class="string">home</span>
-<span class="attr">  url:</span> <span class="string">/</span>
-<span class="attr">- name:</span> <span class="string">project</span>
-<span class="attr">  url:</span> <span class="string">/p/</span>
-<span class="attr">- name:</span> <span class="string">category</span>
-<span class="attr">  url:</span> <span class="string">/categories/</span>
-<span class="attr">- name:</span> <span class="string">archive</span>
-<span class="attr">  url:</span> <span class="string">/archives/</span>
-<span class="attr">- name:</span> <span class="string">about</span>
-<span class="attr">  url:</span> <span class="string">/about/</span></code></pre>
+<pre><code class="yaml">menu:
+- name: home
+  url: /
+- name: project
+  url: /p/
+- name: category
+  url: /categories/
+- name: archive
+  url: /archives/
+- name: about
+  url: /about/
+</code></pre>
 <p><strong>the <var>name</var> will be translated.</strong></p>
-<h3 id="post-widgets"><a href="#post-widgets" class="headerlink" title="post widgets"></a>post widgets</h3><pre><code class="yaml"><span class="comment"># post widgets. see layout/post/widget_xxx.swig</span>
-<span class="attr">post_widgets:</span>
-<span class="comment">#  - search</span>
-<span class="bullet">  -</span> <span class="string">category</span>
-<span class="bullet">  -</span> <span class="string">tag</span>
-<span class="bullet">  -</span> <span class="string">archive</span>
-<span class="bullet">  -</span> <span class="string">recent</span>
+<h3 id="post-widgets"><a href="#post-widgets" class="headerlink" title="post widgets"></a>post widgets</h3><pre><code class="yaml"># post widgets. see layout/post/widget_xxx.swig
+post_widgets:
+#  - search
+  - category
+  - tag
+  - archive
+  - recent
 
-<span class="attr">post_widgets_show_count:</span> <span class="literal">true</span>
-<span class="attr">post_widgets_recent_count:</span> <span class="number">5</span></code></pre>
-<h3 id="archive"><a href="#archive" class="headerlink" title="archive"></a>archive</h3><pre><code class="yaml"><span class="comment"># archive</span>
-<span class="attr">archive:</span>
-<span class="attr">  type:</span> <span class="string">yearly</span> <span class="comment">#yearly|monthly(defaut) see list_archives options</span>
-<span class="attr">  order:</span> <span class="bullet">-1</span> <span class="comment"># 1(asc)|-1(desc) defaut desc</span>
-<span class="attr">  format:</span> <span class="string">YYYY</span>
-<span class="attr">  show_count:</span> <span class="literal">false</span> <span class="comment"># true|false, defaut true</span>
-<span class="attr">  amount:</span> <span class="number">5</span> <span class="comment"># amount in post widgets</span></code></pre>
-<h3 id="toc"><a href="#toc" class="headerlink" title="toc"></a>toc</h3><pre><code class="yaml"><span class="comment"># toc</span>
-<span class="attr">toc:</span>
-<span class="attr">  post:</span> <span class="literal">true</span>
-<span class="attr">  project:</span> <span class="literal">true</span>
-<span class="attr">  page:</span> <span class="literal">true</span></code></pre>
-<h3 id="donate"><a href="#donate" class="headerlink" title="donate"></a>donate</h3><pre><code class="yaml"><span class="attr">donate:</span>
-<span class="attr">  enable:</span> <span class="literal">true</span> <span class="comment"># whether enable page donate</span></code></pre>
+post_widgets_show_count: true
+post_widgets_recent_count: 5
+</code></pre>
+<h3 id="archive"><a href="#archive" class="headerlink" title="archive"></a>archive</h3><pre><code class="yaml"># archive
+archive:
+  type: yearly #yearly|monthly(defaut) see list_archives options
+  order: -1 # 1(asc)|-1(desc) defaut desc
+  format: YYYY
+  show_count: false # true|false, defaut true
+  amount: 5 # amount in post widgets
+</code></pre>
+<h3 id="toc"><a href="#toc" class="headerlink" title="toc"></a>toc</h3><pre><code class="yaml"># toc
+toc:
+  post: true
+  project: true
+  page: true
+</code></pre>
+<h3 id="donate"><a href="#donate" class="headerlink" title="donate"></a>donate</h3><pre><code class="yaml">donate:
+  enable: true # whether enable page donate
+</code></pre>
 <p>The donate 2d-code image suggested to more than 200*200px and named to  donate_aliplay.png, donate_wechat.png</p>
 <h3 id="grid-layout-css"><a href="#grid-layout-css" class="headerlink" title="grid layout css"></a>grid layout css</h3><p>Configure the html page layout, the master branch use bootstrap, so the gird css is bootstrap grid css.</p>
-<pre><code class="yaml"><span class="attr">layout:</span>
-<span class="attr">  index:</span> <span class="comment"># index some to post.</span>
-<span class="attr">    main:</span> <span class="string">col-sx-12</span> <span class="string">col-sm-8</span> <span class="string">col-md-9</span> <span class="string">col-lg-9</span>
-<span class="attr">    widgets:</span> <span class="string">col-sx-12</span> <span class="string">col-sm-4</span> <span class="string">col-md-3</span> <span class="string">col-lg-3</span> <span class="string">hidden-xs</span>
-<span class="attr">  page:</span> <span class="comment">#common page</span>
-<span class="attr">    main:</span> <span class="string">col-sx-12</span> <span class="string">col-sm-8</span> <span class="string">col-md-9</span> <span class="string">col-lg-9</span>
-<span class="attr">    toc:</span> <span class="string">col-sx-12</span> <span class="string">col-sm-4</span> <span class="string">col-md-3</span> <span class="string">col-lg-3</span> <span class="string">hidden-xs</span>
-<span class="attr">  p:</span> <span class="comment">#project</span>
-<span class="attr">    sidebar:</span> <span class="string">col-sx-12</span> <span class="string">col-sm-12</span> <span class="string">col-md-2</span> <span class="string">col-lg-2</span>
-<span class="attr">    main:</span> <span class="string">col-sx-12</span> <span class="string">col-sm-8</span> <span class="string">col-md-8</span> <span class="string">col-lg-8</span>
-<span class="attr">    toc:</span> <span class="string">col-sx-2</span> <span class="string">col-sm-2</span> <span class="string">col-md-2</span> <span class="string">col-lg-2</span> <span class="string">hidden-xs</span>
+<pre><code class="yaml">layout:
+  index: # index some to post.
+    main: col-sx-12 col-sm-8 col-md-9 col-lg-9
+    widgets: col-sx-12 col-sm-4 col-md-3 col-lg-3 hidden-xs
+  page: #common page
+    main: col-sx-12 col-sm-8 col-md-9 col-lg-9
+    toc: col-sx-12 col-sm-4 col-md-3 col-lg-3 hidden-xs
+  p: #project
+    sidebar: col-sx-12 col-sm-12 col-md-2 col-lg-2
+    main: col-sx-12 col-sm-8 col-md-8 col-lg-8
+    toc: col-sx-2 col-sm-2 col-md-2 col-lg-2 hidden-xs
 </code></pre>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><h3 id="Layouts"><a href="#Layouts" class="headerlink" title="Layouts"></a>Layouts</h3><p>Please see <a href="https://www.ieclipse.cn/en/p/hexo-theme-nova/layouts.html">nova layouts</a></p>
 <h3 id="Front-matter"><a href="#Front-matter" class="headerlink" title="Front-matter"></a>Front-matter</h3><p>Please see <a href="https://www.ieclipse.cn/en/p/hexo-theme-nova/front-matter.html">nova front-matter</a></p>
@@ -425,7 +472,7 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
           Table Of Contents
         </a></div>
         <div id="toc-body" class="in">
-        <ul class="nav toc-ul"><li><a href="#Introduction">Introduction</a></li><li><a href="#ScreenShot">ScreenShot</a></li><li><a href="#Install">Install</a></li><li><a href="#Dependencies">Dependencies</a></li><li><a href="#Config">Config</a><ul class="nav toc-ul"><li><a href="#js-css">js_css</a></li><li><a href="#menu">menu</a></li><li><a href="#post-widgets">post widgets</a></li><li><a href="#archive">archive</a></li><li><a href="#toc">toc</a></li><li><a href="#donate">donate</a></li><li><a href="#grid-layout-css">grid layout css</a></li></ul></li><li><a href="#Reference">Reference</a><ul class="nav toc-ul"><li><a href="#Layouts">Layouts</a></li><li><a href="#Front-matter">Front-matter</a></li><li><a href="#Helpers">Helpers</a></li><li><a href="#Plugins">Plugins</a></li></ul></li></ul>
+        <ul class="nav toc-ul"><li><a href="#Introduction">Introduction</a></li><li><a href="#ScreenShot">ScreenShot</a></li><li><a href="#Features">Features</a></li><li><a href="#Change">Change</a><ul class="nav toc-ul"><li><a href="#V0-3-0">V0.3.0</a></li><li><a href="#V0-2-0-Huge">V0.2.0 (Huge)</a></li></ul></li><li><a href="#Install">Install</a></li><li><a href="#Dependencies">Dependencies</a></li><li><a href="#Problems">Problems</a></li><li><a href="#Config">Config</a><ul class="nav toc-ul"><li><a href="#js-css">js_css</a></li><li><a href="#menu">menu</a></li><li><a href="#post-widgets">post widgets</a></li><li><a href="#archive">archive</a></li><li><a href="#toc">toc</a></li><li><a href="#donate">donate</a></li><li><a href="#grid-layout-css">grid layout css</a></li></ul></li><li><a href="#Reference">Reference</a><ul class="nav toc-ul"><li><a href="#Layouts">Layouts</a></li><li><a href="#Front-matter">Front-matter</a></li><li><a href="#Helpers">Helpers</a></li><li><a href="#Plugins">Plugins</a></li></ul></li></ul>
         </div>
       </nav>
 </div>

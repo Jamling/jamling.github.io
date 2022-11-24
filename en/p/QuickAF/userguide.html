@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="keywords" content="User Guide">
-  <meta name="description" content="整体框架采用MVC模式，Activity/Fragment为View层。XXXController为Controller层。各种请求及响应模型为model层。">
+  <meta name="description" content="整体框架采用MVC模式，Activity&#x2F;Fragment为View层。XXXController为Controller层。各种请求及响应模型为model层。">
   
 
   <meta name="og:type" content="website">
@@ -14,14 +14,14 @@
   <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
   <meta name="og:title" content="User Guide">
   <meta name="og:url" content="https://www.ieclipse.cn/p/QuickAF/userguide.html">
-  <meta name="og:description" content="整体框架采用MVC模式，Activity/Fragment为View层。XXXController为Controller层。各种请求及响应模型为model层。">
+  <meta name="og:description" content="整体框架采用MVC模式，Activity&#x2F;Fragment为View层。XXXController为Controller层。各种请求及响应模型为model层。">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="Jamling's Blog and Project Site">
   <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
   <meta name="twitter:title" content="User Guide">
   <meta name="twitter:creator" content="@JamlingLi">
-  <meta name="twitter:description" content="整体框架采用MVC模式，Activity/Fragment为View层。XXXController为Controller层。各种请求及响应模型为model层。">
+  <meta name="twitter:description" content="整体框架采用MVC模式，Activity&#x2F;Fragment为View层。XXXController为Controller层。各种请求及响应模型为model层。">
 
   <!-- Canonical links -->
   <link rel="canonical" href="https://www.ieclipse.cn/en/p/QuickAF/userguide.html">
@@ -213,71 +213,74 @@
   </header>
   <div class="article-content" itemprop="articleBody">
   
-    <p>整体框架采用MVC模式，Activity/Fragment为View层。XXXController为Controller层。各种请求及响应模型为model层。</p>
-<h2 id="BaseActivity-BaseFragment"><a href="#BaseActivity-BaseFragment" class="headerlink" title="BaseActivity/BaseFragment"></a>BaseActivity/BaseFragment</h2><p>app中的所有activity，建议都继承BaseActivity，所有Fragment建议都继承BaseFragment。<br>下面对BaseActivity/BaseFragment中的界面初始化方法做简单的说明</p>
+    <p>整体框架采用MVC模式，Activity&#x2F;Fragment为View层。XXXController为Controller层。各种请求及响应模型为model层。</p>
+<h2 id="BaseActivity-x2F-BaseFragment"><a href="#BaseActivity-x2F-BaseFragment" class="headerlink" title="BaseActivity&#x2F;BaseFragment"></a>BaseActivity&#x2F;BaseFragment</h2><p>app中的所有activity，建议都继承BaseActivity，所有Fragment建议都继承BaseFragment。<br>下面对BaseActivity&#x2F;BaseFragment中的界面初始化方法做简单的说明</p>
 <h3 id="初始化窗体"><a href="#初始化窗体" class="headerlink" title="初始化窗体"></a>初始化窗体</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">protected void initWindowFeature() &#123;
     requestWindowFeature(Window.FEATURE_NO_TITLE);
-&#125;</code></pre>
-<p>在此方法中，可以设置界面窗体特征，比如，标题栏是否可以，是否全屏，是否沉浸式效果，是否显示标题栏，是否悬浮标题栏等。<br><em>*BaseFragment无此方法</em></p>
+&#125;
+</code></pre>
+<p>在此方法中，可以设置界面窗体特征，比如，标题栏是否可以，是否全屏，是否沉浸式效果，是否显示标题栏，是否悬浮标题栏等。<br>*<em>BaseFragment无此方法</em></p>
 <h3 id="初始化参数"><a href="#初始化参数" class="headerlink" title="初始化参数"></a>初始化参数</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">protected void initIntent(Bundle bundle) &#123;
 
-&#125;</code></pre>
-<p>在此方法中，可以初始化参数，如activity/fragment恢复状态，或是从其它界面传入的参数。</p>
+&#125;
+</code></pre>
+<p>在此方法中，可以初始化参数，如activity&#x2F;fragment恢复状态，或是从其它界面传入的参数。</p>
 <h3 id="初始化顶部"><a href="#初始化顶部" class="headerlink" title="初始化顶部"></a>初始化顶部</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">protected void initHeaderView() &#123;
     // 
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>比如左边设置一个返回的text view，中间设置一个text view用于显示标题</p>
 <h3 id="初始化主体"><a href="#初始化主体" class="headerlink" title="初始化主体"></a>初始化主体</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">protected void initContentView(View view) &#123;
 
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>初始化界面主体（中间）部分</p>
 <h3 id="初始化底部"><a href="#初始化底部" class="headerlink" title="初始化底部"></a>初始化底部</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">protected void initBottomView() &#123;
 
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p><em>BaseFragment无此方法</em></p>
 <h3 id="初始化数据"><a href="#初始化数据" class="headerlink" title="初始化数据"></a>初始化数据</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">protected void initData() &#123;
 
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h3 id="设置悬浮标题栏"><a href="#设置悬浮标题栏" class="headerlink" title="设置悬浮标题栏"></a>设置悬浮标题栏</h3><p>void cn.ieclipse.af.app.AfActivity.setOverlay(boolean overlay)</p>
 <p>仅在标题栏可见时有效</p>
 <h3 id="设置标题栏可见"><a href="#设置标题栏可见" class="headerlink" title="设置标题栏可见"></a>设置标题栏可见</h3><p>void cn.ieclipse.af.app.AfActivity.setShowTitleBar(boolean showTitleBar)<br>设置是否显示标题栏<br>注：如果在initWindowFeature中设置为不可见，那么initHeaderView将不会被调用</p>
 <h2 id="常用控件"><a href="#常用控件" class="headerlink" title="常用控件"></a>常用控件</h2><h3 id="TitleBar"><a href="#TitleBar" class="headerlink" title="TitleBar"></a>TitleBar</h3><p>TitleBar定义了标题栏的布局。分为左，中，右三块区域。可以根据设计方案对TitleBar进行设置。<br>默认情况下，BaseActivity中对TitleBar的定义为：<br>左侧返回TextView：mTitleLeftView<br>中间标题名称TextView：mTitleTextView<br>一般情况下，只需要设置mTitleTextView的文本即可<br>下面主要是对右侧菜单进行添加</p>
 <ul>
-<li>右侧button为图片:<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<li>右侧button为图片:<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ul>
 <pre><code class="java">mTitleTextView.setText(R.string.house_title);
 mMap = (ImageView) mAbTitleBar.addRightView(R.layout.layout_title_icon);
 mMap.setImageResource(R.drawable.title_map);
 mSearch = (ImageView) mAbTitleBar.addRightView(R.layout.layout_title_icon);
 mSearch.setImageResource(R.drawable.title_search);
-setOnClickListener(mMap, mSearch);</code></pre>
+setOnClickListener(mMap, mSearch);
+</code></pre>
 <ul>
-<li>右侧button为文字:<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<li>右侧button为文字:<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ul>
 <pre><code class="java">mManageTv = (TextView) mTitleBar.addRightView(R.layout.layout_title_text);
-mManageTv.setText(isMyList() ? R.string.note_my_book_title_manage : R.string.note_other_book_title_change);</code></pre>
+mManageTv.setText(isMyList() ? R.string.note_my_book_title_manage : R.string.note_other_book_title_change);
+</code></pre>
 <ul>
-<li>右侧button为图片加文字(比较少)<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<li>右侧button为图片加文字(比较少)<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ul>
-<pre><code class="java">mSubmit = (TextView) mTitleBar.addRightView(R.layout.layout_title_post_submit);</code></pre>
+<pre><code class="java">mSubmit = (TextView) mTitleBar.addRightView(R.layout.layout_title_post_submit);
+</code></pre>
 <p>然后再更改drawableLeft…等.</p>
 <h2 id="AppController"><a href="#AppController" class="headerlink" title="AppController"></a>AppController</h2><p>各个App客户端用到的接口可能不一样，定义的消息码也未必一样。所以需要针对当前接口的特性，编写具体的AppController，AppController继承Aflibrary中的Controller。用于管理接口异步请求task。工程中的所有controller必须继承AppContoller。<br>建议的做法：<br>一个接口对应一个task，一个task对应listener中的两个方法，一个onXXXSuccess方法用于监听task的成功调用，一个onXXXFailure方法用监听task的调用失败</p>
 <h3 id="UploadController"><a href="#UploadController" class="headerlink" title="UploadController"></a>UploadController</h3><p>用于带图片、文件上传的地方</p>
@@ -400,7 +403,7 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
           Table Of Contents
         </a></div>
         <div id="toc-body" class="in">
-        <ul class="nav toc-ul"><li><a href="#BaseActivity-BaseFragment">BaseActivity/BaseFragment</a><ul class="nav toc-ul"><li><a href="#初始化窗体">初始化窗体</a></li><li><a href="#初始化参数">初始化参数</a></li><li><a href="#初始化顶部">初始化顶部</a></li><li><a href="#初始化主体">初始化主体</a></li><li><a href="#初始化底部">初始化底部</a></li><li><a href="#初始化数据">初始化数据</a></li><li><a href="#设置悬浮标题栏">设置悬浮标题栏</a></li><li><a href="#设置标题栏可见">设置标题栏可见</a></li></ul></li><li><a href="#常用控件">常用控件</a><ul class="nav toc-ul"><li><a href="#TitleBar">TitleBar</a></li></ul></li><li><a href="#AppController">AppController</a><ul class="nav toc-ul"><li><a href="#UploadController">UploadController</a></li></ul></li><li><a href="#Model">Model</a><ul class="nav toc-ul"><li><a href="#BaseRequest">BaseRequest</a></li><li><a href="#BasePostRequest">BasePostRequest</a></li></ul></li></ul>
+        <ul class="nav toc-ul"><li><a href="#BaseActivity-x2F-BaseFragment">BaseActivity/BaseFragment</a><ul class="nav toc-ul"><li><a href="#初始化窗体">初始化窗体</a></li><li><a href="#初始化参数">初始化参数</a></li><li><a href="#初始化顶部">初始化顶部</a></li><li><a href="#初始化主体">初始化主体</a></li><li><a href="#初始化底部">初始化底部</a></li><li><a href="#初始化数据">初始化数据</a></li><li><a href="#设置悬浮标题栏">设置悬浮标题栏</a></li><li><a href="#设置标题栏可见">设置标题栏可见</a></li></ul></li><li><a href="#常用控件">常用控件</a><ul class="nav toc-ul"><li><a href="#TitleBar">TitleBar</a></li></ul></li><li><a href="#AppController">AppController</a><ul class="nav toc-ul"><li><a href="#UploadController">UploadController</a></li></ul></li><li><a href="#Model">Model</a><ul class="nav toc-ul"><li><a href="#BaseRequest">BaseRequest</a></li><li><a href="#BasePostRequest">BasePostRequest</a></li></ul></li></ul>
         </div>
       </nav>
 </div>

@@ -222,7 +222,7 @@
 </ul>
 <h2 id="Fragment列表"><a href="#Fragment列表" class="headerlink" title="Fragment列表"></a>Fragment列表</h2><ul>
 <li>Eclipse explorer for Java, Eclipse 标准版及其它Java语言版本下的explorer插件</li>
-<li>Eclipse explorer for CDT, Eclipse IDE for C/C++ Developers下的explorer插件</li>
+<li>Eclipse explorer for CDT, Eclipse IDE for C&#x2F;C++ Developers下的explorer插件</li>
 </ul>
 <h2 id="开发步骤"><a href="#开发步骤" class="headerlink" title="开发步骤"></a>开发步骤</h2><ul>
 <li>新建fragment工程<br>在Eclipse中，新建工程，选择Plugin Development目录下的Fragment Project</li>
@@ -236,9 +236,7 @@
 <li><p>添加fragment依赖<br>如Java版本fragment，添加org.eclipse.jdt.core依赖</p>
 </li>
 <li><p>继承AdapterFactory<br>新建一个类，如JavaAdapterFactory.java并继承Eclipse Explorer插件中的cn.ieclipse.pde.explorer.AdapterFactory类<br>重写getExplorable()方法，返回可以浏览的资源对象<br>示例：</p>
-<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ul>
 <pre><code class="java">@Override
 public IExplorable getExplorable(Object obj) &#123;
@@ -280,13 +278,12 @@ public IExplorable getExplorable(Object obj) &#123;
         &#125;
     &#125;
     return null;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <ul>
 <li>配置fragment扩展<br>在fragment.xml，Extensions选项卡，添加org.eclipse.core.runtime.adapters扩展点<p> ![image](/p/eclipse-explorer/develop/new_extension.png) ![image](/p/eclipse-explorer/develop/add_adapter_factory_extension.png)</p>
 示例：
-<p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ul>
 <pre><code class="xml">&lt;extension
       point=&quot;org.eclipse.core.runtime.adapters&quot;&gt;
@@ -297,14 +294,15 @@ public IExplorable getExplorable(Object obj) &#123;
             type=&quot;cn.ieclipse.pde.explorer.IExplorable&quot;&gt;
       &lt;/adapter&gt;
    &lt;/factory&gt;
-&lt;/extension&gt;</code></pre>
+&lt;/extension&gt;
+</code></pre>
 <ul>
 <li><p>调试<br>对fragment工程Run As-&gt;Eclipse Application进行调试，建议打开”Error log”视图并查看日志。</p>
 </li>
 <li><p>创建feature<br>调试并测试完毕之后，在Eclipse中，新建工程，选择Plugin Development目录下的Feature Project，为fragment工程创建feature。<br>Feature 创建完毕之后，请在cn.ieclipse.pde.explorer.feature工程中Included Features选项卡添加创建的feature，然后对cn.ieclipse.pde.explorer.site重新Build All。Build完之后，对Feature做安装测试并验证</p>
 </li>
 </ul>
-<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><p>在发布之前，应当充分测试fragment/feature/update site，测试通过后，可以选择将此fragment发布到Eclipse marketplace或作为<a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a>的补丁发布。发布成功后，请在<a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a>项目<br>测试及发布成功后，可以选择在fork <a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a> README.md中添加您的fragment插件及作者信息并提交Pull request.</p>
+<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><p>在发布之前，应当充分测试fragment&#x2F;feature&#x2F;update site，测试通过后，可以选择将此fragment发布到Eclipse marketplace或作为<a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a>的补丁发布。发布成功后，请在<a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a>项目<br>测试及发布成功后，可以选择在fork <a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a> README.md中添加您的fragment插件及作者信息并提交Pull request.</p>
 <p>如果作为<a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a>的补丁发布（推荐使用此方式），请<a href="mailto:li.jaming@gmail.com">mail</a>管理员在Eclipse Marketplace上更新fragment。</p>
 
   

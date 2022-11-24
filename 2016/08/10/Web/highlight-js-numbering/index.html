@@ -186,13 +186,15 @@
 <p class="code-caption" data-lang="html" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css&quot;&gt;
-&lt;script src=&quot;//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js&quot;&gt;&lt;/script&gt;</code></pre>
+&lt;script src=&quot;//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
 <p><a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>有许多代码风格，我在这里使用的是github风格。</p>
 <p>然后，在文档加载完毕之后初始化（推荐在<code>&lt;/body&gt;</code>之前的<code>&lt;script&gt;&lt;/script&gt;</code>中引入）</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code" data-hide="false" data-href="https://github.com/Jamling/hexo-theme-nova/blob/master/source/js/hljs.js#L3:L4"><span class="code-caption-label">([hljs.js](https://github.com/Jamling/hexo-theme-nova/blob/master/source/js/hljs.js#L3:L4))</span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="js">// highlight
-hljs.initHighlightingOnLoad();</code></pre>
+hljs.initHighlightingOnLoad();
+</code></pre>
 <p>如此，便可以测试及查看代码高亮结果了。</p>
 <h2 id="添加行号"><a href="#添加行号" class="headerlink" title="添加行号"></a>添加行号</h2><p>添加行号的大致过程是先将代码部分按行切割，得到代码行数。然后生成一个动态的行号列表ul插入到<code>&lt;code&gt;</code>标签之后</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code" data-hide="false" data-href="https://github.com/Jamling/hexo-theme-nova/blob/master/source/js/hljs.js#L51:L59"><span class="code-caption-label">([hljs.js](https://github.com/Jamling/hexo-theme-nova/blob/master/source/js/hljs.js#L51:L59))</span><a class="code-caption-copy">Copy Code</a></p>
@@ -205,7 +207,8 @@ hljs.initHighlightingOnLoad();</code></pre>
   for (i = 1; i &lt;= lines; i++) &#123;
     $numbering.append($(&#39;&lt;li/&gt;&#39;).text(i));
   &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>对于有行号的<code>&lt;code&gt;</code>标签，多了一个<code>has-numbering</code>的样式，行号列表<code>ul</code>的样式为<code>pre-numbering</code>。通过定义<code>has-numbering</code>和<code>pre-numbering</code>css规则来控制行号与代码块的显示及对齐。</p>
 <p class="code-caption" data-lang="css" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code" data-hide="false" data-href="https://github.com/Jamling/hexo-theme-nova/tree/master/source/css/bs/nova.scss"><span class="code-caption-label">([nova.scss](https://github.com/Jamling/hexo-theme-nova/tree/master/source/css/bs/nova.scss))</span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -230,9 +233,10 @@ hljs.initHighlightingOnLoad();</code></pre>
   font-size: 1.0em; /*字体大小与&lt;code&gt;一致*/
   color: #AAA;
   list-style: none;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>比较重要的规则在上面的css中均有注释说明。完整CSS请参考Nova中的样式。</p>
-<p><strong><em>注，具体的样式需根据当前主题做出适当的修改</em></strong></p>
+<p><em><strong>注，具体的样式需根据当前主题做出适当的修改</strong></em></p>
 <h2 id="处理滚动"><a href="#处理滚动" class="headerlink" title="处理滚动"></a>处理滚动</h2><p>添加了行号，为使行号与代码行不错乱，所以要求代码块在横向允许滚动，一般来说显示行号的<code>&lt;code&gt;</code>标签，还需加上以下css规则。</p>
 <p class="code-caption" data-lang="css" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -241,7 +245,8 @@ hljs.initHighlightingOnLoad();</code></pre>
     overflow-y: auto;
     word-break: keep-all;
     white-space: pre;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h2 id="支持响应式"><a href="#支持响应式" class="headerlink" title="支持响应式"></a>支持响应式</h2><p>由于在小屏幕上，尤其是手机浏览器，横向滚动并不好操作，所以，在移动设备上通过媒体查询来设置行号<code>ul</code>不显示，并且覆盖<code>&lt;code&gt;</code>的样式规则为允许断行。</p>
 <p class="code-caption" data-lang="css" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -254,12 +259,14 @@ hljs.initHighlightingOnLoad();</code></pre>
     word-wrap: break-world !important;
     white-space: pre-wrap !important;
   &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h2 id="支持更多的代码语言"><a href="#支持更多的代码语言" class="headerlink" title="支持更多的代码语言"></a>支持更多的代码语言</h2><p><a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>默认支持大部分主流程序语言的高亮，但是也有小部分语言是不支持的，比如<a href="http://www.ieclipse.cn/2016/05/13/tech-vba-guide/">Excel VBA基础实例教程</a>中贴了不少VB代码，需要额外加载<a target="_blank" rel="noopener" href="https://highlightjs.org/">highlight.js</a>的VBScript.js才能高亮，则需要引入额外的高亮脚本<code>vbscript.js</code>即可。如下所示：</p>
 <p class="code-caption" data-lang="html" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="html">&lt;script src=&quot;http://cdn.bootcss.com/highlight.js/9.1.0/languages/vbscript.min.js&quot; &gt;&lt;/script&gt;</code></pre>
-<h2 id="代码复制"><a href="#代码复制" class="headerlink" title="代码复制"></a>代码复制</h2><p>对于复制这块，比较好的解决方案是引入jquery的zclip插件（<a target="_blank" rel="noopener" href="https://github.com/zeroclipboard/jquery.zeroclipboard）。如果用户选择的不仅仅是代码部分，则需要加入css规则来控制行号不被选择。">https://github.com/zeroclipboard/jquery.zeroclipboard）。如果用户选择的不仅仅是代码部分，则需要加入css规则来控制行号不被选择。</a></p>
+<pre><code class="html">&lt;script src=&quot;http://cdn.bootcss.com/highlight.js/9.1.0/languages/vbscript.min.js&quot; &gt;&lt;/script&gt;
+</code></pre>
+<h2 id="代码复制"><a href="#代码复制" class="headerlink" title="代码复制"></a>代码复制</h2><p>对于复制这块，比较好的解决方案是引入jquery的zclip插件（<a target="_blank" rel="noopener" href="https://github.com/zeroclipboard/jquery.zeroclipboard%EF%BC%89%E3%80%82%E5%A6%82%E6%9E%9C%E7%94%A8%E6%88%B7%E9%80%89%E6%8B%A9%E7%9A%84%E4%B8%8D%E4%BB%85%E4%BB%85%E6%98%AF%E4%BB%A3%E7%A0%81%E9%83%A8%E5%88%86%EF%BC%8C%E5%88%99%E9%9C%80%E8%A6%81%E5%8A%A0%E5%85%A5css%E8%A7%84%E5%88%99%E6%9D%A5%E6%8E%A7%E5%88%B6%E8%A1%8C%E5%8F%B7%E4%B8%8D%E8%A2%AB%E9%80%89%E6%8B%A9%E3%80%82">https://github.com/zeroclipboard/jquery.zeroclipboard）。如果用户选择的不仅仅是代码部分，则需要加入css规则来控制行号不被选择。</a></p>
 <p class="code-caption" data-lang="css" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="css">.pre-numbering &#123;
@@ -267,7 +274,8 @@ hljs.initHighlightingOnLoad();</code></pre>
   -moz-user-select: none; /* Firefox all */
   -ms-user-select: none; /* IE 10+ */
   user-select: none;  /* Likely future */ 
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>syntax-highlighting-with-highlightjs: <a target="_blank" rel="noopener" href="http://idodev.co.uk/2013/03/syntax-highlighting-with-highlightjs/">http://idodev.co.uk/2013/03/syntax-highlighting-with-highlightjs/</a><br>jquery.zeroclipboard: <a target="_blank" rel="noopener" href="https://github.com/zeroclipboard/jquery.zeroclipboard">https://github.com/zeroclipboard/jquery.zeroclipboard</a><br>Hexo高级教程之代码高亮: <a href="http://www.ieclipse.cn/2016/07/18/Web/Hexo-dev-highlight/">http://www.ieclipse.cn/2016/07/18/Web/Hexo-dev-highlight/</a></p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/08/10/Web/highlight-js-numbering/](https://www.ieclipse.cn/2016/08/10/Web/highlight-js-numbering/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   

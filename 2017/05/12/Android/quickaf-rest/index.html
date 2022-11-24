@@ -183,7 +183,7 @@
     <p><a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>中使用Volley进行网络连接，使用Gson来解析响应数据。为了更方便地执行REST API网络请求，<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>对Volley+Gson进行了简单的封装。</p>
 <span id="more"></span>
 
-<h2 id="接口请求与响应设计"><a href="#接口请求与响应设计" class="headerlink" title="接口请求与响应设计"></a>接口请求与响应设计</h2><h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p>REST接口是基于HTTP协议的，一个接口的定义包含请求地址，请求方法，请求参数，响应信息。请求地址为一个URL，由基地址和接口路径和查询字符串组成。比如<a target="_blank" rel="noopener" href="http://127.0.0.1:8080/meituan/api/1.0/user/login?token=xxxxxxx">http://127.0.0.1:8080/meituan/api/1.0/user/login?token=xxxxxxx</a>; <a target="_blank" rel="noopener" href="http://127.0.0.1:8080/meituan/api/1.0/">http://127.0.0.1:8080/meituan/api/1.0/</a> 为基地址，一套api，其基地址是相同的。1.0为接口版本，user/login为接口路径，token=xxxxxx为查询字符串。请求方法有GET/POST/PUT/DELETE等。<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>将接口地址抽象为IUrl接口</p>
+<h2 id="接口请求与响应设计"><a href="#接口请求与响应设计" class="headerlink" title="接口请求与响应设计"></a>接口请求与响应设计</h2><h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p>REST接口是基于HTTP协议的，一个接口的定义包含请求地址，请求方法，请求参数，响应信息。请求地址为一个URL，由基地址和接口路径和查询字符串组成。比如<a target="_blank" rel="noopener" href="http://127.0.0.1:8080/meituan/api/1.0/user/login?token=xxxxxxx">http://127.0.0.1:8080/meituan/api/1.0/user/login?token=xxxxxxx</a>; <a target="_blank" rel="noopener" href="http://127.0.0.1:8080/meituan/api/1.0/">http://127.0.0.1:8080/meituan/api/1.0/</a> 为基地址，一套api，其基地址是相同的。1.0为接口版本，user&#x2F;login为接口路径，token&#x3D;xxxxxx为查询字符串。请求方法有GET&#x2F;POST&#x2F;PUT&#x2F;DELETE等。<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>将接口地址抽象为IUrl接口</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">public interface IUrl &#123;
@@ -208,8 +208,9 @@
      * @param query query string, it a request parameter of string format usually
      */
     void setQuery(String query);
-&#125;</code></pre>
-<h3 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h3><p>一般来说接口的请求比较简单，如果请求是application/json，将请求对象转为json字符串即可。但是实际当中，仍然有许多接口使用的还是application/x-www-form-urlencoded，这种方式简单，而且适用于网页。<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>默认以后者来提交http请求，并且支持以下两种请求格式</p>
+&#125;
+</code></pre>
+<h3 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h3><p>一般来说接口的请求比较简单，如果请求是application&#x2F;json，将请求对象转为json字符串即可。但是实际当中，仍然有许多接口使用的还是application&#x2F;x-www-form-urlencoded，这种方式简单，而且适用于网页。<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>默认以后者来提交http请求，并且支持以下两种请求格式</p>
 <ol>
 <li>键值对，这也是早期使用最多的，通过Map来存储请求参数。</li>
 <li>对象，通过反射机制将对象的属性及属性值转化对键值对，具有很高的可扩展性，一旦接口有变更，比如接口要求添加uuid参数，可以非常方便的修改请求基类来满足业务需求，<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>建议使用这种方式来封装请求。</li>
@@ -222,7 +223,8 @@
     public String secret;
     public String version;
     public String uuid;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>具体的业务API只需要继承BaseRequest，然后添加具体的业务请求参数，比如注册的请求</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -230,7 +232,8 @@
     public String phone;
     public String code;
     public String password;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>对于GET请求，将请求对象转为查询字符串附在url中，对于POST请求，则将请求对象写入body中。</p>
 <h3 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h3><p>REST API接口响应一般包含状态码(status)，提示信息(message)及业务对象(data)，需要经过json工具将其转为对象，这个对象我们姑且称之为接口对象。伪代码如下：</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -239,7 +242,8 @@
   int code;//业务响应状态码
   String message;//业务响应信息，比如投票失败
   Object data;//业务响应对象，比如登录，返回的是一个User对象
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>其实业务模块往往关心的只有业务对象(data)，因为对于业务操作不成功的处理，可以在基类中统一处理。在<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>中，将接口对象抽象为IBaseResponse接口。</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -250,7 +254,8 @@
      * @return concrete business data
      */
     Output getData();
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h3 id="请求任务"><a href="#请求任务" class="headerlink" title="请求任务"></a>请求任务</h3><p>如果我们将请求视为输入，响应视为输出，那么对于一次网络请求，使用代码实现的话，就是：</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -258,7 +263,8 @@
   void onSuccess(Output output); // 业务请求成功
   void onError(RestError error);//业务请求失败
   Url getUrl();//业务请求地址
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>在<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>中，已经实现了网络请求与数据解析功能，所以对开发者来说，只需专注于业务接口，即：接口地址，请求对象，返回的业务对象(data)。业务请求成功，在相关的界面填充业务数据(data)，请求失败，给出相应的错误信息(message)。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>有两个执行任务的方法</p>
 <ol>
@@ -283,7 +289,8 @@ new MyListTask().load2List(null, User.class, /*use cache*/true);
 
 // method 3, auto load
 new MyTask().load(null, false);// sampe to load(null, User.class, false)
-new MyListTask().load(null, true);// sampe to load2List(null, User.class, false)</code></pre>
+new MyListTask().load(null, true);// sampe to load2List(null, User.class, false)
+</code></pre>
 <h2 id="进阶操作"><a href="#进阶操作" class="headerlink" title="进阶操作"></a>进阶操作</h2><h3 id="配置接口对象"><a href="#配置接口对象" class="headerlink" title="配置接口对象"></a>配置接口对象</h3><p>接口对象，一个app，一般只有一个。定义如下</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code" data-hide="false" data-title="BaseResponse.java"><span class="code-caption-label">(`BaseResponse.java`)</span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -307,7 +314,8 @@ new MyListTask().load(null, true);// sampe to load2List(null, User.class, false)
     public Output getData() &#123;
       return data;
     &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>然后可以在Application.onCreate()中配置。</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -315,7 +323,8 @@ new MyListTask().load(null, true);// sampe to load2List(null, User.class, false)
 VolleyConfig config = new VolleyConfig.Builder()
     .setBaseResponseClass(WeatherBaseResponse.class)
     .build();
-VolleyManager.init(getApplicationContext(), config);</code></pre>
+VolleyManager.init(getApplicationContext(), config);
+</code></pre>
 <p>如果有喜欢使用OkHttp的同学，还可配置网络连接使用OkHttp，需要写一个OkHttpStack继承自Volley的HurlStack，参考<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>示例app中的OkHttpStack.java.sample。</p>
 <h3 id="接口统一处理"><a href="#接口统一处理" class="headerlink" title="接口统一处理"></a>接口统一处理</h3><p>主要是根据接口业务状态码进行处理。比如定义业务操作成功，响应码为0，那么不为0的时候，就不应该解析业务对象，转入错误分支。</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -341,7 +350,8 @@ VolleyManager.init(getApplicationContext(), config);</code></pre>
         &#125;
         onError(new RestError(error));
     &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h3 id="数据模拟"><a href="#数据模拟" class="headerlink" title="数据模拟"></a>数据模拟</h3><p>接口对象或业务对象类需在mock()方法中给对象填充模拟值，参考示例工程中BaseInfo.java（这个类是所有业务对象模型的基类）。</p>
 <h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><ul>
 <li>所有的请求继承一个BaseRequest，接口定义的全局请求参数在BaseRequest中定义</li>

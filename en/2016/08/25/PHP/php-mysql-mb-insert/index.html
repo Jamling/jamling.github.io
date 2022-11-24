@@ -233,7 +233,8 @@ function randStr($m = 6) &#123;
   return $new_str;
 &#125;
 
-?&gt;</code></pre>
+?&gt;
+</code></pre>
 <h2 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h2><p>以下是4次测试结果， 前3次是100x1000条数据，第4次是1000x1000条数据。</p>
 <p class="code-caption" data-lang="shell" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -246,7 +247,8 @@ count( * )=&gt;100000
 C:\wamp\www\test&gt;..\..\bin\php\php5.3.10\php.exe api.php
 123 s escaped
 count(*)=&gt;1000000
-C:\wamp\www\test&gt;</code></pre>
+C:\wamp\www\test&gt;
+</code></pre>
 <p>** 1000x1000条数据，for循环组装sql的时间大约需要24s **</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>MySQL果然强大哈，在我的工作机中，大约1秒能执行10000条插入操作。我的工作机配置不高，2.4G主频，而且开了一堆的软件包括相当吃内存的Android Studio, Eclipse等。</p>
 <h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><ul>

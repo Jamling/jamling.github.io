@@ -183,7 +183,7 @@
     <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Eclipse 4.6.0 Neon无法启动问题，先占个坑。<br>环境如下：<br>Windows 7 64位, JDK 1.8<br>之前Mars版本安装运行均无问题。</p>
 <span id="more"></span>
 
-<h2 id="无法启动"><a href="#无法启动" class="headerlink" title="无法启动"></a>无法启动</h2><p>前几天收到邮件，Eclipse 4.6 Neon版本将于2016/06/22执行新的Marketplace策略，所以去下载了eclipse新版本：Neon。</p>
+<h2 id="无法启动"><a href="#无法启动" class="headerlink" title="无法启动"></a>无法启动</h2><p>前几天收到邮件，Eclipse 4.6 Neon版本将于2016&#x2F;06&#x2F;22执行新的Marketplace策略，所以去下载了eclipse新版本：Neon。</p>
 <p>下载安装都很顺利，但是在运行的时候，竟然直接跳出一个错误：</p>
 <p class="code-caption" data-lang="apache" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -193,7 +193,8 @@ Eclipse
 An error has occurred. See the log file C:\Users\Jamling\.p2\pool\configuration\1465180452260.log.
 ---------------------------
 确定   
----------------------------</code></pre>
+---------------------------
+</code></pre>
 <p>日志内容如下：</p>
 <p class="code-caption" data-lang="apache" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -220,12 +221,14 @@ java.lang.IllegalStateException: Unable to acquire application service. Ensure t
     at java.lang.reflect.Method.invoke(Method.java:497)
     at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:673)
     at org.eclipse.equinox.launcher.Main.basicRun(Main.java:610)
-    at org.eclipse.equinox.launcher.Main.run(Main.java:1519)</code></pre>
+    at org.eclipse.equinox.launcher.Main.run(Main.java:1519)
+</code></pre>
 <h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>参考：<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/2493415/unable-to-acquire-application-service-error-while-launching-eclipse">http://stackoverflow.com/questions/2493415/unable-to-acquire-application-service-error-while-launching-eclipse</a></p>
-<p>在<var>ecipse.ini</var>或configuration/<var>config.ini</var>中添加<code>org.eclipse.core.runtime</code><br>我尝试了一下，发现在<var>eclipse.ini</var>中添加有效。</p>
+<p>在<var>ecipse.ini</var>或configuration&#x2F;<var>config.ini</var>中添加<code>org.eclipse.core.runtime</code><br>我尝试了一下，发现在<var>eclipse.ini</var>中添加有效。</p>
 <p class="code-caption" data-lang="ini" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="ini">-Dosgi.bundles=org.eclipse.equinox.simpleconfigurator@1:start,org.eclipse.equinox.common@2:start,org.eclipse.equinox.ds@2:start,org.eclipse.equinox.event@2:start,org.eclipse.update.configurator@3:start,org.eclipse.core.runtime@start</code></pre>
+<pre><code class="ini">-Dosgi.bundles=org.eclipse.equinox.simpleconfigurator@1:start,org.eclipse.equinox.common@2:start,org.eclipse.equinox.ds@2:start,org.eclipse.equinox.event@2:start,org.eclipse.update.configurator@3:start,org.eclipse.core.runtime@start
+</code></pre>
 <p>如此，eclipse终于可以成功运行了。</p>
 <h2 id="无法创建workspace"><a href="#无法创建workspace" class="headerlink" title="无法创建workspace"></a>无法创建workspace</h2><p>运行eclipse之后，首次创建workspace，没想到又一个错误：</p>
 <p class="code-caption" data-lang="apache" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -237,7 +240,8 @@ An error has occurred. See the log file
 E:\eclipse\android-neon\workspace\.metadata\.log.
 ---------------------------
 确定   
----------------------------</code></pre>
+---------------------------
+</code></pre>
 <p>日志内容如下：</p>
 <p class="code-caption" data-lang="apache" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -277,7 +281,8 @@ java.lang.NullPointerException
     at java.lang.reflect.Method.invoke(Method.java:497)
     at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:673)
     at org.eclipse.equinox.launcher.Main.basicRun(Main.java:610)
-    at org.eclipse.equinox.launcher.Main.run(Main.java:1519)</code></pre>
+    at org.eclipse.equinox.launcher.Main.run(Main.java:1519)
+</code></pre>
 <p>尝试了许多办法，仍然还是个这错误。</p>
 <p>已向eclipse提问求助。期待他们能够尽量回复给出解决方案</p>
 <h3 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h3><p>原来是eclipse installer的bug，需下载新版本再安装。</p>
@@ -292,15 +297,18 @@ java.lang.NullPointerException
 <p>org.eclipse.equinox.ds (must be started)<br>org.eclipse.equinox.event (must be started)<br>Note that org.eclipse.equinox.ds and org.eclipse.equinox.event must be explicitly started. In your product file, you should have a section like the following:</p>
 <p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="xml"><span class="tag">&lt;<span class="name">configurations</span>&gt;</span>
-   <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">id</span>=<span class="string">"org.eclipse.core.runtime"</span> <span class="attr">autoStart</span>=<span class="string">"true"</span> <span class="attr">startLevel</span>=<span class="string">"2"</span> /&gt;</span>
-   <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">id</span>=<span class="string">"org.eclipse.equinox.ds"</span> <span class="attr">autoStart</span>=<span class="string">"true"</span> <span class="attr">startLevel</span>=<span class="string">"3"</span> /&gt;</span>
-   <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">id</span>=<span class="string">"org.eclipse.equinox.event"</span> <span class="attr">autoStart</span>=<span class="string">"true"</span> <span class="attr">startLevel</span>=<span class="string">"3"</span> /&gt;</span>
-<span class="tag">&lt;/<span class="name">configurations</span>&gt;</span></code></pre>
+<pre><code class="xml">&lt;configurations&gt;
+   &lt;plugin id=&quot;org.eclipse.core.runtime&quot; autoStart=&quot;true&quot; startLevel=&quot;2&quot; /&gt;
+   &lt;plugin id=&quot;org.eclipse.equinox.ds&quot; autoStart=&quot;true&quot; startLevel=&quot;3&quot; /&gt;
+   &lt;plugin id=&quot;org.eclipse.equinox.event&quot; autoStart=&quot;true&quot; startLevel=&quot;3&quot; /&gt;
+&lt;/configurations&gt;
+</code></pre>
 <p>Failure to set the auto-start levels usually manifest as runtime errors like</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code>Unable to acquire application service. Ensure that the org.eclipse.core.runtime bundle is resolved and started (see config.ini)</code></pre><footer><strong>EclipseWiki</strong><cite><a target="_blank" rel="noopener" href="https://wiki.eclipse.org/Eclipse4/RCP/FAQ#Why_won.27t_my_application_start.3F">wiki.eclipse.org/Eclipse4/RCP/FAQ#Why_won.27t_my_application_start.3F</a></cite></footer></blockquote>
+<pre><code>Unable to acquire application service. Ensure that the org.eclipse.core.runtime bundle is resolved and started (see config.ini)
+</code></pre>
+<footer><strong>EclipseWiki</strong><cite><a target="_blank" rel="noopener" href="https://wiki.eclipse.org/Eclipse4/RCP/FAQ#Why_won.27t_my_application_start.3F">wiki.eclipse.org/Eclipse4/RCP/FAQ#Why_won.27t_my_application_start.3F</a></cite></footer></blockquote>
 
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/06/06/Eclipse/Eclipse-neon-stratup/](https://www.ieclipse.cn/2016/06/06/Eclipse/Eclipse-neon-stratup/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   

@@ -188,7 +188,7 @@
 </ul>
 <span id="more"></span>
 
-<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>一般来说，一个App的页面风格应该是统一的，所以一般在BaseActivity/BaseFragment中对TitleBar进行初始化。初始化方法一般是放在<code>initHeaderView()</code>中，如下所示：</p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>一般来说，一个App的页面风格应该是统一的，所以一般在BaseActivity&#x2F;BaseFragment中对TitleBar进行初始化。初始化方法一般是放在<code>initHeaderView()</code>中，如下所示：</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">protected void initHeaderView() &#123;
@@ -205,33 +205,31 @@
         mTitleBar.setBottomDrawable(AppUtils.getColor(this, R.color.divider));
     &#125;
     setOnClickListener(mTitleLeftView);
-&#125;</code></pre>
-<p>通常，BaseActivity/BaseFragment中已经对TitleBar初始化过了，所以子页面的初始化主要的就是控制TitleBar的右侧区域以及设置标题文字。设置标题文字调用<code>setTitle(&quot;titleName&quot;)</code>就可以了，下面主要描述对TitleBar右侧区域的初始化。</p>
+&#125;
+</code></pre>
+<p>通常，BaseActivity&#x2F;BaseFragment中已经对TitleBar初始化过了，所以子页面的初始化主要的就是控制TitleBar的右侧区域以及设置标题文字。设置标题文字调用<code>setTitle(&quot;titleName&quot;)</code>就可以了，下面主要描述对TitleBar右侧区域的初始化。</p>
 <p>TitleBar提供了一个<code>addRightView()</code>的API来添加右侧菜单项。参数类型可以是layout resource或View对象。如此，用户可以自由控制菜单项的属性，比如设置图片，设置文字，添加onClick事件等。</p>
 <ul>
-<li>右侧button为图片：<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<li>右侧button为图片：<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ul>
 <pre><code class="java">mTitleTextView.setText(R.string.house_title);
 mMap = (ImageView) mTitleBar.addRightView(R.layout.layout_title_icon);
 mMap.setImageResource(R.drawable.title_map);
 mSearch = (ImageView) mTitleBar.addRightView(R.layout.layout_title_icon);
 mSearch.setImageResource(R.drawable.title_search);
-setOnClickListener(mMap, mSearch);</code></pre>
+setOnClickListener(mMap, mSearch);
+</code></pre>
 <ul>
-<li>右侧button为文字：<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<li>右侧button为文字：<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ul>
 <pre><code class="java">mManageTv = (TextView) mTitleBar.addRightView(R.layout.layout_title_text);
-mManageTv.setText(isMyList() ? R.string.note_my_book_title_manage : R.string.note_other_book_title_change);</code></pre>
+mManageTv.setText(isMyList() ? R.string.note_my_book_title_manage : R.string.note_other_book_title_change);
+</code></pre>
 <ul>
-<li>右侧button为图片加文字(比较少)<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<li>右侧button为图片加文字(比较少)<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ul>
-<pre><code class="java">mSubmit = (TextView) mTitleBar.addRightView(R.layout.layout_title_post_submit);</code></pre>
+<pre><code class="java">mSubmit = (TextView) mTitleBar.addRightView(R.layout.layout_title_post_submit);
+</code></pre>
 <h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><h3 id="对齐方式"><a href="#对齐方式" class="headerlink" title="对齐方式"></a>对齐方式</h3><p>TitleBar在垂直方向默认是居中对齐的，在水平方向，提供两种对齐方式：左对齐与居中对齐（默认）。可以通过<code>TitleBar#setGravity(int gravity)</code>方法设置TitleBar的对齐方式，一般来说只需要设置水平对齐即可</p>
 <ul>
 <li><code>Gravity.CENTER_HORIZONTAL</code>，水平居中对齐（默认） ，TitleBar中间区域（标题）会居中显示</li>

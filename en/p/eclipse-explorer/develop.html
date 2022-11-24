@@ -223,7 +223,7 @@
 </ul>
 <h2 id="Fragment-list"><a href="#Fragment-list" class="headerlink" title="Fragment list"></a>Fragment list</h2><ul>
 <li>Eclipse explorer for Java, for Eclipse standard or other Java versions</li>
-<li>Eclipse explorer for CDT, for Eclipse IDE for C/C++ Developers</li>
+<li>Eclipse explorer for CDT, for Eclipse IDE for C&#x2F;C++ Developers</li>
 </ul>
 <h2 id="Dev-guide"><a href="#Dev-guide" class="headerlink" title="Dev guide"></a>Dev guide</h2><ul>
 <li>New fragment project<br>Eclipse-&gt;New-&gt;Others-&gt;Plugin Development-&gt;Fragment Project</li>
@@ -282,12 +282,11 @@ public IExplorable getExplorable(Object obj) &#123;
         &#125;
     &#125;
     return null;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <ul>
 <li>Configure extensions<br>In fragment.xml Editor-&gt;Extensions Tab, add org.eclipse.core.runtime.adapters extension.<p> ![image](/p/eclipse-explorer/develop/new_extension.png) ![image](/p/eclipse-explorer/develop/add_adapter_factory_extension.png)</p>
-Sample:
-
-</li>
+Sample:</li>
 </ul>
 <p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -300,14 +299,15 @@ Sample:
             type=&quot;cn.ieclipse.pde.explorer.IExplorable&quot;&gt;
       &lt;/adapter&gt;
    &lt;/factory&gt;
-&lt;/extension&gt;</code></pre>
+&lt;/extension&gt;
+</code></pre>
 <ul>
 <li><p>Debug<br>Debug fragment project as Eclipse Application. “Error log” is suggested to show.</p>
 </li>
 <li><p>Create feature<br>After debuging and testing, New-&gt;Project-&gt;Plugin Development-&gt;Feature Project to create feature.<br>Add the created feature to cn.ieclipse.pde.explorer.feature project Included Features tab. Finally rebuild the cn.ieclipse.pde.explorer.site project then test the feature installation.</p>
 </li>
 </ul>
-<h2 id="Publish"><a href="#Publish" class="headerlink" title="Publish"></a>Publish</h2><p>Make sure the fragment/feature/update site passing the test, then publish fragment to Eclipse marketplace or published as <a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a> fragment. Finally, fork <a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a> and edit the  README.md to insert the fragment and author info and pull a  request.</p>
+<h2 id="Publish"><a href="#Publish" class="headerlink" title="Publish"></a>Publish</h2><p>Make sure the fragment&#x2F;feature&#x2F;update site passing the test, then publish fragment to Eclipse marketplace or published as <a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a> fragment. Finally, fork <a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a> and edit the  README.md to insert the fragment and author info and pull a  request.</p>
 <p>Published as <a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a> fragment is recommended, please <a href="mailto:li.jaming@gmail.com">mail</a> to update the information on Eclipse Marketplace.</p>
 
   

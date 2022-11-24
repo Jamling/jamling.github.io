@@ -198,7 +198,8 @@
 VolleyConfig config = new VolleyConfig.Builder()
     .setBaseResponseClass(WeatherBaseResponse.class)
     .build();
-VolleyManager.init(getApplicationContext(), config);</code></pre>
+VolleyManager.init(getApplicationContext(), config);
+</code></pre>
 <p>如果有喜欢使用OkHttp的同学，还可配置网络连接使用OkHttp。</p>
 <h3 id="接口响应对象"><a href="#接口响应对象" class="headerlink" title="接口响应对象"></a>接口响应对象</h3><p><code>WeatherBaseResponse.class</code>为接口返回对象class，一般一套接口标准中只有唯一的一个。接口返回的对象一般包含状态码(status)，提示信息(message)及业务对象（data）。对于业务模块，只需要关心业务对象(data)即可，框架中还可以定义拦截器，如果接口请求成功，业务操作不成功，则不会进入业务逻辑层。</p>
 <h2 id="接口API"><a href="#接口API" class="headerlink" title="接口API"></a>接口API</h2><p>在这里，使用的是<a target="_blank" rel="noopener" href="http://apistore.baidu.com/apiworks/servicedetail/112.html">百度api store中的天气api</a>，其中了其中的两个API</p>
@@ -208,17 +209,14 @@ VolleyManager.init(getApplicationContext(), config);</code></pre>
 </ol>
 <h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p>根据接口API，先把模型定义出来</p>
 <ul>
-<li>查询城市列表请求模型<code>BaseRequest</code><br>非常简单，只有一个cityname的请求参数<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<li>查询城市列表请求模型<code>BaseRequest</code><br>非常简单，只有一个cityname的请求参数<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ul>
 <pre><code class="java">public class BaseRequest implements Serializable &#123;
     public String cityname;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <ul>
-<li>查询城市列表响应 <code>List&lt;CityInfo&gt;</code><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<li>查询城市列表响应 <code>List&lt;CityInfo&gt;</code><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ul>
 <pre><code class="java">public class CityInfo implements Serializable &#123;
     public String province_cn;
@@ -226,12 +224,11 @@ VolleyManager.init(getApplicationContext(), config);</code></pre>
     public String name_cn;
     public String name_en;
     public String area_id;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <ul>
 <li>查询城市天气详情请求 <code>CityInfo</code>，与查询城市列表响应返回的列表项一样</li>
-<li>查询城市天气详情响应 <code>WeatherInfo</code><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<li>查询城市天气详情响应 <code>WeatherInfo</code><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ul>
 <pre><code class="java">public class WeatherInfo implements Serializable &#123;
     public String city;
@@ -251,7 +248,8 @@ VolleyManager.init(getApplicationContext(), config);</code></pre>
     public String WS;
     public String sunrise;
     public String sunset;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h2 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h2><p><a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>中通过Controller来执行API请求，一般来说，一个界面对应一个Controller，在Controller中提供了页面操作需要调用的接口API。在Controller内部，每个网络请求都是一个Task。所有的Controller须继承自<code>cn.ieclipse.af.volley.Controller</code>。通常，一个App只有一套接口API，所以，可以定义一个<code>AppController</code>继承自<code>cn.ieclipse.af.volley.Controller</code>。然后各业务模块的Controller继承<code>AppController</code>并向外提供一个回调Listener。</p>
 <h3 id="Task"><a href="#Task" class="headerlink" title="Task"></a>Task</h3><p>Task是Controller中的内部类，用于执行网络请求。可以<code>AppController</code>中定义一个<code>AppTask</code>并继承自父Controller中的<code>RequestObjectTask</code>，来执行一些常用的操作，比如API调用错误处理，给接口API统一添加appKey等http头等。这样子各个业务模块只需专注模块业务即可。<br>Task的调用有两种方式</p>
 <ul>
@@ -263,7 +261,7 @@ VolleyManager.init(getApplicationContext(), config);</code></pre>
 <li>onXXXSuccess(response model)<br>当接口API调用成功时的回调，接口API的响应在参数中</li>
 <li>onXXXFailure(error object)<br>当接口API调用失败时的回调，参数为错误对象，比如网络错误等。</li>
 </ul>
-<p><strong><em>注：回调接口中的方法可以在UI线程中调用</em></strong></p>
+<p><em><strong>注：回调接口中的方法可以在UI线程中调用</strong></em></p>
 <h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><p>在Task中可以设置是否允许缓存，相应地，在接口回调中，会标识此次接口调用是来自于缓存还是实时的接口响应。在<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>中，有自己的API缓存，与Volley不太一样，主要是在国内我们的大后端，一般不会在HTTP中控制缓存（反正我工作快10年了，没有见过一个后端这么做）。</p>
 <h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>下面来看看<code>WeatherController</code>。</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -364,7 +362,8 @@ VolleyManager.init(getApplicationContext(), config);</code></pre>
         void onLoadWeatherSuccess(WeatherInfo out, boolean fromCache);
 
         void onLoadWeatherError(RestError error);
-    &#125;</code></pre>
+    &#125;
+</code></pre>
 <h2 id="界面"><a href="#界面" class="headerlink" title="界面"></a>界面</h2><p>终于到界面了，先看看<code>WeatherActivity</code>的代码</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -409,7 +408,8 @@ VolleyManager.init(getApplicationContext(), config);</code></pre>
             name = et.getHint().toString();
         &#125;
         loadCityList(name, true);
-    &#125;</code></pre>
+    &#125;
+</code></pre>
 <p><code>WeatherActivity</code>实现了<code>WeatherController.WeatherListener</code>回调接口，在初始化时，调用了<code>loadCityList</code>来获取城市列表。</p>
 <p>下面再看4个跟接口API相关的方法。</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -458,7 +458,8 @@ public void onLoadWeatherSuccess(WeatherInfo out, boolean fromCache) &#123;
 @Override
 public void onLoadWeatherError(RestError error) &#123;
     VolleyUtils.showError(tv, error);
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>在回调onXXXSuccess方法中，将模型设置到界面控件中以显示在UI中。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>使用<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>请求REST API非常的方便，开发相当快，重点步骤如下</p>
 <ol>

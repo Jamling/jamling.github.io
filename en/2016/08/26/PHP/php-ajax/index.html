@@ -229,7 +229,8 @@ function my_post() &#123;
     &lt;textarea id=&quot;result&quot; class=&quot;col-xs-12&quot;&gt;&lt;/textarea&gt;
   &lt;/div&gt;
  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
+&lt;/html&gt;
+</code></pre>
 <p>请求数据如下图所示：</p>
 <img src="/2016/08/26/PHP/php-ajax/request.png" class="">
 
@@ -254,7 +255,8 @@ $ret = array(
   &#39;posts&#39; =&gt; $_POST
 );
 exit(json_encode($ret));
-?&gt;</code></pre>
+?&gt;
+</code></pre>
 <p>接口传过来的json对象，直接会被PHP解析为关联数据。比如<var>$data</var>就是一个array。</p>
 <p>响应结果如下图所示：</p>
 <img src="/2016/08/26/PHP/php-ajax/response.png" class="">

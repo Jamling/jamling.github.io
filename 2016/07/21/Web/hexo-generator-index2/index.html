@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="keywords" content="Web,Hexo,Node.js,Hexo带过滤功能的首页插件">
-  <meta name="description" content="简介带过滤功能的Hexo首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类/标签的功能。比如，在首页只显示指定分类下面的文章列表。">
+  <meta name="description" content="简介带过滤功能的Hexo首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类&#x2F;标签的功能。比如，在首页只显示指定分类下面的文章列表。">
    
 
   <meta name="og:type" content="article">
@@ -14,14 +14,14 @@
   <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
   <meta name="og:title" content="Hexo带过滤功能的首页插件">
   <meta name="og:url" content="https://www.ieclipse.cn/2016/07/21/Web/hexo-generator-index2/">
-  <meta name="og:description" content="简介带过滤功能的Hexo首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类/标签的功能。比如，在首页只显示指定分类下面的文章列表。">
+  <meta name="og:description" content="简介带过滤功能的Hexo首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类&#x2F;标签的功能。比如，在首页只显示指定分类下面的文章列表。">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="静勤居">
   <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
   <meta name="twitter:title" content="Hexo带过滤功能的首页插件">
   <meta name="twitter:creator" content="@JamlingLi">
-  <meta name="twitter:description" content="简介带过滤功能的Hexo首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类/标签的功能。比如，在首页只显示指定分类下面的文章列表。">
+  <meta name="twitter:description" content="简介带过滤功能的Hexo首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类&#x2F;标签的功能。比如，在首页只显示指定分类下面的文章列表。">
 
   <!-- Canonical links -->
   <link rel="canonical" href="https://www.ieclipse.cn/2016/07/21/Web/hexo-generator-index2/index.html">
@@ -180,12 +180,13 @@
   </header>
   <div class="article-content" itemprop="articleBody">
   
-    <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>带过滤功能的<a target="_blank" rel="noopener" href="http://hexo.io/">Hexo</a>首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类/标签的功能。比如，在首页只显示指定分类下面的文章列表。</p>
+    <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>带过滤功能的<a target="_blank" rel="noopener" href="http://hexo.io/">Hexo</a>首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类&#x2F;标签的功能。比如，在首页只显示指定分类下面的文章列表。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Jamling/hexo-generator-index2/blob/master/README.md">English</a></p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="bash">$ npm install hexo-generator-index2 --save
-$ npm uninstall hexo-generator-index --save</code></pre>
+$ npm uninstall hexo-generator-index --save
+</code></pre>
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p class="code-caption" data-lang="yaml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="yaml">index_generator:
@@ -194,15 +195,16 @@ $ npm uninstall hexo-generator-index --save</code></pre>
   include:
     - category Web # 只包含Web分类下的文章
   exclude:
-    - tag Hexo # 不包含标签为Hexo的文章</code></pre>
+    - tag Hexo # 不包含标签为Hexo的文章
+</code></pre>
 <ul>
-<li><strong>per_page</strong>: Posts displayed per page. (0 = disable pagination)</li>
+<li><strong>per_page</strong>: Posts displayed per page. (0 &#x3D; disable pagination)</li>
 <li><strong>order_by</strong>: Posts order. (Order by date descending by default)</li>
 <li><strong>include</strong>: Posts filter include option</li>
 <li><strong>exclude</strong>: Posts filter exclude option</li>
 </ul>
 <p>除了include和exclude，其它如<var>per_page</var>和<var>order_by</var>都是原有的官方首页生成器选项，不必更改。</p>
-<p>Include/exclude 选项格式为<code>属性 值</code>（注意，属性与值中间有个英文的空格），可选的属性有：</p>
+<p>Include&#x2F;exclude 选项格式为<code>属性 值</code>（注意，属性与值中间有个英文的空格），可选的属性有：</p>
 <ul>
 <li>category: 文章分类</li>
 <li>tag: 文章标签</li>

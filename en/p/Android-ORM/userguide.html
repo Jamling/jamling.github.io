@@ -217,13 +217,12 @@ Android studioCopy Code">
   <div class="article-content" itemprop="articleBody">
   
     <h2 id="Add-library-dependencies"><a href="#Add-library-dependencies" class="headerlink" title="Add library dependencies"></a>Add library dependencies</h2><ul>
-<li>Android studio<p class="code-caption" data-lang="gradle" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<li>Android studio<p class="code-caption" data-lang="gradle" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ul>
 <pre><code class="gradle">dependencies &#123;
     compile &#39;cn.ieclipse.aorm:aorm-core:1.1.2&#39;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <ul>
 <li>Eclipse<br>Install <a target="_blank" rel="noopener" href="https://marketplace.eclipse.org/content/android-adt-extensions">Android ADT-extension</a> plugin</li>
 </ul>
@@ -232,22 +231,23 @@ Android studioCopy Code">
 
 <pre><code class="java">Aorm.enableDebug(true);// Enable/Disable debug to print SQL
 Aorm.allowExtend(false);// Disable model bean extend
-Aorm.setExactInsertOrUpdate(true);//Set use actuarial insertOrUpdate. If true, will query the object from database, insert if not exists or update if exist, otherwise insert when PK is 0 or update when PK more than 0 (maybe update fail)</code></pre>
+Aorm.setExactInsertOrUpdate(true);//Set use actuarial insertOrUpdate. If true, will query the object from database, insert if not exists or update if exist, otherwise insert when PK is 0 or update when PK more than 0 (maybe update fail)
+</code></pre>
 <h2 id="Create-model-bean"><a href="#Create-model-bean" class="headerlink" title="Create model bean"></a>Create model bean</h2><h3 id="Add-mapping-table"><a href="#Add-mapping-table" class="headerlink" title="Add mapping table"></a>Add mapping table</h3><p>Add @Table annotation in your java bean</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">@Table(name = &quot;student&quot;)
 public class Student implements java.ioSerializable&#123;
     //...
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h3 id="Add-column-mapping"><a href="#Add-column-mapping" class="headerlink" title="Add column mapping"></a>Add column mapping</h3><p>Add @Column annotation for java bean field</p>
 <ul>
-<li>pk (primary key field)<br>id is true<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<li>pk (primary key field)<br>id is true<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ul>
 <pre><code class="java">@Column(name = &quot;_id&quot;, id = true)
-private long id;</code></pre>
+private long id;
+</code></pre>
 <ul>
 <li>normal field</li>
 </ul>
@@ -257,14 +257,14 @@ private long id;</code></pre>
 private String name;
 
 @Column()
-private int age;</code></pre>
+private int age;
+</code></pre>
 <ul>
-<li>un-mapping field<br>No Aorm annotation assigned.<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<li>un-mapping field<br>No Aorm annotation assigned.<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ul>
-<pre><code class="java">private String address;</code></pre>
-<p>The bean must generate getter/setter methods</p>
+<pre><code class="java">private String address;
+</code></pre>
+<p>The bean must generate getter&#x2F;setter methods</p>
 <h2 id="Create-table"><a href="#Create-table" class="headerlink" title="Create table"></a>Create table</h2><p>If Android ADT-extensions install in Eclipse. Select the java element includes Aorm beans and Open New ORM Provider to generate ContentPrivider in wizards.</p>
 <p>Or create manually.</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -277,51 +277,64 @@ private int age;</code></pre>
         Aorm.createTable(db, Student.class);
         Aorm.createTable(db, Course.class);
     &#125;
-&#125;;</code></pre>
+&#125;;
+</code></pre>
 <h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><h3 id="Query"><a href="#Query" class="headerlink" title="Query"></a>Query</h3><h4 id="Simple-query"><a href="#Simple-query" class="headerlink" title="Simple query"></a>Simple query</h4><p>Query all students</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">Session session = ExampleContentProvider.getSession();
 // simplest query, query all student table.
 Criteria criteria = Criteria.create(Student.class);
-List&lt;Student&gt; list = session.list(Student.class);</code></pre>
+List&lt;Student&gt; list = session.list(Student.class);
+</code></pre>
 <p>Query to cursor, so used it in CursorAdapter</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="java">Cursor c = session.query(criteria);</code></pre>
+<pre><code class="java">Cursor c = session.query(criteria);
+</code></pre>
 <p>Query to single object</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">// query student whose id is 4
-s = session.get(Student.class, 4);</code></pre>
+s = session.get(Student.class, 4);
+</code></pre>
 <h4 id="Restriction-query"><a href="#Restriction-query" class="headerlink" title="Restriction query"></a>Restriction query</h4><p>Equals</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">// add restrication: id equals
-criteria.add(Restrictions.eq(&quot;id&quot;, 1));</code></pre>
+criteria.add(Restrictions.eq(&quot;id&quot;, 1));
+</code></pre>
 <p>Like</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">// add restriction: name like Jamling
-criteria.add(Restrictions.like(&quot;name&quot;, &quot;Jaming&quot;));</code></pre>
+criteria.add(Restrictions.like(&quot;name&quot;, &quot;Jaming&quot;));
+</code></pre>
 <p>Compare</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">// add restriction: age &gt; 30
-criteria.add(Restrictions.gt(&quot;age&quot;, 30));</code></pre>
+criteria.add(Restrictions.gt(&quot;age&quot;, 30));
+</code></pre>
 <p>Order</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>// add order
-criteria.addOrder(Order.asc(&quot;age&quot;));</code></pre><p>Distinct</p>
+criteria.addOrder(Order.asc(&quot;age&quot;));
+</code></pre>
+<p>Distinct</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>// set district
-criteria.setDistinct(true);</code></pre><p>Limit</p>
+criteria.setDistinct(true);
+</code></pre>
+<p>Limit</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>// set limit from row 10 to 20
-criteria.setLimit(10, 10);</code></pre><h4 id="Join-query"><a href="#Join-query" class="headerlink" title="Join query"></a>Join query</h4><p>The Criteria support four join</p>
+criteria.setLimit(10, 10);
+</code></pre>
+<h4 id="Join-query"><a href="#Join-query" class="headerlink" title="Join query"></a>Join query</h4><p>The Criteria support four join</p>
 <ol>
 <li>Left Join</li>
 <li>Left outer join</li>
@@ -337,24 +350,28 @@ criteria.setLimit(10, 10);</code></pre><h4 id="Join-query"><a href="#Join-query"
 List&lt;Object[]&gt; ret = session.listAll(criteria);
 Object[] item = ret.get(0);
 Student s = (Student) item[0];
-Grade g = (Grade) item[1];</code></pre>
+Grade g = (Grade) item[1];
+</code></pre>
 <h3 id="Insert"><a href="#Insert" class="headerlink" title="Insert"></a>Insert</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">Session session = ExampleContentProvider.getSession();
 // insert
 Student s = new Student();
 s.setName(&quot;Jamling&quot;);
-long rowId = session.insert(s, null);</code></pre>
+long rowId = session.insert(s, null);
+</code></pre>
 <h3 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">// update student&#39;s name to Jame whose id is 1
 s.setId(1);
 s.setName(&quot;Jame&quot;);
-int rows = session.update(s);</code></pre>
+int rows = session.update(s);
+</code></pre>
 <h3 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">// delete student whose id is 2
-session.deleteById(Student.class, 2);</code></pre>
+session.deleteById(Student.class, 2);
+</code></pre>
 
   
   </div>

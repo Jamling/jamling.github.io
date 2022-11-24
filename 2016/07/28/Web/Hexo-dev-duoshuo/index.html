@@ -181,7 +181,7 @@
   <div class="article-content" itemprop="articleBody">
   
     <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>Hexo的评论系统在国内一般选用多说或友言，在我的博客主题中，早期使用的是友言，在0.1.0版本之后，我在主题中将其替换成了多说。为什么要替换呢？因为友言对于评论数，转发数等支持不好，而且也不开放API。</p>
-<h2 id="多说配置"><a href="#多说配置" class="headerlink" title="多说配置"></a>多说配置</h2><h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>直接访问<a target="_blank" rel="noopener" href="http://duoshuo.com">http://duoshuo.com</a> 登录，多说支持QQ，微博等多种方式登录。</p>
+<h2 id="多说配置"><a href="#多说配置" class="headerlink" title="多说配置"></a>多说配置</h2><h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>直接访问<a target="_blank" rel="noopener" href="http://duoshuo.com/">http://duoshuo.com</a> 登录，多说支持QQ，微博等多种方式登录。</p>
 <h3 id="创建二级域名"><a href="#创建二级域名" class="headerlink" title="创建二级域名"></a>创建二级域名</h3><p>登录多说后，先创建一个xxx.duoshuo.com的二级域名，比如我创建的ieclipse.duosuo.com，然后在管理台中做相应的配置。因为都是中文，就不详细说了。特别提一下的是以下几点：</p>
 <ul>
 <li>域名白名单，在设置中，在域名白名单中添加本地地址，如127.0.0.1，不然有可能本地测试时，发现评论框不显示。</li>
@@ -233,7 +233,9 @@ function ds_load_comments(selector, options) &#123;
       &#125;);
     &#125;
   &#125;);//end ajax;
-&#125;</code></pre><p>通过在主题中给文章html标签添加data-tkey属性，然后通过ajax请求多说API，将指定thread-key的文章信息返回。当请求成功之后，再将likes, comments等数目更新到相应的html中。</p>
+&#125;
+</code></pre>
+<p>通过在主题中给文章html标签添加data-tkey属性，然后通过ajax请求多说API，将指定thread-key的文章信息返回。当请求成功之后，再将likes, comments等数目更新到相应的html中。</p>
 <h3 id="获取最近访客"><a href="#获取最近访客" class="headerlink" title="获取最近访客"></a>获取最近访客</h3><p>官方有示例，稍做修改即可使用，代码（<code>layout/post/widget_ds_recent_visitors.swig</code>）如下：</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -242,7 +244,9 @@ function ds_load_comments(selector, options) &#123;
     &lt;h3 class=&quot;panel-title&quot;&gt;&#123;&#123; __('widget.recent_visitors') &#125;&#125;&lt;/h3&gt;
   &lt;/div&gt;
   &lt;ul class=&quot;ds-recent-visitors&quot; data-num-items=&quot;12&quot;&gt;&lt;li class=&quot;text-center&quot;&gt;&#123;&#123;__('ajax.loading')&#125;&#125;&lt;/li&gt;&lt;/ul&gt;
-&lt;/div&gt;</code></pre><p>我的博客稍微修改了一下css，点击头像时，可以360旋转头像。</p>
+&lt;/div&gt;
+</code></pre>
+<p>我的博客稍微修改了一下css，点击头像时，可以360旋转头像。</p>
 <h3 id="获取热评文章"><a href="#获取热评文章" class="headerlink" title="获取热评文章"></a>获取热评文章</h3><p>前面的组件，在多说官网文档中心都可以找到示例。本着爱学习，爱折腾，爱装逼的精神，我当然不会仅限于使用别人开发好的组件，怎么也得自己亲自动手，通过多说API来实现一个组件吧。</p>
 <p>html代码（<code>layout/post/widget_ds_hot.swig</code>）如下：</p>
 <p class="code-caption" data-lang="htmlbars" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -254,7 +258,8 @@ function ds_load_comments(selector, options) &#123;
   &lt;div  class=&quot;list-group&quot; id=&quot;top-threads&quot; data-range=&quot;weekly&quot; data-num-items=&quot;5&quot;&gt;
     &lt;div class=&quot;text-center&quot;&gt;&#123;&#123;__('ajax.loading')&#125;&#125;&lt;/div&gt;
   &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+&lt;/div&gt;
+</code></pre>
 <p>跟官方的差不多，只不过，class不是<code>ds-top-threads</code>，如果使用官方的<code>ds-top-threads</code>class那么官方的js脚本会运行，然后生成热评文章列表。由于官方生成的html不好修改样式。所以，我使用自己的脚本来生成html，js代码（<code>layout/post/widget_ds_hot.swig</code>）如下：</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -285,9 +290,10 @@ $.ajax(&#123;
   error: function (xhr, msg, e) &#123;
     ds_top_dom.html(&#39;&lt;div class=&quot;text-center&quot;&gt;&#123;&#123;__("ajax.error")&#125;&#125;&lt;/div&gt;&#39;);
   &#125;
-&#125;);</code></pre>
-<p>组件初始化时，显示<em>加载中…</em>，接口调用成功之后，生成热评文件列表html，接口调用失败，则显示<em>加载失败</em>。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>多说评论: <a target="_blank" rel="noopener" href="http://duoshuo.com">http://duoshuo.com</a><br>Nova主题: <a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-theme-nova">http://github.com/Jamling/hexo-theme-nova</a></p>
+&#125;);
+</code></pre>
+<p>组件初始化时，显示<em>加载中…<em>，接口调用成功之后，生成热评文件列表html，接口调用失败，则显示</em>加载失败</em>。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>多说评论: <a target="_blank" rel="noopener" href="http://duoshuo.com/">http://duoshuo.com</a><br>Nova主题: <a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-theme-nova">http://github.com/Jamling/hexo-theme-nova</a></p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/07/28/Web/Hexo-dev-duoshuo/](https://www.ieclipse.cn/2016/07/28/Web/Hexo-dev-duoshuo/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
   </div>

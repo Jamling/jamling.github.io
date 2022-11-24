@@ -199,7 +199,7 @@ hexo-site #整个工程，对应 hexo-site 仓库
         hexo-generator-i18n #插件2，对应hexo-generator-i18n仓库
 </pre>
 
-<p>其中hexo-site对应Jamling/hexo-site.git，themes/nova目录对应Jamling/hexo-theme-nova.git，node_modules/下的github和i18n插件对应的也是单独的git仓库。</p>
+<p>其中hexo-site对应Jamling&#x2F;hexo-site.git，themes&#x2F;nova目录对应Jamling&#x2F;hexo-theme-nova.git，node_modules&#x2F;下的github和i18n插件对应的也是单独的git仓库。</p>
 <p>为了保持博客源文件的干净，在.gitignore文件中，把themes目录和node_modules目录都加入了。所以，主题与插件的修改，都不会影响到hexo-site仓库。</p>
 <p>在hexo-site目录下，通过<code>git submodule add</code>命令添加主题及插件子模块</p>
 <p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -208,7 +208,8 @@ hexo-site #整个工程，对应 hexo-site 仓库
 git submodule add -f git@github.com:Jamling/hexo-generator-github node_modules/hexo-generator-github
 git submodule add -f git@github.com:Jamling/hexo-generator-i18n node_modules/hexo-generator-i18n
 git submodule add -f git@github.com:Jamling/hexo-generator-index2 node_modules/hexo-generator-index2
-git submodule add -f git@github.com:Jamling/hexo-filter-highlight node_modules/hexo-filter-highlight</code></pre>
+git submodule add -f git@github.com:Jamling/hexo-filter-highlight node_modules/hexo-filter-highlight
+</code></pre>
 <p>加-f选项，是因为themes目录和node_modules目录加入了.gitignore，<code>git submodule add</code>第一个参数为子模块的git仓库地址，第二个参数为子模块的名字。子模块成功添加之后，会在hexo-site目录下创建一个<var>.gitmodules</var>文件。内容如下：</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -220,7 +221,9 @@ git submodule add -f git@github.com:Jamling/hexo-filter-highlight node_modules/h
     url = gh:Jamling/hexo-generator-github
 [submodule &quot;node_modules/hexo-generator-i18n&quot;]
     path = node_modules/hexo-generator-i18n
-    url = gh:Jamling/hexo-generator-i18n</code></pre><p>如果对git submodule命令不熟，可以使用<code>git submodule add --help</code>查看帮助，也可以通过直接修改<var>.gitmodules</var>文件来添加。</p>
+    url = gh:Jamling/hexo-generator-i18n
+</code></pre>
+<p>如果对git submodule命令不熟，可以使用<code>git submodule add --help</code>查看帮助，也可以通过直接修改<var>.gitmodules</var>文件来添加。</p>
 <p>注：将子模块加入<var>.gitignore</var>的好处是主仓库中不会出现子模块需要更新的提示，进一步将主仓库与子模块独立开来，但是缺点就是，如果要更新子模块，须单独cd到子模块目录，手动<code>git pull</code>更新。</p>
 <p>子模块添加成功之后，主仓库与子模块的操作都是独立的。执行<code>git status</code>等操作，只会看到当前仓库的变更，跟其它的仓库（模块）没有任何关系。</p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/06/02/other/tech-git-submodule/](https://www.ieclipse.cn/2016/06/02/other/tech-git-submodule/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>

@@ -220,7 +220,7 @@
   
     <p><a target="_blank" rel="noopener" href="https://github.com/Jamling/SmartQQ4Eclipse"><img src="https://img.shields.io/github/release/jamling/SmartQQ4Eclipse.svg?maxAge=3600" alt="GitHub release"></a><br><a target="_blank" rel="noopener" href="https://marketplace.eclipse.org/content/smartqq"><img src="https://img.shields.io/eclipse-marketplace/v/SmartQQ.svg" alt="Eclipse Marketplace"></a><br><a target="_blank" rel="noopener" href="https://marketplace.eclipse.org/content/smartqq"><img src="https://img.shields.io/eclipse-marketplace/dt/SmartQQ.svg" alt="Eclipse Marketplace"></a></p>
 <h2 id="SmartIM4Eclipse-原SmartQQ4Eclipse"><a href="#SmartIM4Eclipse-原SmartQQ4Eclipse" class="headerlink" title="SmartIM4Eclipse (原SmartQQ4Eclipse)"></a>SmartIM4Eclipse (原SmartQQ4Eclipse)</h2><p><img src="https://raw.githubusercontent.com/Jamling/SmartIM4Eclipse/master/screenshot.gif" alt="screenshot"></p>
-<p>Eclipse上的SmartIM插件，防Boss利器，让你可以在eclipse中使用QQ/微信进行聊天</p>
+<p>Eclipse上的SmartIM插件，防Boss利器，让你可以在eclipse中使用QQ&#x2F;微信进行聊天</p>
 <p>Intellij IDEA上的插件请移步这里: <a target="_blank" rel="noopener" href="https://github.com/Jamling/SmartIM4IntelliJ">https://github.com/Jamling/SmartIM4IntelliJ</a>, 支持所有的Intellij IDE哦，包含Android Studio, WebStrom等</p>
 <h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><ul>
 <li><input checked="" disabled="" type="checkbox"> 收发文本消息</li>
@@ -296,7 +296,9 @@
 <pre><code>Cannot complete the install because one or more required items could not be found.
 Software being installed: SmartQQ Feature 3.1.0.201803020925 (cn.ieclipse.smartqq.feature.feature.group 3.1.0.201803020925)
 Missing requirement: SmartQQ Feature 3.1.0.201803020925 (cn.ieclipse.smartqq.feature.feature.group 3.1.0.201803020925)
-requires &apos;cn.ieclipse.pde.explorer 4.1.0&apos; but it could not be found</code></pre><p>请先安装<a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a>插件或手动添加<a target="_blank" rel="noopener" href="http://dl.ieclipse.cn/updates">http://dl.ieclipse.cn/updates</a> 更新站点后再安装SmartQQ</p>
+requires &#39;cn.ieclipse.pde.explorer 4.1.0&#39; but it could not be found
+</code></pre>
+<p>请先安装<a target="_blank" rel="noopener" href="https://github.com/Jamling/eclipse-explorer">Eclipse Explorer</a>插件或手动添加<a target="_blank" rel="noopener" href="http://dl.ieclipse.cn/updates">http://dl.ieclipse.cn/updates</a> 更新站点后再安装SmartQQ</p>
 <h3 id="Eclipse-Marketplace"><a href="#Eclipse-Marketplace" class="headerlink" title="Eclipse Marketplace"></a>Eclipse Marketplace</h3><ol>
 <li>点击Eclipse-&gt;Help-&gt;Eclipse Marketplace…打开eclipse插件市场</li>
 <li>输入SmartIM搜索</li>
@@ -312,7 +314,7 @@ requires &apos;cn.ieclipse.pde.explorer 4.1.0&apos; but it could not be found</c
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ol>
 <li>点击Windows-&gt;Show view-&gt;Others，找到SmartIM下的SmartQQ或Wechat双击打开SmartQQ或Wechat视图</li>
 <li>点击视图工具栏或菜单栏中的同步图标进行登录</li>
-<li>使用手机QQ/手机微信扫描二维码（SmartQQ视图使用手机QQ，Wechat视图使用手机微信扫一扫）</li>
+<li>使用手机QQ&#x2F;手机微信扫描二维码（SmartQQ视图使用手机QQ，Wechat视图使用手机微信扫一扫）</li>
 <li>验证成功后，等待拉取最近消息，好友及群组列表</li>
 <li>双击SmartIM视图中的好友或群，打开聊天窗口</li>
 <li>输入聊天内容，并按快捷键（默认为Enter）发送聊天信息</li>
@@ -321,21 +323,25 @@ requires &apos;cn.ieclipse.pde.explorer 4.1.0&apos; but it could not be found</c
 <li>如果微信无法生成二维码图片，提示javax.net.ssl.SSLProtocolException: handshake alert:  unrecognized_name，请给eclipse加上<code>-Djsse.enableSNIExtension=false</code>参数，可以在eclipse.ini中加，也可以在eclipse快捷方式目标位置中添加</li>
 </ol>
 <h2 id="进阶使用"><a href="#进阶使用" class="headerlink" title="进阶使用"></a>进阶使用</h2><ol>
-<li>文件发送<ul>
+<li>文件发送</li>
+</ol>
+<ul>
 <li>点击聊天Console菜单（就是那个倒三角）选择 Send File 或 Send Project File 选择文件后发送</li>
 <li>对要发送的文件复制，然后粘贴到聊天窗口，再点击发送超链接，确认发送文件</li>
 </ul>
-</li>
-<li>消息群发<ul>
+<ol start="2">
+<li>消息群发</li>
+</ol>
+<ul>
 <li>在SmartIM视图中，点击Broadcast工具图标（就是那个发射塔的图标），输入内容并选择要发送的好友，群及讨论群，再点击确定</li>
 </ul>
-</li>
-<li>代码评审（未来接入Gerrit）<ul>
+<ol start="3">
+<li>代码评审（未来接入Gerrit）</li>
+</ol>
+<ul>
 <li>在编辑器中右键菜单中点击<code>Code Review</code>，输入对代码的评审注释，选择发送的对象，点击确定发送</li>
 <li>对方接收到代码评审消息，点击代码位置，直接跳转到本地相同的代码位置，然后修改吧。</li>
 </ul>
-</li>
-</ol>
 <h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><p>注：在eclipse中，CR表示Enter键</p>
 <ul>
 <li>发送，默认CR (Enter键)，发送消息</li>

@@ -185,14 +185,19 @@
 <p>将整个仓库打包</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code>git archive -o repo.zip HEAD</code></pre><p>查看自前一次提交修改的文件</p>
+<pre><code>git archive -o repo.zip HEAD
+</code></pre>
+<p>查看自前一次提交修改的文件</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code>git diff --name-only HEAD^</code></pre><p>如果想查看前n次提交的修改，可以将HEAD^改为HEAD~n即可。</p>
+<pre><code>git diff --name-only HEAD^
+</code></pre>
+<p>如果想查看前n次提交的修改，可以将HEAD^改为HEAD~n即可。</p>
 <p>综合运用</p>
 <p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="bash">git archive -o update.zip HEAD $(git diff --name-only HEAD^)</code></pre>
+<pre><code class="bash">git archive -o update.zip HEAD $(git diff --name-only HEAD^)
+</code></pre>
 <p>注：git diff显示的文件需提交到仓库才可以。比如新增加了一个文件，要先commit到仓库，不然会出现错误（git diff 加–cached是否可以解决此错误呢？）。</p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/09/01/other/git-archive-diff/](https://www.ieclipse.cn/2016/09/01/other/git-archive-diff/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   

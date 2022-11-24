@@ -207,9 +207,10 @@ public Element getSingleElementByXPath(Element e,String xpath)&#123;
         // 
     &#125; 
     return ret; 
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>不过，对于多级的Xpath搜索，此方法设置的Xpath NameSpace还是不够，需要自己在Xpath每一级中加入prefix:前导。<br>因为一次性给Xpath设置NameSpace并不起作用，这不能不说是给有NameSapce的XML搜索带来致命的移植与维护的问题。</p>
-<p>总结：<br>1，对没有NameSpace的Xpath child:books/child:book…<br>2, 对prefix 为”” 的 Xpath default:books/default:book…<br>3, 对prefix 不为空的Xpath prefixValue:books/prefixValue:book…. </p>
+<p>总结：<br>1，对没有NameSpace的Xpath child:books&#x2F;child:book…<br>2, 对prefix 为”” 的 Xpath default:books&#x2F;default:book…<br>3, 对prefix 不为空的Xpath prefixValue:books&#x2F;prefixValue:book…. </p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2008/09/29/Java/带NameSpace的xml XPath搜索/](https://www.ieclipse.cn/2008/09/29/Java/带NameSpace的xml XPath搜索/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
   </div>

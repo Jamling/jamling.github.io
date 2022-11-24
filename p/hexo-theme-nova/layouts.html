@@ -221,7 +221,7 @@
 </ol>
 <h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><h3 id="post"><a href="#post" class="headerlink" title="post"></a>post</h3><p>Similar to most hexo theme, nova has index, archive, widgets layout. The difference is nova rewrite archive list helpers and provided two paginator helpers.</p>
 <h3 id="project"><a href="#project" class="headerlink" title="project"></a>project</h3><p>Project layout is aimed to demonstrate the github projects info. For project layout, a <code>gh</code> front-matter is nessary in your page.</p>
-<p>The projects sidebar is configurated in <var>_data</var>/<var>projects.yml</var></p>
+<p>The projects sidebar is configurated in <var>_data</var>&#x2F;<var>projects.yml</var></p>
 <h3 id="page"><a href="#page" class="headerlink" title="page"></a>page</h3><p>The default layout of other pages.</p>
 <p>A <code>type</code> front-matter is used to mark special pages.</p>
 <ul>
@@ -288,7 +288,8 @@ layout
     &lt;/aside&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+&lt;/div&gt;
+</code></pre>
 <p>The <code>layout/index.swig</code> is a special layout for home page.</p>
 <h3 id="page-1"><a href="#page-1" class="headerlink" title="page"></a>page</h3><p>For common page, display content in main container, and TOC in right aside.</p>
 <p>For special page, dispatcher to special layout.</p>
@@ -310,7 +311,8 @@ layout
     &lt;/div&gt;
   &lt;/div&gt;&lt;!--  end row --&gt;
 &lt;/div&gt;
-&#123;%- endif %&#125;</code></pre>
+&#123;%- endif %&#125;
+</code></pre>
 <h3 id="project-1"><a href="#project-1" class="headerlink" title="project"></a>project</h3><p>Projects page, listing repos on github</p>
 <p>Other page, display content in main container, TOC in right aside and nagivation bar in left aside.</p>
 <p><code>layout/project.swig</code> dispatcher:</p>
@@ -328,9 +330,10 @@ layout
   &#123;% endif %&#125;
 &#123;% else %&#125;
   &#123;&#123; partial('project/contents', &#123;&#125; )&#125;&#125;
-&#123;% endif %&#125;</code></pre>
+&#123;% endif %&#125;
+</code></pre>
 <h1 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a>Plugin</h1><p>There are many <a target="_blank" rel="noopener" href="https://hexo.io/plugins">plugins</a> of [hexo], it’s easy to write a plugin under [hexo].<br>Just write a <var>.js</var> under <var>script</var> in your theme.</p>
-<p>here is a sample (<var>script</var>/<var>helpers.js</var>) to write a helper plugin to return page title.</p>
+<p>here is a sample (<var>script</var>&#x2F;<var>helpers.js</var>) to write a helper plugin to return page title.</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="js">// return page title.
@@ -344,7 +347,8 @@ hexo.extend.helper.register(&#39;page_title&#39;, function()&#123;
     ret = p.title;
   &#125;
   return ret;
-&#125;);</code></pre>
+&#125;);
+</code></pre>
 <p>And another sample of display categories in post:</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -363,14 +367,16 @@ hexo.extend.helper.register(&#39;post_cates&#39;, function(post)&#123;
   &#125;);
   ret += &#39;&lt;/ol&gt;&#39;;
   return ret;
-&#125;);</code></pre>
-<p>Use in layout/post.swig</p>
+&#125;);
+</code></pre>
+<p>Use in layout&#x2F;post.swig</p>
 <p class="code-caption" data-lang="htmlbars" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="htmlbars">&lt;footer class=&quot;post-item-footer&quot;&gt;
   &#123;&#123; post_cates(post) &#125;&#125; 
   &#123;&#123; post_tags(post) &#125;&#125;
-&lt;/footer&gt;</code></pre>
+&lt;/footer&gt;
+</code></pre>
 <p>Will output:</p>
 <pre>
     <footer class="post-item-footer">

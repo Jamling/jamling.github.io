@@ -9,7 +9,7 @@
   <meta name="description" content="简介首先上个图
 
 
-Preference控件的目的在于替换Android自带的Preference，在QuickAF中，Preference被设计为控件，可以在layout/Activity中随意使用，不必像自带的Preference，需要配合res/xml/xxx_preference、PreferenceFragment/PreferenceActivity使用。">
+Preference控件的目的在于替换Android自带的Preference，在QuickAF中，Preference被设计为控件，可以在layout&#x2F;Activity中随意使用，不必像自带的Preference，需要配合res&#x2F;xml&#x2F;xxx_preference、PreferenceFragment&#x2F;PreferenceActivity使用。">
    
 
   <meta name="og:type" content="article">
@@ -20,7 +20,7 @@ Preference控件的目的在于替换Android自带的Preference，在QuickAF中�
   <meta name="og:description" content="简介首先上个图
 
 
-Preference控件的目的在于替换Android自带的Preference，在QuickAF中，Preference被设计为控件，可以在layout/Activity中随意使用，不必像自带的Preference，需要配合res/xml/xxx_preference、PreferenceFragment/PreferenceActivity使用。">
+Preference控件的目的在于替换Android自带的Preference，在QuickAF中，Preference被设计为控件，可以在layout&#x2F;Activity中随意使用，不必像自带的Preference，需要配合res&#x2F;xml&#x2F;xxx_preference、PreferenceFragment&#x2F;PreferenceActivity使用。">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="Jamling's Blog and Project Site">
@@ -30,7 +30,7 @@ Preference控件的目的在于替换Android自带的Preference，在QuickAF中�
   <meta name="twitter:description" content="简介首先上个图
 
 
-Preference控件的目的在于替换Android自带的Preference，在QuickAF中，Preference被设计为控件，可以在layout/Activity中随意使用，不必像自带的Preference，需要配合res/xml/xxx_preference、PreferenceFragment/PreferenceActivity使用。">
+Preference控件的目的在于替换Android自带的Preference，在QuickAF中，Preference被设计为控件，可以在layout&#x2F;Activity中随意使用，不必像自带的Preference，需要配合res&#x2F;xml&#x2F;xxx_preference、PreferenceFragment&#x2F;PreferenceActivity使用。">
 
   <!-- Canonical links -->
   <link rel="canonical" href="https://www.ieclipse.cn/en/2016/08/12/Android/quickaf-preference/index.html">
@@ -192,7 +192,7 @@ Preference控件的目的在于替换Android自带的Preference，在QuickAF中�
     <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>首先上个图</p>
 <img src="/2016/08/12/Android/quickaf-preference/preference.png" class="">
 
-<p>Preference控件的目的在于替换Android自带的Preference，在<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>中，Preference被设计为控件，可以在layout/Activity中随意使用，不必像自带的Preference，需要配合res/xml/xxx_preference、PreferenceFragment/PreferenceActivity使用。</p>
+<p>Preference控件的目的在于替换Android自带的Preference，在<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>中，Preference被设计为控件，可以在layout&#x2F;Activity中随意使用，不必像自带的Preference，需要配合res&#x2F;xml&#x2F;xxx_preference、PreferenceFragment&#x2F;PreferenceActivity使用。</p>
 <span id="more"></span>
 
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>先来看看控件属性</p>
@@ -208,16 +208,14 @@ Preference控件的目的在于替换Android自带的Preference，在QuickAF中�
     &lt;attr name=&quot;android:drawableRight&quot;/&gt;
     &lt;attr name=&quot;android:gravity&quot;/&gt;
     &lt;attr name=&quot;android:background&quot;/&gt;
-&lt;/declare-styleable&gt;</code></pre>
+&lt;/declare-styleable&gt;
+</code></pre>
 <p>各属性含义如下：</p>
 <ul>
 <li><code>android:key</code>：持久化时，写入shared preference中的key名称</li>
 <li><code>android:title</code>：主标题，一般是左侧的文字</li>
 <li><code>android:summary</code>：副标题，一般是右则的文字或主标题下方的文字</li>
-<li><code>android:persistent</code>：是否持久化，如果为true，则会将checkbox的值写入shared preference</li>
-</ul>
-<p><em>目前仅支持checkbox写入</em></p>
-<ul>
+<li><code>android:persistent</code>：是否持久化，如果为true，则会将checkbox的值写入shared preference<br><em>目前仅支持checkbox写入</em></li>
 <li><code>android:layout</code>：允许添加一个自定义的layout到当前控件中。</li>
 <li><code>android:icon</code>：设置主标题左侧的图标</li>
 <li><code>android:drawableRight</code>：设置副标题右侧的图标，比如一个〉右箭头</li>
@@ -280,7 +278,8 @@ Preference控件的目的在于替换Android自带的Preference，在QuickAF中�
         android:persistent=&quot;true&quot;
         android:summary=&quot;有描述的&quot;
         android:title=&quot;带图标，带Checkbox的&quot; /&gt;
-&lt;/LinearLayout&gt;</code></pre>
+&lt;/LinearLayout&gt;
+</code></pre>
 <h3 id="Java代码"><a href="#Java代码" class="headerlink" title="Java代码"></a>Java代码</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">Preference p = view.findViewById(R.id.s01);
@@ -288,7 +287,8 @@ p.setOnClickListener(new View.OnClickListener() &#123;
     public void onClick(View v) &#123;
         // TODO something.
     &#125;
-&#125;);</code></pre>
+&#125;);
+</code></pre>
 <h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>QuickAF: <a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">https://github.com/Jamling/QuickAF</a></p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/08/12/Android/quickaf-preference/](https://www.ieclipse.cn/2016/08/12/Android/quickaf-preference/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>

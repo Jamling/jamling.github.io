@@ -5,7 +5,7 @@
   <title>将hexo博客部署到coding.net</title>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="keywords" content="Web,git,Hexo,将hexo博客部署到coding.net">
+  <meta name="keywords" content="Web,Hexo,git,将hexo博客部署到coding.net">
   <meta name="description" content="Hexo博客双线部署的姐妹篇。详细详述如何将hexo博客部署到coding.net">
    
 
@@ -185,7 +185,7 @@
 <h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><p>登录成功后，可以创建项目，在<a href="/2016/08/29/Web/Hexo-deploy-lines/">Hexo博客双线部署</a>中，我介绍的是用户pages，在这里，我介绍项目pages，所以创建的是一个普通项目。创建过程如下所示：</p>
 <img src="/2016/09/08/Web/hexo-coding-pages/create_project.png" class="">
 <p>简单填下项目名称和简介就行。</p>
-<p><strong><em>注意：那个使用README.md文件初始化项目不要勾选</em></strong></p>
+<p><em><strong>注意：那个使用README.md文件初始化项目不要勾选</strong></em></p>
 <h2 id="开启Coding-Pages服务"><a href="#开启Coding-Pages服务" class="headerlink" title="开启Coding Pages服务"></a>开启Coding Pages服务</h2><img src="/2016/09/08/Web/hexo-coding-pages/open_pages.png" class="">
 
 <p>在项目管理台，点击<code>Pages服务</code>选项卡，再点击<code>开启服务</code>按钮来开启服务。服务开启之后，可以绑定域名。</p>
@@ -272,7 +272,8 @@ To git@git.coding.net:Jamling/life.git
 Branch coding-pages set up to track remote branch coding-pages from origin.
 
 Jamling@lijiaming-PC MINGW64 /e/hexo/life (coding-pages)
-$</code></pre>
+$
+</code></pre>
 <h2 id="部署验证"><a href="#部署验证" class="headerlink" title="部署验证"></a>部署验证</h2><p>上面的步骤做完，dns缓存应该也更新好了。使用浏览器访问一下，看一下coding-pages是否正确部署了。</p>
 <img src="/2016/09/08/Web/hexo-coding-pages/url1.png" class="">
 <img src="/2016/09/08/Web/hexo-coding-pages/url2.png" class="">
@@ -359,7 +360,8 @@ Untracked files:
 nothing added to commit but untracked files present (use &quot;git add&quot; to track)
 
 Jamling@lijiaming-PC MINGW64 /e/hexo/life (master)
-$</code></pre>
+$
+</code></pre>
 <p>是否先初始化hexo博客，再checkout coding项目，是不是会简单一些呢？我没有试过，试过的请告诉我一下哈。</p>
 <p>建议将themes目录也加入.gitignore文件。</p>
 <h2 id="Hexo设置"><a href="#Hexo设置" class="headerlink" title="Hexo设置"></a>Hexo设置</h2><p>先安装hexo-deployer-git插件，然后配置</p>
@@ -368,7 +370,8 @@ $</code></pre>
 <pre><code class="yaml">deploy:
   type: git
   repo: 
-    coding: git@git.coding.net:Jamling/life,coding-pages</code></pre>
+    coding: git@git.coding.net:Jamling/life,coding-pages
+</code></pre>
 <p>repo可以写多个，格式为git仓库地址+英文逗号+分支名称，以实现多线部署。</p>
 <h2 id="编写博客"><a href="#编写博客" class="headerlink" title="编写博客"></a>编写博客</h2><p>这就不多说了，装插件，装主题，写内容，这些属于hexo的基本操作。不懂的百度。本地测试通过之后，可以使用<code>hexo g -d</code>部署到coding。</p>
 <h2 id="提交hexo源文件"><a href="#提交hexo源文件" class="headerlink" title="提交hexo源文件"></a>提交hexo源文件</h2><p>博客测试完毕之后，就可以将博客源文件提交到master分支了，这样就算换了电脑，可以从远程仓库获取源代码，又可以愉快地写博客了。</p>
@@ -394,8 +397,9 @@ To git@git.coding.net:Jamling/life.git
    e40018e..0efa99d  master -&gt; master
 
 Jamling@lijiaming-PC MINGW64 /e/hexo/life (master)
-$</code></pre>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>Coding Pages 帮助: <a target="_blank" rel="noopener" href="https://coding.net/help/doc/pages/index.html">https://coding.net/help/doc/pages/index.html</a><br>Hexo博客双线部署: /2016/08/29/Web/Hexo-deploy-lines/</p>
+$
+</code></pre>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>Coding Pages 帮助: <a target="_blank" rel="noopener" href="https://coding.net/help/doc/pages/index.html">https://coding.net/help/doc/pages/index.html</a><br>Hexo博客双线部署: &#x2F;2016&#x2F;08&#x2F;29&#x2F;Web&#x2F;Hexo-deploy-lines&#x2F;</p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/09/08/Web/hexo-coding-pages/](https://www.ieclipse.cn/2016/09/08/Web/hexo-coding-pages/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
   </div>

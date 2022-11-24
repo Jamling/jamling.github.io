@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="keywords" content="奇淫巧技,git,Git删除受管控的文件">
-  <meta name="description" content="在提交代码时，有许多的初学者甚至是老程序员也会犯一个错误，那就是把一些不应该提交到源代码仓库的文件也提交到仓库，比如编译后的输出bin/目录，本地工程的一些设置文件如.idea，.settings。如果一旦提交到远程仓库，那么还将影响到团队中的其他成员。每次更新的时候，都会将别人的设置更新下来，可能会导致编译不通过等诸多问题。一旦这些文件受git管控，那么想删掉它就麻烦了。如果本地删除，再commit和push，那么其他成员更新代码的时候，他本地的也会被删除。对于编译输出的文件还好，再编译一次就可以。如果是环境设置类的文件，那么对方就惨了。会导致许多莫名的错误。">
+  <meta name="description" content="在提交代码时，有许多的初学者甚至是老程序员也会犯一个错误，那就是把一些不应该提交到源代码仓库的文件也提交到仓库，比如编译后的输出bin&#x2F;目录，本地工程的一些设置文件如.idea，.settings。如果一旦提交到远程仓库，那么还将影响到团队中的其他成员。每次更新的时候，都会将别人的设置更新下来，可能会导致编译不通过等诸多问题。一旦这些文件受git管控，那么想删掉它就麻烦了。如果本地删除，再commit和push，那么其他成员更新代码的时候，他本地的也会被删除。对于编译输出的文件还好，再编译一次就可以。如果是环境设置类的文件，那么对方就惨了。会导致许多莫名的错误。">
    
 
   <meta name="og:type" content="article">
@@ -14,14 +14,14 @@
   <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
   <meta name="og:title" content="Git删除受管控的文件">
   <meta name="og:url" content="https://www.ieclipse.cn/2016/08/30/other/git-rm/">
-  <meta name="og:description" content="在提交代码时，有许多的初学者甚至是老程序员也会犯一个错误，那就是把一些不应该提交到源代码仓库的文件也提交到仓库，比如编译后的输出bin/目录，本地工程的一些设置文件如.idea，.settings。如果一旦提交到远程仓库，那么还将影响到团队中的其他成员。每次更新的时候，都会将别人的设置更新下来，可能会导致编译不通过等诸多问题。一旦这些文件受git管控，那么想删掉它就麻烦了。如果本地删除，再commit和push，那么其他成员更新代码的时候，他本地的也会被删除。对于编译输出的文件还好，再编译一次就可以。如果是环境设置类的文件，那么对方就惨了。会导致许多莫名的错误。">
+  <meta name="og:description" content="在提交代码时，有许多的初学者甚至是老程序员也会犯一个错误，那就是把一些不应该提交到源代码仓库的文件也提交到仓库，比如编译后的输出bin&#x2F;目录，本地工程的一些设置文件如.idea，.settings。如果一旦提交到远程仓库，那么还将影响到团队中的其他成员。每次更新的时候，都会将别人的设置更新下来，可能会导致编译不通过等诸多问题。一旦这些文件受git管控，那么想删掉它就麻烦了。如果本地删除，再commit和push，那么其他成员更新代码的时候，他本地的也会被删除。对于编译输出的文件还好，再编译一次就可以。如果是环境设置类的文件，那么对方就惨了。会导致许多莫名的错误。">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="静勤居">
   <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
   <meta name="twitter:title" content="Git删除受管控的文件">
   <meta name="twitter:creator" content="@JamlingLi">
-  <meta name="twitter:description" content="在提交代码时，有许多的初学者甚至是老程序员也会犯一个错误，那就是把一些不应该提交到源代码仓库的文件也提交到仓库，比如编译后的输出bin/目录，本地工程的一些设置文件如.idea，.settings。如果一旦提交到远程仓库，那么还将影响到团队中的其他成员。每次更新的时候，都会将别人的设置更新下来，可能会导致编译不通过等诸多问题。一旦这些文件受git管控，那么想删掉它就麻烦了。如果本地删除，再commit和push，那么其他成员更新代码的时候，他本地的也会被删除。对于编译输出的文件还好，再编译一次就可以。如果是环境设置类的文件，那么对方就惨了。会导致许多莫名的错误。">
+  <meta name="twitter:description" content="在提交代码时，有许多的初学者甚至是老程序员也会犯一个错误，那就是把一些不应该提交到源代码仓库的文件也提交到仓库，比如编译后的输出bin&#x2F;目录，本地工程的一些设置文件如.idea，.settings。如果一旦提交到远程仓库，那么还将影响到团队中的其他成员。每次更新的时候，都会将别人的设置更新下来，可能会导致编译不通过等诸多问题。一旦这些文件受git管控，那么想删掉它就麻烦了。如果本地删除，再commit和push，那么其他成员更新代码的时候，他本地的也会被删除。对于编译输出的文件还好，再编译一次就可以。如果是环境设置类的文件，那么对方就惨了。会导致许多莫名的错误。">
 
   <!-- Canonical links -->
   <link rel="canonical" href="https://www.ieclipse.cn/2016/08/30/other/git-rm/index.html">
@@ -180,28 +180,27 @@
   </header>
   <div class="article-content" itemprop="articleBody">
   
-    <p>在提交代码时，有许多的初学者甚至是老程序员也会犯一个错误，那就是把一些不应该提交到源代码仓库的文件也提交到仓库，比如编译后的输出bin/目录，本地工程的一些设置文件如.idea，.settings。如果一旦提交到远程仓库，那么还将影响到团队中的其他成员。每次更新的时候，都会将别人的设置更新下来，可能会导致编译不通过等诸多问题。一旦这些文件受git管控，那么想删掉它就麻烦了。如果本地删除，再commit和push，那么其他成员更新代码的时候，他本地的也会被删除。对于编译输出的文件还好，再编译一次就可以。如果是环境设置类的文件，那么对方就惨了。会导致许多莫名的错误。</p>
+    <p>在提交代码时，有许多的初学者甚至是老程序员也会犯一个错误，那就是把一些不应该提交到源代码仓库的文件也提交到仓库，比如编译后的输出bin&#x2F;目录，本地工程的一些设置文件如.idea，.settings。如果一旦提交到远程仓库，那么还将影响到团队中的其他成员。每次更新的时候，都会将别人的设置更新下来，可能会导致编译不通过等诸多问题。一旦这些文件受git管控，那么想删掉它就麻烦了。如果本地删除，再commit和push，那么其他成员更新代码的时候，他本地的也会被删除。对于编译输出的文件还好，再编译一次就可以。如果是环境设置类的文件，那么对方就惨了。会导致许多莫名的错误。</p>
 <span id="more"></span>
 
 <p>所以平时提交代码的时候，一定要细心，可以使用<code>git status</code>查看状态。不要一味的<code>git add .</code>添加所有的修改。<code>git add</code>之后，也可以再次<code>git status</code>确认哪些要commit。</p>
 <p>但是如果确实不小心commit并push了不必要的文件，那也没关系。git提供了<code>git rm</code>指令来删除文件。删除方式有两种</p>
 <ol>
-<li>彻底删除文件，从git仓库中和文件系统中都删除。这是默认的方式。对于已经提交远程仓库的eclipse工程的 .bin目录，Android Studio的build目录，可以这么操作。<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<li>彻底删除文件，从git仓库中和文件系统中都删除。这是默认的方式。对于已经提交远程仓库的eclipse工程的 .bin目录，Android Studio的build目录，可以这么操作。<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ol>
-<pre><code class="bash">git rm -r bin/</code></pre>
+<pre><code class="bash">git rm -r bin/
+</code></pre>
 <ol start="2">
-<li>只从git仓库中删除，文件系统中不删除。推荐此种方式。<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<li>只从git仓库中删除，文件系统中不删除。推荐此种方式。<p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ol>
-<pre><code class="bash">git rm -r --cached bin/</code></pre>
+<pre><code class="bash">git rm -r --cached bin/
+</code></pre>
 <p>删除之后，记得在.gitignore文件中添加忽略。</p>
 <p>以下是一个示例，svn转git时，竟然将.svn也提交到git仓库。导致git仓库变得非常大。所以需要递归删除掉.svn目录。</p>
 <p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="bash">find -name &#39;.svn&#39; |xargs git rm -rf [--cache]</code></pre>
+<pre><code class="bash">find -name &#39;.svn&#39; |xargs git rm -rf [--cache]
+</code></pre>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/08/30/other/git-rm/](https://www.ieclipse.cn/2016/08/30/other/git-rm/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
   </div>

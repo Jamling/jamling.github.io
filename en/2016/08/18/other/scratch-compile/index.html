@@ -191,9 +191,7 @@
 </ul>
 <h2 id="下载源代码"><a href="#下载源代码" class="headerlink" title="下载源代码"></a>下载源代码</h2><p>请访问<a target="_blank" rel="noopener" href="https://github.com/LLK/scratch-flash">https://github.com/LLK/scratch-flash</a> 下载Scratch源代码，下载到本地后之后，在我大天朝，先不要急着编译，首先得修改一下编译脚本，不然编译时有些依赖包无法下载。</p>
 <ul>
-<li>下载apache-flex-sdk<br>参考<code>scratch.gradle</code>中ivy仓库配置<p class="code-caption" data-lang="gradle" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<li>下载apache-flex-sdk<br>参考<code>scratch.gradle</code>中ivy仓库配置<p class="code-caption" data-lang="gradle" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ul>
 <pre><code class="gradle">repositories &#123;
     ivy &#123;
@@ -205,7 +203,8 @@
         name &#39;Player Globals&#39;
         artifactPattern &#39;http://fpdownload.macromedia.com/get/flashplayer/installers/archive/[module]/[module][revision].[ext]&#39;
     &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>先下载apache-flex-sdk，版本必须高于4.10.0，这个sdk比较大，有70多M，建议使用其它工具下载好，放到本地。我下载的是4.15.0，具体的下载路径地址为：<a target="_blank" rel="noopener" href="http://archive.apache.org/dist/flex/4.15.0/binaries/apache-flex-sdk-4.15.0-bin.zip">http://archive.apache.org/dist/flex/4.15.0/binaries/apache-flex-sdk-4.15.0-bin.zip</a></p>
 <ul>
 <li><p>下载swfobject<br>下载好swfobject_2_2.zip。同样放入本地服务器上</p>
@@ -231,13 +230,14 @@
 
 &lt;target name=&quot;swfobject-download&quot; depends=&quot;swfobject-check&quot; unless=&quot;swfobject.js.present&quot; 
     description=&quot;Copies SWFObject from code.google.com&quot;&gt;
-
+    
     &lt;mkdir dir=&quot;$&#123;download.dir&#125;&quot;/&gt;
     &lt;get src=&quot;http://127.0.0.1/flex/swfobject_2_2.zip&quot; 
         dest=&quot;$&#123;download.dir&#125;/swfobject_2_2.zip&quot; 
         verbose=&quot;false&quot;/&gt;
     ...
-&lt;/target&gt;</code></pre>
+&lt;/target&gt;
+</code></pre>
 <p>如此这般，编译时，依赖包应该能够全部下载好，如果有不能下载的依赖包，可以查看gradle日志输出，参考上面的方法修改gradle编译脚本或apache-flex-sdk的依赖脚本以保证依赖包能够正确下载。</p>
 <h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>参考官方文档，打开git终端，键入编译命令</p>
 <p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -256,13 +256,14 @@ Skipping tests since no tests exist
 
 BUILD SUCCESSFUL
 
-Total time: 15.691 secs</code></pre>
+Total time: 15.691 secs
+</code></pre>
 <p>以上是我最终编译通过的输出。编译后输出的Scratch2.swf在<code>build/11.6/</code>目录下。</p>
 <h2 id="源代码修改"><a href="#源代码修改" class="headerlink" title="源代码修改"></a>源代码修改</h2><p>具体的源代码修改，请参考我github上fork的scratch-flash项目。地址为<a target="_blank" rel="noopener" href="https://github.com/ieclipsecn/scratch-flash/">https://github.com/ieclipsecn/scratch-flash/</a><br>代码提交在jamling分支下。大致讲下修改的地方</p>
 <ul>
 <li>ifOffline 设置为true，默认是false，然后编译的swf不能好好工作。用离线即可。</li>
 <li>默认语言为zh_CN，但是不起作用，猜测应该要写zh-cn值。</li>
-<li>跨域crossdomain.xml路径修改为<a target="_blank" rel="noopener" href="http://cdn.assets.scratch.mit.edu">http://cdn.assets.scratch.mit.edu</a> ，这个地址允许所有的域访问</li>
+<li>跨域crossdomain.xml路径修改为<a target="_blank" rel="noopener" href="http://cdn.assets.scratch.mit.edu/">http://cdn.assets.scratch.mit.edu</a> ，这个地址允许所有的域访问</li>
 <li>加载媒体库和缩略图片库地址，都改为本地地址，且为相对路径。不然会出现跨域问题，导致编译之后的swf无法加载背景库或角色库。</li>
 </ul>
 <p>修改完毕之后，重新编译，如果有错误，根据日志提示，修正错误后再次编译就好了。编译成功之后，会输出Scratch.swf。我修改的代码，输出为Scratch2.swf。</p>

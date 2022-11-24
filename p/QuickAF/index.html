@@ -225,14 +225,15 @@
 <h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><ul>
 <li>Android Studio</li>
 </ul>
-<pre><code class="gradle"><span class="keyword">dependencies</span> {
-    <span class="keyword">compile</span> <span class="string">'cn.ieclipse.af:af-library:2.1.0'</span>
+<pre><code class="gradle">dependencies {
+    compile &#39;cn.ieclipse.af:af-library:2.1.0&#39;
 }
 android {
-    <span class="comment">// for target api &gt;= 23 (Android 6.0)</span>
-    useLibrary(<span class="string">'org.apache.http.legacy'</span>)
+    // for target api &gt;= 23 (Android 6.0)
+    useLibrary(&#39;org.apache.http.legacy&#39;)
     ...
-}</code></pre>
+}
+</code></pre>
 <h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><p><img src="https://raw.githubusercontent.com/Jamling/QuickAF/master/screenshot/struct.png" alt="architecture"></p>
 <h3 id="library"><a href="#library" class="headerlink" title="library"></a>library</h3><ul>
 <li><a href="component.md">Component</a><ul>

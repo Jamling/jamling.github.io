@@ -388,10 +388,11 @@ page_excerpt@param post the post, if undefined means current pageReturn page exc
 </tr>
 </tbody></table>
 <h3 id="widget-tags"><a href="#widget-tags" class="headerlink" title="widget_tags"></a>widget_tags</h3><p>List tags in post widget.</p>
-<h2 id="list-categories-js"><a href="#list-categories-js" class="headerlink" title="list_categories.js"></a>list_categories.js</h2><h3 id="nova-list-categories"><a href="#nova-list-categories" class="headerlink" title="nova_list_categories"></a>nova_list_categories</h3><p>Inserts a list of all categories.<br>Similar to list_categories, used in <var>post/widget_categories.swig</var><br>Only changed the ul, li, style.</p>
+<h2 id="list-categories-js"><a href="#list-categories-js" class="headerlink" title="list_categories.js"></a>list_categories.js</h2><h3 id="nova-list-categories"><a href="#nova-list-categories" class="headerlink" title="nova_list_categories"></a>nova_list_categories</h3><p>Inserts a list of all categories.<br>Similar to list_categories, used in <var>post&#x2F;widget_categories.swig</var><br>Only changed the ul, li, style.</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="js">&lt;%- nova_list_categories([options]) %&gt;</code></pre>
+<pre><code class="js">&lt;%- nova_list_categories([options]) %&gt;
+</code></pre>
 <table>
 <thead>
 <tr>
@@ -441,10 +442,11 @@ page_excerpt@param post the post, if undefined means current pageReturn page exc
 <td></td>
 </tr>
 </tbody></table>
-<h2 id="list-archives-js"><a href="#list-archives-js" class="headerlink" title="list_archives.js"></a>list_archives.js</h2><h3 id="nova-list-archives"><a href="#nova-list-archives" class="headerlink" title="nova_list_archives"></a>nova_list_archives</h3><p>Inserts a list of archives.<br>Similar to list_archives, used in post/widget_archives.swig<br>The helper adds archive.posts and changes class style.</p>
+<h2 id="list-archives-js"><a href="#list-archives-js" class="headerlink" title="list_archives.js"></a>list_archives.js</h2><h3 id="nova-list-archives"><a href="#nova-list-archives" class="headerlink" title="nova_list_archives"></a>nova_list_archives</h3><p>Inserts a list of archives.<br>Similar to list_archives, used in post&#x2F;widget_archives.swig<br>The helper adds archive.posts and changes class style.</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="js">&lt;%- nova_list_archives([options]) %&gt;</code></pre>
+<pre><code class="js">&lt;%- nova_list_archives([options]) %&gt;
+</code></pre>
 <table>
 <thead>
 <tr>
@@ -500,10 +502,11 @@ page_excerpt@param post the post, if undefined means current pageReturn page exc
 </tr>
 </tbody></table>
 <h3 id="nova-archives"><a href="#nova-archives" class="headerlink" title="nova_archives"></a><del>nova_archives</del></h3><p>Deprecated from 0.2.0, see <code>nova_list_archives</code> helpers and set <code>page</code> style options</p>
-<p>Inserts a list of archives.<br>Similar to list_archives, used in post/archives.swig</p>
+<p>Inserts a list of archives.<br>Similar to list_archives, used in post&#x2F;archives.swig</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="js">&lt;%- nova_archives([options]) %&gt;</code></pre>
+<pre><code class="js">&lt;%- nova_archives([options]) %&gt;
+</code></pre>
 <table>
 <thead>
 <tr>
@@ -561,7 +564,8 @@ page_excerpt@param post the post, if undefined means current pageReturn page exc
 <h2 id="list-posts-js"><a href="#list-posts-js" class="headerlink" title="list_posts.js"></a>list_posts.js</h2><h3 id="nova-list-posts"><a href="#nova-list-posts" class="headerlink" title="nova_list_posts"></a>nova_list_posts</h3><p>Inserts a list of posts. Only changs the class style.</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="js">&lt;%- nova_list_posts([options]) %&gt;</code></pre>
+<pre><code class="js">&lt;%- nova_list_posts([options]) %&gt;
+</code></pre>
 <table>
 <thead>
 <tr>
@@ -597,7 +601,7 @@ page_excerpt@param post the post, if undefined means current pageReturn page exc
 </tr>
 <tr>
 <td><code>amount</code></td>
-<td>The number of posts to display (0 = unlimited)</td>
+<td>The number of posts to display (0 &#x3D; unlimited)</td>
 <td>6</td>
 </tr>
 <tr>
@@ -609,7 +613,8 @@ page_excerpt@param post the post, if undefined means current pageReturn page exc
 <h2 id="paginator-js"><a href="#paginator-js" class="headerlink" title="paginator.js"></a>paginator.js</h2><h3 id="nova-paginator"><a href="#nova-paginator" class="headerlink" title="nova_paginator"></a>nova_paginator</h3><p>Inserts a paginator. Similar to paginator, adds class option for paginator bar.</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="js">&lt;%- paginator(options) %&gt;</code></pre>
+<pre><code class="js">&lt;%- paginator(options) %&gt;
+</code></pre>
 <table>
 <thead>
 <tr>
@@ -621,12 +626,12 @@ page_excerpt@param post the post, if undefined means current pageReturn page exc
 <tbody><tr>
 <td><code>base</code></td>
 <td>Base URL</td>
-<td>/</td>
+<td>&#x2F;</td>
 </tr>
 <tr>
 <td><code>format</code></td>
 <td>URL format</td>
-<td>page/%d/</td>
+<td>page&#x2F;%d&#x2F;</td>
 </tr>
 <tr>
 <td><code>total</code></td>
@@ -651,7 +656,7 @@ page_excerpt@param post the post, if undefined means current pageReturn page exc
 <tr>
 <td><code>space</code></td>
 <td>The space text</td>
-<td>&hellp;</td>
+<td>&amp;hellp;</td>
 </tr>
 <tr>
 <td><code>prev_next</code></td>
@@ -697,7 +702,8 @@ page_excerpt@param post the post, if undefined means current pageReturn page exc
 <h2 id="toc-js"><a href="#toc-js" class="headerlink" title="toc.js"></a>toc.js</h2><h3 id="nova-toc"><a href="#nova-toc" class="headerlink" title="nova_toc"></a>nova_toc</h3><p>Parses all heading tags (h1~h6) in the content and inserts a table of contents.<br>Delete list_number option, add expand and deep option.</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="js">&lt;%- nova_toc(str, [options]) %&gt;</code></pre>
+<pre><code class="js">&lt;%- nova_toc(str, [options]) %&gt;
+</code></pre>
 <table>
 <thead>
 <tr>
@@ -730,7 +736,8 @@ page_excerpt@param post the post, if undefined means current pageReturn page exc
 <p><strong>Examples:</strong></p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="js">&#123;&#123; nova_toc(page.content, &#123;class:'nav toc-ul', deep: 6, expand:6&#125;) &#125;&#125;</code></pre>
+<pre><code class="js">&#123;&#123; nova_toc(page.content, &#123;class:'nav toc-ul', deep: 6, expand:6&#125;) &#125;&#125;
+</code></pre>
 
   
   </div>

@@ -198,12 +198,12 @@ Helpers: The hexo helpers are used in templates to help you insert snippets quic
   </header>
   <div class="article-content" itemprop="articleBody">
   
-    <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>This article in an advanced guide to <a target="_blank" rel="noopener" href="https://hexo.io">hexo</a> your blog, you need to prepare the following knowledges:</p>
+    <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>This article in an advanced guide to <a target="_blank" rel="noopener" href="https://hexo.io/">hexo</a> your blog, you need to prepare the following knowledges:</p>
 <ul>
 <li>Front-end: You must has certain knowledge of Web tech such as javascript, css, html and node.js template.</li>
-<li>Layout: The <a target="_blank" rel="noopener" href="https://hexo.io">hexo</a> layout is the <code>view</code> of site, it’s usually using a template to render.</li>
-<li>Variables: The <a target="_blank" rel="noopener" href="https://hexo.io">hexo</a> variables, such as <var>site.posts</va>, <var>config</var>, <var>page</var>.</li>
-<li>Helpers: The <a target="_blank" rel="noopener" href="https://hexo.io">hexo</a> helpers are used in templates to help you insert snippets quickly.</li>
+<li>Layout: The <a target="_blank" rel="noopener" href="https://hexo.io/">hexo</a> layout is the <code>view</code> of site, it’s usually using a template to render.</li>
+<li>Variables: The <a target="_blank" rel="noopener" href="https://hexo.io/">hexo</a> variables, such as <var>site.posts</va>, <var>config</var>, <var>page</var>.</li>
+<li>Helpers: The <a target="_blank" rel="noopener" href="https://hexo.io/">hexo</a> helpers are used in templates to help you insert snippets quickly.</li>
 </ul>
 <span id="more"></span>
 
@@ -238,7 +238,8 @@ Helpers: The hexo helpers are used in templates to help you insert snippets quic
   &lt;/article&gt;
   &lt;hr&gt;
   &#123;% endfor %&#125;
-&lt;/div&gt;</code></pre>
+&lt;/div&gt;
+</code></pre>
 <p>Index output</p>
 <div style="display:none;">
 <p class="code-caption" data-lang="htmlbars" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -256,40 +257,36 @@ Helpers: The hexo helpers are used in templates to help you insert snippets quic
   &lt;/section&gt;
   &lt;footer class=&quot;post-item-footer&quot;&gt;
     &lt;span class=&quot;glyphicon glyphicon-folder-close&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&amp;nbsp;分类&lt;ol class=&quot;breadcrumb category&quot;&gt;&lt;li&gt;&lt;a class=&quot;&quot; href=&quot;/categories/软件技术/&quot;&gt;软件技术&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a class=&quot;&quot; href=&quot;/categories/软件技术/奇淫巧技/&quot;&gt;奇淫巧技&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt; 
-
+    
   &lt;/footer&gt;
 &lt;/article&gt;
         &lt;hr&gt;
 
 &lt;article class=&quot;article post&quot; itemscope itemtype=&quot;http://schema.org/Article&quot;&gt;
 ...
-&lt;/article&gt;</code></pre>
+&lt;/article&gt;
+</code></pre>
 </div>
 
 <img src="/2016/03/04/Web/Hexo-your-blog/index_post.png" class="">
 
-<h1 id="Theme"><a href="#Theme" class="headerlink" title="Theme"></a>Theme</h1><p>If you used theme published on <a target="_blank" rel="noopener" href="https://hexo.io">https://hexo.io</a>, please see the doc/guide of the theme.</p>
+<h1 id="Theme"><a href="#Theme" class="headerlink" title="Theme"></a>Theme</h1><p>If you used theme published on <a target="_blank" rel="noopener" href="https://hexo.io/">https://hexo.io</a>, please see the doc&#x2F;guide of the theme.</p>
 <p>But, sometimes, you want to make some change. You may edit the theme and make a little change. I think it’s no difficulty for you.</p>
 <p>However, the theme may not meet you. I had want to find one theme to set up the site for my github project once, unfortunately, I found none that help me to build site quickly. So, I decided to create my own theme. And the guide based on <a href="/en/p/hexo-theme-nova">Nova</a>.</p>
 <p>The first thing is to design.</p>
 <h2 id="Design"><a href="#Design" class="headerlink" title="Design"></a>Design</h2><p>The content is divided to three modules</p>
 <ol>
-<li><p>Blog article<br>It’s a little different from other theme, include index, tags, categories, pagination basic function.</p>
-<p>It’s two-columns layout, the main container is the post list or post detail, the aside container is widgets or toc.</p>
-</li>
-<li><p>Project page<br>It’s a sub layout of page, include project docs nagivator sidebar, project list, toc.</p>
-<p>It’s three-columns layout, the main container is page content, and the left aside is project nagivator and the right aside is toc suffix</p>
-</li>
-<li><p>Other page<br>Other fragment page, such as “About me”.</p>
-<p>It’s two-columns layout like blog article.</p>
-</li>
+<li>Blog article<br> It’s a little different from other theme, include index, tags, categories, pagination basic function.</li>
 </ol>
+<p> It’s two-columns layout, the main container is the post list or post detail, the aside container is widgets or toc.<br> 2. Project page<br> It’s a sub layout of page, include project docs nagivator sidebar, project list, toc.</p>
+<p> It’s three-columns layout, the main container is page content, and the left aside is project nagivator and the right aside is toc suffix<br> 3. Other page<br> Other fragment page, such as “About me”.</p>
+<p> It’s two-columns layout like blog article.</p>
 <h2 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h2><p>The layout tree</p>
 <img src="/2016/03/04/Web/Hexo-your-blog/layout.png" class="">
 
 <p>Please see <a href="/en/p/hexo-theme-nova/layouts.html">nova layout</a> for more information.</p>
-<h1 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a>Plugin</h1><p>There are many <a target="_blank" rel="noopener" href="https://hexo.io/plugins">plugins</a> of <a target="_blank" rel="noopener" href="https://hexo.io">hexo</a>, it’s easy to write a plugin under <a target="_blank" rel="noopener" href="https://hexo.io">hexo</a>.<br>Just write a <var>.js</var> under <var>scripts</var> in your theme.</p>
-<p>here is a sample (<var>scripts</var>/<var>helpers.js</var>) to write a helper plugin to return page title.</p>
+<h1 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a>Plugin</h1><p>There are many <a target="_blank" rel="noopener" href="https://hexo.io/plugins">plugins</a> of <a target="_blank" rel="noopener" href="https://hexo.io/">hexo</a>, it’s easy to write a plugin under <a target="_blank" rel="noopener" href="https://hexo.io/">hexo</a>.<br>Just write a <var>.js</var> under <var>scripts</var> in your theme.</p>
+<p>here is a sample (<var>scripts</var>&#x2F;<var>helpers.js</var>) to write a helper plugin to return page title.</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="js">// return page title.
@@ -303,7 +300,8 @@ hexo.extend.helper.register(&#39;page_title&#39;, function(page)&#123;
     ret = p.title;
   &#125;
   return ret;
-&#125;);</code></pre>
+&#125;);
+</code></pre>
 <p>And another sample of display categories in post:</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -325,23 +323,25 @@ hexo.extend.helper.register(&#39;post_cates&#39;, function(post, options)&#123;
   &#125;);
   ret += &#39;&lt;/span&gt;&#39;;
   return ret;
-&#125;);</code></pre>
-<p>Use in layout/post/index.swig</p>
+&#125;);
+</code></pre>
+<p>Use in layout&#x2F;post&#x2F;index.swig</p>
 <p class="code-caption" data-lang="htmlbars" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="htmlbars">&#123;&#123; post_cates(post) &#125;&#125;</code></pre>
+<pre><code class="htmlbars">&#123;&#123; post_cates(post) &#125;&#125;
+</code></pre>
 <p>Will output:</p>
 <pre>
     <span class="post-category"><i class="glyphicon glyphicon-folder-close"></i><span class="hidden-xs">分类</span><a class="category-item" href="/categories/tech/">软件技术</a><a class="category-item" href="/categories/tech/Web/">Web</a></span>
 </pre>
 
-<p>The <a href="/en/p/hexo-theme-nova">Nova</a> rewrite lost of helpers of <a target="_blank" rel="noopener" href="https://hexo.io">hexo</a> to simplify the style. Please visit <a href="/en/p/hexo-theme-nova/helpers.html">Helpers</a> for more informations.</p>
+<p>The <a href="/en/p/hexo-theme-nova">Nova</a> rewrite lost of helpers of <a target="_blank" rel="noopener" href="https://hexo.io/">hexo</a> to simplify the style. Please visit <a href="/en/p/hexo-theme-nova/helpers.html">Helpers</a> for more informations.</p>
 <h1 id="Front-matter"><a href="#Front-matter" class="headerlink" title="Front-matter"></a>Front-matter</h1><blockquote><p>Front-matter is a block of YAML or JSON at the beginning of the file that is used to configure settings for your writings. Front-matter is terminated by three dashes when written in YAML or three semicolons when written in JSON.</p>
 <footer><strong>Docs---</strong><cite><a target="_blank" rel="noopener" href="https://hexo.io/docs/front-matter.html">hexo.io/docs/front-matter.html</a></cite></footer></blockquote>
 
 <p>So you can use it to do lots of things.</p>
 <p>See <a href="/en/p/hexo-theme-nova/front-matter.html">Nova Front-matter</a> for more information.</p>
-<h1 id="Optimize"><a href="#Optimize" class="headerlink" title="Optimize"></a>Optimize</h1><h2 id="I18n"><a href="#I18n" class="headerlink" title="I18n"></a>I18n</h2><p><a href="/en/p/hexo-theme-nova">Nova</a> use <a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-generator-i18n">hexo-generator-i18n</a> to generate multi-languages site. The default languages is Chinese and <var>root</var>/<var>en</var> is Englisth site.</p>
+<h1 id="Optimize"><a href="#Optimize" class="headerlink" title="Optimize"></a>Optimize</h1><h2 id="I18n"><a href="#I18n" class="headerlink" title="I18n"></a>I18n</h2><p><a href="/en/p/hexo-theme-nova">Nova</a> use <a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-generator-i18n">hexo-generator-i18n</a> to generate multi-languages site. The default languages is Chinese and <var>root</var>&#x2F;<var>en</var> is Englisth site.</p>
 <h2 id="Highlight"><a href="#Highlight" class="headerlink" title="Highlight"></a>Highlight</h2><p>It’s a little of failure, code highlight style not work well in <a href="/en/p/hexo-theme-nova">Nova</a>.</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -351,7 +351,8 @@ hljs.initHighlightingOnLoad();
 
 $(&#39;pre code&#39;).each(function(i, block) &#123;
   hljs.highlightBlock(block);
-&#125;);</code></pre>
+&#125;);
+</code></pre>
 <h2 id="Image"><a href="#Image" class="headerlink" title="Image"></a>Image</h2><p>Find all images in article and add fancybox style.</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -372,7 +373,7 @@ $(&#39;pre code&#39;).each(function(i, block) &#123;
   $(this).find(&#39;.fancybox&#39;).each(function()&#123;
     $(this).attr(&#39;rel&#39;, &#39;article&#39; + i);
   &#125;);
-
+  
   $(this).find(&#39;table&#39;).each(function()&#123;
     if (!$(this).hasClass(&#39;table-bordered&#39;)) &#123;
       $(this).addClass(&#39;table&#39;);
@@ -383,14 +384,15 @@ $(&#39;pre code&#39;).each(function(i, block) &#123;
 
 if ($.fancybox)&#123;
   $(&#39;.fancybox&#39;).fancybox();
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h2 id="SEO"><a href="#SEO" class="headerlink" title="SEO"></a>SEO</h2><p><a href="/en/p/hexo-theme-nova">Nova</a> has three helper to enhance the SEO.</p>
 <ul>
 <li>head_title: Generate optimized title string in &lt;title&gt;</li>
-<li>head_keywords: Add tags/categores of post into keywords</li>
+<li>head_keywords: Add tags&#x2F;categores of post into keywords</li>
 <li>head_description: <strong>TODO, plan to add description in Front-matter and add post excerpt to description</strong></li>
 </ul>
-<h2 id="Donate"><a href="#Donate" class="headerlink" title="Donate"></a>Donate</h2><p>partial/donate.swig support donate in article, the 2d-code images is under image folder.</p>
+<h2 id="Donate"><a href="#Donate" class="headerlink" title="Donate"></a>Donate</h2><p>partial&#x2F;donate.swig support donate in article, the 2d-code images is under image folder.</p>
 <ul>
 <li>donate_alipay.png: Donate via Alipay</li>
 <li>donate_wechat.png: Donate via Wechat</li>
@@ -399,14 +401,12 @@ if ($.fancybox)&#123;
 <p>Verification</p>
 <ul>
 <li>File verification<br>  download baidu_xxxx_verify.html and upload to your site root dir to verify.</li>
-<li>HTML tag verification<br>  add <code>&lt;meta name=&quot;baidu-site-verification&quot; content=&quot;xxx&quot; /&gt;</code><br>to your home .html</li>
+<li>HTML tag verification<br>  add <code>&lt;meta name=&quot;baidu-site-verification&quot; content=&quot;xxx&quot; /&gt;</code><br> to your home .html</li>
 <li>CNAME verification<br>  add a cname dns parser to zz.baidu.com</li>
 </ul>
 <h3 id="tools"><a href="#tools" class="headerlink" title="tools"></a>tools</h3><p>After site added, you can do </p>
 <ol>
-<li>Post links<br> I choose post my links automatically using following script<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<li>Post links<br> I choose post my links automatically using following script<p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ol>
 <pre><code class="js">&lt;script&gt;
 (function()&#123;
@@ -415,7 +415,8 @@ if ($.fancybox)&#123;
     var s = document.getElementsByTagName(&quot;script&quot;)[0];
     s.parentNode.insertBefore(bp, s);
 &#125;)();
-&lt;/script&gt;</code></pre>
+&lt;/script&gt;
+</code></pre>
 <ol start="2">
 <li>Update robots<br> Update your robots.txt under your site root dir</li>
 <li>Search in sites<br> Enable and add your script</li>

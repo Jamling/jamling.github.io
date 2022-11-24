@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head>
+  <meta charset="utf-8">
+  <title>Android 13 Zygote fork app流程分析</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Android,Framework,Android 13 Zygote fork app流程分析">
+  <meta name="description" content="最新Android 13源码zygote进程fork app流程分析，普通的app具体是如何fork的">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="Jamling's Blog and Project Site">
+  <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="og:title" content="Android 13 Zygote fork app流程分析">
+  <meta name="og:url" content="https://www.ieclipse.cn/2022/10/30/Android/fwk/zygote_fork_app/">
+  <meta name="og:description" content="最新Android 13源码zygote进程fork app流程分析，普通的app具体是如何fork的">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="Jamling's Blog and Project Site">
+  <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
+  <meta name="twitter:title" content="Android 13 Zygote fork app流程分析">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="最新Android 13源码zygote进程fork app流程分析，普通的app具体是如何fork的">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.ieclipse.cn/en/2022/10/30/Android/fwk/zygote_fork_app/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  
+<script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+
+<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script src="//cdn.staticfile.org/sidr/2.2.1/jquery.sidr.min.js"></script>
+
+
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+
+
+<link rel="stylesheet" href="//cdn.staticfile.org/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+
+
+<link rel="stylesheet" href="//cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+
+
+<script src="//cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@2/distr/fira_code.css">
+
+
+<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+<script src="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+
+
+<link rel="stylesheet" href="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+
+
+<script src="//cdn.staticfile.org/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+
+<link rel="stylesheet" href="/css/nova_font.css">
+
+
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+
+<script src="//unpkg.com/leancloud-storage@4.13.2/dist/av-min.js"></script>
+
+
+<script src="/js/leancloud.js"></script>
+
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Jamling's Blog and Project Site" type="application/atom+xml">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon" />
+  <script>
+        lc.init({
+          appId : 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+          appKey : 'QwGBjKlSYOBtjMa5aTGeO3cb',
+          serverURL : 'https://lc.ieclipse.cn'
+        }, {
+          xid : '388d089d3166aad5a87f09fe58afc6cc',
+          url : 'en/2022/10/30/Android/fwk/zygote_fork_app/',
+          title : 'Android 13 Zygote fork app流程分析'
+        }, {
+          counterTable: '',
+          commentTable: '',
+          donateTable: ''
+        });
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+  <!-- header -->
+  <header id="body-header">
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/en/" id="logo"><img src="/image/logo.png" height="50" alt="logo"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/en/" class="main-nav">Home</a></li><li><a href="/en/p/" class="main-nav">Projects</a></li><li><a href="/en/categories/" class="main-nav">Category</a></li><li><a href="/en/archives/" class="main-nav">Archive</a></li><li><a href="/en/donate/" class="main-nav">Donate</a></li><li><a href="/en/about/" class="main-nav">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
+            <ul class="dropdown-menu animated fadeInDown faster">
+              <li><a href="/2022/10/30/Android/fwk/zygote_fork_app/">简体中文</a></li>
+              
+              <li><a href="/en/2022/10/30/Android/fwk/zygote_fork_app/">English</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+<article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>Path: <a class="category-item" href="/en/">Blog</a><a class="category-item" href="/en/categories/Android/">Android</a><a class="category-item" href="/en/categories/Android/Framework/">Framework</a><a class="category-item">Android 13 Zygote fork app流程分析</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name headline">Android 13 Zygote fork app流程分析</h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">Post at: </span>
+      <time datetime="2022-10-30T14:48:31.000Z" itemprop="datePublished"><time datetime="2022-10-30T14:48:31.000Z">2022-10-30</time></time>
+      </span>
+      
+      <span class="post-share xxx-count" data-xid="388d089d3166aad5a87f09fe58afc6cc" data-title="Android 13 Zygote fork app流程分析" data-url="en/2022/10/30/Android/fwk/zygote_fork_app/">
+        <a href="#share" class="icon nova-share">
+          <span class="hidden-xs">Share</span><span class="jiathis_counter_style"></span>
+        </a>
+        <a href="#comment" class="icon nova-bubbles comment-count">
+          <span class="count"></span><span class="hidden-xs">Comment</span>
+        </a>
+        <!--<a href="#like" class="icon nova-heart2-full"><span class="count" id="changyan_parti_unit"></span><span class="hidden-xs">Like</span></a>-->
+        <a href="#" class="icon nova-eye view-count">
+          <span class="count"></span><span class="hidden-xs">Views</span>
+        </a>
+      </span>
+    </div>
+    <div class="divider"></div>
+    <meta content="2022-10-30T14:48:31.000Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <h2 id="Zygote-Fork-App流程解析"><a href="#Zygote-Fork-App流程解析" class="headerlink" title="Zygote Fork App流程解析"></a>Zygote Fork App流程解析</h2><p>涉及的源码如下</p>
+<p>platform&#x2F;frameworks&#x2F;base&#x2F;core&#x2F;java&#x2F;com&#x2F;android&#x2F;internal&#x2F;os&#x2F;ZygoteServer.java zygote进程启动时，负责创建socket服务端，循环等待来自system server进程（AMS发出）的fork请求</p>
+<p>platform&#x2F;frameworks&#x2F;base&#x2F;core&#x2F;java&#x2F;com&#x2F;android&#x2F;internal&#x2F;os&#x2F;ZygoteConnection.java socket连接，处理接收到的socket指令</p>
+<p>core&#x2F;java&#x2F;android&#x2F;os&#x2F;ZygoteProcess.java 客户端发送fork app的请求类</p>
+<p>services&#x2F;core&#x2F;java&#x2F;com&#x2F;android&#x2F;server&#x2F;wm&#x2F;ActivityTaskSupervisor.java</p>
+<p>services&#x2F;core&#x2F;java&#x2F;com&#x2F;android&#x2F;server&#x2F;wm&#x2F;TaskFragment.java</p>
+<h2 id="ZygoteServer"><a href="#ZygoteServer" class="headerlink" title="ZygoteServer"></a>ZygoteServer</h2><h3 id="ZygoteServer-runSelectLoop"><a href="#ZygoteServer-runSelectLoop" class="headerlink" title="ZygoteServer.runSelectLoop()"></a>ZygoteServer.runSelectLoop()</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">if (pollIndex == 0) &#123;
+    // Zygote server socket
+    // 客户端发送给zygote socket的请求，会创建一个连接，并且加入监听列表
+    ZygoteConnection newPeer = acceptCommandPeer(abiList);
+    peers.add(newPeer);
+    socketFDs.add(newPeer.getFileDescriptor());
+&#125; else if (pollIndex &lt; usapPoolEventFDIndex) &#123;
+    // Session socket accepted from the Zygote server socket
+    // 处理客户端发送的socket消息
+    try &#123;
+        ZygoteConnection connection = peers.get(pollIndex);
+        boolean multipleForksOK = !isUsapPoolEnabled()
+                &amp;&amp; ZygoteHooks.isIndefiniteThreadSuspensionSafe();
+        // 核心的代码在这里，会执行fork，fork成功，mIsForkChild会置为true并且command != null
+        final Runnable command =
+                connection.processCommand(this, multipleForksOK);
+
+        // TODO (chriswailes): Is this extra check necessary?
+        if (mIsForkChild) &#123;
+            // We&#39;re in the child. We should always have a command to run at
+            // this stage if processCommand hasn&#39;t called &quot;exec&quot;.
+            if (command == null) &#123;
+                throw new IllegalStateException(&quot;command == null&quot;);
+            &#125;
+            // 对应ZygoteInit.main()的最后一条语句
+            return command;
+        &#125;
+</code></pre>
+<h2 id="ZygoteConnection"><a href="#ZygoteConnection" class="headerlink" title="ZygoteConnection"></a>ZygoteConnection</h2><p>Socket连接封装成ZygoteConnection用于处理客户端发送的相关命令并返回相应的响应信息。</p>
+<h3 id="ZygoteConnection-processCommand"><a href="#ZygoteConnection-processCommand" class="headerlink" title="ZygoteConnection.processCommand()"></a>ZygoteConnection.processCommand()</h3><p>核心的函数，主要为解析参数，执行fork。关键代码如下：</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">if (parsedArgs.mInvokeWith != null || parsedArgs.mStartChildZygote
+        || !multipleOK || peer.getUid() != Process.SYSTEM_UID) &#123;
+    // Continue using old code for now. TODO: Handle these cases in the other path.
+    // 这是特殊应用（详见之前的分析文章）进程的fork流程，普通app走不到，暂不分析
+    pid = Zygote.forkAndSpecialize(parsedArgs.mUid, parsedArgs.mGid,
+            parsedArgs.mGids, parsedArgs.mRuntimeFlags, rlimits,
+            parsedArgs.mMountExternal, parsedArgs.mSeInfo, parsedArgs.mNiceName,
+            fdsToClose, fdsToIgnore, parsedArgs.mStartChildZygote,
+            parsedArgs.mInstructionSet, parsedArgs.mAppDataDir,
+            parsedArgs.mIsTopApp, parsedArgs.mPkgDataInfoList,
+            parsedArgs.mAllowlistedDataInfoList, parsedArgs.mBindMountAppDataDirs,
+            parsedArgs.mBindMountAppStorageDirs);
+
+    try &#123;
+        if (pid == 0) &#123;
+            // in child
+            zygoteServer.setForkChild();
+
+            zygoteServer.closeServerSocket();
+            IoUtils.closeQuietly(serverPipeFd);
+            serverPipeFd = null;
+
+            return handleChildProc(parsedArgs, childPipeFd,
+                    parsedArgs.mStartChildZygote);
+        &#125; else &#123;
+            // In the parent. A pid &lt; 0 indicates a failure and will be handled in
+            // handleParentProc.
+            IoUtils.closeQuietly(childPipeFd);
+            childPipeFd = null;
+            handleParentProc(pid, serverPipeFd);
+            return null;
+        &#125;
+    &#125; finally &#123;
+        IoUtils.closeQuietly(childPipeFd);
+        IoUtils.closeQuietly(serverPipeFd);
+    &#125;
+&#125; else &#123;
+    // 普通App的fork
+    ZygoteHooks.preFork();
+    // childMain -&gt; specializeAppProcess -&gt; ZygoteInit.init()
+    Runnable result = Zygote.forkSimpleApps(argBuffer,
+            zygoteServer.getZygoteSocketFileDescriptor(),
+            peer.getUid(), Zygote.minChildUid(peer), parsedArgs.mNiceName);
+    if (result == null) &#123; // 父进程
+        // parent; we finished some number of forks. Result is Boolean.
+        // We already did the equivalent of handleParentProc().
+        ZygoteHooks.postForkCommon();
+        // argBuffer contains a command not understood by forksimpleApps.
+        continue;
+    &#125; else &#123;
+        // child; result is a Runnable. 子进程
+        zygoteServer.setForkChild();
+        Zygote.setAppProcessName(parsedArgs, TAG);  // ??? Necessary?
+        return result;
+    &#125;
+&#125;
+</code></pre>
+<p>对于普通App，关注<code>Zygote.forkSimpleApps</code>及其之后的流程即可。至此服务端的分析结束。客户端的分析与服务端不同，主要使用逆向分析方式，从ZygoteProcess发送socket请求开始，一层一层往上分析。</p>
+<h2 id="ZygoteProcess-java"><a href="#ZygoteProcess-java" class="headerlink" title="ZygoteProcess.java"></a>ZygoteProcess.java</h2><p>创建了ZygoteServer对应的4个客户端socket连接，调用链为：</p>
+<h3 id="start"><a href="#start" class="headerlink" title="start"></a>start</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">public final Process.ProcessStartResult start(@NonNull final String processClass,
+                                              final String niceName,
+                                              int uid, int gid, @Nullable int[] gids,
+                                              int runtimeFlags, int mountExternal,
+                                              int targetSdkVersion,
+                                              @Nullable String seInfo,
+                                              @NonNull String abi,
+                                              @Nullable String instructionSet,
+                                              @Nullable String appDataDir,
+                                              @Nullable String invokeWith,
+                                              @Nullable String packageName,
+                                              int zygotePolicyFlags,
+                                              boolean isTopApp,
+                                              @Nullable long[] disabledCompatChanges,
+                                              @Nullable Map&lt;String, Pair&lt;String, Long&gt;&gt;
+                                                      pkgDataInfoMap,
+                                              @Nullable Map&lt;String, Pair&lt;String, Long&gt;&gt;
+                                                      allowlistedDataInfoList,
+                                              boolean bindMountAppsData,
+                                              boolean bindMountAppStorageDirs,
+                                              @Nullable String[] zygoteArgs) &#123;
+    // TODO (chriswailes): Is there a better place to check this value?
+    if (fetchUsapPoolEnabledPropWithMinInterval()) &#123;
+        informZygotesOfUsapPoolStatus();
+    &#125;
+
+    try &#123;
+        return startViaZygote(processClass, niceName, uid, gid, gids,
+                runtimeFlags, mountExternal, targetSdkVersion, seInfo,
+                abi, instructionSet, appDataDir, invokeWith, /*startChildZygote=*/ false,
+                packageName, zygotePolicyFlags, isTopApp, disabledCompatChanges,
+                pkgDataInfoMap, allowlistedDataInfoList, bindMountAppsData,
+                bindMountAppStorageDirs, zygoteArgs);
+    &#125; catch (ZygoteStartFailedEx ex) &#123;
+        Log.e(LOG_TAG,
+                &quot;Starting VM process through Zygote failed&quot;);
+        throw new RuntimeException(
+                &quot;Starting VM process through Zygote failed&quot;, ex);
+    &#125;
+&#125;
+</code></pre>
+<h3 id="startViaZygote"><a href="#startViaZygote" class="headerlink" title="startViaZygote"></a>startViaZygote</h3><p>封装参数，调用zygoteSendArgsAndGetResult</p>
+<h3 id="zygoteSendArgsAndGetResult"><a href="#zygoteSendArgsAndGetResult" class="headerlink" title="zygoteSendArgsAndGetResult"></a>zygoteSendArgsAndGetResult</h3><p>关键代码如下：</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">// 向服务端发送请求，得到pid
+if (shouldAttemptUsapLaunch(zygotePolicyFlags, args)) &#123;
+    try &#123;
+        // 写入usap socket
+        return attemptUsapSendArgsAndGetResult(zygoteState, msgStr);
+    &#125; catch (IOException ex) &#123;
+        // If there was an IOException using the USAP pool we will log the error and
+        // attempt to start the process through the Zygote.
+        Log.e(LOG_TAG, &quot;IO Exception while communicating with USAP pool - &quot;
+                + ex.getMessage());
+    &#125;
+&#125;
+// 写入zygote socket
+return attemptZygoteSendArgsAndGetResult(zygoteState, msgStr);
+</code></pre>
+<h3 id="Process-java"><a href="#Process-java" class="headerlink" title="Process.java"></a>Process.java</h3><p>内部创建了一个静态的ZygoteProcess实例ZYGOTE_PROCESS。其start()方法，即调用ZygoteProcess的start方法</p>
+<h3 id="ProcessList-java"><a href="#ProcessList-java" class="headerlink" title="ProcessList.java"></a>ProcessList.java</h3><p>ProcessList.startProcessLocked()</p>
+<h3 id="AMS-LocalService"><a href="#AMS-LocalService" class="headerlink" title="AMS.LocalService"></a>AMS.LocalService</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">@Override
+public void startProcess(String processName, ApplicationInfo info, boolean knownToBeDead,
+        boolean isTop, String hostingType, ComponentName hostingName) &#123;
+    try &#123;
+        if (Trace.isTagEnabled(Trace.TRACE_TAG_ACTIVITY_MANAGER)) &#123;
+            Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, &quot;startProcess:&quot;
+                    + processName);
+        &#125;
+        synchronized (ActivityManagerService.this) &#123;
+            // If the process is known as top app, set a hint so when the process is
+            // started, the top priority can be applied immediately to avoid cpu being
+            // preempted by other processes before attaching the process of top app.
+            startProcessLocked(processName, info, knownToBeDead, 0 /* intentFlags */,
+                    new HostingRecord(hostingType, hostingName, isTop),
+                    ZYGOTE_POLICY_FLAG_LATENCY_SENSITIVE, false /* allowWhileBooting */,
+                    false /* isolated */);
+        &#125;
+    &#125; finally &#123;
+        Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);
+    &#125;
+&#125;
+</code></pre>
+<p>从上面的代码可知，fork操作其实只能在单线程中执行</p>
+<h2 id="AMS及ATMS"><a href="#AMS及ATMS" class="headerlink" title="AMS及ATMS"></a>AMS及ATMS</h2><h3 id="ATMS-startProcessAsync"><a href="#ATMS-startProcessAsync" class="headerlink" title="ATMS.startProcessAsync"></a>ATMS.startProcessAsync</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">void startProcessAsync(ActivityRecord activity, boolean knownToBeDead, boolean isTop,
+        String hostingType) &#123;
+    try &#123;
+        if (Trace.isTagEnabled(TRACE_TAG_WINDOW_MANAGER)) &#123;
+            Trace.traceBegin(TRACE_TAG_WINDOW_MANAGER, &quot;dispatchingStartProcess:&quot;
+                    + activity.processName);
+        &#125;
+        // Post message to start process to avoid possible deadlock of calling into AMS with the
+        // ATMS lock held.
+        final Message m = PooledLambda.obtainMessage(ActivityManagerInternal::startProcess,
+                mAmInternal, activity.processName, activity.info.applicationInfo, knownToBeDead,
+                isTop, hostingType, activity.intent.getComponent());
+        mH.sendMessage(m);
+    &#125; finally &#123;
+        Trace.traceEnd(TRACE_TAG_WINDOW_MANAGER);
+    &#125;
+&#125;
+</code></pre>
+<h3 id="ActivityTaskSupervisor-startSpecificActivity"><a href="#ActivityTaskSupervisor-startSpecificActivity" class="headerlink" title="ActivityTaskSupervisor.startSpecificActivity"></a>ActivityTaskSupervisor.startSpecificActivity</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
+
+<pre><code class="java">void startSpecificActivity(ActivityRecord r, boolean andResume, boolean checkConfig) &#123;
+    // Is this activity&#39;s application already running?
+    final WindowProcessController wpc =
+            mService.getProcessController(r.processName, r.info.applicationInfo.uid);
+
+    boolean knownToBeDead = false;
+    if (wpc != null &amp;&amp; wpc.hasThread()) &#123;
+        try &#123;
+            realStartActivityLocked(r, wpc, andResume, checkConfig);
+            return;
+        &#125; catch (RemoteException e) &#123;
+            Slog.w(TAG, &quot;Exception when starting activity &quot;
+                    + r.intent.getComponent().flattenToShortString(), e);
+        &#125;
+
+        // If a dead object exception was thrown -- fall through to
+        // restart the application.
+        knownToBeDead = true;
+        // Remove the process record so it won&#39;t be considered as alive.
+        mService.mProcessNames.remove(wpc.mName, wpc.mUid);
+        mService.mProcessMap.remove(wpc.getPid());
+    &#125;
+
+    r.notifyUnknownVisibilityLaunchedForKeyguardTransition();
+
+    final boolean isTop = andResume &amp;&amp; r.isTopRunningActivity();
+    // 启动进程
+    mService.startProcessAsync(r, knownToBeDead, isTop,
+            isTop ? HostingRecord.HOSTING_TYPE_TOP_ACTIVITY
+                    : HostingRecord.HOSTING_TYPE_ACTIVITY);
+&#125;
+</code></pre>
+<p>前面的调用链：</p>
+<p>TaskFragment.resumeTopActivity() &lt;- Task.resumeTopActivityInnerLocked &lt;- Task.resumeTopActivityUncheckedLocked</p>
+<p>太深了，方法比较复杂，AMS这块又搞了个ATMS，后面再分析。</p>
+<blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2022/10/30/Android/fwk/zygote_fork_app/](https://www.ieclipse.cn/2022/10/30/Android/fwk/zygote_fork_app/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
+  
+  </div>
+
+  
+<script src="/js/decrypt.min.js"></script>
+
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2022-10-31T02:44:38.810Z" itemprop="dateModified">
+    Last updated: 2022-10-31
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="https://www.ieclipse.cn" itemprop="url">
+      <meta content="Jamling's Blog and Project Site" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+<a id="share"></a>
+<div class="social-share"></div>
+<script>
+with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js'];
+</script>
+
+
+  </footer>
+</article>
+
+<div class="page-footer">
+  <nav><ul class="pager"><li class="next"><a href="/en/2022/10/22/Android/fwk/android-13-zygote-init/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">Next</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    Donate
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal">
+  <img src="/image/donate_button.png" alt="donate">
+  <span>Dear reader, if you feel this good, could you rewark me a `bread` as awark? Thank you very much~</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="modal-title" id="myModalLabel">Donate</span>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate" />
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <a id="comment"></a>
+
+<script src="//unpkg.com/valine/dist/Valine.min.js">
+</script>
+<!--PC和WAP自适应版-->
+<div id="vcomments" data-sid="388d089d3166aad5a87f09fe58afc6cc" ></div>
+<script>
+    new Valine({
+        av: AV,
+        el: '#vcomments',
+        appId: 'C45xzaBLva5G5IfKxOwGXuVb-gzGzoHsz',
+        appKey: 'QwGBjKlSYOBtjMa5aTGeO3cb',
+        path: 'en/2022/10/30/Android/fwk/zygote_fork_app/',
+        recordIP: true,
+        visitor: false
+    })
+</script>
+
+
+
+</div>
+
+
+    
+  </div> <!-- end main column  -->
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <div class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          Table Of Contents
+        </a></div>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a href="#Zygote-Fork-App流程解析">Zygote Fork App流程解析</a></li><li><a href="#ZygoteServer">ZygoteServer</a><ul class="nav toc-ul"><li><a href="#ZygoteServer-runSelectLoop">ZygoteServer.runSelectLoop()</a></li></ul></li><li><a href="#ZygoteConnection">ZygoteConnection</a><ul class="nav toc-ul"><li><a href="#ZygoteConnection-processCommand">ZygoteConnection.processCommand()</a></li></ul></li><li><a href="#ZygoteProcess-java">ZygoteProcess.java</a><ul class="nav toc-ul"><li><a href="#start">start</a></li><li><a href="#startViaZygote">startViaZygote</a></li><li><a href="#zygoteSendArgsAndGetResult">zygoteSendArgsAndGetResult</a></li><li><a href="#Process-java">Process.java</a></li><li><a href="#ProcessList-java">ProcessList.java</a></li><li><a href="#AMS-LocalService">AMS.LocalService</a></li></ul></li><li><a href="#AMS及ATMS">AMS及ATMS</a><ul class="nav toc-ul"><li><a href="#ATMS-startProcessAsync">ATMS.startProcessAsync</a></li><li><a href="#ActivityTaskSupervisor-startSpecificActivity">ActivityTaskSupervisor.startSpecificActivity</a></li></ul></li></ul>
+        </div>
+      </nav>
+</div>
+
+      
+    </aside>
+  </div> <!-- end aside column  -->
+</div> <!-- end row -->
+</div> <!-- end container -->
+
+  <!-- footer -->
+  <footer id="body-footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2022 <a href="https://www.ieclipse.cn" target="_blank">Jamling</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <!-- Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>. -->
+    </div>
+    <div>
+      <a href="//beian.miit.gov.cn" target="_blank">苏ICP备15019510号</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab hidden-print" style="bottom: 45px; right: 24px;">
+  <!--
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=2064663" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+    -->
+    <a class="fab-item large red " href="#top">
+      <i class="icon nova-top"></i>
+    </a>
+  </div>
+
+  <!-- after footer, some 3rd script place here -->
+    <script>
+    var hljs_labels = {
+        left: "Code",
+        right: ":",
+        copy: "Copy to clipboard"
+    }
+    </script>
+    
+<script src="/js/hljs.js"></script>
+
+    
+<script src="/js/script.js"></script>
+
+    
+    
+<script>
+  lc.countCounter({});
+
+  lc.countComment({
+    index: false
+  });
+</script>
+</body>
+</html>

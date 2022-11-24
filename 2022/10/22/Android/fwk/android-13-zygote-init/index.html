@@ -183,14 +183,15 @@
     <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="Zygote"><a href="#Zygote" class="headerlink" title="Zygote"></a>Zygote</h3><p>借用5W2H法</p>
 <p>What？zygote是Android中用来fork App进程的进程，它的作用就是fork出其它需要JVM的进程，比如你写的一个App应用，也可以理解为应用进程的守护进程。</p>
 <p>Why？Android应用层，各App（进程）都运行在虚拟机上，都需要一个Android运行时环境，在应用启动时，实时创建虚拟机，加载运行时环境及资源？显然不是，借用linux的fork函数，可以将启动应用所要做的事情提前做好，待有进程启动时，zygote就”复制”一份运行时环境给进程，以提高性能。</p>
-<p>Who，When？Where？Zytoge进程是init进程(pid=1)启动的。具体是在init的第三个阶段（解析init.rc后）通过<code>/system/bin/app_process</code>命令行带参数来启动。具体的启动流程是重点，后续详细介绍。</p>
+<p>Who，When？Where？Zytoge进程是init进程(pid&#x3D;1)启动的。具体是在init的第三个阶段（解析init.rc后）通过<code>/system/bin/app_process</code>命令行带参数来启动。具体的启动流程是重点，后续详细介绍。</p>
 <h3 id="zygote-模式"><a href="#zygote-模式" class="headerlink" title="zygote 模式"></a>zygote 模式</h3><ul>
 <li><p>zygote模式，初始化zygote进程时带<code>–start-system-server</code>参数，表示是zygote模式，会fork出zygote的第一个子进程：SystemServer，SystemServer会创建许多Framework层的系统服务，比如ActivityManagerService (AMS)，WindowManagerService (WMS)等</p>
 </li>
-<li><p>application模式，启动普通应用程序，传递的参数有class名字以及class带的参数</p>
+<li><p>application模式，启动普通应用程序，传递的参数有class名字以及class带的参数，注：个人理解为uid为0或启动标志带<code>DEBUG_ENABLE_DEBUGGER</code>，允许以application模式启动，表示以同zygote相同的方式启动进程（并非以<code>zygote fork</code>的方式启动）</p>
 </li>
 </ul>
-<h2 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h2><h3 id="入口：app-main-cpp-main"><a href="#入口：app-main-cpp-main" class="headerlink" title="入口：app_main.cpp#main()"></a>入口：app_main.cpp#main()</h3><p>platform_frameworks_base/cmds/app_process/app_main.cpp</p>
+<h3 id="Fork函数"><a href="#Fork函数" class="headerlink" title="Fork函数"></a>Fork函数</h3><p>fork是linux函数，fork执行完毕之后，会出现两个进程并发执行，所以它有两次返回，当返回值为负数，表示fork失败，否则fork成功。当<code>pid = 0</code>是表示运行在子进程，当<code>pid &gt; 0</code>表示运行在父进程。</p>
+<h2 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h2><h3 id="入口：app-main-cpp-main"><a href="#入口：app-main-cpp-main" class="headerlink" title="入口：app_main.cpp#main()"></a>入口：app_main.cpp#main()</h3><p><code>platform_frameworks_base/cmds/app_process/app_main.cpp</code></p>
 <p class="code-caption" data-lang="c++" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="c++">int main(int argc, char* const argv[])
@@ -208,10 +209,10 @@
     bool zygote = false; // 带--zygote参数为true
     bool startSystemServer = false; // 带--start-system-server为true
     bool application = false; // 带--appliction参数为true
-      String8 niceName; // 参数--nice-name=的值，会将原始的app_process的进程名修改为zygote或zygote64
+    String8 niceName; // 参数--nice-name=的值，会将原始的app_process的进程名修改为zygote或zygote64
     String8 className; // 剩下的参数 --后面的值
-      // 参数解析忽略
-      Vector&lt;String8&gt; args; // 
+    // 参数解析忽略
+    Vector&lt;String8&gt; args; // 
     if (!className.isEmpty()) &#123;
         // application 模式, 将applicationw传给RuntimeInit.
         // The Remainder of args get passed to startup class main(). Make
@@ -224,27 +225,28 @@
           ALOGV(&quot;Class name = %s, args = %s&quot;, className.string(), restOfArgs.string());
         &#125;
     &#125; else &#123;
-        // zygote 模式.
+        // 此分支为zygote 模式，特别关注.
         maybeCreateDalvikCache(); // 创建/data/dalvik-cache
         if (startSystemServer) &#123;
             args.add(String8(&quot;start-system-server&quot;));
         &#125;
-                ...
+         ...
         // 所有的参数传入zygote main() 方法.
         for (; i &lt; argc; ++i) &#123;
             args.add(String8(argv[i]));
         &#125;
     &#125;
-        ...
+    ...
     if (zygote) &#123;
         runtime.start(&quot;com.android.internal.os.ZygoteInit&quot;, args, zygote);
     &#125; else if (!className.isEmpty()) &#123;
         runtime.start(&quot;com.android.internal.os.RuntimeInit&quot;, args, zygote);
     &#125; else &#123;
         fprintf(stderr, &quot;Error: no class name or --zygote supplied.\n&quot;);
-    &#125;</code></pre>
+    &#125;
+</code></pre>
 <p>可知main入口方法主要做参数解析及构造传给AndroidRuntime.start方法所需的参数。</p>
-<h3 id="native：AndroidRuntime-cpp"><a href="#native：AndroidRuntime-cpp" class="headerlink" title="native：AndroidRuntime.cpp"></a>native：AndroidRuntime.cpp</h3><p>platform_frameworks_base/core/jni/AndroidRuntime.cpp</p>
+<h3 id="native：AndroidRuntime-cpp"><a href="#native：AndroidRuntime-cpp" class="headerlink" title="native：AndroidRuntime.cpp"></a>native：AndroidRuntime.cpp</h3><p><code>platform_frameworks_base/core/jni/AndroidRuntime.cpp</code></p>
 <p class="code-caption" data-lang="c++" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="c++">void AndroidRuntime::start(const char* className, const Vector&lt;String8&gt;&amp; options, bool zygote)
@@ -255,7 +257,7 @@
     static const String8 startSystemServer(&quot;start-system-server&quot;);
     // 是否primary_zygote？, 为true会fork system server进程.
     bool primary_zygote = false;
-        ...
+    ...
 
     const char* rootDir = getenv(&quot;ANDROID_ROOT&quot;); // 默认为/system
     const char* artRootDir = getenv(&quot;ANDROID_ART_ROOT&quot;);
@@ -269,7 +271,7 @@
     if (startVm(&amp;mJavaVM, &amp;env, zygote, primary_zygote) != 0) &#123;
         return; // 启动失败return
     &#125;
-      // VM启动回调，为空实现 
+    // VM启动回调，为空实现 
     onVmCreated(env);
 
     /*
@@ -293,10 +295,11 @@
     /*
      * 使用JNI反射调用className类对应的main()方法
      */
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>可以看出，start()方法主要做了两件事</p>
 <ul>
-<li><p>startVM()：创建虚拟机，主要是设置VM运行时的参数，比如设置初始堆大小（-Xms）为dalvik.vm.heapstartsize属性值</p>
+<li><p>startVM()：创建虚拟机，主要是设置VM运行时的参数，比如设置初始堆大小（<code>-Xms</code>）为<code>dalvik.vm.heapstartsize</code>属性值</p>
 </li>
 <li><p>startReg()：注册JNI，内部调用<code>register_jni_procs</code>通过JNI函数动态注册注册<code>gRegJNI</code>函数指针数组</p>
 </li>
@@ -323,20 +326,20 @@
         final long startTime = SystemClock.elapsedRealtime();
         final boolean isRuntimeRestarted = &quot;1&quot;.equals(
                 SystemProperties.get(&quot;sys.boot_completed&quot;));
-            // systrace的TAG
+        // systrace的TAG
         String bootTimeTag = Process.is64Bit() ? &quot;Zygote64Timing&quot; : &quot;Zygote32Timing&quot;;
         TimingsTraceLog bootTimingsTraceLog = new TimingsTraceLog(bootTimeTag,
                 Trace.TRACE_TAG_DALVIK);
-          // init开始，详见android systrace工具相关文档
+        // init开始，详见android systrace工具相关文档
         bootTimingsTraceLog.traceBegin(&quot;ZygoteInit&quot;);
-           // 主要是开启DDMS及覆盖Mime
+        // 主要是开启DDMS及覆盖Mime
         RuntimeInit.preForkInit();
 
         boolean startSystemServer = false;
         String zygoteSocketName = &quot;zygote&quot;;
         String abiList = null;
         boolean enableLazyPreload = false;
-          // 解析从AndroidRuntime.cpp传过来的参数
+        // 解析从AndroidRuntime.cpp传过来的参数
         for (int i = 1; i &lt; argv.length; i++) &#123;
             if (&quot;start-system-server&quot;.equals(argv[i])) &#123;
                 startSystemServer = true;
@@ -351,7 +354,7 @@
                 throw new RuntimeException(&quot;Unknown command line argument: &quot; + argv[i]);
             &#125;
         &#125;
-            // primary zygote: /dev/socket/zygote
+        // primary zygote: /dev/socket/zygote
         // secondary zygote: /dev/socket/secondary_zygote
         final boolean isPrimaryZygote = zygoteSocketName.equals(Zygote.PRIMARY_SOCKET_NAME);
         if (!isRuntimeRestarted) &#123;
@@ -376,7 +379,7 @@
             bootTimingsTraceLog.traceBegin(&quot;ZygotePreload&quot;);
             EventLog.writeEvent(LOG_BOOT_PROGRESS_PRELOAD_START,
                     SystemClock.uptimeMillis());
-              // 1. preload
+            // 1. preload
             preload(bootTimingsTraceLog);
             EventLog.writeEvent(LOG_BOOT_PROGRESS_PRELOAD_END,
                     SystemClock.uptimeMillis());
@@ -389,11 +392,11 @@
         bootTimingsTraceLog.traceEnd(); // PostZygoteInitGC
 
         bootTimingsTraceLog.traceEnd(); // ZygoteInit
-            // 初始化Zygote的native状态
+        // 初始化Zygote的native状态
         Zygote.initNativeState(isPrimaryZygote);
 
         ZygoteHooks.stopZygoteNoThreadCreation();
-            // 2. 创建ZygoteServer，建立socket server端
+        // 2. 创建ZygoteServer，建立socket server端
         zygoteServer = new ZygoteServer(isPrimaryZygote);
 
         if (startSystemServer) &#123;
@@ -402,7 +405,7 @@
 
             // &#123;@code r == null&#125; in the parent (zygote) process, and &#123;@code r != null&#125; in the
             // child (system_server) process.
-              // r为空表示zygote进程本身，r!=null表示是system_server子进程
+            // r为空表示zygote进程本身，r!=null表示是system_server子进程
             if (r != null) &#123;
                 r.run(); // 执行com.android.server.SystemServer.main()
                 return;
@@ -423,15 +426,17 @@
     &#125;
 
     // 子进程已退出select loop. 继续执行命令
+    // 对于普通的App，run执行的其实是ActivityThread.main()入口函数
     if (caller != null) &#123;
         caller.run();
     &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>总结一下main方法主要做了以下几件事</p>
 <ul>
-<li>预加载，加载一些共享的资源，这样fork的子进程能够复用这些共享的资源，以提升性能</li>
-<li>Fork system_server子进程，system_server进程会创建各种系统Service</li>
-<li>创建ZygoteServer并循环等待fork请求，创建zygote进程对应的socket 来接受AMS发出的创建App进程请求，从Android 10 (Q)开始，引入了USAP(unspecialized app process)池(可以理解为进程池，像线程池一样)，提前创建好一批进程，当有新的应用启动时，节省fork动作从而提升性能。如何具体fork子进程，后续另开专题分析。</li>
+<li>预加载，加载一些共享的资源，这样fork的子进程能够复用这些共享的资源，以提升速度</li>
+<li>Fork <code>system_server</code>子进程，<code>system_server</code>进程会创建各种系统Service</li>
+<li>创建ZygoteServer并循环等待fork请求，创建zygote进程对应的socket 来接受AMS发出的创建App进程请求，从Android 10 (Q)开始，引入了USAP(<code>unspecialized app process</code>)池(可以理解为进程池，像线程池一样)，提前创建好一批进程，当有新的应用启动时，节省fork动作从而提升性能。如何具体fork子进程，后续另开专题分析。</li>
 </ul>
 <h4 id="预加载：preload"><a href="#预加载：preload" class="headerlink" title="预加载：preload()"></a>预加载：preload()</h4><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -465,7 +470,8 @@
     Log.d(TAG, &quot;end preload&quot;);
 
     sPreloadComplete = true;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h4 id="启动系统服务：forkSystemServer"><a href="#启动系统服务：forkSystemServer" class="headerlink" title="启动系统服务：forkSystemServer"></a>启动系统服务：forkSystemServer</h4><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">/**
@@ -521,7 +527,7 @@ private static Runnable forkSystemServer(String abiList, String socketName,
     try &#123;
         ZygoteCommandBuffer commandBuffer = new ZygoteCommandBuffer(args);
         try &#123;
-              // 参数转个格式转换
+            // 参数格式转换
             parsedArgs = ZygoteArguments.getInstance(commandBuffer);
         &#125; catch (EOFException e) &#123;
             throw new AssertionError(&quot;Unexpected argument error for forking system server&quot;, e);
@@ -529,7 +535,7 @@ private static Runnable forkSystemServer(String abiList, String socketName,
         commandBuffer.close();
         Zygote.applyDebuggerSystemProperty(parsedArgs);
         Zygote.applyInvokeWithSystemProperty(parsedArgs);
-            // 这块内存标记扩展特性参考https://source.android.google.cn/docs/security/test/memory-safety/arm-mte
+        // 这块内存标记扩展特性参考https://source.android.google.cn/docs/security/test/memory-safety/arm-mte
         if (Zygote.nativeSupportsMemoryTagging()) &#123;
             String mode = SystemProperties.get(&quot;arm64.memtag.process.system_server&quot;, &quot;&quot;);
             if (mode.isEmpty()) &#123;
@@ -562,9 +568,9 @@ private static Runnable forkSystemServer(String abiList, String socketName,
         &#125;
 
         /* Request to fork the system server process */
-          /*
-           * 会调用C层的nativeForkSystemServer，其中zygote::ForkCommon函数中，终于见到了fork()函数
-           */
+        /*
+        * 会调用C层的nativeForkSystemServer，其中zygote::ForkCommon函数中，终于见到了fork()函数
+        */
         pid = Zygote.forkSystemServer(
                 parsedArgs.mUid, parsedArgs.mGid,
                 parsedArgs.mGids,
@@ -576,57 +582,68 @@ private static Runnable forkSystemServer(String abiList, String socketName,
         throw new RuntimeException(ex);
     &#125;
 
-    /* For child process */
+    /* system server子进程本身 */
     if (pid == 0) &#123;
         if (hasSecondZygote(abiList)) &#123;
             waitForSecondaryZygote(socketName);
         &#125;
-            // fork时会copy socket，system server需要主动关闭
+        // fork时会copy socket，system server需要主动关闭
         zygoteServer.closeServerSocket();
           // fork完之后的流程，比如创建PathClassLoader, ZygoteInit.zygoteInit()
         return handleSystemServerProcess(parsedArgs);
     &#125;
 
     return null;
-&#125;</code></pre>
-<pre><code class="java">    public static Runnable zygoteInit(int targetSdkVersion, long[] disabledCompatChanges,
-            String[] argv, ClassLoader classLoader) &#123;
-        if (RuntimeInit.DEBUG) &#123;
-            Slog.d(RuntimeInit.TAG, &quot;RuntimeInit: Starting application from zygote&quot;);
-        &#125;
+&#125;
+</code></pre>
+<p>当fork完，<code>system_server</code>进程会调用<code>handleSystemServerProcess</code>创建app加载类的PathClassLoader，</p>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-        Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, &quot;ZygoteInit&quot;);
-        RuntimeInit.redirectLogStreams();
-
-        RuntimeInit.commonInit();
-        ZygoteInit.nativeZygoteInit();
-          // 会找到java类（com.android.server.SystemServer）的main入口方法MethodAndArgsCaller
-          // Runnable的run方法其实就是反射调用main()方法
-        return RuntimeInit.applicationInit(targetSdkVersion, disabledCompatChanges, argv,
-                classLoader);
+<pre><code class="java">public static Runnable zygoteInit(int targetSdkVersion, long[] disabledCompatChanges,
+        String[] argv, ClassLoader classLoader) &#123;
+    if (RuntimeInit.DEBUG) &#123;
+        Slog.d(RuntimeInit.TAG, &quot;RuntimeInit: Starting application from zygote&quot;);
     &#125;
-&lt;p class=&quot;code-caption&quot; data-lang=&quot;&quot; data-line_number=&quot;frontend&quot; data-trim_indent=&quot;backend&quot; data-label_position=&quot;outer&quot; data-labels_left=&quot;Code&quot; data-labels_right=&quot;:&quot; data-labels_copy=&quot;Copy Code&quot;&gt;&lt;span class=&quot;code-caption-label&quot;&gt;&lt;/span&gt;&lt;a class=&quot;code-caption-copy&quot;&gt;Copy Code&lt;/a&gt;&lt;/p&gt;
+
+    Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, &quot;ZygoteInit&quot;);
+    RuntimeInit.redirectLogStreams();
+
+    RuntimeInit.commonInit();
+    ZygoteInit.nativeZygoteInit();
+    // 会找到java类（com.android.server.SystemServer）的main入口方法MethodAndArgsCaller
+    // Runnable的run方法其实就是反射调用main()方法
+    return RuntimeInit.applicationInit(targetSdkVersion, disabledCompatChanges, argv,
+            classLoader);
+&#125;
 </code></pre>
 <h3 id="Java-RuntimeInit-java"><a href="#Java-RuntimeInit-java" class="headerlink" title="Java: RuntimeInit.java"></a>Java: RuntimeInit.java</h3><p>RuntimeInit是zygote application模式的启动类，它比ZygoteInit简单多了</p>
-<pre><code class="java">    public static final void main(String[] argv) &#123;
-        preForkInit();
-        if (argv.length == 2 &amp;&amp; argv[1].equals(&quot;application&quot;)) &#123;
-            if (DEBUG) Slog.d(TAG, &quot;RuntimeInit: Starting application&quot;);
-            redirectLogStreams();
-        &#125; else &#123;
-            if (DEBUG) Slog.d(TAG, &quot;RuntimeInit: Starting tool&quot;);
-        &#125;
+<ul>
+<li>preForkInit 开启DDMS</li>
+<li>commonInit 设置日志及异常处理器</li>
+<li>nativeFinishInit 最终回调的是app_main.cpp AppRuntime中的onStarted回调，最终调用fork出来的进程main函数，<code>system_server</code>进程为<code>com.android.server.SystemServer.main()</code>，App进程为<code>ActivityThread.main()</code></li>
+</ul>
+<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-        commonInit();
+<pre><code class="java">public static final void main(String[] argv) &#123;
+    preForkInit();
+    if (argv.length == 2 &amp;&amp; argv[1].equals(&quot;application&quot;)) &#123;
+        if (DEBUG) Slog.d(TAG, &quot;RuntimeInit: Starting application&quot;);
+        redirectLogStreams();
+    &#125; else &#123;
+        if (DEBUG) Slog.d(TAG, &quot;RuntimeInit: Starting tool&quot;);
+    &#125;
 
-        /*
-         * Now that we&#39;re running in interpreted code, call back into native code
-         * to run the system.
-         */
-        nativeFinishInit();
+    commonInit();
 
-        if (DEBUG) Slog.d(TAG, &quot;Leaving RuntimeInit!&quot;);
-    &#125;</code></pre>
+    /*
+     * Now that we&#39;re running in interpreted code, call back into native code
+     * to run the system.
+     */
+    nativeFinishInit();
+
+    if (DEBUG) Slog.d(TAG, &quot;Leaving RuntimeInit!&quot;);
+&#125;
+</code></pre>
 <h4 id="commonInit"><a href="#commonInit" class="headerlink" title="commonInit()"></a>commonInit()</h4><p>主要设置日志及异常处理器</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -666,7 +683,8 @@ private static Runnable forkSystemServer(String abiList, String socketName,
     TrafficStats.attachSocketTagger();
 
     initialized = true;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>最后上一张流程图<br><img src="./zygote.png" alt="sequence"></p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2022/10/22/Android/fwk/android-13-zygote-init/](https://www.ieclipse.cn/2022/10/22/Android/fwk/android-13-zygote-init/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
@@ -676,8 +694,8 @@ private static Runnable forkSystemServer(String abiList, String socketName,
 <script src="/js/decrypt.min.js"></script>
 
   <footer class="article-footer">
-    <time class="article-footer-updated" datetime="2022-10-22T07:21:00.383Z" itemprop="dateModified">
-    最后更新：2022-10-22
+    <time class="article-footer-updated" datetime="2022-10-26T13:59:05.584Z" itemprop="dateModified">
+    最后更新：2022-10-26
     </time>
     <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
       <meta content="https://www.ieclipse.cn" itemprop="url">
@@ -696,7 +714,7 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
 </article>
 
 <div class="page-footer">
-  <nav><ul class="pager"><li class="next"><a href="/2022/10/20/Android/jetpack-compose-env/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">下一页</span></a></li></ul></nav>
+  <nav><ul class="pager"><li class="previous"><a href="/2022/10/30/Android/fwk/zygote_fork_app/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">上一页</span></a></li><li class="next"><a href="/2022/10/20/Android/jetpack-compose-env/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">下一页</span></a></li></ul></nav>
   
 <!-- Button trigger modal -->
 <blockquote class="donate"><!--
@@ -786,7 +804,7 @@ with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElemen
           目录
         </a></div>
         <div id="toc-body" class="in">
-        <ul class="nav toc-ul"><li><a href="#简介">简介</a><ul class="nav toc-ul"><li><a href="#Zygote">Zygote</a></li><li><a href="#zygote-模式">zygote 模式</a></li></ul></li><li><a href="#启动流程">启动流程</a><ul class="nav toc-ul"><li><a href="#入口：app-main-cpp-main">入口：app_main.cpp#main()</a></li><li><a href="#native：AndroidRuntime-cpp">native：AndroidRuntime.cpp</a></li><li><a href="#Java：ZygoteInit-java">Java：ZygoteInit.java</a><ul class="nav toc-ul"><li><a href="#预加载：preload">预加载：preload()</a></li><li><a href="#启动系统服务：forkSystemServer">启动系统服务：forkSystemServer</a></li></ul></li><li><a href="#Java-RuntimeInit-java">Java: RuntimeInit.java</a><ul class="nav toc-ul"><li><a href="#commonInit">commonInit()</a></li></ul></li></ul></li><li><a href="#总结">总结</a></li></ul>
+        <ul class="nav toc-ul"><li><a href="#简介">简介</a><ul class="nav toc-ul"><li><a href="#Zygote">Zygote</a></li><li><a href="#zygote-模式">zygote 模式</a></li><li><a href="#Fork函数">Fork函数</a></li></ul></li><li><a href="#启动流程">启动流程</a><ul class="nav toc-ul"><li><a href="#入口：app-main-cpp-main">入口：app_main.cpp#main()</a></li><li><a href="#native：AndroidRuntime-cpp">native：AndroidRuntime.cpp</a></li><li><a href="#Java：ZygoteInit-java">Java：ZygoteInit.java</a><ul class="nav toc-ul"><li><a href="#预加载：preload">预加载：preload()</a></li><li><a href="#启动系统服务：forkSystemServer">启动系统服务：forkSystemServer</a></li></ul></li><li><a href="#Java-RuntimeInit-java">Java: RuntimeInit.java</a><ul class="nav toc-ul"><li><a href="#commonInit">commonInit()</a></li></ul></li></ul></li><li><a href="#总结">总结</a></li></ul>
         </div>
       </nav>
 </div>

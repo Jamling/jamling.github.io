@@ -208,11 +208,11 @@ public class CountDownButton extends RoundButton &#123;
             &#125;
         &#125;
     &#125;;
-
+    
     public CountDownButton(Context context) &#123;
         this(context, null);
     &#125;
-
+    
     public CountDownButton(Context context, AttributeSet attrs) &#123;
         super(context, attrs);
         init(context, attrs);
@@ -221,7 +221,7 @@ public class CountDownButton extends RoundButton &#123;
     private void init(Context context, AttributeSet attrs) &#123;
         setHintTextColor(getTextColors());
     &#125;
-
+    
     public void start() &#123;
         this.setEnabled(false);
         this.time = totalTime;
@@ -235,12 +235,12 @@ public class CountDownButton extends RoundButton &#123;
             this.setText(t + label);
         &#125;
     &#125;
-
+    
     public void reset() &#123;
         setText(null);
         setEnabled(true);
     &#125;
-
+    
     /**
      * Set count down total time
      * &lt;p&gt;
@@ -297,7 +297,8 @@ public class CountDownButton extends RoundButton &#123;
     public long getStep() &#123;
         return step;
     &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>实现相对简单，通过Handler的sendEmptyMessageDelayed来定时发送消息，实现计时并更新界面，当然，也可以通过Timer来实现，不过因为Android UI线程的限制，不如使用Handler来得简洁。CountDownButton向外暴露设置step 步长，totalTime总计时等方法。</p>
 <h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -314,7 +315,8 @@ public class CountDownButton extends RoundButton &#123;
     android:textSize=&quot;14sp&quot;
     app:borderColor=&quot;@color/black_alpha_60&quot;
     app:borderWidth=&quot;0dp&quot;
-    android:layout_marginTop=&quot;20dp&quot; /&gt;</code></pre>
+    android:layout_marginTop=&quot;20dp&quot; /&gt;
+</code></pre>
 <h2 id="Activity中使用"><a href="#Activity中使用" class="headerlink" title="Activity中使用"></a>Activity中使用</h2><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">myBtn2 = (CountDownButton) btn2;
@@ -327,7 +329,8 @@ myBtn2.setTotalTime(10000);
 int r = AppUtils.dp2px(this, 4);
 RoundedColorDrawable normal = new RoundedColorDrawable(r, AppUtils.getColor(this, R.color.black_333333));
 normal.addStateColor(new int[]&#123;android.R.attr.state_enabled, android.R.attr.state_window_focused&#125;, AppUtils
-    .getColor(this, R.color.colorPrimary)).applyTo(myBtn2);</code></pre>
+    .getColor(this, R.color.colorPrimary)).applyTo(myBtn2);
+</code></pre>
 <p>当CountDownButton开时计时时，它将进入disable状态（不可点击），button的外观也随之变化，当计时结束后，button恢复原来的状态。<br>示例代码中的button样式与状态，都是通过代码控制的。详细可以查看本站另一篇文章：<a href="http://www.ieclipse.cn/2016/08/02/Android/Android-code-states/">Android使用代码来实现StateListDrawable</a></p>
 <p>计时开始代码：</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -339,7 +342,8 @@ public void onClick(View v) &#123;
         return;
     &#125;
     super.onClick(v);
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a> 是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>Android使用代码来实现StateListDrawable: <a href="http://www.ieclipse.cn/2016/08/02/Android/Android-code-states/">http://www.ieclipse.cn/2016/08/02/Android/Android-code-states/</a><br>QuickAF: <a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">https://github.com/Jamling/QuickAF</a></p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/08/02/Android/Android-coutdown-button/](https://www.ieclipse.cn/2016/08/02/Android/Android-coutdown-button/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>

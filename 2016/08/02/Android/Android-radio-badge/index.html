@@ -221,7 +221,8 @@ protected Point getBadgePosition() &#123;
         &#125;
     &#125;
     return new Point(offw, offh);
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>从上面的代码可以看到，<code>drawBadge</code>用来画BadgeView, <code>getBadgePosition()</code>用于获取BadgeView的位置。注意了，这个位置坐标位于top drawable的右上角，如果你的页面要求小红点位于其它地方，比如右下角，那么需要参考本类的实现，重写<code>getBadgePosition()</code>方法。</p>
 <p>如何控制显示的数目呢？</p>
 <p>请看以下代码：</p>
@@ -246,7 +247,8 @@ public void incrementBadgeCount(int increment) &#123;
 
 public void decrementBadgeCount(int decrement) &#123;
     incrementBadgeCount(-decrement);
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>像常用的对BadgeView数目的操作，都委托<var>badgeView</var>去执行了。更多的操作，需要通过<code>getBadgeView()</code>返回<var>badgeView</var>来执行。</p>
 <p>那么可以认为RadioBadgeView相当于一个Decorator。真正的玄机还在BadgeView2类中。</p>
 <h2 id="BadgeView2"><a href="#BadgeView2" class="headerlink" title="BadgeView2"></a>BadgeView2</h2><p>BadgeView2与BadgeView很像，熟悉BadgeView的同学阅读BadgeView2的代码应该很容易，由于BadgeView2的代码较长，这里只讲部分重点功能。</p>
@@ -273,7 +275,8 @@ public void setBadgeStyle(int badgeStyle) &#123;
         this.badgeStyle = badgeStyle;
         requestLayout();
     &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h3 id="设置背景"><a href="#设置背景" class="headerlink" title="设置背景"></a>设置背景</h3><p>提供两个API来设置背景</p>
 <ul>
 <li>通过指定背景半径(radius)和背景色(bgColor)来设置（背景为ShapeDrawable）</li>
@@ -329,7 +332,8 @@ public void setBadgeBackground(Drawable d) &#123;
         badgeBackground = d;
         requestLayout();
     &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>其它的API就不详细介绍了，有兴趣可以查看<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>源代码。</p>
 <h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>在<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>的sample app中，底部的导航栏使用的就是RadioBageView，另外，在示例中还包含RadioBadgeView的三种使用方式</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -354,7 +358,8 @@ rb2.getBadgeView().setBadgePadding(r, 0, r, 0);
 rb3.getBadgeView().setBadgeBackground(
         getResources().getDrawable(R.mipmap.logo));
 rb3.getBadgeView().setTextColor(0xff0000ff);
-rb3.getBadgeView().setTextSize(ts * 2 / 3);</code></pre>
+rb3.getBadgeView().setTextSize(ts * 2 / 3);
+</code></pre>
 <p>layout中有三个RadioBadgeView，分别为rb1, rb2和rb3。</p>
 <ul>
 <li><strong>rb1</strong>：使用ShapeDrawable作背景，最大数目显示10</li>
@@ -406,7 +411,8 @@ rb3.getBadgeView().setTextSize(ts * 2 / 3);</code></pre>
         android:gravity=&quot;center&quot;
         android:padding=&quot;8dp&quot;
         android:text=&quot;png bg&quot; /&gt;
-&lt;/RadioGroup&gt;</code></pre>
+&lt;/RadioGroup&gt;
+</code></pre>
 <p>大家可以在<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>的sample app中修改显示风格，设置padding，增加或减少数目来查看效果。</p>
 <h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a> 是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>BadgeView: <a target="_blank" rel="noopener" href="https://github.com/stefanjauker/BadgeView">https://github.com/stefanjauker/BadgeView</a><br>QuickAF: <a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">https://github.com/Jamling/QuickAF</a></p>

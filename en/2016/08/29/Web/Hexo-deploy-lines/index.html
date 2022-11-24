@@ -194,7 +194,7 @@
 <p>www的CNAME有两条解析路线，默认（国内）路线指向<var>username</var>.coding.me；海外指向<var>username</var>.github.io。也即，在国内访问，其实是访问coding.net上的博客。而海外，则是访问github.io上的博客。那么如何验证访问的是海外还是国内路线呢？先不急，后面有介绍。</p>
 <p>PS：</p>
 <ul>
-<li>我的顶级域名解析到一个IP地址，其实是ping jamling.coding.me的IP地址，jamling.coding.me的IP地址是变动的。所以有时使用<a target="_blank" rel="noopener" href="http://ieclipse.cn">http://ieclipse.cn</a> 访问的话，可能会出现无法连接到服务器而导致无法访问。解决的办法是将A记录指向<var>username</var>.coding.me。不过，DNS默认提供了@A记录解析，需要先删除掉才能添加成功（我的另一个域名把系统提供默认@记录解析删除掉了以实现<a target="_blank" rel="noopener" href="http://domain.com">http://domain.com</a> 与<a target="_blank" rel="noopener" href="http://www.domain.com">http://www.domain.com</a> 相同的访问效果）。</li>
+<li>我的顶级域名解析到一个IP地址，其实是ping jamling.coding.me的IP地址，jamling.coding.me的IP地址是变动的。所以有时使用<a target="_blank" rel="noopener" href="http://ieclipse.cn/">http://ieclipse.cn</a> 访问的话，可能会出现无法连接到服务器而导致无法访问。解决的办法是将A记录指向<var>username</var>.coding.me。不过，DNS默认提供了@A记录解析，需要先删除掉才能添加成功（我的另一个域名把系统提供默认@记录解析删除掉了以实现<a target="_blank" rel="noopener" href="http://domain.com/">http://domain.com</a> 与<a target="_blank" rel="noopener" href="http://www.domain.com/">http://www.domain.com</a> 相同的访问效果）。</li>
 <li>我的博客在github和coding.net，都是属于用户Pages，如果是项目Pages，请看我的dl.ieclipse.cn解析规则，CNAME国内解析到pages.coding.net。CNAME海外解析到<var>username</var>.github.io。</li>
 </ul>
 <h2 id="验证测试"><a href="#验证测试" class="headerlink" title="验证测试"></a>验证测试</h2><p>验证测试的办法就是github.io上的内容与[coding.me]上的内容不一致，然后通过使用海外代理或翻墙的方式来访问相同的域名，看是否解析正常。浏览器不使用代理，VPN，访问的域名，就是coding.me。使用翻墙软件访问的就是github.io。然后看比较内容，看是否正常解析。还有一种方式就是注意看浏览器左下角的状态。比如输入域名后回车，状态栏有正在连接github.io，则说明访问的是海外路线。</p>
@@ -205,14 +205,15 @@
   type: git
   repo: 
     coding: git@git.coding.net:Jamling/Jamling,coding-pages
-    github: git@github.com:Jamling/jamling.github.com.git,master</code></pre>
+    github: git@github.com:Jamling/jamling.github.com.git,master
+</code></pre>
 <p>repo可以写多个，格式为git仓库地址+英文逗号+分支名称。在国内，有时部署到github.io会失败，此时，[coding.me]上的博客是最新的，而github.io上的博客还是原来的，此时，正是验证你双线部署是否成功的绝佳时刻。</p>
 <h2 id="致谢"><a href="#致谢" class="headerlink" title="致谢"></a>致谢</h2><ul>
 <li><strong>感谢[github.com]!</strong></li>
-<li><strong>感谢[coding.net]!</strong> </li>
+<li><strong>感谢[coding.net]!</strong></li>
 </ul>
 <p>[github.com]和[coding.net]为大家免费提供的pages服务，希望大家不要滥用，更不要做违反相关法律法规的事，不然，哪一天迫于政府压力终止服务或被墙的时候，到哪里去找这么优质的免费空间呢？</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>Coding Pages 帮助: <a target="_blank" rel="noopener" href="https://coding.net/help/doc/pages/index.html">https://coding.net/help/doc/pages/index.html</a><br>github pages自定义域名: <a target="_blank" rel="noopener" href="https://help.github.com/articles/setting-up-a-custom-subdomain/">https://help.github.com/articles/setting-up-a-custom-subdomain/</a><br>[github.com]: <a target="_blank" rel="noopener" href="https://github.com">https://github.com</a><br>[coding.net]: <a target="_blank" rel="noopener" href="https://coding.net">https://coding.net</a><br>[Hexo]: <a target="_blank" rel="noopener" href="https://hexo.io">https://hexo.io</a><br>[Nova]: <a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-theme-nova">http://github.com/Jamling/hexo-theme-nova</a><br>[Coding Pages 帮助]: <a target="_blank" rel="noopener" href="https://coding.net/help/doc/pages/index.html">https://coding.net/help/doc/pages/index.html</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>Coding Pages 帮助: <a target="_blank" rel="noopener" href="https://coding.net/help/doc/pages/index.html">https://coding.net/help/doc/pages/index.html</a><br>github pages自定义域名: <a target="_blank" rel="noopener" href="https://help.github.com/articles/setting-up-a-custom-subdomain/">https://help.github.com/articles/setting-up-a-custom-subdomain/</a><br>[github.com]: <a target="_blank" rel="noopener" href="https://github.com/">https://github.com</a><br>[coding.net]: <a target="_blank" rel="noopener" href="https://coding.net/">https://coding.net</a><br>[Hexo]: <a target="_blank" rel="noopener" href="https://hexo.io/">https://hexo.io</a><br>[Nova]: <a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-theme-nova">http://github.com/Jamling/hexo-theme-nova</a><br>[Coding Pages 帮助]: <a target="_blank" rel="noopener" href="https://coding.net/help/doc/pages/index.html">https://coding.net/help/doc/pages/index.html</a></p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/08/29/Web/Hexo-deploy-lines/](https://www.ieclipse.cn/2016/08/29/Web/Hexo-deploy-lines/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
   </div>

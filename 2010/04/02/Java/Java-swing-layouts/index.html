@@ -201,7 +201,7 @@
 </li>
 <li><p>insets：指定组件的外部填充，相当于单元格间距。</p>
 </li>
-<li><p>Anchor：当组件的大小小于可用显示区域时使用，指定组件在显示区域中的位置。 请见下图： </p>
+<li><p>Anchor：当组件的大小小于可用显示区域时使用，指定组件在显示区域中的位置。 请见下图：</p>
 </li>
 </ul>
 <pre>
@@ -229,7 +229,7 @@
 </ul>
 <h2 id="SpringLayout"><a href="#SpringLayout" class="headerlink" title="SpringLayout"></a>SpringLayout</h2><p>SpringLayout是一种较特殊的布局管理器，它通过定义容器及容器内组件的约束来实现布局。 它与Spring, SpringLayout. Constraints联合使用。 </p>
 <p>在此之前先说一下Spring<br>Spring好似一个弹簧，它可以伸长到maximum，也可以收缩到minimun，在正常情况下它的长度是prefferenceSize，在容器大小变动时，它根据前面的三个值根据一系列规则计算出具体的value。<br>Spring是一个抽象类，它提供max,sum静态函数</p>
-<p>SpringLayout.Constraints，将管理组件大小和位置更改方式的约束存储在 SpringLayout 控制的容器中，它有x、y、width 和 height 属性，因而它类似于一个 Rectangle。 但是，在 Constraints 对象中，这些属性具有的是 Spring 值，而不是整数。 此外，可以使用 constraint 属性按四个边（东、南、西、北）操作一个 Constraints 对象。<br>组件与组件的约束是通过边来定义的，如一个textfield的左边距label的右边多少距离。 下面给出边的计算公式：<br>WEST = x<br>NORTH = y<br>EAST = x + width<br>SOUTH = y + height<br>下面给出一个官方的示例：<br>容器容器pane使用Spring布局管理器，pane下有一个label及一个textfield。</p>
+<p>SpringLayout.Constraints，将管理组件大小和位置更改方式的约束存储在 SpringLayout 控制的容器中，它有x、y、width 和 height 属性，因而它类似于一个 Rectangle。 但是，在 Constraints 对象中，这些属性具有的是 Spring 值，而不是整数。 此外，可以使用 constraint 属性按四个边（东、南、西、北）操作一个 Constraints 对象。<br>组件与组件的约束是通过边来定义的，如一个textfield的左边距label的右边多少距离。 下面给出边的计算公式：<br>WEST &#x3D; x<br>NORTH &#x3D; y<br>EAST &#x3D; x + width<br>SOUTH &#x3D; y + height<br>下面给出一个官方的示例：<br>容器容器pane使用Spring布局管理器，pane下有一个label及一个textfield。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Swing的布局管理器感觉没有SWT好使，在现实的界面开发中，需要根据实际情况灵活使用多种布局管理器，不像SWT使用一个GridLayout差不多就可以了。 鉴于个人理解的还不够深刻，更多的资料需要去看sun官网布局管理器的说明：</p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2010/04/02/Java/Java-swing-layouts/](https://www.ieclipse.cn/2010/04/02/Java/Java-swing-layouts/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   

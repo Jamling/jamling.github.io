@@ -185,7 +185,7 @@
 
 <h2 id="加载速度对比"><a href="#加载速度对比" class="headerlink" title="加载速度对比"></a>加载速度对比</h2><p>先看下面几个站点的加载速度</p>
 <ul>
-<li><p><a href="http://www.ieclipse.cn">www.ieclipse.cn</a><br>这是我自己的站点，使用了双线部署，国内节点为coding.net。</p>
+<li><p><a href="http://www.ieclipse.cn/">www.ieclipse.cn</a><br>这是我自己的站点，使用了双线部署，国内节点为coding.net。</p>
 <img src="/2016/08/30/Web/Hexo-blog-performance/ieclipse.cn.png" class="">
 <p>请求非常多，52个请求，页面加载用时427ms，加上其它的异步请求，总用时1.54s。相当于页面秒开。加载相对较慢的有nova.css和那个自动隐藏导航栏的js脚本。其它的像jq和bootstrap都使用了cdn，加载还是相当快的。</p>
 </li>
@@ -206,7 +206,7 @@
 <li>使用多线部署，因为国内访问github比较慢，建议博客可以放在国内的站点。具体教程可以参考本站另一文章：<a href="/2016/08/29/Web/Hexo-deploy-lines/">Hexo博客双线部署</a></li>
 <li>使用cdn，对于字体，js，css等静态资源，如果有cdn加速，建议使用cdn。比如我的博客，jquery, bootstrap使用的都是cdn。</li>
 <li>尽量使用简洁的主题，比如Next，像上面的csdoker.com和fatdoge.cn使用的主题，加载就慢多了。</li>
-<li>js脚本尽量后置，如果不影响功能，建议放在&lt;/body&gt;之前，并且能异步加载的，尽量异步加载。比如本站的nova主题，许多脚本都是后置并且异步的。</li>
+<li>js脚本尽量后置，如果不影响功能，建议放在&lt;&#x2F;body&gt;之前，并且能异步加载的，尽量异步加载。比如本站的nova主题，许多脚本都是后置并且异步的。</li>
 </ul>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/08/30/Web/Hexo-blog-performance/](https://www.ieclipse.cn/2016/08/30/Web/Hexo-blog-performance/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   

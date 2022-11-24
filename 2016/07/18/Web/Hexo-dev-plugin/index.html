@@ -207,7 +207,7 @@ hexo.io插件">
 <li>渲染引擎 (Renderer)</li>
 <li>标签 (Tag)</li>
 </ul>
-<h2 id="Hexo插件加载流程"><a href="#Hexo插件加载流程" class="headerlink" title="Hexo插件加载流程"></a>Hexo插件加载流程</h2><p>首先上代码（hexo/lib/index.js）：</p>
+<h2 id="Hexo插件加载流程"><a href="#Hexo插件加载流程" class="headerlink" title="Hexo插件加载流程"></a>Hexo插件加载流程</h2><p>首先上代码（hexo&#x2F;lib&#x2F;index.js）：</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="js">Hexo.prototype.init = function() &#123;
@@ -238,7 +238,8 @@ hexo.io插件">
     // Ready to go!
     self.emit(&#39;ready&#39;);
   &#125;);
-&#125;;</code></pre>
+&#125;;
+</code></pre>
 <p>从上面的代码可知，在hexo初始化时会加载插件，加载插件写在<code>load_plugins.js</code>中。它有两个主要函数</p>
 <ul>
 <li>loadModules，会去加载第三方的插件，包括hexo自带的插件</li>
@@ -254,7 +255,8 @@ hexo.io插件">
 <pre><code class="js">hexo.extend.helper.register(&#39;hello_plugin&#39;, function(page)&#123;
     this.log(&quot;Hello Plugin&quot;);
     return &quot;hello plugin&quot;;
-&#125;);</code></pre>
+&#125;);
+</code></pre>
 <p>重启后，调用此辅助函数，则会在命令窗口显示Hello Plugin，并且在前台界面上显示hello plugin。</p>
 <p>如果插件功能较为简单，则不妨将其写为script插件。一个文件，可以写多个不同类型的插件。<a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-generator-i18n">hexo-generator-i18n</a>国际化插件早期也是写在script中的，后来为了更多的人能够使用，将其发布到NPM，才写为了package插件。</p>
 <h2 id="Package插件"><a href="#Package插件" class="headerlink" title="Package插件"></a>Package插件</h2><h3 id="npm-init"><a href="#npm-init" class="headerlink" title="npm init"></a>npm init</h3><p>使用<code>npm init</code>来新建本地包。然后根据提示，依次输入name, version, description等信息，新建完成后会生成一个<code>package.json</code>文件。</p>
@@ -271,8 +273,9 @@ hexo.io插件">
   &quot;author&quot;: &quot;&quot;,
   &quot;license&quot;: &quot;ISC&quot;,
   &quot;keywords&quot;: []
-&#125;</code></pre>
-<p>当然也可以手动新建<code>package.json</code>文件，并编辑，其中name和version字段是必须的。详细请参考npm文档<a target="_blank" rel="noopener" href="https://docs.npmjs.com/getting-started/using-a-package.json。">https://docs.npmjs.com/getting-started/using-a-package.json。</a></p>
+&#125;
+</code></pre>
+<p>当然也可以手动新建<code>package.json</code>文件，并编辑，其中name和version字段是必须的。详细请参考npm文档<a target="_blank" rel="noopener" href="https://docs.npmjs.com/getting-started/using-a-package.json%E3%80%82">https://docs.npmjs.com/getting-started/using-a-package.json。</a></p>
 <h3 id="编写插件逻辑"><a href="#编写插件逻辑" class="headerlink" title="编写插件逻辑"></a>编写插件逻辑</h3><p>确定好插件要实现的功能，再根据<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/api/">hexo api</a>编写相应的逻辑代码。下面以<a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-generator-index2">hexo-generator-index2</a>为例。</p>
 <p>之前，有人在群里问，如何在hexo博客首页，显示指定分类下文章。要实现这个功能，可以修改官方的hexo-generator-index插件。</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -290,7 +293,8 @@ hexo.io插件">
       __index: true
     &#125;
   &#125;);
-&#125;;</code></pre>
+&#125;;
+</code></pre>
 <p>在对posts分页之前，将指定分类之外的文章过滤掉即可。如下所示：</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -302,7 +306,8 @@ hexo.io插件">
     &#125;
   &#125;);
   return ret;
-&#125;);</code></pre>
+&#125;);
+</code></pre>
 <p>但这种修改，只在当前的机器上有效。在此基础上，对此插件稍做修改，指定的分类，可以通过配置来指定。</p>
 <p class="code-caption" data-lang="js" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -315,13 +320,15 @@ funcs[&#39;category&#39;] = function(post, value)&#123;
       &#125;
     &#125;);
     return ret;
-&#125;;</code></pre>
+&#125;;
+</code></pre>
 <p>除了category过滤，<a target="_blank" rel="noopener" href="http://github.com/Jamling/hexo-generator-index2">hexo-generator-index2</a>还有tag和path过滤。</p>
 <p>注：hexo启动时，会调用所有的generaotr插件。</p>
 <h3 id="插件发布"><a href="#插件发布" class="headerlink" title="插件发布"></a>插件发布</h3><p>在发布到npm之前，先去npmjs.com注册账号并激活，然后在本地<code>$ npm login</code>登录。登录成功之后，就可以发布到npm了。</p>
 <p class="code-caption" data-lang="bash" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="bash">$ npm publish</code></pre>
+<pre><code class="bash">$ npm publish
+</code></pre>
 <p>发布成功之后，就可以将插件提交到hexo plugins列表了。</p>
 <p>如果对插件进行了修改，刚可以通过<code>npm version</code>来更新版本（注如使用了git做scm，那么，它会自动生成一个新tag并提交）。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>hexo api: <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/api/">https://hexo.io/zh-cn/api/</a><br>hexo docs: <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/plugins.html">https://hexo.io/zh-cn/docs/plugins.html</a></p>

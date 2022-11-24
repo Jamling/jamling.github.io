@@ -187,16 +187,13 @@
 <p>使用adb文件传输优点：无需卸载或挂载SD卡</p>
 <span id="more"></span>
 
-<h2 id="官方指南"><a href="#官方指南" class="headerlink" title="官方指南"></a>官方指南</h2><p>请访问<a target="_blank" rel="noopener" href="http://developer.android.com/tools/device.html配置你的设备，也可以下载驱动">http://developer.android.com/tools/device.html配置你的设备，也可以下载驱动</a></p>
+<h2 id="官方指南"><a href="#官方指南" class="headerlink" title="官方指南"></a>官方指南</h2><p>请访问<a target="_blank" rel="noopener" href="http://developer.android.com/tools/device.html%E9%85%8D%E7%BD%AE%E4%BD%A0%E7%9A%84%E8%AE%BE%E5%A4%87%EF%BC%8C%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%B8%8B%E8%BD%BD%E9%A9%B1%E5%8A%A8">http://developer.android.com/tools/device.html配置你的设备，也可以下载驱动</a></p>
 <h2 id="操作实践"><a href="#操作实践" class="headerlink" title="操作实践"></a>操作实践</h2><h3 id="在Win7上连接手机。"><a href="#在Win7上连接手机。" class="headerlink" title="在Win7上连接手机。"></a>在Win7上连接手机。</h3><ol>
-<li><p>使用USB线将PC与手机连接起来</p>
-</li>
-<li><p>打开cmd，输入adb devices查看设备状态</p>
-<img src="/2016/05/14/other/tech-adb-mobile/image001.jpg" class="">
-
-<p>注：adb 命令找不到，将先配置系统环境变量</p>
-</li>
+<li>使用USB线将PC与手机连接起来</li>
+<li>打开cmd，输入adb devices查看设备状态</li>
 </ol>
+ <img src="/2016/05/14/other/tech-adb-mobile/image001.jpg" class="">
+<p> 注：adb 命令找不到，将先配置系统环境变量</p>
 <p>从上图可以看到，目前adb识别到的设备数为0。为什么呢？因为缺少驱动。需要安装驱动。不信，可以在设备管理器查看一下，如下图所示：</p>
 <p><img src="/2016/05/14/other/tech-adb-mobile/image002.jpg" class=""></p>
 
@@ -206,7 +203,7 @@
 
 <p>如果你不是专业的Android开发人员，请自行百度并下载Google USB驱动。下载好驱动之后，进入驱动所在的目录，如我的电脑存放在：<br><code>D:\adt-bundle-windows-x86\sdk\extras\google\usb_driver</code><br>在此目录下，有一个<kbd>android_winusb.inf</kbd>文件，使用像记事本等文本编辑器打开它。</p>
 <p><img src="/2016/05/14/other/tech-adb-mobile/image005.jpg" class=""></p>
-
+ 
 <p>文件内容如下图，像Google的亲儿子Nexus系统手机，它都配置好了VID和PID，可以直接安装驱动。但是好多手机，需要我们自己配置，谁叫你买的不是Google的产品呢~</p>
 <img src="/2016/05/14/other/tech-adb-mobile/image006.jpg" class="">
 
@@ -226,13 +223,6 @@
 
 <p>运行monitor查看手机</p>
 <img src="/2016/05/14/other/tech-adb-mobile/image016.jpg" class=""> 
-
-
-
-
-
-
-
 
 
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/05/14/other/tech-adb-mobile/](https://www.ieclipse.cn/2016/05/14/other/tech-adb-mobile/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>

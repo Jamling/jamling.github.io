@@ -189,7 +189,7 @@
 <li>resume.md，简历右侧内容，可完全采用markdown来写 :)</li>
 </ul>
 <h2 id="排版"><a href="#排版" class="headerlink" title="排版"></a>排版</h2><p>模板采用左-右结构，左边主要是个人信息等基本信息展示，右侧展示工作与项目经历，基本信息不是完全的结构化，所以需要提取结构化的数据。模板中对数据进行了渲染</p>
-<h3 id="数据源"><a href="#数据源" class="headerlink" title="数据源"></a>数据源</h3><p>可在数据文件夹(_data目录)/resume.yml中存放基本信息等左侧内容，也可以在.md源文件中定义数据源</p>
+<h3 id="数据源"><a href="#数据源" class="headerlink" title="数据源"></a>数据源</h3><p>可在数据文件夹(_data目录)&#x2F;resume.yml中存放基本信息等左侧内容，也可以在.md源文件中定义数据源</p>
 <p class="code-caption" data-lang="yaml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="yaml">side:
@@ -222,7 +222,8 @@
           type: md
         - label: Github
           value: &quot;[Jamling](https://github.com/Jamling)&quot;
-          type: md</code></pre>
+          type: md
+</code></pre>
 <p>工作经历与项目经历等直接使用markdown写在.md源文件中</p>
 <p class="code-caption" data-lang="markdown" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -246,12 +247,13 @@
 
 
 #### 职责
-
+  
 - 负责XXX
-
+  
 #### 业绩
-
-- 成本降低XXX</code></pre>
+  
+- 成本降低XXX
+</code></pre>
 <p>渲染结果可参考<a href="/other/resume.html">简历模板</a>，与原来的html模板比起来，不要简洁太多。</p>
 <h2 id="打印"><a href="#打印" class="headerlink" title="打印"></a>打印</h2><p>原模板在打印上不太友好，优化后的打印效果基本同当前所见到的页面，不会出现效果相差巨大的问题。</p>
 <p class="code-caption" data-lang="css" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -274,7 +276,8 @@
     h3 &#123;
         font-size: 1.2em;
     &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>完整的css请参考<code>resume.scss</code></p>
 <h2 id="隐私"><a href="#隐私" class="headerlink" title="隐私"></a>隐私</h2><p>可利用Nova特有的加密功能开启隐私保护，在Front-matter中添加passord: your passowrd即可，密码输入不对，无法查看。</p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2022/10/17/Web/hexo-your-resume/](https://www.ieclipse.cn/2022/10/17/Web/hexo-your-resume/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>

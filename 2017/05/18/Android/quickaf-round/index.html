@@ -205,13 +205,15 @@
     canvas.drawBitmap(bitmap, rect, rect, paint);
 
     return output;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>点评：<br>早期用得较多，占用bitmap双倍内存。</p>
 <h2 id="方法二：使用BitmapShader"><a href="#方法二：使用BitmapShader" class="headerlink" title="方法二：使用BitmapShader"></a>方法二：使用BitmapShader</h2><p>此种方式是先将bitmap生成BitmapShader，然后将其绘制到canvas中, 部分关键代码如下，完整代码请参考<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>中的RoundImageView</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">bitmapShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-paint.setShader(bitmapShader);</code></pre>
+paint.setShader(bitmapShader);
+</code></pre>
 <pre><code class="java">@Override
 public void draw(Canvas canvas) &#123;
     Rect bounds = getBounds();
@@ -231,7 +233,8 @@ public void draw(Canvas canvas) &#123;
 <h2 id="方法三：图片加载库"><a href="#方法三：图片加载库" class="headerlink" title="方法三：图片加载库"></a>方法三：图片加载库</h2><p>目前github上有许多流行的图片加载库，基于上都附带圆角图片功能，只需要稍微配置一下，即可轻松的实现想要的效果。其实在底层，无非也是使用上面的两种方式。比如<a href="Android-Universal-Image-Loader">Android-Universal-Image-Loader</a> 早期的RoundedBitmapDisplayer使用setXfermode来实现，后来使用BitmapShader实现。</p>
 <pre><code class="java">DisplayImageOptions options = new DisplayImageOptions.Builder()
         .displayer(new RoundedBitmapDisplayer()) // display rounded bitmap
-        .build();</code></pre>
+        .build();
+</code></pre>
 <p>再以比较另类的<a target="_blank" rel="noopener" href="https://github.com/facebook/fresco">fresco</a>为例，虽然底层是以C实现，不过在圆角处理上，仍然还是在Java层实现，用的方式还是BitmapShader。不过对于非bitmap的圆角实现，fresco是用Paint直接画的。附上fresco配置。</p>
 <p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -262,7 +265,8 @@ public void draw(Canvas canvas) &#123;
   fresco:roundWithOverlayColor=&quot;@color/corner_color&quot;
   fresco:roundingBorderWidth=&quot;2dp&quot;
   fresco:roundingBorderColor=&quot;@color/border_color&quot;
-/&gt;</code></pre>
+/&gt;
+</code></pre>
 <p>点评：<br>由框架实现，使用简单，稳定。</p>
 <h2 id="方法四：遮罩"><a href="#方法四：遮罩" class="headerlink" title="方法四：遮罩"></a>方法四：遮罩</h2><p>此种方式还是使用setXfermode，不过与方法一不同的是：不对图片作任何更改，只在圆角之外再画一层与背景颜色相同的四个角来遮挡，在视觉上造成圆角图片的效果。关键代码如下：</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -281,7 +285,8 @@ protected void onDraw(Canvas canvas) &#123;
         paint.setXfermode(null);
         canvas.restoreToCount(sc);
     &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>详细代码请参考<a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>中的RoundMaskView</p>
 <p>使用这种方式，圆角化的对象不限于ImageView，还可以是任意的layout哦，比如下面的示例</p>
 <p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -315,7 +320,8 @@ protected void onDraw(Canvas canvas) &#123;
         android:radius=&quot;10dp&quot;
         app:af_borderColor=&quot;@color/white&quot;
         app:af_borderWidth=&quot;1dp&quot;/&gt;
-&lt;/FrameLayout&gt;</code></pre>
+&lt;/FrameLayout&gt;
+</code></pre>
 <p>配合FrameLayout，将LinearLayout实现了圆角，在视觉效果上，ImageView左上和右上圆角，TextView左下和右下圆角。</p>
 <p>点评：<br>具有一定的局限性，不过不限于图片，所有的Layout都可以在视觉上实现圆角。</p>
 <h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>

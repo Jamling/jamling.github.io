@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="keywords" content="Android,VectorDrawble踩过的坑">
-  <meta name="description" content="前言Android 从5.0（代号L）开始支持矢量图，心想，这个好哇，drawable/mipmap图片资源终于可以瘦身了！后来还特地翻墙在YouTube上观看了Google IO大会上在Android Studio中创建Vector drawable的视频。本着匆用新版本的原则。一直对它处于了解阶段。并未在项目中实践。前一阵子，实践了一把，结果差点被坑死。下面列举一下本人亲自踩过的坑。">
+  <meta name="description" content="前言Android 从5.0（代号L）开始支持矢量图，心想，这个好哇，drawable&#x2F;mipmap图片资源终于可以瘦身了！后来还特地翻墙在YouTube上观看了Google IO大会上在Android Studio中创建Vector drawable的视频。本着匆用新版本的原则。一直对它处于了解阶段。并未在项目中实践。前一阵子，实践了一把，结果差点被坑死。下面列举一下本人亲自踩过的坑。">
    
 
   <meta name="og:type" content="article">
@@ -14,14 +14,14 @@
   <meta name="og:image" content="https://www.ieclipse.cn/image/logo.png">
   <meta name="og:title" content="VectorDrawble踩过的坑">
   <meta name="og:url" content="https://www.ieclipse.cn/2017/03/02/Android/vector-trap/">
-  <meta name="og:description" content="前言Android 从5.0（代号L）开始支持矢量图，心想，这个好哇，drawable/mipmap图片资源终于可以瘦身了！后来还特地翻墙在YouTube上观看了Google IO大会上在Android Studio中创建Vector drawable的视频。本着匆用新版本的原则。一直对它处于了解阶段。并未在项目中实践。前一阵子，实践了一把，结果差点被坑死。下面列举一下本人亲自踩过的坑。">
+  <meta name="og:description" content="前言Android 从5.0（代号L）开始支持矢量图，心想，这个好哇，drawable&#x2F;mipmap图片资源终于可以瘦身了！后来还特地翻墙在YouTube上观看了Google IO大会上在Android Studio中创建Vector drawable的视频。本着匆用新版本的原则。一直对它处于了解阶段。并未在项目中实践。前一阵子，实践了一把，结果差点被坑死。下面列举一下本人亲自踩过的坑。">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="Jamling's Blog and Project Site">
   <meta name="twitter:image" content="https://www.ieclipse.cn/image/logo.png">
   <meta name="twitter:title" content="VectorDrawble踩过的坑">
   <meta name="twitter:creator" content="@JamlingLi">
-  <meta name="twitter:description" content="前言Android 从5.0（代号L）开始支持矢量图，心想，这个好哇，drawable/mipmap图片资源终于可以瘦身了！后来还特地翻墙在YouTube上观看了Google IO大会上在Android Studio中创建Vector drawable的视频。本着匆用新版本的原则。一直对它处于了解阶段。并未在项目中实践。前一阵子，实践了一把，结果差点被坑死。下面列举一下本人亲自踩过的坑。">
+  <meta name="twitter:description" content="前言Android 从5.0（代号L）开始支持矢量图，心想，这个好哇，drawable&#x2F;mipmap图片资源终于可以瘦身了！后来还特地翻墙在YouTube上观看了Google IO大会上在Android Studio中创建Vector drawable的视频。本着匆用新版本的原则。一直对它处于了解阶段。并未在项目中实践。前一阵子，实践了一把，结果差点被坑死。下面列举一下本人亲自踩过的坑。">
 
   <!-- Canonical links -->
   <link rel="canonical" href="https://www.ieclipse.cn/en/2017/03/02/Android/vector-trap/index.html">
@@ -180,7 +180,7 @@
   </header>
   <div class="article-content" itemprop="articleBody">
   
-    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Android 从5.0（代号L）开始支持矢量图，心想，这个好哇，drawable/mipmap图片资源终于可以瘦身了！后来还特地翻墙在YouTube上观看了Google IO大会上在Android Studio中创建Vector drawable的视频。本着匆用新版本的原则。一直对它处于了解阶段。并未在项目中实践。前一阵子，实践了一把，结果差点被坑死。下面列举一下本人亲自踩过的坑。</p>
+    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Android 从5.0（代号L）开始支持矢量图，心想，这个好哇，drawable&#x2F;mipmap图片资源终于可以瘦身了！后来还特地翻墙在YouTube上观看了Google IO大会上在Android Studio中创建Vector drawable的视频。本着匆用新版本的原则。一直对它处于了解阶段。并未在项目中实践。前一阵子，实践了一把，结果差点被坑死。下面列举一下本人亲自踩过的坑。</p>
 <span id="more"></span>
 
 <h2 id="fillColor无法在低于API21的版本使用引用颜色"><a href="#fillColor无法在低于API21的版本使用引用颜色" class="headerlink" title="fillColor无法在低于API21的版本使用引用颜色"></a>fillColor无法在低于API21的版本使用引用颜色</h2><p>在项目中，使用定义了<code>colorPrimary</code>作为主题首选色，比如蓝色。现引用一个Vector，要求颜色与主题首选色一致。第一时间想到的就是，在Vector中作如下定义：</p>
@@ -188,7 +188,8 @@
 
 <pre><code class="xml">&lt;path
         android:fillColor=&quot;@color/colorPrimary&quot;
-        android:pathData=&quot;...&quot;/&gt;</code></pre>
+        android:pathData=&quot;...&quot;/&gt;
+</code></pre>
 <p>然而在5.0以下的设备中运行时发现，图标为黑色，<code>fillColor</code>设置无效。Google之后，说应该使用Tint来对vector着色，好吧，于是写了一个util方法进行处理。</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -202,7 +203,8 @@
         DrawableCompat.setTint(wrappedDrawable, color);
         return wrappedDrawable;
     &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h2 id="TextView-compound-drawable无法着色"><a href="#TextView-compound-drawable无法着色" class="headerlink" title="TextView compound drawable无法着色"></a>TextView compound drawable无法着色</h2><p>我有一个带Compound Drawable的<code>TextView</code></p>
 <p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -218,7 +220,8 @@
     android:text=&quot;@string/common_back&quot;
     android:textColor=&quot;@color/white&quot;
     android:textSize=&quot;16sp&quot;&gt;
-&lt;/TextView&gt;</code></pre>
+&lt;/TextView&gt;
+</code></pre>
 <p>ic_back是VectorDrawble，我想设置图片颜色与文字一致，都为白色。本以为加上<code>android:drawableTint=&quot;#FFF&quot;</code>就行了，然而发现并不起作用。于是尝试将<code>TextView</code>换成<code>AppcompatTextView</code>，竟然还是不起作用，debug了一把，发现<code>AppcompatTextHelper</code>无法生成<code>TintInfo</code></p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -232,7 +235,8 @@
         return tintInfo;
     &#125;
     return null;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>我不明白<code>ImageView</code>的<code>android:tint</code>可以生效，而<code>TextView</code>不可以，又不想将<code>TextView</code>拆分为<code>ImageView</code>和<code>TextView</code>。所以呢，没办法，我只能复制一份ic_back.xml，然后修改fillColor为white之后另存为ic_back_white.xml。</p>
 <h2 id="VectorDrawble无法在selector中使用"><a href="#VectorDrawble无法在selector中使用" class="headerlink" title="VectorDrawble无法在selector中使用"></a>VectorDrawble无法在selector中使用</h2><p>这里其实有两个问问题。<br>为了提高用户体验，上面的<code>TextView</code>点击颜色会变换，我想让图片也跟着一起变色。我本是这么定义的</p>
 <p class="code-caption" data-lang="xml" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code" data-hide="false" data-title="ic_back_selector.xml"><span class="code-caption-label">(`ic_back_selector.xml`)</span><a class="code-caption-copy">Copy Code</a></p>
@@ -249,8 +253,9 @@
         &lt;bitmap android:src=&quot;@drawable/ic_back&quot;
             android:tint=&quot;#00f&quot;/&gt;
     &lt;/item&gt;
-&lt;/selector&gt;</code></pre>
-<p>首先在5.0之前的系统上运行，发现tint根本不起作用。所以我又定义了一个ic_back_pressed.xml。<br>然后在5.0上的系统运行时，直接crash了。根据<code>Caused by: android.content.res.Resources$NotFoundException: File res/drawable/ic_back_selector.xml from drawable resource ID #0x7f02005d</code>错误，stackOverflow上又找到了答案，原来gradle中需要配置android.defaultConfig.vectorDrawables.useSupportLibrary = true。然而并没有卵用，gradle sync之后，还是crash。不过Android Studio有新的错误提示，意思是要使用app:srcCompat代替android:src，按照这个提示，又修改了一次。结果又是crash，提示<code>Caused by: org.xmlpull.v1.XmlPullParserException: Binary XML file line #6: &lt;bitmap&gt; requires a valid src attribute</code>。好吧，我认输了。drawable下面已经有ic_back.xml，ic_back_pressed.xml，ic_back_white.xml，ic_back_selector.xml这么多vectorDrawable了，而且我想要的效果还不能实现。这坑就不填了。</p>
+&lt;/selector&gt;
+</code></pre>
+<p>首先在5.0之前的系统上运行，发现tint根本不起作用。所以我又定义了一个ic_back_pressed.xml。<br>然后在5.0上的系统运行时，直接crash了。根据<code>Caused by: android.content.res.Resources$NotFoundException: File res/drawable/ic_back_selector.xml from drawable resource ID #0x7f02005d</code>错误，stackOverflow上又找到了答案，原来gradle中需要配置android.defaultConfig.vectorDrawables.useSupportLibrary &#x3D; true。然而并没有卵用，gradle sync之后，还是crash。不过Android Studio有新的错误提示，意思是要使用app:srcCompat代替android:src，按照这个提示，又修改了一次。结果又是crash，提示<code>Caused by: org.xmlpull.v1.XmlPullParserException: Binary XML file line #6: &lt;bitmap&gt; requires a valid src attribute</code>。好吧，我认输了。drawable下面已经有ic_back.xml，ic_back_pressed.xml，ic_back_white.xml，ic_back_selector.xml这么多vectorDrawable了，而且我想要的效果还不能实现。这坑就不填了。</p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2017/03/02/Android/vector-trap/](https://www.ieclipse.cn/2017/03/02/Android/vector-trap/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   
   </div>

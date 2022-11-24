@@ -188,18 +188,22 @@
 <li>OpenCV Android包<br><a target="_blank" rel="noopener" href="http://sourceforge.net/projects/opencvlibrary/files/opencv-android/2.3/">http://sourceforge.net/projects/opencvlibrary/files/opencv-android/2.3/</a></li>
 <li>cmake(可选，替代NDK)<br>参考：<a target="_blank" rel="noopener" href="http://www.cmake.org/">http://www.cmake.org/</a></li>
 </ul>
-<p><em>注：<a target="_blank" rel="noopener" href="http://code.google.com/p/android-opencv/网站上说要使用crystax">http://code.google.com/p/android-opencv/网站上说要使用crystax</a> ndk r4代替NDK。估计可能是对于较旧的Android版本需要这样。如果NDK无法编译，请尝试使用crystax ndk r4编译。</em></p>
-<h3 id="OpenCV设置"><a href="#OpenCV设置" class="headerlink" title="OpenCV设置"></a>OpenCV设置</h3><p>从网站上下载OpenCV 2.3.0 for Android 后，解压到某个目录，如<del>/目录下<br>设置OPENCV_PACKAGE_DIR环境变量<br>`$ export OPENCV_PACKAGE_DIR=</del>/enCV-2.3.0/`</p>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="新建一个Android工程"><a href="#新建一个Android工程" class="headerlink" title="新建一个Android工程"></a>新建一个Android工程</h3><p>在eclipse中新建一个android 工程如study.opencv，并且在工程根目录下新建一个名为jni的目录。将下载的android-ndk-r6解压到某个目录下，如<del>/<br>从</del>/android-ndk-r6/sample下某个sample中拷贝Android.mk, Application.mk到study.opencv/jni目录</p>
+<p><em>注：<a target="_blank" rel="noopener" href="http://code.google.com/p/android-opencv/%E7%BD%91%E7%AB%99%E4%B8%8A%E8%AF%B4%E8%A6%81%E4%BD%BF%E7%94%A8crystax">http://code.google.com/p/android-opencv/网站上说要使用crystax</a> ndk r4代替NDK。估计可能是对于较旧的Android版本需要这样。如果NDK无法编译，请尝试使用crystax ndk r4编译。</em></p>
+<h3 id="OpenCV设置"><a href="#OpenCV设置" class="headerlink" title="OpenCV设置"></a>OpenCV设置</h3><p>从网站上下载OpenCV 2.3.0 for Android 后，解压到某个目录，如<del>&#x2F;目录下<br>设置OPENCV_PACKAGE_DIR环境变量<br>&#96;$ export OPENCV_PACKAGE_DIR&#x3D;</del>&#x2F;enCV-2.3.0&#x2F;&#96;</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="新建一个Android工程"><a href="#新建一个Android工程" class="headerlink" title="新建一个Android工程"></a>新建一个Android工程</h3><p>在eclipse中新建一个android 工程如study.opencv，并且在工程根目录下新建一个名为jni的目录。将下载的android-ndk-r6解压到某个目录下，如<del>&#x2F;<br>从</del>&#x2F;android-ndk-r6&#x2F;sample下某个sample中拷贝Android.mk, Application.mk到study.opencv&#x2F;jni目录</p>
 <h3 id="设置编译脚本"><a href="#设置编译脚本" class="headerlink" title="设置编译脚本"></a>设置编译脚本</h3><p>在Android.mk中，include $(CLEAR_VARS)后面，加入下行<br><code>include $(OPENCV_PACKAGE_DIR)/$(TARGET_ARCH_ABI)/share/opencv/OpenCV.mk</code><br>如果应用支持ARM NEON那么还需要加入以下行</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>include $(OPENCV_PACKAGE_DIR)/armeabi-v7a-neon/share/opencv/OpenCV.mk
-LOCAL_ARM_NEON := true</code></pre><p>在Application.mk中加入以下行</p>
+LOCAL_ARM_NEON := true
+</code></pre>
+<p>在Application.mk中加入以下行</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>APP_STL := gnustl_static
-APP_CPPFLAGS := -frtti -fexceptions</code></pre><p>注：关于Android.mk与Application.mk的详细说明，请参考ndk/docs下Android-mk.html和Application-mk.html。</p>
+APP_CPPFLAGS := -frtti -fexceptions
+</code></pre>
+<p>注：关于Android.mk与Application.mk的详细说明，请参考ndk&#x2F;docs下Android-mk.html和Application-mk.html。</p>
 <h3 id="Java层定义native接口"><a href="#Java层定义native接口" class="headerlink" title="Java层定义native接口"></a>Java层定义native接口</h3><p>新建study.opencv.FaceRec类，定义一个人脸检测的本地接口</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -213,11 +217,15 @@ APP_CPPFLAGS := -frtti -fexceptions</code></pre><p>注：关于Android.mk与Appl
  * @param outfile
  *            output image file path
  */
-public native void detect(String xml, String infile, String outfile);</code></pre><h3 id="生成jni头文件"><a href="#生成jni头文件" class="headerlink" title="生成jni头文件"></a>生成jni头文件</h3><p>使用javah命令生成jni头文件</p>
+public native void detect(String xml, String infile, String outfile);
+</code></pre>
+<h3 id="生成jni头文件"><a href="#生成jni头文件" class="headerlink" title="生成jni头文件"></a>生成jni头文件</h3><p>使用javah命令生成jni头文件</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>$ cd ~/workspace/study.opencv/bin
-$ javah study.opencv.FaceRec</code></pre><p>会在bin目录生成一个study_opencv_FaceRec.h文件。将此文件拷贝到../jni目录中</p>
+$ javah study.opencv.FaceRec
+</code></pre>
+<p>会在bin目录生成一个study_opencv_FaceRec.h文件。将此文件拷贝到..&#x2F;jni目录中</p>
 <p>注：如果接口有变更，请先手动删除生成的.h文件。以防止一些意外的错误。</p>
 <h3 id="在c层实现图像人脸检测"><a href="#在c层实现图像人脸检测" class="headerlink" title="在c层实现图像人脸检测"></a>在c层实现图像人脸检测</h3><p>在jni目录中使用文本编辑器新建一个facedetect.cpp，实现图像人脸检测</p>
 <p class="code-caption" data-lang="c" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -260,7 +268,7 @@ int captureFromImage(char* xml, char* filename, char* outfile)
     const char* input_name = &quot;lina.png&quot;;
     if(xml != NULL)
     &#123;
-        cascade_name = xml;    
+        cascade_name = xml;	
     &#125;
     if(filename != NULL)
     &#123;
@@ -397,7 +405,8 @@ char* jstring2String(JNIEnv* env, jstring jstr)
     env-&gt;ReleaseByteArrayElements(barr, ba, 0);
     LOGI(&quot;char*=%s&quot;,rtn);
     return rtn;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>Android.mk:</p>
 <p class="code-caption" data-lang="make" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -413,20 +422,24 @@ LOCAL_SRC_FILES := \
 
 LOCAL_LDLIBS    := -llog
 
-include $(BUILD_SHARED_LIBRARY)</code></pre>
+include $(BUILD_SHARED_LIBRARY)
+</code></pre>
 <p>Application.mk:</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>APP_ABI := armeabi armeabi-v7a
 APP_PLATFORM := android-10
 APP_STL := gnustl_static
-APP_CPPFLAGS := -frtti -fexceptions</code></pre><h3 id="使用NDK进行编译"><a href="#使用NDK进行编译" class="headerlink" title="使用NDK进行编译"></a>使用NDK进行编译</h3><p>在工程jni目录下执行ndk-build</p>
+APP_CPPFLAGS := -frtti -fexceptions
+</code></pre>
+<h3 id="使用NDK进行编译"><a href="#使用NDK进行编译" class="headerlink" title="使用NDK进行编译"></a>使用NDK进行编译</h3><p>在工程jni目录下执行ndk-build</p>
 <p class="code-caption" data-lang="sh" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="sh">$ cd ~/workspace/study.opencv/jni
-$ ~/android-ndk-r6/ndk-build.</code></pre>
-<p>如果编译成功，则会在工程下面生成libs/armeabi/facedetect.so库了.<br>如有编译失败，请根据提示修改错误</p>
-<h3 id="调用JNI接口"><a href="#调用JNI接口" class="headerlink" title="调用JNI接口"></a>调用JNI接口</h3><p>将opencv人脸检测要用到的xml文件(位于OpenCV-2.3.0/armeabi/share/opencv/haarcascades/目录下)及图像文件使用DDMS push到data/data/study.opencv/files目录中。</p>
+$ ~/android-ndk-r6/ndk-build.
+</code></pre>
+<p>如果编译成功，则会在工程下面生成libs&#x2F;armeabi&#x2F;facedetect.so库了.<br>如有编译失败，请根据提示修改错误</p>
+<h3 id="调用JNI接口"><a href="#调用JNI接口" class="headerlink" title="调用JNI接口"></a>调用JNI接口</h3><p>将opencv人脸检测要用到的xml文件(位于OpenCV-2.3.0&#x2F;armeabi&#x2F;share&#x2F;opencv&#x2F;haarcascades&#x2F;目录下)及图像文件使用DDMS push到data&#x2F;data&#x2F;study.opencv&#x2F;files目录中。</p>
 <p>在activity中新建一个线程，调用FaceRec#detect方法。</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -446,7 +459,8 @@ $ ~/android-ndk-r6/ndk-build.</code></pre>
             &#125;
         &#125;.start();
 
-    &#125;</code></pre>
+    &#125;
+</code></pre>
 <h3 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h3><p>经测试，对png,jpg,bmp图片可以正确识别，不过就是速度有点慢。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li>人脸检测<br><a target="_blank" rel="noopener" href="http://www.opencv.org.cn/index.php/%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B">http://www.opencv.org.cn/index.php/%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B</a></li>

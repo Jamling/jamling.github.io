@@ -210,7 +210,8 @@ private function onLoginSuccess($user)
         &#39;user&#39; =&gt; $user
     ];
     $this-&gt;logic_success(null, $ret);
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>在上面的代码中，登录成功，服务端向客户端返回token和user信息。token是通过Token类的静态方法<code>generateToken</code>来生成的。</p>
 <p class="code-caption" data-lang="php" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -247,7 +248,8 @@ private function onLoginSuccess($user)
     // 3，将token写入缓存
     Token::cacheToken($token-&gt;getData());
     return $token-&gt;getData();
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>这里主要有3个步骤</p>
 <ol>
 <li>根据用户及设备等信息生成一个唯一的token，uid用于识别用户，uuid用于识别设备，time用于保证唯一。将这些信息序列化后加密并生成md5</li>
@@ -270,7 +272,8 @@ private function onLoginSuccess($user)
     else &#123;
         return Token::findByToken($key);
     &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>过程很简单，先从缓存中取，如果不存在再从数据库中查询。所有的请求，服务端都会执行解析token。</p>
 <h2 id="验证token"><a href="#验证token" class="headerlink" title="验证token"></a>验证token</h2><p>服务端简单地把API分为三类</p>
 <ol>
@@ -300,7 +303,8 @@ private function onLoginSuccess($user)
         &#125;
         return false;
     &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>缓存相对简单，缓存的key为加密token之后的md5值，也即登录成功后，服务端向客户端发送的token值。缓存未设置有效期，默认永不过期。</p>
 <p class="code-caption" data-lang="php" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -313,7 +317,8 @@ private function onLoginSuccess($user)
         cache($token[&#39;token&#39;], ($token));
     &#125;
 &#125;
-?&gt;</code></pre>
+?&gt;
+</code></pre>
 <h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><p>为了让您的应该更加安全，还可以在以下方面强化</p>
 <ol>
 <li>token有效期</li>

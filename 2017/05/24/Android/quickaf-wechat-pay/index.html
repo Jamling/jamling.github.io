@@ -184,7 +184,7 @@
 <span id="more"></span>
 
 <h2 id="在微信上创建你的应用"><a href="#在微信上创建你的应用" class="headerlink" title="在微信上创建你的应用"></a>在微信上创建你的应用</h2><p>这里特别强调一下，这一步很重要，不然微信支付集成调试会出现莫名的错误。</p>
-<p>1，在注册之前对于Android客户端，需要提供app应用的包名和应用签名（md5值），这两个东西问开发或产品同学要。尽量在注册前提供。另外还需准备一个28x28和108x108的logo图片，问设计或产品同学要。<br>2，在<a target="_blank" rel="noopener" href="https://open.weixin.qq.com">微信开放平台</a>上注册，注意了，是微信开放平台，不是公众号平台，公众号平台账号不能在开放平台登录。如果已经注册过，请直接登录，登录成功后，点击创建移动应用，创建Android应用时，<code>应用包名</code>和<code>应用签名</code>，尽量一次性填对了。应用创建成功后，将得到<code>appid</code>(以wx开头的一串数字)。然后再去申请微信支付（需做开发者认证并缴费）<br>3，在[微信支付商户平台]注册或登录，申请app支付，申请通过后，将得到商户id<code>mch_id</code>(一串10位数字)，然后在<em>账户设置–&gt;API安全–&gt;密钥设置</em>中设置API密钥<code>key</code>(32位的字串)</p>
+<p>1，在注册之前对于Android客户端，需要提供app应用的包名和应用签名（md5值），这两个东西问开发或产品同学要。尽量在注册前提供。另外还需准备一个28x28和108x108的logo图片，问设计或产品同学要。<br>2，在<a target="_blank" rel="noopener" href="https://open.weixin.qq.com/">微信开放平台</a>上注册，注意了，是微信开放平台，不是公众号平台，公众号平台账号不能在开放平台登录。如果已经注册过，请直接登录，登录成功后，点击创建移动应用，创建Android应用时，<code>应用包名</code>和<code>应用签名</code>，尽量一次性填对了。应用创建成功后，将得到<code>appid</code>(以wx开头的一串数字)。然后再去申请微信支付（需做开发者认证并缴费）<br>3，在[微信支付商户平台]注册或登录，申请app支付，申请通过后，将得到商户id<code>mch_id</code>(一串10位数字)，然后在<em>账户设置–&gt;API安全–&gt;密钥设置</em>中设置API密钥<code>key</code>(32位的字串)</p>
 <p>更多的申请帮助，请参考：<a target="_blank" rel="noopener" href="https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;t=resource/res_list&amp;verify=1&amp;id=open1419317780&amp;token=6c7b59a75b08969c15fa41141ee8d88c236f01ab&amp;lang=zh_CN">https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;t=resource/res_list&amp;verify=1&amp;id=open1419317780&amp;token=6c7b59a75b08969c15fa41141ee8d88c236f01ab&amp;lang=zh_CN</a></p>
 <p>注：关于微信支付申请，请在开放平台申请（同公众号支付申请流程，公众号支付不在本文讨论范围之内）微信的工作人员审核通过后，会发审核通过的邮件。里面包含<em>微信支付商户号</em><code>mch_id</code>(一串10位数字)和APPID等信息。然后根据邮件提示或者直接在<em>微信商户平台中–&gt;账户设置–&gt;API安全–&gt;密钥设置</em>中下载api证书并设置API密钥<code>key</code>(32位的字串)</p>
 <p>在微信开放平台创建应用成功后，APP支付也申请通过了。请提供给开发同学以下东西：</p>
@@ -199,7 +199,9 @@
 
 <pre><code>dependencies &#123;
    compile &#39;com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+&#39;
-&#125;</code></pre><p>以前是直接使用libammsdk.jar，相比起来，算是进步了。</p>
+&#125;
+</code></pre>
+<p>以前是直接使用libammsdk.jar，相比起来，算是进步了。</p>
 <h3 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h3><p>我建议直接忽略官方的demo，不信我的可以直接去<a target="_blank" rel="noopener" href="https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419319167&token=&lang=zh_CN">Android资源下载</a>下载相关demo</p>
 <p>以下是我踩过的坑：</p>
 <ul>
@@ -276,7 +278,8 @@
         task.setParams(OrderInfoUtil.buildOrderParamMap(outTradeNo, &quot;测试支付&quot;, &quot;&quot;, &quot;1&quot;, null, null, null));
         task.execute();
     &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>附上完整的支付过程中的日志<br><img src="http://dl.ieclipse.cn/screenshots/af-pay-wechat.png" alt="完整日志"></p>
 <p>如果是服务端下单，客户端只需生成PayReq对象，然后调用<code>wxpay.pay(PayReq)</code>即可。<a target="_blank" rel="noopener" href="https://github.com/Jamling/af-pay">af-pay</a>已经配置好回调的WXPayActivity和Receiver。详细信息请访问Github。</p>
 <h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p><a target="_blank" rel="noopener" href="https://github.com/Jamling/QuickAF">QuickAF</a>是一个Android平台上的app快速开发框架，欢迎读者在github star或fork。本人写作水平有限，欢迎广大读者指正，如有问题，可与我直接联系或在我的官方博客中给出评论。</p>

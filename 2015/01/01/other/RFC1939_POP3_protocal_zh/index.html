@@ -231,7 +231,9 @@ S:&lt;服务器发送消息头，一个空行和信件的头10行&gt;
 S:.
 ...
 C:TOP1003
-S:-ERRnosuchmessage</code></pre><p>　　·UIDL[msg]<br>　　【参数】信件数（可选）。如果给出信件数，不包括被标记为删除的信件。<br>　　【限制】仅在”操作”状态下使用。<br>　　【说明】<br>　　如果给出了参数，且POP3服务器返回包括上述信息的”确认”，此行称为信息的”独立-ID表”。<br>　　<br>　　如果没有参数，服务器返回”确认”响应，此响应便以多行给出。在初的+OK后，对于每个信件，<br>服务器均给出相应的响应。此行叫做信件的”独立-ID表”。  </p>
+S:-ERRnosuchmessage
+</code></pre>
+<p>　　·UIDL[msg]<br>　　【参数】信件数（可选）。如果给出信件数，不包括被标记为删除的信件。<br>　　【限制】仅在”操作”状态下使用。<br>　　【说明】<br>　　如果给出了参数，且POP3服务器返回包括上述信息的”确认”，此行称为信息的”独立-ID表”。<br>　　<br>　　如果没有参数，服务器返回”确认”响应，此响应便以多行给出。在初的+OK后，对于每个信件，<br>服务器均给出相应的响应。此行叫做信件的”独立-ID表”。  </p>
 <p>　　为简化语法分析，所有服务器要求使用独立-ID表的特定格式。它包括空格和信件的独立-ID。<br>　　<br>　　信件的独立-ID由0x21到0x7E字符组成，这个符号在给定的存储邮件中不会重复。<br>　　<br>　　注意：信件不包括被标记为删除的信件。<br>　　<br>　　【响应】+OK：其后是独立-ID表；<br>　　-ERR：其后无类似信件。<br>　　【例子】  </p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -245,7 +247,9 @@ C:UIDL2
 S:+OK2QhdPYR:00WBw1Ph7x7
 ...
 C:UIDL3
-S:-ERRnosuchmessage,only2messagesinmaildrop</code></pre><p>　　·APOPnamedigest<br>　　【参数】指定邮箱的字串和MD5摘要串。<br>　　【限制】仅在POP3确认后的”确认”状态中使用。<br>　　【说明】通常，每个POP3会话均以USER/PASS互换开始。这导致了用户名和口令在网络上的显式<br>传送，这不会造成什么危险。但是，许多客户经常连接到服务检查信件。通常间隔时间比较短，这就<br>加大了泄密的可能性。<br>另一种提供”确认”过程的方法是使用APOP命令。</p>
+S:-ERRnosuchmessage,only2messagesinmaildrop
+</code></pre>
+<p>　　·APOPnamedigest<br>　　【参数】指定邮箱的字串和MD5摘要串。<br>　　【限制】仅在POP3确认后的”确认”状态中使用。<br>　　【说明】通常，每个POP3会话均以USER&#x2F;PASS互换开始。这导致了用户名和口令在网络上的显式<br>传送，这不会造成什么危险。但是，许多客户经常连接到服务检查信件。通常间隔时间比较短，这就<br>加大了泄密的可能性。<br>另一种提供”确认”过程的方法是使用APOP命令。</p>
 <p>　　实现APOP命令的服务器包括一个标记确认的时间戳。例如：在UNIX上使用APOP命令的语法为：<br>process-ID.clock@hostname，其中进程-ID是进程的十进制的数，时钟是系统时钟的十进制表示，主<br>机名与POP3服务器名一致。</p>
 <p>　　客户记录下此时间戳，然后以送APOP命令。name语法和USER命令一致。Digest是采用MD5算法产<br>生的包括时间戳和共享密钥的字串。此密钥是客户和服务器共知的，应该注意保护此密钥，如果泄密，<br>任何人都能够以用户身份进入服务器。</p>
 <p>　　如果服务器接到APOP命令，它验证digest，如果正确，服务器返回”确认”，进入”操作”状态；否<br>则，给出”失败”并停留在”确认”状态。</p>
@@ -254,7 +258,9 @@ S:-ERRnosuchmessage,only2messagesinmaildrop</code></pre><p>　　·APOPnamediges
 
 <pre><code>S:+OKPOP3serverready&lt;1896.697170952@dbc.mtview.ca.us&gt;
 C:APOPmrosec4c9334bac560ecc979e58001b3e22fb
-S:+OKmaildrophas1message(369octets)</code></pre><p>　　在此例子中，共享密钥<a href="mailto:&#49;&#56;&#57;&#x36;&#46;&#54;&#57;&#x37;&#x31;&#x37;&#x30;&#x39;&#x35;&#50;&#x40;&#100;&#98;&#99;&#46;&#x6d;&#x74;&#x76;&#x69;&#101;&#119;&#x2e;&#99;&#x61;&#x2e;&#x75;&#115;">&#49;&#56;&#57;&#x36;&#46;&#54;&#57;&#x37;&#x31;&#x37;&#x30;&#x39;&#x35;&#50;&#x40;&#100;&#98;&#99;&#46;&#x6d;&#x74;&#x76;&#x69;&#101;&#119;&#x2e;&#99;&#x61;&#x2e;&#x75;&#115;</a>tanstaaf由MD5算法生成，它产生了<br>digest值，c4c9334bac560ecc979e58001b3e22fb</p>
+S:+OKmaildrophas1message(369octets)
+</code></pre>
+<p>　　在此例子中，共享密钥<a href="mailto:&#49;&#x38;&#57;&#x36;&#46;&#54;&#57;&#x37;&#49;&#x37;&#x30;&#x39;&#x35;&#50;&#x40;&#x64;&#98;&#x63;&#x2e;&#x6d;&#116;&#x76;&#105;&#101;&#x77;&#46;&#99;&#x61;&#46;&#x75;&#115;">&#49;&#x38;&#57;&#x36;&#46;&#54;&#57;&#x37;&#49;&#x37;&#x30;&#x39;&#x35;&#50;&#x40;&#x64;&#98;&#x63;&#x2e;&#x6d;&#116;&#x76;&#105;&#101;&#x77;&#46;&#99;&#x61;&#46;&#x75;&#115;</a>tanstaaf由MD5算法生成，它产生了<br>digest值，c4c9334bac560ecc979e58001b3e22fb</p>
 <h2 id="8-POP3命令总结"><a href="#8-POP3命令总结" class="headerlink" title="8.POP3命令总结"></a>8.POP3命令总结</h2><p>基础的POP3命令：<br>USERname在”确认”状态有效<br>PASSstring<br>QUIT  </p>
 <p>STAT在”操作”状态有效<br>LIST[msg]<br>RETRmsg<br>DELEmsg<br>NOOP<br>RSET  </p>
 <p>QUIT在”更新”状态有效<br>　<br>可选的POP3命令：<br>APOPnamedigest在”确认”状态有效<br>TOPmsgn在”操作”状态有效<br>UIDL[msg]  </p>
@@ -289,8 +295,10 @@ S:+OKmessage2deleted
 C:QUIT
 S:+OKdeweyPOP3serversigningoff(maildropempty)
 C:&lt;关闭连接&gt;
-S:&lt;等待下一次连接&gt;</code></pre><h2 id="10-消息格式"><a href="#10-消息格式" class="headerlink" title="10.消息格式"></a>10.消息格式</h2><p>　　在会话过程中的消息格式都假定与Internet文本消息格式标准一致。应该注意的是，由于各<br>个服务器对于换行符的处理不同，因此计数不一定相同。通常，在”确认”状态中，服务器能够以<br>八进制计算信件的大小。例如，如果在打开储存邮件时服务器内部认定换行符代表一个字符，一<br>般服务器在计算它时作为两个字符计。注意，以终止符开始的消息行不被计数两次，因为客户将<br>在接收到多行响应后删除所有字节填充。</p>
-<h2 id="11-安全性考虑"><a href="#11-安全性考虑" class="headerlink" title="11.安全性考虑"></a>11.安全性考虑</h2><p>　　可以推测，使用APOP命令可以提供会话期间的保护。相应的，同时实现PASS和APOP命令的服务<br>器只允许用户以一种方式访问；也就是说要么使用USER/PASS组合，要么使用APOP命令，不能同时<br>使用两个。</p>
+S:&lt;等待下一次连接&gt;
+</code></pre>
+<h2 id="10-消息格式"><a href="#10-消息格式" class="headerlink" title="10.消息格式"></a>10.消息格式</h2><p>　　在会话过程中的消息格式都假定与Internet文本消息格式标准一致。应该注意的是，由于各<br>个服务器对于换行符的处理不同，因此计数不一定相同。通常，在”确认”状态中，服务器能够以<br>八进制计算信件的大小。例如，如果在打开储存邮件时服务器内部认定换行符代表一个字符，一<br>般服务器在计算它时作为两个字符计。注意，以终止符开始的消息行不被计数两次，因为客户将<br>在接收到多行响应后删除所有字节填充。</p>
+<h2 id="11-安全性考虑"><a href="#11-安全性考虑" class="headerlink" title="11.安全性考虑"></a>11.安全性考虑</h2><p>　　可以推测，使用APOP命令可以提供会话期间的保护。相应的，同时实现PASS和APOP命令的服务<br>器只允许用户以一种方式访问；也就是说要么使用USER&#x2F;PASS组合，要么使用APOP命令，不能同时<br>使用两个。</p>
 <p>　　而且，注意随着共享密钥长度的增加，解读的难度也就上升了。服务器要提供用户名时不给出<br>任何响应，不给出任何暗示此用户名是否正确。而口令却在网络上显式传送；使用RETR和TOP命令<br>在网络上显式传送信件</p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2015/01/01/other/RFC1939_POP3_protocal_zh/](https://www.ieclipse.cn/2015/01/01/other/RFC1939_POP3_protocal_zh/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   

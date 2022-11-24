@@ -220,44 +220,45 @@
   
     <h1 id="hexo-generator-i18n"><a href="#hexo-generator-i18n" class="headerlink" title="hexo-generator-i18n"></a>hexo-generator-i18n</h1><p><a target="_blank" rel="noopener" href="https://travis-ci.org/Jamling/hexo-generator-i18n"><img src="https://travis-ci.org/Jamling/hexo-generator-i18n.svg?branch=master" alt="Build Status"></a><br><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-generator-i18n"><img src="https://img.shields.io/node/v/hexo-generator-i18n.svg" alt="node"></a><br><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-generator-i18n"><img src="https://img.shields.io/npm/dt/hexo-generator-i18n.svg" alt="npm downloads"></a><br><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-generator-i18n"><img src="https://img.shields.io/npm/v/hexo-generator-i18n.svg" alt="npm version"></a><br><a target="_blank" rel="noopener" href="https://github.com/Jamling/hexo-generator-i18n/releases/latest"><img src="https://img.shields.io/github/release/jamling/hexo-generator-i18n.svg" alt="GitHub release"></a></p>
 <p>Multi-languages pages generator for <a target="_blank" rel="noopener" href="http://hexo.io/">Hexo</a>. Here is a <a href="https://www.ieclipse.cn/other/">demo</a></p>
-<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><pre><code class="bash">$ npm install hexo-generator-i18n --save</code></pre>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><pre><code class="bash">$ npm install hexo-generator-i18n --save
+</code></pre>
 <h2 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h2><p><var>_config.yml</var></p>
-<pre><code class="yaml"><span class="comment"># hexo default is empty, change to exact languages, and add xx.yml under your theme languages dir.</span>
-<span class="attr">language:</span> <span class="string">[zh,en]</span>
-<span class="comment"># config hexo-generator-i18n option (optional, this is default option)</span>
-<span class="attr">i18n:</span>
-<span class="attr">  type:</span> <span class="string">[page,</span> <span class="string">post]</span>
-<span class="attr">  generator:</span> <span class="string">[index,</span> <span class="string">archive,</span> <span class="string">category,</span> <span class="string">tag]</span></code></pre>
+<pre><code class="yaml"># hexo default is empty, change to exact languages, and add xx.yml under your theme languages dir.
+language: [zh,en]
+# config hexo-generator-i18n option (optional, this is default option)
+i18n:
+  type: [page, post]
+  generator: [archive, category, tag, index]
+</code></pre>
 <ul>
-<li><strong>type</strong>: What type of model to be i18n generated<ul>
+<li><strong>type</strong>: What type of model to be i18n generated</li>
 <li>page: All page model under <var>source</var></li>
-<li>post: All post model under <var>source</var>/<var>_post</var></li>
-</ul>
-</li>
-<li><strong>generator</strong>: Which generator to be i18n generated, it’s array of your installed generator names.<ul>
-<li>index: Generate i18n index page</li>
+<li>post: All post model under <var>source</var>&#x2F;<var>_post</var></li>
+<li><strong>generator</strong>: Which generator to be i18n generated, it’s array of your installed generator names.</li>
 <li>archive: Generate i18n archive page</li>
 <li>category: Generate i18n category page</li>
 <li>tag: Generate i18n tag page</li>
+<li>index: Generate i18n index page</li>
 </ul>
-</li>
-</ul>
-<p><strong><em>And add xx.yml (such as zh.yml, en.yml) under your themes languages directory</em></strong></p>
-<p>Set language display name in <var>source/_data/languages.yml</var> (Optional)</p>
-<pre><code class="yaml"><span class="attr">zh:</span> <span class="string">简体中文</span>
-<span class="attr">en:</span> <span class="string">English</span></code></pre>
+<p><em><strong>And add xx.yml (such as zh.yml, en.yml) under your themes languages directory</strong></em></p>
+<p>Set language display name in <var>source&#x2F;_data&#x2F;languages.yml</var> (Optional)</p>
+<pre><code class="yaml">zh: 简体中文
+en: English
+</code></pre>
 <h2 id="Order"><a href="#Order" class="headerlink" title="Order"></a>Order</h2><p>Make sure this plugin after other generators in <var>dependencies</var> of <var>package.json</var></p>
-<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><p>You may need to replace <code>url_for()</code> to <code>url_for_lang()</code> to output link under current language. Usually, in post/archive/tag/category pages.</p>
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><p>You may need to replace <code>url_for()</code> to <code>url_for_lang()</code> to output link under current language. Usually, in post&#x2F;archive&#x2F;tag&#x2F;category pages.</p>
 <h2 id="Helpers"><a href="#Helpers" class="headerlink" title="Helpers"></a>Helpers</h2><h3 id="get-langs"><a href="#get-langs" class="headerlink" title="get_langs"></a>get_langs</h3><p>Return array of config languages, exclude <code>default</code> language</p>
 <h3 id="default-lang"><a href="#default-lang" class="headerlink" title="default_lang"></a>default_lang</h3><p>Return default language, it’s the first element of <a href="#get_langs">get_langs</a></p>
 <h3 id="switch-lang"><a href="#switch-lang" class="headerlink" title="switch_lang"></a>switch_lang</h3><p>Return the absolute url under lang</p>
-<pre><code class="js"><span class="built_in">window</span>.location = {{ switch_lang(<span class="string">'en'</span>)}}</code></pre>
+<pre><code class="js">window.location = {{ switch_lang(&#39;en&#39;)}}
+</code></pre>
 <h3 id="url-for-lang"><a href="#url-for-lang" class="headerlink" title="url_for_lang"></a>url_for_lang</h3><p>Return url for path with language</p>
-<pre><code class="js">ret += <span class="string">'&lt;ul class="list-group"&gt;'</span>;
-<span class="keyword">this</span>.site.tags.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>{
-  ret += <span class="string">'&lt;li class="list-group-item"&gt;&lt;a href="'</span> + _self.url_for_lang(item.path) + <span class="string">'"&gt;'</span> + item.name + <span class="string">'&lt;/a&gt;&lt;/li&gt;'</span>;
-});
-ret += <span class="string">'&lt;/ul&gt;'</span>;</code></pre>
+<pre><code class="js">  ret += &#39;&lt;ul class=&quot;list-group&quot;&gt;&#39;;
+  this.site.tags.forEach(function(item){
+    ret += &#39;&lt;li class=&quot;list-group-item&quot;&gt;&lt;a href=&quot;&#39; + _self.url_for_lang(item.path) + &#39;&quot;&gt;&#39; + item.name + &#39;&lt;/a&gt;&lt;/li&gt;&#39;;
+  });
+  ret += &#39;&lt;/ul&gt;&#39;;
+</code></pre>
 <h2 id="License"><a href="#License" class="headerlink" title="License"></a>License</h2><p>MIT</p>
 
   

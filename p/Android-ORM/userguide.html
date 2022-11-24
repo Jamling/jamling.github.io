@@ -217,13 +217,12 @@ Android studio在项目build.gradle中添加以下依赖Copy Code">
   <div class="article-content" itemprop="articleBody">
   
     <h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><ul>
-<li>Android studio<br>在项目build.gradle中添加以下依赖<p class="code-caption" data-lang="gradle" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<li>Android studio<br>在项目build.gradle中添加以下依赖<p class="code-caption" data-lang="gradle" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ul>
 <pre><code class="gradle">dependencies &#123;
     compile &#39;cn.ieclipse.aorm:aorm-core:1.1.2&#39;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <ul>
 <li>Eclipse<br>安装 <a target="_blank" rel="noopener" href="https://marketplace.eclipse.org/content/android-adt-extensions">Android ADT-extension</a> 插件，然后Add ORM capapility</li>
 </ul>
@@ -232,37 +231,37 @@ Android studio在项目build.gradle中添加以下依赖Copy Code">
 
 <pre><code class="java">Aorm.enableDebug(true);// 启用/禁用debug，在debug模式下会打印SQL等日志
 Aorm.allowExtend(false);// 允许/禁止模型继承，如果开启继承，ROM映射模型将会从父类中查找映射字段
-Aorm.setExactInsertOrUpdate(true);//设置是否精确的插入或更新操作。如果设置为true, 在执行写操作之前先查询数据库，如果查询出来的对象不存在，则插入新数据；如果存在，则更新数据库。如果设置为false，那么则根据主键是否为0来决定插入或更新操作（如果主键大于0，则执行更新操作，有可能会导致更新失败）。</code></pre>
+Aorm.setExactInsertOrUpdate(true);//设置是否精确的插入或更新操作。如果设置为true, 在执行写操作之前先查询数据库，如果查询出来的对象不存在，则插入新数据；如果存在，则更新数据库。如果设置为false，那么则根据主键是否为0来决定插入或更新操作（如果主键大于0，则执行更新操作，有可能会导致更新失败）。
+</code></pre>
 <h2 id="创建映射模型"><a href="#创建映射模型" class="headerlink" title="创建映射模型"></a>创建映射模型</h2><h3 id="设置映射表"><a href="#设置映射表" class="headerlink" title="设置映射表"></a>设置映射表</h3><p>只需简单地对class添加@Table注解，即可设置对数据库表的映射</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">@Table(name = &quot;student&quot;)
 public class Student implements java.ioSerializable&#123;
     //...
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h3 id="设置映射字段"><a href="#设置映射字段" class="headerlink" title="设置映射字段"></a>设置映射字段</h3><p>对Java bean的属性添加@Column注解</p>
 <ul>
-<li>pk (标识为主键)<br>id is true<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<li>pk (标识为主键)<br>id is true<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ul>
 <pre><code class="java">@Column(name = &quot;_id&quot;, id = true)
-private long id;</code></pre>
+private long id;
+</code></pre>
 <ul>
-<li>普通字段<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<li>普通字段<p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ul>
 <pre><code class="java">@Column(name = &quot;_name&quot;)
 private String name;
 @Column(name = &quot;_age&quot;)
-private int age;</code></pre>
+private int age;
+</code></pre>
 <ul>
-<li>非映射字段<br>如果不想映射数据库字段，则无需设置@Column注解<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
-
-</li>
+<li>非映射字段<br>如果不想映射数据库字段，则无需设置@Column注解<p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p></li>
 </ul>
-<pre><code>private String address;</code></pre><p>映射的属性必须设置标准的Getter/Setter属性。</p>
+<pre><code>private String address;
+</code></pre>
+<p>映射的属性必须设置标准的Getter&#x2F;Setter属性。</p>
 <h2 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h2><p>如果使用的是Eclipse已经安装了Android ADT-extensions插件，则可以使用此插件来生成数据库：右键选择Aorm模型（可以多选）-&gt;右键菜单-&gt;ADT extensions-&gt;New ORM Provider打开组件生成向导来自动生成。</p>
 <p>当然，您也可以手动创建，如下代码所示：</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -275,51 +274,64 @@ private int age;</code></pre>
         Aorm.createTable(db, Student.class);
         Aorm.createTable(db, Course.class);
     &#125;
-&#125;;</code></pre>
+&#125;;
+</code></pre>
 <h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><h4 id="简单查询"><a href="#简单查询" class="headerlink" title="简单查询"></a>简单查询</h4><p>查询所有的学生记录。</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">Session session = ExampleContentProvider.getSession();
 // 最简单的查询，查询所有的记录
 Criteria criteria = Criteria.create(Student.class);
-List&lt;Student&gt; list = session.list(Student.class);</code></pre>
+List&lt;Student&gt; list = session.list(Student.class);
+</code></pre>
 <p>查询为cursor对象，cursor可以直接在CursorAdapter中使用</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code class="java">Cursor c = session.query(criteria);</code></pre>
+<pre><code class="java">Cursor c = session.query(criteria);
+</code></pre>
 <p>查询单个学生信息</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">// 查询主键为4的学生
-s = session.get(Student.class, 4);</code></pre>
+s = session.get(Student.class, 4);
+</code></pre>
 <h4 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h4><p>Equals查询</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">// 添加id equals条件
-criteria.add(Restrictions.eq(&quot;id&quot;, 1));</code></pre>
+criteria.add(Restrictions.eq(&quot;id&quot;, 1));
+</code></pre>
 <p>Like查询</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">// 添加姓名中包含Jamling的学生
-criteria.add(Restrictions.like(&quot;name&quot;, &quot;Jaming&quot;));</code></pre>
+criteria.add(Restrictions.like(&quot;name&quot;, &quot;Jaming&quot;));
+</code></pre>
 <p>比较查询</p>
 <p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">// 添加年龄大于30岁条件
-criteria.add(Restrictions.gt(&quot;age&quot;, 30));</code></pre>
+criteria.add(Restrictions.gt(&quot;age&quot;, 30));
+</code></pre>
 <p>排序</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>// 按年龄升序排序
-criteria.addOrder(Order.asc(&quot;age&quot;));</code></pre><p>Distinct</p>
+criteria.addOrder(Order.asc(&quot;age&quot;));
+</code></pre>
+<p>Distinct</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>// set district
-criteria.setDistinct(true);</code></pre><p>Limit</p>
+criteria.setDistinct(true);
+</code></pre>
+<p>Limit</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code>// 限定查询第10到20条记录
-criteria.setLimit(10, 10);</code></pre><h4 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h4><p>Criteria支持以下四种连接</p>
+criteria.setLimit(10, 10);
+</code></pre>
+<h4 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h4><p>Criteria支持以下四种连接</p>
 <ol>
 <li>左连接</li>
 <li>左外连接</li>
@@ -336,24 +348,28 @@ criteria.setLimit(10, 10);</code></pre><h4 id="连接查询"><a href="#连接查
 List&lt;Object[]&gt; ret = session.listAll(criteria);
 Object[] item = ret.get(0);
 Student s = (Student) item[0];
-Grade g = (Grade) item[1];</code></pre>
+Grade g = (Grade) item[1];
+</code></pre>
 <h3 id="插入记录"><a href="#插入记录" class="headerlink" title="插入记录"></a>插入记录</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">Session session = ExampleContentProvider.getSession();
 // insert
 Student s = new Student();
 s.setName(&quot;Jamling&quot;);
-long rowId = session.insert(s, null);</code></pre>
+long rowId = session.insert(s, null);
+</code></pre>
 <h3 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a>更新记录</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">// update student&#39;s name to Jame whose id is 1
 s.setId(1);
 s.setName(&quot;Jame&quot;);
-int rows = session.update(s);</code></pre>
+int rows = session.update(s);
+</code></pre>
 <h3 id="删除记录"><a href="#删除记录" class="headerlink" title="删除记录"></a>删除记录</h3><p class="code-caption" data-lang="java" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="java">// delete student whose id is 2
-session.deleteById(Student.class, 2);</code></pre>
+session.deleteById(Student.class, 2);
+</code></pre>
 
   
   </div>

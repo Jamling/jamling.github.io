@@ -187,11 +187,12 @@
 
 <pre><code class="plain">&#123;% codeblock [title] [lang:language] [url] [link text] %&#125;
 code snippet
-&#123;% endcodeblock %&#125;</code></pre>
+&#123;% endcodeblock %&#125;
+</code></pre>
 <p>还有一种是<a target="_blank" rel="noopener" href="https://hexo.io/docs/tag-plugins.html#Backtick-Code-Block">Backtick Code Block</a></p>
 ``` [language] [title] [url] [link text] code snippet ```
 
-<h2 id="Markdown代码高亮"><a href="#Markdown代码高亮" class="headerlink" title="Markdown代码高亮"></a>Markdown代码高亮</h2><p>Markdown中插入代码，是通过添加三个反引号（`）或三个波浪号（~）来实现的。如下示例</p>
+<h2 id="Markdown代码高亮"><a href="#Markdown代码高亮" class="headerlink" title="Markdown代码高亮"></a>Markdown代码高亮</h2><p>Markdown中插入代码，是通过添加三个反引号（&#96;）或三个波浪号（~）来实现的。如下示例</p>
 ``` [language] code here <br>```
 
 <p>像大多数的markdown如github的markdown都是这种写法。这种写法在<code>[language]</code>后面不能加其它参数，否则会输出不正常。</p>
@@ -206,7 +207,8 @@ code snippet
   label:
     left: Code
     right: &#39;:&#39;
-    copy: Copy Code</code></pre>
+    copy: Copy Code
+</code></pre>
 <p><code>enable</code>：用于打开或关闭本插件功能。<br><code>line_number</code>：设定是由前端还是后端（本插件）添加行号（暂时只时在前端添加）<br><code>trim_indent</code>：是否删除列前面的缩进空白，前端与后端均可。推荐在后端<br><code>label</code>：用于初始化代码块标题（caption）显示文本。</p>
 <p>注：本插件开启后，会在3个反引号前面添加一个<code>&lt;div class=&quot;code-caption&quot;&gt;</code>的div用于显示代码块caption。相应的设置均以<code>data-</code>添加在div的data域中。</p>
 <p>一开始本插件设定了两种caption的插入位置</p>
@@ -240,7 +242,8 @@ code snippet
   &#125;
 
   hljs.highlightBlock(block);
-&#125;);</code></pre>
+&#125;);
+</code></pre>
 <p>设置前端显示样式</p>
 <p class="code-caption" data-lang="css" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -254,12 +257,13 @@ code snippet
   font-style: italic;
   font-weight: bold;
  &#125;
-
+ 
 .code-caption .code-caption-copy &#123;
   float: right;
   @include user-select-none();
-&#125;</code></pre>
-<p><strong><em>注：其它样式请参考[Highlight.js 添加代码行号]</em></strong></p>
+&#125;
+</code></pre>
+<p><em><strong>注：其它样式请参考[Highlight.js 添加代码行号]</strong></em></p>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>语法规则如下：</p>
 ``` [language] [title] [link] show:off|false <br>code here <br>```
 
@@ -279,7 +283,8 @@ var hljs_labels = &#123;
     right: &quot;&#123;&#123;__('hljs.right')&#125;&#125;&quot;,
     copy: &quot;&#123;&#123;__('hljs.copy')&#125;&#125;&quot;
 &#125;
-&lt;/script&gt;</code></pre>
+&lt;/script&gt;
+</code></pre>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>syntax-highlighting-with-highlightjs: <a target="_blank" rel="noopener" href="http://idodev.co.uk/2013/03/syntax-highlighting-with-highlightjs/">http://idodev.co.uk/2013/03/syntax-highlighting-with-highlightjs/</a><br>jquery.zeroclipboard: <a target="_blank" rel="noopener" href="https://github.com/zeroclipboard/jquery.zeroclipboard">https://github.com/zeroclipboard/jquery.zeroclipboard</a><br>Hexo高级教程之代码高亮: <a href="http://www.ieclipse.cn/2016/07/18/Web/Hexo-dev-highlight/">http://www.ieclipse.cn/2016/07/18/Web/Hexo-dev-highlight/</a><br>hexo-filter-highlight: <a target="_blank" rel="noopener" href="https://github.com/Jamling/hexo-filter-highlight/">https://github.com/Jamling/hexo-filter-highlight/</a></p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2016/08/10/Web/hexo-filter-highlight/](https://www.ieclipse.cn/2016/08/10/Web/hexo-filter-highlight/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   

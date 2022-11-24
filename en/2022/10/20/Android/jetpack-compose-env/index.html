@@ -198,14 +198,20 @@ kotlinOptions &#123;
 
 composeOptions &#123;
     kotlinCompilerExtensionVersion &#39;1.3.2&#39;
-&#125;</code></pre><p>然后现实很骨感，给我这么一个下马威</p>
+&#125;
+</code></pre>
+<p>然后现实很骨感，给我这么一个下马威</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code>This version (x.x.x) of the Compose Compiler requires Kotlin version y.y.y but you appear to be using Kotlin version z.z.z which is not known to be compatible.  Please fix your configuration (or `suppressKotlinVersionCompatibilityCheck` but don&#39;t say I didn&#39;t warn you!).</code></pre><p>应该是Kotlin版本太低了，升级到最新的1.7.20先升了再说，相应的依赖组件也升级到此对应版本，这个不知道什么原因，我只能使用1.6.0（不过最终仍然被我升级到了1.7.20）</p>
-<h3 id="Gradle配置"><a href="#Gradle配置" class="headerlink" title="Gradle配置"></a>Gradle配置</h3><p>吃了之前的亏，我就新建了一个Compose Activity新项目，发现app/build.gradle引入插件的方式变了，都看不见build-tool了，应该是新的方法，立马应用一波，结果</p>
+<pre><code>This version (x.x.x) of the Compose Compiler requires Kotlin version y.y.y but you appear to be using Kotlin version z.z.z which is not known to be compatible.  Please fix your configuration (or `suppressKotlinVersionCompatibilityCheck` but don&#39;t say I didn&#39;t warn you!).
+</code></pre>
+<p>应该是Kotlin版本太低了，升级到最新的1.7.20先升了再说，相应的依赖组件也升级到此对应版本，这个不知道什么原因，我只能使用1.6.0（不过最终仍然被我升级到了1.7.20）</p>
+<h3 id="Gradle配置"><a href="#Gradle配置" class="headerlink" title="Gradle配置"></a>Gradle配置</h3><p>吃了之前的亏，我就新建了一个Compose Activity新项目，发现app&#x2F;build.gradle引入插件的方式变了，都看不见build-tool了，应该是新的方法，立马应用一波，结果</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code>Plugin [id: &#39;com.android.application&#39;, version: &#39;7.2.0&#39;, apply: false] was not found in any of the following sources:</code></pre><p>invalidate caches及restart及百度无果之后，发发现新建的项目settings.gradle有变化，添加了如下配置</p>
+<pre><code>Plugin [id: &#39;com.android.application&#39;, version: &#39;7.2.0&#39;, apply: false] was not found in any of the following sources:
+</code></pre>
+<p>invalidate caches及restart及百度无果之后，发发现新建的项目settings.gradle有变化，添加了如下配置</p>
 <p class="code-caption" data-lang="gradle" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
 <pre><code class="gradle">pluginManagement &#123; // 这是build工具组件的搜索仓库
@@ -223,7 +229,8 @@ dependencyResolutionManagement &#123;
         mavenCentral()
         maven &#123; url &#39;https://jitpack.io&#39; &#125;
     &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>终于sync成功了</p>
 <h3 id="添加Compose依赖"><a href="#添加Compose依赖" class="headerlink" title="添加Compose依赖"></a>添加Compose依赖</h3><p class="code-caption" data-lang="gradle" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
@@ -246,11 +253,14 @@ dependencyResolutionManagement &#123;
 
     // UI 测试
     androidTestImplementation &#39;androidx.compose.ui:ui-test-junit4:1.2.1&#39;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>又报类重复冲突</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
 
-<pre><code>Duplicate class androidx.lifecycle.ViewModelLazy found in modules jetified-lifecycle-viewmodel-ktx-2.3.1-runtime (androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1.</code></pre><p>升级组件，升级后还是报类似的错，依赖中把java及ktx的组件全加进去。类似的还是jetpack core组件，相同的解决方式。此问题修复</p>
+<pre><code>Duplicate class androidx.lifecycle.ViewModelLazy found in modules jetified-lifecycle-viewmodel-ktx-2.3.1-runtime (androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1.
+</code></pre>
+<p>升级组件，升级后还是报类似的错，依赖中把java及ktx的组件全加进去。类似的还是jetpack core组件，相同的解决方式。此问题修复</p>
 <p>后来中途不知道做了什么操作，import中的 compose全部标红。gradle sync一直失败<br><code>Gradle sync failed: Sync failed: reason unknown</code><br>一度怀疑改错了什么，clean、invalidate及restart都都想放弃了。仔细对比之后发现修改应无问题才是，回过头去运行之前创建的新工程，发现也无法运行。<br><code>Unable to find Gradle tasks to build: [:].</code></p>
 <p>详细的错误日志是这些看不懂的</p>
 <p class="code-caption" data-lang="" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a></p>
@@ -259,7 +269,9 @@ dependencyResolutionManagement &#123;
 ... 
 Exception &#39;java.lang.NoClassDefFoundError: Could not initialize class com.jetbrain.
 ...
-ClassNotFoundException: kotlin.reflect.jvm.KClassesJvm</code></pre><p>这TM的就好办了，肯定是AS抽筯了，重新安装AS，问题解决。</p>
+ClassNotFoundException: kotlin.reflect.jvm.KClassesJvm
+</code></pre>
+<p>这TM的就好办了，肯定是AS抽筯了，重新安装AS，问题解决。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>其实遇到的问题非常多，大约十几个，复杂一点的就上面几个，新的技术，建议还是参考官方新项目来搞，旧项目坑太多了，尤其是最后一条，太坑了，不过越是难，越有挑战性，遇到问题不要慌，冷静思考，沉着应对。相信总会解决的。</p>
 <blockquote class="addlink">本文永久链接： [https://www.ieclipse.cn/2022/10/20/Android/jetpack-compose-env/](https://www.ieclipse.cn/2022/10/20/Android/jetpack-compose-env/) 未经允许，禁止转载，如有问题，请在我的博客原始页面提交评论。</blockquote>
   

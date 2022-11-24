@@ -194,7 +194,7 @@
 <li>disqus，外国的，在大陆速度慢</li>
 <li>搜狐畅言，忘了从什么时候开始需备案，这个备案条件比较高，放弃了</li>
 <li>网易云跟贴，停止服务了</li>
-<li>Valine，似乎是目前唯一可用的，推荐，详细文档可访问<a target="_blank" rel="noopener" href="https://valine.js.org">https://valine.js.org</a></li>
+<li>Valine，似乎是目前唯一可用的，推荐，详细文档可访问<a target="_blank" rel="noopener" href="https://valine.js.org/">https://valine.js.org</a></li>
 </ul>
 <h2 id="Valine的阅读计数"><a href="#Valine的阅读计数" class="headerlink" title="Valine的阅读计数"></a>Valine的阅读计数</h2><p>因本站长时间未更新，原来的文章阅读量功能已过时，需要重新适配，发现新版本的Valine已支持文章阅读数，不过在集成Valine的过程中，遇到一些问题，由于某些原因，Valine的src目录将从v1.4.0后暂停更新，提交Issue及联系作者无果后，最终决定停止Valine的阅读访问功能，在原hexo-theme-nova的阅读计数基础上进行适配。<br>原hexo-nova-theme的Counter表设计为 <code>title</code>，<code>url</code>,<code>pageId</code>, <code>count</code>字段。Valine则为<code>title</code>,<code>url</code>,<code>xid</code>,<code>time</code>字段，为保持兼容，将表设计修改为与Valine的设计一致，所以如果要升级Nova主题，则需要手动修改Counter表设计</p>
 <p>不过Valine在首页等文章列表页对计数功能不太友好，且无法对当前页面进行计数。所以并不建议使用Valine的阅读计数功能。</p>
